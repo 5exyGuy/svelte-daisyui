@@ -1,0 +1,33 @@
+.carousel {
+    @apply flex overflow-x-scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+        @apply hidden;
+    }
+
+    &.carousel-vertical {
+        @apply flex-col overflow-y-scroll;
+        scroll-snap-type: y mandatory;
+    }
+
+    & > .carousel-item {
+        @apply box-content flex flex-none;
+        scroll-snap-align: start;
+    }
+
+    &.carousel-center {
+        & > .carousel-item {
+            scroll-snap-align: center;
+        }
+    }
+
+    &.carousel-end {
+        & > .carousel-item {
+            scroll-snap-align: end;
+        }
+    }
+}

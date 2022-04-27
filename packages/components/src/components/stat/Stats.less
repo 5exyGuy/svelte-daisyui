@@ -1,0 +1,93 @@
+.stats {
+    @apply bg-base-100 text-base-content rounded-2xl;
+    @apply divide-x divide-y-0 overflow-x-auto;
+    @apply inline-grid grid-flow-col;
+
+    &.stats-primary {
+        @apply bg-primary text-primary-content;
+    }
+
+    &.stats-secondary {
+        @apply bg-secondary text-secondary-content;
+    }
+
+    &.stats-accent {
+        @apply bg-accent text-accent-content;
+    }
+
+    &.stats-info {
+        @apply bg-info text-info-content;
+    }
+
+    &.stats-success {
+        @apply bg-success text-success-content;
+    }
+
+    &.stats-warning {
+        @apply bg-warning text-warning-content;
+    }
+
+    &.stats-error {
+        @apply bg-error text-error-content;
+    }
+
+    & > .stats-horizontal {
+        @apply divide-x divide-y-0 overflow-x-auto;
+        @apply grid-flow-col;
+    }
+
+    & > .stats-vertical {
+        @apply divide-y divide-x-0 overflow-y-auto;
+        @apply grid-flow-row;
+    }
+
+    & > .stat {
+        @apply gap-x-4 border-base-content border-opacity-10 px-6 py-4;
+        @apply inline-grid w-full;
+        grid-template-columns: repeat(1, 1fr);
+
+        &.stat-primary {
+            @apply bg-primary text-primary-content;
+        }
+
+        &.stat-secondary {
+            @apply bg-secondary text-secondary-content;
+        }
+
+        &.stat-accent {
+            @apply bg-accent text-accent-content;
+        }
+
+        &.stat-info {
+            @apply bg-info text-info-content;
+        }
+
+        &.stat-success {
+            @apply bg-success text-success-content;
+        }
+
+        &.stat-warning {
+            @apply bg-warning text-warning-content;
+        }
+
+        &.stat-error {
+            @apply bg-error text-error-content;
+        }
+
+        & > .stat-title {
+            @apply opacity-60;
+        }
+
+        & > .stat-value {
+            @apply text-4xl font-extrabold;
+        }
+
+        & > .stat-description {
+            @apply text-xs opacity-60;
+        }
+
+        & > .stat-actions {
+            @apply mt-4;
+        }
+    }
+}

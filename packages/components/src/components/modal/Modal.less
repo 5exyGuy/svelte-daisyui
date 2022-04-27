@@ -1,0 +1,50 @@
+.modal {
+    @apply pointer-events-none invisible fixed inset-0 flex items-end justify-center opacity-0 sm:items-center;
+    @apply bg-neutral-focus bg-opacity-40 duration-200 ease-in-out;
+    transition-property: transform, opacity;
+    overflow-y: hidden;
+    overscroll-behavior: contain;
+    z-index: 999;
+
+    &.modal-open,
+    &[data-visible='true'] {
+        @apply pointer-events-auto visible opacity-100;
+
+        & > .modal-box {
+            @apply translate-y-0 scale-100;
+        }
+    }
+
+    & > .modal-box {
+        @apply transform translate-y-10 sm:translate-y-0 sm:scale-90 transition duration-200 ease-in-out;
+        @apply max-h-full p-6 w-full sm:max-w-lg overflow-y-auto;
+        @apply bg-base-100 sm:rounded-2xl;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+        & > .modal-header {
+            @apply flex items-center mb-4;
+
+            & > .modal-header-title {
+                @apply flex-1;
+            }
+            & > .modal-header-close {
+                @apply flex-none justify-self-end;
+            }
+        }
+
+        & > .modal-actions {
+            @apply flex flex-wrap;
+            @apply mt-6 space-x-2;
+
+            &.modal-actions-left {
+                @apply justify-start;
+            }
+            &.modal-actions-center {
+                @apply justify-center;
+            }
+            &.modal-actions-right {
+                @apply justify-end;
+            }
+        }
+    }
+}

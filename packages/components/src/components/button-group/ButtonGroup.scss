@@ -1,0 +1,11 @@
+.btn-group {
+    @apply flex flex-wrap;
+
+    & > .btn:not(:first-child) {
+        @apply -ml-px rounded-l-none;
+    }
+
+    & > .btn:not(:last-child) {
+        @apply rounded-r-none;
+    }
+}

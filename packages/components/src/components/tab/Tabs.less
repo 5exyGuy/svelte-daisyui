@@ -1,0 +1,114 @@
+.tabs {
+    @apply flex flex-wrap items-end;
+
+    &.tabs-bordered > .tab {
+        &:not(.tab-active) {
+            @apply border-opacity-20;
+        }
+
+        @apply border-base-content;
+        border-style: solid;
+        border-bottom-width: calc(var(--tab-border, 1px) + 1px);
+    }
+
+    &.tabs-lifted > .tab {
+        border: var(--tab-border, 1px) solid transparent;
+        border-width: 0 0 var(--tab-border, 1px) 0;
+        border-top-left-radius: var(--tab-radius, 0.5rem);
+        border-top-right-radius: var(--tab-radius, 0.5rem);
+        border-bottom-color: var(--tab-border-color);
+        padding-left: var(--tab-padding, 1rem);
+        padding-right: var(--tab-padding, 1rem);
+        padding-top: var(--tab-border, 1px);
+
+        &:focus-visible {
+            border-bottom-right-radius: var(--tab-radius, 0.5rem);
+            border-bottom-left-radius: var(--tab-radius, 0.5rem);
+        }
+
+        &.tab-active {
+            background-color: var(--tab-bg);
+            border-width: var(--tab-border, 1px) var(--tab-border, 1px) 0 var(--tab-border, 1px);
+            border-left-color: var(--tab-border-color);
+            border-right-color: var(--tab-border-color);
+            border-top-color: var(--tab-border-color);
+            padding-left: calc(var(--tab-padding, 1rem) - var(--tab-border, 1px));
+            padding-right: calc(var(--tab-padding, 1rem) - var(--tab-border, 1px));
+            padding-bottom: var(--tab-border, 1px);
+            padding-top: 0;
+
+            &:before,
+            &:after {
+                z-index: 1;
+                content: '';
+                display: block;
+                position: absolute;
+                width: var(--tab-radius, 0.5rem);
+                height: var(--tab-radius, 0.5rem);
+                bottom: 0;
+                --tab-grad: calc(68% - var(--tab-border, 1px));
+                --tab-corner-bg: radial-gradient(
+                    circle at var(--circle-pos),
+                    transparent var(--tab-grad),
+                    var(--tab-border-color) calc(var(--tab-grad) + 0.3px),
+                    var(--tab-border-color) calc(var(--tab-grad) + var(--tab-border, 1px)),
+                    var(--tab-bg) calc(var(--tab-grad) + var(--tab-border, 1px) + 0.3px)
+                );
+            }
+
+            &:before {
+                left: calc(var(--tab-radius, 0.5rem) * -1);
+                --circle-pos: top left;
+                background-image: var(--tab-corner-bg);
+            }
+
+            &:after {
+                right: calc(var(--tab-radius, 0.5rem) * -1);
+                --circle-pos: top right;
+                background-image: var(--tab-corner-bg);
+            }
+
+            &:first-child:before {
+                background: none;
+            }
+
+            &:last-child:after {
+                background: none;
+            }
+
+            & + .tab.tab-lifted.tab-active {
+                &:before {
+                    background: none;
+                }
+            }
+        }
+    }
+
+    &.tabs-boxed {
+        @apply bg-base-200 p-1 rounded-2xl;
+
+        & > .tab.tab-active {
+            @apply bg-primary text-primary-content rounded-2xl;
+        }
+    }
+
+    &.tabs-md > .tab {
+        @apply h-8 text-sm leading-loose;
+        --tab-padding: 1rem;
+    }
+
+    &.tabs-lg > .tab {
+        @apply h-12 text-lg leading-loose;
+        --tab-padding: 1.25rem;
+    }
+
+    &.tabs-sm > .tab {
+        @apply h-6 text-sm leading-3;
+        --tab-padding: 0.75rem;
+    }
+
+    &.tabs-xs > .tab {
+        @apply h-5 text-xs leading-3;
+        --tab-padding: 0.5rem;
+    }
+}

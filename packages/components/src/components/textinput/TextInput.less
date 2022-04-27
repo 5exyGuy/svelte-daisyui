@@ -1,0 +1,91 @@
+.input {
+    @apply border border-base-content border-opacity-0 bg-base-100 rounded-btn;
+    @apply flex-shrink transition duration-200 ease-in-out;
+    @apply h-12 px-4 text-sm leading-loose;
+
+    &.input-bordered {
+        @apply border-opacity-20;
+    }
+
+    &:focus {
+        outline: 2px solid hsla(var(--bc) / 0.2);
+        outline-offset: 2px;
+    }
+
+    &.input-ghost {
+        @apply bg-opacity-5;
+        &:focus {
+            @apply bg-opacity-100 text-base-content;
+            box-shadow: none;
+        }
+    }
+
+    &.input-primary {
+        @apply border-primary;
+        &:focus {
+            outline: 2px solid hsl(var(--p));
+        }
+    }
+
+    &.input-secondary {
+        @apply border-secondary;
+        &:focus {
+            outline: 2px solid hsl(var(--s));
+        }
+    }
+
+    &.input-accent {
+        @apply border-accent;
+        &:focus {
+            outline: 2px solid hsl(var(--a));
+        }
+    }
+
+    &.input-info {
+        @apply border-info;
+        &:focus {
+            outline: 2px solid hsl(var(--in));
+        }
+    }
+
+    &.input-success {
+        @apply border-success;
+        &:focus {
+            outline: 2px solid hsl(var(--su));
+        }
+    }
+
+    &.input-warning {
+        @apply border-warning;
+        &:focus {
+            outline: 2px solid hsl(var(--wa));
+        }
+    }
+
+    &.input-error {
+        @apply border-error;
+        &:focus {
+            outline: 2px solid hsl(var(--er));
+        }
+    }
+
+    &:disabled {
+        @apply cursor-not-allowed border-base-200 bg-base-200 text-opacity-20 placeholder-base-content placeholder-opacity-20;
+    }
+
+    &.input-md {
+        @apply h-12 px-4 text-sm leading-loose;
+    }
+
+    &.input-lg {
+        @apply h-16 px-6 text-lg leading-loose;
+    }
+
+    &.input-sm {
+        @apply h-8 px-3 text-sm leading-8;
+    }
+
+    &.input-xs {
+        @apply h-6 px-2 text-xs leading-relaxed;
+    }
+}

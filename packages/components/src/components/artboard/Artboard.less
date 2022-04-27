@@ -1,0 +1,73 @@
+.artboard {
+    @apply w-full;
+
+    &.artboard-demo {
+        @apply flex flex-none flex-col items-center justify-center;
+        @apply bg-base-100 text-base-content rounded-box;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    }
+
+    &.phone {
+        width: 320px;
+
+        &-1 {
+            width: 320px;
+            height: 568px;
+
+            &.artboard-horizontal {
+                width: 568px;
+                height: 320px;
+            }
+        }
+
+        &-2 {
+            width: 375px;
+            height: 667px;
+
+            &.artboard-horizontal {
+                width: 667px;
+                height: 375px;
+            }
+        }
+
+        &-3 {
+            width: 414px;
+            height: 736px;
+
+            &.artboard-horizontal {
+                width: 736px;
+                height: 414px;
+            }
+        }
+
+        &-4 {
+            width: 375px;
+            height: 812px;
+
+            &.artboard-horizontal {
+                width: 812px;
+                height: 375px;
+            }
+        }
+
+        &-5 {
+            width: 414px;
+            height: 896px;
+
+            &.artboard-horizontal {
+                width: 896px;
+                height: 414px;
+            }
+        }
+
+        &-6 {
+            width: 320px;
+            height: 1024px;
+
+            &.artboard-horizontal {
+                width: 1024px;
+                height: 320px;
+            }
+        }
+    }
+}

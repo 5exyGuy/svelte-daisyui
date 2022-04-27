@@ -1,0 +1,20 @@
+{
+    "name": "@svelte-daisyui/shared",
+    "version": "1.0.0",
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsup",
+        "dev": "tsup --watch"
+    },
+    "dependencies": {
+        "@svelte-daisyui/themes": "workspace:^1.0.0",
+        "joi": "^17.6.0"
+    },
+    "devDependencies": {
+        "tsup": "^5.12.6",
+        "type-fest": "^2.12.2"
+    }
+}

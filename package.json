@@ -1,0 +1,28 @@
+{
+    "name": "svelte-daisyui",
+    "version": "1.0.0",
+    "description": "Svelte UI Component Library based on daisyUI",
+    "private": true,
+    "scripts": {
+        "build": "turbo run build",
+        "dev": "turbo run dev --parallel"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/5exyGuy/svelte-daisyui.git"
+    },
+    "keywords": [
+        "svelte"
+    ],
+    "author": "Aurėjus Remeika (5exyGuy)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/5exyGuy/svelte-daisyui/issues"
+    },
+    "homepage": "https://github.com/5exyGuy/svelte-daisyui#readme",
+    "devDependencies": {
+        "eslint": "^8.14.0",
+        "prettier": "^2.6.2",
+        "turbo": "^1.2.5"
+    }
+}

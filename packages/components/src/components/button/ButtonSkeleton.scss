@@ -1,0 +1,49 @@
+.btn {
+    @apply inline-flex flex-shrink-0 cursor-pointer select-none flex-wrap items-center justify-center border-transparent text-center transition duration-200 ease-in-out;
+    @apply h-12 px-4 text-sm;
+    min-height: 3rem;
+    line-height: 1em;
+    border-radius: var(--button-border-radius, 0.5rem);
+
+    &:disabled {
+        @apply pointer-events-none;
+    }
+
+    &.btn-square {
+        @apply h-12 w-12 p-0;
+    }
+
+    &.btn-circle {
+        @apply h-12 w-12 rounded-full p-0;
+    }
+
+    &.btn-loading {
+        &,
+        &:hover {
+            @apply pointer-events-none;
+        }
+        &:before {
+            @apply mr-2 h-4 w-4 rounded-full border-2;
+            animation: spin 2s linear infinite;
+            content: "";
+            border-top-color: transparent;
+            border-left-color: transparent;
+            border-bottom-color: currentColor;
+            border-right-color: currentColor;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            &:before {
+                animation: spin 10s linear infinite;
+            }
+        }
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+  }
