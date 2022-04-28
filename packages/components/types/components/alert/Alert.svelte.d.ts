@@ -28,7 +28,7 @@ export interface AlertProps {
     | undefined;
 
   /**
-   * @default ''
+   * @default undefined
    */
   class?: string | undefined;
 }

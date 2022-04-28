@@ -21,7 +21,7 @@
      */
     export let horizontal = false;
 
-    let className = '';
+    let className;
     /**
      * @type {string | undefined}
      */

@@ -3,7 +3,7 @@ import type { SvelteComponentTyped } from "svelte";
 
 export interface WindowProps {
   /**
-   * @default ''
+   * @default undefined
    */
   class?: string | undefined;
 }

@@ -1,21 +1,20 @@
 <script>
-    import { Size } from '../../enums';
+    import { HorizontalAlignment, VerticalAlignment } from '../../enums';
     import { classes } from '../../utils';
-    import { TabGroupType } from './tab-group-type.enum';
 
     // -----------------------------------------------------------
     //                           Props
     // -----------------------------------------------------------
 
     /**
-     * @type {'bordered' | 'lifted' | 'boxed' | undefined}
+     * @type {'start' | 'center' | 'end'}
      */
-    export let type;
+    export let horizontal = 'end';
 
     /**
-     * @type {'tiny' | 'small' | 'medium' | 'large'}
+     * @type {'top' | 'middle' | 'bottom'}
      */
-    export let size = 'medium';
+    export let vertical = 'top';
 
     let className;
     /**
@@ -28,28 +27,28 @@
     // -----------------------------------------------------------
 
     const classNames = classes(
-        'tab-group',
+        'indicator-item',
         {
-            type: {
-                condition: !!type,
-                key: type,
-                value: TabGroupType,
+            horizontal: {
+                condition: !!horizontal,
+                key: horizontal,
+                value: HorizontalAlignment,
             },
-            size: {
-                condition: !!size,
-                key: size,
-                value: Size,
+            vertical: {
+                condition: !!vertical,
+                key: vertical,
+                value: VerticalAlignment,
             },
         },
         className,
     );
 </script>
 
-<div class={classNames}>
+<span class={classNames}>
     <slot />
-</div>
+</span>
 
 <style lang="scss">
-    @import 'TabGroupStyled.scss';
-    @import 'TabGroupUnstyled.scss';
+    @import 'IndicatorItemStyled.scss';
+    @import 'IndicatorItemUnstyled.scss';
 </style>

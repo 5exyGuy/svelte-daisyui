@@ -21,7 +21,7 @@
      */
     export let bordered = false;
 
-    let className = '';
+    let className;
     /**
      * @type {string | undefined}
      */

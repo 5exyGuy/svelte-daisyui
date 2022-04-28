@@ -11,7 +11,7 @@
      */
     export let size;
 
-    let className = '';
+    let className;
     /**
      * @type {string | undefined}
      */

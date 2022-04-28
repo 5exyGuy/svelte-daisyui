@@ -16,7 +16,7 @@ export interface StackProps {
     | "downright";
 
   /**
-   * @default ''
+   * @default undefined
    */
   class?: string | undefined;
 }

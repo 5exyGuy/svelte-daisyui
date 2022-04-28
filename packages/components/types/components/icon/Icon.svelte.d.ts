@@ -28,7 +28,7 @@ export interface IconProps {
   spin?: boolean;
 
   /**
-   * @default ''
+   * @default undefined
    */
   class?: string | undefined;
 }

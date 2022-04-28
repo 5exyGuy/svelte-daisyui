@@ -16,7 +16,7 @@
      */
     export let state = false;
 
-    let className = '';
+    let className;
     /**
      * @type {string | undefined}
      */

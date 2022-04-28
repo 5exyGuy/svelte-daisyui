@@ -18,7 +18,7 @@ export interface ArtboardProps {
   horizontal?: boolean;
 
   /**
-   * @default ''
+   * @default undefined
    */
   class?: string | undefined;
 }

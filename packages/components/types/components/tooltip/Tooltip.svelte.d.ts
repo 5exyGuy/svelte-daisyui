@@ -26,7 +26,7 @@ export interface TooltipProps {
     | undefined;
 
   /**
-   * @default ''
+   * @default undefined
    */
   class?: string | undefined;
 }

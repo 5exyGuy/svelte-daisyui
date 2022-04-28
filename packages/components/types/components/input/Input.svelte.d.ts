@@ -37,7 +37,7 @@ export interface InputProps {
   bordered?: boolean;
 
   /**
-   * @default ''
+   * @default undefined
    */
   class?: string | undefined;
 }

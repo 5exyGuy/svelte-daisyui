@@ -13,7 +13,7 @@ export interface TabGroupProps {
   size?: "tiny" | "small" | "medium" | "large";
 
   /**
-   * @default ''
+   * @default undefined
    */
   class?: string | undefined;
 }

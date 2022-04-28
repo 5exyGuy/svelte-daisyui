@@ -10,7 +10,7 @@
      */
     export let href;
 
-    let className = '';
+    let className;
     /**
      * @type {string | undefined}
      */

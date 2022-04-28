@@ -26,7 +26,7 @@ export interface BadgeProps {
   outline?: boolean;
 
   /**
-   * @default ''
+   * @default undefined
    */
   class?: string | undefined;
 }

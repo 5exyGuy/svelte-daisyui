@@ -11,7 +11,7 @@
      */
     export let direction = 'down';
 
-    let className = '';
+    let className;
     /**
      * @type {string | undefined}
      */

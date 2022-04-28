@@ -30,7 +30,7 @@ export interface ToggleProps {
   checked?: boolean;
 
   /**
-   * @default ''
+   * @default undefined
    */
   class?: string | undefined;
 }

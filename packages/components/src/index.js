@@ -18,7 +18,8 @@ export { default as Code } from './components/code/Code.svelte';
 // Dropdown
 // Hero
 export { default as Icon } from './components/icon/Icon.svelte';
-// Indicator
+export { default as IndicatorGroup } from './components/indicator-group/IndicatorGroup.svelte';
+export { default as IndicatorItem } from './components/indicator-item/IndicatorItem.svelte';
 // InputGroup
 export { default as Input } from './components/input/Input.svelte';
 export { default as Kbd } from './components/kbd/Kbd.svelte';

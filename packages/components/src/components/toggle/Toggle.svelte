@@ -26,7 +26,7 @@
      */
     export let checked = false;
 
-    let className = '';
+    let className;
     /**
      * @type {string | undefined}
      */

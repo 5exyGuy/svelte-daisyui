@@ -8,7 +8,7 @@ export interface KbdProps {
   size?: "tiny" | "small" | "medium" | "large";
 
   /**
-   * @default ''
+   * @default undefined
    */
   class?: string | undefined;
 }

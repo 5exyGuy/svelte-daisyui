@@ -7,6 +7,8 @@ export { default as BreadcrumbGroup } from "./components/breadcrumb-group/Breadc
 export { default as BreadcrumbItem } from "./components/breadcrumb-item/BreadcrumbItem.svelte";
 export { default as Code } from "./components/code/Code.svelte";
 export { default as Icon } from "./components/icon/Icon.svelte";
+export { default as IndicatorGroup } from "./components/indicator-group/IndicatorGroup.svelte";
+export { default as IndicatorItem } from "./components/indicator-item/IndicatorItem.svelte";
 export { default as Input } from "./components/input/Input.svelte";
 export { default as Kbd } from "./components/kbd/Kbd.svelte";
 export { default as Link } from "./components/link/Link.svelte";

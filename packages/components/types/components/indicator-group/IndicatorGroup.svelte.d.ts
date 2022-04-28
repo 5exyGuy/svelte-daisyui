@@ -1,20 +1,15 @@
 /// <reference types="svelte" />
 import type { SvelteComponentTyped } from "svelte";
 
-export interface TabItemProps {
-  /**
-   * @default false
-   */
-  active?: boolean;
-
+export interface IndicatorGroupProps {
   /**
    * @default undefined
    */
   class?: string | undefined;
 }
 
-export default class TabItem extends SvelteComponentTyped<
-  TabItemProps,
+export default class IndicatorGroup extends SvelteComponentTyped<
+  IndicatorGroupProps,
   {},
   { default: {} }
 > {}

@@ -31,7 +31,7 @@
      */
     export let size = 'medium';
 
-    let className = '';
+    let className;
     /**
      * @type {string | undefined}
      */

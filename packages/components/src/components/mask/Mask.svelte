@@ -17,7 +17,7 @@
      */
     export let type = 'circle';
 
-    let className = '';
+    let className;
     export { className as class };
 
     // -----------------------------------------------------------

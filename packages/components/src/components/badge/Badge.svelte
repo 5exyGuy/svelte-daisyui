@@ -26,7 +26,7 @@
      */
     export let outline = false;
 
-    let className = '';
+    let className;
     /**
      * @type {string | undefined}
      */

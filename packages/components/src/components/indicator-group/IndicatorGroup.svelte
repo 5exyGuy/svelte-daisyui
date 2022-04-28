@@ -5,11 +5,6 @@
     //                           Props
     // -----------------------------------------------------------
 
-    /**
-     * @type {boolean}
-     */
-    export let active = false;
-
     let className;
     /**
      * @type {string | undefined}
@@ -20,23 +15,14 @@
     //                     Classes and Styles
     // -----------------------------------------------------------
 
-    const classNames = classes(
-        'tab-item',
-        {
-            active: {
-                condition: active,
-                value: 'active',
-            },
-        },
-        className,
-    );
+    const classNames = classes('indicator-group', {}, className);
 </script>
 
-<div tabindex="0" class={classNames}>
+<div class={classNames}>
     <slot />
 </div>
 
 <style lang="scss">
-    @import 'TabItemStyled.scss';
-    @import 'TabItemUnstyled.scss';
+    @import 'IndicatorGroupStyled.scss';
+    @import 'IndicatorGroupUnstyled.scss';
 </style>

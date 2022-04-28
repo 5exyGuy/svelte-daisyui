@@ -32,9 +32,9 @@ export interface MaskProps {
     | "triangle4";
 
   /**
-   * @default ''
+   * @default undefined
    */
-  class?: string;
+  class?: undefined;
 }
 
 export default class Mask extends SvelteComponentTyped<

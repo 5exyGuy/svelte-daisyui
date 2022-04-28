@@ -23,7 +23,7 @@ export interface AvatarProps {
   status?: "online" | "offline" | undefined;
 
   /**
-   * @default ''
+   * @default undefined
    */
   class?: string | undefined;
 }

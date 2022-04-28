@@ -27,7 +27,7 @@ export interface LinkProps {
   href?: string | undefined;
 
   /**
-   * @default ''
+   * @default undefined
    */
   class?: string | undefined;
 }
