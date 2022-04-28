@@ -3,7 +3,7 @@ import type { Pipe } from './pipe';
 export class Pipeline {
     public readonly name: string;
     public readonly extensions: ReadonlyArray<string>;
-    public readonly transformExtension?: string;
+    public readonly transformExtension: string | undefined;
     private pipes: Array<Pipe> = [];
 
     public constructor(

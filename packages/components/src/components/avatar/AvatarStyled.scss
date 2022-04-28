@@ -1,0 +1,21 @@
+@mixin status($bg-color) {
+    &:before {
+        content: '';
+        @apply absolute z-10 block rounded-full #{$bg-color};
+        width: 15%;
+        height: 15%;
+        top: 7%;
+        right: 7%;
+        box-shadow: 0 0 0 2px var(--base-100);
+    }
+}
+
+.avatar {
+    &.avatar-online {
+        @include status('bg-success');
+    }
+
+    &.avatar-offline {
+        @include status('bg-base-300');
+    }
+}

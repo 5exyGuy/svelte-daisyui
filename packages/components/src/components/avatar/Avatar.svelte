@@ -1,36 +1,72 @@
-<script lang="ts">
-    import { Maybe } from '../maybe.type';
-    import { AvatarSize } from './avatar-size.enum';
+<script>
+    import { Size } from '../../enums';
+    import { classes } from '../../utils';
     import { AvatarStatus } from './avatar-status.enum';
 
-    // Props
-    export let src: Maybe<string> = null;
-    export let size: keyof typeof AvatarSize | number | string = 'Medium';
-    export let status: Maybe<keyof typeof AvatarStatus> = null;
-    let className: string = '';
+    // -----------------------------------------------------------
+    //                           Props
+    // -----------------------------------------------------------
+
+    /**
+     * @type {string | undefined}
+     */
+    export let src;
+
+    /**
+     * @type {string}
+     */
+    export let alt;
+
+    /**
+     * @type {'tiny' | 'small' | 'medium' | 'large' | number | string | undefined}
+     */
+    export let size = 'medium';
+
+    /**
+     * @type {'online' | 'offline' | undefined}
+     */
+    export let status;
+
+    let className = '';
+    /**
+     * @type {string | undefined}
+     */
     export { className as class };
 
-    // Classes
-    const classes: string[] = [];
+    // -----------------------------------------------------------
+    //                     Classes and Styles
+    // -----------------------------------------------------------
 
-    classes.push('avatar');
-    if (size && typeof size !== 'number' && AvatarSize[size]) classes.push(AvatarSize[size]);
-    if (status) classes.push(status);
+    const classNames = classes(
+        'avatar',
+        {
+            size: {
+                condition: size && typeof size !== 'number' && Size[size],
+                key: size,
+                value: Size,
+            },
+            status: {
+                condition: !!status,
+                key: status,
+                value: AvatarStatus,
+            },
+        },
+        className,
+    );
 
-    const classNames = className.length > 0 ? className.split(' ') : [];
-    classes.push(...classNames);
-
-    const style: Maybe<string> = typeof size === 'number' ? `width:${size}rem;height:${size}rem;` : null;
+    const style =
+        typeof size === 'number' ? `width:${size}rem;height:${size}rem;` : null;
 </script>
 
-<div class={classes.join(' ')} {style}>
+<div class={classNames} {style}>
     {#if src}
-        <img alt="" {src} />
+        <img {alt} {src} />
     {:else}
         <slot />
     {/if}
 </div>
 
-<style lang="less">
-    @import 'Avatar.less';
+<style lang="scss">
+    @import 'AvatarStyled.scss';
+    @import 'AvatarUnstyled.scss';
 </style>

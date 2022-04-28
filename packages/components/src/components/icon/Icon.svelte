@@ -1,29 +1,61 @@
-<script lang="ts">
-    import { SvelteComponent } from 'svelte';
-    import { Maybe } from '../utils/maybe.type';
+<script>
+    import { classes } from '../../utils';
 
-    // Props
-    export let component: Maybe<typeof SvelteComponent> = null;
-    export let size: Maybe<number> = null;
-    export let height: number = 1;
-    export let width: number = 1;
-    export let spin: boolean = false;
-    let className: string = '';
+    // -----------------------------------------------------------
+    //                           Props
+    // -----------------------------------------------------------
+
+    /**
+     * @type {typeof import('svelte').SvelteComponent | undefined}
+     */
+    export let component;
+
+    /**
+     * @type {number | undefined}
+     */
+    export let size;
+
+    /**
+     * @type {number}
+     */
+    export let height = 1;
+
+    /**
+     * @type {number}
+     */
+    export let width = 1;
+
+    /**
+     * @type {boolean}
+     */
+    export let spin = false;
+
+    let className = '';
+    /**
+     * @type {string | undefined}
+     */
     export { className as class };
 
-    // Classes
-    const classes: string[] = [];
+    // -----------------------------------------------------------
+    //                          Classes
+    // -----------------------------------------------------------
 
-    classes.push('icon');
-    if (spin) classes.push('icon-spin');
-
-    const classNames = className.length > 0 ? className.split(' ') : [];
-    classes.push(...classNames);
-
-    const finalClass = classes.join(' ');
+    const classNames = classes(
+        'icon',
+        {
+            spin: {
+                condition: spin,
+                value: 'spin',
+            },
+        },
+        className,
+    );
 </script>
 
-<div class={finalClass} style={`height: ${size ?? height}rem; width: ${size ?? width}rem;`}>
+<div
+    class={classNames}
+    style={`height: ${size ?? height}rem; width: ${size ?? width}rem;`}
+>
     {#if component}
         <svelte:component this={component} />
     {:else}
@@ -31,6 +63,7 @@
     {/if}
 </div>
 
-<style lang="less">
-    @import 'Icon.less';
+<style lang="scss">
+    @import 'IconStyled.scss';
+    @import 'IconUnstyled.scss';
 </style>

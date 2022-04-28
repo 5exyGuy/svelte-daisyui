@@ -5,6 +5,16 @@
     import MdErrorOutline from 'svelte-icons/md/MdErrorOutline.svelte';
     import { BrandColor, FunctionalColor } from '../../enums';
     import Icon from '../icon/Icon.svelte';
+    import { classes } from '../../utils';
+
+    // -----------------------------------------------------------
+    //                      Type definitions
+    // -----------------------------------------------------------
+
+    /**
+     * @typedef {'primary' | 'secondary' | 'accent'} BrandColor
+     * @typedef {'info' | 'success' | 'warning' | 'error'} FunctionalColor
+     */
 
     // -----------------------------------------------------------
     //                           Props
@@ -20,9 +30,8 @@
      */
     export let icon;
 
-
     /**
-     * @type {BrandColor | FunctionalColor | AdditionalColor | undefined}
+     * @type {BrandColor | FunctionalColor | undefined}
      */
     export let color;
 
@@ -33,36 +42,38 @@
     export { className as class };
 
     // -----------------------------------------------------------
-    //                          Classes
+    //                     Classes and Styles
     // -----------------------------------------------------------
 
-    // Classes
-    const classes: string[] = [];
-
-    classes.push('alert');
-    if (type) {
-        const colors = { ...BrandColor, ...FunctionalColor };
-        classes.push(colors[type]);
-    }
-
-    const classNames = className.length > 0 ? className.split(' ') : [];
-    classes.push(...classNames);
-
-    const finalClass = classes.join(' ');
+    const classNames = classes(
+        'alert',
+        {
+            color: {
+                condition: !!color,
+                key: color,
+                value: { ...BrandColor, ...FunctionalColor },
+            },
+        },
+        className,
+    );
 </script>
 
-<div class={finalClass}>
+<div class={classNames}>
     <div class="alert-content">
         {#if icon}
-            <svelte:component this={Icon} component={icon.component} size={icon.size} />
-        {:else if !icon && type}
-            {#if type === 'Info'}
+            <svelte:component
+                this={Icon}
+                component={icon.component}
+                size={icon.size}
+            />
+        {:else if !icon && color}
+            {#if color === 'info'}
                 <Icon size={1.5} component={MdInfoOutline} />
-            {:else if type === 'Success'}
+            {:else if color === 'success'}
                 <Icon size={1.5} component={FaRegCheckCircle} />
-            {:else if type === 'Warning'}
+            {:else if color === 'warning'}
                 <Icon size={1.5} component={MdWarning} />
-            {:else if type === 'Error'}
+            {:else if color === 'error'}
                 <Icon size={1.5} component={MdErrorOutline} />
             {/if}
         {/if}
@@ -80,5 +91,6 @@
 </div>
 
 <style lang="scss">
-    @import 'Alert.scss';
+    @import 'AlertStyled.scss';
+    @import 'AlertUnstyled.scss';
 </style>

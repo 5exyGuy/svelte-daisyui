@@ -1,0 +1,53 @@
+@use 'sass:map';
+
+$sizes: (
+    1: (
+        x: 320px,
+        y: 568px,
+    ),
+    2: (
+        x: 375px,
+        y: 667px,
+    ),
+    3: (
+        x: 414px,
+        y: 736px,
+    ),
+    4: (
+        x: 375px,
+        y: 812px,
+    ),
+    5: (
+        x: 414px,
+        y: 896px,
+    ),
+    6: (
+        x: 320px,
+        y: 1024px,
+    ),
+);
+
+.artboard {
+    @apply w-full;
+
+    &.artboard-demo {
+        @apply bg-base-100 text-base-content;
+        border-radius: var(--box-border-radius);
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+            0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    }
+
+    &.artboard-phone {
+        @each $size, $object in $sizes {
+            &-#{$size} {
+                width: map.get($object, 'x');
+                height: map.get($object, 'y');
+
+                &.artboard-horizontal {
+                    width: map.get($object, 'y');
+                    height: map.get($object, 'x');
+                }
+            }
+        }
+    }
+}

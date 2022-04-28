@@ -5,13 +5,13 @@ import { SassPipe } from '../pipes/sass.pipe';
 import { SveltePipe } from '../pipes/svelte.pipe';
 import { Processor } from './processor';
 import tailwindcss from 'tailwindcss';
-import { TAILWIND_CONFIG } from '../../configs/tailwind.config';
+import { TAILWIND_CONFIG } from '@svelte-daisyui/shared';
 import autoprefixer from 'autoprefixer';
 import type { AddPipelineFunction } from './types/add-pipeline-function.type';
 import type { AddPipelineEventFunction } from './types/add-pipeline-event-function.type';
 
 export class BuildProcessor extends Processor {
-    public setupPipelines(add: AddPipelineFunction): void {
+    public override setupPipelines(add: AddPipelineFunction): void {
         add('svelte', [new SveltePipe()], ['.svelte']);
         add('javascript', [new JavascriptPipe()], ['.js']);
         add(
@@ -40,7 +40,7 @@ export class BuildProcessor extends Processor {
         for (const filePath of files) await this.process(filePath);
     }
 
-    public setupPipelineEvents(add: AddPipelineEventFunction): void {
+    public override setupPipelineEvents(add: AddPipelineEventFunction): void {
         add(['svelte', 'javascript'], async (data) => {
             const { transformed, output } = data;
             const { filePathWithoutInput, source } = transformed;

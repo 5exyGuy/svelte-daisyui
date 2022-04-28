@@ -1,5 +1,5 @@
-import type { Constructor } from '@eztrip/types';
-import { File } from '../../utils/file';
+import type { Constructor } from 'type-fest';
+import { File } from '@svelte-daisyui/shared';
 import { Pipeline } from '../pipes/pipeline';
 import minimist from 'minimist';
 import type { Pipe } from '../pipes/pipe';
@@ -35,10 +35,10 @@ export abstract class Processor {
     public static start(): void {
         const args = Processor.parseArgv();
 
-        const ModeClass = Processor.modes.get(args.mode);
-        if (!ModeClass) throw new Error(`Unknown mode name: ${args.mode}`);
+        const ModeClass = Processor.modes.get(args['mode']);
+        if (!ModeClass) throw new Error(`Unknown mode name: ${args['mode']}`);
 
-        const mode = new ModeClass(args._[0], args.output);
+        const mode = new ModeClass(args._[0] as string, args['output']);
         if (mode.setupPipelines)
             mode.setupPipelines(mode.addPipeline.bind(mode));
         if (mode.setupPipelineEvents)
@@ -61,9 +61,8 @@ export abstract class Processor {
         name: string,
         pipes: ReadonlyArray<Pipe>,
         extensions: Array<string>,
-        transformExtension?: string,
     ): void {
-        const pipeline = new Pipeline(name, extensions, transformExtension);
+        const pipeline = new Pipeline(name, extensions);
         pipeline.addPipe(...pipes);
 
         for (const ext of extensions)

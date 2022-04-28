@@ -1,0 +1,15 @@
+@use 'sass:list';
+@use '../variables.scss' as *;
+
+$colors: list.join($brand-colors, $functional-colors);
+
+.alert {
+    @apply bg-base-200 p-4;
+    border-radius: var(--box-border-radius);
+
+    @each $color in $colors {
+        &.alert-#{$color} {
+            @apply bg-#{$color} text-#{$color}-content;
+        }
+    }
+}

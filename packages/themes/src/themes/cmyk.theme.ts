@@ -1,5 +1,5 @@
 import type { PartialDeep } from 'type-fest';
-import type { Theme } from '../interfaces/theme.interface';
+import type { Theme } from '@svelte-daisyui/shared';
 
 export const CmykTheme: PartialDeep<Theme> = {
     name: 'cmyk',

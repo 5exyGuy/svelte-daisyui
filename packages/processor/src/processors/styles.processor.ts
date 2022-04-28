@@ -4,12 +4,12 @@ import { Processor } from './processor';
 import { SassPipe } from '../pipes/sass.pipe';
 import { PostCssPipe } from '../pipes/postcss.pipe';
 import { JssPipe } from '../pipes/jss.pipe';
-import { TAILWIND_CONFIG } from '../../configs/tailwind.config';
+import { TAILWIND_CONFIG } from '@svelte-daisyui/shared';
 import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
 
 export class StylesProcessor extends Processor {
-    public setupPipelines(add: AddPipelineFunction): void {
+    public override setupPipelines(add: AddPipelineFunction): void {
         add(
             'css',
             [
@@ -31,7 +31,7 @@ export class StylesProcessor extends Processor {
         );
     }
 
-    public setupPipelineEvents(add: AddPipelineEventFunction): void {
+    public override setupPipelineEvents(add: AddPipelineEventFunction): void {
         add(['css'], async (data) => {
             const { transformed, output } = data;
             const { fileName, source } = transformed;
@@ -46,7 +46,7 @@ export class StylesProcessor extends Processor {
         });
     }
 
-    public async start(input: string, output: string): Promise<void> {
+    public async start(input: string, _output: string): Promise<void> {
         const files = this.file.readDirRecursively(input);
         for (const filePath of files) await this.process(filePath);
     }

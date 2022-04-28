@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "main": "./dist/index.umd.js",
     "module": "./dist/index.es.js",
-    "types": "./styles/index.d.ts",
+    "types": "./types/index.d.ts",
     "svelte": "./src/index.js",
     "license": "MIT",
     "scripts": {

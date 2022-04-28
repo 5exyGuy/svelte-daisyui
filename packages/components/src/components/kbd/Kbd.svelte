@@ -1,28 +1,44 @@
-<script lang="ts">
-    import { Size, type SizeKey } from '$enums';
-    import type { Nullable } from '@eztrip/types';
+<script>
+    import { Size } from '../../enums';
+    import { classes } from '../../utils';
 
-    // Props
-    export let size: Nullable<SizeKey> = null;
-    let className: string = '';
+    // -----------------------------------------------------------
+    //                           Props
+    // -----------------------------------------------------------
+
+    /**
+     * @type {'tiny' | 'small' | 'medium' | 'large'}
+     */
+    export let size;
+
+    let className = '';
+    /**
+     * @type {string | undefined}
+     */
     export { className as class };
 
-    // Classes
-    const classes: string[] = [];
+    // -----------------------------------------------------------
+    //                     Classes and Styles
+    // -----------------------------------------------------------
 
-    classes.push('kbd');
-    if (size) classes.push(`kbd-${Size[size]}`);
-
-    const classNames = className.length > 0 ? className.split(' ') : [];
-    classes.push(...classNames);
-
-    const finalClass = classes.join(' ');
+    const classNames = classes(
+        'kbd',
+        {
+            size: {
+                condition: !!size,
+                key: size,
+                value: Size,
+            },
+        },
+        className,
+    );
 </script>
 
-<kbd class={finalClass}>
+<kbd class={classNames}>
     <slot />
 </kbd>
 
-<style global lang="less">
-    @import 'Kbd.less';
+<style lang="scss">
+    @import 'KbdStyled.scss';
+    @import 'KbdUnstyled.scss';
 </style>

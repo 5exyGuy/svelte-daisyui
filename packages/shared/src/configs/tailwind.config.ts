@@ -13,7 +13,7 @@ function withOpacityValue(variable: string) {
 }
 
 export const TAILWIND_CONFIG: TailwindConfig = {
-    content: ['./src/**/*.{js,svelte,ts}'],
+    content: ['./src/**/*.{svelte,js,ts}'],
     theme: {
         extend: {
             colors: {

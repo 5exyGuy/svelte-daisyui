@@ -7,7 +7,7 @@ export class SveltePipe extends Pipe {
         const sassImports = [...source.matchAll(sassImportsRegex)];
 
         for (const sassImport of sassImports) {
-            const value = sassImport[0];
+            const value = sassImport[0] as string;
             const cssImport = value.replace(/.s(c|a)ss/gi, '.css');
             source = source.replace(/(\s+)lang=['"]([^\s]+)['"](\s*)/gi, '');
             source = source.replace(value, cssImport);

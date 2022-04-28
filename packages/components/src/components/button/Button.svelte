@@ -1,56 +1,57 @@
 <script>
-    import { BrandColor, FunctionalColor, Size, AdditionalColor } from '../../enums';
+    import {
+        BrandColor,
+        FunctionalColor,
+        Size,
+        AdditionalColor,
+    } from '../../enums';
     import { ButtonShape } from './button-shape.enum';
     import { classes } from '../../utils';
-
-    // -----------------------------------------------------------
-    //                      Type definitions
-    // -----------------------------------------------------------
-
-    /**
-     * @typedef {'primary' | 'secondary' | 'accent'} BrandColor
-     * @typedef {'info' | 'success' | 'warning' | 'error'} FunctionalColor
-     * @typedef {'ghost' | 'link'} AdditionalColor
-     * @typedef {'tiny' | 'small' | 'medium' | 'large'} Size
-     * @typedef {'square' | 'circle'} Shape
-     */
 
     // -----------------------------------------------------------
     //                           Props
     // -----------------------------------------------------------
 
     /**
-     * @type {BrandColor | FunctionalColor | AdditionalColor | undefined}
+     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost' | 'link' | undefined}
      */
-    export let color = null;
+    export let color;
+
     /**
-     * @type {Size | undefined}
+     * @type {'tiny' | 'small' | 'medium' | 'large' | undefined}
      */
-    export let size = null;
+    export let size;
+
     /**
-     * @type {Shape | undefined}
+     * @type {'square' | 'circle' | undefined}
      */
-    export let shape = null;
+    export let shape;
+
     /**
      * @type {boolean}
      */
     export let active = false;
+
     /**
      * @type {boolean}
      */
     export let block = false;
+
     /**
      * @type {boolean}
      */
     export let outline = false;
+
     /**
      * @type {boolean}
      */
     export let loading = false;
+
     /**
      * @type {boolean}
      */
     export let disabled = false;
+
     /**
      * @type {boolean}
      */
@@ -63,7 +64,7 @@
     export { className as class };
 
     // -----------------------------------------------------------
-    //                          Classes
+    //                     Classes and Styles
     // -----------------------------------------------------------
 
     const classNames = classes(
@@ -72,7 +73,11 @@
             color: {
                 condition: !!color,
                 key: color,
-                value: { ...BrandColor, ...FunctionalColor, ...AdditionalColor },
+                value: {
+                    ...BrandColor,
+                    ...FunctionalColor,
+                    ...AdditionalColor,
+                },
             },
             size: {
                 condition: !!size,

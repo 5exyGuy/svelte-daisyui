@@ -1,0 +1,10 @@
+@use '../variables.scss' as *;
+
+.breadcrumb-group {
+    @apply max-w-full overflow-x-auto;
+
+    & > :global(ul) {
+        @apply flex items-center whitespace-nowrap;
+        min-height: min-content;
+    }
+}

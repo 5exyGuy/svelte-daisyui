@@ -1,4 +1,4 @@
-import type { DaisyUIConfig } from '../../../plugin/src/daisyui-config.interface';
+import type { DaisyUIConfig } from '@svelte-daisyui/shared';
 import { DEFAULT_DARK_THEME, DEFAULT_MAIN_THEME } from '../constants';
 import { DEFAULT_THEMES } from '../themes';
 import { CUSTOM_THEME_SCHEMA } from './custom-theme.schema';

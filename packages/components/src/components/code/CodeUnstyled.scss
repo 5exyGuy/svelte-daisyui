@@ -1,0 +1,10 @@
+.code {
+    @apply relative overflow-hidden overflow-x-auto;
+
+    :global(pre[data-prefix]) {
+        &:before {
+            content: attr(data-prefix);
+            @apply inline-block text-right;
+        }
+    }
+}

@@ -1,31 +1,31 @@
 /// <reference types="svelte" />
 import type { SvelteComponentTyped } from "svelte";
 
-export type BrandColor = "primary" | "secondary" | "accent";
-
-export type FunctionalColor = "info" | "success" | "warning" | "error";
-
-export type AdditionalColor = "ghost" | "link";
-
-export type Size = "tiny" | "small" | "medium" | "large";
-
-export type Shape = "square" | "circle";
-
 export interface ButtonProps {
   /**
-   * @default null
+   * @default undefined
    */
-  color?: BrandColor | FunctionalColor | AdditionalColor | undefined;
+  color?:
+    | "primary"
+    | "secondary"
+    | "accent"
+    | "info"
+    | "success"
+    | "warning"
+    | "error"
+    | "ghost"
+    | "link"
+    | undefined;
 
   /**
-   * @default null
+   * @default undefined
    */
-  size?: Size | undefined;
+  size?: "tiny" | "small" | "medium" | "large" | undefined;
 
   /**
-   * @default null
+   * @default undefined
    */
-  shape?: Shape | undefined;
+  shape?: "square" | "circle" | undefined;
 
   /**
    * @default false

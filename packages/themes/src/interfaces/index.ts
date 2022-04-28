@@ -1,1 +1,1 @@
-export type { Theme } from './theme.interface';
+export type { Theme } from '@svelte-daisyui/shared';

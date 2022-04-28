@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import { Processor } from './processors/processor';
 import { BuildProcessor } from './processors/build.processor';
 import { WatchProcessor } from './processors/watch.processor';

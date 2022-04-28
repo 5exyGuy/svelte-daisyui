@@ -1,7 +1,7 @@
 <script>
-    import { Button } from '@svelte-daisyui/components';
+    import { Mask } from '@svelte-daisyui/components';
 </script>
 
-<Button>Hello world</Button>
-
-<div>Hello world</div>
+<Mask type="hexagon2" class="w-32 h-32">
+    <img src="https://api.lorem.space/image/shoes" alt="" />
+</Mask>

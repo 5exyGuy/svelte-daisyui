@@ -1,14 +1,38 @@
 {
     "name": "@svelte-daisyui/processor",
     "version": "1.0.0",
-    "main": "./dist/index.js",
-    "module": "./dist/index.mjs",
+    "main": "./dist/index.cjs.js",
+    "module": "./dist/index.es.js",
     "types": "./dist/index.d.ts",
     "license": "MIT",
     "scripts": {
-        "build": "tsup",
-        "dev": "tsup --watch"
+        "build": "rollup -c && pnpm run types",
+        "dev": "rollup -c -w",
+        "types": "dts-bundle-generator -o dist/index.d.ts src/index.ts"
     },
-    "dependencies": {},
-    "devDependencies": {}
+    "dependencies": {
+        "@svelte-daisyui/shared": "workspace:^1.0.0",
+        "autoprefixer": "^10.4.5",
+        "chokidar": "^3.5.3",
+        "jss": "^10.9.0",
+        "minimist": "^1.2.6",
+        "postcss": "^8.4.12",
+        "rtlcss": "^3.5.0",
+        "sass": "^1.51.0",
+        "sveld": "^0.15.0",
+        "tailwindcss": "^3.0.24"
+    },
+    "devDependencies": {
+        "@rollup/plugin-commonjs": "^22.0.0",
+        "@rollup/plugin-node-resolve": "^13.2.1",
+        "@types/minimist": "^1.2.2",
+        "@types/rtlcss": "^3.1.4",
+        "@types/tailwindcss": "^3.0.10",
+        "dts-bundle-generator": "^6.9.0",
+        "rollup": "^2.70.2",
+        "rollup-plugin-node-externals": "^4.0.0",
+        "rollup-plugin-terser": "^7.0.2",
+        "rollup-plugin-ts": "^2.0.7",
+        "type-fest": "^2.12.2"
+    }
 }

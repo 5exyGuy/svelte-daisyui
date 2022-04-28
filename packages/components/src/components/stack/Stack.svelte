@@ -1,5 +1,5 @@
-<script lang="ts">
-    import { StackDirection, StackDirectionKey } from './stack-direction.enum';
+<script>
+    import { StackDirection } from './stack-direction.enum';
 
     // Props
     export let direction: StackDirectionKey = 'Down';
@@ -22,6 +22,7 @@
     <slot />
 </div>
 
-<style global lang="less">
-    @import 'Stack.less';
+<style lang="scss">
+    @import 'StackStyled.scss';
+    @import 'StackUnstyled.scss';
 </style>

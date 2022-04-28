@@ -2,7 +2,6 @@
     "name": "@svelte-daisyui/playground",
     "private": true,
     "version": "1.0.0",
-    "type": "module",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
@@ -11,7 +10,6 @@
     "dependencies": {
         "@svelte-daisyui/components": "workspace:^1.0.0",
         "@svelte-daisyui/plugin": "workspace:^1.0.0",
-        "@svelte-daisyui/shared": "workspace:^1.0.0",
         "svelte": "^3.47.0"
     },
     "devDependencies": {

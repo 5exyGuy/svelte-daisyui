@@ -1,0 +1,7 @@
+.avatar-group {
+    @apply flex overflow-hidden;
+
+    & > :global(.avatar) {
+        @apply overflow-hidden rounded-full border-4 border-base-100;
+    }
+}

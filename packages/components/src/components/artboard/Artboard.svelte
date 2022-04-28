@@ -1,29 +1,62 @@
-<script lang="ts">
-    import { ArtboardSize, ArtboardSizeKey } from './artboard-size.enum';
+<script>
+    import { classes } from '../../utils';
+    import { ArtboardSize } from './artboard-size.enum';
 
-    // Props
-    export let size: ArtboardSizeKey = 'Phone1';
-    export let horizontal: boolean = false;
-    let className: string = '';
+    // -----------------------------------------------------------
+    //                           Props
+    // -----------------------------------------------------------
+
+    /**
+     * @type {'1' | '2' | '3' | '4' | '5' | '6' | 1 | 2 | 3 | 4 | 5 | 6}
+     */
+    export let size = '1';
+
+    /**
+     * @type {boolean}
+     */
+    export let demo = false;
+
+    /**
+     * @type {boolean}
+     */
+    export let horizontal = false;
+
+    let className = '';
+    /**
+     * @type {string | undefined}
+     */
     export { className as class };
 
-    // Classes
-    const classes: string[] = [];
+    // -----------------------------------------------------------
+    //                     Classes and Styles
+    // -----------------------------------------------------------
 
-    classes.push('alert');
-    classes.push(`artboard-${ArtboardSize[size]}`);
-    if (horizontal) classes.push('artboard-horizontal');
-
-    const classNames = className.length > 0 ? className.split(' ') : [];
-    classes.push(...classNames);
-
-    const finalClass = classes.join(' ');
+    const classNames = classes(
+        'artboard',
+        {
+            size: {
+                condition: !!size,
+                key: `phone${size}`,
+                value: ArtboardSize,
+            },
+            demo: {
+                condition: demo,
+                value: 'demo',
+            },
+            horizontal: {
+                condition: horizontal,
+                value: 'horizontal',
+            },
+        },
+        className,
+    );
 </script>
 
-<div class={finalClass}>
+<div class={classNames}>
     <slot />
 </div>
 
-<style global lang="less">
-    @import 'Artboard.less';
+<style lang="scss">
+    @import 'ArtboardStyled.scss';
+    @import 'ArtboardUnstyled.scss';
 </style>

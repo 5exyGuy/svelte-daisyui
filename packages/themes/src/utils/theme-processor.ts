@@ -1,6 +1,5 @@
 import type { Theme } from '../interfaces';
 import type { StringKeyOf } from 'type-fest';
-import type { Styles } from 'jss';
 import { DEFAULT_THEMES } from '../themes';
 import { DAISYUI_CONFIG_SCHEMA, CUSTOM_THEME_SCHEMA } from '../schemas';
 import {
@@ -105,9 +104,7 @@ export class ThemeProcessor {
         return processedTheme;
     }
 
-    public generate(): Partial<
-        Styles<string | number | symbol, any, undefined>
-    > {
+    public generate(): Object {
         const includedThemes = [] as Theme[];
 
         // Validating the config
@@ -157,9 +154,7 @@ export class ThemeProcessor {
         }
 
         // Processing the included themes
-        const generatedStyles = {} as Partial<
-            Styles<string | number | symbol, any, undefined>
-        >;
+        const generatedStyles = {} as any;
 
         generatedStyles[':root'] = this.process(mainTheme);
         generatedStyles['@media (prefers-color-scheme: dark)'] = {

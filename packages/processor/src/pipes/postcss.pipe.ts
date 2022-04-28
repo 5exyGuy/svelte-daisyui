@@ -12,9 +12,7 @@ export class PostCssPipe extends Pipe {
     }
 
     public async process({ source }: PipeData): Promise<string> {
-        const { css } = await postcss(this.plugins).process(source, {
-            from: undefined,
-        });
+        const { css } = await postcss(this.plugins).process(source);
         return css;
     }
 }

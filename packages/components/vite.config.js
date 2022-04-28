@@ -31,6 +31,8 @@ export default defineConfig({
                 },
             }),
         }),
-        sveld(),
+        sveld({
+            markdown: true,
+        }),
     ],
 });
