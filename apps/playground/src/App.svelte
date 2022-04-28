@@ -1,14 +1,13 @@
 <script>
-    import {
-        Badge,
-        IndicatorGroup,
-        IndicatorItem,
-    } from '@svelte-daisyui/components';
+    import { Rating } from '@svelte-daisyui/components';
 </script>
 
 <div class="p-16">
-    <IndicatorGroup>
-        <IndicatorItem><Badge /></IndicatorItem>
-        <div class="grid w-32 h-32 bg-base-300 place-items-center">content</div>
-    </IndicatorGroup>
+    <Rating size="large" half>
+        <input type="radio" name="rating-1" class="mask mask-star" />
+        <input type="radio" name="rating-1" class="mask mask-star" checked />
+        <input type="radio" name="rating-1" class="mask mask-star" />
+        <input type="radio" name="rating-1" class="mask mask-star" />
+        <input type="radio" name="rating-1" class="mask mask-star" />
+    </Rating>
 </div>

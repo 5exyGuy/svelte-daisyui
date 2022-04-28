@@ -1,0 +1,56 @@
+@use 'sass:list';
+@use '../variables.scss' as *;
+
+.progress {
+    @apply h-2;
+    border-radius: var(--box-border-radius);
+
+    &::-moz-progress-bar {
+        @apply bg-neutral;
+    }
+
+    @each $color in list.join($brand-colors, $functional-colors) {
+        &.progress-#{$color}::-moz-progress-bar {
+            @apply bg-#{$color};
+        }
+    }
+
+    &:indeterminate::after {
+        @apply bg-neutral;
+    }
+
+    @each $color in list.join($brand-colors, $functional-colors) {
+        &.progress-#{$color}:indeterminate::after {
+            @apply bg-#{$color};
+        }
+    }
+
+    &::-webkit-progress-bar {
+        @apply bg-neutral bg-opacity-20;
+        border-radius: var(--box-border-radius);
+    }
+
+    &::-webkit-progress-value {
+        @apply bg-neutral-focus;
+        border-radius: var(--box-border-radius);
+    }
+
+    @each $color in list.join($brand-colors, $functional-colors) {
+        &.progress-#{$color}::-webkit-progress-value {
+            @apply bg-#{$color};
+        }
+    }
+
+    &:indeterminate::after {
+        @apply inset-y-0 -left-[40%] w-1/3 absolute;
+        content: '';
+        border-radius: var(--box-border-radius);
+        animation: progress-loading 5s infinite ease-in-out;
+    }
+}
+
+@keyframes progress-loading {
+    50% {
+        left: 107%;
+    }
+}

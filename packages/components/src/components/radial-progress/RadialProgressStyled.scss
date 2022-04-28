@@ -1,0 +1,9 @@
+.radial-progress {
+    --value: 0;
+    --size: 5rem;
+    --thickness: calc(var(--size) / 10);
+
+    &:after {
+        @apply bg-current;
+    }
+}

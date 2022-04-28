@@ -9,7 +9,10 @@
 - [`Badge`](#badge)
 - [`BreadcrumbGroup`](#breadcrumbgroup)
 - [`BreadcrumbItem`](#breadcrumbitem)
+- [`Checkbox`](#checkbox)
 - [`Code`](#code)
+- [`Divider`](#divider)
+- [`Dropdown`](#dropdown)
 - [`Icon`](#icon)
 - [`IndicatorGroup`](#indicatorgroup)
 - [`IndicatorItem`](#indicatoritem)
@@ -17,7 +20,11 @@
 - [`Kbd`](#kbd)
 - [`Link`](#link)
 - [`Mask`](#mask)
+- [`Progress`](#progress)
+- [`RadialProgress`](#radialprogress)
+- [`Radio`](#radio)
 - [`Range`](#range)
+- [`Rating`](#rating)
 - [`Select`](#select)
 - [`Stack`](#stack)
 - [`TabGroup`](#tabgroup)
@@ -171,6 +178,28 @@ None.
 
 None.
 
+## `Checkbox`
+
+### Props
+
+| Prop name     | Kind             | Reactive | Type                                                                                                                                      | Default value          | Description |
+| :------------ | :--------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
+| checked       | <code>let</code> | No       | <code>boolean</code>                                                                                                                      | <code>false</code>     | --          |
+| disabled      | <code>let</code> | No       | <code>boolean</code>                                                                                                                      | <code>false</code>     | --          |
+| indeterminate | <code>let</code> | No       | <code>boolean</code>                                                                                                                      | <code>false</code>     | --          |
+| color         | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; undefined</code> | <code>undefined</code> | --          |
+| class         | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                      | <code>undefined</code> | --          |
+
+### Slots
+
+None.
+
+### Events
+
+| Event name | Type      | Detail |
+| :--------- | :-------- | :----- |
+| change     | forwarded | --     |
+
 ## `Code`
 
 ### Props
@@ -184,6 +213,46 @@ None.
 | Slot name | Default | Props | Fallback |
 | :-------- | :------ | :---- | :------- |
 | --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `Divider`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                                        | Default value           | Description |
+| :-------- | :--------------- | :------- | :------------------------------------------ | ----------------------- | ----------- |
+| alignment | <code>let</code> | No       | <code>'vertical' &#124; 'horizontal'</code> | <code>'vertical'</code> | --          |
+| class     | <code>let</code> | No       | <code>string &#124; undefined</code>        | <code>undefined</code>  | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `Dropdown`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                                                            | Default value          | Description |
+| :-------- | :--------------- | :------- | :-------------------------------------------------------------- | ---------------------- | ----------- |
+| position  | <code>let</code> | No       | <code>'top' &#124; 'bottom' &#124; 'left' &#124; 'right'</code> | <code>'bottom'</code>  | --          |
+| end       | <code>let</code> | No       | <code>boolean</code>                                            | <code>false</code>     | --          |
+| class     | <code>let</code> | No       | <code>string &#124; undefined</code>                            | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props                         | Fallback |
+| :-------- | :------ | :---------------------------- | :------- |
+| --        | Yes     | --                            | --       |
+| focus     | No      | <code>{ tabindex: 0 } </code> | --       |
 
 ### Events
 
@@ -331,6 +400,67 @@ None.
 
 None.
 
+## `Progress`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                                                                                                                                      | Default value          | Description |
+| :-------- | :--------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
+| color     | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; undefined</code> | <code>undefined</code> | --          |
+| size      | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large'</code>                                                                         | <code>'medium'</code>  | --          |
+| value     | <code>let</code> | No       | <code>number</code>                                                                                                                       | <code>0</code>         | --          |
+| max       | <code>let</code> | No       | <code>number</code>                                                                                                                       | <code>100</code>       | --          |
+| class     | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                      | <code>undefined</code> | --          |
+
+### Slots
+
+None.
+
+### Events
+
+None.
+
+## `RadialProgress`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                                 | Default value          | Description |
+| :-------- | :--------------- | :------- | :----------------------------------- | ---------------------- | ----------- |
+| value     | <code>let</code> | No       | <code>number</code>                  | <code>0</code>         | --          |
+| class     | <code>let</code> | No       | <code>string &#124; undefined</code> | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `Radio`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                                                                                                                                      | Default value          | Description |
+| :-------- | :--------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
+| size      | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large'</code>                                                                         | <code>'medium'</code>  | --          |
+| color     | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; undefined</code> | <code>undefined</code> | --          |
+| name      | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                      | <code>undefined</code> | --          |
+| checked   | <code>let</code> | No       | <code>boolean</code>                                                                                                                      | <code>false</code>     | --          |
+| class     | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                      | <code>undefined</code> | --          |
+
+### Slots
+
+None.
+
+### Events
+
+| Event name | Type      | Detail |
+| :--------- | :-------- | :----- |
+| change     | forwarded | --     |
+
 ## `Range`
 
 ### Props
@@ -347,6 +477,26 @@ None.
 ### Slots
 
 None.
+
+### Events
+
+None.
+
+## `Rating`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                                                              | Default value          | Description |
+| :-------- | :--------------- | :------- | :---------------------------------------------------------------- | ---------------------- | ----------- |
+| size      | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large'</code> | <code>'medium'</code>  | --          |
+| half      | <code>let</code> | No       | <code>boolean</code>                                              | <code>false</code>     | --          |
+| class     | <code>let</code> | No       | <code>string &#124; undefined</code>                              | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
 
 ### Events
 

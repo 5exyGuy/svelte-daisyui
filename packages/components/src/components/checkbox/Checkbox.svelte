@@ -1,47 +1,64 @@
-<script lang="ts">
-    import { createEventDispatcher } from 'svelte';
-    import { CheckboxType } from './checkbox-type.enum';
+<script>
+    import { BrandColor, FunctionalColor } from '../../enums';
+    import { classes } from '../../utils';
 
-    // Props
-    export let autofocus: boolean = false;
-    export let checked: boolean = false;
-    export let defaultChecked: boolean = false;
-    export let disabled: boolean = false;
-    export let indeterminate: boolean = false;
-    export let onChange: ((value: boolean) => void) | null = null;
-    export let type: CheckboxType | null = null;
-    let className: string = '';
+    // -----------------------------------------------------------
+    //                           Props
+    // -----------------------------------------------------------
+
+    /**
+     * @type {boolean}
+     */
+    export let checked = false;
+
+    /**
+     * @type {boolean}
+     */
+    export let disabled = false;
+
+    /**
+     * @type {boolean}
+     */
+    export let indeterminate = false;
+
+    /**
+     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | undefined}
+     */
+    export let color;
+
+    let className;
+    /**
+     * @type {string | undefined}
+     */
     export { className as class };
 
-    // Classes
-    const classes: string[] = [];
+    // -----------------------------------------------------------
+    //                     Classes and Styles
+    // -----------------------------------------------------------
 
-    classes.push('checkbox');
-    if (type) classes.push(type);
-
-    const classNames = className.length > 0 ? className.split(' ') : [];
-    classes.push(...classNames);
-
-    // Events and callbacks
-    const dispatch = createEventDispatcher();
-
-    const onCheckboxChange = (event: Event) => {
-        if (disabled) return;
-        if (onChange) onChange((event.target as HTMLInputElement).checked);
-        dispatch('change', event);
-    };
+    const classNames = classes(
+        'checkbox',
+        {
+            color: {
+                condition: !!color,
+                key: color,
+                value: { ...BrandColor, ...FunctionalColor },
+            },
+        },
+        className,
+    );
 </script>
 
 <input
-    class={classes.join(' ')}
+    class={classNames}
     type="checkbox"
     {checked}
-    on:change={onCheckboxChange}
+    on:change
     {disabled}
-    {autofocus}
     {indeterminate}
 />
 
-<style lang="less">
-    @import 'Checkbox.less';
+<style lang="scss">
+    @import 'CheckboxStyled.scss';
+    @import 'CheckboxUnstyled.scss';
 </style>

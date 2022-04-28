@@ -1,0 +1,19 @@
+.checkbox {
+    @apply shrink-0;
+
+    &.checkbox-xs {
+        @apply h-4 w-4;
+    }
+
+    &.checkbox-sm {
+        @apply h-5 w-5;
+    }
+
+    &.checkbox-md {
+        @apply h-6 w-6;
+    }
+
+    &.checkbox-lg {
+        @apply h-8 w-8;
+    }
+}

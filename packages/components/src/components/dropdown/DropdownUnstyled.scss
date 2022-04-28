@@ -6,7 +6,6 @@
     }
 
     & > :global(.dropdown-content) {
-        @apply origin-top scale-95 transform transition duration-200 ease-in-out;
         @apply invisible absolute z-50 opacity-0;
     }
 
@@ -26,21 +25,14 @@
 
     &.dropdown-left > :global(.dropdown-content) {
         @apply top-0 right-full bottom-auto;
-        @apply origin-right;
     }
 
     &.dropdown-right > :global(.dropdown-content) {
         @apply left-full top-0 bottom-auto;
-        @apply origin-left;
     }
 
     &.dropdown-top > :global(.dropdown-content) {
         @apply bottom-full top-auto;
-        @apply origin-bottom;
-    }
-
-    &.dropdown-bottom > :global(.dropdown-content) {
-        @apply origin-top;
     }
 
     &.dropdown-open > :global(.dropdown-content),
@@ -49,25 +41,4 @@
     &:not(.dropdown-hover):focus-within > :global(.dropdown-content) {
         @apply visible opacity-100;
     }
-
-    &.dropdown-open > :global(.dropdown-content),
-    &.dropdown-hover:hover > :global(.dropdown-content),
-    &:focus > :global(.dropdown-content),
-    &:focus-within > :global(.dropdown-content) {
-        @apply scale-100;
-    }
 }
-
-// .dropdown.dropdown-open .dropdown-content,
-// .dropdown.dropdown-hover:hover .dropdown-content,
-// .dropdown:not(.dropdown-hover):focus .dropdown-content,
-// .dropdown:not(.dropdown-hover):focus-within .dropdown-content {
-//     @apply visible opacity-100;
-// }
-
-// .dropdown.dropdown-open .dropdown-content,
-// .dropdown.dropdown-hover:hover .dropdown-content,
-// .dropdown:focus .dropdown-content,
-// .dropdown:focus-within .dropdown-content {
-//     @apply scale-100;
-// }

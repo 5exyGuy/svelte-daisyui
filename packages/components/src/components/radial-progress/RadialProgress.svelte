@@ -1,5 +1,4 @@
 <script>
-    import { Alignment } from '../../enums';
     import { classes } from '../../utils';
 
     // -----------------------------------------------------------
@@ -7,9 +6,9 @@
     // -----------------------------------------------------------
 
     /**
-     * @type {'vertical' | 'horizontal'}
+     * @type {number}
      */
-    export let alignment = 'vertical';
+    export let value = 0;
 
     let className;
     /**
@@ -21,24 +20,18 @@
     //                     Classes and Styles
     // -----------------------------------------------------------
 
-    const classNames = classes(
-        'divider',
-        {
-            alignment: {
-                condition: !!alignment,
-                key: alignment,
-                value: Alignment,
-            },
-        },
-        className,
-    );
+    const classNames = classes('radial-progress', {}, className);
 </script>
 
-<div class={classNames}>
-    <slot />
+<div class={classNames} style={`--value:${value}`}>
+    {#if $$slots.default}
+        <slot />
+    {:else}
+        {value}%
+    {/if}
 </div>
 
 <style lang="scss">
-    @import 'DividerStyled.scss';
-    @import 'DividerUnstyled.scss';
+    @import 'RadialProgressStyled.scss';
+    @import 'RadialProgressUnstyled.scss';
 </style>

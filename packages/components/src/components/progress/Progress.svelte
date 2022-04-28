@@ -1,54 +1,62 @@
-<script lang="ts">
-    import {
-        BrandColor,
-        FunctionalColor,
-        Size,
-        type BrandColorKey,
-        type FunctionalColorKey,
-        type SizeKey,
-    } from '$enums';
+<script>
+    import { BrandColor, FunctionalColor, Size } from '../../enums';
+    import { classes } from '../../utils';
 
-    import type { Nullable } from '@eztrip/types';
+    // -----------------------------------------------------------
+    //                           Props
+    // -----------------------------------------------------------
 
-    // Props
-    export let type: Nullable<BrandColorKey | FunctionalColorKey> = null;
-    export let size: Nullable<SizeKey> = null;
-    export let value: number = 0;
-    export let max: number = 100;
-    export let min: number = 0;
-    export let showPercentage: boolean = false;
-    let className: string = '';
+    /**
+     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | undefined}
+     */
+    export let color;
+
+    /**
+     * @type {'tiny' | 'small' | 'medium' | 'large'}
+     */
+    export let size = 'medium';
+
+    /**
+     * @type {number}
+     */
+    export let value = 0;
+
+    /**
+     * @type {number}
+     */
+    export let max = 100;
+
+    let className;
+    /**
+     * @type {string | undefined}
+     */
     export { className as class };
 
-    //
-    $: progressbarWidth = ((value - min) * 100) / (max - min);
+    // -----------------------------------------------------------
+    //                     Classes and Styles
+    // -----------------------------------------------------------
 
-    // Classes
-    const classes: string[] = [];
-
-    classes.push('progress');
-    if (type) {
-        const colors = { ...BrandColor, ...FunctionalColor };
-        classes.push(`progress-${colors[type]}`);
-    }
-    if (size) classes.push(`progress-${Size[size]}`);
-
-    const classNames = className.length > 0 ? className.split(' ') : [];
-    classes.push(...classNames);
-
-    const finalClass = classes.join(' ');
+    const classNames = classes(
+        'progress',
+        {
+            color: {
+                condition: !!color,
+                key: color,
+                value: { ...BrandColor, ...FunctionalColor },
+            },
+            size: {
+                condition: !!size,
+                key: size,
+                value: Size,
+            },
+        },
+        className,
+    );
 </script>
 
-<div class={finalClass}>
-    <div class="progress-bar" role="progressbar" style="width:{progressbarWidth}%;">
-        {#if $$slots.default}
-            <slot />
-        {:else if showPercentage}
-            {progressbarWidth}%
-        {/if}
-    </div>
-</div>
+<progress class={classNames} {value} {max} />
 
-<style global lang="less">
-    @import 'Progress.less';
+<style lang="scss">
+    @import 'ProgressStyled.scss';
+    @import 'ProgressUnstyled.scss';
 </style>

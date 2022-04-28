@@ -1,0 +1,19 @@
+.radio {
+    @apply shrink-0;
+
+    &.radio-xs {
+        @apply h-4 w-4;
+    }
+
+    &.radio-sm {
+        @apply h-5 w-5;
+    }
+
+    &.radio-md {
+        @apply h-6 w-6;
+    }
+
+    &.radio-lg {
+        @apply h-8 w-8;
+    }
+}

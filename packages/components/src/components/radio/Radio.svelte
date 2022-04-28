@@ -1,27 +1,62 @@
-<script lang="ts">
-    import { Maybe } from '../utils/maybe.type';
-    import { Size, SizeKey } from '../utils/size.enum';
+<script>
+    import { BrandColor, FunctionalColor, Size } from '../../enums';
+    import { classes } from '../../utils';
 
-    // Props
-    export let size: Maybe<SizeKey> = null;
-    export let checked: boolean = false;
-    let className: string = '';
+    // -----------------------------------------------------------
+    //                           Props
+    // -----------------------------------------------------------
+
+    /**
+     * @type {'tiny' | 'small' | 'medium' | 'large'}
+     */
+    export let size = 'medium';
+
+    /**
+     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | undefined}
+     */
+    export let color;
+
+    /**
+     * @type {string | undefined}
+     */
+    export let name;
+
+    /**
+     * @type {boolean}
+     */
+    export let checked = false;
+
+    let className;
+    /**
+     * @type {string | undefined}
+     */
     export { className as class };
 
-    // Classes
-    const classes: string[] = [];
+    // -----------------------------------------------------------
+    //                     Classes and Styles
+    // -----------------------------------------------------------
 
-    classes.push('radio');
-    if (size) classes.push(`input-${Size[size]}`);
-
-    const classNames = className.length > 0 ? className.split(' ') : [];
-    classes.push(...classNames);
-
-    const finalClass = classes.join(' ');
+    const classNames = classes(
+        'radio',
+        {
+            size: {
+                condition: !!size,
+                key: size,
+                value: Size,
+            },
+            color: {
+                condition: !!color,
+                key: color,
+                value: { ...BrandColor, ...FunctionalColor },
+            },
+        },
+        className,
+    );
 </script>
 
-<input type="radio" class={finalClass} {name} {checked} />
+<input type="radio" on:change class={classNames} {name} {checked} />
 
-<style global lang="less">
-    @import 'Radio.less';
+<style lang="scss">
+    @import 'RadioStyled.scss';
+    @import 'RadioUnstyled.scss';
 </style>

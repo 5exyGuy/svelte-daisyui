@@ -1,31 +1,56 @@
-<script lang="ts">
-    import { Position, type PositionKey } from '$enums';
+<script>
+    import { Position } from '../../enums';
+    import { classes } from '../../utils';
 
-    // Props
-    export let position: PositionKey = 'Bottom';
-    export let end: boolean = false;
-    let className: string = '';
+    // -----------------------------------------------------------
+    //                           Props
+    // -----------------------------------------------------------
+
+    /**
+     * @type {'top' | 'bottom' | 'left' | 'right'}
+     */
+    export let position = 'bottom';
+
+    /**
+     * @type {boolean}
+     */
+    export let end = false;
+
+    let className;
+    /**
+     * @type {string | undefined}
+     */
     export { className as class };
 
-    // Classes
-    const classes: string[] = [];
+    // -----------------------------------------------------------
+    //                     Classes and Styles
+    // -----------------------------------------------------------
 
-    classes.push('dropdown');
-    classes.push(Position[position]);
-    if (end) classes.push('dropdown-end');
-
-    const classNames = className.length > 0 ? className.split(' ') : [];
-    classes.push(...classNames);
+    const classNames = classes(
+        'dropdown',
+        {
+            position: {
+                condition: !!position,
+                key: position,
+                value: Position,
+            },
+            end: {
+                condition: end,
+                value: 'end',
+            },
+        },
+        className,
+    );
 </script>
 
-<div class={classes.join(' ')}>
-    <slot name="dropdown-focus" />
+<div class={classNames}>
+    <slot name="focus" tabindex="0" />
     <div class="dropdown-content">
-        <slot name="dropdown-content" />
         <slot />
     </div>
 </div>
 
-<style lang="less">
-    @import 'Dropdown.less';
+<style lang="scss">
+    @import 'DropdownStyled.scss';
+    @import 'DropdownUnstyled.scss';
 </style>

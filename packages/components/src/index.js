@@ -9,13 +9,13 @@ export { default as BreadcrumbItem } from './components/breadcrumb-item/Breadcru
 // ButtonGroup
 // Card
 // Corousel
-// Checkbox
+export { default as Checkbox } from './components/checkbox/Checkbox.svelte';
 export { default as Code } from './components/code/Code.svelte';
 // Collapse
 // Countdown
-// Divider
+export { default as Divider } from './components/divider/Divider.svelte';
 // Drawer
-// Dropdown
+export { default as Dropdown } from './components/dropdown/Dropdown.svelte';
 // Hero
 export { default as Icon } from './components/icon/Icon.svelte';
 export { default as IndicatorGroup } from './components/indicator-group/IndicatorGroup.svelte';
@@ -29,10 +29,11 @@ export { default as Mask } from './components/mask/Mask.svelte';
 // Modal
 // Navbar
 // Pagination
-// Progress
-// Radio
+export { default as Progress } from './components/progress/Progress.svelte';
+export { default as RadialProgress } from './components/radial-progress/RadialProgress.svelte';
+export { default as Radio } from './components/radio/Radio.svelte';
 export { default as Range } from './components/range/Range.svelte';
-// Rating
+export { default as Rating } from './components/rating/Rating.svelte';
 export { default as Select } from './components/select/Select.svelte';
 export { default as Stack } from './components/stack/Stack.svelte';
 // StatGroup
