@@ -1,20 +1,21 @@
 <script>
+    import { Size } from '../../enums';
     import { classes } from '../../utils';
-    import { SwapAnim } from './swap-anim.enum';
+    import { TabGroupType } from './tab-group-type.enum';
 
     // -----------------------------------------------------------
     //                           Props
     // -----------------------------------------------------------
 
     /**
-     * @type {'rotate' | 'flip'}
+     * @type {'bordered' | 'lifted' | 'boxed' | undefined}
      */
-    export let animation = null;
+    export let type;
 
     /**
-     * @type {boolean}
+     * @type {'tiny' | 'small' | 'medium' | 'large'}
      */
-    export let state = false;
+    export let size = 'medium';
 
     let className = '';
     /**
@@ -27,24 +28,28 @@
     // -----------------------------------------------------------
 
     const classNames = classes(
-        'swap',
+        'tab-group',
         {
-            animation: {
-                condition: !!animation,
-                key: animation,
-                value: SwapAnim,
+            type: {
+                condition: !!type,
+                key: type,
+                value: TabGroupType,
+            },
+            size: {
+                condition: !!size,
+                key: size,
+                value: Size,
             },
         },
         className,
     );
 </script>
 
-<div class={classNames} on:click data-state={state}>
-    <slot name="swap-on" />
-    <slot name="swap-off" />
+<div class={classNames}>
+    <slot />
 </div>
 
 <style lang="scss">
-    @import 'SwapStyled.scss';
-    @import 'SwapUnstyled.scss';
+    @import 'TabGroupStyled.scss';
+    @import 'TabGroupUnstyled.scss';
 </style>

@@ -8,15 +8,6 @@
     import { classes } from '../../utils';
 
     // -----------------------------------------------------------
-    //                      Type definitions
-    // -----------------------------------------------------------
-
-    /**
-     * @typedef {'primary' | 'secondary' | 'accent'} BrandColor
-     * @typedef {'info' | 'success' | 'warning' | 'error'} FunctionalColor
-     */
-
-    // -----------------------------------------------------------
     //                           Props
     // -----------------------------------------------------------
 
@@ -31,7 +22,7 @@
     export let icon;
 
     /**
-     * @type {BrandColor | FunctionalColor | undefined}
+     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | undefined}
      */
     export let color;
 

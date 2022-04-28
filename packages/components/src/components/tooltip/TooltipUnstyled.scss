@@ -1,0 +1,36 @@
+.tooltip {
+    @apply relative inline-block;
+    --tooltip-offset: calc(100% + 1px + var(--tooltip-tail, 0px));
+
+    & > :global(.tooltip-content) {
+        @apply absolute pointer-events-none;
+    }
+
+    &.tooltip-top {
+        & > :global(.tooltip-content) {
+            @apply -translate-x-1/2 top-auto left-1/2 right-auto;
+            bottom: var(--tooltip-offset);
+        }
+    }
+
+    &.tooltip-bottom {
+        & > :global(.tooltip-content) {
+            @apply -translate-x-1/2 left-1/2 right-auto bottom-auto;
+            top: var(--tooltip-offset);
+        }
+    }
+
+    &.tooltip-left {
+        & > :global(.tooltip-content) {
+            @apply -translate-y-1/2 top-1/2 left-auto bottom-auto;
+            right: var(--tooltip-offset);
+        }
+    }
+
+    &.tooltip-right {
+        & > :global(.tooltip-content) {
+            @apply -translate-y-1/2 top-1/2 right-auto bottom-auto;
+            left: var(--tooltip-offset);
+        }
+    }
+}

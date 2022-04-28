@@ -57,8 +57,8 @@ export interface Theme {
             'border-radius': string;
         };
         tab: {
-            'border-radius': string;
-            'border-width': string;
+            radius: string;
+            border: string;
         };
     };
 }

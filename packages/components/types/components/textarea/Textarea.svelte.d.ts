@@ -1,18 +1,11 @@
 /// <reference types="svelte" />
 import type { SvelteComponentTyped } from "svelte";
 
-export interface AlertProps {
+export interface TextAreaProps {
   /**
    * @default undefined
    */
-  message?: string | undefined;
-
-  /**
-   * @default undefined
-   */
-  icon?:
-    | { component: typeof import("svelte").SvelteComponent; size: number }
-    | undefined;
+  placeholder?: string | undefined;
 
   /**
    * @default undefined
@@ -25,7 +18,18 @@ export interface AlertProps {
     | "success"
     | "warning"
     | "error"
+    | "ghost"
     | undefined;
+
+  /**
+   * @default false
+   */
+  disabled?: boolean;
+
+  /**
+   * @default false
+   */
+  bordered?: boolean;
 
   /**
    * @default ''
@@ -33,8 +37,8 @@ export interface AlertProps {
   class?: string | undefined;
 }
 
-export default class Alert extends SvelteComponentTyped<
-  AlertProps,
+export default class TextArea extends SvelteComponentTyped<
+  TextAreaProps,
   {},
-  { actions: {}; content: {} }
+  {}
 > {}

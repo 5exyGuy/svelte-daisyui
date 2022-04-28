@@ -1,10 +1,10 @@
 export const StackDirection = {
-    u: 'up',
-    d: 'down',
-    l: 'left',
-    r: 'right',
-    ul: 'upleft',
-    ur: 'upright',
-    dl: 'downleft',
-    dr: 'downright',
+    up: 'up',
+    down: 'down',
+    left: 'left',
+    right: 'right',
+    upleft: 'upleft',
+    upright: 'upright',
+    downleft: 'downleft',
+    downright: 'downright',
 };

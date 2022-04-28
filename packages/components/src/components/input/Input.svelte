@@ -1,6 +1,6 @@
 <script>
     import { classes } from '../../utils';
-    import { BrandColor, FunctionalColor } from '../../enums';
+    import { BrandColor, FunctionalColor, Size } from '../../enums';
 
     // -----------------------------------------------------------
     //                           Props
@@ -10,6 +10,11 @@
      * @type {string | undefined}
      */
     export let placeholder;
+
+    /**
+     * @type {'tiny' | 'small' | 'medium' | 'large'}
+     */
+    export let size = 'medium';
 
     /**
      * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost' | undefined}
@@ -37,12 +42,17 @@
     // -----------------------------------------------------------
 
     const classNames = classes(
-        'textarea',
+        'input',
         {
             color: {
                 condition: !!color,
                 key: color,
                 value: { ...BrandColor, ...FunctionalColor },
+            },
+            size: {
+                condition: !!size,
+                key: size,
+                value: Size,
             },
             bordered: {
                 condition: bordered,
@@ -53,9 +63,9 @@
     );
 </script>
 
-<textarea class={classNames} {placeholder} {disabled} />
+<input class={classNames} type="text" {placeholder} {disabled} />
 
 <style lang="scss">
-    @import 'TextareaStyled.scss';
-    @import 'TextareaUnstyled.scss';
+    @import 'InputStyled.scss';
+    @import 'InputUnstyled.scss';
 </style>

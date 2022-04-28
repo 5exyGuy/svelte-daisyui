@@ -1,0 +1,29 @@
+.select {
+    @apply inline-flex flex-shrink-0 cursor-pointer select-none appearance-none;
+    @apply h-12 pl-4 pr-10 text-sm leading-loose;
+    min-height: 3rem;
+
+    &:disabled {
+        @apply pointer-events-none;
+    }
+
+    &.select-md {
+        @apply h-12 pl-4 pr-10 text-sm leading-loose;
+        min-height: 3rem;
+    }
+
+    &.select-lg {
+        @apply h-16 pl-6 pr-8 text-lg leading-loose;
+        min-height: 4rem;
+    }
+
+    &.select-sm {
+        @apply h-8 pl-3 pr-8 text-sm leading-8;
+        min-height: 2rem;
+    }
+
+    &.select-xs {
+        @apply h-6 pl-2 pr-8 text-xs leading-relaxed;
+        min-height: 1.5rem;
+    }
+}

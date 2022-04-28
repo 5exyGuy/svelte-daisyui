@@ -1,20 +1,14 @@
 <script>
     import { classes } from '../../utils';
-    import { SwapAnim } from './swap-anim.enum';
 
     // -----------------------------------------------------------
     //                           Props
     // -----------------------------------------------------------
 
     /**
-     * @type {'rotate' | 'flip'}
-     */
-    export let animation = null;
-
-    /**
      * @type {boolean}
      */
-    export let state = false;
+    export let active = false;
 
     let className = '';
     /**
@@ -27,24 +21,22 @@
     // -----------------------------------------------------------
 
     const classNames = classes(
-        'swap',
+        'tab-item',
         {
-            animation: {
-                condition: !!animation,
-                key: animation,
-                value: SwapAnim,
+            active: {
+                condition: active,
+                value: 'active',
             },
         },
         className,
     );
 </script>
 
-<div class={classNames} on:click data-state={state}>
-    <slot name="swap-on" />
-    <slot name="swap-off" />
+<div tabindex="0" class={classNames}>
+    <slot />
 </div>
 
 <style lang="scss">
-    @import 'SwapStyled.scss';
-    @import 'SwapUnstyled.scss';
+    @import 'TabItemStyled.scss';
+    @import 'TabItemUnstyled.scss';
 </style>

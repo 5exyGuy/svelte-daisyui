@@ -9,34 +9,34 @@
 - [`Badge`](#badge)
 - [`BreadcrumbGroup`](#breadcrumbgroup)
 - [`BreadcrumbItem`](#breadcrumbitem)
-- [`Button`](#button)
 - [`Code`](#code)
 - [`Icon`](#icon)
+- [`Input`](#input)
 - [`Kbd`](#kbd)
 - [`Link`](#link)
 - [`Mask`](#mask)
+- [`Range`](#range)
+- [`Select`](#select)
+- [`Stack`](#stack)
+- [`TabGroup`](#tabgroup)
+- [`TabItem`](#tabitem)
+- [`TextArea`](#textarea)
+- [`Toggle`](#toggle)
+- [`Tooltip`](#tooltip)
 - [`Window`](#window)
 
 ---
 
 ## `Alert`
 
-### Types
-
-```ts
-export type BrandColor = "primary" | "secondary" | "accent";
-
-export type FunctionalColor = "info" | "success" | "warning" | "error";
-```
-
 ### Props
 
-| Prop name | Kind             | Reactive | Type                                                                                                | Default value          | Description |
-| :-------- | :--------------- | :------- | :-------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
-| message   | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                | <code>undefined</code> | --          |
-| icon      | <code>let</code> | No       | <code>{ component: typeof import('svelte').SvelteComponent; size: number; } &#124; undefined</code> | <code>undefined</code> | --          |
-| color     | <code>let</code> | No       | <code>BrandColor &#124; FunctionalColor &#124; undefined</code>                                     | <code>undefined</code> | --          |
-| class     | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                | <code>''</code>        | --          |
+| Prop name | Kind             | Reactive | Type                                                                                                                                      | Default value          | Description |
+| :-------- | :--------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
+| message   | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                      | <code>undefined</code> | --          |
+| icon      | <code>let</code> | No       | <code>{ component: typeof import('svelte').SvelteComponent; size: number; } &#124; undefined</code>                                       | <code>undefined</code> | --          |
+| color     | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; undefined</code> | <code>undefined</code> | --          |
+| class     | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                      | <code>''</code>        | --          |
 
 ### Slots
 
@@ -169,35 +169,6 @@ None.
 
 None.
 
-## `Button`
-
-### Props
-
-| Prop name | Kind             | Reactive | Type                                                                                                                                                                   | Default value          | Description |
-| :-------- | :--------------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
-| color     | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; 'ghost' &#124; 'link' &#124; undefined</code> | <code>undefined</code> | --          |
-| size      | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large' &#124; undefined</code>                                                                                     | <code>undefined</code> | --          |
-| shape     | <code>let</code> | No       | <code>'square' &#124; 'circle' &#124; undefined</code>                                                                                                                 | <code>undefined</code> | --          |
-| active    | <code>let</code> | No       | <code>boolean</code>                                                                                                                                                   | <code>false</code>     | --          |
-| block     | <code>let</code> | No       | <code>boolean</code>                                                                                                                                                   | <code>false</code>     | --          |
-| outline   | <code>let</code> | No       | <code>boolean</code>                                                                                                                                                   | <code>false</code>     | --          |
-| loading   | <code>let</code> | No       | <code>boolean</code>                                                                                                                                                   | <code>false</code>     | --          |
-| disabled  | <code>let</code> | No       | <code>boolean</code>                                                                                                                                                   | <code>false</code>     | --          |
-| noAnim    | <code>let</code> | No       | <code>boolean</code>                                                                                                                                                   | <code>false</code>     | --          |
-| class     | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                                                   | <code>null</code>      | --          |
-
-### Slots
-
-| Slot name | Default | Props | Fallback |
-| :-------- | :------ | :---- | :------- |
-| --        | Yes     | --    | --       |
-
-### Events
-
-| Event name | Type      | Detail |
-| :--------- | :-------- | :----- |
-| click      | forwarded | --     |
-
 ## `Code`
 
 ### Props
@@ -234,6 +205,27 @@ None.
 | Slot name | Default | Props | Fallback |
 | :-------- | :------ | :---- | :------- |
 | --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `Input`
+
+### Props
+
+| Prop name   | Kind             | Reactive | Type                                                                                                                                                     | Default value          | Description |
+| :---------- | :--------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
+| placeholder | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                                     | <code>undefined</code> | --          |
+| size        | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large'</code>                                                                                        | <code>'medium'</code>  | --          |
+| color       | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; 'ghost' &#124; undefined</code> | <code>undefined</code> | --          |
+| disabled    | <code>let</code> | No       | <code>boolean</code>                                                                                                                                     | <code>false</code>     | --          |
+| bordered    | <code>let</code> | No       | <code>boolean</code>                                                                                                                                     | <code>false</code>     | --          |
+| class       | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                                     | <code>''</code>        | --          |
+
+### Slots
+
+None.
 
 ### Events
 
@@ -294,6 +286,168 @@ None.
 | Slot name | Default | Props | Fallback |
 | :-------- | :------ | :---- | :------- |
 | --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `Range`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                                                              | Default value         | Description |
+| :-------- | :--------------- | :------- | :---------------------------------------------------------------- | --------------------- | ----------- |
+| min       | <code>let</code> | No       | <code>number</code>                                               | <code>0</code>        | --          |
+| max       | <code>let</code> | No       | <code>number</code>                                               | <code>100</code>      | --          |
+| value     | <code>let</code> | No       | <code>number</code>                                               | <code>0</code>        | --          |
+| step      | <code>let</code> | No       | <code>number</code>                                               | <code>1</code>        | --          |
+| size      | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large'</code> | <code>'medium'</code> | --          |
+| class     | <code>let</code> | No       | <code>string &#124; undefined</code>                              | <code>''</code>       | --          |
+
+### Slots
+
+None.
+
+### Events
+
+None.
+
+## `Select`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                                                                                                                                                     | Default value          | Description |
+| :-------- | :--------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
+| color     | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; 'ghost' &#124; undefined</code> | <code>undefined</code> | --          |
+| size      | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large'</code>                                                                                        | <code>'medium'</code>  | --          |
+| bordered  | <code>let</code> | No       | <code>boolean</code>                                                                                                                                     | <code>false</code>     | --          |
+| class     | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                                     | <code>''</code>        | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `Stack`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                                                                                                                               | Default value       | Description |
+| :-------- | :--------------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ----------- |
+| direction | <code>let</code> | No       | <code>'up' &#124; 'down' &#124; 'left' &#124; 'right' &#124; 'upleft' &#124; 'upright' &#124; 'downleft' &#124; 'downright'</code> | <code>'down'</code> | --          |
+| class     | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                               | <code>''</code>     | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `TabGroup`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                                                                    | Default value          | Description |
+| :-------- | :--------------- | :------- | :---------------------------------------------------------------------- | ---------------------- | ----------- |
+| type      | <code>let</code> | No       | <code>'bordered' &#124; 'lifted' &#124; 'boxed' &#124; undefined</code> | <code>undefined</code> | --          |
+| size      | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large'</code>       | <code>'medium'</code>  | --          |
+| class     | <code>let</code> | No       | <code>string &#124; undefined</code>                                    | <code>''</code>        | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `TabItem`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                                 | Default value      | Description |
+| :-------- | :--------------- | :------- | :----------------------------------- | ------------------ | ----------- |
+| active    | <code>let</code> | No       | <code>boolean</code>                 | <code>false</code> | --          |
+| class     | <code>let</code> | No       | <code>string &#124; undefined</code> | <code>''</code>    | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `TextArea`
+
+### Props
+
+| Prop name   | Kind             | Reactive | Type                                                                                                                                                     | Default value          | Description |
+| :---------- | :--------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
+| placeholder | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                                     | <code>undefined</code> | --          |
+| color       | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; 'ghost' &#124; undefined</code> | <code>undefined</code> | --          |
+| disabled    | <code>let</code> | No       | <code>boolean</code>                                                                                                                                     | <code>false</code>     | --          |
+| bordered    | <code>let</code> | No       | <code>boolean</code>                                                                                                                                     | <code>false</code>     | --          |
+| class       | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                                     | <code>''</code>        | --          |
+
+### Slots
+
+None.
+
+### Events
+
+None.
+
+## `Toggle`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                                                                                                                     | Default value          | Description |
+| :-------- | :--------------- | :------- | :----------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
+| color     | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error'</code> | <code>undefined</code> | --          |
+| size      | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large'</code>                                                        | <code>'medium'</code>  | --          |
+| disabled  | <code>let</code> | No       | <code>boolean</code>                                                                                                     | <code>false</code>     | --          |
+| checked   | <code>let</code> | No       | <code>boolean</code>                                                                                                     | <code>false</code>     | --          |
+| class     | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                     | <code>''</code>        | --          |
+
+### Slots
+
+None.
+
+### Events
+
+None.
+
+## `Tooltip`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                                                                                                                                      | Default value          | Description |
+| :-------- | :--------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
+| open      | <code>let</code> | No       | <code>boolean</code>                                                                                                                      | <code>false</code>     | --          |
+| position  | <code>let</code> | No       | <code>'top' &#124; 'bottom' &#124; 'left' &#124; 'right'</code>                                                                           | <code>'top'</code>     | --          |
+| color     | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; undefined</code> | <code>undefined</code> | --          |
+| class     | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                      | <code>''</code>        | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+| content   | No      | --    | --       |
 
 ### Events
 

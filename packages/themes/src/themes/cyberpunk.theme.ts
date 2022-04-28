@@ -24,7 +24,7 @@ export const CyberpunkTheme: PartialDeep<Theme> = {
             'border-radius': '0',
         },
         tab: {
-            'border-radius': '0',
+            radius: '0',
         },
     },
 };

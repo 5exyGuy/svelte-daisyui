@@ -1,18 +1,16 @@
 /// <reference types="svelte" />
 import type { SvelteComponentTyped } from "svelte";
 
-export interface AlertProps {
+export interface TooltipProps {
   /**
-   * @default undefined
+   * @default false
    */
-  message?: string | undefined;
+  open?: boolean;
 
   /**
-   * @default undefined
+   * @default 'top'
    */
-  icon?:
-    | { component: typeof import("svelte").SvelteComponent; size: number }
-    | undefined;
+  position?: "top" | "bottom" | "left" | "right";
 
   /**
    * @default undefined
@@ -33,8 +31,8 @@ export interface AlertProps {
   class?: string | undefined;
 }
 
-export default class Alert extends SvelteComponentTyped<
-  AlertProps,
+export default class Tooltip extends SvelteComponentTyped<
+  TooltipProps,
   {},
-  { actions: {}; content: {} }
+  { default: {}; content: {} }
 > {}

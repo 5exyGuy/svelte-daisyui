@@ -1,24 +1,40 @@
 <script>
+    import { classes } from '../../utils';
     import { StackDirection } from './stack-direction.enum';
 
-    // Props
-    export let direction: StackDirectionKey = 'Down';
-    let className: string = '';
+    // -----------------------------------------------------------
+    //                           Props
+    // -----------------------------------------------------------
+
+    /**
+     *  @type {'up' | 'down' | 'left' | 'right' | 'upleft' | 'upright' | 'downleft' | 'downright'}
+     */
+    export let direction = 'down';
+
+    let className = '';
+    /**
+     * @type {string | undefined}
+     */
     export { className as class };
 
-    // Classes
-    const classes: string[] = [];
+    // -----------------------------------------------------------
+    //                     Classes and Styles
+    // -----------------------------------------------------------
 
-    classes.push('stack');
-    classes.push(`stack-${StackDirection[direction]}`);
-
-    const classNames = className.length > 0 ? className.split(' ') : [];
-    classes.push(...classNames);
-
-    const finalClass = classes.join(' ');
+    const classNames = classes(
+        'stack',
+        {
+            direction: {
+                condition: !!direction,
+                key: direction,
+                value: StackDirection,
+            },
+        },
+        className,
+    );
 </script>
 
-<div class={finalClass}>
+<div class={classNames}>
     <slot />
 </div>
 

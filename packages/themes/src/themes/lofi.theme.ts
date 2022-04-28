@@ -41,7 +41,7 @@ export const LofiTheme: PartialDeep<Theme> = {
             'animation-duration': '0',
         },
         tab: {
-            'border-radius': '0',
+            radius: '0',
         },
     },
 };

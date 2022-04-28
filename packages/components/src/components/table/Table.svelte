@@ -51,6 +51,6 @@
     </table>
 </div>
 
-<style global lang="less">
+<style lang="scss">
     @import 'Table.less';
 </style>

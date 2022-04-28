@@ -1,35 +1,67 @@
-<script lang="ts">
-    import { BrandColor, BrandColorKey } from '../utils/brand-color.enum';
-    import { FunctionalColor, FunctionalColorKey } from '../utils/functional-color.enum';
+<script>
+    import { BrandColor, FunctionalColor, Size } from '../../enums';
+    import { classes } from '../../utils';
 
-    import { Maybe } from '../utils/maybe.type';
-    import { Size, SizeKey } from '../utils/size.enum';
+    // -----------------------------------------------------------
+    //                           Props
+    // -----------------------------------------------------------
 
-    // Props
-    export let color: Maybe<BrandColorKey | FunctionalColorKey | 'Ghost'> = null;
-    export let size: Maybe<SizeKey> = null;
-    export let bordered: boolean = false;
-    let className: string = '';
+    /**
+     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost' | undefined}
+     */
+    export let color;
+
+    /**
+     * @type {'tiny' | 'small' | 'medium' | 'large'}
+     */
+    export let size = 'medium';
+
+    /**
+     * @type {boolean}
+     */
+    export let bordered = false;
+
+    let className = '';
+    /**
+     * @type {string | undefined}
+     */
     export { className as class };
 
-    // Classes
-    const classes: string[] = [];
+    // -----------------------------------------------------------
+    //                     Classes and Styles
+    // -----------------------------------------------------------
 
-    classes.push('select');
-    if (color) classes.push(`select-${{ ...BrandColor, ...FunctionalColor, ...{ Ghost: 'ghost' } }[color]}`);
-    if (size) classes.push(`select-${Size[size]}`);
-    if (bordered) classes.push('select-bordered');
-
-    const classNames = className.length > 0 ? className.split(' ') : [];
-    classes.push(...classNames);
-
-    const finalClass = classes.join(' ');
+    const classNames = classes(
+        'select',
+        {
+            color: {
+                condition: !!color,
+                key: color,
+                value: {
+                    ...BrandColor,
+                    ...FunctionalColor,
+                    ...{ ghost: 'ghost' },
+                },
+            },
+            size: {
+                condition: !!size,
+                key: size,
+                value: Size,
+            },
+            bordered: {
+                condition: bordered,
+                value: 'bordered',
+            },
+        },
+        className,
+    );
 </script>
 
-<select class={finalClass}>
+<select class={classNames}>
     <slot />
 </select>
 
-<style global lang="less">
-    @import 'Select.less';
+<style lang="scss">
+    @import 'SelectStyled.scss';
+    @import 'SelectUnstyled.scss';
 </style>

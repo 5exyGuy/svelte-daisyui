@@ -1,45 +1,66 @@
-<script lang="ts">
-    import {
-        BrandColor,
-        FunctionalColor,
-        Position,
-        type BrandColorKey,
-        type FunctionalColorKey,
-        type PositionKey,
-    } from '$enums';
-    import type { Nullable } from '@eztrip/types';
+<script>
+    import { BrandColor, FunctionalColor, Position } from '../../enums';
+    import { classes } from '../../utils';
 
-    // Props
-    export let forceOpen: Nullable<boolean> = null;
-    export let position: PositionKey = 'Top';
-    export let type: Nullable<BrandColorKey | FunctionalColorKey> = null;
-    let className: string = '';
+    // -----------------------------------------------------------
+    //                           Props
+    // -----------------------------------------------------------
+
+    /**
+     * @type {boolean}
+     */
+    export let open = false;
+
+    /**
+     * @type {'top' | 'bottom' | 'left' | 'right'}
+     */
+    export let position = 'top';
+
+    /**
+     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | undefined}
+     */
+    export let color;
+
+    let className = '';
+    /**
+     * @type {string | undefined}
+     */
     export { className as class };
 
-    // Classes
-    const classes: string[] = [];
+    // -----------------------------------------------------------
+    //                     Classes and Styles
+    // -----------------------------------------------------------
 
-    classes.push('tooltip');
-    if (forceOpen) classes.push('tooltip-open');
-    classes.push(Position[position]);
-    if (type) {
-        const colors = { ...BrandColor, ...FunctionalColor };
-        classes.push(`tooltip-${colors[type]}`);
-    }
-
-    const classNames = className.length > 0 ? className.split(' ') : [];
-    classes.push(...classNames);
-
-    const finalClass = classes.join(' ');
+    const classNames = classes(
+        'tooltip',
+        {
+            open: {
+                condition: open,
+                value: 'open',
+            },
+            position: {
+                condition: !!position,
+                key: position,
+                value: Position,
+            },
+            color: {
+                condition: !!color,
+                key: color,
+                value: { ...BrandColor, ...FunctionalColor },
+            },
+        },
+        className,
+    );
 </script>
 
-<div class={finalClass}>
+<div class={classNames}>
     <div class="tooltip-content">
         <slot name="content" />
     </div>
     <slot />
 </div>
 
-<style lang="less">
-    @import 'Tooltip.less';
+<style lang="scss">
+    @import 'TooltipStyled.scss';
+    @import 'TooltipUnstyled.scss';
 </style>

@@ -1,18 +1,16 @@
 /// <reference types="svelte" />
 import type { SvelteComponentTyped } from "svelte";
 
-export interface AlertProps {
+export interface InputProps {
   /**
    * @default undefined
    */
-  message?: string | undefined;
+  placeholder?: string | undefined;
 
   /**
-   * @default undefined
+   * @default 'medium'
    */
-  icon?:
-    | { component: typeof import("svelte").SvelteComponent; size: number }
-    | undefined;
+  size?: "tiny" | "small" | "medium" | "large";
 
   /**
    * @default undefined
@@ -25,7 +23,18 @@ export interface AlertProps {
     | "success"
     | "warning"
     | "error"
+    | "ghost"
     | undefined;
+
+  /**
+   * @default false
+   */
+  disabled?: boolean;
+
+  /**
+   * @default false
+   */
+  bordered?: boolean;
 
   /**
    * @default ''
@@ -33,8 +42,4 @@ export interface AlertProps {
   class?: string | undefined;
 }
 
-export default class Alert extends SvelteComponentTyped<
-  AlertProps,
-  {},
-  { actions: {}; content: {} }
-> {}
+export default class Input extends SvelteComponentTyped<InputProps, {}, {}> {}

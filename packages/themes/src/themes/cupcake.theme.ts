@@ -18,8 +18,8 @@ export const CupcakeTheme: PartialDeep<Theme> = {
             'border-radius': '1.9rem',
         },
         tab: {
-            'border-radius': '0.5rem',
-            'border-width': '2px',
+            radius: '0.5rem',
+            border: '2px',
         },
     },
 };

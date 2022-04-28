@@ -32,8 +32,8 @@ export const DEFAULT_THEME = {
             'border-radius': '1.9rem',
         },
         tab: {
-            'border-radius': '0.5rem',
-            'border-width': '1px',
+            border: '1px',
+            radius: '0.5rem',
         },
     },
 } as Theme;

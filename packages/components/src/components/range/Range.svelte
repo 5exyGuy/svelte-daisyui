@@ -1,30 +1,62 @@
-<script lang="ts">
-    import { Maybe } from '../utils/maybe.type';
-    import { Size, SizeKey } from '../utils/size.enum';
+<script>
+    import { Size } from '../../enums';
+    import { classes } from '../../utils';
 
-    // Props
-    export let min: number = 0;
-    export let max: number = 100;
-    export let value: number = 0;
-    export let step: number = 1;
-    export let size: Maybe<SizeKey> = null;
-    let className: string = '';
+    // -----------------------------------------------------------
+    //                           Props
+    // -----------------------------------------------------------
+
+    /**
+     * @type {number}
+     */
+    export let min = 0;
+
+    /**
+     * @type {number}
+     */
+    export let max = 100;
+
+    /**
+     * @type {number}
+     */
+    export let value = 0;
+
+    /**
+     * @type {number}
+     */
+    export let step = 1;
+
+    /**
+     * @type {'tiny' | 'small' | 'medium' | 'large'}
+     */
+    export let size = 'medium';
+
+    let className = '';
+    /**
+     * @type {string | undefined}
+     */
     export { className as class };
 
-    // Classes
-    const classes: string[] = [];
+    // -----------------------------------------------------------
+    //                     Classes and Styles
+    // -----------------------------------------------------------
 
-    classes.push('range');
-    if (size) classes.push(`range-${Size[size]}`);
-
-    const classNames = className.length > 0 ? className.split(' ') : [];
-    classes.push(...classNames);
-
-    const finalClass = classes.join(' ');
+    const classNames = classes(
+        'range',
+        {
+            size: {
+                condition: !!size,
+                key: size,
+                value: Size,
+            },
+        },
+        className,
+    );
 </script>
 
-<input class={finalClass} type="range" {min} {max} {step} {value} />
+<input class={classNames} type="range" {min} {max} {step} {value} />
 
-<style global lang="less">
-    @import 'Range.less';
+<style lang="scss">
+    @import 'RangeStyled.scss';
+    @import 'RangeUnstyled.scss';
 </style>

@@ -1,17 +1,38 @@
-.tabs {
-    @apply flex flex-wrap items-end;
+:global(.tab-group) {
+    & > :global(.tab-item) {
+        @apply text-opacity-50 hover:text-opacity-100;
+        --tab-color: hsla(var(--base-content) / var(--tw-text-opacity, 1));
+        --tab-bg: hsla(var(--base-100) / var(--tw-bg-opacity, 1));
+        --tab-border-color: hsla(var(--base-300) / var(--tw-bg-opacity, 1));
+        color: var(--tab-color);
+        padding-left: var(--tab-padding, 1rem);
+        padding-right: var(--tab-padding, 1rem);
 
-    &.tabs-bordered > .tab {
-        &:not(.tab-active) {
-            @apply border-opacity-20;
+        &.tab-item-active {
+            @apply border-base-content border-opacity-100 text-opacity-100;
         }
 
-        @apply border-base-content;
+        &:focus {
+            @apply outline-none;
+        }
+
+        &:focus-visible {
+            outline: 2px solid currentColor;
+            outline-offset: -3px;
+        }
+    }
+}
+
+:global(.tab-group.tab-group-bordered) {
+    & > :global(.tab-item) {
+        @apply border-base-content border-opacity-20;
         border-style: solid;
         border-bottom-width: calc(var(--tab-border, 1px) + 1px);
     }
+}
 
-    &.tabs-lifted > .tab {
+:global(.tab-group.tab-group-lifted) {
+    & > :global(.tab-item) {
         border: var(--tab-border, 1px) solid transparent;
         border-width: 0 0 var(--tab-border, 1px) 0;
         border-top-left-radius: var(--tab-radius, 0.5rem);
@@ -26,14 +47,19 @@
             border-bottom-left-radius: var(--tab-radius, 0.5rem);
         }
 
-        &.tab-active {
+        &.tab-item-active {
             background-color: var(--tab-bg);
-            border-width: var(--tab-border, 1px) var(--tab-border, 1px) 0 var(--tab-border, 1px);
+            border-width: var(--tab-border, 1px) var(--tab-border, 1px) 0
+                var(--tab-border, 1px);
             border-left-color: var(--tab-border-color);
             border-right-color: var(--tab-border-color);
             border-top-color: var(--tab-border-color);
-            padding-left: calc(var(--tab-padding, 1rem) - var(--tab-border, 1px));
-            padding-right: calc(var(--tab-padding, 1rem) - var(--tab-border, 1px));
+            padding-left: calc(
+                var(--tab-padding, 1rem) - var(--tab-border, 1px)
+            );
+            padding-right: calc(
+                var(--tab-padding, 1rem) - var(--tab-border, 1px)
+            );
             padding-bottom: var(--tab-border, 1px);
             padding-top: 0;
 
@@ -51,8 +77,10 @@
                     circle at var(--circle-pos),
                     transparent var(--tab-grad),
                     var(--tab-border-color) calc(var(--tab-grad) + 0.3px),
-                    var(--tab-border-color) calc(var(--tab-grad) + var(--tab-border, 1px)),
-                    var(--tab-bg) calc(var(--tab-grad) + var(--tab-border, 1px) + 0.3px)
+                    var(--tab-border-color)
+                        calc(var(--tab-grad) + var(--tab-border, 1px)),
+                    var(--tab-bg)
+                        calc(var(--tab-grad) + var(--tab-border, 1px) + 0.3px)
                 );
             }
 
@@ -60,12 +88,22 @@
                 left: calc(var(--tab-radius, 0.5rem) * -1);
                 --circle-pos: top left;
                 background-image: var(--tab-corner-bg);
+
+                // /* RTL quick fix */
+                // [dir='rtl'] & {
+                //     --circle-pos: top right;
+                // }
             }
 
             &:after {
                 right: calc(var(--tab-radius, 0.5rem) * -1);
                 --circle-pos: top right;
                 background-image: var(--tab-corner-bg);
+
+                // /* RTL quick fix */
+                // [dir='rtl'] & {
+                //     --circle-pos: top left;
+                // }
             }
 
             &:first-child:before {
@@ -76,39 +114,26 @@
                 background: none;
             }
 
-            & + .tab.tab-lifted.tab-active {
+            & + .tab-item.tab-item-active {
                 &:before {
                     background: none;
                 }
             }
         }
     }
+}
 
-    &.tabs-boxed {
-        @apply bg-base-200 p-1 rounded-2xl;
-
-        & > .tab.tab-active {
-            @apply bg-primary text-primary-content rounded-2xl;
-        }
-    }
-
-    &.tabs-md > .tab {
-        @apply h-8 text-sm leading-loose;
-        --tab-padding: 1rem;
-    }
-
-    &.tabs-lg > .tab {
-        @apply h-12 text-lg leading-loose;
-        --tab-padding: 1.25rem;
-    }
-
-    &.tabs-sm > .tab {
-        @apply h-6 text-sm leading-3;
-        --tab-padding: 0.75rem;
-    }
-
-    &.tabs-xs > .tab {
-        @apply h-5 text-xs leading-3;
-        --tab-padding: 0.5rem;
+:global(.tab-group.tab-group-boxed) {
+    & > :global(.tab-item.tab-item-active) {
+        @apply bg-primary text-primary-content hover:text-primary-content;
+        border-radius: var(--button-border-radius);
     }
 }
+
+// .tab-group.tab-group-lifted > .tab-item.tab-item-active {
+//     & + .tab-item.tab-item-active {
+//         &:before {
+//             background: none;
+//         }
+//     }
+// }

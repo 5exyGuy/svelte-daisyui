@@ -1,19 +1,19 @@
 .textarea {
-    @apply border border-base-content border-opacity-0 bg-base-100 rounded-btn;
-    @apply flex-shrink transition duration-200 ease-in-out;
-    @apply px-4 py-2  text-sm leading-loose min-h-12;
+    @apply border border-base-content border-opacity-0 bg-base-100;
+    border-radius: var(--button-border-radius);
 
     &.textarea-bordered {
         @apply border-opacity-20;
     }
 
     &:focus {
-        outline: 2px solid rgb(var(--base-content) / 0.2);
+        outline: 2px solid hsla(var(--base-content) / 0.2);
         outline-offset: 2px;
     }
 
     &.textarea-ghost {
         @apply bg-opacity-5;
+
         &:focus {
             @apply bg-opacity-100 text-base-content;
             box-shadow: none;
@@ -22,50 +22,57 @@
 
     &.textarea-primary {
         @apply border-primary;
+
         &:focus {
-            outline: 2px solid hsl(var(--p));
+            outline: 2px solid hsl(var(--primary));
         }
     }
 
     &.textarea-secondary {
         @apply border-secondary;
+
         &:focus {
-            outline: 2px solid hsl(var(--s));
+            outline: 2px solid hsl(var(--secondary));
         }
     }
 
     &.textarea-accent {
         @apply border-accent;
+
         &:focus {
-            outline: 2px solid hsl(var(--a));
+            outline: 2px solid hsl(var(--accent));
         }
     }
 
     &.textarea-info {
         @apply border-info;
+
         &:focus {
-            outline: 2px solid hsl(var(--in));
+            outline: 2px solid hsl(var(--info));
         }
     }
 
     &.textarea-success {
         @apply border-success;
+
         &:focus {
-            outline: 2px solid hsl(var(--su));
+            outline: 2px solid hsl(var(--success));
         }
     }
 
     &.textarea-warning {
         @apply border-warning;
+
         &:focus {
-            outline: 2px solid hsl(var(--wa));
+            outline: 2px solid hsl(var(--warning));
         }
     }
 
     &.textarea-error {
         @apply border-error;
+
         &:focus {
-            outline: 2px solid hsl(var(--er));
+            outline: 2px solid hsl(var(--error));
         }
     }
 

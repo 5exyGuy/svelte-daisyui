@@ -28,7 +28,7 @@ export const WireframeTheme: PartialDeep<Theme> = {
             'border-radius': '0.2rem',
         },
         tab: {
-            'border-radius': '0.2rem',
+            radius: '0.2rem',
         },
     },
 };

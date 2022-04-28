@@ -1,0 +1,6 @@
+.tab-group {
+    &.tab-group-boxed {
+        @apply bg-base-200 p-1;
+        border-radius: var(--button-border-radius);
+    }
+}

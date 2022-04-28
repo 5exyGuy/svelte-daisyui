@@ -81,12 +81,12 @@ export const CUSTOM_THEME_SCHEMA = joi.object<Theme>({
                 .default(DEFAULT_THEME.variables.badge),
             tab: joi
                 .object({
-                    'border-radius': joi
+                    border: joi
                         .string()
-                        .default(DEFAULT_THEME.variables.tab['border-radius']),
-                    'border-width': joi
+                        .default(DEFAULT_THEME.variables.tab['border']),
+                    radius: joi
                         .string()
-                        .default(DEFAULT_THEME.variables.tab['border-width']),
+                        .default(DEFAULT_THEME.variables.tab['radius']),
                 })
                 .default(DEFAULT_THEME.variables.tab),
         })

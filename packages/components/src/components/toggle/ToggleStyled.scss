@@ -1,0 +1,66 @@
+@use 'sass:list';
+@use '../variables.scss' as *;
+
+.toggle {
+    --chkbg: hsla(var(--base-content) / 0.2);
+    --handleoffset: 1.5rem;
+    @apply h-6 w-12 cursor-pointer appearance-none border border-base-content border-opacity-20 bg-base-content bg-opacity-20 duration-300 ease-in-out;
+    border-radius: var(--badge-border-radius);
+    transition: background, box-shadow var(--animation-input, 0.2s) ease-in-out;
+    box-shadow: calc(var(--handleoffset) * -1) 0 0 2px hsl(var(--base-100))
+            inset,
+        0 0 0 2px hsl(var(--base-100)) inset;
+
+    &:focus-visible {
+        outline: 2px solid hsl(var(--base-content));
+        outline-offset: 2px;
+    }
+
+    &:checked,
+    &[checked='true'] {
+        --chkbg: hsl(var(--base-content));
+        @apply border-opacity-100 bg-opacity-100;
+        box-shadow: var(--handleoffset) 0 0 2px hsl(var(--base-100)) inset,
+            0 0 0 2px hsl(var(--base-100)) inset;
+        [dir='rtl'] & {
+            box-shadow: calc(var(--handleoffset) * 1) 0 0 2px
+                    hsl(var(--base-100)) inset,
+                0 0 0 2px hsl(var(--base-100)) inset;
+        }
+    }
+
+    &:indeterminate {
+        --chkbg: hsl(var(--base-content));
+        @apply border-opacity-100 bg-opacity-100;
+        box-shadow: calc(var(--handleoffset) / 2) 0 0 2px hsl(var(--base-100))
+                inset,
+            calc(var(--handleoffset) / -2) 0 0 2px hsl(var(--base-100)) inset,
+            0 0 0 2px hsl(var(--base-100)) inset;
+        [dir='rtl'] & {
+            box-shadow: calc(var(--handleoffset) / 2) 0 0 2px
+                    hsl(var(--base-100)) inset,
+                calc(var(--handleoffset) / -2) 0 0 2px hsl(var(--base-100))
+                    inset,
+                0 0 0 2px hsl(var(--base-100)) inset;
+        }
+    }
+
+    @each $color in list.join($brand-colors, $functional-colors) {
+        &.toggle-#{$color} {
+            &:focus-visible {
+                outline: 2px solid hsl(var(--#{$color}));
+            }
+
+            &:checked,
+            &[checked='true'] {
+                --chkbg: hsl(var(--#{$color}));
+                @apply border-#{$color};
+                @apply border-#{$color} border-opacity-10 bg-#{$color} text-#{$color}-content;
+            }
+        }
+    }
+
+    &:disabled {
+        @apply cursor-not-allowed border-transparent bg-base-content bg-opacity-20;
+    }
+}
