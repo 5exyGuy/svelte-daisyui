@@ -1,0 +1,30 @@
+@use 'sass:list';
+@use '../variables.scss' as *;
+
+:global(.stat-group) {
+    & > .stat-item {
+        @apply gap-x-4 border-base-content border-opacity-10 px-6 py-4;
+
+        & > .stat-item-title {
+            @apply opacity-60;
+        }
+
+        & > .stat-item-value {
+            @apply text-4xl font-extrabold;
+        }
+
+        & > .stat-item-desc {
+            @apply text-xs opacity-60;
+        }
+
+        & > .stat-item-actions {
+            @apply mt-4;
+        }
+
+        @each $color in list.join($brand-colors, $functional-colors) {
+            &.stat-item-#{$color} {
+                @apply bg-#{$color} text-#{$color}-content;
+            }
+        }
+    }
+}

@@ -11,6 +11,7 @@
 - [`BreadcrumbItem`](#breadcrumbitem)
 - [`Checkbox`](#checkbox)
 - [`Code`](#code)
+- [`Countdown`](#countdown)
 - [`Divider`](#divider)
 - [`Dropdown`](#dropdown)
 - [`Icon`](#icon)
@@ -27,6 +28,8 @@
 - [`Rating`](#rating)
 - [`Select`](#select)
 - [`Stack`](#stack)
+- [`StatGroup`](#statgroup)
+- [`StatItem`](#statitem)
 - [`TabGroup`](#tabgroup)
 - [`TabItem`](#tabitem)
 - [`TextArea`](#textarea)
@@ -213,6 +216,22 @@ None.
 | Slot name | Default | Props | Fallback |
 | :-------- | :------ | :---- | :------- |
 | --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `Countdown`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                                 | Default value          | Description |
+| :-------- | :--------------- | :------- | :----------------------------------- | ---------------------- | ----------- |
+| class     | <code>let</code> | No       | <code>string &#124; undefined</code> | <code>undefined</code> | --          |
+
+### Slots
+
+None.
 
 ### Events
 
@@ -537,6 +556,52 @@ None.
 | Slot name | Default | Props | Fallback |
 | :-------- | :------ | :---- | :------- |
 | --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `StatGroup`
+
+### Props
+
+| Prop name  | Kind             | Reactive | Type                                                                                                                                      | Default value             | Description |
+| :--------- | :--------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------- | ----------- |
+| alignment  | <code>let</code> | No       | <code>'horizontal' &#124; 'vertical'</code>                                                                                               | <code>'horizontal'</code> | --          |
+| background | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; undefined</code> | <code>undefined</code>    | --          |
+| class      | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                      | <code>undefined</code>    | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `StatItem`
+
+### Props
+
+| Prop name   | Kind             | Reactive | Type                                                                                                                                      | Default value          | Description |
+| :---------- | :--------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
+| title       | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                      | <code>undefined</code> | --          |
+| value       | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                      | <code>undefined</code> | --          |
+| description | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                      | <code>undefined</code> | --          |
+| background  | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; undefined</code> | <code>undefined</code> | --          |
+| class       | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                      | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name   | Default | Props | Fallback |
+| :---------- | :------ | :---- | :------- |
+| actions     | No      | --    | --       |
+| description | No      | --    | --       |
+| figure      | No      | --    | --       |
+| title       | No      | --    | --       |
+| value       | No      | --    | --       |
 
 ### Events
 

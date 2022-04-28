@@ -1,0 +1,26 @@
+:global(.stat-group) {
+    & > .stat-item {
+        @apply inline-grid w-full;
+        grid-template-columns: repeat(1, 1fr);
+
+        &.stat-item-figure {
+            @apply col-start-2 row-span-3 row-start-1 place-self-center justify-self-end;
+        }
+
+        &.stat-item-title {
+            @apply col-start-1 whitespace-nowrap;
+        }
+
+        &.stat-item-value {
+            @apply col-start-1 whitespace-nowrap;
+        }
+
+        &.stat-item-desc {
+            @apply col-start-1 whitespace-nowrap;
+        }
+
+        &.stat-item-actions {
+            @apply col-start-1 whitespace-nowrap;
+        }
+    }
+}

@@ -12,7 +12,7 @@ export { default as BreadcrumbItem } from './components/breadcrumb-item/Breadcru
 export { default as Checkbox } from './components/checkbox/Checkbox.svelte';
 export { default as Code } from './components/code/Code.svelte';
 // Collapse
-// Countdown
+export { default as Countdown } from './components/countdown/Countdown.svelte'; // Not working, implement better solution
 export { default as Divider } from './components/divider/Divider.svelte';
 // Drawer
 export { default as Dropdown } from './components/dropdown/Dropdown.svelte';
@@ -36,8 +36,8 @@ export { default as Range } from './components/range/Range.svelte';
 export { default as Rating } from './components/rating/Rating.svelte';
 export { default as Select } from './components/select/Select.svelte';
 export { default as Stack } from './components/stack/Stack.svelte';
-// StatGroup
-// StatItem
+export { default as StatGroup } from './components/stat-group/StatGroup.svelte';
+export { default as StatItem } from './components/stat-item/StatItem.svelte';
 // StepGroup
 // StepItem
 // Swap

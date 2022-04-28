@@ -1,13 +1,15 @@
 <script>
-    import { Rating } from '@svelte-daisyui/components';
+    import { StatGroup, StatItem } from '@svelte-daisyui/components';
 </script>
 
 <div class="p-16">
-    <Rating size="large" half>
-        <input type="radio" name="rating-1" class="mask mask-star" />
-        <input type="radio" name="rating-1" class="mask mask-star" checked />
-        <input type="radio" name="rating-1" class="mask mask-star" />
-        <input type="radio" name="rating-1" class="mask mask-star" />
-        <input type="radio" name="rating-1" class="mask mask-star" />
-    </Rating>
+    <StatGroup background="accent">
+        <StatItem
+            background="error"
+            title="Title #1"
+            description="Description #1"
+            value="31K"
+        />
+        <StatItem title="Title #1" description="Description #1" value="4,200" />
+    </StatGroup>
 </div>

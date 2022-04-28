@@ -1,0 +1,22 @@
+@use 'sass:list';
+@use '../variables.scss' as *;
+
+.stat-group {
+    @apply bg-base-100 text-base-content;
+    @apply divide-x divide-y-0 overflow-x-auto;
+    border-radius: var(--box-border-radius);
+
+    &.stat-group-horizontal {
+        @apply divide-x divide-y-0 overflow-x-auto;
+    }
+
+    &.stat-group-vertical {
+        @apply divide-y divide-x-0 overflow-y-auto;
+    }
+
+    @each $color in list.join($brand-colors, $functional-colors) {
+        &.stat-group-#{$color} {
+            @apply bg-#{$color} text-#{$color}-content;
+        }
+    }
+}

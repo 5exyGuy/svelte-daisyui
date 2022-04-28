@@ -1,0 +1,11 @@
+.stat-group {
+    @apply inline-grid grid-flow-col;
+
+    &.stat-group-horizontal {
+        @apply grid-flow-col;
+    }
+
+    &.stat-group-vertical {
+        @apply grid-flow-row;
+    }
+}
