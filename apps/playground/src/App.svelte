@@ -1,19 +1,12 @@
 <script>
-    import { Drawer, Button } from '@svelte-daisyui/components';
-
-    let visible = false;
+    import { Menu, MenuItem } from '@svelte-daisyui/components';
 </script>
 
-<Drawer end bind:visible>
-    <div slot="content" class="p-32">
-        <Button on:click={() => (visible = !visible)}>Open drawer</Button>
-    </div>
-    <ul
-        slot="side"
-        class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content"
-    >
-        <!-- Sidebar content here -->
-        <li><a>Sidebar Item 1</a></li>
-        <li><a>Sidebar Item 2</a></li>
-    </ul>
-</Drawer>
+<Menu class="menu bg-base-100 w-56">
+    <!-- svelte-ignore a11y-missing-attribute -->
+    <MenuItem><a>Item 1</a></MenuItem>
+    <!-- svelte-ignore a11y-missing-attribute -->
+    <MenuItem><a>Item 2</a></MenuItem>
+    <!-- svelte-ignore a11y-missing-attribute -->
+    <MenuItem><a>Item 3</a></MenuItem>
+</Menu>

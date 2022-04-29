@@ -12,18 +12,24 @@
     },
     "dependencies": {
         "@svelte-daisyui/shared": "workspace:^1.0.0",
-        "color": "^4.2.3",
         "joi": "^17.6.0"
     },
     "devDependencies": {
+        "@babel/core": "^7.17.9",
+        "@babel/preset-env": "^7.16.11",
+        "@babel/preset-typescript": "^7.16.7",
         "@rollup/plugin-commonjs": "^22.0.0",
         "@rollup/plugin-node-resolve": "^13.2.1",
-        "dts-bundle-generator": "^6.9.0",
         "@types/color": "^3.0.3",
+        "@types/jest": "^27.4.1",
+        "babel-jest": "^28.0.3",
+        "dts-bundle-generator": "^6.9.0",
+        "jest": "^28.0.3",
         "rollup": "^2.70.2",
         "rollup-plugin-node-externals": "^4.0.0",
         "rollup-plugin-terser": "^7.0.2",
         "rollup-plugin-ts": "^2.0.7",
+        "ts-jest": "^27.1.4",
         "type-fest": "^2.12.2"
     }
 }

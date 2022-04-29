@@ -28,6 +28,12 @@
             }
         }
     }
+
+    @media (min-width: 1024px) {
+        &.drawer-mobile.drawer-open > .drawer-content {
+            @apply translate-x-0;
+        }
+    }
 }
 
 // .drawer-toggle {
@@ -64,18 +70,6 @@
 //             }
 //             &.btn-link {
 //                 outline: 2px solid currentColor;
-//             }
-//         }
-//     }
-// }
-
-// @media (min-width: 1024px) {
-//     .drawer-mobile {
-//         & > .drawer-toggle {
-//             &:checked {
-//                 & ~ .drawer-content {
-//                     @apply translate-x-0;
-//                 }
 //             }
 //         }
 //     }

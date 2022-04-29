@@ -1,4 +1,4 @@
-import type { Theme } from '../interfaces';
+import type { Theme } from '@svelte-daisyui/shared';
 import type { StringKeyOf } from 'type-fest';
 import { DEFAULT_THEMES } from '../themes';
 import { DAISYUI_CONFIG_SCHEMA, CUSTOM_THEME_SCHEMA } from '../schemas';

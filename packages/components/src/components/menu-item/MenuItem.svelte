@@ -1,15 +1,9 @@
 <script>
-    import { Alignment } from '../../enums';
     import { classes } from '../../utils';
 
     // -----------------------------------------------------------
     //                           Props
     // -----------------------------------------------------------
-
-    /**
-     * @type {'horizontal' | 'vertical'}
-     */
-    export let alignment = 'horizontal';
 
     let className;
     /**
@@ -21,17 +15,7 @@
     //                     Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'menu',
-        {
-            alignment: {
-                condition: !!alignment,
-                key: alignment,
-                value: Alignment,
-            },
-        },
-        className,
-    );
+    $: classNames = classes('menu-item', {}, className);
 </script>
 
 <div class={classNames}>
@@ -39,6 +23,6 @@
 </div>
 
 <style lang="scss">
-    @import 'MenuStyled.scss';
-    @import 'MenuUnstyled.scss';
+    @import 'MenuItemStyled.scss';
+    @import 'MenuItemUnstyled.scss';
 </style>

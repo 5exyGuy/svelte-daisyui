@@ -65,9 +65,9 @@
         drawerSideRef.focus();
     }
 
-    const drawerSideFocus = () => {
-        console.log('focus');
-    };
+    // const drawerSideFocus = () => {
+    //     console.log('focus');
+    // };
     const drawerSideBlur = () => {
         visible = false;
     };
@@ -85,7 +85,6 @@
         class="drawer-side"
         tabindex="-1"
         bind:this={drawerSideRef}
-        on:focus={drawerSideFocus}
         on:blur={drawerSideBlur}
     >
         <div tabindex="0" class="drawer-overlay" />

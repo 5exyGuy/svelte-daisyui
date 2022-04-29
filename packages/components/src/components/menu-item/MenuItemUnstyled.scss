@@ -1,0 +1,17 @@
+:global(.menu) {
+    li.menu-item {
+        @apply relative flex flex-col flex-wrap items-stretch;
+    }
+}
+
+:global(.menu.menu-horizontal) {
+    li.menu-item {
+        @apply flex-row;
+    }
+}
+
+:global(.menu.menu-vertical) {
+    li.menu-item {
+        @apply flex-col;
+    }
+}
