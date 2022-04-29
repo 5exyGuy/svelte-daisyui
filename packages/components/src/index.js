@@ -15,7 +15,7 @@ export { default as Code } from './components/code/Code.svelte';
 export { default as Collapse } from './components/collapse/Collapse.svelte';
 export { default as Countdown } from './components/countdown/Countdown.svelte'; // Not working, implement better solution
 export { default as Divider } from './components/divider/Divider.svelte';
-// export { default as Drawer } from './components/drawer/Drawer.svelte';
+export { default as Drawer } from './components/drawer/Drawer.svelte';
 export { default as Dropdown } from './components/dropdown/Dropdown.svelte';
 export { default as Hero } from './components/hero/Hero.svelte';
 export { default as Icon } from './components/icon/Icon.svelte';

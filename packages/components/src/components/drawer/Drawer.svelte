@@ -1,4 +1,6 @@
 <script>
+    import { onMount } from 'svelte';
+
     import { classes } from '../../utils';
 
     // -----------------------------------------------------------
@@ -8,7 +10,7 @@
     /**
      * @type {boolean}
      */
-    export let open = false;
+    export let visible = false;
 
     /**
      * @type {boolean}
@@ -33,8 +35,8 @@
     $: classNames = classes(
         'drawer',
         {
-            open: {
-                condition: open,
+            visible: {
+                condition: visible,
                 value: 'open',
             },
             mobile: {
@@ -48,6 +50,27 @@
         },
         className,
     );
+
+    // -----------------------------------------------------------
+    //                       Functionality
+    // -----------------------------------------------------------
+
+    let drawerSideRef;
+
+    onMount(() => {
+        if (visible) drawerSideRef.focus();
+    });
+
+    $: if (visible) {
+        drawerSideRef.focus();
+    }
+
+    const drawerSideFocus = () => {
+        console.log('focus');
+    };
+    const drawerSideBlur = () => {
+        visible = false;
+    };
 </script>
 
 <div class={classNames}>
@@ -58,8 +81,14 @@
             <slot name="content" />
         {/if}
     </div>
-    <div class="drawer-side">
-        <div class="drawer-overlay" />
+    <div
+        class="drawer-side"
+        tabindex="-1"
+        bind:this={drawerSideRef}
+        on:focus={drawerSideFocus}
+        on:blur={drawerSideBlur}
+    >
+        <div tabindex="0" class="drawer-overlay" />
         <slot name="side" />
     </div>
 </div>

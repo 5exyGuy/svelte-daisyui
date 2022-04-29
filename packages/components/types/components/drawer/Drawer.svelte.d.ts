@@ -5,7 +5,7 @@ export interface DrawerProps {
   /**
    * @default false
    */
-  open?: boolean;
+  visible?: boolean;
 
   /**
    * @default false

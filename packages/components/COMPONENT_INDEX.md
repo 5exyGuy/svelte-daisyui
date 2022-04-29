@@ -19,6 +19,7 @@
 - [`Collapse`](#collapse)
 - [`Countdown`](#countdown)
 - [`Divider`](#divider)
+- [`Drawer`](#drawer)
 - [`Dropdown`](#dropdown)
 - [`Hero`](#hero)
 - [`Icon`](#icon)
@@ -406,6 +407,29 @@ None.
 | Slot name | Default | Props | Fallback |
 | :-------- | :------ | :---- | :------- |
 | --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `Drawer`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                 | Default value          | Description |
+| :-------- | :--------------- | :------- | :------------------- | ---------------------- | ----------- |
+| visible   | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
+| mobile    | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
+| end       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
+| class     | <code>let</code> | No       | <code>string</code>  | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+| content   | No      | --    | --       |
+| side      | No      | --    | --       |
 
 ### Events
 
