@@ -1,42 +1,12 @@
 <script>
-    import { CarouselGroup, CarouselItem } from '@svelte-daisyui/components';
+    import { Collapse } from '@svelte-daisyui/components';
 </script>
 
-<CarouselGroup alignment="vertical" snap="center">
-    <CarouselItem>
-        <img
-            src="https://api.lorem.space/image/car?w=400&h=300&hash=8B7SDA2"
-            alt="Burger"
-        />
-    </CarouselItem>
-    <CarouselItem>
-        <img
-            src="https://api.lorem.space/image/burger?w=400&h=300&hash=8B7SADD"
-            alt="Burger"
-        />
-    </CarouselItem>
-    <CarouselItem>
-        <img
-            src="https://api.lorem.space/image/burger?w=400&h=300&hash=8BSADC2"
-            alt="Burger"
-        />
-    </CarouselItem>
-    <CarouselItem>
-        <img
-            src="https://api.lorem.space/image/car?w=400&h=300&hash=asdasda"
-            alt="Burger"
-        />
-    </CarouselItem>
-    <CarouselItem>
-        <img
-            src="https://api.lorem.space/image/burger?w=400&h=300&hash=8BDSF"
-            alt="Burger"
-        />
-    </CarouselItem>
-    <CarouselItem>
-        <img
-            src="https://api.lorem.space/image/burger?w=400&h=300&hash=SR5465"
-            alt="Burger"
-        />
-    </CarouselItem>
-</CarouselGroup>
+<div class="p-4">
+    <Collapse open icon="plus" class="border border-base-300 bg-base-100">
+        <div slot="title" class="text-xl font-medium">
+            Focus me to see content
+        </div>
+        <p>tabindex="0" attribute is necessary to make the div focusable</p>
+    </Collapse>
+</div>

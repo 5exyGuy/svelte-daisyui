@@ -12,7 +12,7 @@ export { default as CarouselGroup } from './components/carousel-group/CarouselGr
 export { default as CarouselItem } from './components/carousel-item/CarouselItem.svelte';
 export { default as Checkbox } from './components/checkbox/Checkbox.svelte';
 export { default as Code } from './components/code/Code.svelte';
-// Collapse
+export { default as Collapse } from './components/collapse/Collapse.svelte';
 export { default as Countdown } from './components/countdown/Countdown.svelte'; // Not working, implement better solution
 export { default as Divider } from './components/divider/Divider.svelte';
 // export { default as Drawer } from './components/drawer/Drawer.svelte';

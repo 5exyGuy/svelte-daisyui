@@ -1,0 +1,62 @@
+.collapse {
+    &:focus-visible {
+        outline: 2px solid hsl(var(--neutral-focus));
+        outline-offset: 2px;
+    }
+
+    &.collapse-arrow > .collapse-title:after {
+        @apply absolute block h-2 w-2 transition-all ease-in-out;
+        transition-duration: 0.2s;
+        top: 1.4rem;
+        right: 1.4rem;
+        content: '';
+        transform-origin: 75% 75%;
+        transform: rotate(45deg);
+        box-shadow: 2px 2px;
+        pointer-events: none;
+    }
+
+    &.collapse-plus > .collapse-title:after {
+        @apply absolute block h-2 w-2 transition-all duration-300 ease-in-out;
+        top: 0.9rem;
+        right: 1.4rem;
+        content: '+';
+        pointer-events: none;
+    }
+
+    &:not(.collapse-open):not(.collapse-close) > .collapse-title {
+        @apply cursor-pointer;
+    }
+
+    &:focus:not(.collapse-open):not(.collapse-close) > .collapse-title {
+        cursor: unset;
+    }
+
+    & > .collapse-title {
+        @apply w-full p-4 pr-12;
+        min-height: 3.75rem;
+        transition: background-color 0.2s ease-in-out;
+    }
+
+    & > .collapse-content {
+        @apply px-4;
+        cursor: unset;
+        transition: padding 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    }
+
+    &.collapse-open > .collapse-content,
+    &:focus:not(.collapse-close) > .collapse-content {
+        @apply pb-4;
+        transition: padding 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    }
+
+    &.collapse-open.collapse-arrow .collapse-title:after,
+    &.collapse-arrow:focus:not(.collapse-close) .collapse-title:after {
+        transform: rotate(225deg);
+    }
+
+    &.collapse-open.collapse-plus .collapse-title:after,
+    &.collapse-plus:focus:not(.collapse-close) .collapse-title:after {
+        content: '−';
+    }
+}

@@ -16,6 +16,7 @@
 - [`CarouselItem`](#carouselitem)
 - [`Checkbox`](#checkbox)
 - [`Code`](#code)
+- [`Collapse`](#collapse)
 - [`Countdown`](#countdown)
 - [`Divider`](#divider)
 - [`Dropdown`](#dropdown)
@@ -348,6 +349,28 @@ None.
 | Slot name | Default | Props | Fallback |
 | :-------- | :------ | :---- | :------- |
 | --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `Collapse`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                               | Default value          | Description |
+| :-------- | :--------------- | :------- | :--------------------------------- | ---------------------- | ----------- |
+| icon      | <code>let</code> | No       | <code>'arrow' &#124; 'plus'</code> | <code>undefined</code> | --          |
+| open      | <code>let</code> | No       | <code>boolean</code>               | <code>false</code>     | --          |
+| close     | <code>let</code> | No       | <code>boolean</code>               | <code>false</code>     | --          |
+| class     | <code>let</code> | No       | <code>string</code>                | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+| title     | No      | --    | --       |
 
 ### Events
 
