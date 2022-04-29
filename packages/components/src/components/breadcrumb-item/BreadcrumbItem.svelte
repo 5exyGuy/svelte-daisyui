@@ -20,7 +20,7 @@
     //                     Classes and Styles
     // -----------------------------------------------------------
 
-    const classNames = classes('breadcrumb-item', {}, className);
+    $: classNames = classes('breadcrumb-item', {}, className);
 </script>
 
 <li class={classNames}>

@@ -1,27 +1,44 @@
-<script lang="ts">
-    import { Alignment, type AlignmentKey } from '$enums/alignment.enum';
+<script>
+    import { Alignment } from '../../enums';
+    import { classes } from '../../utils';
 
-    // Props
-    export let alignment: AlignmentKey = 'Horizontal';
-    let className: string = '';
+    // -----------------------------------------------------------
+    //                           Props
+    // -----------------------------------------------------------
+
+    /**
+     * @type {'horizontal' | 'vertical'}
+     */
+    export let alignment = 'horizontal';
+
+    let className;
+    /**
+     * @type {string}
+     */
     export { className as class };
 
-    // Classes
-    const classes: string[] = [];
+    // -----------------------------------------------------------
+    //                     Classes and Styles
+    // -----------------------------------------------------------
 
-    classes.push('steps');
-    classes.push(`steps-${Alignment[alignment]}`);
-
-    const classNames = className.length > 0 ? className.split(' ') : [];
-    classes.push(...classNames);
-
-    const finalClass = classes.join(' ');
+    $: classNames = classes(
+        'step-group',
+        {
+            alignment: {
+                condition: !!alignment,
+                key: alignment,
+                value: Alignment,
+            },
+        },
+        className,
+    );
 </script>
 
-<div class={finalClass}>
+<div class={classNames}>
     <slot />
 </div>
 
-<style global lang="less">
-    @import 'Steps.less';
+<style lang="scss">
+    @import 'StepGroupStyled.scss';
+    @import 'StepGroupUnstyled.scss';
 </style>

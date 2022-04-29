@@ -3,7 +3,7 @@
         @apply h-6 w-6 bg-base-content bg-opacity-100;
         @apply appearance-none;
         -webkit-appearance: none;
-        animation: rating-pop var(--animation-input, 0.25s) ease-out;
+        animation: rating-pop var(--input-animation-duration, 0.25s) ease-out;
 
         &.rating-hidden {
             @apply w-2 bg-transparent;
@@ -27,7 +27,7 @@
         }
     }
 
-    &.rating-half > input:not(.rating-hidden) {
+    &.rating-half > :global(input:not(.rating-hidden)) {
         @apply w-3;
     }
 }

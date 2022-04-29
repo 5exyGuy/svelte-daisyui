@@ -15,7 +15,7 @@
     //                     Classes and Styles
     // -----------------------------------------------------------
 
-    const classNames = classes('breadcrumb-group', {}, className);
+    $: classNames = classes('breadcrumb-group', {}, className);
 </script>
 
 <div class={classNames}>

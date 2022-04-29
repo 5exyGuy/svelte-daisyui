@@ -27,7 +27,7 @@
     //                     Classes and Styles
     // -----------------------------------------------------------
 
-    const classNames = classes(
+    $: classNames = classes(
         'tab-group',
         {
             type: {

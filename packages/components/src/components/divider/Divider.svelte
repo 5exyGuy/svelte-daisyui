@@ -21,7 +21,7 @@
     //                     Classes and Styles
     // -----------------------------------------------------------
 
-    const classNames = classes(
+    $: classNames = classes(
         'divider',
         {
             alignment: {

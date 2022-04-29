@@ -9,7 +9,7 @@
     /**
      * @type {'rotate' | 'flip'}
      */
-    export let animation = null;
+    export let animation;
 
     /**
      * @type {boolean}
@@ -18,7 +18,7 @@
 
     let className;
     /**
-     * @type {string | undefined}
+     * @type {string}
      */
     export { className as class };
 
@@ -26,7 +26,7 @@
     //                     Classes and Styles
     // -----------------------------------------------------------
 
-    const classNames = classes(
+    $: classNames = classes(
         'swap',
         {
             animation: {
@@ -37,11 +37,17 @@
         },
         className,
     );
+
+    // -----------------------------------------------------------
+    //                       Functionality
+    // -----------------------------------------------------------
+
+    const changeState = () => (state = !state);
 </script>
 
-<div class={classNames} on:click data-state={state}>
-    <slot name="swap-on" />
-    <slot name="swap-off" />
+<div class={classNames} on:click={changeState} on:click data-state={state}>
+    <slot name="on" />
+    <slot name="off" />
 </div>
 
 <style lang="scss">

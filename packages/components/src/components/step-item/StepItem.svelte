@@ -1,27 +1,44 @@
-<script lang="ts">
-    import { BrandColor, FunctionalColor, type BrandColorKey, type FunctionalColorKey } from '$enums';
-    import type { Nullable } from '@eztrip/types';
+<script>
+    import { BrandColor, FunctionalColor } from '../../enums';
+    import { classes } from '../../utils';
 
-    // Props
-    export let type: Nullable<BrandColorKey | FunctionalColorKey> = null;
-    let className: string = '';
+    // -----------------------------------------------------------
+    //                           Props
+    // -----------------------------------------------------------
+
+    /**
+     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'neutral'}
+     */
+    export let color;
+
+    let className;
+    /**
+     * @type {string}
+     */
     export { className as class };
 
-    // Classes
-    const classes: string[] = [];
+    // -----------------------------------------------------------
+    //                     Classes and Styles
+    // -----------------------------------------------------------
 
-    classes.push('step');
-    if (type) {
-        const colors = { ...BrandColor, ...FunctionalColor };
-        classes.push(`step-${colors[type]}`);
-    }
-
-    const classNames = className.length > 0 ? className.split(' ') : [];
-    classes.push(...classNames);
-
-    const finalClass = classes.join(' ');
+    $: classNames = classes(
+        'step-item',
+        {
+            color: {
+                condition: !!color,
+                key: color,
+                value: { ...BrandColor, ...FunctionalColor },
+            },
+        },
+        className,
+    );
 </script>
 
-<div class={finalClass}>
+<div class={classNames}>
     <slot />
 </div>
+
+<style lang="scss">
+    @import 'StepItemStyled.scss';
+    @import 'StepItemUnstyled.scss';
+</style>

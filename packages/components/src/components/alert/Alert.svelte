@@ -12,23 +12,23 @@
     // -----------------------------------------------------------
 
     /**
-     * @type {string | undefined}
+     * @type {string}
      */
     export let message;
 
     /**
-     *  @type {{ component: typeof import('svelte').SvelteComponent; size: number; } | undefined}
+     *  @type {{ component: typeof import('svelte').SvelteComponent; size: number; }}
      */
     export let icon;
 
     /**
-     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | undefined}
+     * @type {import('../../enums').BrandColor}
      */
     export let color;
 
     let className;
     /**
-     * @type {string | undefined}
+     * @type {string}
      */
     export { className as class };
 
@@ -36,7 +36,7 @@
     //                     Classes and Styles
     // -----------------------------------------------------------
 
-    const classNames = classes(
+    $: classNames = classes(
         'alert',
         {
             color: {

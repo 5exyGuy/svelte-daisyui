@@ -1,24 +1,22 @@
 /// <reference types="svelte" />
 import type { SvelteComponentTyped } from "svelte";
 
+export type BrandColor = "primary" | "secondary" | "accent" | "info";
+
+export type FunctionalColor = "info" | "success" | "warning" | "error";
+
+export type Size = "tiny" | "small" | "medium" | "large";
+
 export interface BadgeProps {
   /**
    * @default undefined
    */
-  color?:
-    | "primary"
-    | "secondary"
-    | "accent"
-    | "info"
-    | "success"
-    | "warning"
-    | "error"
-    | undefined;
+  color?: BrandColor | FunctionalColor;
 
   /**
    * @default 'medium'
    */
-  size?: "tiny" | "small" | "medium" | "large";
+  size?: Size;
 
   /**
    * @default false
@@ -28,7 +26,7 @@ export interface BadgeProps {
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class Badge extends SvelteComponentTyped<

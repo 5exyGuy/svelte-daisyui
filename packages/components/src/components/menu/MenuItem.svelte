@@ -13,7 +13,7 @@
     classes.push('menu-item');
     // if (active) classes.push('menu-');
 
-    const classNames = className.length > 0 ? className.split(' ') : [];
+    $: classNames = className.length > 0 ? className.split(' ') : [];
     classes.push(...classNames);
 
     const finalClass = classes.join(' ');

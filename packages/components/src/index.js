@@ -16,7 +16,7 @@ export { default as Countdown } from './components/countdown/Countdown.svelte'; 
 export { default as Divider } from './components/divider/Divider.svelte';
 // Drawer
 export { default as Dropdown } from './components/dropdown/Dropdown.svelte';
-// Hero
+export { default as Hero } from './components/hero/Hero.svelte';
 export { default as Icon } from './components/icon/Icon.svelte';
 export { default as IndicatorGroup } from './components/indicator-group/IndicatorGroup.svelte';
 export { default as IndicatorItem } from './components/indicator-item/IndicatorItem.svelte';
@@ -27,7 +27,7 @@ export { default as Link } from './components/link/Link.svelte';
 export { default as Mask } from './components/mask/Mask.svelte';
 // Menu
 // Modal
-// Navbar
+export { default as Navbar } from './components/navbar/Navbar.svelte'; // TODO: Add background colors
 // Pagination
 export { default as Progress } from './components/progress/Progress.svelte';
 export { default as RadialProgress } from './components/radial-progress/RadialProgress.svelte';
@@ -38,12 +38,12 @@ export { default as Select } from './components/select/Select.svelte';
 export { default as Stack } from './components/stack/Stack.svelte';
 export { default as StatGroup } from './components/stat-group/StatGroup.svelte';
 export { default as StatItem } from './components/stat-item/StatItem.svelte';
-// StepGroup
-// StepItem
-// Swap
+export { default as StepGroup } from './components/step-group/StepGroup.svelte';
+export { default as StepItem } from './components/step-item/StepItem.svelte';
+export { default as Swap } from './components/swap/Swap.svelte'; // TODO: Add events
 export { default as TabGroup } from './components/tab-group/TabGroup.svelte';
 export { default as TabItem } from './components/tab-item/TabItem.svelte';
-// Table
+// export { default as Table } from './components/table/Table.svelte'; // TODO: Find better solution for making the table
 export { default as TextArea } from './components/textarea/Textarea.svelte';
 export { default as Toggle } from './components/toggle/Toggle.svelte';
 export { default as Tooltip } from './components/tooltip/Tooltip.svelte';

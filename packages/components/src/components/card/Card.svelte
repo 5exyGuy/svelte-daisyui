@@ -1,7 +1,8 @@
 <script lang="ts">
     import { CardImagePosition } from './CardImagePosition';
 
-    export let imagePosition: CardImagePosition | undefined = CardImagePosition.Top;
+    export let imagePosition: CardImagePosition | undefined =
+        CardImagePosition.Top;
     export let imageSource: string | undefined = undefined;
     export let imageDescription: string;
     export let imageOverlay: boolean = false;
@@ -20,7 +21,7 @@
     if (center) classes.push('text-center');
     if (compact) classes.push('card-compact');
 
-    const classNames = className.length > 0 ? className.split(' ') : [];
+    $: classNames = className.length > 0 ? className.split(' ') : [];
     classes.push(...classNames);
 </script>
 

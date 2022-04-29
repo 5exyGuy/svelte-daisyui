@@ -22,11 +22,11 @@
         @apply border-opacity-100 bg-opacity-100;
         box-shadow: var(--handleoffset) 0 0 2px hsl(var(--base-100)) inset,
             0 0 0 2px hsl(var(--base-100)) inset;
-        [dir='rtl'] & {
-            box-shadow: calc(var(--handleoffset) * 1) 0 0 2px
-                    hsl(var(--base-100)) inset,
-                0 0 0 2px hsl(var(--base-100)) inset;
-        }
+        // [dir='rtl'] & {
+        //     box-shadow: calc(var(--handleoffset) * 1) 0 0 2px
+        //             hsl(var(--base-100)) inset,
+        //         0 0 0 2px hsl(var(--base-100)) inset;
+        // }
     }
 
     &:indeterminate {
@@ -36,13 +36,13 @@
                 inset,
             calc(var(--handleoffset) / -2) 0 0 2px hsl(var(--base-100)) inset,
             0 0 0 2px hsl(var(--base-100)) inset;
-        [dir='rtl'] & {
-            box-shadow: calc(var(--handleoffset) / 2) 0 0 2px
-                    hsl(var(--base-100)) inset,
-                calc(var(--handleoffset) / -2) 0 0 2px hsl(var(--base-100))
-                    inset,
-                0 0 0 2px hsl(var(--base-100)) inset;
-        }
+        // [dir='rtl'] & {
+        //     box-shadow: calc(var(--handleoffset) / 2) 0 0 2px
+        //             hsl(var(--base-100)) inset,
+        //         calc(var(--handleoffset) / -2) 0 0 2px hsl(var(--base-100))
+        //             inset,
+        //         0 0 0 2px hsl(var(--base-100)) inset;
+        // }
     }
 
     @each $color in list.join($brand-colors, $functional-colors) {

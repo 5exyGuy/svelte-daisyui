@@ -1,50 +1,61 @@
-<script lang="ts">
-    import {
-        BaseColor,
-        BrandColor,
-        FunctionalColor,
-        type BaseColorKey,
-        type BrandColorKey,
-        type FunctionalColorKey,
-    } from '$enums';
+<script>
+    import { classes } from '../../utils';
 
-    // Props
-    export let background: BrandColorKey | FunctionalColorKey | BaseColorKey = 'Base-100';
-    export let rounded: boolean = false;
-    let className: string = '';
+    // -----------------------------------------------------------
+    //                           Props
+    // -----------------------------------------------------------
+
+    // export let background: BrandColorKey | FunctionalColorKey | BaseColorKey =
+    //     'Base-100';
+    /**
+     * @type {boolean}
+     */
+    export let rounded = false;
+
+    let className;
+    /**
+     * @type {string}
+     */
     export { className as class };
 
-    // Classes
-    const classes: string[] = [];
+    // -----------------------------------------------------------
+    //                     Classes and Styles
+    // -----------------------------------------------------------
 
-    classes.push('navbar');
-    classes.push(`navbar-${{ ...BrandColor, ...FunctionalColor, ...BaseColor }[background]}`);
-    classes.push('navbar-rounded');
-
-    const classNames = className.length > 0 ? className.split(' ') : [];
-    classes.push(...classNames);
-
-    const finalClass = classes.join(' ');
+    $: classNames = classes(
+        'navbar',
+        {
+            rounded: {
+                condition: rounded,
+                value: 'rounded',
+            },
+        },
+        className,
+    );
 </script>
 
-<div class={finalClass}>
-    {#if $$slots.start}
+<div class={classNames}>
+    {#if $$slots.default}
+        <slot />
+    {/if}
+    {#if !$$slots.default && $$slots.start}
         <div class="navbar-start">
             <slot name="start" />
         </div>
     {/if}
-    {#if $$slots.center}
+    {#if !$$slots.default && $$slots.center}
         <div class="navbar-center">
             <slot name="center" />
         </div>
     {/if}
-    {#if $$slots.end}
+    {#if !$$slots.default && $$slots.end}
         <div class="navbar-end">
             <slot name="end" />
         </div>
     {/if}
 </div>
 
-<style global lang="less">
-    @import 'Navbar.less';
+<style lang="scss">
+    @import 'NavbarStyled.scss';
+    @import 'NavbarUnstyled.scss';
 </style>

@@ -8,16 +8,26 @@
     } from '../../enums';
 
     // -----------------------------------------------------------
+    //                     Type Definitions
+    // -----------------------------------------------------------
+
+    /**
+     * @typedef {'primary' | 'secondary' | 'accent' | 'info'} BrandColor
+     * @typedef {'info' | 'success' | 'warning' | 'error'} FunctionalColor
+     * @typedef {'tiny' | 'small' | 'medium' | 'large'} Size
+     */
+
+    // -----------------------------------------------------------
     //                           Props
     // -----------------------------------------------------------
 
     /**
-     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | undefined}
+     * @type {BrandColor | FunctionalColor}
      */
     export let color;
 
     /**
-     * @type {'tiny' | 'small' | 'medium' | 'large'}
+     * @type {Size}
      */
     export let size = 'medium';
 
@@ -28,7 +38,7 @@
 
     let className;
     /**
-     * @type {string | undefined}
+     * @type {string}
      */
     export { className as class };
 
@@ -36,7 +46,7 @@
     //                     Classes and Styles
     // -----------------------------------------------------------
 
-    const classNames = classes(
+    $: classNames = classes(
         'badge',
         {
             color: {

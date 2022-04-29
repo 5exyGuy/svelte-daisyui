@@ -15,7 +15,7 @@
     //                     Classes and Styles
     // -----------------------------------------------------------
 
-    const classNames = classes('window', {}, className);
+    $: classNames = classes('window', {}, className);
 </script>
 
 <div class={classNames}>

@@ -1,0 +1,21 @@
+.navbar {
+    @apply flex items-center;
+
+    & > :global(*) {
+        @apply inline-flex items-center;
+    }
+
+    & > :global(.navbar-start) {
+        width: 50%;
+        justify-content: flex-start;
+    }
+
+    & > :global(.navbar-center) {
+        flex-shrink: 0;
+    }
+
+    & > :global(.navbar-end) {
+        width: 50%;
+        justify-content: flex-end;
+    }
+}

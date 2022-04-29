@@ -15,7 +15,7 @@
     //                     Classes and Styles
     // -----------------------------------------------------------
 
-    const classNames = classes('countdown', {}, className);
+    $: classNames = classes('countdown', {}, className);
 </script>
 
 <span class={classNames}>

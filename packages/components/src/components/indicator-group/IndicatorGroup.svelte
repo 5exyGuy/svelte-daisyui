@@ -15,7 +15,7 @@
     //                     Classes and Styles
     // -----------------------------------------------------------
 
-    const classNames = classes('indicator-group', {}, className);
+    $: classNames = classes('indicator-group', {}, className);
 </script>
 
 <div class={classNames}>

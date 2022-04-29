@@ -14,6 +14,7 @@
 - [`Countdown`](#countdown)
 - [`Divider`](#divider)
 - [`Dropdown`](#dropdown)
+- [`Hero`](#hero)
 - [`Icon`](#icon)
 - [`IndicatorGroup`](#indicatorgroup)
 - [`IndicatorItem`](#indicatoritem)
@@ -21,6 +22,7 @@
 - [`Kbd`](#kbd)
 - [`Link`](#link)
 - [`Mask`](#mask)
+- [`Navbar`](#navbar)
 - [`Progress`](#progress)
 - [`RadialProgress`](#radialprogress)
 - [`Radio`](#radio)
@@ -30,6 +32,9 @@
 - [`Stack`](#stack)
 - [`StatGroup`](#statgroup)
 - [`StatItem`](#statitem)
+- [`StepGroup`](#stepgroup)
+- [`StepItem`](#stepitem)
+- [`Swap`](#swap)
 - [`TabGroup`](#tabgroup)
 - [`TabItem`](#tabitem)
 - [`TextArea`](#textarea)
@@ -43,12 +48,12 @@
 
 ### Props
 
-| Prop name | Kind             | Reactive | Type                                                                                                                                      | Default value          | Description |
-| :-------- | :--------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
-| message   | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                      | <code>undefined</code> | --          |
-| icon      | <code>let</code> | No       | <code>{ component: typeof import('svelte').SvelteComponent; size: number; } &#124; undefined</code>                                       | <code>undefined</code> | --          |
-| color     | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; undefined</code> | <code>undefined</code> | --          |
-| class     | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                      | <code>undefined</code> | --          |
+| Prop name | Kind             | Reactive | Type                                                                               | Default value          | Description |
+| :-------- | :--------------- | :------- | :--------------------------------------------------------------------------------- | ---------------------- | ----------- |
+| message   | <code>let</code> | No       | <code>string</code>                                                                | <code>undefined</code> | --          |
+| icon      | <code>let</code> | No       | <code>{ component: typeof import('svelte').SvelteComponent; size: number; }</code> | <code>undefined</code> | --          |
+| color     | <code>let</code> | No       | <code>import('../../enums').BrandColor</code>                                      | <code>undefined</code> | --          |
+| class     | <code>let</code> | No       | <code>string</code>                                                                | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -125,14 +130,24 @@ None.
 
 ## `Badge`
 
+### Types
+
+```ts
+export type BrandColor = "primary" | "secondary" | "accent" | "info";
+
+export type FunctionalColor = "info" | "success" | "warning" | "error";
+
+export type Size = "tiny" | "small" | "medium" | "large";
+```
+
 ### Props
 
-| Prop name | Kind             | Reactive | Type                                                                                                                                      | Default value          | Description |
-| :-------- | :--------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
-| color     | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; undefined</code> | <code>undefined</code> | --          |
-| size      | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large'</code>                                                                         | <code>'medium'</code>  | --          |
-| outline   | <code>let</code> | No       | <code>boolean</code>                                                                                                                      | <code>false</code>     | --          |
-| class     | <code>let</code> | No       | <code>string &#124; undefined</code>                                                                                                      | <code>undefined</code> | --          |
+| Prop name | Kind             | Reactive | Type                                           | Default value          | Description |
+| :-------- | :--------------- | :------- | :--------------------------------------------- | ---------------------- | ----------- |
+| color     | <code>let</code> | No       | <code>BrandColor &#124; FunctionalColor</code> | <code>undefined</code> | --          |
+| size      | <code>let</code> | No       | <code>Size</code>                              | <code>'medium'</code>  | --          |
+| outline   | <code>let</code> | No       | <code>boolean</code>                           | <code>false</code>     | --          |
+| class     | <code>let</code> | No       | <code>string</code>                            | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -277,6 +292,27 @@ None.
 
 None.
 
+## `Hero`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                | Default value          | Description |
+| :-------- | :--------------- | :------- | :------------------ | ---------------------- | ----------- |
+| class     | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+| style     | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+| content   | No      | --    | --       |
+| overlay   | No      | --    | --       |
+
+### Events
+
+None.
+
 ## `Icon`
 
 ### Props
@@ -414,6 +450,28 @@ None.
 | Slot name | Default | Props | Fallback |
 | :-------- | :------ | :---- | :------- |
 | --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `Navbar`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                 | Default value          | Description |
+| :-------- | :--------------- | :------- | :------------------- | ---------------------- | ----------- |
+| rounded   | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
+| class     | <code>let</code> | No       | <code>string</code>  | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+| center    | No      | --    | --       |
+| end       | No      | --    | --       |
+| start     | No      | --    | --       |
 
 ### Events
 
@@ -606,6 +664,67 @@ None.
 ### Events
 
 None.
+
+## `StepGroup`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                                        | Default value             | Description |
+| :-------- | :--------------- | :------- | :------------------------------------------ | ------------------------- | ----------- |
+| alignment | <code>let</code> | No       | <code>'horizontal' &#124; 'vertical'</code> | <code>'horizontal'</code> | --          |
+| class     | <code>let</code> | No       | <code>string</code>                         | <code>undefined</code>    | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `StepItem`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                                                                                                                                      | Default value          | Description |
+| :-------- | :--------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
+| color     | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; 'neutral'</code> | <code>undefined</code> | --          |
+| class     | <code>let</code> | No       | <code>string</code>                                                                                                                       | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `Swap`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                                | Default value          | Description |
+| :-------- | :--------------- | :------- | :---------------------------------- | ---------------------- | ----------- |
+| state     | <code>let</code> | Yes      | <code>boolean</code>                | <code>false</code>     | --          |
+| animation | <code>let</code> | No       | <code>'rotate' &#124; 'flip'</code> | <code>undefined</code> | --          |
+| class     | <code>let</code> | No       | <code>string</code>                 | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| off       | No      | --    | --       |
+| on        | No      | --    | --       |
+
+### Events
+
+| Event name | Type      | Detail |
+| :--------- | :-------- | :----- |
+| click      | forwarded | --     |
 
 ## `TabGroup`
 

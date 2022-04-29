@@ -6,7 +6,7 @@
 
     classes.push('btn-group');
 
-    const classNames = className.length > 0 ? className.split(' ') : [];
+    $: classNames = className.length > 0 ? className.split(' ') : [];
     classes.push(...classNames);
 </script>
 

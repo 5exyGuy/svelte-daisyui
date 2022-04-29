@@ -1,56 +1,19 @@
 .swap {
     @apply relative inline-grid select-none place-content-center;
-    @apply cursor-pointer;
 
     & > :global(*) {
-        @apply transition-all duration-300 ease-in-out;
         @apply col-start-1 row-start-1;
     }
 
-    & > :global([slot='swap-on']) {
+    & > :global([slot='on']) {
         @apply opacity-0;
     }
 
-    &[data-state='true'] > :global([slot='swap-off']) {
+    &[data-state='true'] > :global([slot='off']) {
         @apply opacity-0;
     }
 
-    &[data-state='true'] > :global([slot='swap-on']) {
+    &[data-state='true'] > :global([slot='on']) {
         @apply opacity-100;
-    }
-
-    &.swap-rotate {
-        & > :global([slot='swap-on']) {
-            @apply rotate-45;
-        }
-
-        &[data-state='true'] > :global([slot='swap-off']) {
-            @apply -rotate-45;
-        }
-
-        &[data-state='true'] > :global([slot='swap-on']) {
-            @apply rotate-0;
-        }
-    }
-
-    &.swap-flip {
-        transform-style: preserve-3d;
-        perspective: 16em;
-
-        & > :global([slot='swap-on']) {
-            transform: rotateY(180deg);
-            backface-visibility: hidden;
-            @apply opacity-100;
-        }
-
-        &[data-state='true'] > :global([slot='swap-off']) {
-            transform: rotateY(-180deg);
-            backface-visibility: hidden;
-            @apply opacity-100;
-        }
-
-        &[data-state='true'] > :global([slot='swap-on']) {
-            transform: rotateY(0deg);
-        }
     }
 }

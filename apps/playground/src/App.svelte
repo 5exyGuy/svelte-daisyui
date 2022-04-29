@@ -1,15 +1,7 @@
 <script>
-    import { StatGroup, StatItem } from '@svelte-daisyui/components';
+    import { Navbar } from '@svelte-daisyui/components';
 </script>
 
-<div class="p-16">
-    <StatGroup background="accent">
-        <StatItem
-            background="error"
-            title="Title #1"
-            description="Description #1"
-            value="31K"
-        />
-        <StatItem title="Title #1" description="Description #1" value="4,200" />
-    </StatGroup>
-</div>
+<Navbar rounded class="bg-base-200">
+    <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+</Navbar>

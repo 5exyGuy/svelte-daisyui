@@ -1,0 +1,65 @@
+@use 'sass:list';
+@use '../variables.scss' as *;
+
+:global(.step-group) > .step-item {
+    @apply grid place-items-center text-center;
+    min-width: 4rem;
+
+    &:before {
+        @apply top-0 col-start-1 row-start-1 h-2 w-full transform bg-base-300 text-base-content;
+        content: '';
+        margin-left: -100%;
+    }
+
+    &:after {
+        @apply relative col-start-1 row-start-1 grid h-8 w-8 place-items-center place-self-center rounded-full bg-base-300 text-base-content;
+        content: counter(step);
+        counter-increment: step;
+        z-index: 1;
+    }
+
+    &:first-child:before {
+        @apply content-none;
+    }
+
+    &:global([data-content]:after) {
+        content: attr(data-content);
+    }
+
+    @each $color
+        in list.append(list.join($brand-colors, $functional-colors), 'neutral')
+    {
+        &.step-item-#{$color} + :global(.step-item.step-item-#{$color}:before),
+        &.step-item-#{$color}:after {
+            @apply bg-#{$color} text-#{$color}-content;
+        }
+    }
+}
+
+:global(.step-group.step-group-horizontal) > .step-item {
+    grid-template-rows: 40px 1fr;
+    grid-template-columns: auto;
+
+    &:first-child:before {
+        @apply content-none;
+    }
+
+    &:before {
+        @apply h-2 w-full translate-y-0 translate-x-0;
+        content: '';
+        margin-left: -100%;
+    }
+}
+
+:global(.step-group.step-group-vertical) > .step-item {
+    gap: 0.5rem;
+    grid-template-columns: 40px 1fr;
+    grid-template-rows: auto;
+    min-height: 4rem;
+    justify-items: start;
+
+    &:before {
+        @apply h-full w-2 -translate-y-1/2 -translate-x-1/2;
+        margin-left: 50%;
+    }
+}

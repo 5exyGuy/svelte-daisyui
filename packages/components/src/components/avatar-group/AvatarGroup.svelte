@@ -13,7 +13,7 @@
     //                     Classes and Styles
     // -----------------------------------------------------------
 
-    const classNames = classes('avatar-group', {}, className);
+    $: classNames = classes('avatar-group', {}, className);
 </script>
 
 <div class={classNames} style={`--avatar-group-x-space:${space}`}>

@@ -7,22 +7,37 @@
 
     let className;
     /**
-     * @type {string | undefined}
+     * @type {string}
      */
     export { className as class };
+
+    /**
+     * @type {string}
+     */
+    export let style;
 
     // -----------------------------------------------------------
     //                     Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes('code', {}, className);
+    $: classNames = classes('hero', {}, className);
 </script>
 
-<div class={classNames}>
-    <slot />
+<div class={classNames} {style}>
+    {#if $$slots.overlay}
+        <div class="hero-overlay">
+            <slot name="overlay" />
+        </div>
+    {/if}
+    <div class="hero-content">
+        {#if !$$slots.default && $$slots.content}
+            <slot name="content" />
+        {/if}
+        <slot />
+    </div>
 </div>
 
 <style lang="scss">
-    @import 'CodeStyled.scss';
-    @import 'CodeUnstyled.scss';
+    @import 'HeroStyled.scss';
+    @import 'HeroUnstyled.scss';
 </style>

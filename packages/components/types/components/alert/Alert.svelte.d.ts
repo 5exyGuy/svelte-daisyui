@@ -5,32 +5,22 @@ export interface AlertProps {
   /**
    * @default undefined
    */
-  message?: string | undefined;
+  message?: string;
 
   /**
    * @default undefined
    */
-  icon?:
-    | { component: typeof import("svelte").SvelteComponent; size: number }
-    | undefined;
+  icon?: { component: typeof import("svelte").SvelteComponent; size: number };
 
   /**
    * @default undefined
    */
-  color?:
-    | "primary"
-    | "secondary"
-    | "accent"
-    | "info"
-    | "success"
-    | "warning"
-    | "error"
-    | undefined;
+  color?: import("../../enums").BrandColor;
 
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class Alert extends SvelteComponentTyped<

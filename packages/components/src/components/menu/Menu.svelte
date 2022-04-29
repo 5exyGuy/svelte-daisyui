@@ -1,5 +1,9 @@
 <script lang="ts">
-    import type { AlignmentKey, BrandColorKey, FunctionalColorKey } from '$enums';
+    import type {
+        AlignmentKey,
+        BrandColorKey,
+        FunctionalColorKey,
+    } from '$enums';
 
     import type { Nullable } from '@eztrip/types';
 
@@ -15,7 +19,7 @@
 
     classes.push('menu');
 
-    const classNames = className.length > 0 ? className.split(' ') : [];
+    $: classNames = className.length > 0 ? className.split(' ') : [];
     classes.push(...classNames);
 
     const finalClass = classes.join(' ');

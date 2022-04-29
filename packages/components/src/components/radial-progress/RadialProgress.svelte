@@ -20,7 +20,7 @@
     //                     Classes and Styles
     // -----------------------------------------------------------
 
-    const classNames = classes('radial-progress', {}, className);
+    $: classNames = classes('radial-progress', {}, className);
 </script>
 
 <div class={classNames} style={`--value:${value}`}>

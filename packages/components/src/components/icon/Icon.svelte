@@ -40,7 +40,7 @@
     //                          Classes
     // -----------------------------------------------------------
 
-    const classNames = classes(
+    $: classNames = classes(
         'icon',
         {
             spin: {

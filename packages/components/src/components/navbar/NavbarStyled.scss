@@ -1,0 +1,9 @@
+.navbar {
+    @apply w-full;
+    padding: var(--navbar-padding, 0.5rem);
+    min-height: 4rem;
+
+    &.navbar-rounded {
+        border-radius: var(--box-border-radius, 1rem);
+    }
+}
