@@ -119,5 +119,6 @@
 </button>
 
 <style lang="scss">
-    @import 'Button.scss';
+    @import 'ButtonStyled.scss';
+    @import 'ButtonUnstyled.scss';
 </style>

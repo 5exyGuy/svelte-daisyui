@@ -1,0 +1,11 @@
+.btn-group {
+    @apply flex flex-wrap;
+
+    & > :global(input[type='radio'].btn) {
+        @apply appearance-none;
+    }
+
+    & > :global(input[type='radio'].btn:before) {
+        content: attr(data-title);
+    }
+}

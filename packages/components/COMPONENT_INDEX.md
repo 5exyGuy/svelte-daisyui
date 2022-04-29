@@ -9,18 +9,22 @@
 - [`Badge`](#badge)
 - [`BreadcrumbGroup`](#breadcrumbgroup)
 - [`BreadcrumbItem`](#breadcrumbitem)
+- [`Button`](#button)
+- [`ButtonGroup`](#buttongroup)
 - [`Card`](#card)
+- [`CarouselGroup`](#carouselgroup)
+- [`CarouselItem`](#carouselitem)
 - [`Checkbox`](#checkbox)
 - [`Code`](#code)
 - [`Countdown`](#countdown)
 - [`Divider`](#divider)
-- [`Drawer`](#drawer)
 - [`Dropdown`](#dropdown)
 - [`Hero`](#hero)
 - [`Icon`](#icon)
 - [`IndicatorGroup`](#indicatorgroup)
 - [`IndicatorItem`](#indicatoritem)
 - [`Input`](#input)
+- [`InputGroup`](#inputgroup)
 - [`Kbd`](#kbd)
 - [`Link`](#link)
 - [`Mask`](#mask)
@@ -198,6 +202,53 @@ None.
 
 None.
 
+## `Button`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                                                                                                                                                  | Default value          | Description |
+| :-------- | :--------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
+| color     | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; 'ghost' &#124; 'link'</code> | <code>undefined</code> | --          |
+| size      | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large'</code>                                                                                     | <code>undefined</code> | --          |
+| shape     | <code>let</code> | No       | <code>'square' &#124; 'circle'</code>                                                                                                                 | <code>undefined</code> | --          |
+| active    | <code>let</code> | No       | <code>boolean</code>                                                                                                                                  | <code>false</code>     | --          |
+| block     | <code>let</code> | No       | <code>boolean</code>                                                                                                                                  | <code>false</code>     | --          |
+| outline   | <code>let</code> | No       | <code>boolean</code>                                                                                                                                  | <code>false</code>     | --          |
+| loading   | <code>let</code> | No       | <code>boolean</code>                                                                                                                                  | <code>false</code>     | --          |
+| disabled  | <code>let</code> | No       | <code>boolean</code>                                                                                                                                  | <code>false</code>     | --          |
+| noAnim    | <code>let</code> | No       | <code>boolean</code>                                                                                                                                  | <code>false</code>     | --          |
+| class     | <code>let</code> | No       | <code>string</code>                                                                                                                                   | <code>null</code>      | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+| Event name | Type      | Detail |
+| :--------- | :-------- | :----- |
+| click      | forwarded | --     |
+
+## `ButtonGroup`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                | Default value          | Description |
+| :-------- | :--------------- | :------- | :------------------ | ---------------------- | ----------- |
+| class     | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
 ## `Card`
 
 ### Props
@@ -219,6 +270,44 @@ None.
 | lower     | No      | --    | --       |
 | title     | No      | --    | --       |
 | upper     | No      | --    | --       |
+
+### Events
+
+None.
+
+## `CarouselGroup`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                                              | Default value             | Description |
+| :-------- | :--------------- | :------- | :------------------------------------------------ | ------------------------- | ----------- |
+| snap      | <code>let</code> | No       | <code>'start' &#124; 'center' &#124; 'end'</code> | <code>'start'</code>      | --          |
+| alignment | <code>let</code> | No       | <code>'horizontal' &#124; 'vertical'</code>       | <code>'horizontal'</code> | --          |
+| class     | <code>let</code> | No       | <code>string</code>                               | <code>undefined</code>    | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `CarouselItem`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                | Default value          | Description |
+| :-------- | :--------------- | :------- | :------------------ | ---------------------- | ----------- |
+| class     | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
 
 ### Events
 
@@ -294,29 +383,6 @@ None.
 | Slot name | Default | Props | Fallback |
 | :-------- | :------ | :---- | :------- |
 | --        | Yes     | --    | --       |
-
-### Events
-
-None.
-
-## `Drawer`
-
-### Props
-
-| Prop name | Kind             | Reactive | Type                 | Default value          | Description |
-| :-------- | :--------------- | :------- | :------------------- | ---------------------- | ----------- |
-| open      | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
-| mobile    | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
-| end       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
-| class     | <code>let</code> | No       | <code>string</code>  | <code>undefined</code> | --          |
-
-### Slots
-
-| Slot name | Default | Props | Fallback |
-| :-------- | :------ | :---- | :------- |
-| --        | Yes     | --    | --       |
-| content   | No      | --    | --       |
-| side      | No      | --    | --       |
 
 ### Events
 
@@ -441,6 +507,26 @@ None.
 ### Slots
 
 None.
+
+### Events
+
+None.
+
+## `InputGroup`
+
+### Props
+
+| Prop name | Kind             | Reactive | Type                                                              | Default value             | Description |
+| :-------- | :--------------- | :------- | :---------------------------------------------------------------- | ------------------------- | ----------- |
+| alignment | <code>let</code> | No       | <code>'horizontal' &#124; 'vertical'</code>                       | <code>'horizontal'</code> | --          |
+| size      | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large'</code> | <code>'medium'</code>     | --          |
+| class     | <code>let</code> | No       | <code>string</code>                                               | <code>undefined</code>    | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
 
 ### Events
 

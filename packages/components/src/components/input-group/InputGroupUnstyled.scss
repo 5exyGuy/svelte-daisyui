@@ -1,0 +1,78 @@
+.input-group {
+    @apply flex w-full items-stretch;
+
+    & > :global(*),
+    & > :global(.input) {
+        @apply rounded-none;
+    }
+
+    &.input-group-md {
+        @apply text-sm leading-loose;
+    }
+
+    &.input-group-lg {
+        @apply text-lg leading-loose;
+    }
+
+    &.input-group-sm {
+        @apply text-sm leading-8;
+    }
+
+    &.input-group-xs {
+        @apply text-xs leading-relaxed;
+    }
+
+    :global(span) {
+        @apply flex items-center bg-base-300 px-4;
+    }
+
+    & > :global(:first-child) {
+        border-top-left-radius: var(--button-border-radius, 0.5rem);
+        border-top-right-radius: 0;
+        border-bottom-left-radius: var(--button-border-radius, 0.5rem);
+        border-bottom-right-radius: 0;
+    }
+
+    & > :global(:last-child) {
+        border-top-left-radius: 0;
+        border-top-right-radius: var(--button-border-radius, 0.5rem);
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: var(--button-border-radius, 0.5rem);
+    }
+
+    &.input-group-horizontal {
+        @apply flex-row;
+
+        & > :global(:first-child) {
+            border-top-left-radius: var(--button-border-radius, 0.5rem);
+            border-top-right-radius: 0;
+            border-bottom-left-radius: var(--button-border-radius, 0.5rem);
+            border-bottom-right-radius: 0;
+        }
+
+        & > :global(:last-child) {
+            border-top-left-radius: 0;
+            border-top-right-radius: var(--button-border-radius, 0.5rem);
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: var(--button-border-radius, 0.5rem);
+        }
+    }
+
+    &.input-group-vertical {
+        @apply flex-col;
+
+        & > :global(:first-child) {
+            border-top-left-radius: var(--button-border-radius, 0.5rem);
+            border-top-right-radius: var(--button-border-radius, 0.5rem);
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        & > :global(:last-child) {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: var(--button-border-radius, 0.5rem);
+            border-bottom-right-radius: var(--button-border-radius, 0.5rem);
+        }
+    }
+}

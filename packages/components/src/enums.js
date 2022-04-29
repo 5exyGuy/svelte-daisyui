@@ -1,7 +1,3 @@
-/**
- * @typedef {'primary' | 'secondary' | 'secondary'} BrandColor
- */
-
 export const AdditionalColor = {
     ghost: 'ghost',
     link: 'link',

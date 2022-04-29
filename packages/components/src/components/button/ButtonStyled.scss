@@ -1,0 +1,150 @@
+@use 'sass:list';
+@use '../variables.scss' as *;
+
+.btn {
+    @apply border-neutral bg-neutral text-neutral-content;
+    @apply font-semibold uppercase no-underline;
+    border-width: var(---button-border-width, 1px);
+    animation: button-pop var(--button-animation-duration, 0.25s) ease-out;
+    text-transform: var(--button-text-transform, uppercase);
+
+    &.btn-no-animation {
+        --button-animation-duration: 0;
+        --button-focus-scale: 1;
+    }
+
+    &:active:hover,
+    &:active:focus {
+        animation: none;
+    }
+
+    &:active:hover,
+    &:active:focus {
+        transform: scale(var(--button-focus-scale, 0.95));
+    }
+
+    &:hover,
+    &.btn-active {
+        @apply border-neutral-focus bg-neutral-focus;
+    }
+
+    &:focus-visible {
+        outline: 2px solid hsl(var(--neutral-focus));
+        outline-offset: 2px;
+    }
+
+    // Brand colors
+    @each $color in $brand-colors {
+        &.btn-#{$color} {
+            @apply border-#{$color} bg-#{$color} text-#{$color}-content;
+
+            &:hover,
+            &.btn-active {
+                @apply border-#{$color}-focus bg-#{$color}-focus;
+            }
+
+            &:focus-visible {
+                outline: 2px solid hsl(var(--#{$color}));
+            }
+        }
+    }
+
+    // State colors
+    @each $color in $functional-colors {
+        &.btn-#{$color} {
+            @apply border-#{$color} bg-#{$color} text-#{$color}-content;
+
+            &:hover,
+            &.btn-active {
+                @apply border-#{$color} bg-#{$color};
+            }
+
+            &:focus-visible {
+                outline: 2px solid hsl(var(--#{$color}));
+            }
+        }
+    }
+
+    &.btn-ghost {
+        @apply border border-transparent bg-transparent text-current;
+        &:hover,
+        &.btn-active {
+            @apply border-opacity-0 bg-base-content bg-opacity-20;
+        }
+        &:focus-visible {
+            outline: 2px solid 0 0 2px currentColor;
+        }
+    }
+
+    &.btn-link {
+        @apply border-transparent bg-transparent text-primary;
+        &:hover,
+        &.btn-active {
+            @apply border-transparent bg-transparent underline;
+        }
+        &:focus-visible {
+            outline: 2px solid 0 0 2px currentColor;
+        }
+    }
+
+    &.btn-outline {
+        @apply border-current bg-transparent text-base-content;
+
+        &:hover {
+            @apply border-base-content bg-base-content text-base-100;
+        }
+
+        // Brand colors
+        @each $color in $brand-colors {
+            &.btn-#{$color} {
+                @apply text-#{$color};
+
+                &:hover {
+                    @apply border-#{$color}-focus bg-#{$color}-focus text-#{$color}-content;
+                }
+            }
+        }
+
+        // State colors
+        @each $color in $functional-colors {
+            &.btn-#{$color} {
+                @apply text-#{$color};
+                &:hover {
+                    @apply border-#{$color} bg-#{$color} text-#{$color}-content;
+                }
+            }
+        }
+    }
+
+    &:disabled,
+    &:disabled:hover {
+        @apply border-opacity-0 bg-neutral bg-opacity-20 text-base-content text-opacity-20;
+    }
+
+    &.btn-loading {
+        &.btn-square:before,
+        &.btn-circle:before {
+            @apply mr-0;
+        }
+        &.btn-xl:before,
+        &.btn-lg:before {
+            @apply h-5 w-5;
+        }
+        &.btn-sm:before,
+        &.btn-xs:before {
+            @apply h-3 w-3;
+        }
+    }
+}
+
+@keyframes button-pop {
+    0% {
+        transform: scale(var(--button-focus-scale, 0.95));
+    }
+    40% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

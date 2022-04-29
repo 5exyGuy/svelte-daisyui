@@ -1,0 +1,14 @@
+.carousel-group {
+    @apply flex;
+    scroll-behavior: smooth;
+
+    &.carousel-group-horizontal {
+        @apply flex-row overflow-x-scroll;
+        scroll-snap-type: x mandatory;
+    }
+
+    &.carousel-group-vertical {
+        @apply flex-col overflow-y-scroll;
+        scroll-snap-type: y mandatory;
+    }
+}

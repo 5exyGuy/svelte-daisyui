@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
     import { classes } from '../../utils';
 
     // -----------------------------------------------------------
@@ -15,7 +15,7 @@
     //                     Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes('btn-group', {}, className);
+    $: classNames = classes('carousel-item', {}, className);
 </script>
 
 <div class={classNames}>
@@ -23,6 +23,6 @@
 </div>
 
 <style lang="scss">
-    @import 'ButtonGroupStyled.scss';
-    @import 'ButtonGroupUnstyled.scss';
+    @import 'CarouselItemStyled.scss';
+    @import 'CarouselItemUnstyled.scss';
 </style>
