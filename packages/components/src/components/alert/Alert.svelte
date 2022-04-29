@@ -22,7 +22,7 @@
     export let icon;
 
     /**
-     * @type {import('../../enums').BrandColor}
+     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'}
      */
     export let color;
 

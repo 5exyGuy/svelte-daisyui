@@ -5,7 +5,7 @@ export interface WindowProps {
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class Window extends SvelteComponentTyped<

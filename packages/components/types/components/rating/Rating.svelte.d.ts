@@ -15,7 +15,7 @@ export interface RatingProps {
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class Rating extends SvelteComponentTyped<

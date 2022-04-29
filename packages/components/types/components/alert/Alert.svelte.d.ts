@@ -15,7 +15,14 @@ export interface AlertProps {
   /**
    * @default undefined
    */
-  color?: import("../../enums").BrandColor;
+  color?:
+    | "primary"
+    | "secondary"
+    | "accent"
+    | "info"
+    | "success"
+    | "warning"
+    | "error";
 
   /**
    * @default undefined

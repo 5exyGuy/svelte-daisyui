@@ -5,7 +5,7 @@ export interface AvatarProps {
   /**
    * @default undefined
    */
-  src?: string | undefined;
+  src?: string;
 
   /**
    * @default undefined
@@ -15,17 +15,17 @@ export interface AvatarProps {
   /**
    * @default 'medium'
    */
-  size?: "tiny" | "small" | "medium" | "large" | number | string | undefined;
+  size?: "tiny" | "small" | "medium" | "large" | number | string;
 
   /**
    * @default undefined
    */
-  status?: "online" | "offline" | undefined;
+  status?: "online" | "offline";
 
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class Avatar extends SvelteComponentTyped<

@@ -12,8 +12,7 @@ export interface ProgressProps {
     | "info"
     | "success"
     | "warning"
-    | "error"
-    | undefined;
+    | "error";
 
   /**
    * @default 'medium'
@@ -33,7 +32,7 @@ export interface ProgressProps {
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class Progress extends SvelteComponentTyped<

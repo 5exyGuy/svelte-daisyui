@@ -10,7 +10,7 @@ export interface KbdProps {
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class Kbd extends SvelteComponentTyped<

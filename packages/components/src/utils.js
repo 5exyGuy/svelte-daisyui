@@ -1,7 +1,7 @@
 /**
  * @typedef ClassPropData
- * @prop {boolean | undefined} condition
- * @prop {string | undefined} key
+ * @prop {boolean} condition
+ * @prop {string} key
  * @prop {string | Record<string, string>} value
  */
 

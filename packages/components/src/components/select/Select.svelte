@@ -7,7 +7,7 @@
     // -----------------------------------------------------------
 
     /**
-     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost' | undefined}
+     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost'}
      */
     export let color;
 
@@ -23,7 +23,7 @@
 
     let className;
     /**
-     * @type {string | undefined}
+     * @type {string}
      */
     export { className as class };
 

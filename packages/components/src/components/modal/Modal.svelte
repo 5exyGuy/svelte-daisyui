@@ -10,7 +10,7 @@
     export let closeOnBlur: boolean = false; // Close modal on blur
     export let showHeader: boolean = true; // Show header
     export let showCustomTitle: boolean = false; // Show custom header title
-    export let title: string | undefined = undefined; // Show default header title
+    export let title: string = undefined; // Show default header title
     export let showCloseButton: boolean = true; // Show close button on header
     // export let closePosition: keyof typeof ModalClosePosition = 'Right';
     export let closeIcon: typeof SvelteComponent = MdClose;

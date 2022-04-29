@@ -7,14 +7,14 @@ export { default as BreadcrumbGroup } from './components/breadcrumb-group/Breadc
 export { default as BreadcrumbItem } from './components/breadcrumb-item/BreadcrumbItem.svelte';
 // export { default as Button } from './components/button/Button.svelte';
 // ButtonGroup
-// Card
+export { default as Card } from './components/card/Card.svelte';
 // Corousel
 export { default as Checkbox } from './components/checkbox/Checkbox.svelte';
 export { default as Code } from './components/code/Code.svelte';
 // Collapse
 export { default as Countdown } from './components/countdown/Countdown.svelte'; // Not working, implement better solution
 export { default as Divider } from './components/divider/Divider.svelte';
-// Drawer
+export { default as Drawer } from './components/drawer/Drawer.svelte';
 export { default as Dropdown } from './components/dropdown/Dropdown.svelte';
 export { default as Hero } from './components/hero/Hero.svelte';
 export { default as Icon } from './components/icon/Icon.svelte';

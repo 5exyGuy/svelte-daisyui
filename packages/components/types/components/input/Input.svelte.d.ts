@@ -5,7 +5,7 @@ export interface InputProps {
   /**
    * @default undefined
    */
-  placeholder?: string | undefined;
+  placeholder?: string;
 
   /**
    * @default 'medium'
@@ -23,8 +23,7 @@ export interface InputProps {
     | "success"
     | "warning"
     | "error"
-    | "ghost"
-    | undefined;
+    | "ghost";
 
   /**
    * @default false
@@ -39,7 +38,7 @@ export interface InputProps {
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class Input extends SvelteComponentTyped<InputProps, {}, {}> {}

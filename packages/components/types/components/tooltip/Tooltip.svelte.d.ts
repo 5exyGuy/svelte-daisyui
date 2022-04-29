@@ -22,13 +22,12 @@ export interface TooltipProps {
     | "info"
     | "success"
     | "warning"
-    | "error"
-    | undefined;
+    | "error";
 
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class Tooltip extends SvelteComponentTyped<

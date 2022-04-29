@@ -13,17 +13,17 @@
     // -----------------------------------------------------------
 
     /**
-     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost' | 'link' | undefined}
+     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost' | 'link'}
      */
     export let color;
 
     /**
-     * @type {'tiny' | 'small' | 'medium' | 'large' | undefined}
+     * @type {'tiny' | 'small' | 'medium' | 'large'}
      */
     export let size;
 
     /**
-     * @type {'square' | 'circle' | undefined}
+     * @type {'square' | 'circle'}
      */
     export let shape;
 
@@ -59,7 +59,7 @@
 
     let className = null;
     /**
-     * @type {string | undefined}
+     * @type {string}
      */
     export { className as class };
 

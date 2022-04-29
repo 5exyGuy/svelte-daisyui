@@ -17,13 +17,12 @@ export interface RadioProps {
     | "info"
     | "success"
     | "warning"
-    | "error"
-    | undefined;
+    | "error";
 
   /**
    * @default undefined
    */
-  name?: string | undefined;
+  name?: string;
 
   /**
    * @default false
@@ -33,7 +32,7 @@ export interface RadioProps {
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class Radio extends SvelteComponentTyped<

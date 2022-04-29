@@ -8,7 +8,7 @@
     // -----------------------------------------------------------
 
     /**
-     * @type {'bordered' | 'lifted' | 'boxed' | undefined}
+     * @type {'bordered' | 'lifted' | 'boxed'}
      */
     export let type;
 
@@ -19,7 +19,7 @@
 
     let className;
     /**
-     * @type {string | undefined}
+     * @type {string}
      */
     export { className as class };
 

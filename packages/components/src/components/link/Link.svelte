@@ -7,7 +7,7 @@
     // -----------------------------------------------------------
 
     /**
-     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'neutral' | undefined}
+     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'neutral'}
      */
     export let color;
 
@@ -17,13 +17,13 @@
     export let hover = false;
 
     /**
-     * @type {string | undefined}
+     * @type {string}
      */
     export let href = '#';
 
     let className;
     /**
-     * @type {string | undefined}
+     * @type {string}
      */
     export { className as class };
 

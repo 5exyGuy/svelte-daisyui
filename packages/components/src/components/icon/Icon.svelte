@@ -6,12 +6,12 @@
     // -----------------------------------------------------------
 
     /**
-     * @type {typeof import('svelte').SvelteComponent | undefined}
+     * @type {typeof import('svelte').SvelteComponent}
      */
     export let component;
 
     /**
-     * @type {number | undefined}
+     * @type {number}
      */
     export let size;
 
@@ -32,7 +32,7 @@
 
     let className;
     /**
-     * @type {string | undefined}
+     * @type {string}
      */
     export { className as class };
 

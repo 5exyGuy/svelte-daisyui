@@ -30,7 +30,7 @@ export interface RangeProps {
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class Range extends SvelteComponentTyped<RangeProps, {}, {}> {}

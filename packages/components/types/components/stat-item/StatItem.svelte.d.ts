@@ -5,17 +5,17 @@ export interface StatItemProps {
   /**
    * @default undefined
    */
-  title?: string | undefined;
+  title?: string;
 
   /**
    * @default undefined
    */
-  value?: string | undefined;
+  value?: string;
 
   /**
    * @default undefined
    */
-  description?: string | undefined;
+  description?: string;
 
   /**
    * @default undefined
@@ -27,13 +27,12 @@ export interface StatItemProps {
     | "info"
     | "success"
     | "warning"
-    | "error"
-    | undefined;
+    | "error";
 
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class StatItem extends SvelteComponentTyped<

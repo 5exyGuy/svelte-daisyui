@@ -32,7 +32,7 @@ export interface ToggleProps {
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class Toggle extends SvelteComponentTyped<ToggleProps, {}, {}> {}

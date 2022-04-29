@@ -5,7 +5,7 @@ export interface TextAreaProps {
   /**
    * @default undefined
    */
-  placeholder?: string | undefined;
+  placeholder?: string;
 
   /**
    * @default undefined
@@ -18,8 +18,7 @@ export interface TextAreaProps {
     | "success"
     | "warning"
     | "error"
-    | "ghost"
-    | undefined;
+    | "ghost";
 
   /**
    * @default false
@@ -34,7 +33,7 @@ export interface TextAreaProps {
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class TextArea extends SvelteComponentTyped<

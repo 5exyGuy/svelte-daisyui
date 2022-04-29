@@ -10,7 +10,7 @@ export interface DividerProps {
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class Divider extends SvelteComponentTyped<

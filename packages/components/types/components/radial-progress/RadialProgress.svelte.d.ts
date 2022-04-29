@@ -10,7 +10,7 @@ export interface RadialProgressProps {
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class RadialProgress extends SvelteComponentTyped<

@@ -7,28 +7,28 @@
     // -----------------------------------------------------------
 
     /**
-     * @type {string | undefined}
+     * @type {string}
      */
     export let title;
 
     /**
-     * @type {string | undefined}
+     * @type {string}
      */
     export let value;
 
     /**
-     * @type {string | undefined}
+     * @type {string}
      */
     export let description;
 
     /**
-     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | undefined}
+     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'}
      */
     export let background;
 
     let className;
     /**
-     * @type {string | undefined}
+     * @type {string}
      */
     export { className as class };
 

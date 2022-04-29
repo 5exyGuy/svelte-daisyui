@@ -5,12 +5,12 @@ export interface BreadcrumbItemProps {
   /**
    * @default undefined
    */
-  href?: string | undefined;
+  href?: string;
 
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class BreadcrumbItem extends SvelteComponentTyped<

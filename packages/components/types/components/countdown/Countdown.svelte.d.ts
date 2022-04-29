@@ -5,7 +5,7 @@ export interface CountdownProps {
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class Countdown extends SvelteComponentTyped<

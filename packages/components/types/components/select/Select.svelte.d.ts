@@ -13,8 +13,7 @@ export interface SelectProps {
     | "success"
     | "warning"
     | "error"
-    | "ghost"
-    | undefined;
+    | "ghost";
 
   /**
    * @default 'medium'
@@ -29,7 +28,7 @@ export interface SelectProps {
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class Select extends SvelteComponentTyped<

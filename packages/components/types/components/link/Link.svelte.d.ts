@@ -13,8 +13,7 @@ export interface LinkProps {
     | "success"
     | "warning"
     | "error"
-    | "neutral"
-    | undefined;
+    | "neutral";
 
   /**
    * @default false
@@ -24,12 +23,12 @@ export interface LinkProps {
   /**
    * @default '#'
    */
-  href?: string | undefined;
+  href?: string;
 
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class Link extends SvelteComponentTyped<

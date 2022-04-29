@@ -1,48 +1,85 @@
-<script lang="ts">
-    import { CardImagePosition } from './CardImagePosition';
+<script>
+    import { classes } from '../../utils';
+    import { CardPadding } from './card-padding.enum';
 
-    export let imagePosition: CardImagePosition | undefined =
-        CardImagePosition.Top;
-    export let imageSource: string | undefined = undefined;
-    export let imageDescription: string;
-    export let imageOverlay: boolean = false;
-    export let bordered: boolean = false;
-    export let center: boolean = false;
-    export let compact: boolean = false;
-    // export let shadowSize: ShadowSize = ShadowSize;
-    let className: string = '';
+    // -----------------------------------------------------------
+    //                           Props
+    // -----------------------------------------------------------
+
+    /**
+     * @type {boolean}
+     */
+    export let bordered = false;
+
+    /**
+     * @type {boolean}
+     */
+    export let fullImage = false;
+
+    /**
+     * @type {'normal' | 'compact'}
+     */
+    export let padding;
+
+    /**
+     * @type {boolean}
+     */
+    export let side = false;
+
+    let className;
+    /**
+     * @type {string}
+     */
     export { className as class };
 
-    const classes: string[] = [];
+    // -----------------------------------------------------------
+    //                     Classes and Styles
+    // -----------------------------------------------------------
 
-    classes.push('card');
-    if (bordered) classes.push('card-bordered');
-    if (imageOverlay) classes.push('image-full');
-    if (center) classes.push('text-center');
-    if (compact) classes.push('card-compact');
-
-    $: classNames = className.length > 0 ? className.split(' ') : [];
-    classes.push(...classNames);
+    $: classNames = classes(
+        'card',
+        {
+            bordered: {
+                condition: bordered,
+                value: 'bordered',
+            },
+            fullImage: {
+                condition: fullImage,
+                value: 'image-full',
+            },
+            padding: {
+                condition: !!padding,
+                key: padding,
+                value: CardPadding,
+            },
+            size: {
+                condition: side,
+                value: 'side',
+            },
+        },
+        className,
+    );
 </script>
 
-<div class={classes.join(' ')}>
+<div class={classNames}>
+    <slot name="upper" />
     <div class="card-body">
-        {#if imageSource && imagePosition === CardImagePosition.Top}
-            <figure>
-                <img src={imageSource} alt={imageDescription} />
-            </figure>
+        {#if $$slots.title}
+            <h2 class="card-title">
+                <slot name="title" />
+            </h2>
         {/if}
-        <div class="card-title" />
-        <slot />
-        <div class="card-actions" />
-        {#if imageSource && imagePosition === CardImagePosition.Bottom}
-            <figure>
-                <img src={imageSource} alt={imageDescription} />
-            </figure>
+        <slot name="body" />
+        {#if $$slots.actions}
+            <div class="card-actions">
+                <slot name="actions" />
+            </div>
         {/if}
     </div>
+    <slot name="lower" />
 </div>
 
-<style lang="less">
-    @import 'Card.less';
+<style lang="scss">
+    @import 'CardStyled.scss';
+    @import 'CardUnstyled.scss';
 </style>

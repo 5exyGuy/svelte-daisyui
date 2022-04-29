@@ -5,7 +5,7 @@ export interface BreadcrumbGroupProps {
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class BreadcrumbGroup extends SvelteComponentTyped<

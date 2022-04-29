@@ -10,7 +10,7 @@ export interface TabItemProps {
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class TabItem extends SvelteComponentTyped<

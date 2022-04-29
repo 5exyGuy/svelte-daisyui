@@ -5,7 +5,7 @@ export interface CodeProps {
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class Code extends SvelteComponentTyped<

@@ -27,13 +27,12 @@ export interface CheckboxProps {
     | "info"
     | "success"
     | "warning"
-    | "error"
-    | undefined;
+    | "error";
 
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class Checkbox extends SvelteComponentTyped<

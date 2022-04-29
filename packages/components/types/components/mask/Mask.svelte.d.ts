@@ -5,7 +5,7 @@ export interface MaskProps {
   /**
    * @default undefined
    */
-  half?: "1" | "2" | 1 | 2 | undefined;
+  half?: "1" | "2" | 1 | 2;
 
   /**
    * @default 'circle'

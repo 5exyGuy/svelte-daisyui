@@ -5,10 +5,12 @@ export { default as AvatarGroup } from "./components/avatar-group/AvatarGroup.sv
 export { default as Badge } from "./components/badge/Badge.svelte";
 export { default as BreadcrumbGroup } from "./components/breadcrumb-group/BreadcrumbGroup.svelte";
 export { default as BreadcrumbItem } from "./components/breadcrumb-item/BreadcrumbItem.svelte";
+export { default as Card } from "./components/card/Card.svelte";
 export { default as Checkbox } from "./components/checkbox/Checkbox.svelte";
 export { default as Code } from "./components/code/Code.svelte";
 export { default as Countdown } from "./components/countdown/Countdown.svelte";
 export { default as Divider } from "./components/divider/Divider.svelte";
+export { default as Drawer } from "./components/drawer/Drawer.svelte";
 export { default as Dropdown } from "./components/dropdown/Dropdown.svelte";
 export { default as Hero } from "./components/hero/Hero.svelte";
 export { default as Icon } from "./components/icon/Icon.svelte";

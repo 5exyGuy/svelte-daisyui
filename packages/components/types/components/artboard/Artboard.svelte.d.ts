@@ -20,7 +20,7 @@ export interface ArtboardProps {
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class Artboard extends SvelteComponentTyped<

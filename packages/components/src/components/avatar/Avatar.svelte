@@ -8,7 +8,7 @@
     // -----------------------------------------------------------
 
     /**
-     * @type {string | undefined}
+     * @type {string}
      */
     export let src;
 
@@ -18,18 +18,18 @@
     export let alt;
 
     /**
-     * @type {'tiny' | 'small' | 'medium' | 'large' | number | string | undefined}
+     * @type {'tiny' | 'small' | 'medium' | 'large' | number | string}
      */
     export let size = 'medium';
 
     /**
-     * @type {'online' | 'offline' | undefined}
+     * @type {'online' | 'offline'}
      */
     export let status;
 
     let className;
     /**
-     * @type {string | undefined}
+     * @type {string}
      */
     export { className as class };
 

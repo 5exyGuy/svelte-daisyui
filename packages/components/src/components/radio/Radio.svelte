@@ -12,12 +12,12 @@
     export let size = 'medium';
 
     /**
-     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | undefined}
+     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'}
      */
     export let color;
 
     /**
-     * @type {string | undefined}
+     * @type {string}
      */
     export let name;
 
@@ -28,7 +28,7 @@
 
     let className;
     /**
-     * @type {string | undefined}
+     * @type {string}
      */
     export { className as class };
 

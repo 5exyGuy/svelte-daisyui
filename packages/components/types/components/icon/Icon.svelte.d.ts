@@ -5,12 +5,12 @@ export interface IconProps {
   /**
    * @default undefined
    */
-  component?: typeof import("svelte").SvelteComponent | undefined;
+  component?: typeof import("svelte").SvelteComponent;
 
   /**
    * @default undefined
    */
-  size?: number | undefined;
+  size?: number;
 
   /**
    * @default 1
@@ -30,7 +30,7 @@ export interface IconProps {
   /**
    * @default undefined
    */
-  class?: string | undefined;
+  class?: string;
 }
 
 export default class Icon extends SvelteComponentTyped<
