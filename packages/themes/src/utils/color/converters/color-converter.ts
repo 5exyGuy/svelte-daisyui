@@ -1,1 +1,1 @@
-export class ColorConverter {}
+export abstract class ColorConverter {}
