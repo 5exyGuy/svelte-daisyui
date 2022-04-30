@@ -12,16 +12,17 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "postcss": "^8.4.13",
         "svelte": "^3.47.0",
         "svelte-icons": "^2.1.0"
     },
     "devDependencies": {
+        "@babel/core": "^7.17.10",
         "@svelte-daisyui/shared": "workspace:^1.0.0",
-        "@sveltejs/vite-plugin-svelte": "^1.0.0-next.30",
+        "@sveltejs/vite-plugin-svelte": "^1.0.0-next.42",
         "@testing-library/jest-dom": "^5.16.4",
         "@testing-library/svelte": "^3.1.1",
         "@types/tailwindcss": "^3.0.10",
-        "autoprefixer": "^10.4.5",
         "babel-jest": "^28.0.3",
         "jest": "^28.0.3",
         "sass": "^1.51.0",
@@ -29,6 +30,6 @@
         "svelte-jester": "^2.3.2",
         "svelte-preprocess": "^4.10.6",
         "tailwindcss": "^3.0.24",
-        "vite": "^2.9.5"
+        "vite": "^2.9.6"
     }
 }
