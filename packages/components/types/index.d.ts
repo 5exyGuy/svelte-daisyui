@@ -26,8 +26,6 @@ export { default as Input } from "./components/input/Input.svelte";
 export { default as Kbd } from "./components/kbd/Kbd.svelte";
 export { default as Link } from "./components/link/Link.svelte";
 export { default as Mask } from "./components/mask/Mask.svelte";
-export { default as Menu } from "./components/menu/Menu.svelte";
-export { default as MenuItem } from "./components/menu-item/MenuItem.svelte";
 export { default as Navbar } from "./components/navbar/Navbar.svelte";
 export { default as Progress } from "./components/progress/Progress.svelte";
 export { default as RadialProgress } from "./components/radial-progress/RadialProgress.svelte";

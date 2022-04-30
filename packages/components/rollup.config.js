@@ -1,21 +1,20 @@
-import { svelte } from '@sveltejs/vite-plugin-svelte';
-import { defineConfig } from 'vite';
+import { TAILWIND_CONFIG } from '@svelte-daisyui/shared';
+import { terser } from 'rollup-plugin-terser';
+import svelte from 'rollup-plugin-svelte';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 import preprocess from 'svelte-preprocess';
 import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
 import sveld from 'sveld';
-import { TAILWIND_CONFIG } from '@svelte-daisyui/shared';
+import pkg from './package.json';
 
-// https://vitejs.dev/config/
-export default defineConfig({
-    build: {
-        lib: {
-            entry: 'src/index.js',
-            name: 'Components',
-            fileName: (format) => `index.${format}.js`,
-            formats: ['umd', 'es'],
-        },
-    },
+export default {
+    input: 'src/index.js',
+    output: [
+        { file: pkg.module, format: 'es' },
+        { file: pkg.main, format: 'umd', name: 'svelte-daisyui' },
+    ],
     plugins: [
         svelte({
             emitCss: false,
@@ -23,7 +22,7 @@ export default defineConfig({
                 postcss: {
                     plugins: [
                         tailwindcss({
-                            content: ['./src/**/*.{js,svelte,scss,sass}'],
+                            content: ['./src/**/*.{js,svelte}'],
                             theme: TAILWIND_CONFIG.theme,
                         }),
                         autoprefixer(),
@@ -31,8 +30,11 @@ export default defineConfig({
                 },
             }),
         }),
+        resolve(),
+        commonjs(),
+        terser(),
         sveld({
             markdown: true,
         }),
     ],
-});
+};

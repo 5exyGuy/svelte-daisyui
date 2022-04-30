@@ -30,8 +30,6 @@
 - [`Kbd`](#kbd)
 - [`Link`](#link)
 - [`Mask`](#mask)
-- [`Menu`](#menu)
-- [`MenuItem`](#menuitem)
 - [`Navbar`](#navbar)
 - [`Progress`](#progress)
 - [`RadialProgress`](#radialprogress)
@@ -630,43 +628,6 @@ None.
 | half      | <code>let</code> | No       | <code>'1' &#124; '2' &#124; 1 &#124; 2</code>                                                                                                                                                                                                                                                                                                                        | <code>undefined</code> | --          |
 | type      | <code>let</code> | No       | <code>'squircle' &#124; 'heart' &#124; 'hexagon' &#124; 'hexagon2' &#124; 'decagon' &#124; 'pentagon' &#124; 'diamond' &#124; 'square' &#124; 'circle' &#124; 'parallelogram' &#124; 'parallelogram2' &#124; 'parallelogram3' &#124; 'parallelogram4' &#124; 'star' &#124; 'star2' &#124; 'triangle' &#124; 'triangle2' &#124; 'triangle3' &#124; 'triangle4'</code> | <code>'circle'</code>  | --          |
 | class     | <code>let</code> | No       | --                                                                                                                                                                                                                                                                                                                                                                   | <code>undefined</code> | --          |
-
-### Slots
-
-| Slot name | Default | Props | Fallback |
-| :-------- | :------ | :---- | :------- |
-| --        | Yes     | --    | --       |
-
-### Events
-
-None.
-
-## `Menu`
-
-### Props
-
-| Prop name | Kind             | Reactive | Type                                        | Default value             | Description |
-| :-------- | :--------------- | :------- | :------------------------------------------ | ------------------------- | ----------- |
-| alignment | <code>let</code> | No       | <code>'horizontal' &#124; 'vertical'</code> | <code>'horizontal'</code> | --          |
-| class     | <code>let</code> | No       | <code>string</code>                         | <code>undefined</code>    | --          |
-
-### Slots
-
-| Slot name | Default | Props | Fallback |
-| :-------- | :------ | :---- | :------- |
-| --        | Yes     | --    | --       |
-
-### Events
-
-None.
-
-## `MenuItem`
-
-### Props
-
-| Prop name | Kind             | Reactive | Type                | Default value          | Description |
-| :-------- | :--------------- | :------- | :------------------ | ---------------------- | ----------- |
-| class     | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
 
 ### Slots
 
