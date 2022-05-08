@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "@svelte-daisyui/shared": "workspace:^1.0.0",
+        "color": "^4.2.3",
         "joi": "^17.6.0"
     },
     "devDependencies": {
