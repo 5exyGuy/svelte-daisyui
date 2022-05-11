@@ -1,5 +1,6 @@
 @use 'sass:list';
 @use '../variables.scss' as *;
+@use '../escape.scss' as *;
 
 $colors: list.join($brand-colors, $functional-colors);
 
@@ -7,9 +8,21 @@ $colors: list.join($brand-colors, $functional-colors);
     @apply bg-base-200 p-4;
     border-radius: var(--box-border-radius);
 
-    @each $color in $colors {
-        &.alert-#{$color} {
-            @apply bg-#{$color} text-#{$color}-content;
+    @mixin alert-props($prefix: '') {
+        $prefix: escape($prefix);
+
+        @each $color in $colors {
+            &.#{$prefix}test-#{$color} {
+                @apply bg-#{$color} text-#{$color}-content;
+            }
+        }
+    }
+
+    @include alert-props();
+
+    @each $screen-size in $tailwind-screen-sizes {
+        @screen #{$screen-size} {
+            @include alert-props('#{$screen-size}\\:');
         }
     }
 }
