@@ -37,6 +37,11 @@ export class ThemeProcessor {
         return this;
     }
 
+    public setCustomThemes(customThemes: Array<Theme>): ThemeProcessor {
+        this.customThemes = customThemes;
+        return this;
+    }
+
     private formatHsl(hsl: Array<number>): string {
         return `${hsl[0]} ${hsl[1]}% ${hsl[2]}%`;
     }

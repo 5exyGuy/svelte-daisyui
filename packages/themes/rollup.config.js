@@ -10,10 +10,12 @@ export default {
         {
             file: 'dist/index.cjs.js',
             format: 'cjs',
+            sourcemap: true,
         },
         {
             file: 'dist/index.es.js',
             format: 'es',
+            sourcemap: true,
         },
     ],
     plugins: [external(), resolve(), commonjs(), ts(), terser()],

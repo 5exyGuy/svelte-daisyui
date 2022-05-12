@@ -1,3 +1,3 @@
-const shared = require('@svelte-daisyui/shared');
+const { TAILWIND_CONFIG } = require('@svelte-daisyui/shared');
 
-module.exports = shared.TAILWIND_CONFIG;
+module.exports = TAILWIND_CONFIG;

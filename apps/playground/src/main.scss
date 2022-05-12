@@ -1,0 +1,9 @@
+// Prieš transformaciją
+.body {
+    @apply flex justify-center;
+}
+// Po transformacijos
+.body {
+    display: flex;
+    justify-content: center;
+}
