@@ -7,9 +7,10 @@ import joi from 'joi';
 export const DAISYUI_CONFIG_SCHEMA = joi.object<DaisyUIConfig>({
     mainTheme: joi.string().default(DEFAULT_MAIN_THEME),
     darkTheme: joi.string().default(DEFAULT_DARK_THEME),
-    enabledDefaultThemes: joi
+    includedThemes: joi
         .array()
         .items(joi.string())
         .default(DEFAULT_THEMES.map((theme) => theme.name)),
+    excludedThemes: joi.array().items(joi.string()).default([]),
     customThemes: joi.array().items(CUSTOM_THEME_SCHEMA).default([]),
 });

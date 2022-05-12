@@ -11,12 +11,31 @@ import {
 import color from 'color';
 
 export class ThemeProcessor {
-    public constructor(
-        private readonly mainTheme?: string,
-        private readonly darkTheme?: string,
-        private readonly enabledDefaultThemes?: Array<string>,
-        private readonly customThemes?: Array<Theme>,
-    ) {}
+    public mainTheme?: string;
+    public darkTheme?: string;
+    public includedThemes?: Array<string>;
+    public excludedThemes?: Array<string>;
+    public customThemes?: Array<Theme>;
+
+    public setMainTheme(mainTheme: string): ThemeProcessor {
+        this.mainTheme = mainTheme;
+        return this;
+    }
+
+    public setDarkTheme(darkTheme: string): ThemeProcessor {
+        this.darkTheme = darkTheme;
+        return this;
+    }
+
+    public setIncludedThemes(includedThemes: Array<string>): ThemeProcessor {
+        this.includedThemes = includedThemes;
+        return this;
+    }
+
+    public setExcludedThemes(excludedThemes: Array<string>): ThemeProcessor {
+        this.excludedThemes = excludedThemes;
+        return this;
+    }
 
     private formatHsl(hsl: Array<number>): string {
         return `${hsl[0]} ${hsl[1]}% ${hsl[2]}%`;
@@ -105,21 +124,26 @@ export class ThemeProcessor {
     }
 
     public generate(): Object {
-        const includedThemes = [] as Theme[];
+        const includedThemes = [] as Array<Theme>;
 
         // Validating the config
         const { error, value: validatedConfig } =
             DAISYUI_CONFIG_SCHEMA.validate({
                 mainTheme: this.mainTheme,
                 darkTheme: this.darkTheme,
-                enabledDefaultThemes: this.enabledDefaultThemes,
+                includedThemes: this.includedThemes,
+                excludedThemes: this.excludedThemes,
                 customThemes: this.customThemes,
             });
         if (error) throw new Error(error.message);
         if (!validatedConfig) throw new Error('Invalid config');
 
+        validatedConfig.includedThemes = validatedConfig.includedThemes.filter(
+            (themeName) => !validatedConfig.excludedThemes.includes(themeName),
+        );
+
         // Including default themes
-        for (const defaultThemeName of validatedConfig.enabledDefaultThemes) {
+        for (const defaultThemeName of validatedConfig.includedThemes) {
             const defaultTheme = DEFAULT_THEMES.find(
                 (theme) => theme.name === defaultThemeName,
             );
@@ -131,7 +155,16 @@ export class ThemeProcessor {
             includedThemes.push(validatedTheme.value);
         }
         // Including custom themes
-        includedThemes.push(...validatedConfig.customThemes);
+        includedThemes.push(
+            ...validatedConfig.customThemes.filter((customTheme) => {
+                const validatedTheme =
+                    CUSTOM_THEME_SCHEMA.validate(customTheme);
+                if (validatedTheme.error) return false;
+                if (!validatedConfig.includedThemes.includes(customTheme.name))
+                    return false;
+                return true;
+            }),
+        );
         // Finding the main and dark themes
         let mainTheme = includedThemes.find(
             (theme) => theme.name === validatedConfig.mainTheme,
@@ -145,13 +178,18 @@ export class ThemeProcessor {
             mainTheme = includedThemes.find(
                 (theme) => theme.name === validatedConfig.mainTheme,
             ) as Theme;
+            if (!mainTheme) return {};
         }
         if (!darkTheme) {
             validatedConfig.darkTheme = DEFAULT_DARK_THEME;
             darkTheme = includedThemes.find(
                 (theme) => theme.name === validatedConfig.darkTheme,
             ) as Theme;
+            if (!darkTheme) return {};
         }
+
+        this.mainTheme = mainTheme.name;
+        this.darkTheme = darkTheme.name;
 
         // Processing the included themes
         const generatedStyles = {} as any;

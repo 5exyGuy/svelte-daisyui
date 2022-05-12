@@ -21,8 +21,10 @@
         "checkJs": true,
 
         "esModuleInterop": true,
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true
+        "skipLibCheck": false,
+        "forceConsistentCasingInFileNames": true,
+
+        "types": ["node"]
     },
     "include": ["src/**/*.ts"]
 }

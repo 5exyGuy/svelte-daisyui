@@ -1,5 +1,5 @@
 import { COLOR_NAMES, DEFAULT_THEME } from '../constants';
-import type { Theme } from '../interfaces';
+import type { Theme } from '@svelte-daisyui/shared';
 import joi, { type PartialSchemaMap } from 'joi';
 
 const colorSchemaMap: PartialSchemaMap = {};

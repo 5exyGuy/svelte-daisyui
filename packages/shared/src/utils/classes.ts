@@ -2,7 +2,7 @@ import type { ClassPropData } from '../interfaces/class-prop-data.interface';
 
 export function classes(
     prefix: string,
-    classProps: Record<string, ClassPropData>,
+    classProps: Array<ClassPropData>,
     restClass?: string,
 ) {
     const classList = [prefix];

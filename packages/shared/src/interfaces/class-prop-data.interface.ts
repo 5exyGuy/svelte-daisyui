@@ -1,5 +1,5 @@
 export interface ClassPropData {
     condition: boolean;
-    key: string;
+    key?: string;
     value: string | Record<string, string>;
 }

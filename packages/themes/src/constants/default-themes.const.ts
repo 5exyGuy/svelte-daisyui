@@ -1,4 +1,4 @@
-import type { Theme } from '../interfaces';
+import type { Theme } from '@svelte-daisyui/shared';
 
 export const DEFAULT_MAIN_THEME = 'light';
 export const DEFAULT_DARK_THEME = 'dark';
