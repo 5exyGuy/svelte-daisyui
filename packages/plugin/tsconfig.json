@@ -20,7 +20,7 @@
         "checkJs": true,
 
         "esModuleInterop": true,
-        "skipLibCheck": true,
+        "skipLibCheck": false,
         "forceConsistentCasingInFileNames": true,
 
         "types": ["node"]

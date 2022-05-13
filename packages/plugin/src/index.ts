@@ -5,17 +5,17 @@ import { TAILWIND_CONFIG } from '@svelte-daisyui/shared';
 const tailwindFunction: TailwindPluginFn = ({ config, addBase }) => {
     const mainTheme = config('daisyui.mainTheme') as string;
     const darkTheme = config('daisyui.darkTheme') as string;
-    const enabledDefaultThemes = config(
-        'daisyui.enabledDefaultThemes',
-    ) as Array<string>;
+    const includedThemes = config('daisyui.includedThemes') as Array<string>;
+    const excludedThemes = config('daisyui.excludedThemes') as Array<string>;
     const customThemes = config('daisyui.customThemes') as Array<Theme>;
 
-    const themeProcessor = new ThemeProcessor(
-        mainTheme,
-        darkTheme,
-        enabledDefaultThemes,
-        customThemes,
-    );
+    const themeProcessor = new ThemeProcessor();
+    themeProcessor
+        .setMainTheme(mainTheme)
+        .setDarkTheme(darkTheme)
+        .setIncludedThemes(includedThemes)
+        .setExcludedThemes(excludedThemes)
+        .setCustomThemes(customThemes);
     const generatedJsStyles = themeProcessor.generate();
     addBase(generatedJsStyles);
 
