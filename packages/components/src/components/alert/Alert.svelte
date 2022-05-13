@@ -68,13 +68,7 @@
                 <Icon size={1.5} component={MdErrorOutline} />
             {/if}
         {/if}
-        {#if message}
-            <span>
-                {message}
-            </span>
-        {:else}
-            <slot name="content" />
-        {/if}
+        <slot />
     </div>
     <div class="alert-actions">
         <slot name="actions" />

@@ -12,7 +12,7 @@ $colors: list.join($brand-colors, $functional-colors);
         $prefix: escape($prefix);
 
         @each $color in $colors {
-            &.#{$prefix}test-#{$color} {
+            &.#{$prefix}alert-#{$color} {
                 @apply bg-#{$color} text-#{$color}-content;
             }
         }
@@ -22,7 +22,7 @@ $colors: list.join($brand-colors, $functional-colors);
 
     @each $screen-size in $tailwind-screen-sizes {
         @screen #{$screen-size} {
-            @include alert-props('#{$screen-size}\\:');
+            @include alert-props('#{$screen-size}:');
         }
     }
 }
