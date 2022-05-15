@@ -5,32 +5,43 @@
     import MdErrorOutline from 'svelte-icons/md/MdErrorOutline.svelte';
     import { BrandColor, FunctionalColor } from '../../enums';
     import Icon from '../icon/Icon.svelte';
-    import { classes } from '../../utils';
+    import { classes } from '@svelte-daisyui/shared';
+
+    // -----------------------------------------------------------
+    //                      Type Definitions
+    // -----------------------------------------------------------
+
+    /**
+     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'} Color
+     * @typedef {{ component: typeof import('svelte').SvelteComponent; size: number; }} Icon
+     * @typedef {{ color?: Color, icon?: Icon, class?: string }} ScreenProps
+     * @typedef {{ sm?: ScreenProps, md?: ScreenProps, lg?: ScreenProps, xl?: ScreenProps, '2xl'?: ScreenProps }} Screen
+     */
 
     // -----------------------------------------------------------
     //                           Props
     // -----------------------------------------------------------
 
     /**
-     * @type {string}
-     */
-    export let message;
-
-    /**
-     *  @type {{ component: typeof import('svelte').SvelteComponent; size: number; }}
+     *  @type {Icon}
      */
     export let icon;
 
     /**
-     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'}
+     * @type {Color}
      */
     export let color;
 
-    let className;
+    let restClass;
     /**
      * @type {string}
      */
-    export { className as class };
+    export { restClass as class };
+
+    /**
+     * @type {Screen}
+     */
+    export let screen = { sm: {} };
 
     // -----------------------------------------------------------
     //                     Classes and Styles
@@ -38,14 +49,14 @@
 
     $: classNames = classes(
         'alert',
-        {
-            color: {
+        [
+            {
                 condition: !!color,
                 key: color,
                 value: { ...BrandColor, ...FunctionalColor },
             },
-        },
-        className,
+        ],
+        restClass,
     );
 </script>
 
