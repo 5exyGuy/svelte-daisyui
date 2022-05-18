@@ -23,15 +23,23 @@
 </details>
 
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
+### daisyUI
+
+Styles were taken from [saadeghi/daisyui](https://github.com/saadeghi/daisyui)
+and licenced under MIT License available
+[here](https://github.com/saadeghi/daisyui/blob/master/LICENSE).
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
+
 ## Acknowledgments
 
-* [daisyUI — Tailwind CSS Components](https://daisyui.com/)
+-   [daisyUI — Tailwind CSS Components](https://daisyui.com/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
