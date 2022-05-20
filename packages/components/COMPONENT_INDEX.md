@@ -106,14 +106,35 @@ None.
 
 ## `Artboard`
 
+### Types
+
+```ts
+export type Size = "1" | "2" | "3" | "4" | "5" | "6" | 1 | 2 | 3 | 4 | 5 | 6;
+
+export interface ScreenProps {
+  size?: Size;
+  demo?: boolean;
+  horizontal?: boolean;
+}
+
+export interface Screen {
+  sm?: ScreenProps;
+  md?: ScreenProps;
+  lg?: ScreenProps;
+  xl?: ScreenProps;
+  "2xl"?: ScreenProps;
+}
+```
+
 ### Props
 
-| Prop name  | Kind             | Reactive | Type                                                                                                                          | Default value          | Description |
-| :--------- | :--------------- | :------- | :---------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
-| size       | <code>let</code> | No       | <code>'1' &#124; '2' &#124; '3' &#124; '4' &#124; '5' &#124; '6' &#124; 1 &#124; 2 &#124; 3 &#124; 4 &#124; 5 &#124; 6</code> | <code>'1'</code>       | --          |
-| demo       | <code>let</code> | No       | <code>boolean</code>                                                                                                          | <code>false</code>     | --          |
-| horizontal | <code>let</code> | No       | <code>boolean</code>                                                                                                          | <code>false</code>     | --          |
-| class      | <code>let</code> | No       | <code>string</code>                                                                                                           | <code>undefined</code> | --          |
+| Prop name  | Kind             | Reactive | Type                 | Default value          | Description |
+| :--------- | :--------------- | :------- | :------------------- | ---------------------- | ----------- |
+| size       | <code>let</code> | No       | <code>Size</code>    | <code>'1'</code>       | --          |
+| demo       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
+| horizontal | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
+| class      | <code>let</code> | No       | <code>string</code>  | <code>undefined</code> | --          |
+| screen     | <code>let</code> | No       | <code>Screen</code>  | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -509,6 +530,22 @@ None.
 
 ## `Icon`
 
+### Types
+
+```ts
+export interface ScreenProps {
+  spin?: boolean;
+}
+
+export interface Screen {
+  sm?: ScreenProps;
+  md?: ScreenProps;
+  lg?: ScreenProps;
+  xl?: ScreenProps;
+  "2xl"?: ScreenProps;
+}
+```
+
 ### Props
 
 | Prop name | Kind             | Reactive | Type                                                 | Default value          | Description |
@@ -519,6 +556,7 @@ None.
 | width     | <code>let</code> | No       | <code>number</code>                                  | <code>1</code>         | --          |
 | spin      | <code>let</code> | No       | <code>boolean</code>                                 | <code>false</code>     | --          |
 | class     | <code>let</code> | No       | <code>string</code>                                  | <code>undefined</code> | --          |
+| screen    | <code>let</code> | No       | <code>Screen</code>                                  | <code>undefined</code> | --          |
 
 ### Slots
 

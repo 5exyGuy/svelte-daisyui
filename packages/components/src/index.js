@@ -1,5 +1,4 @@
 export { default as Alert } from './components/alert/Alert.svelte';
-
 export { default as Artboard } from './components/artboard/Artboard.svelte';
 export { default as Avatar } from './components/avatar/Avatar.svelte';
 export { default as AvatarGroup } from './components/avatar-group/AvatarGroup.svelte';

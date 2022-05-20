@@ -1,6 +1,18 @@
 /// <reference types="svelte" />
 import type { SvelteComponentTyped } from "svelte";
 
+export interface ScreenProps {
+  spin?: boolean;
+}
+
+export interface Screen {
+  sm?: ScreenProps;
+  md?: ScreenProps;
+  lg?: ScreenProps;
+  xl?: ScreenProps;
+  "2xl"?: ScreenProps;
+}
+
 export interface IconProps {
   /**
    * @default undefined
@@ -31,6 +43,11 @@ export interface IconProps {
    * @default undefined
    */
   class?: string;
+
+  /**
+   * @default undefined
+   */
+  screen?: Screen;
 }
 
 export default class Icon extends SvelteComponentTyped<

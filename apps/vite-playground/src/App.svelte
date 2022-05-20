@@ -1,9 +1,15 @@
 <script>
-    import { Alert, Button } from '@svelte-daisyui/components';
+    import { Alert, Button, Artboard } from '@svelte-daisyui/components';
 </script>
 
 <div class="flex justify-center items-center h-screen">
     <div class="flex flex-col max-w-2xl gap-2">
+        <Artboard
+            size="1"
+            demo
+            screen={{ sm: { size: '4' }, xl: { horizontal: true } }}
+            >test</Artboard
+        >
         <Alert
             color="info"
             screen={{ sm: { color: 'error' }, xl: { color: 'success' } }}
