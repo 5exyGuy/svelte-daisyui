@@ -7,8 +7,6 @@ export default defineConfig({
     plugins: [
         svelte({
             preprocess: preprocess({
-                sass: true,
-                scss: true,
                 postcss: true,
             }),
         }),

@@ -1,0 +1,14 @@
+{
+    "color": "primary",
+    "size": "lg",
+    "screen": {
+        "sm": {
+            "color": "primary",
+            "size": "sm"
+        },
+        "md": {
+            "color": "secondary",
+            "size": "md"
+        }
+    }
+}

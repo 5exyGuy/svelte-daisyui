@@ -54,21 +54,51 @@
 
 ## `Alert`
 
+### Types
+
+```ts
+export type Color =
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "info"
+  | "success"
+  | "warning"
+  | "error";
+
+export interface Icon {
+  component: typeof import("svelte").SvelteComponent;
+  size: number;
+}
+
+export interface ScreenProps {
+  color?: Color;
+}
+
+export interface Screen {
+  sm?: ScreenProps;
+  md?: ScreenProps;
+  lg?: ScreenProps;
+  xl?: ScreenProps;
+  "2xl"?: ScreenProps;
+}
+```
+
 ### Props
 
-| Prop name | Kind             | Reactive | Type                                                                                                                     | Default value          | Description |
-| :-------- | :--------------- | :------- | :----------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
-| message   | <code>let</code> | No       | <code>string</code>                                                                                                      | <code>undefined</code> | --          |
-| icon      | <code>let</code> | No       | <code>{ component: typeof import('svelte').SvelteComponent; size: number; }</code>                                       | <code>undefined</code> | --          |
-| color     | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error'</code> | <code>undefined</code> | --          |
-| class     | <code>let</code> | No       | <code>string</code>                                                                                                      | <code>undefined</code> | --          |
+| Prop name | Kind             | Reactive | Type                | Default value          | Description |
+| :-------- | :--------------- | :------- | :------------------ | ---------------------- | ----------- |
+| icon      | <code>let</code> | No       | <code>Icon</code>   | <code>undefined</code> | --          |
+| color     | <code>let</code> | No       | <code>Color</code>  | <code>undefined</code> | --          |
+| class     | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+| screen    | <code>let</code> | No       | <code>Screen</code> | <code>undefined</code> | --          |
 
 ### Slots
 
 | Slot name | Default | Props | Fallback |
 | :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
 | actions   | No      | --    | --       |
-| content   | No      | --    | --       |
 
 ### Events
 

@@ -6,7 +6,7 @@ $colors: list.join($brand-colors, $functional-colors);
 
 .alert {
     @apply bg-base-200 p-4;
-    border-radius: var(--box-border-radius);
+    border-radius: var(--box-border-radius, 1rem);
 
     @mixin alert-props($prefix: '') {
         $prefix: escape($prefix);

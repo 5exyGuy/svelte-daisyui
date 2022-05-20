@@ -8,60 +8,64 @@
     import { classes } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
-    //                      Type Definitions
+    //  Type Definitions
     // -----------------------------------------------------------
 
     /**
      * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'} Color
      * @typedef {{ component: typeof import('svelte').SvelteComponent; size: number; }} Icon
-     * @typedef {{ color?: Color, icon?: Icon, class?: string }} ScreenProps
+     * @typedef {{ color?: Color }} ScreenProps
      * @typedef {{ sm?: ScreenProps, md?: ScreenProps, lg?: ScreenProps, xl?: ScreenProps, '2xl'?: ScreenProps }} Screen
      */
 
     // -----------------------------------------------------------
-    //                           Props
+    // Props
     // -----------------------------------------------------------
 
     /**
      *  @type {Icon}
      */
-    export let icon;
+    export let icon = undefined;
 
     /**
      * @type {Color}
      */
-    export let color;
+    export let color = undefined;
 
-    let restClass;
+    let restClass = undefined;
     /**
      * @type {string}
      */
     export { restClass as class };
 
+    // -----------------------------------------------------------
+    // Screen
+    // -----------------------------------------------------------
+
     /**
      * @type {Screen}
      */
-    export let screen = { sm: {} };
+    export let screen = undefined;
 
     // -----------------------------------------------------------
-    //                     Classes and Styles
+    // Classes and Styles
     // -----------------------------------------------------------
 
     $: classNames = classes(
         'alert',
-        [
-            {
-                condition: !!color,
-                key: color,
+        {
+            color: {
                 value: { ...BrandColor, ...FunctionalColor },
             },
-        ],
+        },
         restClass,
+        { color },
+        screen,
     );
 </script>
 
 <div class={classNames}>
-    <div class="alert-content">
+    <div class="alert-icon">
         {#if icon}
             <svelte:component
                 this={Icon}
@@ -79,11 +83,17 @@
                 <Icon size={1.5} component={MdErrorOutline} />
             {/if}
         {/if}
-        <slot />
     </div>
-    <div class="alert-actions">
-        <slot name="actions" />
-    </div>
+    {#if $$slots.default}
+        <div class="alert-content">
+            <slot />
+        </div>
+    {/if}
+    {#if $$slots.actions}
+        <div class="alert-actions">
+            <slot name="actions" />
+        </div>
+    {/if}
 </div>
 
 <style lang="scss">
