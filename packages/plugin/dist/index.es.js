@@ -1,2 +1,0 @@
-import e from"tailwindcss/plugin";import{ThemeProcessor as s}from"@svelte-daisyui/themes";import{TAILWIND_CONFIG as i}from"@svelte-daisyui/shared";var d=e((({config:e,addBase:i})=>{const d=e("daisyui.mainTheme"),a=e("daisyui.darkTheme"),m=e("daisyui.includedThemes"),t=e("daisyui.excludedThemes"),u=e("daisyui.customThemes"),o=new s;o.setMainTheme(d).setDarkTheme(a).setIncludedThemes(m).setExcludedThemes(t).setCustomThemes(u);i(o.generate()),console.log("DaisyUI: TailwindCSS plugin loaded")}),i);export{d as default};
-//# sourceMappingURL=index.es.js.map
