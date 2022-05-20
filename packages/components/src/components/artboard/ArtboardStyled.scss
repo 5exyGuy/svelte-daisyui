@@ -1,0 +1,24 @@
+@use 'sass:list';
+@use '../variables.scss' as *;
+@use '../escape.scss' as *;
+
+.artboard {
+    @mixin artboard-props($prefix: '') {
+        $prefix: escape($prefix);
+
+        &.#{$prefix}artboard-demo {
+            @apply bg-base-100 text-base-content;
+            border-radius: var(--box-border-radius);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+                0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+    }
+
+    @include artboard-props();
+
+    @each $screen-size in $tailwind-screen-sizes {
+        @screen #{$screen-size} {
+            @include artboard-props('#{$screen-size}:');
+        }
+    }
+}

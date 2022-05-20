@@ -4,4 +4,9 @@
     & > :global(*) {
         @apply flex items-center gap-2;
     }
+
+    & > :global(.alert-actions),
+    :global(.alert-icon) {
+        @apply flex-none;
+    }
 }

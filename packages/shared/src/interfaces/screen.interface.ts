@@ -1,6 +1,10 @@
+import type { StringKeyOf } from 'type-fest';
+import type { ScreenSize } from '../enums/screen-size.enum';
+import type { ClassPropData } from './class-prop-data.interface';
+
 export type Screen<
-    T = undefined,
-    K extends string = 'sm' | 'md' | 'lg' | 'xl' | '2xl',
+    T = ClassPropData[],
+    K extends string = StringKeyOf<typeof ScreenSize>,
 > = {
-    [screenSize in K]: Partial<T>;
+    [screenSize in K]?: T;
 };

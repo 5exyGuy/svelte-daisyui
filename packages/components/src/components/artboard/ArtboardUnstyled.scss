@@ -1,4 +1,7 @@
 @use 'sass:map';
+@use 'sass:list';
+@use '../variables.scss' as *;
+@use '../escape.scss' as *;
 
 $sizes: (
     1: (
@@ -28,26 +31,32 @@ $sizes: (
 );
 
 .artboard {
+    @apply flex flex-none flex-col items-center justify-center;
     @apply w-full;
 
-    &.artboard-demo {
-        @apply bg-base-100 text-base-content;
-        border-radius: var(--box-border-radius);
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
-            0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    }
+    @mixin artboard-props($prefix: '') {
+        $prefix: escape($prefix);
 
-    &.artboard-phone {
-        @each $size, $object in $sizes {
-            &-#{$size} {
-                width: map.get($object, 'x');
-                height: map.get($object, 'y');
+        &.#{$prefix}artboard-phone {
+            @each $size, $object in $sizes {
+                &-#{$size} {
+                    width: map.get($object, 'x');
+                    height: map.get($object, 'y');
 
-                &.artboard-horizontal {
-                    width: map.get($object, 'y');
-                    height: map.get($object, 'x');
+                    &.#{$prefix}artboard-horizontal {
+                        width: map.get($object, 'y');
+                        height: map.get($object, 'x');
+                    }
                 }
             }
+        }
+    }
+
+    @include artboard-props();
+
+    @each $screen-size in $tailwind-screen-sizes {
+        @screen #{$screen-size} {
+            @include artboard-props('#{$screen-size}:');
         }
     }
 }

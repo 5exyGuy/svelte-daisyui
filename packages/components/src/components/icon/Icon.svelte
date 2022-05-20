@@ -1,8 +1,17 @@
 <script>
-    import { classes } from '../../utils';
+    import { classes } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
-    //                           Props
+    //  Type Definitions
+    // -----------------------------------------------------------
+
+    /**
+     * @typedef {{ spin?: boolean }} ScreenProps
+     * @typedef {{ sm?: ScreenProps, md?: ScreenProps, lg?: ScreenProps, xl?: ScreenProps, '2xl'?: ScreenProps }} Screen
+     */
+
+    // -----------------------------------------------------------
+    // Props
     // -----------------------------------------------------------
 
     /**
@@ -30,31 +39,41 @@
      */
     export let spin = false;
 
-    let className;
+    let restClass = undefined;
     /**
      * @type {string}
      */
-    export { className as class };
+    export { restClass as class };
 
     // -----------------------------------------------------------
-    //                          Classes
+    // Screen
+    // -----------------------------------------------------------
+
+    /**
+     * @type {Screen}
+     */
+    export let screen = undefined;
+
+    // -----------------------------------------------------------
+    // Classes and Styles
     // -----------------------------------------------------------
 
     $: classNames = classes(
         'icon',
         {
             spin: {
-                condition: spin,
                 value: 'spin',
             },
         },
-        className,
+        restClass,
+        { spin },
+        screen,
     );
 </script>
 
 <div
     class={classNames}
-    style={`height: ${size ?? height}rem; width: ${size ?? width}rem;`}
+    style={`height: ${size ?? height}em; width: ${size ?? width}em;`}
 >
     {#if component}
         <svelte:component this={component} />
