@@ -1,8 +1,9 @@
 {
     "compilerOptions": {
         "lib": ["ESNext"],
-        "module": "CommonJS",
+        "module": "ESNext",
         "target": "ESNext",
+        "moduleResolution": "Node",
 
         "strict": true,
         "allowUnusedLabels": false,
