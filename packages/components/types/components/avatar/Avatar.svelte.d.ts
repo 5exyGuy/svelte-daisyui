@@ -1,6 +1,23 @@
 /// <reference types="svelte" />
 import type { SvelteComponentTyped } from "svelte";
 
+export type Size = "tiny" | "small" | "medium" | "large";
+
+export type Status = "online" | "offline";
+
+export interface ScreenProps {
+  size?: Size;
+  status: Status;
+}
+
+export interface Screen {
+  sm?: ScreenProps;
+  md?: ScreenProps;
+  lg?: ScreenProps;
+  xl?: ScreenProps;
+  "2xl"?: ScreenProps;
+}
+
 export interface AvatarProps {
   /**
    * @default undefined
@@ -13,9 +30,9 @@ export interface AvatarProps {
   alt?: string;
 
   /**
-   * @default 'medium'
+   * @default undefined
    */
-  size?: "tiny" | "small" | "medium" | "large" | number | string;
+  size?: "tiny" | "small" | "medium" | "large";
 
   /**
    * @default undefined
@@ -26,6 +43,11 @@ export interface AvatarProps {
    * @default undefined
    */
   class?: string;
+
+  /**
+   * @default undefined
+   */
+  screen?: Screen;
 }
 
 export default class Avatar extends SvelteComponentTyped<

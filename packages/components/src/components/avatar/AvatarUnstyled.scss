@@ -1,3 +1,6 @@
+@use '../variables.scss' as *;
+@use '../escape.scss' as *;
+
 $avatar-sizes: (
     xs: 6,
     sm: 12,
@@ -22,9 +25,21 @@ $avatar-sizes: (
         }
     }
 
-    @each $size-name, $size in $avatar-sizes {
-        &.avatar-#{$size-name} {
-            @apply h-#{$size} w-#{$size};
+    @mixin avatar-props($prefix: '') {
+        $prefix: escape($prefix);
+
+        @each $size-name, $size in $avatar-sizes {
+            &.#{$prefix}avatar-#{$size-name} {
+                @apply h-#{$size} w-#{$size};
+            }
+        }
+    }
+
+    @include avatar-props();
+
+    @each $screen-size in $tailwind-screen-sizes {
+        @screen #{$screen-size} {
+            @include avatar-props('#{$screen-size}:');
         }
     }
 }

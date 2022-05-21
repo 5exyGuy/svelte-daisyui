@@ -1,19 +1,26 @@
-<script lang="ts">
-    import { classes } from '../../utils';
+<script>
+    import { classes } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
-    //                           Props
+    // Props
     // -----------------------------------------------------------
 
-    export let space: string = '1.5rem';
-    let className: string = '';
-    export { className as class };
+    /**
+     * @type {string}
+     */
+    export let space = '1.5rem';
+
+    let restClass = undefined;
+    /**
+     * @type {string}
+     */
+    export { restClass as class };
 
     // -----------------------------------------------------------
-    //                     Classes and Styles
+    // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes('avatar-group', {}, className);
+    $: classNames = classes('avatar-group', {}, restClass, {});
 </script>
 
 <div class={classNames} style={`--avatar-group-x-space:${space}`}>

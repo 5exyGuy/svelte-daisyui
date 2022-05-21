@@ -1,64 +1,81 @@
 <script>
-    import { Size } from '../../enums';
-    import { classes } from '../../utils';
+    import { Size, classes } from '@svelte-daisyui/shared';
     import { AvatarStatus } from './avatar-status.enum';
 
     // -----------------------------------------------------------
-    //                           Props
+    //  Type Definitions
+    // -----------------------------------------------------------
+
+    /**
+     * @typedef {'tiny' | 'small' | 'medium' | 'large'} Size
+     * @typedef {'online' | 'offline'} Status
+     * @typedef {{ size?: Size, status: Status }} ScreenProps
+     * @typedef {{ sm?: ScreenProps, md?: ScreenProps, lg?: ScreenProps, xl?: ScreenProps, '2xl'?: ScreenProps }} Screen
+     */
+
+    // -----------------------------------------------------------
+    // Props
     // -----------------------------------------------------------
 
     /**
      * @type {string}
      */
-    export let src;
+    export let src = undefined;
 
     /**
      * @type {string}
      */
-    export let alt;
+    export let alt = undefined;
 
     /**
-     * @type {'tiny' | 'small' | 'medium' | 'large' | number | string}
+     * @type {'tiny' | 'small' | 'medium' | 'large'}
      */
-    export let size = 'medium';
+    export let size = undefined;
 
     /**
      * @type {'online' | 'offline'}
      */
-    export let status;
+    export let status = undefined;
 
-    let className;
+    let restClass = undefined;
     /**
      * @type {string}
      */
-    export { className as class };
+    export { restClass as class };
 
     // -----------------------------------------------------------
-    //                     Classes and Styles
+    // Screen
+    // -----------------------------------------------------------
+
+    /**
+     * @type {Screen}
+     */
+    export let screen = undefined;
+
+    // -----------------------------------------------------------
+    // Classes and Styles
     // -----------------------------------------------------------
 
     $: classNames = classes(
         'avatar',
         {
             size: {
-                condition: size && typeof size !== 'number' && Size[size],
-                key: size,
                 value: Size,
             },
             status: {
-                condition: !!status,
-                key: status,
                 value: AvatarStatus,
             },
         },
-        className,
+        restClass,
+        {
+            size,
+            status,
+        },
+        screen,
     );
-
-    const style =
-        typeof size === 'number' ? `width:${size}rem;height:${size}rem;` : null;
 </script>
 
-<div class={classNames} {style}>
+<div class={classNames}>
     {#if src}
         <img {alt} {src} />
     {:else}
