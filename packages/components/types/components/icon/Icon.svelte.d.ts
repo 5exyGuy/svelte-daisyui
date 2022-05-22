@@ -17,12 +17,12 @@ export interface IconProps {
   /**
    * @default undefined
    */
-  component?: typeof import("svelte").SvelteComponent;
+  component: typeof import("svelte").SvelteComponent;
 
   /**
    * @default undefined
    */
-  size?: number;
+  size: number;
 
   /**
    * @default 1

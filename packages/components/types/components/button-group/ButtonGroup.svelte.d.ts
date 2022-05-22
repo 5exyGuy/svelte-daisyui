@@ -5,7 +5,7 @@ export interface ButtonGroupProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class ButtonGroup extends SvelteComponentTyped<

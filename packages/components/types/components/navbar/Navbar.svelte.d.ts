@@ -10,7 +10,7 @@ export interface NavbarProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class Navbar extends SvelteComponentTyped<

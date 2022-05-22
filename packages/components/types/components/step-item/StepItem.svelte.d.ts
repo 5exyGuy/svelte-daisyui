@@ -5,7 +5,7 @@ export interface StepItemProps {
   /**
    * @default undefined
    */
-  color?:
+  color:
     | "primary"
     | "secondary"
     | "accent"
@@ -18,7 +18,7 @@ export interface StepItemProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class StepItem extends SvelteComponentTyped<

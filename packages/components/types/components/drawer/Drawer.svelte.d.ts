@@ -20,7 +20,7 @@ export interface DrawerProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class Drawer extends SvelteComponentTyped<

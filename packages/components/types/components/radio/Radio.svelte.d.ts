@@ -10,7 +10,7 @@ export interface RadioProps {
   /**
    * @default undefined
    */
-  color?:
+  color:
     | "primary"
     | "secondary"
     | "accent"
@@ -22,7 +22,7 @@ export interface RadioProps {
   /**
    * @default undefined
    */
-  name?: string;
+  name: string;
 
   /**
    * @default false
@@ -32,7 +32,7 @@ export interface RadioProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class Radio extends SvelteComponentTyped<

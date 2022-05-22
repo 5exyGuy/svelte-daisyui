@@ -15,7 +15,7 @@ export interface InputGroupProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class InputGroup extends SvelteComponentTyped<

@@ -5,7 +5,7 @@ export interface ToggleProps {
   /**
    * @default undefined
    */
-  color?:
+  color:
     | "primary"
     | "secondary"
     | "accent"
@@ -32,7 +32,7 @@ export interface ToggleProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class Toggle extends SvelteComponentTyped<ToggleProps, {}, {}> {}

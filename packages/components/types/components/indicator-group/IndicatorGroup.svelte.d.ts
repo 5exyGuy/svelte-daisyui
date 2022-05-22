@@ -5,7 +5,7 @@ export interface IndicatorGroupProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class IndicatorGroup extends SvelteComponentTyped<

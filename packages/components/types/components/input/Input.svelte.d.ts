@@ -5,7 +5,7 @@ export interface InputProps {
   /**
    * @default undefined
    */
-  placeholder?: string;
+  placeholder: string;
 
   /**
    * @default 'medium'
@@ -15,7 +15,7 @@ export interface InputProps {
   /**
    * @default undefined
    */
-  color?:
+  color:
     | "primary"
     | "secondary"
     | "accent"
@@ -38,7 +38,7 @@ export interface InputProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class Input extends SvelteComponentTyped<InputProps, {}, {}> {}

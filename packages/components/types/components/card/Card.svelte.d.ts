@@ -15,7 +15,7 @@ export interface CardProps {
   /**
    * @default undefined
    */
-  padding?: "normal" | "compact";
+  padding: "normal" | "compact";
 
   /**
    * @default false
@@ -25,7 +25,7 @@ export interface CardProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class Card extends SvelteComponentTyped<

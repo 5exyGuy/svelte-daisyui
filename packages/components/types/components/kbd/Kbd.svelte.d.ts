@@ -5,12 +5,12 @@ export interface KbdProps {
   /**
    * @default undefined
    */
-  size?: "tiny" | "small" | "medium" | "large";
+  size: "tiny" | "small" | "medium" | "large";
 
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class Kbd extends SvelteComponentTyped<

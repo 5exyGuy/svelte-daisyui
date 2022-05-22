@@ -1,5 +1,5 @@
 {
-    "name": "@svelte-daisyui/playground",
+    "name": "@svelte-daisyui/vite",
     "private": true,
     "version": "1.0.0",
     "scripts": {

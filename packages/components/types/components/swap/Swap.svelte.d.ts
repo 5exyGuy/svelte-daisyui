@@ -5,7 +5,7 @@ export interface SwapProps {
   /**
    * @default undefined
    */
-  animation?: "rotate" | "flip";
+  animation: "rotate" | "flip";
 
   /**
    * @default false
@@ -15,7 +15,7 @@ export interface SwapProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class Swap extends SvelteComponentTyped<

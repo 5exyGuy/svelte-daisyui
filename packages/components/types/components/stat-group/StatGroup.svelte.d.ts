@@ -10,7 +10,7 @@ export interface StatGroupProps {
   /**
    * @default undefined
    */
-  background?:
+  background:
     | "primary"
     | "secondary"
     | "accent"
@@ -22,7 +22,7 @@ export interface StatGroupProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class StatGroup extends SvelteComponentTyped<

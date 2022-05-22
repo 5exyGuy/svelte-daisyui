@@ -5,12 +5,12 @@ export interface HeroProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 
   /**
    * @default undefined
    */
-  style?: string;
+  style: string;
 }
 
 export default class Hero extends SvelteComponentTyped<

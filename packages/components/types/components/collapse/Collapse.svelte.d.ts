@@ -5,7 +5,7 @@ export interface CollapseProps {
   /**
    * @default undefined
    */
-  icon?: "arrow" | "plus";
+  icon: "arrow" | "plus";
 
   /**
    * @default false
@@ -20,7 +20,7 @@ export interface CollapseProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class Collapse extends SvelteComponentTyped<

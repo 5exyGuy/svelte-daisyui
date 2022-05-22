@@ -15,7 +15,7 @@ export interface TooltipProps {
   /**
    * @default undefined
    */
-  color?:
+  color:
     | "primary"
     | "secondary"
     | "accent"
@@ -27,7 +27,7 @@ export interface TooltipProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class Tooltip extends SvelteComponentTyped<

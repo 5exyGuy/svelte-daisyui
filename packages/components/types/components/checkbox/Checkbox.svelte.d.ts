@@ -20,7 +20,7 @@ export interface CheckboxProps {
   /**
    * @default undefined
    */
-  color?:
+  color:
     | "primary"
     | "secondary"
     | "accent"
@@ -32,7 +32,7 @@ export interface CheckboxProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class Checkbox extends SvelteComponentTyped<

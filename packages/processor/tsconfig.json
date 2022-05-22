@@ -21,7 +21,7 @@
         "checkJs": true,
 
         "esModuleInterop": true,
-        "skipLibCheck": true,
+        "skipLibCheck": false,
         "forceConsistentCasingInFileNames": true
     },
     "include": ["src/**/*.ts"]

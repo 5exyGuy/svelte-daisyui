@@ -5,7 +5,7 @@ export interface SelectProps {
   /**
    * @default undefined
    */
-  color?:
+  color:
     | "primary"
     | "secondary"
     | "accent"
@@ -28,7 +28,7 @@ export interface SelectProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class Select extends SvelteComponentTyped<

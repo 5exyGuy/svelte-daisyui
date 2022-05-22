@@ -5,7 +5,7 @@ export interface MaskProps {
   /**
    * @default undefined
    */
-  half?: "1" | "2" | 1 | 2;
+  half: "1" | "2" | 1 | 2;
 
   /**
    * @default 'circle'
@@ -34,7 +34,7 @@ export interface MaskProps {
   /**
    * @default undefined
    */
-  class?: undefined;
+  class: undefined;
 }
 
 export default class Mask extends SvelteComponentTyped<

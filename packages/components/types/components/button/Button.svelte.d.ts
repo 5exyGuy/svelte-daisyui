@@ -5,7 +5,7 @@ export interface ButtonProps {
   /**
    * @default undefined
    */
-  color?:
+  color:
     | "primary"
     | "secondary"
     | "accent"
@@ -19,12 +19,12 @@ export interface ButtonProps {
   /**
    * @default undefined
    */
-  size?: "tiny" | "small" | "medium" | "large";
+  size: "tiny" | "small" | "medium" | "large";
 
   /**
    * @default undefined
    */
-  shape?: "square" | "circle";
+  shape: "square" | "circle";
 
   /**
    * @default false

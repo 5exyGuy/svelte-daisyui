@@ -15,7 +15,7 @@ export interface DropdownProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class Dropdown extends SvelteComponentTyped<

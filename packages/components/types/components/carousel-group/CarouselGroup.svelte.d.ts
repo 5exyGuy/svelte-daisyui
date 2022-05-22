@@ -15,7 +15,7 @@ export interface CarouselGroupProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class CarouselGroup extends SvelteComponentTyped<

@@ -8,7 +8,7 @@ export interface AvatarGroupProps {
   space?: string;
 
   /**
-   * @default ''
+   * @default undefined
    */
   class?: string;
 }

@@ -5,12 +5,12 @@ export interface TextAreaProps {
   /**
    * @default undefined
    */
-  placeholder?: string;
+  placeholder: string;
 
   /**
    * @default undefined
    */
-  color?:
+  color:
     | "primary"
     | "secondary"
     | "accent"
@@ -33,7 +33,7 @@ export interface TextAreaProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class TextArea extends SvelteComponentTyped<

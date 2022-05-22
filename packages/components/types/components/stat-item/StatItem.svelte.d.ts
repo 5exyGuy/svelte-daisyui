@@ -5,22 +5,22 @@ export interface StatItemProps {
   /**
    * @default undefined
    */
-  title?: string;
+  title: string;
 
   /**
    * @default undefined
    */
-  value?: string;
+  value: string;
 
   /**
    * @default undefined
    */
-  description?: string;
+  description: string;
 
   /**
    * @default undefined
    */
-  background?:
+  background:
     | "primary"
     | "secondary"
     | "accent"
@@ -32,7 +32,7 @@ export interface StatItemProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class StatItem extends SvelteComponentTyped<

@@ -5,7 +5,7 @@ export interface LinkProps {
   /**
    * @default undefined
    */
-  color?:
+  color:
     | "primary"
     | "secondary"
     | "accent"
@@ -28,7 +28,7 @@ export interface LinkProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class Link extends SvelteComponentTyped<

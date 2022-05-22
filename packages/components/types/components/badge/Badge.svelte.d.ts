@@ -11,7 +11,7 @@ export interface BadgeProps {
   /**
    * @default undefined
    */
-  color?: BrandColor | FunctionalColor;
+  color: BrandColor | FunctionalColor;
 
   /**
    * @default 'medium'
@@ -26,7 +26,7 @@ export interface BadgeProps {
   /**
    * @default undefined
    */
-  class?: string;
+  class: string;
 }
 
 export default class Badge extends SvelteComponentTyped<
