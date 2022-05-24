@@ -1,10 +1,9 @@
 /// <reference types="svelte" />
 import type { SvelteComponentTyped } from "svelte";
 
-export type Padding = "normal" | "compact";
-
 export interface Properties {
-  padding?: Padding;
+  active?: boolean;
+  hover?: boolean;
 }
 
 export interface Screen {
@@ -15,26 +14,16 @@ export interface Screen {
   "2xl"?: Properties;
 }
 
-export interface CardProps {
+export interface TableRowProps {
   /**
-   * @default undefined
+   * @default false
    */
-  padding?: Properties["padding"];
+  active?: Properties["active"];
 
   /**
    * @default false
    */
-  bordered?: boolean;
-
-  /**
-   * @default false
-   */
-  fullImage?: boolean;
-
-  /**
-   * @default false
-   */
-  side?: boolean;
+  hover?: Properties["hover"];
 
   /**
    * @default undefined
@@ -47,8 +36,8 @@ export interface CardProps {
   screen?: Screen;
 }
 
-export default class Card extends SvelteComponentTyped<
-  CardProps,
+export default class TableRow extends SvelteComponentTyped<
+  TableRowProps,
   {},
-  { actions: {}; body: {}; lower: {}; title: {}; upper: {} }
+  { default: {} }
 > {}

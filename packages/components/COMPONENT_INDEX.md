@@ -45,6 +45,13 @@
 - [`Swap`](#swap)
 - [`TabGroup`](#tabgroup)
 - [`TabItem`](#tabitem)
+- [`Table`](#table)
+- [`TableBody`](#tablebody)
+- [`TableCell`](#tablecell)
+- [`TableFooter`](#tablefooter)
+- [`TableHeader`](#tableheader)
+- [`TableHeaderCell`](#tableheadercell)
+- [`TableRow`](#tablerow)
 - [`TextArea`](#textarea)
 - [`Toggle`](#toggle)
 - [`Tooltip`](#tooltip)
@@ -81,11 +88,11 @@ export interface Screen {
 
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
-| :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
-| color     | No       | <code>let</code> | No       | <code>Color</code>  | <code>undefined</code> | --          |
-| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
-| screen    | No       | <code>let</code> | No       | <code>Screen</code> | <code>undefined</code> | --          |
+| Prop name | Required | Kind             | Reactive | Type                             | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | -------------------------------- | ---------------------- | ----------- |
+| color     | No       | <code>let</code> | No       | <code>Properties['color']</code> | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>              | <code>undefined</code> | --          |
+| screen    | No       | <code>let</code> | No       | <code>Screen</code>              | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -261,7 +268,7 @@ None.
 
 | Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
 | :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
-| class     | Yes      | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -279,8 +286,8 @@ None.
 
 | Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
 | :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
-| href      | Yes      | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+| href      | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -310,9 +317,12 @@ export type Color =
 
 export type Size = "xs" | "sm" | "md" | "lg";
 
+export type Shape = "square" | "circle";
+
 export interface Properties {
   color?: Color;
   size?: Size;
+  shape?: Shape;
 }
 
 export interface Screen {
@@ -326,19 +336,19 @@ export interface Screen {
 
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                                  | Default value          | Description |
-| :-------- | :------- | :--------------- | :------- | ------------------------------------- | ---------------------- | ----------- |
-| color     | No       | <code>let</code> | No       | <code>Properties['color']</code>      | <code>undefined</code> | --          |
-| size      | No       | <code>let</code> | No       | <code>Properties['size']</code>       | <code>undefined</code> | --          |
-| shape     | No       | <code>let</code> | No       | <code>'square' &#124; 'circle'</code> | <code>undefined</code> | --          |
-| active    | No       | <code>let</code> | No       | <code>boolean</code>                  | <code>false</code>     | --          |
-| block     | No       | <code>let</code> | No       | <code>boolean</code>                  | <code>false</code>     | --          |
-| outline   | No       | <code>let</code> | No       | <code>boolean</code>                  | <code>false</code>     | --          |
-| loading   | No       | <code>let</code> | No       | <code>boolean</code>                  | <code>false</code>     | --          |
-| disabled  | No       | <code>let</code> | No       | <code>boolean</code>                  | <code>false</code>     | --          |
-| noAnim    | No       | <code>let</code> | No       | <code>boolean</code>                  | <code>false</code>     | --          |
-| class     | No       | <code>let</code> | No       | <code>string</code>                   | <code>undefined</code> | --          |
-| screen    | No       | <code>let</code> | No       | <code>Screen</code>                   | <code>undefined</code> | --          |
+| Prop name | Required | Kind             | Reactive | Type                             | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | -------------------------------- | ---------------------- | ----------- |
+| color     | No       | <code>let</code> | No       | <code>Properties['color']</code> | <code>undefined</code> | --          |
+| size      | No       | <code>let</code> | No       | <code>Properties['size']</code>  | <code>undefined</code> | --          |
+| shape     | No       | <code>let</code> | No       | <code>Properties['shape']</code> | <code>undefined</code> | --          |
+| active    | No       | <code>let</code> | No       | <code>boolean</code>             | <code>false</code>     | --          |
+| block     | No       | <code>let</code> | No       | <code>boolean</code>             | <code>false</code>     | --          |
+| outline   | No       | <code>let</code> | No       | <code>boolean</code>             | <code>false</code>     | --          |
+| loading   | No       | <code>let</code> | No       | <code>boolean</code>             | <code>false</code>     | --          |
+| disabled  | No       | <code>let</code> | No       | <code>boolean</code>             | <code>false</code>     | --          |
+| noAnim    | No       | <code>let</code> | No       | <code>boolean</code>             | <code>false</code>     | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>              | <code>undefined</code> | --          |
+| screen    | No       | <code>let</code> | No       | <code>Screen</code>              | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -358,7 +368,7 @@ export interface Screen {
 
 | Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
 | :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
-| class     | Yes      | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -372,15 +382,34 @@ None.
 
 ## `Card`
 
+### Types
+
+```ts
+export type Padding = "normal" | "compact";
+
+export interface Properties {
+  padding?: Padding;
+}
+
+export interface Screen {
+  sm?: Properties;
+  md?: Properties;
+  lg?: Properties;
+  xl?: Properties;
+  "2xl"?: Properties;
+}
+```
+
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                                   | Default value          | Description |
-| :-------- | :------- | :--------------- | :------- | -------------------------------------- | ---------------------- | ----------- |
-| bordered  | No       | <code>let</code> | No       | <code>boolean</code>                   | <code>false</code>     | --          |
-| fullImage | No       | <code>let</code> | No       | <code>boolean</code>                   | <code>false</code>     | --          |
-| padding   | Yes      | <code>let</code> | No       | <code>'normal' &#124; 'compact'</code> | <code>undefined</code> | --          |
-| side      | No       | <code>let</code> | No       | <code>boolean</code>                   | <code>false</code>     | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code>                    | <code>undefined</code> | --          |
+| Prop name | Required | Kind             | Reactive | Type                               | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | ---------------------------------- | ---------------------- | ----------- |
+| padding   | No       | <code>let</code> | No       | <code>Properties['padding']</code> | <code>undefined</code> | --          |
+| bordered  | No       | <code>let</code> | No       | <code>boolean</code>               | <code>false</code>     | --          |
+| fullImage | No       | <code>let</code> | No       | <code>boolean</code>               | <code>false</code>     | --          |
+| side      | No       | <code>let</code> | No       | <code>boolean</code>               | <code>false</code>     | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>                | <code>undefined</code> | --          |
+| screen    | No       | <code>let</code> | No       | <code>Screen</code>                | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -1104,6 +1133,182 @@ None.
 | :-------- | :------- | :--------------- | :------- | -------------------- | ---------------------- | ----------- |
 | active    | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
 | class     | Yes      | <code>let</code> | No       | <code>string</code>  | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `Table`
+
+### Types
+
+```ts
+export type Padding = "normal" | "compact";
+
+export interface Properties {
+  padding?: Padding;
+  zebra?: boolean;
+}
+
+export interface Screen {
+  sm?: Properties;
+  md?: Properties;
+  lg?: Properties;
+  xl?: Properties;
+  "2xl"?: Properties;
+}
+
+export interface Data {
+  insertNumbering?: boolean;
+  header?: Array<string>;
+  rows?: Array<Array<string>>;
+  footer?: Array<string>;
+}
+```
+
+### Props
+
+| Prop name | Required | Kind             | Reactive | Type                               | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | ---------------------------------- | ---------------------- | ----------- |
+| padding   | No       | <code>let</code> | No       | <code>Properties['padding']</code> | <code>undefined</code> | --          |
+| zebra     | No       | <code>let</code> | No       | <code>Properties['zebra']</code>   | <code>false</code>     | --          |
+| data      | No       | <code>let</code> | No       | <code>Data</code>                  | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>                | <code>undefined</code> | --          |
+| screen    | No       | <code>let</code> | No       | <code>Screen</code>                | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `TableBody`
+
+### Props
+
+| Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
+| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `TableCell`
+
+### Props
+
+| Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
+| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `TableFooter`
+
+### Props
+
+| Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
+| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `TableHeader`
+
+### Props
+
+| Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
+| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `TableHeaderCell`
+
+### Props
+
+| Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
+| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `TableRow`
+
+### Types
+
+```ts
+export interface Properties {
+  active?: boolean;
+  hover?: boolean;
+}
+
+export interface Screen {
+  sm?: Properties;
+  md?: Properties;
+  lg?: Properties;
+  xl?: Properties;
+  "2xl"?: Properties;
+}
+```
+
+### Props
+
+| Prop name | Required | Kind             | Reactive | Type                              | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | --------------------------------- | ---------------------- | ----------- |
+| active    | No       | <code>let</code> | No       | <code>Properties['active']</code> | <code>false</code>     | --          |
+| hover     | No       | <code>let</code> | No       | <code>Properties['hover']</code>  | <code>false</code>     | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>               | <code>undefined</code> | --          |
+| screen    | No       | <code>let</code> | No       | <code>Screen</code>               | <code>undefined</code> | --          |
 
 ### Slots
 

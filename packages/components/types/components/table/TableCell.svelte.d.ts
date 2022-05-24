@@ -1,15 +1,15 @@
 /// <reference types="svelte" />
 import type { SvelteComponentTyped } from "svelte";
 
-export interface ButtonGroupProps {
+export interface TableCellProps {
   /**
    * @default undefined
    */
   class?: string;
 }
 
-export default class ButtonGroup extends SvelteComponentTyped<
-  ButtonGroupProps,
+export default class TableCell extends SvelteComponentTyped<
+  TableCellProps,
   {},
   { default: {} }
 > {}

@@ -5,6 +5,7 @@ export type Padding = "normal" | "compact";
 
 export interface Properties {
   padding?: Padding;
+  zebra?: boolean;
 }
 
 export interface Screen {
@@ -15,7 +16,14 @@ export interface Screen {
   "2xl"?: Properties;
 }
 
-export interface CardProps {
+export interface Data {
+  insertNumbering?: boolean;
+  header?: Array<string>;
+  rows?: Array<Array<string>>;
+  footer?: Array<string>;
+}
+
+export interface TableProps {
   /**
    * @default undefined
    */
@@ -24,17 +32,12 @@ export interface CardProps {
   /**
    * @default false
    */
-  bordered?: boolean;
+  zebra?: Properties["zebra"];
 
   /**
-   * @default false
+   * @default undefined
    */
-  fullImage?: boolean;
-
-  /**
-   * @default false
-   */
-  side?: boolean;
+  data?: Data;
 
   /**
    * @default undefined
@@ -47,8 +50,8 @@ export interface CardProps {
   screen?: Screen;
 }
 
-export default class Card extends SvelteComponentTyped<
-  CardProps,
+export default class Table extends SvelteComponentTyped<
+  TableProps,
   {},
-  { actions: {}; body: {}; lower: {}; title: {}; upper: {} }
+  { default: {} }
 > {}

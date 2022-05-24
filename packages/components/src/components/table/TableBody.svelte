@@ -5,11 +5,6 @@
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {string}
-     */
-    export let space = '1.5rem';
-
     let restClass = undefined;
     /**
      * @type {string}
@@ -20,14 +15,9 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({ prefix: 'avatar-group', restClass });
+    const classNames = classes({ prefix: 'table-body', restClass });
 </script>
 
-<div class={classNames} style={`--avatar-group-x-space:${space}`}>
+<tbody class={classNames}>
     <slot />
-</div>
-
-<style lang="scss">
-    @import 'AvatarGroupStyled.scss';
-    @import 'AvatarGroupUnstyled.scss';
-</style>
+</tbody>

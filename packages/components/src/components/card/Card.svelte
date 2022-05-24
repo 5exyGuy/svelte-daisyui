@@ -1,10 +1,25 @@
 <script>
-    import { classes } from '../../utils';
-    import { CardPadding } from './card-padding.enum';
+    import { classes, CardPadding } from '@svelte-daisyui/shared';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    /**
+
+     * @typedef {'normal' | 'compact'} Padding
+     * @typedef {{ padding?: Padding }} Properties
+     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
+     */
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
+
+    /**
+     * @type {Properties['padding']}
+     */
+    export let padding = undefined;
 
     /**
      * @type {boolean}
@@ -17,48 +32,49 @@
     export let fullImage = false;
 
     /**
-     * @type {'normal' | 'compact'}
-     */
-    export let padding;
-
-    /**
      * @type {boolean}
      */
     export let side = false;
 
-    let className;
+    let restClass = undefined;
     /**
      * @type {string}
      */
-    export { className as class };
+    export { restClass as class };
+
+    // -----------------------------------------------------------
+    // Screen
+    // -----------------------------------------------------------
+
+    /**
+     * @type {Screen}
+     */
+    export let screen = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'card',
-        {
+    $: classNames = classes({
+        prefix: 'card',
+        classProps: {
             bordered: {
-                condition: bordered,
                 value: 'bordered',
             },
             fullImage: {
-                condition: fullImage,
                 value: 'image-full',
             },
             padding: {
-                condition: !!padding,
-                key: padding,
                 value: CardPadding,
             },
-            size: {
-                condition: side,
+            side: {
                 value: 'side',
             },
         },
-        className,
-    );
+        props: { bordered, fullImage, padding, side },
+        screen,
+        restClass,
+    });
 </script>
 
 <div class={classNames}>

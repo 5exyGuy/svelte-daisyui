@@ -1,5 +1,5 @@
 <script>
-    import { classes } from '../../utils';
+    import { classes } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
     // Properties
@@ -8,19 +8,19 @@
     /**
      * @type {string}
      */
-    export let href;
+    export let href = undefined;
 
-    let className;
+    let restClass = undefined;
     /**
      * @type {string}
      */
-    export { className as class };
+    export { restClass as class };
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes('breadcrumb-item', {}, className);
+    $: classNames = classes({ prefix: 'breadcrumb-item', restClass });
 </script>
 
 <li class={classNames}>

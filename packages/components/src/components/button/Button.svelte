@@ -1,10 +1,10 @@
 <script>
-    import { ButtonShape } from './button-shape.enum';
     import {
         classes,
         BrandColor,
         FunctionalColor,
         Size,
+        ButtonShape,
     } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
@@ -14,7 +14,8 @@
     /**
      * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost' | 'link'} Color
      * @typedef {'xs' | 'sm' | 'md' | 'lg'} Size
-     * @typedef {{ color?: Color, size?: Size }} Properties
+     * @typedef {'square' | 'circle'} Shape
+     * @typedef {{ color?: Color, size?: Size, shape?: Shape }} Properties
      * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
      */
 
@@ -33,7 +34,7 @@
     export let size = undefined;
 
     /**
-     * @type {'square' | 'circle'}
+     * @type {Properties['shape']}
      */
     export let shape = undefined;
 

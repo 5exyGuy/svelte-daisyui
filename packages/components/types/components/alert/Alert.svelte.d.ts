@@ -26,7 +26,7 @@ export interface AlertProps {
   /**
    * @default undefined
    */
-  color?: Color;
+  color?: Properties["color"];
 
   /**
    * @default undefined

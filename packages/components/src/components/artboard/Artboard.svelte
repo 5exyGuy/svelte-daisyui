@@ -1,6 +1,5 @@
 <script>
-    import { classes } from '@svelte-daisyui/shared';
-    import { ArtboardSize } from './artboard-size.enum';
+    import { classes, ArtboardSize } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
     //  Type Definitions

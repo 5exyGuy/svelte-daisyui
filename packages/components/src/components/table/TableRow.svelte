@@ -1,39 +1,28 @@
 <script>
-    import { Size, classes, AvatarStatus } from '@svelte-daisyui/shared';
+    import { classes } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
     //  Type Definitions
     // -----------------------------------------------------------
 
     /**
-     * @typedef {'xs' | 'sm' | 'md' | 'lg'} Size
-     * @typedef {'online' | 'offline'} Status
-     * @typedef {{ size?: Size, status: Status }} Properties
+     * @typedef {{ active?: boolean, hover?: boolean }} Properties
      * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
      */
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
-    /**
-     * @type {Properties['size']}
-     */
-    export let size = undefined;
 
     /**
-     * @type {Properties['status']}
+     * @type {Properties['active']}
      */
-    export let status = undefined;
+    export let active = false;
 
     /**
-     * @type {string}
+     * @type {Properties['hover']}
      */
-    export let src = undefined;
-
-    /**
-     * @type {string}
-     */
-    export let alt = undefined;
+    export let hover = false;
 
     let restClass = undefined;
     /**
@@ -54,34 +43,18 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({
-        prefix: 'avatar',
+    const classNames = classes({
+        prefix: 'table-row',
         classProps: {
-            size: {
-                value: Size,
-            },
-            status: {
-                value: AvatarStatus,
-            },
+            active: { value: 'active' },
+            hover: { value: 'hover' },
         },
-        props: {
-            size,
-            status,
-        },
+        props: { active, hover },
         screen,
         restClass,
     });
 </script>
 
-<div class={classNames}>
-    {#if src}
-        <img {alt} {src} />
-    {:else}
-        <slot />
-    {/if}
-</div>
-
-<style lang="scss">
-    @import 'AvatarStyled.scss';
-    @import 'AvatarUnstyled.scss';
-</style>
+<tr class={classNames}>
+    <slot />
+</tr>

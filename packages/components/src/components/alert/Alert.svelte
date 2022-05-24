@@ -25,7 +25,7 @@
     // -----------------------------------------------------------
 
     /**
-     * @type {Color}
+     * @type {Properties['color']}
      */
     export let color = undefined;
 

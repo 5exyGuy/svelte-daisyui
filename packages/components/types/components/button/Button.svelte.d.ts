@@ -14,9 +14,12 @@ export type Color =
 
 export type Size = "xs" | "sm" | "md" | "lg";
 
+export type Shape = "square" | "circle";
+
 export interface Properties {
   color?: Color;
   size?: Size;
+  shape?: Shape;
 }
 
 export interface Screen {
@@ -41,7 +44,7 @@ export interface ButtonProps {
   /**
    * @default undefined
    */
-  shape?: "square" | "circle";
+  shape?: Properties["shape"];
 
   /**
    * @default false

@@ -1,0 +1,163 @@
+:global(table.table) {
+    & > :global(thead.table-header) > :global(tr.table-row),
+    & > :global(tbody.table-body) > :global(tr.table-row),
+    & > :global(tfoot.table-footer) > :global(tr.table-row) {
+        & > th.table-header-cell {
+            @apply whitespace-nowrap p-4 align-middle;
+            @apply bg-base-100;
+
+            &:first-child {
+                @apply sticky left-0 z-[11];
+                /* because safari */
+                position: -webkit-sticky;
+            }
+        }
+    }
+
+    &
+        > :global(thead.table-header)
+        > :global(tr.table-row)
+        > th.table-header-cell,
+    &
+        > :global(tfoot.table-footer)
+        > :global(tr.table-row)
+        > th.table-header-cell {
+        @apply bg-base-200 text-xs font-bold uppercase;
+    }
+
+    &
+        > :global(:first-child)
+        > :global(tr.table-row:first-child)
+        > th.table-header-cell {
+        &:first-child {
+            @apply rounded-tl-lg;
+        }
+
+        &:last-child {
+            @apply rounded-tr-lg;
+        }
+    }
+
+    &
+        > :global(:last-child)
+        > :global(tr.table-row:last-child)
+        > th.table-header-cell {
+        &:first-child {
+            @apply rounded-bl-lg;
+        }
+
+        &:last-child {
+            @apply rounded-br-lg;
+        }
+    }
+
+    &:not(.table-zebra)
+        > :global(thead.table-header)
+        > :global(tr.table-row:not(:last-child))
+        > th.table-header-cell,
+    &:not(.table-zebra)
+        > :global(tbody.table-body)
+        > :global(tr.table-row:not(:last-child))
+        > th.table-header-cell,
+    &:not(.table-zebra)
+        > :global(tfoot.table-body)
+        > :global(tr.table-row:not(:last-child))
+        > th.table-header-cell {
+        @apply border-b border-base-200;
+    }
+}
+
+// Active
+:global(table.table)
+    > :global(thead.table-header)
+    > :global(tr.table-row.table-row-active)
+    > th.table-header-cell,
+:global(table.table)
+    > :global(thead.table-header)
+    > :global(tr.table-row.table-row-active:nth-child(even))
+    > th.table-header-cell,
+:global(table.table)
+    > :global(tbody.table-body)
+    > :global(tr.table-row.table-row-active)
+    > th.table-header-cell,
+:global(table.table)
+    > :global(tbody.table-body)
+    > :global(tr.table-row.table-row-active:nth-child(even))
+    > th.table-header-cell,
+:global(table.table)
+    > :global(thead.table-footer)
+    > :global(tr.table-row.table-row-active)
+    > th.table-header-cell,
+:global(table.table)
+    > :global(thead.table-footer)
+    > :global(tr.table-row.table-row-active:nth-child(even))
+    > th.table-header-cell {
+    @apply bg-base-300;
+}
+
+// Hover
+:global(table.table)
+    > :global(thead.table-header)
+    > :global(tr.table-row.table-row-hover:hover)
+    > th.table-header-cell,
+:global(table.table)
+    > :global(thead.table-header)
+    > :global(tr.table-row.table-row-hover:hover:nth-child(even):hover)
+    > th.table-header-cell,
+:global(table.table)
+    > :global(tbody.table-body)
+    > :global(tr.table-row.table-row-hover:hover)
+    > th.table-header-cell,
+:global(table.table)
+    > :global(tbody.table-body)
+    > :global(tr.table-row.table-row-hover:hover:nth-child(even):hover)
+    > th.table-header-cell,
+:global(table.table)
+    > :global(tfoot.table-footer)
+    > :global(tr.table-row.table-row-hover:hover)
+    > th.table-header-cell,
+:global(table.table)
+    > :global(tfoot.table-footer)
+    > :global(tr.table-row.table-row-hover:hover:nth-child(even):hover)
+    > th.table-header-cell {
+    @apply bg-base-300;
+}
+
+// Normal
+:global(table.table.table-normal)
+    > :global(thead.table-header)
+    > :global(tr.table-row)
+    > th.table-header-cell,
+:global(table.table.table-normal)
+    > :global(tbody.table-body)
+    > :global(tr.table-row)
+    > th.table-header-cell,
+:global(table.table.table-normal)
+    > :global(tfoot.table-footer)
+    > :global(tr.table-row)
+    > th.table-header-cell {
+    @apply p-4 text-base;
+}
+
+// Compact
+:global(table.table.table-compact)
+    > :global(thead.table-header)
+    > :global(tr.table-row)
+    > th.table-header-cell,
+:global(table.table.table-compact)
+    > :global(tbody.table-body)
+    > :global(tr.table-row)
+    > th.table-header-cell,
+:global(table.table.table-compact)
+    > :global(tfoot.table-footer)
+    > :global(tr.table-row)
+    > th.table-header-cell {
+    @apply p-2 text-sm;
+}
+
+:global(table.table.table-zebra)
+    > :global(tbody.table-body)
+    > :global(tr.table-row:nth-child(even))
+    > th.table-header-cell {
+    @apply bg-base-200;
+}

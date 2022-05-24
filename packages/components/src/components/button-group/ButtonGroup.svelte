@@ -1,21 +1,21 @@
 <script lang="ts">
-    import { classes } from '../../utils';
+    import { classes } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    let className;
+    let restClass = undefined;
     /**
      * @type {string}
      */
-    export { className as class };
+    export { restClass as class };
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes('btn-group', {}, className);
+    $: classNames = classes({ prefix: 'btn-group', restClass });
 </script>
 
 <div class={classNames}>
