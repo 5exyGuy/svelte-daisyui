@@ -2,7 +2,7 @@
     import { classes } from '../../utils';
 
     // -----------------------------------------------------------
-    //                           Props
+    // Properties
     // -----------------------------------------------------------
 
     let className;
@@ -12,7 +12,7 @@
     export { className as class };
 
     // -----------------------------------------------------------
-    //                     Classes and Styles
+    // Classes and Styles
     // -----------------------------------------------------------
 
     $: classNames = classes('carousel-item', {}, className);

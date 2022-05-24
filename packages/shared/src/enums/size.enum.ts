@@ -1,6 +1,6 @@
 export enum Size {
-    tiny = 'xs',
-    small ='sm',
-    medium = 'md',
-    large = 'lg',
-};
+    xs = 'xs',
+    sm = 'sm',
+    md = 'md',
+    lg = 'lg',
+}

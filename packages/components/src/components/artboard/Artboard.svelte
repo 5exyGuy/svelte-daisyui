@@ -8,12 +8,12 @@
 
     /**
      * @typedef {1 | 2 | 3 | 4 | 5 | 6} Size
-     * @typedef {{ size?: Size, demo?: boolean, horizontal?: boolean }} ScreenProps
-     * @typedef {{ sm?: ScreenProps, md?: ScreenProps, lg?: ScreenProps, xl?: ScreenProps, '2xl'?: ScreenProps }} Screen
+     * @typedef {{ size?: Size, demo?: boolean, horizontal?: boolean }} Properties
+     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
      */
 
     // -----------------------------------------------------------
-    // Props
+    // Properties
     // -----------------------------------------------------------
 
     /**
@@ -50,9 +50,9 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'artboard',
-        {
+    $: classNames = classes({
+        prefix: 'artboard',
+        classProps: {
             size: {
                 value: ArtboardSize,
             },
@@ -63,10 +63,10 @@
                 value: 'horizontal',
             },
         },
-        restClass,
-        { size, demo, horizontal },
+        props: { size, demo, horizontal },
         screen,
-    );
+        restClass,
+    });
 </script>
 
 <div class={classNames}>

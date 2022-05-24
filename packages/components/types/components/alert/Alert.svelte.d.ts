@@ -10,16 +10,16 @@ export type Color =
   | "warning"
   | "error";
 
-export interface ScreenProps {
+export interface Properties {
   color?: Color;
 }
 
 export interface Screen {
-  sm?: ScreenProps;
-  md?: ScreenProps;
-  lg?: ScreenProps;
-  xl?: ScreenProps;
-  "2xl"?: ScreenProps;
+  sm?: Properties;
+  md?: Properties;
+  lg?: Properties;
+  xl?: Properties;
+  "2xl"?: Properties;
 }
 
 export interface AlertProps {

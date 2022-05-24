@@ -11,26 +11,25 @@
     // -----------------------------------------------------------
 
     /**
-     * @typedef {'primary' | 'secondary' | 'accent' | 'info'} BrandColor
-     * @typedef {'info' | 'success' | 'warning' | 'error'} FunctionalColor
-     * @typedef {'tiny' | 'small' | 'medium' | 'large'} Size
-     * @typedef {{ color?: BrandColor | FunctionalColor | 'ghost', size?: Size }} Props
-     * @typedef {{ sm?: Props, md?: Props, lg?: Props, xl?: Props, '2xl'?: Props }} Screen
+     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost'} Color
+     * @typedef {'xs' | 'sm' | 'md' | 'lg'} Size
+     * @typedef {{ color?: Color, size?: Size }} Properties
+     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
      */
 
     // -----------------------------------------------------------
-    // Props
+    // Properties
     // -----------------------------------------------------------
 
     /**
-     * @type {Props['color']}
+     * @type {Properties['color']}
      */
     export let color = undefined;
 
     /**
-     * @type {Props['size']}
+     * @type {Properties['size']}
      */
-    export let size = 'medium';
+    export let size = undefined;
 
     /**
      * @type {boolean}
@@ -56,9 +55,9 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'badge',
-        {
+    $: classNames = classes({
+        prefix: 'badge',
+        classProps: {
             color: {
                 value: {
                     ...BrandColor,
@@ -72,10 +71,10 @@
                 value: 'outline',
             },
         },
-        restClass,
-        { color, size, outline },
+        props: { color, size, outline },
         screen,
-    );
+        restClass,
+    });
 </script>
 
 <div class={classNames}>

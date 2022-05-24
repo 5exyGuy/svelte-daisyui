@@ -7,15 +7,24 @@
     // -----------------------------------------------------------
 
     /**
-     * @typedef {'tiny' | 'small' | 'medium' | 'large'} Size
+     * @typedef {'xs' | 'sm' | 'md' | 'lg'} Size
      * @typedef {'online' | 'offline'} Status
-     * @typedef {{ size?: Size, status: Status }} ScreenProps
-     * @typedef {{ sm?: ScreenProps, md?: ScreenProps, lg?: ScreenProps, xl?: ScreenProps, '2xl'?: ScreenProps }} Screen
+     * @typedef {{ size?: Size, status: Status }} Properties
+     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
      */
 
     // -----------------------------------------------------------
-    // Props
+    // Properties
     // -----------------------------------------------------------
+    /**
+     * @type {Properties['size']}
+     */
+    export let size = undefined;
+
+    /**
+     * @type {Properties['status']}
+     */
+    export let status = undefined;
 
     /**
      * @type {string}
@@ -26,16 +35,6 @@
      * @type {string}
      */
     export let alt = undefined;
-
-    /**
-     * @type {'tiny' | 'small' | 'medium' | 'large'}
-     */
-    export let size = undefined;
-
-    /**
-     * @type {'online' | 'offline'}
-     */
-    export let status = undefined;
 
     let restClass = undefined;
     /**
@@ -56,9 +55,9 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'avatar',
-        {
+    $: classNames = classes({
+        prefix: 'avatar',
+        classProps: {
             size: {
                 value: Size,
             },
@@ -66,13 +65,13 @@
                 value: AvatarStatus,
             },
         },
-        restClass,
-        {
+        props: {
             size,
             status,
         },
         screen,
-    );
+        restClass,
+    });
 </script>
 
 <div class={classNames}>

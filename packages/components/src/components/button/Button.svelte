@@ -1,31 +1,41 @@
 <script>
+    import { ButtonShape } from './button-shape.enum';
     import {
+        classes,
         BrandColor,
         FunctionalColor,
         Size,
-        AdditionalColor,
-    } from '../../enums';
-    import { ButtonShape } from './button-shape.enum';
-    import { classes } from '../../utils';
+    } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
-    //                           Props
+    // Type Definitions
     // -----------------------------------------------------------
 
     /**
-     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost' | 'link'}
+     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost' | 'link'} Color
+     * @typedef {'xs' | 'sm' | 'md' | 'lg'} Size
+     * @typedef {{ color?: Color, size?: Size }} Properties
+     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
      */
-    export let color;
+
+    // -----------------------------------------------------------
+    // Properties
+    // -----------------------------------------------------------
 
     /**
-     * @type {'tiny' | 'small' | 'medium' | 'large'}
+     * @type {Properties['color']}
      */
-    export let size;
+    export let color = undefined;
+
+    /**
+     * @type {Properties['size']}
+     */
+    export let size = undefined;
 
     /**
      * @type {'square' | 'circle'}
      */
-    export let shape;
+    export let shape = undefined;
 
     /**
      * @type {boolean}
@@ -57,61 +67,70 @@
      */
     export let noAnim = false;
 
-    let className = null;
+    let restClass = undefined;
     /**
      * @type {string}
      */
-    export { className as class };
+    export { restClass as class };
 
     // -----------------------------------------------------------
-    //                     Classes and Styles
+    // Screen
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'btn',
-        {
+    /**
+     * @type {Screen}
+     */
+    export let screen = undefined;
+
+    // -----------------------------------------------------------
+    // Classes and Styles
+    // -----------------------------------------------------------
+
+    $: classNames = classes({
+        prefix: 'btn',
+        classProps: {
             color: {
-                condition: !!color,
-                key: color,
                 value: {
                     ...BrandColor,
                     ...FunctionalColor,
-                    ...AdditionalColor,
+                    ...{ ghost: 'ghost', link: 'link' },
                 },
             },
             size: {
-                condition: !!size,
-                key: size,
                 value: Size,
             },
             shape: {
-                condition: !!shape,
-                key: shape,
                 value: ButtonShape,
             },
             active: {
-                condition: active,
                 value: 'active',
             },
             block: {
-                condition: block && !shape,
                 value: 'block',
             },
             outline: {
-                condition: outline,
                 value: 'outline',
             },
             loading: {
-                condition: loading,
                 value: 'loading',
             },
             noAnim: {
-                condition: noAnim,
                 value: 'no-animation',
             },
         },
-        className,
-    );
+        props: {
+            color,
+            size,
+            shape,
+            active,
+            block: block && !shape,
+            outline,
+            loading,
+            noAnim,
+        },
+        restClass,
+        screen,
+    });
 </script>
 
 <button on:click class={classNames} {disabled}>

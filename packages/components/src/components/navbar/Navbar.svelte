@@ -2,7 +2,7 @@
     import { classes } from '../../utils';
 
     // -----------------------------------------------------------
-    //                           Props
+    // Properties
     // -----------------------------------------------------------
 
     // export let background: BrandColorKey | FunctionalColorKey | BaseColorKey =
@@ -19,7 +19,7 @@
     export { className as class };
 
     // -----------------------------------------------------------
-    //                     Classes and Styles
+    // Classes and Styles
     // -----------------------------------------------------------
 
     $: classNames = classes(

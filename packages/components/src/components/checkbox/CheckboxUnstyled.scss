@@ -1,19 +1,34 @@
+@use '../variables.scss' as *;
+@use '../escape.scss' as *;
+
 .checkbox {
     @apply shrink-0;
 
-    &.checkbox-xs {
-        @apply h-4 w-4;
+    @mixin checkbox-props($prefix: '') {
+        $prefix: escape($prefix);
+
+        &.#{$prefix}checkbox-xs {
+            @apply h-4 w-4;
+        }
+
+        &.#{$prefix}checkbox-sm {
+            @apply h-5 w-5;
+        }
+
+        &.#{$prefix}checkbox-md {
+            @apply h-6 w-6;
+        }
+
+        &.#{$prefix}checkbox-lg {
+            @apply h-8 w-8;
+        }
     }
 
-    &.checkbox-sm {
-        @apply h-5 w-5;
-    }
+    @include checkbox-props();
 
-    &.checkbox-md {
-        @apply h-6 w-6;
-    }
-
-    &.checkbox-lg {
-        @apply h-8 w-8;
+    @each $screen-size in $tailwind-screen-sizes {
+        @screen #{$screen-size} {
+            @include checkbox-props('#{$screen-size}:');
+        }
     }
 }

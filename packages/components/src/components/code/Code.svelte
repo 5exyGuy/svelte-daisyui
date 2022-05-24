@@ -1,21 +1,21 @@
 <script>
-    import { classes } from '../../utils';
+    import { classes } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
-    //                           Props
+    // Properties
     // -----------------------------------------------------------
 
-    let className;
+    let restClass;
     /**
      * @type {string}
      */
-    export { className as class };
+    export { restClass as class };
 
     // -----------------------------------------------------------
-    //                     Classes and Styles
+    // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes('code', {}, className);
+    $: classNames = classes({ prefix: 'code', restClass });
 </script>
 
 <div class={classNames}>

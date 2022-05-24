@@ -1,19 +1,14 @@
-import type { ClassPropData } from '../interfaces';
+import type { ClassesParams, ClassPropData } from '../interfaces';
 import type { Primitive, StringKeyOf } from 'type-fest';
 import type { ScreenSize } from '../enums';
 
-export function classes<Props extends string>(
-    prefix: string,
-    classProps: Partial<Record<Props, ClassPropData>> = {},
-    restClass: string = '',
-    props: Record<Props, Primitive>,
-    screen: Partial<
-        Record<
-            StringKeyOf<typeof ScreenSize>,
-            Partial<Record<Props, Primitive>>
-        >
-    > = {},
-) {
+export function classes<Props extends string>({
+    prefix,
+    classProps = {},
+    props = {},
+    screen = {},
+    restClass = '',
+}: ClassesParams<Props>): string {
     const classList = [prefix];
 
     for (const prop in props) {

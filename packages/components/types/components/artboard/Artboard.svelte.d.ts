@@ -3,18 +3,18 @@ import type { SvelteComponentTyped } from "svelte";
 
 export type Size = 1 | 2 | 3 | 4 | 5 | 6;
 
-export interface ScreenProps {
+export interface Properties {
   size?: Size;
   demo?: boolean;
   horizontal?: boolean;
 }
 
 export interface Screen {
-  sm?: ScreenProps;
-  md?: ScreenProps;
-  lg?: ScreenProps;
-  xl?: ScreenProps;
-  "2xl"?: ScreenProps;
+  sm?: Properties;
+  md?: Properties;
+  lg?: Properties;
+  xl?: Properties;
+  "2xl"?: Properties;
 }
 
 export interface ArtboardProps {

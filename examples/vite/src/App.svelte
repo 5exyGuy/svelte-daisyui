@@ -5,10 +5,10 @@
 <!-- <div class="flex justify-center items-center h-screen">
     <div class="flex flex-col max-w-2xl gap-2"> -->
 <Avatar
-    size="large"
+    size="lg"
     src="https://picsum.photos/1000/1000"
     status="online"
-    screen={{ '2xl': { status: 'offline', size: 'tiny' } }}
+    screen={{ '2xl': { status: 'offline', size: 'lg' } }}
 />
 <Alert
     color="info"

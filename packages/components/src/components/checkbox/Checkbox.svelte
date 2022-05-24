@@ -1,10 +1,35 @@
 <script>
-    import { BrandColor, FunctionalColor } from '../../enums';
-    import { classes } from '../../utils';
+    import {
+        classes,
+        BrandColor,
+        FunctionalColor,
+        Size,
+    } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
-    //                           Props
+    //  Type Definitions
     // -----------------------------------------------------------
+
+    /**
+     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'} Color
+     * @typedef {'xs' | 'sm' | 'md' | 'lg'} Size
+     * @typedef {{ color?: Color, size?: Size }} Properties
+     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
+     */
+
+    // -----------------------------------------------------------
+    // Properties
+    // -----------------------------------------------------------
+
+    /**
+     * @type {Properties['color']}
+     */
+    export let color = undefined;
+
+    /**
+     * @type {Properties['size']}
+     */
+    export let size = undefined;
 
     /**
      * @type {boolean}
@@ -21,32 +46,39 @@
      */
     export let indeterminate = false;
 
-    /**
-     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'}
-     */
-    export let color;
-
-    let className;
+    let restClass = undefined;
     /**
      * @type {string}
      */
-    export { className as class };
+    export { restClass as class };
 
     // -----------------------------------------------------------
-    //                     Classes and Styles
+    // Screen
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'checkbox',
-        {
+    /**
+     * @type {Screen}
+     */
+    export let screen = undefined;
+
+    // -----------------------------------------------------------
+    // Classes and Styles
+    // -----------------------------------------------------------
+
+    $: classNames = classes({
+        prefix: 'checkbox',
+        classProps: {
             color: {
-                condition: !!color,
-                key: color,
                 value: { ...BrandColor, ...FunctionalColor },
             },
+            size: {
+                value: { ...Size },
+            },
         },
-        className,
-    );
+        props: { color, size },
+        screen,
+        restClass,
+    });
 </script>
 
 <input

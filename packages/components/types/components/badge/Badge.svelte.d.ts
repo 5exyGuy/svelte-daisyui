@@ -1,35 +1,41 @@
 /// <reference types="svelte" />
 import type { SvelteComponentTyped } from "svelte";
 
-export type BrandColor = "primary" | "secondary" | "accent" | "info";
+export type Color =
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "info"
+  | "success"
+  | "warning"
+  | "error"
+  | "ghost";
 
-export type FunctionalColor = "info" | "success" | "warning" | "error";
+export type Size = "xs" | "sm" | "md" | "lg";
 
-export type Size = "tiny" | "small" | "medium" | "large";
-
-export interface Props {
-  color?: BrandColor | FunctionalColor | "ghost";
+export interface Properties {
+  color?: Color;
   size?: Size;
 }
 
 export interface Screen {
-  sm?: Props;
-  md?: Props;
-  lg?: Props;
-  xl?: Props;
-  "2xl"?: Props;
+  sm?: Properties;
+  md?: Properties;
+  lg?: Properties;
+  xl?: Properties;
+  "2xl"?: Properties;
 }
 
 export interface BadgeProps {
   /**
    * @default undefined
    */
-  color?: Props["color"];
+  color?: Properties["color"];
 
   /**
-   * @default 'medium'
+   * @default undefined
    */
-  size?: Props["size"];
+  size?: Properties["size"];
 
   /**
    * @default false
@@ -39,7 +45,7 @@ export interface BadgeProps {
   /**
    * @default undefined
    */
-  class: string;
+  class?: string;
 
   /**
    * @default undefined

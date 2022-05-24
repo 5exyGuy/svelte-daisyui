@@ -1,5 +1,6 @@
 @use 'sass:list';
 @use '../variables.scss' as *;
+@use '../escape.scss' as *;
 
 .checkbox {
     @apply h-6 w-6 cursor-pointer appearance-none border border-base-content border-opacity-20;
@@ -55,20 +56,32 @@
             );
     }
 
-    @each $color in list.join($brand-colors, $functional-colors) {
-        &.checkbox-#{$color} {
-            --chkbg: var(--#{$color});
-            --chkfg: var(--#{$color}-content);
-            @apply border-#{$color} hover:border-#{$color};
+    @mixin checkbox-props($prefix: '') {
+        $prefix: escape($prefix);
 
-            &:focus-visible {
-                outline: 2px solid hsl(var(--#{$color}));
-            }
+        @each $color in list.join($brand-colors, $functional-colors) {
+            &.#{$prefix}checkbox-#{$color} {
+                --chkbg: var(--#{$color});
+                --chkfg: var(--#{$color}-content);
+                @apply border-#{$color} hover:border-#{$color};
 
-            &:checked,
-            &[checked='true'] {
-                @apply border-#{$color} bg-#{$color} text-#{$color}-content;
+                &:focus-visible {
+                    outline: 2px solid hsl(var(--#{$color}));
+                }
+
+                &:checked,
+                &[checked='true'] {
+                    @apply border-#{$color} bg-#{$color} text-#{$color}-content;
+                }
             }
+        }
+    }
+
+    @include checkbox-props();
+
+    @each $screen-size in $tailwind-screen-sizes {
+        @screen #{$screen-size} {
+            @include checkbox-props('#{$screen-size}:');
         }
     }
 

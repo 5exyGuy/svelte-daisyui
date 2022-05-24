@@ -16,12 +16,12 @@
 
     /**
      * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'} Color
-     * @typedef {{ color?: Color }} ScreenProps
-     * @typedef {{ sm?: ScreenProps, md?: ScreenProps, lg?: ScreenProps, xl?: ScreenProps, '2xl'?: ScreenProps }} Screen
+     * @typedef {{ color?: Color }} Properties
+     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
      */
 
     // -----------------------------------------------------------
-    // Props
+    // Properties
     // -----------------------------------------------------------
 
     /**
@@ -48,17 +48,17 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'alert',
-        {
+    $: classNames = classes({
+        prefix: 'alert',
+        classProps: {
             color: {
                 value: { ...BrandColor, ...FunctionalColor },
             },
         },
-        restClass,
-        { color },
+        props: { color },
         screen,
-    );
+        restClass,
+    });
 </script>
 
 <div class={classNames}>
