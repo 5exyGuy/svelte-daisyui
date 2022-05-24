@@ -1,29 +1,44 @@
 @use 'sass:list';
 @use '../variables.scss' as *;
-
-$colors: list.join($brand-colors, $functional-colors);
+@use '../escape.scss' as *;
 
 .badge {
     @apply border border-neutral bg-neutral text-neutral-content;
     border-radius: var(--badge-border-radius);
 
-    @each $color in $colors {
-        &.badge-#{$color} {
-            @apply border-#{$color} bg-#{$color} text-#{$color}-content;
+    @mixin badge-props($prefix: '') {
+        $prefix: escape($prefix);
+
+        @each $color in list.join($brand-colors, $functional-colors) {
+            &.#{$prefix}badge-#{$color} {
+                @apply border-#{$color} bg-#{$color} text-#{$color}-content;
+            }
+        }
+
+        &.#{$prefix}badge-ghost {
+            @apply border-base-200 bg-base-200 text-base-content;
+        }
+
+        &.#{$prefix}badge-outline {
+            @apply border-current border-opacity-50 bg-transparent text-current;
+
+            @each $color in list.join($brand-colors, $functional-colors) {
+                &.badge-#{$color} {
+                    @apply text-#{$color};
+                }
+
+                // &.#{$prefix}badge-#{$color} {
+                //     @apply text-#{$color};
+                // }
+            }
         }
     }
 
-    &.badge-ghost {
-        @apply border-base-200 bg-base-200 text-base-content;
-    }
+    @include badge-props();
 
-    &.badge-outline {
-        @apply border-current border-opacity-50 bg-transparent text-current;
-
-        @each $color in $colors {
-            &.badge-#{$color} {
-                @apply text-#{$color};
-            }
+    @each $screen-size in $tailwind-screen-sizes {
+        @screen #{$screen-size} {
+            @include badge-props('#{$screen-size}:');
         }
     }
 }

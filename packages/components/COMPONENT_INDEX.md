@@ -66,11 +66,6 @@ export type Color =
   | "warning"
   | "error";
 
-export interface Icon {
-  component: typeof import("svelte").SvelteComponent;
-  size: number;
-}
-
 export interface ScreenProps {
   color?: Color;
 }
@@ -88,7 +83,6 @@ export interface Screen {
 
 | Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
 | :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
-| icon      | No       | <code>let</code> | No       | <code>Icon</code>   | <code>undefined</code> | --          |
 | color     | No       | <code>let</code> | No       | <code>Color</code>  | <code>undefined</code> | --          |
 | class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
 | screen    | No       | <code>let</code> | No       | <code>Screen</code> | <code>undefined</code> | --          |
@@ -99,6 +93,7 @@ export interface Screen {
 | :-------- | :------ | :---- | :------- |
 | --        | Yes     | --    | --       |
 | actions   | No      | --    | --       |
+| icon      | No      | --    | --       |
 
 ### Events
 
@@ -109,7 +104,7 @@ None.
 ### Types
 
 ```ts
-export type Size = "1" | "2" | "3" | "4" | "5" | "6" | 1 | 2 | 3 | 4 | 5 | 6;
+export type Size = 1 | 2 | 3 | 4 | 5 | 6;
 
 export interface ScreenProps {
   size?: Size;
@@ -130,7 +125,7 @@ export interface Screen {
 
 | Prop name  | Required | Kind             | Reactive | Type                 | Default value          | Description |
 | :--------- | :------- | :--------------- | :------- | -------------------- | ---------------------- | ----------- |
-| size       | No       | <code>let</code> | No       | <code>Size</code>    | <code>'1'</code>       | --          |
+| size       | No       | <code>let</code> | No       | <code>Size</code>    | <code>1</code>         | --          |
 | demo       | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
 | horizontal | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
 | class      | No       | <code>let</code> | No       | <code>string</code>  | <code>undefined</code> | --          |
@@ -219,16 +214,30 @@ export type BrandColor = "primary" | "secondary" | "accent" | "info";
 export type FunctionalColor = "info" | "success" | "warning" | "error";
 
 export type Size = "tiny" | "small" | "medium" | "large";
+
+export interface Props {
+  color?: BrandColor | FunctionalColor | "ghost";
+  size?: Size;
+}
+
+export interface Screen {
+  sm?: Props;
+  md?: Props;
+  lg?: Props;
+  xl?: Props;
+  "2xl"?: Props;
+}
 ```
 
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                                           | Default value          | Description |
-| :-------- | :------- | :--------------- | :------- | ---------------------------------------------- | ---------------------- | ----------- |
-| color     | Yes      | <code>let</code> | No       | <code>BrandColor &#124; FunctionalColor</code> | <code>undefined</code> | --          |
-| size      | No       | <code>let</code> | No       | <code>Size</code>                              | <code>'medium'</code>  | --          |
-| outline   | No       | <code>let</code> | No       | <code>boolean</code>                           | <code>false</code>     | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code>                            | <code>undefined</code> | --          |
+| Prop name | Required | Kind             | Reactive | Type                        | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | --------------------------- | ---------------------- | ----------- |
+| color     | No       | <code>let</code> | No       | <code>Props['color']</code> | <code>undefined</code> | --          |
+| size      | No       | <code>let</code> | No       | <code>Props['size']</code>  | <code>'medium'</code>  | --          |
+| outline   | No       | <code>let</code> | No       | <code>boolean</code>        | <code>false</code>     | --          |
+| class     | Yes      | <code>let</code> | No       | <code>string</code>         | <code>undefined</code> | --          |
+| screen    | No       | <code>let</code> | No       | <code>Screen</code>         | <code>undefined</code> | --          |
 
 ### Slots
 

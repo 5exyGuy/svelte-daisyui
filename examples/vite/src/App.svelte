@@ -1,5 +1,5 @@
 <script>
-    import { Alert, Button, Avatar, Mask } from '@svelte-daisyui/components';
+    import { Alert, Button, Avatar, Badge } from '@svelte-daisyui/components';
 </script>
 
 <!-- <div class="flex justify-center items-center h-screen">
@@ -21,6 +21,12 @@
         teksto variantas atrodo tikroviškai, nesikartoja, ir jame nėra
         „neįmanomų“ žodžių. Lorem Ipsum teksto variantas atrodo tikroviškai,
         nesikartoja, ir jame nėra „neįmanomų“ žodžių.
+        <Badge
+            color="error"
+            outline
+            screen={{ sm: { color: 'info' }, xl: { color: 'error' } }}
+            >Hello world</Badge
+        >
     </span>
     <Button slot="actions">Skaityti daugiau...</Button>
 </Alert>

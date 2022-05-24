@@ -1,33 +1,34 @@
 <script>
-    import { classes } from '../../utils';
     import {
+        classes,
         BrandColor,
         FunctionalColor,
-        AdditionalColor,
         Size,
-    } from '../../enums';
+    } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
-    //                     Type Definitions
+    // Type Definitions
     // -----------------------------------------------------------
 
     /**
      * @typedef {'primary' | 'secondary' | 'accent' | 'info'} BrandColor
      * @typedef {'info' | 'success' | 'warning' | 'error'} FunctionalColor
      * @typedef {'tiny' | 'small' | 'medium' | 'large'} Size
+     * @typedef {{ color?: BrandColor | FunctionalColor | 'ghost', size?: Size }} Props
+     * @typedef {{ sm?: Props, md?: Props, lg?: Props, xl?: Props, '2xl'?: Props }} Screen
      */
 
     // -----------------------------------------------------------
-    //                           Props
+    // Props
     // -----------------------------------------------------------
 
     /**
-     * @type {BrandColor | FunctionalColor}
+     * @type {Props['color']}
      */
-    export let color;
+    export let color = undefined;
 
     /**
-     * @type {Size}
+     * @type {Props['size']}
      */
     export let size = 'medium';
 
@@ -36,39 +37,44 @@
      */
     export let outline = false;
 
-    let className;
+    let restClass = undefined;
     /**
      * @type {string}
      */
-    export { className as class };
+    export { restClass as class };
 
     // -----------------------------------------------------------
-    //                     Classes and Styles
+    // Screen
+    // -----------------------------------------------------------
+
+    /**
+     * @type {Screen}
+     */
+    export let screen = undefined;
+
+    // -----------------------------------------------------------
+    // Classes and Styles
     // -----------------------------------------------------------
 
     $: classNames = classes(
         'badge',
         {
             color: {
-                condition: !!color,
-                key: color,
                 value: {
                     ...BrandColor,
                     ...FunctionalColor,
-                    ...AdditionalColor,
                 },
             },
             size: {
-                condition: !!size,
-                key: size,
                 value: Size,
             },
             outline: {
-                condition: outline,
                 value: 'outline',
             },
         },
-        className,
+        restClass,
+        { color, size, outline },
+        screen,
     );
 </script>
 

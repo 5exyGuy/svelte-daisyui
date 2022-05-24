@@ -1,7 +1,7 @@
 /// <reference types="svelte" />
 import type { SvelteComponentTyped } from "svelte";
 
-export type Size = "1" | "2" | "3" | "4" | "5" | "6" | 1 | 2 | 3 | 4 | 5 | 6;
+export type Size = 1 | 2 | 3 | 4 | 5 | 6;
 
 export interface ScreenProps {
   size?: Size;
@@ -19,7 +19,7 @@ export interface Screen {
 
 export interface ArtboardProps {
   /**
-   * @default '1'
+   * @default 1
    */
   size?: Size;
 

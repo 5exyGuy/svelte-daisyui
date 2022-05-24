@@ -7,7 +7,7 @@
     // -----------------------------------------------------------
 
     /**
-     * @typedef {'1' | '2' | '3' | '4' | '5' | '6' | 1 | 2 | 3 | 4 | 5 | 6} Size
+     * @typedef {1 | 2 | 3 | 4 | 5 | 6} Size
      * @typedef {{ size?: Size, demo?: boolean, horizontal?: boolean }} ScreenProps
      * @typedef {{ sm?: ScreenProps, md?: ScreenProps, lg?: ScreenProps, xl?: ScreenProps, '2xl'?: ScreenProps }} Screen
      */
@@ -19,7 +19,7 @@
     /**
      * @type {Size}
      */
-    export let size = '1';
+    export let size = 1;
 
     /**
      * @type {boolean}

@@ -3,9 +3,12 @@
     import FaRegCheckCircle from 'svelte-icons/fa/FaRegCheckCircle.svelte';
     import MdWarning from 'svelte-icons/md/MdWarning.svelte';
     import MdErrorOutline from 'svelte-icons/md/MdErrorOutline.svelte';
-    import { BrandColor, FunctionalColor } from '../../enums';
     import Icon from '../icon/Icon.svelte';
-    import { classes } from '@svelte-daisyui/shared';
+    import {
+        BrandColor,
+        FunctionalColor,
+        classes,
+    } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
     //  Type Definitions
@@ -13,7 +16,6 @@
 
     /**
      * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'} Color
-     * @typedef {{ component: typeof import('svelte').SvelteComponent; size: number; }} Icon
      * @typedef {{ color?: Color }} ScreenProps
      * @typedef {{ sm?: ScreenProps, md?: ScreenProps, lg?: ScreenProps, xl?: ScreenProps, '2xl'?: ScreenProps }} Screen
      */
@@ -21,11 +23,6 @@
     // -----------------------------------------------------------
     // Props
     // -----------------------------------------------------------
-
-    /**
-     *  @type {Icon}
-     */
-    export let icon = undefined;
 
     /**
      * @type {Color}
@@ -65,14 +62,12 @@
 </script>
 
 <div class={classNames}>
-    <div class="alert-icon">
-        {#if icon}
-            <svelte:component
-                this={Icon}
-                component={icon.component}
-                size={icon.size}
-            />
-        {:else if !icon && color}
+    {#if $$slots.icon}
+        <div class="alert-icon">
+            <slot name="icon" />
+        </div>
+    {:else if !$$slots.icon && color}
+        <div class="alert-icon">
             {#if color === 'info'}
                 <Icon size={1.5} component={MdInfoOutline} />
             {:else if color === 'success'}
@@ -82,8 +77,8 @@
             {:else if color === 'error'}
                 <Icon size={1.5} component={MdErrorOutline} />
             {/if}
-        {/if}
-    </div>
+        </div>
+    {/if}
     {#if $$slots.default}
         <div class="alert-content">
             <slot />

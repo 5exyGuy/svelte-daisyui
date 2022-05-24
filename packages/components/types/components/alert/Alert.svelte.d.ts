@@ -10,11 +10,6 @@ export type Color =
   | "warning"
   | "error";
 
-export interface Icon {
-  component: typeof import("svelte").SvelteComponent;
-  size: number;
-}
-
 export interface ScreenProps {
   color?: Color;
 }
@@ -28,11 +23,6 @@ export interface Screen {
 }
 
 export interface AlertProps {
-  /**
-   * @default undefined
-   */
-  icon?: Icon;
-
   /**
    * @default undefined
    */
@@ -52,5 +42,5 @@ export interface AlertProps {
 export default class Alert extends SvelteComponentTyped<
   AlertProps,
   {},
-  { default: {}; actions: {} }
+  { default: {}; actions: {}; icon: {} }
 > {}

@@ -1,28 +1,44 @@
+@use 'sass:list';
+@use '../variables.scss' as *;
+@use '../escape.scss' as *;
+
 .badge {
     @apply inline-flex items-center justify-center transition duration-200 ease-in-out;
     width: fit-content;
 
-    &.badge-xs {
-        @apply h-3 text-xs leading-3;
-        padding-left: 0.313rem;
-        padding-right: 0.313rem;
+    @mixin badge-props($prefix: '') {
+        $prefix: escape($prefix);
+
+        &.#{$prefix}badge-xs {
+            @apply h-3 text-xs leading-3;
+            padding-left: 0.313rem;
+            padding-right: 0.313rem;
+        }
+
+        &.#{$prefix}badge-sm {
+            @apply h-4 text-xs leading-4;
+            padding-left: 0.438rem;
+            padding-right: 0.438rem;
+        }
+
+        &.#{$prefix}badge-md {
+            @apply h-5 text-sm leading-5;
+            padding-left: 0.563rem;
+            padding-right: 0.563rem;
+        }
+
+        &.#{$prefix}badge-lg {
+            @apply h-6 text-base leading-6;
+            padding-left: 0.688rem;
+            padding-right: 0.688rem;
+        }
     }
 
-    &.badge-sm {
-        @apply h-4 text-xs leading-4;
-        padding-left: 0.438rem;
-        padding-right: 0.438rem;
-    }
+    @include badge-props();
 
-    &.badge-md {
-        @apply h-5 text-sm leading-5;
-        padding-left: 0.563rem;
-        padding-right: 0.563rem;
-    }
-
-    &.badge-lg {
-        @apply h-6 text-base leading-6;
-        padding-left: 0.688rem;
-        padding-right: 0.688rem;
+    @each $screen-size in $tailwind-screen-sizes {
+        @screen #{$screen-size} {
+            @include badge-props('#{$screen-size}:');
+        }
     }
 }

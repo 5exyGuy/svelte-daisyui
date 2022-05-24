@@ -7,16 +7,29 @@ export type FunctionalColor = "info" | "success" | "warning" | "error";
 
 export type Size = "tiny" | "small" | "medium" | "large";
 
+export interface Props {
+  color?: BrandColor | FunctionalColor | "ghost";
+  size?: Size;
+}
+
+export interface Screen {
+  sm?: Props;
+  md?: Props;
+  lg?: Props;
+  xl?: Props;
+  "2xl"?: Props;
+}
+
 export interface BadgeProps {
   /**
    * @default undefined
    */
-  color: BrandColor | FunctionalColor;
+  color?: Props["color"];
 
   /**
    * @default 'medium'
    */
-  size?: Size;
+  size?: Props["size"];
 
   /**
    * @default false
@@ -27,6 +40,11 @@ export interface BadgeProps {
    * @default undefined
    */
   class: string;
+
+  /**
+   * @default undefined
+   */
+  screen?: Screen;
 }
 
 export default class Badge extends SvelteComponentTyped<

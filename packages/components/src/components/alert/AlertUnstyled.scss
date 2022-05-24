@@ -6,7 +6,7 @@
     }
 
     & > :global(.alert-actions),
-    :global(.alert-icon) {
+    & > :global(.alert-icon) {
         @apply flex-none;
     }
 }
