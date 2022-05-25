@@ -13,14 +13,21 @@
         TableCell,
     } from '@svelte-daisyui/components';
 
-    const data = {
-        insertNumbering: true,
-        header: ['Vardas', 'Pavardė', 'Spalva'],
-        rows: [
-            ['Jonas', 'Jonaitis', 'Mėlyna'],
-            ['Antanas', 'Antanaitis', 'Raudona'],
-        ],
-    };
+    const headers = [
+        { text: 'First Name', value: 'firstName' },
+        { text: 'Last Name', value: 'lastName' },
+        { text: 'Age', value: 'age', alignment: 'end' },
+    ];
+    const items = [
+        { firstName: 'John', lastName: 'Doe', age: 694 },
+        {
+            firstName: 'Leo',
+            lastName: 'Tolstoy',
+            age: new Date().getFullYear() - 1828,
+        },
+        { firstName: 'فلان', lastName: 'الفلاني', age: 42 },
+        { firstName: 'Иван', lastName: 'Иванов', age: 69 },
+    ];
 </script>
 
 <!-- <div class="flex justify-center items-center h-screen">
@@ -94,4 +101,4 @@
     </TableFooter>
 </Table>
 
-<Table {data} />
+<Table padding="compact" class="text-xs" {headers} {items} footers={headers} />

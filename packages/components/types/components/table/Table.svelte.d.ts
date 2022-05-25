@@ -16,12 +16,21 @@ export interface Screen {
   "2xl"?: Properties;
 }
 
-export interface Data {
-  insertNumbering?: boolean;
-  header?: Array<string>;
-  rows?: Array<Array<string>>;
-  footer?: Array<string>;
+export type HorizontalAlignment = "start" | "center" | "end";
+
+export interface Header {
+  text?: string;
+  value?: string;
+  align?: HorizontalAlignment;
 }
+
+export interface Footer {
+  text?: string;
+  value?: string;
+  align?: HorizontalAlignment;
+}
+
+export type Item = Record<string, import("type-fest").Primitive>;
 
 export interface TableProps {
   /**
@@ -37,7 +46,17 @@ export interface TableProps {
   /**
    * @default undefined
    */
-  data?: Data;
+  headers?: Array<Header>;
+
+  /**
+   * @default undefined
+   */
+  footers?: Array<Footer>;
+
+  /**
+   * @default undefined
+   */
+  items?: Array<Item>;
 
   /**
    * @default undefined
@@ -45,6 +64,8 @@ export interface TableProps {
   class?: string;
 
   /**
+   *
+   *
    * @default undefined
    */
   screen?: Screen;

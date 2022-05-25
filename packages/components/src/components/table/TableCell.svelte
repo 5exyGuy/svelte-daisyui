@@ -1,9 +1,24 @@
 <script>
-    import { classes } from '@svelte-daisyui/shared';
+    import { classes, HorizontalAlignment } from '@svelte-daisyui/shared';
+
+    // -----------------------------------------------------------
+    //  Type Definitions
+    // -----------------------------------------------------------
+
+    /**
+     * @typedef {'start' | 'center' | 'end'} HorizontalAlignment
+     * @typedef {{ alignment?: HorizontalAlignment }} Properties
+     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
+     */
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
+
+    /**
+     * @type {Properties['alignment']}
+     */
+    export let alignment = undefined;
 
     let restClass = undefined;
     /**
@@ -12,10 +27,27 @@
     export { restClass as class };
 
     // -----------------------------------------------------------
+    // Screen
+    // -----------------------------------------------------------
+
+    /**
+     * @type {Screen}
+     */
+    export let screen = undefined;
+
+    // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    const classNames = classes({ prefix: 'table-cell', restClass });
+    const classNames = classes({
+        prefix: 'table-cell',
+        classProps: {
+            alignment: { value: HorizontalAlignment },
+        },
+        props: { alignment },
+        screen,
+        restClass,
+    });
 </script>
 
 <td class={classNames}>

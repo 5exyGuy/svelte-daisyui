@@ -1,11 +1,16 @@
 <script>
-    import { classes, TablePadding } from '@svelte-daisyui/shared';
+    import {
+        classes,
+        TablePadding,
+        HorizontalAlignment,
+    } from '@svelte-daisyui/shared';
     import TableBody from './TableBody.svelte';
     import TableCell from './TableCell.svelte';
     import TableFooter from './TableFooter.svelte';
     import TableHeader from './TableHeader.svelte';
     import TableHeaderCell from './TableHeaderCell.svelte';
     import TableRow from './TableRow.svelte';
+
     // -----------------------------------------------------------
     //  Type Definitions
     // -----------------------------------------------------------
@@ -14,7 +19,11 @@
      * @typedef {'normal' | 'compact'} Padding
      * @typedef {{ padding?: Padding, zebra?: boolean }} Properties
      * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
-     * @typedef {{ insertNumbering?: boolean, header?: Array<string>, rows?: Array<Array<string>>, footer?: Array<string> }} Data
+     *
+     * @typedef {'start' | 'center' | 'end'} HorizontalAlignment
+     * @typedef {{ text?: string, value?: string, alignment?: HorizontalAlignment}} Header
+     * @typedef {{ text?: string, value?: string, alignment?: HorizontalAlignment}} Footer
+     * @typedef {Record<string, import('type-fest').Primitive>} Item
      */
 
     // -----------------------------------------------------------
@@ -32,9 +41,19 @@
     export let zebra = false;
 
     /**
-     * @type {Data}
+     * @type {Array<Header>}
      */
-    export let data = undefined;
+    export let headers = undefined;
+
+    /**
+     * @type {Array<Footer>}
+     */
+    export let footers = undefined;
+
+    /**
+     * @type {Array<Item>}
+     */
+    export let items = undefined;
 
     let restClass = undefined;
     /**
@@ -72,49 +91,37 @@
     // -----------------------------------------------------------
     // Functionality
     // -----------------------------------------------------------
-
-    let currentNumber = 1;
-
-    const getNewNumber = () => {
-        return currentNumber++;
-    };
 </script>
 
 <table class={classNames}>
     {#if $$slots.default}
         <slot />
-    {:else if data}
-        {#if data.header && Array.isArray(data.header)}
+    {:else if items}
+        {#if headers && Array.isArray(headers)}
             <TableHeader>
                 <TableRow>
-                    {#if data.insertNumbering}
-                        <TableHeaderCell />
-                    {/if}
-                    {#each data.header as value}
-                        <TableHeaderCell>{value}</TableHeaderCell>
+                    {#each headers as header}
+                        <TableHeaderCell>{header.text}</TableHeaderCell>
                     {/each}
                 </TableRow>
             </TableHeader>
         {/if}
-        {#if data.rows && Array.isArray(data.rows)}
-            <TableBody>
-                {#each data.rows as row}
-                    <TableRow>
-                        {#if data.insertNumbering}
-                            <TableHeaderCell>{getNewNumber()}</TableHeaderCell>
-                        {/if}
-                        {#each row as value}
-                            <TableCell>{value}</TableCell>
-                        {/each}
-                    </TableRow>
-                {/each}
-            </TableBody>
-        {/if}
-        {#if data.footer && Array.isArray(data.footer)}
+        <TableBody>
+            {#each items as item}
+                <TableRow>
+                    {#each headers ?? footers ?? [] as header}
+                        <TableCell alignment={header.alignment}>
+                            {item[header.value]}
+                        </TableCell>
+                    {/each}
+                </TableRow>
+            {/each}
+        </TableBody>
+        {#if footers && Array.isArray(footers)}
             <TableFooter>
                 <TableRow>
-                    {#each data.footer as value}
-                        <TableHeaderCell>{value}</TableHeaderCell>
+                    {#each footers as footer}
+                        <TableHeaderCell>{footer.text}</TableHeaderCell>
                     {/each}
                 </TableRow>
             </TableFooter>

@@ -5,6 +5,18 @@
         & > td.table-cell {
             @apply whitespace-nowrap p-4 align-middle;
             @apply bg-base-100;
+
+            &.table-cell-start {
+                @apply text-left;
+            }
+
+            &.table-cell-center {
+                @apply text-center;
+            }
+
+            &.table-cell-end {
+                @apply text-right;
+            }
         }
     }
 

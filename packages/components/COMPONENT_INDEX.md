@@ -1164,12 +1164,21 @@ export interface Screen {
   "2xl"?: Properties;
 }
 
-export interface Data {
-  insertNumbering?: boolean;
-  header?: Array<string>;
-  rows?: Array<Array<string>>;
-  footer?: Array<string>;
+export type HorizontalAlignment = "start" | "center" | "end";
+
+export interface Header {
+  text?: string;
+  value?: string;
+  align?: HorizontalAlignment;
 }
+
+export interface Footer {
+  text?: string;
+  value?: string;
+  align?: HorizontalAlignment;
+}
+
+export type Item = Record<string, import("type-fest").Primitive>;
 ```
 
 ### Props
@@ -1178,7 +1187,9 @@ export interface Data {
 | :-------- | :------- | :--------------- | :------- | ---------------------------------- | ---------------------- | ----------- |
 | padding   | No       | <code>let</code> | No       | <code>Properties['padding']</code> | <code>undefined</code> | --          |
 | zebra     | No       | <code>let</code> | No       | <code>Properties['zebra']</code>   | <code>false</code>     | --          |
-| data      | No       | <code>let</code> | No       | <code>Data</code>                  | <code>undefined</code> | --          |
+| headers   | No       | <code>let</code> | No       | <code>Array<Header></code>         | <code>undefined</code> | --          |
+| footers   | No       | <code>let</code> | No       | <code>Array<Footer></code>         | <code>undefined</code> | --          |
+| items     | No       | <code>let</code> | No       | <code>Array<Item></code>           | <code>undefined</code> | --          |
 | class     | No       | <code>let</code> | No       | <code>string</code>                | <code>undefined</code> | --          |
 | screen    | No       | <code>let</code> | No       | <code>Screen</code>                | <code>undefined</code> | --          |
 

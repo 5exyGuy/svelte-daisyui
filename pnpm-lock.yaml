@@ -115,6 +115,7 @@ importers:
       svelte-icons: ^2.1.0
       svelte-preprocess: ^4.10.6
       tailwindcss: ^3.0.24
+      type-fest: ^2.13.0
     dependencies:
       svelte-icons: 2.1.0
     devDependencies:
@@ -136,6 +137,7 @@ importers:
       svelte: 3.48.0
       svelte-preprocess: 4.10.6_9ea4fa5e7790c4f15b8e64601083efff
       tailwindcss: 3.0.24
+      type-fest: 2.13.0
 
   packages/plugin:
     specifiers:
