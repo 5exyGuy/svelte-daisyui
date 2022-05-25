@@ -64,28 +64,28 @@
 <div class={classNames}>
     {#if $$slots.icon}
         <div class="alert-icon">
-            <slot name="icon" />
-        </div>
-    {:else if !$$slots.icon && color}
-        <div class="alert-icon">
-            {#if color === 'info'}
-                <Icon size={1.5} component={MdInfoOutline} />
-            {:else if color === 'success'}
-                <Icon size={1.5} component={FaRegCheckCircle} />
-            {:else if color === 'warning'}
-                <Icon size={1.5} component={MdWarning} />
-            {:else if color === 'error'}
-                <Icon size={1.5} component={MdErrorOutline} />
-            {/if}
+            <slot name="icon">
+                {#if color}
+                    {#if color === 'info'}
+                        <Icon size={1.5} component={MdInfoOutline} />
+                    {:else if color === 'success'}
+                        <Icon size={1.5} component={FaRegCheckCircle} />
+                    {:else if color === 'warning'}
+                        <Icon size={1.5} component={MdWarning} />
+                    {:else if color === 'error'}
+                        <Icon size={1.5} component={MdErrorOutline} />
+                    {/if}
+                {/if}
+            </slot>
         </div>
     {/if}
     {#if $$slots.default}
-        <div class="alert-content">
+        <div class="content">
             <slot />
         </div>
     {/if}
     {#if $$slots.actions}
-        <div class="alert-actions">
+        <div class="actions">
             <slot name="actions" />
         </div>
     {/if}

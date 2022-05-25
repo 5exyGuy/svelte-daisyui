@@ -101,7 +101,11 @@
             <TableHeader>
                 <TableRow>
                     {#each headers as header}
-                        <TableHeaderCell>{header.text}</TableHeaderCell>
+                        <slot name="header" {header}>
+                            <TableHeaderCell>
+                                {header.text}
+                            </TableHeaderCell>
+                        </slot>
                     {/each}
                 </TableRow>
             </TableHeader>
@@ -110,9 +114,11 @@
             {#each items as item}
                 <TableRow>
                     {#each headers ?? footers ?? [] as header}
-                        <TableCell alignment={header.alignment}>
-                            {item[header.value]}
-                        </TableCell>
+                        <slot name="item" {item} {header}>
+                            <TableCell alignment={header.alignment}>
+                                {item[header.value]}
+                            </TableCell>
+                        </slot>
                     {/each}
                 </TableRow>
             {/each}
@@ -121,7 +127,11 @@
             <TableFooter>
                 <TableRow>
                     {#each footers as footer}
-                        <TableHeaderCell>{footer.text}</TableHeaderCell>
+                        <slot name="footer" {footer}>
+                            <TableHeaderCell>
+                                {footer.text}
+                            </TableHeaderCell>
+                        </slot>
                     {/each}
                 </TableRow>
             </TableFooter>

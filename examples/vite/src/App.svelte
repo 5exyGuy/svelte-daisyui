@@ -101,4 +101,11 @@
     </TableFooter>
 </Table>
 
-<Table padding="compact" class="text-xs" {headers} {items} footers={headers} />
+<Table padding="compact" {headers} {items} footers={headers}>
+    <TableHeaderCell class="text-red-500 !font-medium" slot="header" let:header>
+        {header.text}
+    </TableHeaderCell>
+    <TableCell class="text-orange-500" slot="item" let:item let:header>
+        {item[header.value]}
+    </TableCell>
+</Table>
