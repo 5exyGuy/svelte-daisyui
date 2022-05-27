@@ -1169,13 +1169,13 @@ export type HorizontalAlignment = "start" | "center" | "end";
 export interface Header {
   text?: string;
   value?: string;
-  align?: HorizontalAlignment;
+  alignment?: HorizontalAlignment;
 }
 
 export interface Footer {
   text?: string;
   value?: string;
-  align?: HorizontalAlignment;
+  alignment?: HorizontalAlignment;
 }
 
 export type Item = Record<string, import("type-fest").Primitive>;
@@ -1195,9 +1195,12 @@ export type Item = Record<string, import("type-fest").Primitive>;
 
 ### Slots
 
-| Slot name | Default | Props | Fallback |
-| :-------- | :------ | :---- | :------- |
-| --        | Yes     | --    | --       |
+| Slot name | Default | Props                                    | Fallback                                                                                                        |
+| :-------- | :------ | :--------------------------------------- | :-------------------------------------------------------------------------------------------------------------- |
+| --        | Yes     | --                                       | --                                                                                                              |
+| footer    | No      | <code>{ footer: any } </code>            | <code>&lt;TableHeaderCell&gt;<br /> {footer.text}<br /> &lt;/TableHeaderCell&gt;</code>                         |
+| header    | No      | <code>{ header: any } </code>            | <code>&lt;TableHeaderCell&gt;<br /> {header.text}<br /> &lt;/TableHeaderCell&gt;</code>                         |
+| item      | No      | <code>{ item: any, header: any } </code> | <code>&lt;TableCell alignment={header.alignment}&gt;<br /> {item[header.value]}<br /> &lt;/TableCell&gt;</code> |
 
 ### Events
 
@@ -1223,11 +1226,31 @@ None.
 
 ## `TableCell`
 
+### Types
+
+```ts
+export type HorizontalAlignment = "start" | "center" | "end";
+
+export interface Properties {
+  alignment?: HorizontalAlignment;
+}
+
+export interface Screen {
+  sm?: Properties;
+  md?: Properties;
+  lg?: Properties;
+  xl?: Properties;
+  "2xl"?: Properties;
+}
+```
+
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
-| :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
-| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+| Prop name | Required | Kind             | Reactive | Type                                 | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | ------------------------------------ | ---------------------- | ----------- |
+| alignment | No       | <code>let</code> | No       | <code>Properties['alignment']</code> | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>                  | <code>undefined</code> | --          |
+| screen    | No       | <code>let</code> | No       | <code>Screen</code>                  | <code>undefined</code> | --          |
 
 ### Slots
 

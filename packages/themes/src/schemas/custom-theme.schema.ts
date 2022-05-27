@@ -4,7 +4,7 @@ import joi, { type PartialSchemaMap } from 'joi';
 
 const colorSchemaMap: PartialSchemaMap = {};
 const colorRegex =
-    /(?:#|0x)(?:[a-f0-9]{3}|[a-f0-9]{6})\b|(?:rgb|hsl)a?\([^\)]*\)/;
+    /(?:#|0x)(?:[a-fA-F0-9]{3}|[a-fA-F0-9]{6})\b|(?:rgb|hsl)a?\([^\)]*\)/;
 
 for (const colorName in COLOR_NAMES) {
     colorSchemaMap[`${colorName}`] = joi.string().regex(colorRegex);

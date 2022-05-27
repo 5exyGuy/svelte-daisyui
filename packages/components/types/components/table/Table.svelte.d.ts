@@ -21,13 +21,13 @@ export type HorizontalAlignment = "start" | "center" | "end";
 export interface Header {
   text?: string;
   value?: string;
-  align?: HorizontalAlignment;
+  alignment?: HorizontalAlignment;
 }
 
 export interface Footer {
   text?: string;
   value?: string;
-  align?: HorizontalAlignment;
+  alignment?: HorizontalAlignment;
 }
 
 export type Item = Record<string, import("type-fest").Primitive>;
@@ -74,5 +74,10 @@ export interface TableProps {
 export default class Table extends SvelteComponentTyped<
   TableProps,
   {},
-  { default: {} }
+  {
+    default: {};
+    footer: { footer: any };
+    header: { header: any };
+    item: { item: any; header: any };
+  }
 > {}
