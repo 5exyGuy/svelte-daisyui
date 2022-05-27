@@ -97,27 +97,13 @@
                     ...{ ghost: 'ghost', link: 'link' },
                 },
             },
-            size: {
-                value: Size,
-            },
-            shape: {
-                value: ButtonShape,
-            },
-            active: {
-                value: 'active',
-            },
-            block: {
-                value: 'block',
-            },
-            outline: {
-                value: 'outline',
-            },
-            loading: {
-                value: 'loading',
-            },
-            noAnim: {
-                value: 'no-animation',
-            },
+            size: { value: Size },
+            shape: { value: ButtonShape },
+            active: { value: 'active' },
+            block: { value: 'block' },
+            outline: { value: 'outline' },
+            loading: { value: 'loading' },
+            noAnim: { value: 'no-animation' },
         },
         props: {
             color,
