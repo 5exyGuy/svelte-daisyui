@@ -12,26 +12,24 @@
     import Showcase from './Showcase.svelte';
 
     const headers = [
-        { text: 'First Name', value: 'firstName' },
-        { text: 'Last Name', value: 'lastName' },
-        { text: 'Age', value: 'age', alignment: 'end' },
+        { text: 'Vardas', value: 'firstName', alignment: 'center' },
+        { text: 'Pavardė', value: 'lastName', alignment: 'start' },
+        { text: 'Amžius', value: 'age', alignment: 'end' },
     ];
     const items = [
-        { firstName: 'John', lastName: 'Doe', age: 694 },
-        {
-            firstName: 'Leo',
-            lastName: 'Tolstoy',
-            age: new Date().getFullYear() - 1828,
-        },
-        { firstName: 'فلان', lastName: 'الفلاني', age: 42 },
-        { firstName: 'Иван', lastName: 'Иванов', age: 69 },
+        { firstName: 'Jonas', lastName: 'Jonaitis', age: 694 },
+        { firstName: 'Antanas', lastName: 'Antanaitis', age: 55 },
+        { firstName: 'Petras', lastName: 'Petraitis', age: 42 },
+        { firstName: 'Kazys', lastName: 'Kazimieras', age: 69 },
     ];
 </script>
 
 <Showcase>
-    <Kbd>CTRL + C</Kbd>
+    <Button color="primary" size="lg" outline loading>Skaityti daugiau</Button>
+    <Button color="accent" size="sm">Skaityti daugiau</Button>
+    <!-- <Kbd>CTRL + C</Kbd>
     <Alert color="warning">
-        <div class="inline-block">
+        <div class="inline-block"> 
             <Link color="secondary" hover>Lorem Ipsum</Link> is simply dummy text
             of the printing and typesetting industry. Lorem Ipsum has been the industry's
             standard dummy text ever since the 1500s, when an unknown printer took
@@ -54,19 +52,13 @@
         of Letraset sheets containing Lorem Ipsum passages, and more recently
         with desktop publishing software like Aldus PageMaker including versions
         of Lorem Ipsum.
-    </Alert>
-    <Table
-        class="overflow-x-scroll w-full"
-        padding="compact"
-        {headers}
-        {items}
-        footers={headers}
-    >
+    </Alert> -->
+    <!-- <Table class="overflow-x-scroll w-full" padding="compact" {headers} {items}>
         <TableHeaderCell slot="header" let:header>
             {header.text}
         </TableHeaderCell>
         <TableCell slot="item" let:item let:header>
             {item[header.value]}
         </TableCell>
-    </Table>
+    </Table> -->
 </Showcase>

@@ -1195,12 +1195,19 @@ export type Item = Record<string, import("type-fest").Primitive>;
 
 ### Slots
 
-| Slot name | Default | Props                                    | Fallback                                                                                                        |
-| :-------- | :------ | :--------------------------------------- | :-------------------------------------------------------------------------------------------------------------- |
-| --        | Yes     | --                                       | --                                                                                                              |
-| footer    | No      | <code>{ footer: any } </code>            | <code>&lt;TableHeaderCell&gt;<br /> {footer.text}<br /> &lt;/TableHeaderCell&gt;</code>                         |
-| header    | No      | <code>{ header: any } </code>            | <code>&lt;TableHeaderCell&gt;<br /> {header.text}<br /> &lt;/TableHeaderCell&gt;</code>                         |
-| item      | No      | <code>{ item: any, header: any } </code> | <code>&lt;TableCell alignment={header.alignment}&gt;<br /> {item[header.value]}<br /> &lt;/TableCell&gt;</code> |
+| Slot name | Default | Props                         | Fallback                      |
+| :-------- | :------ | :---------------------------- | :---------------------------- |
+| --        | Yes     | --                            | --                            |
+| footer    | No      | <code>{ footer: any } </code> | <code>&lt;TableHeaderCell&gt; |
+
+<br /> {footer.text}
+<br /> &lt;/TableHeaderCell&gt;</code> |
+| header | No | <code>{ header: any } </code> | <code>&lt;TableHeaderCell&gt;
+<br /> {header.text}
+<br /> &lt;/TableHeaderCell&gt;</code> |
+| item | No | <code>{ item: any, header: any } </code> | <code>&lt;TableCell alignment={header.alignment}&gt;
+<br /> {item[header.value]}
+<br /> &lt;/TableCell&gt;</code> |
 
 ### Events
 
