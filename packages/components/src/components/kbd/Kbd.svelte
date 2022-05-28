@@ -1,44 +1,64 @@
 <script>
-    import { Size } from '../../enums';
-    import { classes } from '../../utils';
+    import { classes, Size } from '@svelte-daisyui/shared';
+
+    // -----------------------------------------------------------
+    //  Type Definitions
+    // -----------------------------------------------------------
+
+    /**
+     * @slot {{ props: { [key: string]: any } }}
+     * @restProps {kbd}
+     *
+     * @typedef {'xs' | 'sm' | 'md' | 'lg'} Size
+     * @typedef {{ size?: Size }} Properties
+     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
+     */
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
     /**
-     * @type {'tiny' | 'small' | 'medium' | 'large'}
+     * @type {Size}
      */
-    export let size;
+    export let size = undefined;
 
-    let className;
+    let restClass = undefined;
     /**
      * @type {string}
      */
-    export { className as class };
+    export { restClass as class };
+
+    // -----------------------------------------------------------
+    // Screen
+    // -----------------------------------------------------------
+
+    /**
+     * @type {Screen}
+     */
+    export let screen = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'kbd',
-        {
+    $: classNames = classes({
+        prefix: 'kbd',
+        classProps: {
             size: {
-                condition: !!size,
-                key: size,
                 value: Size,
             },
         },
-        className,
-    );
+        props: { size },
+        screen,
+        restClass,
+    });
 </script>
 
-<kbd class={classNames}>
+<kbd class={classNames} {...$$restProps}>
     <slot />
 </kbd>
 
 <style lang="scss">
-    @import 'KbdStyled.scss';
-    @import 'KbdUnstyled.scss';
+    @import 'Kbd.scss';
 </style>

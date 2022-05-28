@@ -15,6 +15,9 @@
     // -----------------------------------------------------------
 
     /**
+     * @slot {{ props: { [key: string]: any } }}
+     * @restProps {div}
+     *
      * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'} Color
      * @typedef {{ color?: Color }} Properties
      * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
@@ -25,9 +28,14 @@
     // -----------------------------------------------------------
 
     /**
-     * @type {Properties['color']}
+     * @type {Color}
      */
     export let color = undefined;
+
+    /**
+     * @type {boolean}
+     */
+    export let showIcon = true;
 
     let restClass = undefined;
     /**
@@ -61,12 +69,8 @@
     });
 </script>
 
-<div class={classNames}>
-    {#if $$slots.icon}
-        <div class="alert-icon">
-            <slot name="icon" />
-        </div>
-    {:else if color}
+<div class={classNames} {...$$restProps}>
+    {#if showIcon && color}
         {#if color === 'info'}
             <div class="alert-icon">
                 <Icon size={1.5} component={MdInfoOutline} />
@@ -85,19 +89,9 @@
             </div>
         {/if}
     {/if}
-    {#if $$slots.default}
-        <div class="alert-content">
-            <slot />
-        </div>
-    {/if}
-    {#if $$slots.actions}
-        <div class="alert-actions">
-            <slot name="actions" />
-        </div>
-    {/if}
+    <slot />
 </div>
 
 <style lang="scss">
-    @import 'AlertStyled.scss';
-    @import 'AlertUnstyled.scss';
+    @import 'Alert.scss';
 </style>

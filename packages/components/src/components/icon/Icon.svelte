@@ -6,8 +6,11 @@
     // -----------------------------------------------------------
 
     /**
-     * @typedef {{ spin?: boolean }} ScreenProps
-     * @typedef {{ sm?: ScreenProps, md?: ScreenProps, lg?: ScreenProps, xl?: ScreenProps, '2xl'?: ScreenProps }} Screen
+     * @slot {{ props: { [key: string]: any } }}
+     * @restProps {div}
+     *
+     * @typedef {{ spin?: boolean }} Properties
+     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
      */
 
     // -----------------------------------------------------------
@@ -58,22 +61,19 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'icon',
-        {
-            spin: {
-                value: 'spin',
-            },
-        },
-        restClass,
-        { spin },
+    $: classNames = classes({
+        prefix: 'icon',
+        classProps: { spin: { value: 'spin' } },
+        props: { spin },
         screen,
-    );
+        restClass,
+    });
 </script>
 
 <div
     class={classNames}
     style={`height: ${size ?? height}em; width: ${size ?? width}em;`}
+    {...$$restProps}
 >
     {#if component}
         <svelte:component this={component} />
@@ -83,6 +83,5 @@
 </div>
 
 <style lang="scss">
-    @import 'IconStyled.scss';
-    @import 'IconUnstyled.scss';
+    @import 'Icon.scss';
 </style>

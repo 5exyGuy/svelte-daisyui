@@ -1,15 +1,31 @@
 <script>
-    import { BrandColor, FunctionalColor } from '../../enums';
-    import { classes } from '../../utils';
+    import {
+        BrandColor,
+        classes,
+        FunctionalColor,
+    } from '@svelte-daisyui/shared';
+
+    // -----------------------------------------------------------
+    //  Type Definitions
+    // -----------------------------------------------------------
+
+    /**
+     * @slot {{ props: { [key: string]: any } }}
+     * @restProps {a}
+     *
+     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'neutral'} Color
+     * @typedef {{ color?: Color, hover?: boolean }} Properties
+     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
+     */
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
     /**
-     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'neutral'}
+     * @type {Color}
      */
-    export let color;
+    export let color = undefined;
 
     /**
      * @type {boolean}
@@ -21,38 +37,49 @@
      */
     export let href = '#';
 
-    let className;
+    let restClass = undefined;
     /**
      * @type {string}
      */
-    export { className as class };
+    export { restClass as class };
+
+    // -----------------------------------------------------------
+    // Screen
+    // -----------------------------------------------------------
+
+    /**
+     * @type {Screen}
+     */
+    export let screen = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'link',
-        {
+    $: classNames = classes({
+        prefix: 'link',
+        classProps: {
             color: {
-                condition: !!color,
-                key: color,
-                value: { ...BrandColor, ...FunctionalColor },
+                value: {
+                    ...BrandColor,
+                    ...FunctionalColor,
+                    ...{ neutral: 'neutral' },
+                },
             },
             hover: {
-                condition: hover,
                 value: 'hover',
             },
         },
-        className,
-    );
+        props: { color, hover },
+        screen,
+        restClass,
+    });
 </script>
 
-<a {href} class={classNames}>
+<a {href} class={classNames} {...$$restProps}>
     <slot />
 </a>
 
 <style lang="scss">
-    @import 'LinkStyled.scss';
-    @import 'LinkUnstyled.scss';
+    @import 'Link.scss';
 </style>

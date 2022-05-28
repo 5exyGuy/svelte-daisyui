@@ -1,0 +1,47 @@
+@use '../variables.scss' as *;
+@use '../escape.scss' as *;
+
+.kbd {
+    @apply border border-neutral-focus border-opacity-20 bg-base-200 px-2;
+    border-radius: var(--button-border-radius);
+    border-bottom-width: 2px;
+    min-height: 2.2em;
+    min-width: 2.2em;
+    @apply inline-flex items-center justify-center;
+
+    @mixin kbd-props($prefix: '') {
+        $prefix: escape($prefix);
+
+        &.#{$prefix}kbd-xs {
+            @apply px-1 text-xs;
+            min-height: 1.2em;
+            min-width: 1.2em;
+        }
+
+        &.#{$prefix}kbd-sm {
+            @apply px-1 text-sm;
+            min-height: 1.6em;
+            min-width: 1.6em;
+        }
+
+        &.#{$prefix}kbd-md {
+            @apply px-2 text-base;
+            min-height: 2.2em;
+            min-width: 2.2em;
+        }
+
+        &.#{$prefix}kbd-lg {
+            @apply px-4 text-lg;
+            min-height: 2.5em;
+            min-width: 2.5em;
+        }
+    }
+
+    @include kbd-props();
+
+    @each $screen-size in $tailwind-screen-sizes {
+        @screen #{$screen-size} {
+            @include kbd-props('#{$screen-size}:');
+        }
+    }
+}

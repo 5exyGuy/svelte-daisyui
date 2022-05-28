@@ -88,19 +88,18 @@ export interface Screen {
 
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                             | Default value          | Description |
-| :-------- | :------- | :--------------- | :------- | -------------------------------- | ---------------------- | ----------- |
-| color     | No       | <code>let</code> | No       | <code>Properties['color']</code> | <code>undefined</code> | --          |
-| class     | No       | <code>let</code> | No       | <code>string</code>              | <code>undefined</code> | --          |
-| screen    | No       | <code>let</code> | No       | <code>Screen</code>              | <code>undefined</code> | --          |
+| Prop name | Required | Kind             | Reactive | Type                 | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | -------------------- | ---------------------- | ----------- |
+| color     | No       | <code>let</code> | No       | <code>Color</code>   | <code>undefined</code> | --          |
+| showIcon  | No       | <code>let</code> | No       | <code>boolean</code> | <code>true</code>      | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>  | <code>undefined</code> | --          |
+| screen    | No       | <code>let</code> | No       | <code>Screen</code>  | <code>undefined</code> | --          |
 
 ### Slots
 
-| Slot name | Default | Props | Fallback |
-| :-------- | :------ | :---- | :------- |
-| --        | Yes     | --    | --       |
-| actions   | No      | --    | --       |
-| icon      | No      | --    | --       |
+| Slot name | Default | Props                                           | Fallback |
+| :-------- | :------ | :---------------------------------------------- | :------- |
+| --        | Yes     | <code>{ props: { [key: string]: any } } </code> | --       |
 
 ### Events
 
@@ -776,18 +775,37 @@ None.
 
 ## `Kbd`
 
+### Types
+
+```ts
+export type Size = "xs" | "sm" | "md" | "lg";
+
+export interface Properties {
+  size?: Size;
+}
+
+export interface Screen {
+  sm?: Properties;
+  md?: Properties;
+  lg?: Properties;
+  xl?: Properties;
+  "2xl"?: Properties;
+}
+```
+
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                                                              | Default value          | Description |
-| :-------- | :------- | :--------------- | :------- | ----------------------------------------------------------------- | ---------------------- | ----------- |
-| size      | Yes      | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large'</code> | <code>undefined</code> | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code>                                               | <code>undefined</code> | --          |
+| Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
+| size      | No       | <code>let</code> | No       | <code>Size</code>   | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+| screen    | No       | <code>let</code> | No       | <code>Screen</code> | <code>undefined</code> | --          |
 
 ### Slots
 
-| Slot name | Default | Props | Fallback |
-| :-------- | :------ | :---- | :------- |
-| --        | Yes     | --    | --       |
+| Slot name | Default | Props                                           | Fallback |
+| :-------- | :------ | :---------------------------------------------- | :------- |
+| --        | Yes     | <code>{ props: { [key: string]: any } } </code> | --       |
 
 ### Events
 
@@ -795,20 +813,48 @@ None.
 
 ## `Link`
 
+### Types
+
+```ts
+export type Color =
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "info"
+  | "success"
+  | "warning"
+  | "error"
+  | "neutral";
+
+export interface Properties {
+  color?: Color;
+  hover?: boolean;
+}
+
+export interface Screen {
+  sm?: Properties;
+  md?: Properties;
+  lg?: Properties;
+  xl?: Properties;
+  "2xl"?: Properties;
+}
+```
+
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                                                                                                                                      | Default value          | Description |
-| :-------- | :------- | :--------------- | :------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
-| color     | Yes      | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; 'neutral'</code> | <code>undefined</code> | --          |
-| hover     | No       | <code>let</code> | No       | <code>boolean</code>                                                                                                                      | <code>false</code>     | --          |
-| href      | No       | <code>let</code> | No       | <code>string</code>                                                                                                                       | <code>'#'</code>       | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code>                                                                                                                       | <code>undefined</code> | --          |
+| Prop name | Required | Kind             | Reactive | Type                 | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | -------------------- | ---------------------- | ----------- |
+| color     | No       | <code>let</code> | No       | <code>Color</code>   | <code>undefined</code> | --          |
+| hover     | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
+| href      | No       | <code>let</code> | No       | <code>string</code>  | <code>'#'</code>       | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>  | <code>undefined</code> | --          |
+| screen    | No       | <code>let</code> | No       | <code>Screen</code>  | <code>undefined</code> | --          |
 
 ### Slots
 
-| Slot name | Default | Props | Fallback |
-| :-------- | :------ | :---- | :------- |
-| --        | Yes     | --    | --       |
+| Slot name | Default | Props                                           | Fallback |
+| :-------- | :------ | :---------------------------------------------- | :------- |
+| --        | Yes     | <code>{ props: { [key: string]: any } } </code> | --       |
 
 ### Events
 
@@ -1195,19 +1241,12 @@ export type Item = Record<string, import("type-fest").Primitive>;
 
 ### Slots
 
-| Slot name | Default | Props                         | Fallback                      |
-| :-------- | :------ | :---------------------------- | :---------------------------- |
-| --        | Yes     | --                            | --                            |
-| footer    | No      | <code>{ footer: any } </code> | <code>&lt;TableHeaderCell&gt; |
-
-<br /> {footer.text}
-<br /> &lt;/TableHeaderCell&gt;</code> |
-| header | No | <code>{ header: any } </code> | <code>&lt;TableHeaderCell&gt;
-<br /> {header.text}
-<br /> &lt;/TableHeaderCell&gt;</code> |
-| item | No | <code>{ item: any, header: any } </code> | <code>&lt;TableCell alignment={header.alignment}&gt;
-<br /> {item[header.value]}
-<br /> &lt;/TableCell&gt;</code> |
+| Slot name | Default | Props                                    | Fallback                                                                                                        |
+| :-------- | :------ | :--------------------------------------- | :-------------------------------------------------------------------------------------------------------------- |
+| --        | Yes     | --                                       | --                                                                                                              |
+| footer    | No      | <code>{ footer: any } </code>            | <code>&lt;TableHeaderCell&gt;<br /> {footer.text}<br /> &lt;/TableHeaderCell&gt;</code>                         |
+| header    | No      | <code>{ header: any } </code>            | <code>&lt;TableHeaderCell&gt;<br /> {header.text}<br /> &lt;/TableHeaderCell&gt;</code>                         |
+| item      | No      | <code>{ item: any, header: any } </code> | <code>&lt;TableCell alignment={header.alignment}&gt;<br /> {item[header.value]}<br /> &lt;/TableCell&gt;</code> |
 
 ### Events
 

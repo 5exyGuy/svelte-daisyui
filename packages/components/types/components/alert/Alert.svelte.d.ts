@@ -22,11 +22,17 @@ export interface Screen {
   "2xl"?: Properties;
 }
 
-export interface AlertProps {
+export interface AlertProps
+  extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap["div"]> {
   /**
    * @default undefined
    */
-  color?: Properties["color"];
+  color?: Color;
+
+  /**
+   * @default true
+   */
+  showIcon?: boolean;
 
   /**
    * @default undefined
@@ -42,5 +48,5 @@ export interface AlertProps {
 export default class Alert extends SvelteComponentTyped<
   AlertProps,
   {},
-  { default: {}; actions: {}; icon: {} }
+  { default: { props: { [key: string]: any } } }
 > {}

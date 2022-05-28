@@ -1,0 +1,43 @@
+@use 'sass:list';
+@use '../variables.scss' as *;
+@use '../escape.scss' as *;
+
+.link {
+    @apply cursor-pointer underline;
+
+    @mixin link-props($prefix: '') {
+        $prefix: escape($prefix);
+
+        &.#{$prefix}link-hover {
+            @apply no-underline hover:underline;
+        }
+
+        @each $color
+            in list.append(
+                list.join($brand-colors, $functional-colors),
+                'neutral'
+            )
+        {
+            &.#{$prefix}link-#{$color} {
+                @apply text-#{$color} hover:text-#{$color}-focus;
+            }
+        }
+    }
+
+    @include link-props();
+
+    @each $screen-size in $tailwind-screen-sizes {
+        @screen #{$screen-size} {
+            @include link-props('#{$screen-size}:');
+        }
+    }
+
+    &:focus {
+        @apply outline-none;
+    }
+
+    &:focus-visible {
+        outline: 2px solid currentColor;
+        outline-offset: 2px;
+    }
+}

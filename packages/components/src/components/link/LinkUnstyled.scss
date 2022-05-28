@@ -1,7 +1,0 @@
-.link {
-    @apply cursor-pointer underline;
-
-    &.link-hover {
-        @apply no-underline hover:underline;
-    }
-}
