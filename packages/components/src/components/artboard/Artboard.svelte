@@ -1,13 +1,17 @@
 <script>
-    import { classes, ArtboardSize } from '@svelte-daisyui/shared';
+    import { classes, ArtboardSize, Alignment } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
     //  Type Definitions
     // -----------------------------------------------------------
 
     /**
+     * @slot {{ props: { [key: string]: any } }}
+     * @restProps {div}
+     *
      * @typedef {1 | 2 | 3 | 4 | 5 | 6} Size
-     * @typedef {{ size?: Size, demo?: boolean, horizontal?: boolean }} Properties
+     * @typedef {'horizontal' | 'vertical'} Alignment
+     * @typedef {{ size?: Size, demo?: boolean, alignment?: Alignment }} Properties
      * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
      */
 
@@ -18,7 +22,7 @@
     /**
      * @type {Size}
      */
-    export let size = 1;
+    export let size = undefined;
 
     /**
      * @type {boolean}
@@ -26,9 +30,9 @@
     export let demo = false;
 
     /**
-     * @type {boolean}
+     * @type {Alignment}
      */
-    export let horizontal = false;
+    export let alignment = undefined;
 
     let restClass = undefined;
     /**
@@ -52,27 +56,20 @@
     $: classNames = classes({
         prefix: 'artboard',
         classProps: {
-            size: {
-                value: ArtboardSize,
-            },
-            demo: {
-                value: 'demo',
-            },
-            horizontal: {
-                value: 'horizontal',
-            },
+            size: { value: ArtboardSize },
+            demo: { value: 'demo' },
+            alignment: { value: Alignment },
         },
-        props: { size, demo, horizontal },
+        props: { size, demo, alignment },
         screen,
         restClass,
     });
 </script>
 
-<div class={classNames}>
+<div class={classNames} {...$$restProps}>
     <slot />
 </div>
 
 <style lang="scss">
-    @import 'ArtboardStyled.scss';
-    @import 'ArtboardUnstyled.scss';
+    @import 'Artboard.scss';
 </style>

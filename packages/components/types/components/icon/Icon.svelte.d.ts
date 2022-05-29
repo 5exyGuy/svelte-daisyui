@@ -1,19 +1,20 @@
 /// <reference types="svelte" />
 import type { SvelteComponentTyped } from "svelte";
 
-export interface ScreenProps {
+export interface Properties {
   spin?: boolean;
 }
 
 export interface Screen {
-  sm?: ScreenProps;
-  md?: ScreenProps;
-  lg?: ScreenProps;
-  xl?: ScreenProps;
-  "2xl"?: ScreenProps;
+  sm?: Properties;
+  md?: Properties;
+  lg?: Properties;
+  xl?: Properties;
+  "2xl"?: Properties;
 }
 
-export interface IconProps {
+export interface IconProps
+  extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap["div"]> {
   /**
    * @default undefined
    */
@@ -53,5 +54,5 @@ export interface IconProps {
 export default class Icon extends SvelteComponentTyped<
   IconProps,
   {},
-  { default: {} }
+  { default: { props: { [key: string]: any } } }
 > {}

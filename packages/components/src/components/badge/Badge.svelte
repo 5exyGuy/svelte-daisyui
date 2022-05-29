@@ -11,6 +11,9 @@
     // -----------------------------------------------------------
 
     /**
+     * @slot {{ [key: string]: any }}
+     * @restProps {div}
+     *
      * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost'} Color
      * @typedef {'xs' | 'sm' | 'md' | 'lg'} Size
      * @typedef {{ color?: Color, size?: Size }} Properties
@@ -22,12 +25,12 @@
     // -----------------------------------------------------------
 
     /**
-     * @type {Properties['color']}
+     * @type {Color}
      */
     export let color = undefined;
 
     /**
-     * @type {Properties['size']}
+     * @type {Size}
      */
     export let size = undefined;
 
@@ -62,14 +65,11 @@
                 value: {
                     ...BrandColor,
                     ...FunctionalColor,
+                    ...{ ghost: 'ghost' },
                 },
             },
-            size: {
-                value: Size,
-            },
-            outline: {
-                value: 'outline',
-            },
+            size: { value: Size },
+            outline: { value: 'outline' },
         },
         props: { color, size, outline },
         screen,
@@ -82,6 +82,5 @@
 </div>
 
 <style lang="scss">
-    @import 'BadgeStyled.scss';
-    @import 'BadgeUnstyled.scss';
+    @import 'Badge.scss';
 </style>

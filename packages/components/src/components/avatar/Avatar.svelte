@@ -6,22 +6,20 @@
     // -----------------------------------------------------------
 
     /**
-     * @typedef {'xs' | 'sm' | 'md' | 'lg'} Size
+     * @slot {{ props: { [key: string]: any } }}
+     * @restProps {div}
+     *
      * @typedef {'online' | 'offline'} Status
-     * @typedef {{ size?: Size, status: Status }} Properties
+     * @typedef {{ status: Status }} Properties
      * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
      */
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
-    /**
-     * @type {Properties['size']}
-     */
-    export let size = undefined;
 
     /**
-     * @type {Properties['status']}
+     * @type {Status}
      */
     export let status = undefined;
 
@@ -57,17 +55,9 @@
     $: classNames = classes({
         prefix: 'avatar',
         classProps: {
-            size: {
-                value: Size,
-            },
-            status: {
-                value: AvatarStatus,
-            },
+            status: { value: AvatarStatus },
         },
-        props: {
-            size,
-            status,
-        },
+        props: { status },
         screen,
         restClass,
     });
@@ -82,6 +72,5 @@
 </div>
 
 <style lang="scss">
-    @import 'AvatarStyled.scss';
-    @import 'AvatarUnstyled.scss';
+    @import 'Avatar.scss';
 </style>

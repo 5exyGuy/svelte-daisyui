@@ -1,12 +1,9 @@
 /// <reference types="svelte" />
 import type { SvelteComponentTyped } from "svelte";
 
-export type Size = "xs" | "sm" | "md" | "lg";
-
 export type Status = "online" | "offline";
 
 export interface Properties {
-  size?: Size;
   status: Status;
 }
 
@@ -18,16 +15,12 @@ export interface Screen {
   "2xl"?: Properties;
 }
 
-export interface AvatarProps {
+export interface AvatarProps
+  extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap["div"]> {
   /**
    * @default undefined
    */
-  size?: Properties["size"];
-
-  /**
-   * @default undefined
-   */
-  status?: Properties["status"];
+  status?: Status;
 
   /**
    * @default undefined
@@ -53,5 +46,5 @@ export interface AvatarProps {
 export default class Avatar extends SvelteComponentTyped<
   AvatarProps,
   {},
-  { default: {} }
+  { default: { props: { [key: string]: any } } }
 > {}

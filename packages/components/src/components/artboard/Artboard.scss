@@ -33,19 +33,33 @@ $sizes: (
 .artboard {
     @apply flex flex-none flex-col items-center justify-center;
     @apply w-full;
+    width: 320px;
+    height: 568px;
 
     @mixin artboard-props($prefix: '') {
         $prefix: escape($prefix);
 
+        &.#{$prefix}artboard-demo {
+            @apply bg-base-100 text-base-content;
+            border-radius: var(--box-border-radius);
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+                0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+
         &.#{$prefix}artboard-phone {
-            @each $size, $object in $sizes {
+            @each $size, $vector2 in $sizes {
                 &-#{$size} {
-                    width: map.get($object, 'x');
-                    height: map.get($object, 'y');
+                    width: map.get($vector2, 'x');
+                    height: map.get($vector2, 'y');
+
+                    &.#{$prefix}artboard-vertical {
+                        width: map.get($vector2, 'x');
+                        height: map.get($vector2, 'y');
+                    }
 
                     &.#{$prefix}artboard-horizontal {
-                        width: map.get($object, 'y');
-                        height: map.get($object, 'x');
+                        width: map.get($vector2, 'y');
+                        height: map.get($vector2, 'x');
                     }
                 }
             }

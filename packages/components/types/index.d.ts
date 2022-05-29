@@ -1,10 +1,10 @@
 export { default as Alert } from "./components/alert/Alert.svelte";
 export { default as Artboard } from "./components/artboard/Artboard.svelte";
 export { default as Avatar } from "./components/avatar/Avatar.svelte";
-export { default as AvatarGroup } from "./components/avatar-group/AvatarGroup.svelte";
+export { default as AvatarGroup } from "./components/avatar/AvatarGroup.svelte";
 export { default as Badge } from "./components/badge/Badge.svelte";
-export { default as BreadcrumbGroup } from "./components/breadcrumb-group/BreadcrumbGroup.svelte";
-export { default as BreadcrumbItem } from "./components/breadcrumb-item/BreadcrumbItem.svelte";
+export { default as BreadcrumbGroup } from "./components/breadcrumbs/BreadcrumbGroup.svelte";
+export { default as BreadcrumbItem } from "./components/breadcrumbs/BreadcrumbItem.svelte";
 export { default as Button } from "./components/button/Button.svelte";
 export { default as ButtonGroup } from "./components/button-group/ButtonGroup.svelte";
 export { default as Card } from "./components/card/Card.svelte";

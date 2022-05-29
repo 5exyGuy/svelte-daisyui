@@ -3,10 +3,12 @@ import type { SvelteComponentTyped } from "svelte";
 
 export type Size = 1 | 2 | 3 | 4 | 5 | 6;
 
+export type Alignment = "horizontal" | "vertical";
+
 export interface Properties {
   size?: Size;
   demo?: boolean;
-  horizontal?: boolean;
+  alignment?: Alignment;
 }
 
 export interface Screen {
@@ -17,9 +19,10 @@ export interface Screen {
   "2xl"?: Properties;
 }
 
-export interface ArtboardProps {
+export interface ArtboardProps
+  extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap["div"]> {
   /**
-   * @default 1
+   * @default undefined
    */
   size?: Size;
 
@@ -29,9 +32,9 @@ export interface ArtboardProps {
   demo?: boolean;
 
   /**
-   * @default false
+   * @default undefined
    */
-  horizontal?: boolean;
+  alignment?: Alignment;
 
   /**
    * @default undefined
@@ -47,5 +50,5 @@ export interface ArtboardProps {
 export default class Artboard extends SvelteComponentTyped<
   ArtboardProps,
   {},
-  { default: {} }
+  { default: { props: { [key: string]: any } } }
 > {}

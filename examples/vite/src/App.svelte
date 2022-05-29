@@ -7,6 +7,9 @@
         Button,
         Kbd,
         Link,
+        BreadcrumbGroup,
+        BreadcrumbItem,
+        Badge,
     } from '@svelte-daisyui/components';
 
     import Showcase from './Showcase.svelte';
@@ -25,6 +28,17 @@
 </script>
 
 <Showcase>
+    <BreadcrumbGroup items={headers}>
+        <BreadcrumbItem slot="item" let:item>
+            <Badge
+                size="lg"
+                color="primary"
+                outline
+                screen={{ sm: { color: 'secondary', size: 'xs' } }}
+                >{item.text}</Badge
+            >
+        </BreadcrumbItem>
+    </BreadcrumbGroup>
     <Button color="primary" size="lg" outline loading>Skaityti daugiau</Button>
     <Button color="accent" size="sm">Skaityti daugiau</Button>
     <Kbd size="lg" screen={{ '2xl': { size: 'xs' } }}>CTRL + C</Kbd>

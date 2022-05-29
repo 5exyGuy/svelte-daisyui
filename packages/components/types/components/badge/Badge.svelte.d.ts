@@ -26,16 +26,17 @@ export interface Screen {
   "2xl"?: Properties;
 }
 
-export interface BadgeProps {
+export interface BadgeProps
+  extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap["div"]> {
   /**
    * @default undefined
    */
-  color?: Properties["color"];
+  color?: Color;
 
   /**
    * @default undefined
    */
-  size?: Properties["size"];
+  size?: Size;
 
   /**
    * @default false
@@ -56,5 +57,5 @@ export interface BadgeProps {
 export default class Badge extends SvelteComponentTyped<
   BadgeProps,
   {},
-  { default: {} }
+  { default: { [key: string]: any } }
 > {}

@@ -58,11 +58,7 @@
 
     $: classNames = classes({
         prefix: 'alert',
-        classProps: {
-            color: {
-                value: { ...BrandColor, ...FunctionalColor },
-            },
-        },
+        classProps: { color: { value: { ...BrandColor, ...FunctionalColor } } },
         props: { color },
         screen,
         restClass,

@@ -112,10 +112,12 @@ None.
 ```ts
 export type Size = 1 | 2 | 3 | 4 | 5 | 6;
 
+export type Alignment = "horizontal" | "vertical";
+
 export interface Properties {
   size?: Size;
   demo?: boolean;
-  horizontal?: boolean;
+  alignment?: Alignment;
 }
 
 export interface Screen {
@@ -129,19 +131,19 @@ export interface Screen {
 
 ### Props
 
-| Prop name  | Required | Kind             | Reactive | Type                 | Default value          | Description |
-| :--------- | :------- | :--------------- | :------- | -------------------- | ---------------------- | ----------- |
-| size       | No       | <code>let</code> | No       | <code>Size</code>    | <code>1</code>         | --          |
-| demo       | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
-| horizontal | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
-| class      | No       | <code>let</code> | No       | <code>string</code>  | <code>undefined</code> | --          |
-| screen     | No       | <code>let</code> | No       | <code>Screen</code>  | <code>undefined</code> | --          |
+| Prop name | Required | Kind             | Reactive | Type                   | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | ---------------------- | ---------------------- | ----------- |
+| size      | No       | <code>let</code> | No       | <code>Size</code>      | <code>undefined</code> | --          |
+| demo      | No       | <code>let</code> | No       | <code>boolean</code>   | <code>false</code>     | --          |
+| alignment | No       | <code>let</code> | No       | <code>Alignment</code> | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>    | <code>undefined</code> | --          |
+| screen    | No       | <code>let</code> | No       | <code>Screen</code>    | <code>undefined</code> | --          |
 
 ### Slots
 
-| Slot name | Default | Props | Fallback |
-| :-------- | :------ | :---- | :------- |
-| --        | Yes     | --    | --       |
+| Slot name | Default | Props                                           | Fallback |
+| :-------- | :------ | :---------------------------------------------- | :------- |
+| --        | Yes     | <code>{ props: { [key: string]: any } } </code> | --       |
 
 ### Events
 
@@ -152,12 +154,9 @@ None.
 ### Types
 
 ```ts
-export type Size = "xs" | "sm" | "md" | "lg";
-
 export type Status = "online" | "offline";
 
 export interface Properties {
-  size?: Size;
   status: Status;
 }
 
@@ -172,20 +171,19 @@ export interface Screen {
 
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                              | Default value          | Description |
-| :-------- | :------- | :--------------- | :------- | --------------------------------- | ---------------------- | ----------- |
-| size      | No       | <code>let</code> | No       | <code>Properties['size']</code>   | <code>undefined</code> | --          |
-| status    | No       | <code>let</code> | No       | <code>Properties['status']</code> | <code>undefined</code> | --          |
-| src       | No       | <code>let</code> | No       | <code>string</code>               | <code>undefined</code> | --          |
-| alt       | No       | <code>let</code> | No       | <code>string</code>               | <code>undefined</code> | --          |
-| class     | No       | <code>let</code> | No       | <code>string</code>               | <code>undefined</code> | --          |
-| screen    | No       | <code>let</code> | No       | <code>Screen</code>               | <code>undefined</code> | --          |
+| Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
+| status    | No       | <code>let</code> | No       | <code>Status</code> | <code>undefined</code> | --          |
+| src       | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+| alt       | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+| screen    | No       | <code>let</code> | No       | <code>Screen</code> | <code>undefined</code> | --          |
 
 ### Slots
 
-| Slot name | Default | Props | Fallback |
-| :-------- | :------ | :---- | :------- |
-| --        | Yes     | --    | --       |
+| Slot name | Default | Props                                           | Fallback |
+| :-------- | :------ | :---------------------------------------------- | :------- |
+| --        | Yes     | <code>{ props: { [key: string]: any } } </code> | --       |
 
 ### Events
 
@@ -202,9 +200,9 @@ None.
 
 ### Slots
 
-| Slot name | Default | Props | Fallback |
-| :-------- | :------ | :---- | :------- |
-| --        | Yes     | --    | --       |
+| Slot name | Default | Props                                           | Fallback |
+| :-------- | :------ | :---------------------------------------------- | :------- |
+| --        | Yes     | <code>{ props: { [key: string]: any } } </code> | --       |
 
 ### Events
 
@@ -243,19 +241,19 @@ export interface Screen {
 
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                             | Default value          | Description |
-| :-------- | :------- | :--------------- | :------- | -------------------------------- | ---------------------- | ----------- |
-| color     | No       | <code>let</code> | No       | <code>Properties['color']</code> | <code>undefined</code> | --          |
-| size      | No       | <code>let</code> | No       | <code>Properties['size']</code>  | <code>undefined</code> | --          |
-| outline   | No       | <code>let</code> | No       | <code>boolean</code>             | <code>false</code>     | --          |
-| class     | No       | <code>let</code> | No       | <code>string</code>              | <code>undefined</code> | --          |
-| screen    | No       | <code>let</code> | No       | <code>Screen</code>              | <code>undefined</code> | --          |
+| Prop name | Required | Kind             | Reactive | Type                 | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | -------------------- | ---------------------- | ----------- |
+| color     | No       | <code>let</code> | No       | <code>Color</code>   | <code>undefined</code> | --          |
+| size      | No       | <code>let</code> | No       | <code>Size</code>    | <code>undefined</code> | --          |
+| outline   | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>  | <code>undefined</code> | --          |
+| screen    | No       | <code>let</code> | No       | <code>Screen</code>  | <code>undefined</code> | --          |
 
 ### Slots
 
-| Slot name | Default | Props | Fallback |
-| :-------- | :------ | :---- | :------- |
-| --        | Yes     | --    | --       |
+| Slot name | Default | Props                                | Fallback |
+| :-------- | :------ | :----------------------------------- | :------- |
+| --        | Yes     | <code>{ [key: string]: any } </code> | --       |
 
 ### Events
 
@@ -263,17 +261,28 @@ None.
 
 ## `BreadcrumbGroup`
 
+### Types
+
+```ts
+export interface BreadcrumbItem {
+  text?: string;
+  href?: string;
+}
+```
+
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
-| :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
-| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+| Prop name | Required | Kind             | Reactive | Type                               | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | ---------------------------------- | ---------------------- | ----------- |
+| items     | No       | <code>let</code> | No       | <code>Array<BreadcrumbItem></code> | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>                | <code>undefined</code> | --          |
 
 ### Slots
 
-| Slot name | Default | Props | Fallback |
-| :-------- | :------ | :---- | :------- |
-| --        | Yes     | --    | --       |
+| Slot name | Default | Props                                             | Fallback                                                                                             |
+| :-------- | :------ | :------------------------------------------------ | :--------------------------------------------------------------------------------------------------- |
+| --        | Yes     | <code>{ props: { [key: string]: any } } </code>   | --                                                                                                   |
+| item      | No      | <code>{ props: { item: BreadcrumbItem } } </code> | <code>&lt;BreadcrumbItem href={item.href}&gt;<br /> {item.text}<br /> &lt;/BreadcrumbItem&gt;</code> |
 
 ### Events
 
@@ -290,9 +299,9 @@ None.
 
 ### Slots
 
-| Slot name | Default | Props | Fallback |
-| :-------- | :------ | :---- | :------- |
-| --        | Yes     | --    | --       |
+| Slot name | Default | Props                                           | Fallback |
+| :-------- | :------ | :---------------------------------------------- | :------- |
+| --        | Yes     | <code>{ props: { [key: string]: any } } </code> | --       |
 
 ### Events
 
@@ -659,16 +668,16 @@ None.
 ### Types
 
 ```ts
-export interface ScreenProps {
+export interface Properties {
   spin?: boolean;
 }
 
 export interface Screen {
-  sm?: ScreenProps;
-  md?: ScreenProps;
-  lg?: ScreenProps;
-  xl?: ScreenProps;
-  "2xl"?: ScreenProps;
+  sm?: Properties;
+  md?: Properties;
+  lg?: Properties;
+  xl?: Properties;
+  "2xl"?: Properties;
 }
 ```
 
@@ -686,9 +695,9 @@ export interface Screen {
 
 ### Slots
 
-| Slot name | Default | Props | Fallback |
-| :-------- | :------ | :---- | :------- |
-| --        | Yes     | --    | --       |
+| Slot name | Default | Props                                           | Fallback |
+| :-------- | :------ | :---------------------------------------------- | :------- |
+| --        | Yes     | <code>{ props: { [key: string]: any } } </code> | --       |
 
 ### Events
 

@@ -1,0 +1,76 @@
+@use 'sass:list';
+@use '../variables.scss' as *;
+@use '../escape.scss' as *;
+
+.badge {
+    @apply border border-neutral bg-neutral text-neutral-content;
+    @apply inline-flex items-center justify-center transition duration-200 ease-in-out;
+    border-radius: var(--badge-border-radius);
+    width: fit-content;
+
+    @mixin badge-props($prefix: '') {
+        $prefix: escape($prefix);
+
+        @each $color in list.join($brand-colors, $functional-colors) {
+            &.#{$prefix}badge-#{$color} {
+                @apply border-#{$color} bg-#{$color} text-#{$color}-content;
+            }
+        }
+
+        &.#{$prefix}badge-ghost {
+            @apply border-base-200 bg-base-200 text-base-content;
+        }
+
+        &.#{$prefix}badge-outline {
+            @apply border-current border-opacity-50 text-current;
+            @apply bg-transparent #{!important};
+
+            @each $color in list.join($brand-colors, $functional-colors) {
+                &.badge-#{$color} {
+                    @apply text-#{$color};
+                }
+
+                @each $screen-size in $tailwind-screen-sizes {
+                    @screen #{$screen-size} {
+                        $size-prefix: escape('#{$screen-size}:');
+                        &.#{$size-prefix}badge-#{$color} {
+                            @apply text-#{$color};
+                        }
+                    }
+                }
+            }
+        }
+
+        &.#{$prefix}badge-xs {
+            @apply h-3 text-xs leading-3;
+            padding-left: 0.313rem;
+            padding-right: 0.313rem;
+        }
+
+        &.#{$prefix}badge-sm {
+            @apply h-4 text-xs leading-4;
+            padding-left: 0.438rem;
+            padding-right: 0.438rem;
+        }
+
+        &.#{$prefix}badge-md {
+            @apply h-5 text-sm leading-5;
+            padding-left: 0.563rem;
+            padding-right: 0.563rem;
+        }
+
+        &.#{$prefix}badge-lg {
+            @apply h-6 text-base leading-6;
+            padding-left: 0.688rem;
+            padding-right: 0.688rem;
+        }
+    }
+
+    @include badge-props();
+
+    @each $screen-size in $tailwind-screen-sizes {
+        @screen #{$screen-size} {
+            @include badge-props('#{$screen-size}:');
+        }
+    }
+}

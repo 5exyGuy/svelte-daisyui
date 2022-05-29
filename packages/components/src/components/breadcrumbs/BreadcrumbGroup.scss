@@ -1,6 +1,5 @@
-@use '../variables.scss' as *;
-
 .breadcrumb-group {
+    @apply py-2;
     @apply max-w-full overflow-x-auto;
 
     & > :global(ul) {

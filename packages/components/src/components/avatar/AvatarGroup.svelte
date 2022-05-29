@@ -2,6 +2,15 @@
     import { classes } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
+    //  Type Definitions
+    // -----------------------------------------------------------
+
+    /**
+     * @slot {{ props: { [key: string]: any } }}
+     * @restProps {div}
+     */
+
+    // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
@@ -28,6 +37,5 @@
 </div>
 
 <style lang="scss">
-    @import 'AvatarGroupStyled.scss';
-    @import 'AvatarGroupUnstyled.scss';
+    @import 'AvatarGroup.scss';
 </style>

@@ -2,6 +2,15 @@
     import { classes } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
+    //  Type Definitions
+    // -----------------------------------------------------------
+
+    /**
+     * @slot {{ props: { [key: string]: any } }}
+     * @restProps {li}
+     */
+
+    // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
@@ -32,6 +41,5 @@
 </li>
 
 <style lang="scss">
-    @import 'BreadcrumbItemStyled.scss';
-    @import 'BreadcrumbItemUnstyled.scss';
+    @import 'BreadcrumbItem.scss';
 </style>
