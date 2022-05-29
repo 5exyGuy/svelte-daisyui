@@ -32,7 +32,7 @@
     $: classNames = classes({ prefix: 'breadcrumb-item', restClass });
 </script>
 
-<li class={classNames}>
+<li class={classNames} on:click>
     {#if href}
         <a {href}><slot /></a>
     {:else}

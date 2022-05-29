@@ -24,17 +24,17 @@
     // -----------------------------------------------------------
 
     /**
-     * @type {Properties['color']}
+     * @type {Color}
      */
     export let color = undefined;
 
     /**
-     * @type {Properties['size']}
+     * @type {Size}
      */
     export let size = undefined;
 
     /**
-     * @type {Properties['shape']}
+     * @type {Shape}
      */
     export let shape = undefined;
 
