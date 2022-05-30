@@ -1,4 +1,6 @@
 .btn-group {
+    @apply flex flex-wrap;
+
     & > :global(input[type='radio']:checked.btn),
     & > :global(.btn-active) {
         @apply border-primary bg-primary text-primary-content;
@@ -14,5 +16,13 @@
 
     & > :global(.btn:not(:last-of-type)) {
         @apply rounded-r-none;
+    }
+
+    & > :global(input[type='radio'].btn) {
+        @apply appearance-none;
+    }
+
+    & > :global(input[type='radio'].btn:before) {
+        content: attr(data-title);
     }
 }

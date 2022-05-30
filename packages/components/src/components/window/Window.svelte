@@ -1,28 +1,36 @@
 <script>
-    import { classes } from '../../utils';
+    import { classes } from '@svelte-daisyui/shared';
+
+    // -----------------------------------------------------------
+    //  Type Definitions
+    // -----------------------------------------------------------
+
+    /**
+     * @slot {{ [key: string]: any }}
+     * @restProps {div}
+     */
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    let className;
+    let restClass = undefined;
     /**
      * @type {string}
      */
-    export { className as class };
+    export { restClass as class };
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes('window', {}, className);
+    $: classNames = classes({ prefix: 'window', restClass });
 </script>
 
-<div class={classNames}>
+<div class={classNames} {...$$restProps}>
     <slot />
 </div>
 
 <style lang="scss">
-    @import 'WindowStyled.scss';
-    @import 'WindowUnstyled.scss';
+    @import 'Window.scss';
 </style>

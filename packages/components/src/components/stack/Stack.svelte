@@ -1,5 +1,5 @@
 <script>
-    import { classes } from '../../utils';
+    import { classes } from '@svelte-daisyui/shared';
     import { StackDirection } from './stack-direction.enum';
 
     // -----------------------------------------------------------
@@ -11,34 +11,28 @@
      */
     export let direction = 'down';
 
-    let className;
+    let restClass;
     /**
      * @type {string}
      */
-    export { className as class };
+    export { restClass as class };
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'stack',
-        {
-            direction: {
-                condition: !!direction,
-                key: direction,
-                value: StackDirection,
-            },
-        },
-        className,
-    );
+    $: classNames = classes({
+        prefix: 'stack',
+        classProps: { direction: { value: StackDirection } },
+        props: { direction },
+        restClass,
+    });
 </script>
 
-<div class={classNames}>
+<div class={classNames} {...$$restProps}>
     <slot />
 </div>
 
 <style lang="scss">
-    @import 'StackStyled.scss';
-    @import 'StackUnstyled.scss';
+    @import 'Stack.scss';
 </style>

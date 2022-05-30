@@ -2,6 +2,15 @@
     import { classes } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    /**
+     * @slot {{ [key: string]: any }}
+     * @restProps {div}
+     */
+
+    // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
@@ -18,11 +27,10 @@
     $: classNames = classes({ prefix: 'btn-group', restClass });
 </script>
 
-<div class={classNames}>
+<div class={classNames} {...$$restProps}>
     <slot />
 </div>
 
 <style lang="scss">
-    @import 'ButtonGroupStyled.scss';
-    @import 'ButtonGroupUnstyled.scss';
+    @import 'ButtonGroup.scss';
 </style>

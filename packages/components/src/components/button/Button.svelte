@@ -12,6 +12,9 @@
     // -----------------------------------------------------------
 
     /**
+     * @slot {{ [key: string]: any }}
+     * @restProps {button}
+     *
      * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost' | 'link'} Color
      * @typedef {'xs' | 'sm' | 'md' | 'lg'} Size
      * @typedef {'square' | 'circle'} Shape
@@ -120,7 +123,7 @@
     });
 </script>
 
-<button on:click class={classNames} {disabled}>
+<button on:click class={classNames} {disabled} {...$$restProps}>
     <slot />
 </button>
 

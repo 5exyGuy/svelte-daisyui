@@ -12,7 +12,7 @@ export { default as BreadcrumbGroup } from './components/breadcrumbs/BreadcrumbG
 export { default as BreadcrumbItem } from './components/breadcrumbs/BreadcrumbItem.svelte';
 // Button
 export { default as Button } from './components/button/Button.svelte';
-export { default as ButtonGroup } from './components/button-group/ButtonGroup.svelte';
+export { default as ButtonGroup } from './components/button/ButtonGroup.svelte';
 // Card
 export { default as Card } from './components/card/Card.svelte';
 // Carousel
