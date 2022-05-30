@@ -11,7 +11,6 @@
     // -----------------------------------------------------------
 
     /**
-     * @slot {{ [key: string]: any }}
      * @restProps {div}
      *
      * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost'} Color

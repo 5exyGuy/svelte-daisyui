@@ -7,8 +7,7 @@
     // -----------------------------------------------------------
 
     /**
-     * @slot {{ props: { [key: string]: any } }}
-     * @slot {{ props: { item: BreadcrumbItem } }} item
+     * @slot {{ item: BreadcrumbItem }} item
      * @restProps {div}
      *
      * @typedef {{ text?: string, href?: string }} BreadcrumbItem

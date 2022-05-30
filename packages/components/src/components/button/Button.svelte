@@ -12,7 +12,6 @@
     // -----------------------------------------------------------
 
     /**
-     * @slot {{ [key: string]: any }}
      * @restProps {button}
      *
      * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost' | 'link'} Color
@@ -128,6 +127,5 @@
 </button>
 
 <style lang="scss">
-    @import 'ButtonStyled.scss';
-    @import 'ButtonUnstyled.scss';
+    @import 'Button.scss';
 </style>

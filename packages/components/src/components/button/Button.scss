@@ -2,24 +2,32 @@
 @use '../variables.scss' as *;
 
 .btn {
+    @apply inline-flex flex-shrink-0 cursor-pointer select-none flex-wrap items-center justify-center border-transparent text-center transition duration-200 ease-in-out;
+    @apply h-12 px-4 text-sm;
     @apply border-neutral bg-neutral text-neutral-content;
     @apply font-semibold uppercase no-underline;
     border-width: var(---button-border-width, 1px);
     animation: button-pop var(--button-animation-duration, 0.25s) ease-out;
     text-transform: var(--button-text-transform, uppercase);
+    border-radius: var(--button-border-radius);
+    min-height: 3rem;
+    line-height: 1em;
+
+    @mixin btn-props($prefix: '') {
+    }
 
     &.btn-no-animation {
         --button-animation-duration: 0;
         --button-focus-scale: 1;
     }
 
-    &:active:hover,
-    &:active:focus {
+    &.btn-active:hover,
+    &.btn-active:focus {
         animation: none;
     }
 
-    &:active:hover,
-    &:active:focus {
+    &.btn-active:hover,
+    &.btn-active:focus {
         transform: scale(var(--button-focus-scale, 0.95));
     }
 
@@ -33,30 +41,13 @@
         outline-offset: 2px;
     }
 
-    // Brand colors
-    @each $color in $brand-colors {
+    @each $color in list.join($brand-colors, $functional-colors) {
         &.btn-#{$color} {
             @apply border-#{$color} bg-#{$color} text-#{$color}-content;
 
             &:hover,
             &.btn-active {
                 @apply border-#{$color}-focus bg-#{$color}-focus;
-            }
-
-            &:focus-visible {
-                outline: 2px solid hsl(var(--#{$color}));
-            }
-        }
-    }
-
-    // State colors
-    @each $color in $functional-colors {
-        &.btn-#{$color} {
-            @apply border-#{$color} bg-#{$color} text-#{$color}-content;
-
-            &:hover,
-            &.btn-active {
-                @apply border-#{$color} bg-#{$color};
             }
 
             &:focus-visible {
@@ -94,23 +85,12 @@
             @apply border-base-content bg-base-content text-base-100;
         }
 
-        // Brand colors
-        @each $color in $brand-colors {
+        @each $color in list.join($brand-colors, $functional-colors) {
             &.btn-#{$color} {
                 @apply text-#{$color};
 
                 &:hover {
                     @apply border-#{$color}-focus bg-#{$color}-focus text-#{$color}-content;
-                }
-            }
-        }
-
-        // State colors
-        @each $color in $functional-colors {
-            &.btn-#{$color} {
-                @apply text-#{$color};
-                &:hover {
-                    @apply border-#{$color} bg-#{$color} text-#{$color}-content;
                 }
             }
         }
@@ -126,13 +106,112 @@
         &.btn-circle:before {
             @apply mr-0;
         }
+
         &.btn-xl:before,
         &.btn-lg:before {
             @apply h-5 w-5;
         }
+
         &.btn-sm:before,
         &.btn-xs:before {
             @apply h-3 w-3;
+        }
+
+        &,
+        &:hover {
+            @apply pointer-events-none;
+        }
+
+        &:before {
+            @apply mr-2 h-4 w-4 rounded-full border-2;
+            animation: spin 2s linear infinite;
+            content: '';
+            border-top-color: transparent;
+            border-left-color: transparent;
+            border-bottom-color: currentColor;
+            border-right-color: currentColor;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            &:before {
+                animation: spin 10s linear infinite;
+            }
+        }
+    }
+
+    &:disabled {
+        @apply pointer-events-none;
+    }
+
+    &.btn-xs {
+        @apply h-6 px-2;
+        min-height: 1.5rem;
+        font-size: 0.75rem;
+    }
+
+    &.btn-sm {
+        @apply h-8 px-3;
+        min-height: 2rem;
+        font-size: 0.875rem;
+    }
+
+    &.btn-md {
+        @apply h-12 px-4;
+        min-height: 3rem;
+        font-size: 0.875rem;
+    }
+
+    &.btn-lg {
+        @apply h-16 px-6;
+        min-height: 4rem;
+        font-size: 1.125rem;
+    }
+
+    &.btn-wide {
+        @apply w-64;
+    }
+
+    &.btn-block {
+        @apply w-full;
+    }
+
+    &.btn-square {
+        @apply h-12 w-12 p-0;
+
+        &.btn-xs {
+            @apply h-6 w-6/12;
+        }
+
+        &.btn-sm {
+            @apply h-8 w-28;
+        }
+
+        &.btn-md {
+            @apply h-12 w-12;
+        }
+
+        &.btn-lg {
+            @apply h-16 w-16;
+        }
+    }
+
+    &.btn-circle {
+        @apply h-12 w-12 rounded-full p-0;
+
+        &.btn-xs {
+            @apply h-6 w-6;
+        }
+
+        &.btn-sm {
+            @apply h-8 w-8;
+        }
+
+        &.btn-md {
+            @apply h-12 w-12;
+        }
+
+        &.btn-lg {
+            @apply h-16 w-16;
         }
     }
 }
@@ -146,5 +225,14 @@
     }
     100% {
         transform: scale(1);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
     }
 }
