@@ -1,5 +1,10 @@
+@use 'sass:list';
+@use '../variables.scss' as *;
+@use '../escape.scss' as *;
+
 .tooltip {
     @apply relative inline-block text-center;
+    --tooltip-offset: calc(100% + 1px + var(--tooltip-tail, 0px));
     --tooltip-tail: 3px;
     --tooltip-color: hsl(var(--neutral));
     --tooltip-text-color: hsl(var(--neutral-content));
@@ -10,10 +15,20 @@
         @apply opacity-0 transition delay-100 duration-200 ease-in-out;
     }
 
+    & > :global(.tooltip-content) {
+        @apply absolute pointer-events-none;
+        @apply -translate-x-1/2 top-auto left-1/2 right-auto;
+        bottom: var(--tooltip-offset);
+    }
+
     &:after {
         @apply absolute block w-0 h-0 border-solid;
+        @apply -translate-x-1/2 top-auto left-1/2 right-auto;
         content: '';
         border-width: var(--tooltip-tail, 0);
+        bottom: var(--tooltip-tail-offset);
+        border-color: var(--tooltip-color) transparent transparent
+            transparent;
     }
 
     & > :global(.tooltip-content) {
@@ -31,6 +46,11 @@
     }
 
     &.tooltip-top {
+        & > :global(.tooltip-content) {
+            @apply -translate-x-1/2 top-auto left-1/2 right-auto;
+            bottom: var(--tooltip-offset);
+        }
+
         &:after {
             @apply -translate-x-1/2 top-auto left-1/2 right-auto;
             bottom: var(--tooltip-tail-offset);
@@ -40,6 +60,11 @@
     }
 
     &.tooltip-bottom {
+        & > :global(.tooltip-content) {
+            @apply -translate-x-1/2 left-1/2 right-auto bottom-auto;
+            top: var(--tooltip-offset);
+        }
+
         &:after {
             @apply -translate-x-1/2 left-1/2 right-auto bottom-auto;
             top: var(--tooltip-tail-offset);
@@ -49,6 +74,11 @@
     }
 
     &.tooltip-left {
+        & > :global(.tooltip-content) {
+            @apply -translate-y-1/2 top-1/2 left-auto bottom-auto;
+            right: var(--tooltip-offset);
+        }
+
         &:after {
             @apply -translate-y-1/2 top-1/2 left-auto bottom-auto;
             right: var(--tooltip-tail-offset);
@@ -58,6 +88,11 @@
     }
 
     &.tooltip-right {
+        & > :global(.tooltip-content) {
+            @apply -translate-y-1/2 top-1/2 right-auto bottom-auto;
+            left: var(--tooltip-offset);
+        }
+
         &:after {
             @apply -translate-y-1/2 top-1/2 right-auto bottom-auto;
             left: var(--tooltip-tail-offset);
@@ -66,38 +101,10 @@
         }
     }
 
-    &.tooltip-primary {
-        --tooltip-color: hsl(var(--primary));
-        --tooltip-text-color: hsl(var(--primary-content));
-    }
-
-    &.tooltip-secondary {
-        --tooltip-color: hsl(var(--secondary));
-        --tooltip-text-color: hsl(var(--secondary-content));
-    }
-
-    &.tooltip-accent {
-        --tooltip-color: hsl(var(--accent));
-        --tooltip-text-color: hsl(var(--accent-content));
-    }
-
-    &.tooltip-info {
-        --tooltip-color: hsl(var(--info));
-        --tooltip-text-color: hsl(var(--info-content));
-    }
-
-    &.tooltip-success {
-        --tooltip-color: hsl(var(--success));
-        --tooltip-text-color: hsl(var(--success-content));
-    }
-
-    &.tooltip-warning {
-        --tooltip-color: hsl(var(--warning));
-        --tooltip-text-color: hsl(var(--warning-content));
-    }
-
-    &.tooltip-error {
-        --tooltip-color: hsl(var(--error));
-        --tooltip-text-color: hsl(var(--error-content));
+    @each $color in list.join($brand-colors, $functional-colors) {
+        &.tooltip-#{$color} {
+            --tooltip-color: hsl(var(--#{$color}));
+            --tooltip-text-color: hsl(var(--#{$color}-content));
+        }
     }
 }

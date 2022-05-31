@@ -1,15 +1,16 @@
 /// <reference types="svelte" />
 import type { SvelteComponentTyped } from "svelte";
 
-export interface WindowProps {
+export interface WindowProps
+  extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap["div"]> {
   /**
    * @default undefined
    */
-  class: string;
+  class?: string;
 }
 
 export default class Window extends SvelteComponentTyped<
   WindowProps,
   {},
-  { default: {} }
+  { default: { [key: string]: any } }
 > {}

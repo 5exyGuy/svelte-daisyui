@@ -39,7 +39,7 @@
             >
         </BreadcrumbItem>
     </BreadcrumbGroup>
-    <Button color="primary" size="lg" outline loading>Skaityti daugiau</Button>
+    <Button color="secondary" size="sm" outline>asdasdassdaads daugiau</Button>
     <Button color="accent" size="sm">Skaityti daugiau</Button>
     <Kbd size="lg" screen={{ '2xl': { size: 'xs' } }}>CTRL + C</Kbd>
     <Alert color="warning">

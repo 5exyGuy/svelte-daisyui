@@ -1,21 +1,16 @@
 /// <reference types="svelte" />
 import type { SvelteComponentTyped } from "svelte";
 
-export interface AvatarGroupProps
+export interface ButtonGroupProps
   extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap["div"]> {
-  /**
-   * @default '1.5rem'
-   */
-  space?: string;
-
   /**
    * @default undefined
    */
   class?: string;
 }
 
-export default class AvatarGroup extends SvelteComponentTyped<
-  AvatarGroupProps,
+export default class ButtonGroup extends SvelteComponentTyped<
+  ButtonGroupProps,
   {},
   { default: {} }
 > {}

@@ -50,5 +50,5 @@ export interface ArtboardProps
 export default class Artboard extends SvelteComponentTyped<
   ArtboardProps,
   {},
-  { default: { props: { [key: string]: any } } }
+  { default: {} }
 > {}

@@ -23,7 +23,7 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({ prefix: 'window', restClass });
+    $: classNames = classes({ prefix: 'tooltip-content', restClass });
 </script>
 
 <div class={classNames} {...$$restProps}>
@@ -31,5 +31,5 @@
 </div>
 
 <style lang="scss">
-    @import 'Window.scss';
+    @import 'TooltipContent.scss';
 </style>

@@ -57,5 +57,5 @@ export interface BadgeProps
 export default class Badge extends SvelteComponentTyped<
   BadgeProps,
   {},
-  { default: { [key: string]: any } }
+  { default: {} }
 > {}

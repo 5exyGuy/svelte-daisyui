@@ -6,7 +6,7 @@ export { default as Badge } from "./components/badge/Badge.svelte";
 export { default as BreadcrumbGroup } from "./components/breadcrumbs/BreadcrumbGroup.svelte";
 export { default as BreadcrumbItem } from "./components/breadcrumbs/BreadcrumbItem.svelte";
 export { default as Button } from "./components/button/Button.svelte";
-export { default as ButtonGroup } from "./components/button-group/ButtonGroup.svelte";
+export { default as ButtonGroup } from "./components/button/ButtonGroup.svelte";
 export { default as Card } from "./components/card/Card.svelte";
 export { default as CarouselGroup } from "./components/carousel-group/CarouselGroup.svelte";
 export { default as CarouselItem } from "./components/carousel-item/CarouselItem.svelte";

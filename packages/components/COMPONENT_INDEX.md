@@ -97,9 +97,9 @@ export interface Screen {
 
 ### Slots
 
-| Slot name | Default | Props                                           | Fallback |
-| :-------- | :------ | :---------------------------------------------- | :------- |
-| --        | Yes     | <code>{ props: { [key: string]: any } } </code> | --       |
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
 
 ### Events
 
@@ -141,9 +141,9 @@ export interface Screen {
 
 ### Slots
 
-| Slot name | Default | Props                                           | Fallback |
-| :-------- | :------ | :---------------------------------------------- | :------- |
-| --        | Yes     | <code>{ props: { [key: string]: any } } </code> | --       |
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
 
 ### Events
 
@@ -181,9 +181,9 @@ export interface Screen {
 
 ### Slots
 
-| Slot name | Default | Props                                           | Fallback |
-| :-------- | :------ | :---------------------------------------------- | :------- |
-| --        | Yes     | <code>{ props: { [key: string]: any } } </code> | --       |
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
 
 ### Events
 
@@ -200,9 +200,9 @@ None.
 
 ### Slots
 
-| Slot name | Default | Props                                           | Fallback |
-| :-------- | :------ | :---------------------------------------------- | :------- |
-| --        | Yes     | <code>{ props: { [key: string]: any } } </code> | --       |
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
 
 ### Events
 
@@ -251,9 +251,9 @@ export interface Screen {
 
 ### Slots
 
-| Slot name | Default | Props                                | Fallback |
-| :-------- | :------ | :----------------------------------- | :------- |
-| --        | Yes     | <code>{ [key: string]: any } </code> | --       |
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
 
 ### Events
 
@@ -279,10 +279,10 @@ export interface BreadcrumbItem {
 
 ### Slots
 
-| Slot name | Default | Props                                             | Fallback                                                                                             |
-| :-------- | :------ | :------------------------------------------------ | :--------------------------------------------------------------------------------------------------- |
-| --        | Yes     | <code>{ props: { [key: string]: any } } </code>   | --                                                                                                   |
-| item      | No      | <code>{ props: { item: BreadcrumbItem } } </code> | <code>&lt;BreadcrumbItem href={item.href}&gt;<br /> {item.text}<br /> &lt;/BreadcrumbItem&gt;</code> |
+| Slot name | Default | Props                                  | Fallback                                                                                             |
+| :-------- | :------ | :------------------------------------- | :--------------------------------------------------------------------------------------------------- |
+| --        | Yes     | --                                     | --                                                                                                   |
+| item      | No      | <code>{ item: BreadcrumbItem } </code> | <code>&lt;BreadcrumbItem href={item.href}&gt;<br /> {item.text}<br /> &lt;/BreadcrumbItem&gt;</code> |
 
 ### Events
 
@@ -299,13 +299,15 @@ None.
 
 ### Slots
 
-| Slot name | Default | Props                                           | Fallback |
-| :-------- | :------ | :---------------------------------------------- | :------- |
-| --        | Yes     | <code>{ props: { [key: string]: any } } </code> | --       |
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
 
 ### Events
 
-None.
+| Event name | Type      | Detail |
+| :--------- | :-------- | :----- |
+| click      | forwarded | --     |
 
 ## `Button`
 
@@ -344,19 +346,19 @@ export interface Screen {
 
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                             | Default value          | Description |
-| :-------- | :------- | :--------------- | :------- | -------------------------------- | ---------------------- | ----------- |
-| color     | No       | <code>let</code> | No       | <code>Properties['color']</code> | <code>undefined</code> | --          |
-| size      | No       | <code>let</code> | No       | <code>Properties['size']</code>  | <code>undefined</code> | --          |
-| shape     | No       | <code>let</code> | No       | <code>Properties['shape']</code> | <code>undefined</code> | --          |
-| active    | No       | <code>let</code> | No       | <code>boolean</code>             | <code>false</code>     | --          |
-| block     | No       | <code>let</code> | No       | <code>boolean</code>             | <code>false</code>     | --          |
-| outline   | No       | <code>let</code> | No       | <code>boolean</code>             | <code>false</code>     | --          |
-| loading   | No       | <code>let</code> | No       | <code>boolean</code>             | <code>false</code>     | --          |
-| disabled  | No       | <code>let</code> | No       | <code>boolean</code>             | <code>false</code>     | --          |
-| noAnim    | No       | <code>let</code> | No       | <code>boolean</code>             | <code>false</code>     | --          |
-| class     | No       | <code>let</code> | No       | <code>string</code>              | <code>undefined</code> | --          |
-| screen    | No       | <code>let</code> | No       | <code>Screen</code>              | <code>undefined</code> | --          |
+| Prop name | Required | Kind             | Reactive | Type                 | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | -------------------- | ---------------------- | ----------- |
+| color     | No       | <code>let</code> | No       | <code>Color</code>   | <code>undefined</code> | --          |
+| size      | No       | <code>let</code> | No       | <code>Size</code>    | <code>undefined</code> | --          |
+| shape     | No       | <code>let</code> | No       | <code>Shape</code>   | <code>undefined</code> | --          |
+| active    | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
+| block     | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
+| outline   | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
+| loading   | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
+| disabled  | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
+| noAnim    | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>  | <code>undefined</code> | --          |
+| screen    | No       | <code>let</code> | No       | <code>Screen</code>  | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -1477,13 +1479,13 @@ None.
 
 | Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
 | :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
-| class     | Yes      | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
 
 ### Slots
 
-| Slot name | Default | Props | Fallback |
-| :-------- | :------ | :---- | :------- |
-| --        | Yes     | --    | --       |
+| Slot name | Default | Props                                | Fallback |
+| :-------- | :------ | :----------------------------------- | :------- |
+| --        | Yes     | <code>{ [key: string]: any } </code> | --       |
 
 ### Events
 

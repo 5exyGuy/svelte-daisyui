@@ -30,21 +30,22 @@ export interface Screen {
   "2xl"?: Properties;
 }
 
-export interface ButtonProps {
+export interface ButtonProps
+  extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap["button"]> {
   /**
    * @default undefined
    */
-  color?: Properties["color"];
+  color?: Color;
 
   /**
    * @default undefined
    */
-  size?: Properties["size"];
+  size?: Size;
 
   /**
    * @default undefined
    */
-  shape?: Properties["shape"];
+  shape?: Shape;
 
   /**
    * @default false

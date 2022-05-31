@@ -46,5 +46,5 @@ export interface AvatarProps
 export default class Avatar extends SvelteComponentTyped<
   AvatarProps,
   {},
-  { default: { props: { [key: string]: any } } }
+  { default: {} }
 > {}

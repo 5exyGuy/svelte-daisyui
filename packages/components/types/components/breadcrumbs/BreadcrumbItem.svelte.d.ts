@@ -16,6 +16,6 @@ export interface BreadcrumbItemProps
 
 export default class BreadcrumbItem extends SvelteComponentTyped<
   BreadcrumbItemProps,
-  {},
-  { default: { props: { [key: string]: any } } }
+  { click: WindowEventMap["click"] },
+  { default: {} }
 > {}

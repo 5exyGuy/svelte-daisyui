@@ -1,7 +1,7 @@
 module.exports = {
     content: ['./src/**/*.{svelte,js,ts}'],
     daisyui: {
-        mainTheme: 'mano-tema',
+        mainTheme: 'light',
         darkTheme: 'dark',
         includedThemes: ['dark', 'light', 'mano-tema'],
         excludedThemes: ['mano-tema'],

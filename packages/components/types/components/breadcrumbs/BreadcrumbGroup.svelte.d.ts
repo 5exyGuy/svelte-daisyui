@@ -22,8 +22,5 @@ export interface BreadcrumbGroupProps
 export default class BreadcrumbGroup extends SvelteComponentTyped<
   BreadcrumbGroupProps,
   {},
-  {
-    default: { props: { [key: string]: any } };
-    item: { props: { item: BreadcrumbItem } };
-  }
+  { default: {}; item: { item: BreadcrumbItem } }
 > {}

@@ -1,6 +1,23 @@
 <script>
-    import { BrandColor, FunctionalColor, Position } from '../../enums';
-    import { classes } from '../../utils';
+    import {
+        classes,
+        BrandColor,
+        FunctionalColor,
+        Position,
+    } from '@svelte-daisyui/shared';
+
+    // -----------------------------------------------------------
+    //  Type Definitions
+    // -----------------------------------------------------------
+
+    /**
+     * @restProps {div}
+     *
+     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'} Color
+     * @typedef {'top' | 'bottom' | 'left' | 'right'} Position
+     * @typedef {{ color?: Color, position?: Position }} Properties
+     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
+     */
 
     // -----------------------------------------------------------
     // Properties
@@ -12,55 +29,56 @@
     export let open = false;
 
     /**
-     * @type {'top' | 'bottom' | 'left' | 'right'}
+     * @type {Position}
      */
-    export let position = 'top';
+    export let position = undefined;
 
     /**
-     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'}
+     * @type {Color}
      */
-    export let color;
+    export let color = undefined;
 
-    let className;
+    let restClass = undefined;
     /**
      * @type {string}
      */
-    export { className as class };
+    export { restClass as class };
+
+    // -----------------------------------------------------------
+    // Screen
+    // -----------------------------------------------------------
+
+    /**
+     * @type {Screen}
+     */
+    export let screen = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'tooltip',
-        {
-            open: {
-                condition: open,
-                value: 'open',
-            },
-            position: {
-                condition: !!position,
-                key: position,
-                value: Position,
-            },
-            color: {
-                condition: !!color,
-                key: color,
-                value: { ...BrandColor, ...FunctionalColor },
-            },
+    $: classNames = classes({
+        prefix: 'tooltip',
+        classProps: {
+            open: { value: 'open' },
+            position: { value: Position },
+            color: { value: { ...BrandColor, ...FunctionalColor } },
         },
-        className,
-    );
+        props: { open, position, color },
+        screen,
+        restClass,
+    });
 </script>
 
 <div class={classNames}>
-    <div class="tooltip-content">
-        <slot name="content" />
-    </div>
+    {#if $$slots.content}
+        <div class="tooltip-content">
+            <slot name="content" />
+        </div>
+    {/if}
     <slot />
 </div>
 
 <style lang="scss">
-    @import 'TooltipStyled.scss';
-    @import 'TooltipUnstyled.scss';
+    @import 'Tooltip.scss';
 </style>
