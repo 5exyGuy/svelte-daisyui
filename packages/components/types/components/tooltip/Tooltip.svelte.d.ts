@@ -1,33 +1,57 @@
 /// <reference types="svelte" />
 import type { SvelteComponentTyped } from "svelte";
 
-export interface TooltipProps {
+export type Color =
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "info"
+  | "success"
+  | "warning"
+  | "error";
+
+export type Position = "top" | "bottom" | "left" | "right";
+
+export interface Properties {
+  color?: Color;
+  position?: Position;
+  open?: boolean;
+}
+
+export interface Screen {
+  sm?: Properties;
+  md?: Properties;
+  lg?: Properties;
+  xl?: Properties;
+  "2xl"?: Properties;
+}
+
+export interface TooltipProps
+  extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap["div"]> {
+  /**
+   * @default undefined
+   */
+  color?: Color;
+
   /**
    * @default false
    */
   open?: boolean;
 
   /**
-   * @default 'top'
+   * @default undefined
    */
-  position?: "top" | "bottom" | "left" | "right";
+  position?: Position;
 
   /**
    * @default undefined
    */
-  color:
-    | "primary"
-    | "secondary"
-    | "accent"
-    | "info"
-    | "success"
-    | "warning"
-    | "error";
+  class?: string;
 
   /**
    * @default undefined
    */
-  class: string;
+  screen?: Screen;
 }
 
 export default class Tooltip extends SvelteComponentTyped<

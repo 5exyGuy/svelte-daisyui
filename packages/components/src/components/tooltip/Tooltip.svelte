@@ -15,13 +15,18 @@
      *
      * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'} Color
      * @typedef {'top' | 'bottom' | 'left' | 'right'} Position
-     * @typedef {{ color?: Color, position?: Position }} Properties
+     * @typedef {{ color?: Color, position?: Position, open?: boolean }} Properties
      * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
      */
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
+
+    /**
+     * @type {Color}
+     */
+    export let color = undefined;
 
     /**
      * @type {boolean}
@@ -32,11 +37,6 @@
      * @type {Position}
      */
     export let position = undefined;
-
-    /**
-     * @type {Color}
-     */
-    export let color = undefined;
 
     let restClass = undefined;
     /**

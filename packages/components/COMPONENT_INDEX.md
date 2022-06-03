@@ -1453,14 +1453,44 @@ None.
 
 ## `Tooltip`
 
+### Types
+
+```ts
+export type Color =
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "info"
+  | "success"
+  | "warning"
+  | "error";
+
+export type Position = "top" | "bottom" | "left" | "right";
+
+export interface Properties {
+  color?: Color;
+  position?: Position;
+  open?: boolean;
+}
+
+export interface Screen {
+  sm?: Properties;
+  md?: Properties;
+  lg?: Properties;
+  xl?: Properties;
+  "2xl"?: Properties;
+}
+```
+
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                                                                                                                     | Default value          | Description |
-| :-------- | :------- | :--------------- | :------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------- | ----------- |
-| open      | No       | <code>let</code> | No       | <code>boolean</code>                                                                                                     | <code>false</code>     | --          |
-| position  | No       | <code>let</code> | No       | <code>'top' &#124; 'bottom' &#124; 'left' &#124; 'right'</code>                                                          | <code>'top'</code>     | --          |
-| color     | Yes      | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error'</code> | <code>undefined</code> | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code>                                                                                                      | <code>undefined</code> | --          |
+| Prop name | Required | Kind             | Reactive | Type                  | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | --------------------- | ---------------------- | ----------- |
+| color     | No       | <code>let</code> | No       | <code>Color</code>    | <code>undefined</code> | --          |
+| open      | No       | <code>let</code> | No       | <code>boolean</code>  | <code>false</code>     | --          |
+| position  | No       | <code>let</code> | No       | <code>Position</code> | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>   | <code>undefined</code> | --          |
+| screen    | No       | <code>let</code> | No       | <code>Screen</code>   | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -1483,9 +1513,9 @@ None.
 
 ### Slots
 
-| Slot name | Default | Props                                | Fallback |
-| :-------- | :------ | :----------------------------------- | :------- |
-| --        | Yes     | <code>{ [key: string]: any } </code> | --       |
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
 
 ### Events
 

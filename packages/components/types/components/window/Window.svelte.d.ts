@@ -12,5 +12,5 @@ export interface WindowProps
 export default class Window extends SvelteComponentTyped<
   WindowProps,
   {},
-  { default: { [key: string]: any } }
+  { default: {} }
 > {}

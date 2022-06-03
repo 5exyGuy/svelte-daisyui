@@ -2,8 +2,6 @@
 @use '../variables.scss' as *;
 @use '../escape.scss' as *;
 
-$colors: list.join($brand-colors, $functional-colors);
-
 .alert {
     @apply flex w-full flex-col items-center justify-between gap-4 space-y-2 md:flex-row md:space-y-0;
     @apply bg-base-200 p-4;
@@ -20,7 +18,7 @@ $colors: list.join($brand-colors, $functional-colors);
     @mixin alert-props($prefix: '') {
         $prefix: escape($prefix);
 
-        @each $color in $colors {
+        @each $color in list.join($brand-colors, $functional-colors) {
             &.#{$prefix}alert-#{$color} {
                 @apply bg-#{$color} text-#{$color}-content;
             }
