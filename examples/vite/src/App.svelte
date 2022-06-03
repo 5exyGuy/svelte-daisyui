@@ -8,8 +8,6 @@
         Kbd,
         Link,
         BreadcrumbGroup,
-        BreadcrumbItem,
-        Badge,
         Tooltip,
     } from '@svelte-daisyui/components';
 
