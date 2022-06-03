@@ -71,11 +71,7 @@
 </script>
 
 <div class={classNames}>
-    {#if $$slots.content}
-        <div class="tooltip-content">
-            <slot name="content" />
-        </div>
-    {/if}
+    <slot name="content" />
     <slot />
 </div>
 

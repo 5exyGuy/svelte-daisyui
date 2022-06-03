@@ -51,4 +51,5 @@ export { default as TableRow } from "./components/table/TableRow.svelte";
 export { default as TextArea } from "./components/textarea/Textarea.svelte";
 export { default as Toggle } from "./components/toggle/Toggle.svelte";
 export { default as Tooltip } from "./components/tooltip/Tooltip.svelte";
+export { default as TooltipContent } from "./components/tooltip/TooltipContent.svelte";
 export { default as Window } from "./components/window/Window.svelte";

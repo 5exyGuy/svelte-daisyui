@@ -55,6 +55,7 @@
 - [`TextArea`](#textarea)
 - [`Toggle`](#toggle)
 - [`Tooltip`](#tooltip)
+- [`TooltipContent`](#tooltipcontent)
 - [`Window`](#window)
 
 ---
@@ -1498,6 +1499,24 @@ export interface Screen {
 | :-------- | :------ | :---- | :------- |
 | --        | Yes     | --    | --       |
 | content   | No      | --    | --       |
+
+### Events
+
+None.
+
+## `TooltipContent`
+
+### Props
+
+| Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
+| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
 
 ### Events
 

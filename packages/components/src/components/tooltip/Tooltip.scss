@@ -2,7 +2,7 @@
 @use '../variables.scss' as *;
 @use '../escape.scss' as *;
 
-.tooltip {
+div.tooltip {
     @apply relative inline-block text-center;
     --tooltip-offset: calc(100% + 1px + var(--tooltip-tail, 0px));
     --tooltip-tail: 3px;
@@ -10,15 +10,8 @@
     --tooltip-text-color: hsl(var(--neutral-content));
     --tooltip-tail-offset: calc(100% + 1px - var(--tooltip-tail));
 
-    & > :global(.tooltip-content),
     &:after {
         @apply opacity-0 transition delay-100 duration-200 ease-in-out;
-    }
-
-    & > :global(.tooltip-content) {
-        @apply absolute pointer-events-none;
-        @apply -translate-x-1/2 top-auto left-1/2 right-auto;
-        bottom: var(--tooltip-offset);
     }
 
     &:after {
@@ -27,40 +20,25 @@
         content: '';
         border-width: var(--tooltip-tail, 0);
         bottom: var(--tooltip-tail-offset);
-        border-color: var(--tooltip-color) transparent transparent
-            transparent;
+        border-color: var(--tooltip-color) transparent transparent transparent;
     }
 
-    & > :global(.tooltip-content) {
-        @apply max-w-xs rounded px-2 py-1 text-sm;
-        background-color: var(--tooltip-color);
-        color: var(--tooltip-text-color);
-        width: max-content;
-    }
-
-    &.tooltip-open > :global(.tooltip-content),
     &.tooltip-open:after,
-    &:hover > :global(.tooltip-content),
     &:hover:after {
         @apply opacity-100 delay-75;
     }
 
     @mixin tooltip-props($prefix: '') {
         $prefix: escape($prefix);
-    
+
         @each $color in list.join($brand-colors, $functional-colors) {
-            &.tooltip-#{$color} {
+            &.#{$prefix}tooltip-#{$color} {
                 --tooltip-color: hsl(var(--#{$color}));
                 --tooltip-text-color: hsl(var(--#{$color}-content));
             }
         }
-    
-        &.tooltip-top {
-            & > :global(.tooltip-content) {
-                @apply -translate-x-1/2 top-auto left-1/2 right-auto;
-                bottom: var(--tooltip-offset);
-            }
-    
+
+        &.#{$prefix}tooltip-top {
             &:after {
                 @apply -translate-x-1/2 top-auto left-1/2 right-auto;
                 bottom: var(--tooltip-tail-offset);
@@ -68,13 +46,8 @@
                     transparent;
             }
         }
-    
-        &.tooltip-bottom {
-            & > :global(.tooltip-content) {
-                @apply -translate-x-1/2 left-1/2 right-auto bottom-auto;
-                top: var(--tooltip-offset);
-            }
-    
+
+        &.#{$prefix}tooltip-bottom {
             &:after {
                 @apply -translate-x-1/2 left-1/2 right-auto bottom-auto;
                 top: var(--tooltip-tail-offset);
@@ -82,13 +55,8 @@
                     transparent;
             }
         }
-    
-        &.tooltip-left {
-            & > :global(.tooltip-content) {
-                @apply -translate-y-1/2 top-1/2 left-auto bottom-auto;
-                right: var(--tooltip-offset);
-            }
-    
+
+        &.#{$prefix}tooltip-left {
             &:after {
                 @apply -translate-y-1/2 top-1/2 left-auto bottom-auto;
                 right: var(--tooltip-tail-offset);
@@ -96,13 +64,8 @@
                     var(--tooltip-color);
             }
         }
-    
-        &.tooltip-right {
-            & > :global(.tooltip-content) {
-                @apply -translate-y-1/2 top-1/2 right-auto bottom-auto;
-                left: var(--tooltip-offset);
-            }
-    
+
+        &.#{$prefix}tooltip-right {
             &:after {
                 @apply -translate-y-1/2 top-1/2 right-auto bottom-auto;
                 left: var(--tooltip-tail-offset);
@@ -111,9 +74,9 @@
             }
         }
     }
-    
+
     @include tooltip-props();
-    
+
     @each $screen-size in $tailwind-screen-sizes {
         @screen #{$screen-size} {
             @include tooltip-props('#{$screen-size}:');
