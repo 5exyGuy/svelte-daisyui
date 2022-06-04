@@ -1,0 +1,59 @@
+@use 'sass:list';
+@use '../variables.scss' as *;
+@use '../escape.scss' as *;
+
+.dui-textarea {
+    @apply border border-base-content border-opacity-0 bg-base-100;
+    @apply flex-shrink transition duration-200 ease-in-out;
+    @apply px-4 py-2 text-sm leading-loose;
+    border-radius: var(--button-border-radius);
+    min-height: 3rem;
+
+    &:focus {
+        @apply border-opacity-100 #{!important};
+        outline: 2px solid hsl(var(--neutral) / var(--tw-border-opacity));
+        outline-offset: 2px;
+    }
+
+    &:disabled {
+        @apply cursor-not-allowed border-base-200 bg-base-200 text-opacity-20 placeholder-base-content placeholder-opacity-20;
+    }
+
+    @mixin textarea-props($prefix: '') {
+        $prefix: escape($prefix);
+
+        &.#{$prefix}dui-textarea-bordered {
+            @apply border-opacity-20;
+        }
+
+        &.#{$prefix}dui-textarea-ghost {
+            @apply bg-opacity-5;
+
+            &:focus {
+                @apply bg-opacity-100 text-base-content;
+                box-shadow: none;
+            }
+        }
+
+        @each $color in list.join($brand-colors, $functional-colors) {
+            &.#{$prefix}dui-textarea-#{$color} {
+                border-color: hsl(var(--#{$color}) / var(--tw-border-opacity));
+
+                &:focus {
+                    --tw-border-opacity: 1;
+                    outline: 2px
+                        solid
+                        hsl(var(--#{$color}) / var(--tw-border-opacity));
+                }
+            }
+        }
+    }
+
+    @include textarea-props();
+
+    @each $screen-size in $tailwind-screen-sizes {
+        @screen #{$screen-size} {
+            @include textarea-props('#{$screen-size}:');
+        }
+    }
+}

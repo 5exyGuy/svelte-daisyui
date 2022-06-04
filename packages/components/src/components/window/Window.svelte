@@ -23,7 +23,7 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({ prefix: 'window', restClass });
+    $: classNames = classes({ prefix: 'dui-window', restClass });
 </script>
 
 <div class={classNames} {...$$restProps}>

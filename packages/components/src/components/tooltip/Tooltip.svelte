@@ -58,7 +58,7 @@
     // -----------------------------------------------------------
 
     $: classNames = classes({
-        prefix: 'tooltip',
+        prefix: 'dui-tooltip',
         classProps: {
             open: { value: 'open' },
             position: { value: Position },
@@ -75,6 +75,6 @@
     <slot />
 </div>
 
-<style lang="scss">
+<style lang="scss" global>
     @import 'Tooltip.scss';
 </style>

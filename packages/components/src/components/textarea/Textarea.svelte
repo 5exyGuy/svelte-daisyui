@@ -1,20 +1,35 @@
 <script>
-    import { classes } from '../../utils';
-    import { BrandColor, FunctionalColor } from '../../enums';
+    import {
+        classes,
+        BrandColor,
+        FunctionalColor,
+    } from '@svelte-daisyui/shared';
+
+    // -----------------------------------------------------------
+    //  Type Definitions
+    // -----------------------------------------------------------
+
+    /**
+     * @restProps {input}
+     *
+     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost'} Color
+     * @typedef {{ color?: Color }} Properties
+     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
+     */
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
     /**
-     * @type {string}
+     * @type {Color}
      */
-    export let placeholder;
+    export let color = undefined;
 
     /**
-     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost'}
+     * @type {string}
      */
-    export let color;
+    export let placeholder = undefined;
 
     /**
      * @type {boolean}
@@ -26,36 +41,45 @@
      */
     export let bordered = false;
 
-    let className;
+    let restClass = undefined;
     /**
      * @type {string}
      */
-    export { className as class };
+    export { restClass as class };
+
+    // -----------------------------------------------------------
+    // Screen
+    // -----------------------------------------------------------
+
+    /**
+     * @type {Screen}
+     */
+    export let screen = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'textarea',
-        {
+    $: classNames = classes({
+        prefix: 'dui-textarea',
+        classProps: {
             color: {
-                condition: !!color,
-                key: color,
-                value: { ...BrandColor, ...FunctionalColor },
+                value: {
+                    ...BrandColor,
+                    ...FunctionalColor,
+                    ...{ ghost: 'ghost' },
+                },
             },
-            bordered: {
-                condition: bordered,
-                value: 'bordered',
-            },
+            bordered: { value: 'bordered' },
         },
-        className,
-    );
+        props: { color, bordered },
+        screen,
+        restClass,
+    });
 </script>
 
 <textarea class={classNames} {placeholder} {disabled} />
 
-<style lang="scss">
-    @import 'TextareaStyled.scss';
-    @import 'TextareaUnstyled.scss';
+<style lang="scss" global>
+    @import 'TextArea.scss';
 </style>

@@ -79,7 +79,7 @@ export { default as Swap } from './components/swap/Swap.svelte'; // TODO: Add ev
 export { default as TabGroup } from './components/tab-group/TabGroup.svelte';
 export { default as TabItem } from './components/tab-item/TabItem.svelte';
 // Table
-export { default as Table } from './components/table/Table.svelte'; // TODO: Find better solution for making the table
+export { default as Table } from './components/table/Table.svelte';
 export { default as TableBody } from './components/table/TableBody.svelte';
 export { default as TableCell } from './components/table/TableCell.svelte';
 export { default as TableFooter } from './components/table/TableFooter.svelte';
@@ -87,7 +87,7 @@ export { default as TableHeader } from './components/table/TableHeader.svelte';
 export { default as TableHeaderCell } from './components/table/TableHeaderCell.svelte';
 export { default as TableRow } from './components/table/TableRow.svelte';
 // TextArea
-export { default as TextArea } from './components/textarea/Textarea.svelte';
+export { default as TextArea } from './components/textarea/TextArea.svelte';
 // Toggle
 export { default as Toggle } from './components/toggle/Toggle.svelte';
 // Tooltip

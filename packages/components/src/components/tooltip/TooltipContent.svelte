@@ -23,13 +23,13 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({ prefix: 'tooltip-content', restClass });
+    $: classNames = classes({ prefix: 'dui-tooltip-content', restClass });
 </script>
 
 <div class={classNames} {...$$restProps}>
     <slot />
 </div>
 
-<style lang="scss">
+<style lang="scss" global>
     @import 'TooltipContent.scss';
 </style>

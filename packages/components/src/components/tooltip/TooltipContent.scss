@@ -2,8 +2,8 @@
 @use '../variables.scss' as *;
 @use '../escape.scss' as *;
 
-:global(div.tooltip) {
-    & > div.tooltip-content {
+div.dui-tooltip {
+    & > div.dui-tooltip-content {
         @apply opacity-0 transition delay-100 duration-200 ease-in-out;
         @apply absolute pointer-events-none;
         @apply -translate-x-1/2 top-auto left-1/2 right-auto;
@@ -14,56 +14,58 @@
         width: max-content;
     }
 
-    & :global(.tooltip-open) > div.tooltip-content,
-    // &:hover > div.tooltip-content
-    {
+    &:hover > div.dui-tooltip-content {
         @apply opacity-100 delay-75;
     }
 
-    // @mixin tooltip-props($prefix: '') {
-    //     $prefix: escape($prefix);
+    @mixin tooltip-props($prefix: '') {
+        $prefix: escape($prefix);
 
-    //     @each $color in list.join($brand-colors, $functional-colors) {
-    //         &.#{$prefix}tooltip-#{$color} {
-    //             --tooltip-color: hsl(var(--#{$color}));
-    //             --tooltip-text-color: hsl(var(--#{$color}-content));
-    //         }
-    //     }
+        &.#{$prefix}dui-tooltip-open > div.dui-tooltip-content {
+            @apply opacity-100 delay-75;
+        }
 
-    //     &.#{$prefix}tooltip-top {
-    //         & > div.tooltip-content {
-    //             @apply -translate-x-1/2 top-auto left-1/2 right-auto;
-    //             bottom: var(--tooltip-offset);
-    //         }
-    //     }
+        @each $color in list.join($brand-colors, $functional-colors) {
+            &.#{$prefix}dui-tooltip-#{$color} {
+                --tooltip-color: hsl(var(--#{$color}));
+                --tooltip-text-color: hsl(var(--#{$color}-content));
+            }
+        }
 
-    //     &.#{$prefix}tooltip-bottom {
-    //         & > div.tooltip-content {
-    //             @apply -translate-x-1/2 left-1/2 right-auto bottom-auto;
-    //             top: var(--tooltip-offset);
-    //         }
-    //     }
+        &.#{$prefix}dui-tooltip-top {
+            & > div.dui-tooltip-content {
+                @apply -translate-x-1/2 translate-y-0 top-auto left-1/2 right-auto;
+                bottom: var(--tooltip-offset);
+            }
+        }
 
-    //     &.#{$prefix}tooltip-left {
-    //         & > div.tooltip-content {
-    //             @apply -translate-y-1/2 top-1/2 left-auto bottom-auto;
-    //             right: var(--tooltip-offset);
-    //         }
-    //     }
+        &.#{$prefix}dui-tooltip-bottom {
+            & > div.dui-tooltip-content {
+                @apply -translate-x-1/2 translate-y-0 left-1/2 right-auto bottom-auto;
+                top: var(--tooltip-offset);
+            }
+        }
 
-    //     &.#{$prefix}tooltip-right {
-    //         & > div.tooltip-content {
-    //             @apply -translate-y-1/2 top-1/2 right-auto bottom-auto;
-    //             left: var(--tooltip-offset);
-    //         }
-    //     }
-    // }
+        &.#{$prefix}dui-tooltip-left {
+            & > div.dui-tooltip-content {
+                @apply translate-x-0 -translate-y-1/2 top-1/2 left-auto bottom-auto;
+                right: var(--tooltip-offset);
+            }
+        }
 
-    // @include tooltip-props();
+        &.#{$prefix}dui-tooltip-right {
+            & > div.dui-tooltip-content {
+                @apply translate-x-0 -translate-y-1/2 top-1/2 right-auto bottom-auto;
+                left: var(--tooltip-offset);
+            }
+        }
+    }
 
-    // @each $screen-size in $tailwind-screen-sizes {
-    //     @screen #{$screen-size} {
-    //         @include tooltip-props('#{$screen-size}:');
-    //     }
-    // }
+    @include tooltip-props();
+
+    @each $screen-size in $tailwind-screen-sizes {
+        @screen #{$screen-size} {
+            @include tooltip-props('#{$screen-size}:');
+        }
+    }
 }

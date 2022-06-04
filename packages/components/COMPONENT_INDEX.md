@@ -1414,15 +1414,42 @@ None.
 
 ## `TextArea`
 
+### Types
+
+```ts
+export type Color =
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "info"
+  | "success"
+  | "warning"
+  | "error"
+  | "ghost";
+
+export interface Properties {
+  color?: Color;
+}
+
+export interface Screen {
+  sm?: Properties;
+  md?: Properties;
+  lg?: Properties;
+  xl?: Properties;
+  "2xl"?: Properties;
+}
+```
+
 ### Props
 
-| Prop name   | Required | Kind             | Reactive | Type                                                                                                                                    | Default value          | Description |
-| :---------- | :------- | :--------------- | :------- | --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
-| placeholder | Yes      | <code>let</code> | No       | <code>string</code>                                                                                                                     | <code>undefined</code> | --          |
-| color       | Yes      | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; 'ghost'</code> | <code>undefined</code> | --          |
-| disabled    | No       | <code>let</code> | No       | <code>boolean</code>                                                                                                                    | <code>false</code>     | --          |
-| bordered    | No       | <code>let</code> | No       | <code>boolean</code>                                                                                                                    | <code>false</code>     | --          |
-| class       | Yes      | <code>let</code> | No       | <code>string</code>                                                                                                                     | <code>undefined</code> | --          |
+| Prop name   | Required | Kind             | Reactive | Type                 | Default value          | Description |
+| :---------- | :------- | :--------------- | :------- | -------------------- | ---------------------- | ----------- |
+| color       | No       | <code>let</code> | No       | <code>Color</code>   | <code>undefined</code> | --          |
+| placeholder | No       | <code>let</code> | No       | <code>string</code>  | <code>undefined</code> | --          |
+| disabled    | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
+| bordered    | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
+| class       | No       | <code>let</code> | No       | <code>string</code>  | <code>undefined</code> | --          |
+| screen      | No       | <code>let</code> | No       | <code>Screen</code>  | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -1434,15 +1461,45 @@ None.
 
 ## `Toggle`
 
+### Types
+
+```ts
+export type Color =
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "info"
+  | "success"
+  | "warning"
+  | "error";
+
+export type Size = "xs" | "sm" | "md" | "lg";
+
+export interface Properties {
+  color?: Color;
+  size?: Size;
+}
+
+export interface Screen {
+  sm?: Properties;
+  md?: Properties;
+  lg?: Properties;
+  xl?: Properties;
+  "2xl"?: Properties;
+}
+```
+
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                                                                                                                     | Default value          | Description |
-| :-------- | :------- | :--------------- | :------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------- | ----------- |
-| color     | Yes      | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error'</code> | <code>undefined</code> | --          |
-| size      | No       | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large'</code>                                                        | <code>'medium'</code>  | --          |
-| disabled  | No       | <code>let</code> | No       | <code>boolean</code>                                                                                                     | <code>false</code>     | --          |
-| checked   | No       | <code>let</code> | No       | <code>boolean</code>                                                                                                     | <code>false</code>     | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code>                                                                                                      | <code>undefined</code> | --          |
+| Prop name     | Required | Kind             | Reactive | Type                 | Default value          | Description |
+| :------------ | :------- | :--------------- | :------- | -------------------- | ---------------------- | ----------- |
+| color         | No       | <code>let</code> | No       | <code>Color</code>   | <code>undefined</code> | --          |
+| size          | No       | <code>let</code> | No       | <code>Size</code>    | <code>undefined</code> | --          |
+| disabled      | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
+| checked       | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
+| indeterminate | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
+| class         | No       | <code>let</code> | No       | <code>string</code>  | <code>undefined</code> | --          |
+| screen        | No       | <code>let</code> | No       | <code>Screen</code>  | <code>undefined</code> | --          |
 
 ### Slots
 

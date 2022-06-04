@@ -1,0 +1,112 @@
+@use 'sass:list';
+@use '../variables.scss' as *;
+@use '../escape.scss' as *;
+
+.dui-toggle {
+    @apply shrink-0;
+    --handle-offset: 1.5rem;
+    @apply h-6 w-12 cursor-pointer appearance-none border border-neutral border-opacity-20 bg-neutral bg-opacity-20;
+    border-radius: var(--badge-border-radius);
+    transition: background, box-shadow var(--animation-input, 0.2s) ease-in-out;
+    box-shadow: calc(var(--handle-offset) * -1) 0 0 2px hsl(var(--base-100))
+            inset,
+        0 0 0 2px hsl(var(--base-100)) inset;
+
+    &:focus-visible {
+        outline: 2px solid hsl(var(--neutral));
+        outline-offset: 2px;
+    }
+
+    &:checked {
+        @apply border-opacity-100 bg-opacity-100;
+        box-shadow: var(--handle-offset) 0 0 2px hsl(var(--base-100)) inset,
+            0 0 0 2px hsl(var(--base-100)) inset;
+        [dir='rtl'] & {
+            box-shadow: calc(var(--handle-offset) * 1) 0 0 2px
+                    hsl(var(--base-100)) inset,
+                0 0 0 2px hsl(var(--base-100)) inset;
+        }
+    }
+
+    &:indeterminate {
+        @apply border-opacity-100 bg-opacity-100;
+        box-shadow: calc(var(--handle-offset) / 2) 0 0 2px hsl(var(--base-100))
+                inset,
+            calc(var(--handle-offset) / -2) 0 0 2px hsl(var(--base-100)) inset,
+            0 0 0 2px hsl(var(--base-100)) inset;
+        [dir='rtl'] & {
+            box-shadow: calc(var(--handle-offset) / 2) 0 0 2px
+                    hsl(var(--base-100)) inset,
+                calc(var(--handle-offset) / -2) 0 0 2px hsl(var(--base-100))
+                    inset,
+                0 0 0 2px hsl(var(--base-100)) inset;
+        }
+    }
+
+    &:disabled {
+        @apply cursor-not-allowed;
+        @apply border-transparent bg-neutral bg-opacity-20 #{!important};
+
+        @mixin toggle-colors($prefix: '') {
+            $prefix: escape($prefix);
+
+            @each $color in list.join($brand-colors, $functional-colors) {
+                &.#{$prefix}dui-toggle-#{$color}:checked {
+                    @apply bg-#{$color} bg-opacity-20 #{!important};
+                }
+            }
+        }
+
+        @include toggle-colors();
+
+        @each $screen-size in $tailwind-screen-sizes {
+            @screen #{$screen-size} {
+                @include toggle-colors('#{$screen-size}:');
+            }
+        }
+    }
+
+    @mixin toggle-props($prefix: '') {
+        $prefix: escape($prefix);
+
+        @each $color in list.join($brand-colors, $functional-colors) {
+            &.#{$prefix}dui-toggle-#{$color} {
+                &:focus-visible {
+                    outline: 2px solid hsl(var(--#{$color}));
+                }
+
+                &:checked {
+                    @apply border-#{$color} border-opacity-10 bg-#{$color} text-#{$color}-content;
+                }
+            }
+        }
+
+        &.#{$prefix}dui-toggle-xs {
+            --handle-offset: 0.5rem;
+            @apply h-4 w-6;
+        }
+
+        &.#{$prefix}dui-toggle-sm {
+            --handle-offset: 0.75rem;
+            @apply h-5 w-8;
+        }
+
+        &.#{$prefix}dui-toggle-md {
+            --handle-offset: 1.5rem;
+            @apply h-6 w-12;
+        }
+
+        &.#{$prefix}dui-toggle-lg {
+            --handle-offset: 2rem;
+            @apply h-8 w-16;
+        }
+    }
+
+    @include toggle-props();
+
+    @each $screen-size in $tailwind-screen-sizes {
+        @screen #{$screen-size} {
+            @include toggle-props('#{$screen-size}:');
+        }
+    }
+}

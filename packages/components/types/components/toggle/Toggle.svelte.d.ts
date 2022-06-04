@@ -1,23 +1,41 @@
 /// <reference types="svelte" />
 import type { SvelteComponentTyped } from "svelte";
 
-export interface ToggleProps {
+export type Color =
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "info"
+  | "success"
+  | "warning"
+  | "error";
+
+export type Size = "xs" | "sm" | "md" | "lg";
+
+export interface Properties {
+  color?: Color;
+  size?: Size;
+}
+
+export interface Screen {
+  sm?: Properties;
+  md?: Properties;
+  lg?: Properties;
+  xl?: Properties;
+  "2xl"?: Properties;
+}
+
+export interface ToggleProps
+  extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap["input"]> {
   /**
    * @default undefined
    */
-  color:
-    | "primary"
-    | "secondary"
-    | "accent"
-    | "info"
-    | "success"
-    | "warning"
-    | "error";
+  color?: Color;
 
   /**
-   * @default 'medium'
+   * @default undefined
    */
-  size?: "tiny" | "small" | "medium" | "large";
+  size?: Size;
 
   /**
    * @default false
@@ -30,9 +48,19 @@ export interface ToggleProps {
   checked?: boolean;
 
   /**
+   * @default false
+   */
+  indeterminate?: boolean;
+
+  /**
    * @default undefined
    */
-  class: string;
+  class?: string;
+
+  /**
+   * @default undefined
+   */
+  screen?: Screen;
 }
 
 export default class Toggle extends SvelteComponentTyped<ToggleProps, {}, {}> {}
