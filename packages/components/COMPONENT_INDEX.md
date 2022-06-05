@@ -532,7 +532,7 @@ None.
 
 | Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
 | :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
-| class     | Yes      | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
 
 ### Slots
 

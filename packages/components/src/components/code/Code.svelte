@@ -2,10 +2,18 @@
     import { classes } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
+    //  Type Definitions
+    // -----------------------------------------------------------
+
+    /**
+     * @restProps {div}
+     */
+
+    // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    let restClass;
+    let restClass = undefined;
     /**
      * @type {string}
      */
@@ -23,6 +31,5 @@
 </div>
 
 <style lang="scss">
-    @import 'CodeStyled.scss';
-    @import 'CodeUnstyled.scss';
+    @import 'Code.scss';
 </style>
