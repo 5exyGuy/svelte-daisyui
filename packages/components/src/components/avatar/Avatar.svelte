@@ -1,5 +1,5 @@
 <script>
-    import { Size, classes, AvatarStatus } from '@svelte-daisyui/shared';
+    import { classes, AvatarStatus } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
     //  Type Definitions
@@ -53,16 +53,14 @@
 
     $: classNames = classes({
         prefix: 'avatar',
-        classProps: {
-            status: { value: AvatarStatus },
-        },
+        classProps: { status: { value: AvatarStatus } },
         props: { status },
         screen,
         restClass,
     });
 </script>
 
-<div class={classNames}>
+<div class={classNames} {...$$restProps}>
     {#if src}
         <img {alt} {src} />
     {:else}

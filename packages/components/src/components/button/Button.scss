@@ -1,5 +1,6 @@
 @use 'sass:list';
 @use '../variables.scss' as *;
+@use '../escape.scss' as *;
 
 .btn {
     @apply inline-flex flex-shrink-0 cursor-pointer select-none flex-wrap items-center justify-center border-transparent text-center transition duration-200 ease-in-out;
@@ -14,12 +15,15 @@
     line-height: 1em;
 
     @mixin btn-props($prefix: '') {
+        $prefix: escape($prefix);
+
+        &.#{$prefix}btn-no-animation {
+            --button-animation-duration: 0;
+            --button-focus-scale: 1;
+        }
     }
 
-    &.btn-no-animation {
-        --button-animation-duration: 0;
-        --button-focus-scale: 1;
-    }
+    @import btn-props();
 
     &.btn-active:hover,
     &.btn-active:focus {

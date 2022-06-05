@@ -23,13 +23,13 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({ prefix: 'btn-group', restClass });
+    $: classNames = classes({ prefix: 'dui-btn-group', restClass });
 </script>
 
 <div class={classNames} {...$$restProps}>
     <slot />
 </div>
 
-<style lang="scss">
+<style lang="scss" global>
     @import 'ButtonGroup.scss';
 </style>

@@ -17,7 +17,7 @@
      * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost' | 'link'} Color
      * @typedef {'xs' | 'sm' | 'md' | 'lg'} Size
      * @typedef {'square' | 'circle'} Shape
-     * @typedef {{ color?: Color, size?: Size, shape?: Shape }} Properties
+     * @typedef {{ color?: Color, size?: Size, shape?: Shape, active?: boolean, block?: boolean, outline?: boolean, loading?: boolean, animation?: boolean }} Properties
      * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
      */
 
@@ -68,7 +68,7 @@
     /**
      * @type {boolean}
      */
-    export let noAnim = false;
+    export let animation = false;
 
     let restClass = undefined;
     /**
@@ -105,7 +105,7 @@
             block: { value: 'block' },
             outline: { value: 'outline' },
             loading: { value: 'loading' },
-            noAnim: { value: 'no-animation' },
+            animation: { value: 'no-animation' },
         },
         props: {
             color,
@@ -115,17 +115,26 @@
             block: block && !shape,
             outline,
             loading,
-            noAnim,
+            animation,
         },
         restClass,
         screen,
     });
 </script>
 
-<button on:click class={classNames} {disabled} {...$$restProps}>
+<button
+    class={classNames}
+    {disabled}
+    {...$$restProps}
+    on:click
+    on:focus
+    on:mouseover
+    on:mouseenter
+    on:mouseleave
+>
     <slot />
 </button>
 
-<style lang="scss">
+<style lang="scss" global>
     @import 'Button.scss';
 </style>

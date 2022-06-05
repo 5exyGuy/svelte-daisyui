@@ -1,28 +1,29 @@
-.btn-group {
+.dui-btn-group {
     @apply flex flex-wrap;
 
-    & > :global(input[type='radio']:checked.btn),
-    & > :global(.btn-active) {
+    & > input[type='radio']:checked.btn,
+    & > .btn-active {
         @apply border-primary bg-primary text-primary-content;
 
         &:focus-visible {
-            outline: 2px solid hsl(var(--primary));
+            --tw-border-opacity: 1;
+            outline: 2px solid hsl(var(--primary) / var(--tw-border-opacity));
         }
     }
 
-    & > :global(.btn:not(:first-of-type)) {
+    & > .btn:not(:first-of-type) {
         @apply -ml-px rounded-l-none;
     }
 
-    & > :global(.btn:not(:last-of-type)) {
+    & > .btn:not(:last-of-type) {
         @apply rounded-r-none;
     }
 
-    & > :global(input[type='radio'].btn) {
+    & > input[type='radio'].btn {
         @apply appearance-none;
     }
 
-    & > :global(input[type='radio'].btn:before) {
+    & > input[type='radio'].btn:before {
         content: attr(data-title);
     }
 }
