@@ -28,7 +28,7 @@ export { default as Link } from "./components/link/Link.svelte";
 export { default as Mask } from "./components/mask/Mask.svelte";
 export { default as Navbar } from "./components/navbar/Navbar.svelte";
 export { default as Progress } from "./components/progress/Progress.svelte";
-export { default as RadialProgress } from "./components/radial-progress/RadialProgress.svelte";
+export { default as RadialProgress } from "./components/progress/RadialProgress.svelte";
 export { default as Radio } from "./components/radio/Radio.svelte";
 export { default as Range } from "./components/range/Range.svelte";
 export { default as Rating } from "./components/rating/Rating.svelte";

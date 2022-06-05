@@ -23,7 +23,7 @@
         }
     }
 
-    @import btn-props();
+    @include btn-props();
 
     &.btn-active:hover,
     &.btn-active:focus {

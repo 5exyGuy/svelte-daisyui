@@ -1,7 +1,10 @@
-.radial-progress {
+.dui-radial-progress {
     @apply w-[var(--size)] h-[var(--size)] bg-transparent rounded-full place-content-center inline-grid relative;
     vertical-align: middle;
     box-sizing: content-box;
+    --value: 0;
+    --size: 5rem;
+    --thickness: calc(var(--size) / 10);
 
     &::-moz-progress-bar {
         @apply bg-transparent appearance-none;
@@ -39,6 +42,7 @@
     }
 
     &:after {
+        @apply bg-current;
         inset: calc(50% - var(--thickness) / 2);
         transform: rotate(calc(var(--value) * 3.6deg - 90deg))
             translate(calc(var(--size) / 2 - 50%));

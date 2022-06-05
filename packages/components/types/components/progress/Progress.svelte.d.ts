@@ -1,23 +1,41 @@
 /// <reference types="svelte" />
 import type { SvelteComponentTyped } from "svelte";
 
-export interface ProgressProps {
+export type Color =
+  | "primary"
+  | "secondary"
+  | "accent"
+  | "info"
+  | "success"
+  | "warning"
+  | "error";
+
+export type Size = "xs" | "sm" | "md" | "lg";
+
+export interface Properties {
+  color?: Color;
+  size?: Size;
+}
+
+export interface Screen {
+  sm?: Properties;
+  md?: Properties;
+  lg?: Properties;
+  xl?: Properties;
+  "2xl"?: Properties;
+}
+
+export interface ProgressProps
+  extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap["progress"]> {
   /**
    * @default undefined
    */
-  color:
-    | "primary"
-    | "secondary"
-    | "accent"
-    | "info"
-    | "success"
-    | "warning"
-    | "error";
+  color?: Color;
 
   /**
-   * @default 'medium'
+   * @default 'md'
    */
-  size?: "tiny" | "small" | "medium" | "large";
+  size?: Size;
 
   /**
    * @default 0
@@ -32,7 +50,12 @@ export interface ProgressProps {
   /**
    * @default undefined
    */
-  class: string;
+  class?: string;
+
+  /**
+   * @default undefined
+   */
+  screen?: Screen;
 }
 
 export default class Progress extends SvelteComponentTyped<

@@ -2,7 +2,7 @@
 @use '../escape.scss' as *;
 
 .kbd {
-    @apply border border-neutral-focus border-opacity-20 bg-base-200 px-2;
+    @apply border border-neutral-focus border-opacity-20 bg-base-200 text-base-content px-2;
     border-radius: var(--button-border-radius);
     border-bottom-width: 2px;
     min-height: 2.2em;

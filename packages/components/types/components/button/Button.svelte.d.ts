@@ -20,6 +20,11 @@ export interface Properties {
   color?: Color;
   size?: Size;
   shape?: Shape;
+  active?: boolean;
+  block?: boolean;
+  outline?: boolean;
+  loading?: boolean;
+  animation?: boolean;
 }
 
 export interface Screen {
@@ -75,7 +80,7 @@ export interface ButtonProps
   /**
    * @default false
    */
-  noAnim?: boolean;
+  animation?: boolean;
 
   /**
    * @default undefined
@@ -90,6 +95,12 @@ export interface ButtonProps
 
 export default class Button extends SvelteComponentTyped<
   ButtonProps,
-  { click: WindowEventMap["click"] },
+  {
+    click: WindowEventMap["click"];
+    focus: WindowEventMap["focus"];
+    mouseover: WindowEventMap["mouseover"];
+    mouseenter: WindowEventMap["mouseenter"];
+    mouseleave: WindowEventMap["mouseleave"];
+  },
   { default: {} }
 > {}

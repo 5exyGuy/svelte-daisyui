@@ -56,7 +56,7 @@ export { default as Mask } from './components/mask/Mask.svelte';
 export { default as Navbar } from './components/navbar/Navbar.svelte'; // TODO: Add background colors
 // Progress
 export { default as Progress } from './components/progress/Progress.svelte';
-export { default as RadialProgress } from './components/radial-progress/RadialProgress.svelte';
+export { default as RadialProgress } from './components/progress/RadialProgress.svelte';
 // Radio
 export { default as Radio } from './components/radio/Radio.svelte';
 // Range

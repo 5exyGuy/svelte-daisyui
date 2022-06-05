@@ -10,7 +10,6 @@
     // -----------------------------------------------------------
 
     /**
-     * @slot {{ props: { [key: string]: any } }}
      * @restProps {a}
      *
      * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'neutral'} Color
@@ -66,9 +65,7 @@
                     ...{ neutral: 'neutral' },
                 },
             },
-            hover: {
-                value: 'hover',
-            },
+            hover: { value: 'hover' },
         },
         props: { color, hover },
         screen,

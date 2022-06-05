@@ -79,5 +79,5 @@ export interface LinkProps
 export default class Link extends SvelteComponentTyped<
   LinkProps,
   {},
-  { default: { props: { [key: string]: any } } }
+  { default: {} }
 > {}

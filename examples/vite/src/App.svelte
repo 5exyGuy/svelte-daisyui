@@ -1,7 +1,7 @@
 <script>
     import {
-        Divider,
         Kbd,
+        RadialProgress,
         TextArea,
         Toggle,
         Tooltip,
@@ -27,26 +27,7 @@
     <Toggle color="accent" disabled />
     <TextArea bordered placeholder="Enter text here..." />
     <TextArea color="primary" bordered placeholder="Enter text here..." />
-    <div class="flex flex-col w-full border-opacity-50">
-        <div class="grid h-20 card bg-base-300 rounded-box place-items-center">
-            content
-        </div>
-        <Divider alignment="vertical" />
-        <div class="grid h-20 card bg-base-300 rounded-box place-items-center">
-            content
-        </div>
-    </div>
-    <div class="flex w-full">
-        <div
-            class="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center"
-        >
-            content
-        </div>
-        <Divider alignment="horizontal" />
-        <div
-            class="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center"
-        >
-            content
-        </div>
-    </div>
+    <RadialProgress value={50} let:value>
+        <div class="text-primary-content">{value}</div>
+    </RadialProgress>
 </Showcase>

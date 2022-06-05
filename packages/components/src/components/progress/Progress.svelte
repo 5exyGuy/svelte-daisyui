@@ -1,20 +1,37 @@
 <script>
-    import { BrandColor, FunctionalColor, Size } from '../../enums';
-    import { classes } from '../../utils';
+    import {
+        classes,
+        BrandColor,
+        FunctionalColor,
+        Size,
+    } from '@svelte-daisyui/shared';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    /**
+     * @restProps {progress}
+     *
+     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'} Color
+     * @typedef {'xs' | 'sm' | 'md' | 'lg'} Size
+     * @typedef {{ color?: Color, size?: Size }} Properties
+     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
+     */
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
     /**
-     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'}
+     * @type {Color}
      */
-    export let color;
+    export let color = undefined;
 
     /**
-     * @type {'tiny' | 'small' | 'medium' | 'large'}
+     * @type {Size}
      */
-    export let size = 'medium';
+    export let size = 'md';
 
     /**
      * @type {number}
@@ -26,35 +43,38 @@
      */
     export let max = 100;
 
-    let className;
+    let restClass = undefined;
     /**
      * @type {string}
      */
-    export { className as class };
+    export { restClass as class };
+
+    // -----------------------------------------------------------
+    // Screen
+    // -----------------------------------------------------------
+
+    /**
+     * @type {Screen}
+     */
+    export let screen = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'progress',
-        {
-            color: {
-                condition: !!color,
-                key: color,
-                value: { ...BrandColor, ...FunctionalColor },
-            },
-            size: {
-                condition: !!size,
-                key: size,
-                value: Size,
-            },
+    $: classNames = classes({
+        prefix: 'progress',
+        classProps: {
+            color: { value: { ...BrandColor, ...FunctionalColor } },
+            size: { value: Size },
         },
-        className,
-    );
+        props: { color, size },
+        screen,
+        restClass,
+    });
 </script>
 
-<progress class={classNames} {value} {max} />
+<progress class={classNames} {value} {max} {...$$restProps} />
 
 <style lang="scss">
     @import 'ProgressStyled.scss';
