@@ -48,7 +48,7 @@ export { default as TableFooter } from "./components/table/TableFooter.svelte";
 export { default as TableHeader } from "./components/table/TableHeader.svelte";
 export { default as TableHeaderCell } from "./components/table/TableHeaderCell.svelte";
 export { default as TableRow } from "./components/table/TableRow.svelte";
-export { default as TextArea } from "./components/textarea/Textarea.svelte";
+export { default as TextArea } from "./components/textarea/TextArea.svelte";
 export { default as Toggle } from "./components/toggle/Toggle.svelte";
 export { default as Tooltip } from "./components/tooltip/Tooltip.svelte";
 export { default as TooltipContent } from "./components/tooltip/TooltipContent.svelte";

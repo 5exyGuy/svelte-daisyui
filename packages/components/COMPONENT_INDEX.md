@@ -584,12 +584,31 @@ None.
 
 ## `Divider`
 
+### Types
+
+```ts
+export type Alignment = "vertical" | "horizontal";
+
+export interface Properties {
+  alignment?: Alignment;
+}
+
+export interface Screen {
+  sm?: Properties;
+  md?: Properties;
+  lg?: Properties;
+  xl?: Properties;
+  "2xl"?: Properties;
+}
+```
+
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                                        | Default value           | Description |
-| :-------- | :------- | :--------------- | :------- | ------------------------------------------- | ----------------------- | ----------- |
-| alignment | No       | <code>let</code> | No       | <code>'vertical' &#124; 'horizontal'</code> | <code>'vertical'</code> | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code>                         | <code>undefined</code>  | --          |
+| Prop name | Required | Kind             | Reactive | Type                   | Default value           | Description |
+| :-------- | :------- | :--------------- | :------- | ---------------------- | ----------------------- | ----------- |
+| alignment | No       | <code>let</code> | No       | <code>Alignment</code> | <code>'vertical'</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>    | <code>undefined</code>  | --          |
+| screen    | No       | <code>let</code> | No       | <code>Screen</code>    | <code>undefined</code>  | --          |
 
 ### Slots
 

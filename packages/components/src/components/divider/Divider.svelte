@@ -1,44 +1,59 @@
 <script>
-    import { Alignment } from '../../enums';
-    import { classes } from '../../utils';
+    import { classes, Alignment } from '@svelte-daisyui/shared';
+
+    // -----------------------------------------------------------
+    //  Type Definitions
+    // -----------------------------------------------------------
+
+    /**
+     * @restProps {div}
+     *
+     * @typedef {'vertical' | 'horizontal'} Alignment
+     * @typedef {{ alignment?: Alignment }} Properties
+     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
+     */
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
     /**
-     * @type {'vertical' | 'horizontal'}
+     * @type {Alignment}
      */
     export let alignment = 'vertical';
 
-    let className;
+    let restClass = undefined;
     /**
      * @type {string}
      */
-    export { className as class };
+    export { restClass as class };
+
+    // -----------------------------------------------------------
+    // Screen
+    // -----------------------------------------------------------
+
+    /**
+     * @type {Screen}
+     */
+    export let screen = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'divider',
-        {
-            alignment: {
-                condition: !!alignment,
-                key: alignment,
-                value: Alignment,
-            },
-        },
-        className,
-    );
+    $: classNames = classes({
+        prefix: 'dui-divider',
+        classProps: { alignment: { value: Alignment } },
+        props: { alignment },
+        screen,
+        restClass,
+    });
 </script>
 
 <div class={classNames}>
     <slot />
 </div>
 
-<style lang="scss">
-    @import 'DividerStyled.scss';
-    @import 'DividerUnstyled.scss';
+<style lang="scss" global>
+    @import 'Divider.scss';
 </style>

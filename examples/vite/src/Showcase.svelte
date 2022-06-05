@@ -1,5 +1,5 @@
 <div
-    class="bg-gradient-to-br from-slate-900 to-red-800 min-h-screen min-w-full py-10"
+    class="bg-gradient-to-br from-slate-900 to-sky-600 min-h-screen min-w-full py-10"
 >
     <div class="flex justify-center flex-col gap-4 items-center min-h-screen">
         <h1 class="text-white text-5xl sm:text-7xl mb-20 font-light">
