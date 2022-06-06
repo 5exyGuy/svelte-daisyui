@@ -134,21 +134,21 @@ export class ThemeProcessor {
         // Validating the config
         const { error, value: validatedConfig } =
             DAISYUI_CONFIG_SCHEMA.validate({
-                mainTheme: this.mainTheme,
-                darkTheme: this.darkTheme,
-                includedThemes: this.includedThemes,
-                excludedThemes: this.excludedThemes,
-                customThemes: this.customThemes,
+                main: this.mainTheme,
+                dark: this.darkTheme,
+                included: this.includedThemes,
+                excluded: this.excludedThemes,
+                custom: this.customThemes,
             });
         if (error) throw new Error(error.message);
         if (!validatedConfig) throw new Error('Invalid config');
 
-        validatedConfig.includedThemes = validatedConfig.includedThemes.filter(
-            (themeName) => !validatedConfig.excludedThemes.includes(themeName),
+        validatedConfig.included = validatedConfig.included.filter(
+            (themeName) => !validatedConfig.excluded.includes(themeName),
         );
 
         // Including default themes
-        for (const defaultThemeName of validatedConfig.includedThemes) {
+        for (const defaultThemeName of validatedConfig.included) {
             const defaultTheme = DEFAULT_THEMES.find(
                 (theme) => theme.name === defaultThemeName,
             );
@@ -161,34 +161,34 @@ export class ThemeProcessor {
         }
         // Including custom themes
         includedThemes.push(
-            ...validatedConfig.customThemes.filter((customTheme) => {
+            ...validatedConfig.custom.filter((customTheme) => {
                 const validatedTheme =
                     CUSTOM_THEME_SCHEMA.validate(customTheme);
                 if (validatedTheme.error) return false;
-                if (!validatedConfig.includedThemes.includes(customTheme.name))
+                if (!validatedConfig.included.includes(customTheme.name))
                     return false;
                 return true;
             }),
         );
         // Finding the main and dark themes
         let mainTheme = includedThemes.find(
-            (theme) => theme.name === validatedConfig.mainTheme,
+            (theme) => theme.name === validatedConfig.main,
         ) as Theme;
         let darkTheme = includedThemes.find(
-            (theme) => theme.name === validatedConfig.darkTheme,
+            (theme) => theme.name === validatedConfig.dark,
         ) as Theme;
 
         if (!mainTheme) {
-            validatedConfig.mainTheme = DEFAULT_MAIN_THEME;
+            validatedConfig.main = DEFAULT_MAIN_THEME;
             mainTheme = includedThemes.find(
-                (theme) => theme.name === validatedConfig.mainTheme,
+                (theme) => theme.name === validatedConfig.main,
             ) as Theme;
             if (!mainTheme) return {};
         }
         if (!darkTheme) {
-            validatedConfig.darkTheme = DEFAULT_DARK_THEME;
+            validatedConfig.dark = DEFAULT_DARK_THEME;
             darkTheme = includedThemes.find(
-                (theme) => theme.name === validatedConfig.darkTheme,
+                (theme) => theme.name === validatedConfig.dark,
             ) as Theme;
             if (!darkTheme) return {};
         }

@@ -4,7 +4,7 @@
     & > :global(tfoot.table-footer) > :global(tr.table-row) {
         & > th.table-header-cell {
             @apply whitespace-nowrap p-4 align-middle;
-            @apply bg-base-100;
+            @apply bg-base-100 text-base-content;
 
             &:first-child {
                 @apply sticky left-0 z-[11];

@@ -3,11 +3,11 @@ import { type Theme, ThemeProcessor } from '@svelte-daisyui/themes';
 import { TAILWIND_CONFIG } from '@svelte-daisyui/shared';
 
 const tailwindFunction: TailwindPluginFn = ({ config, addBase }) => {
-    const mainTheme = config('daisyui.mainTheme') as string;
-    const darkTheme = config('daisyui.darkTheme') as string;
-    const includedThemes = config('daisyui.includedThemes') as Array<string>;
-    const excludedThemes = config('daisyui.excludedThemes') as Array<string>;
-    const customThemes = config('daisyui.customThemes') as Array<Theme>;
+    const mainTheme = config('theme.main') as string;
+    const darkTheme = config('theme.dark') as string;
+    const includedThemes = config('theme.included') as Array<string>;
+    const excludedThemes = config('theme.excluded') as Array<string>;
+    const customThemes = config('theme.custom') as Array<Theme>;
 
     const themeProcessor = new ThemeProcessor();
     themeProcessor

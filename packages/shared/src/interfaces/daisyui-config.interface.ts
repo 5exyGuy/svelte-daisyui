@@ -2,9 +2,9 @@ import type { Theme } from './theme.interface';
 import type { TailwindConfig } from 'tailwindcss/tailwind-config';
 
 export type DaisyUIConfig = {
-    mainTheme: string;
-    darkTheme: string;
-    includedThemes: Array<string>;
-    excludedThemes: Array<string>;
-    customThemes: Array<Theme>;
+    main: string;
+    dark: string;
+    included: Array<string>;
+    excluded: Array<string>;
+    custom: Array<Theme>;
 } & TailwindConfig;

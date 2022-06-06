@@ -4,7 +4,7 @@
     & > :global(tfoot.table-footer) > :global(tr.table-row) {
         & > td.table-cell {
             @apply whitespace-nowrap p-4 align-middle;
-            @apply bg-base-100;
+            @apply bg-base-100 text-base-content;
 
             &.table-cell-start {
                 @apply text-left;
@@ -22,7 +22,7 @@
 
     & > :global(thead.table-header) > :global(tr.table-row) > td.table-cell,
     & > :global(tfoot.table-footer) > :global(tr.table-row) > td.table-cell {
-        @apply bg-base-200 text-xs font-bold uppercase;
+        @apply bg-base-200 text-base-content text-xs font-bold uppercase;
     }
 
     &
