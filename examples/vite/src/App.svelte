@@ -31,19 +31,17 @@
 </script>
 
 <Showcase>
-    <Alert color="info" showIcon>
+    <Alert screen={{ sm: { color: 'warning' } }} color="info" showIcon>
         Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book.
+        industry.
         <div class="flex-none">
             <Tooltip
                 color="primary"
                 position="right"
-                screen={{ lg: { position: 'bottom', open: true } }}
+                screen={{ sm: { position: 'bottom', open: true } }}
             >
                 <TooltipContent slot="content" class=""
-                    >Lorem Ipsum</TooltipContent
+                    >Kopijuoti</TooltipContent
                 >
                 <Kbd size="lg">CTRL + C</Kbd>
             </Tooltip>
