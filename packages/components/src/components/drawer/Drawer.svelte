@@ -61,7 +61,7 @@
         if (visible) drawerSideRef.focus();
     });
 
-    $: if (visible) {
+    $: if (drawerSideRef && visible) {
         drawerSideRef.focus();
     }
 

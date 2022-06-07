@@ -10,7 +10,8 @@
     "dependencies": {
         "@svelte-daisyui/components": "workspace:^1.0.0",
         "@svelte-daisyui/plugin": "workspace:^1.0.0",
-        "svelte": "^3.48.0"
+        "svelte": "^3.48.0",
+        "svelte-icons": "^2.1.0"
     },
     "devDependencies": {
         "@sveltejs/vite-plugin-svelte": "^1.0.0-next.47",

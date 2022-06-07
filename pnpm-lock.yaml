@@ -78,6 +78,7 @@ importers:
       autoprefixer: ^10.4.7
       postcss: ^8.4.14
       svelte: ^3.48.0
+      svelte-icons: ^2.1.0
       svelte-preprocess: ^4.10.7
       tailwindcss: ^3.0.24
       vite: ^2.9.9
@@ -85,6 +86,7 @@ importers:
       '@svelte-daisyui/components': link:../../packages/components
       '@svelte-daisyui/plugin': link:../../packages/plugin
       svelte: 3.48.0
+      svelte-icons: 2.1.0
     devDependencies:
       '@sveltejs/vite-plugin-svelte': 1.0.0-next.47_svelte@3.48.0+vite@2.9.9
       '@types/tailwindcss': 3.0.10
