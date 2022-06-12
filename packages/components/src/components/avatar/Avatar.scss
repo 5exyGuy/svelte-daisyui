@@ -1,27 +1,38 @@
 @use '../variables.scss' as *;
 @use '../escape.scss' as *;
 
-.avatar {
-    @apply relative inline-flex;
+.dui-avatar {
+    position: relative;
+    display: inline-flex;
 
-    & > :global(div) {
-        @apply block aspect-square overflow-hidden;
+    & > div {
+        display: block;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
     }
 
-    & > :global(img) {
-        @apply h-full w-full object-cover;
+    & > img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
     }
 
-    &.avatar-placeholder {
-        & > :global(div) {
-            @apply flex items-center justify-center;
+    &.dui-avatar-placeholder {
+        & > div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     }
 
     @mixin avatar-status($bg-color) {
         &:before {
+            @apply #{$bg-color};
             content: '';
-            @apply absolute z-10 block rounded-full #{$bg-color};
+            display: block;
+            position: absolute;
+            z-index: 10;
+            border-radius: 9999px;
             width: 15%;
             height: 15%;
             top: 7%;
@@ -30,23 +41,11 @@
         }
     }
 
-    @mixin avatar-props($prefix: '') {
-        $prefix: escape($prefix);
-
-        &.#{$prefix}avatar-online {
-            @include avatar-status('bg-success');
-        }
-
-        &.#{$prefix}avatar-offline {
-            @include avatar-status('bg-base-300');
-        }
+    &.dui-avatar-online {
+        @include avatar-status('bg-success');
     }
 
-    @include avatar-props();
-
-    @each $screen-size in $tailwind-screen-sizes {
-        @screen #{$screen-size} {
-            @include avatar-props('#{$screen-size}:');
-        }
+    &.dui-avatar-offline {
+        @include avatar-status('bg-base-300');
     }
 }

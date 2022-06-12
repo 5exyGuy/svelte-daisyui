@@ -10,8 +10,6 @@
      *
      * @typedef {1 | 2 | 3 | 4 | 5 | 6} Size
      * @typedef {'horizontal' | 'vertical'} Alignment
-     * @typedef {{ size?: Size, demo?: boolean, alignment?: Alignment }} Properties
-     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
      */
 
     // -----------------------------------------------------------
@@ -40,15 +38,6 @@
     export { restClass as class };
 
     // -----------------------------------------------------------
-    // Screen
-    // -----------------------------------------------------------
-
-    /**
-     * @type {Screen}
-     */
-    export let screen = undefined;
-
-    // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
@@ -60,7 +49,6 @@
             alignment: { value: Alignment },
         },
         props: { size, demo, alignment },
-        screen,
         restClass,
     });
 </script>
@@ -69,6 +57,6 @@
     <slot />
 </div>
 
-<style lang="scss">
+<style lang="scss" global>
     @import 'Artboard.scss';
 </style>

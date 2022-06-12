@@ -1,7 +1,15 @@
-.avatar-group {
-    @apply flex overflow-hidden;
+.dui-avatar-group {
+    display: flex;
+    // overflow: hidden;
 
-    & > :global(.avatar) {
-        @apply overflow-hidden rounded-full border-4 border-base-100;
+    & > .dui-avatar {
+        @apply border-base-100;
+        // overflow: hidden;
+        border-radius: 9999px;
+        border-width: 4px;
+    }
+
+    & > .dui-avatar ~ .dui-avatar {
+        margin-left: var(--avatar-group-x-space, -1.5rem);
     }
 }

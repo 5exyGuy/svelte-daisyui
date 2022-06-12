@@ -114,20 +114,6 @@ None.
 export type Size = 1 | 2 | 3 | 4 | 5 | 6;
 
 export type Alignment = "horizontal" | "vertical";
-
-export interface Properties {
-  size?: Size;
-  demo?: boolean;
-  alignment?: Alignment;
-}
-
-export interface Screen {
-  sm?: Properties;
-  md?: Properties;
-  lg?: Properties;
-  xl?: Properties;
-  "2xl"?: Properties;
-}
 ```
 
 ### Props
@@ -138,7 +124,6 @@ export interface Screen {
 | demo      | No       | <code>let</code> | No       | <code>boolean</code>   | <code>false</code>     | --          |
 | alignment | No       | <code>let</code> | No       | <code>Alignment</code> | <code>undefined</code> | --          |
 | class     | No       | <code>let</code> | No       | <code>string</code>    | <code>undefined</code> | --          |
-| screen    | No       | <code>let</code> | No       | <code>Screen</code>    | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -156,29 +141,15 @@ None.
 
 ```ts
 export type Status = "online" | "offline";
-
-export interface Properties {
-  status: Status;
-}
-
-export interface Screen {
-  sm?: Properties;
-  md?: Properties;
-  lg?: Properties;
-  xl?: Properties;
-  "2xl"?: Properties;
-}
 ```
 
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
-| :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
-| status    | No       | <code>let</code> | No       | <code>Status</code> | <code>undefined</code> | --          |
-| src       | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
-| alt       | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
-| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
-| screen    | No       | <code>let</code> | No       | <code>Screen</code> | <code>undefined</code> | --          |
+| Prop name | Required | Kind             | Reactive | Type                                                     | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | -------------------------------------------------------- | ---------------------- | ----------- |
+| status    | No       | <code>let</code> | No       | <code>Status</code>                                      | <code>undefined</code> | --          |
+| imgProps  | No       | <code>let</code> | No       | <code>svelte.JSX.HTMLAttributes<HTMLImageElement></code> | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>                                      | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -194,10 +165,11 @@ None.
 
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
-| :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
-| space     | No       | <code>let</code> | No       | <code>string</code> | <code>'1.5rem'</code>  | --          |
-| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+| Prop name | Required | Kind             | Reactive | Type                 | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | -------------------- | ---------------------- | ----------- |
+| space     | No       | <code>let</code> | No       | <code>string</code>  | <code>'-1.5rem'</code> | --          |
+| reverse   | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>  | <code>undefined</code> | --          |
 
 ### Slots
 

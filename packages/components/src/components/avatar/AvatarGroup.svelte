@@ -1,5 +1,7 @@
 <script>
     import { classes } from '@svelte-daisyui/shared';
+    import { setContext } from 'svelte';
+    import { writable } from 'svelte/store';
 
     // -----------------------------------------------------------
     //  Type Definitions
@@ -16,7 +18,7 @@
     /**
      * @type {string}
      */
-    export let space = '1.5rem';
+    export let space = '-1.5rem';
 
     let restClass = undefined;
     /**
@@ -28,13 +30,29 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({ prefix: 'avatar-group', restClass });
+    $: classNames = classes({
+        prefix: 'dui-avatar-group',
+        restClass,
+    });
+
+    // -----------------------------------------------------------
+    // Functionality
+    // -----------------------------------------------------------
+
+    const avatars = writable([]);
+    setContext('AvatarGroup', {
+        avatars,
+        add: (ref) => {
+            avatars.update((_) => [..._, { index: _.length }]);
+            console.log(ref);
+        },
+    });
 </script>
 
 <div class={classNames} style={`--avatar-group-x-space:${space}`}>
     <slot />
 </div>
 
-<style lang="scss">
+<style lang="scss" global>
     @import 'AvatarGroup.scss';
 </style>
