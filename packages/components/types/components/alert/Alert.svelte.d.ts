@@ -10,16 +10,16 @@ export type Color =
   | "warning"
   | "error";
 
-export interface Properties {
+export interface ResponsiveProperties {
   color?: Color;
 }
 
 export interface Screen {
-  sm?: Properties;
-  md?: Properties;
-  lg?: Properties;
-  xl?: Properties;
-  "2xl"?: Properties;
+  sm?: ResponsiveProperties;
+  md?: ResponsiveProperties;
+  lg?: ResponsiveProperties;
+  xl?: ResponsiveProperties;
+  "2xl"?: ResponsiveProperties;
 }
 
 export interface AlertProps

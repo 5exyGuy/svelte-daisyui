@@ -74,16 +74,16 @@ export type Color =
   | "warning"
   | "error";
 
-export interface Properties {
+export interface ResponsiveProperties {
   color?: Color;
 }
 
 export interface Screen {
-  sm?: Properties;
-  md?: Properties;
-  lg?: Properties;
-  xl?: Properties;
-  "2xl"?: Properties;
+  sm?: ResponsiveProperties;
+  md?: ResponsiveProperties;
+  lg?: ResponsiveProperties;
+  xl?: ResponsiveProperties;
+  "2xl"?: ResponsiveProperties;
 }
 ```
 
@@ -165,11 +165,11 @@ None.
 
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                 | Default value          | Description |
-| :-------- | :------- | :--------------- | :------- | -------------------- | ---------------------- | ----------- |
-| space     | No       | <code>let</code> | No       | <code>string</code>  | <code>'-1.5rem'</code> | --          |
-| reverse   | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
-| class     | No       | <code>let</code> | No       | <code>string</code>  | <code>undefined</code> | --          |
+| Prop name | Required | Kind             | Reactive | Type                                                                                 | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | ------------------------------------------------------------------------------------ | ---------------------- | ----------- |
+| space     | No       | <code>let</code> | No       | <code>string</code>                                                                  | <code>'-1.5rem'</code> | --          |
+| avatar    | No       | <code>let</code> | No       | <code>import('@svelte-daisyui/shared').SvelteProps<import('./Avatar.svelte')></code> | <code>{}</code>        | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>                                                                  | <code>undefined</code> | --          |
 
 ### Slots
 

@@ -50,6 +50,10 @@
     let ref;
 
     const { add } = getContext('AvatarGroup');
+
+    onMount(() => {
+        add(ref);
+    });
 </script>
 
 <div class={classNames} {...$$restProps} bind:this={ref}>

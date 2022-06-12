@@ -20,6 +20,11 @@
      */
     export let space = '-1.5rem';
 
+    /**
+     * @type {import('./Avatar.svelte').AvatarProps}
+     */
+    export let avatar = {};
+
     let restClass = undefined;
     /**
      * @type {string}
@@ -43,8 +48,8 @@
     setContext('AvatarGroup', {
         avatars,
         add: (ref) => {
-            avatars.update((_) => [..._, { index: _.length }]);
-            console.log(ref);
+            avatars.update((_) => [..._, { ref, index: _.length }]);
+            ref.style.zIndex = $avatars.length;
         },
     });
 </script>
