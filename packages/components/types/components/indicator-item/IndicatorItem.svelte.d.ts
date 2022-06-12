@@ -15,7 +15,7 @@ export interface IndicatorItemProps {
   /**
    * @default undefined
    */
-  class: string;
+  class?: string;
 }
 
 export default class IndicatorItem extends SvelteComponentTyped<

@@ -1,5 +1,6 @@
 <script>
     import { classes, AvatarStatus } from '@svelte-daisyui/shared';
+    import { getContext, onMount } from 'svelte';
 
     // -----------------------------------------------------------
     //  Type Definitions
@@ -9,8 +10,6 @@
      * @restProps {div}
      *
      * @typedef {'online' | 'offline'} Status
-     * @typedef {{ status: Status }} Properties
-     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
      */
 
     // -----------------------------------------------------------
@@ -23,14 +22,9 @@
     export let status = undefined;
 
     /**
-     * @type {string}
+     * @type {svelte.JSX.HTMLAttributes<HTMLImageElement>}
      */
-    export let src = undefined;
-
-    /**
-     * @type {string}
-     */
-    export let alt = undefined;
+    export let imgProps = undefined;
 
     let restClass = undefined;
     /**
@@ -39,35 +33,38 @@
     export { restClass as class };
 
     // -----------------------------------------------------------
-    // Screen
-    // -----------------------------------------------------------
-
-    /**
-     * @type {Screen}
-     */
-    export let screen = undefined;
-
-    // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
     $: classNames = classes({
-        prefix: 'avatar',
+        prefix: 'dui-avatar',
         classProps: { status: { value: AvatarStatus } },
         props: { status },
-        screen,
         restClass,
+    });
+
+    // -----------------------------------------------------------
+    // Functionality
+    // -----------------------------------------------------------
+
+    let ref;
+
+    const { add } = getContext('AvatarGroup');
+
+    onMount(() => {
+        add(ref);
     });
 </script>
 
-<div class={classNames} {...$$restProps}>
-    {#if src}
-        <img {alt} {src} />
+<div class={classNames} {...$$restProps} bind:this={ref}>
+    {#if imgProps}
+        <!-- svelte-ignore a11y-missing-attribute -->
+        <img {...imgProps} />
     {:else}
         <slot />
     {/if}
 </div>
 
-<style lang="scss">
+<style lang="scss" global>
     @import 'Avatar.scss';
 </style>

@@ -1,13 +1,29 @@
 <script>
-    import { Window } from '@svelte-daisyui/components';
+    import { Avatar, AvatarGroup } from '@svelte-daisyui/components';
     import Showcase from './Showcase.svelte';
 </script>
 
 <Showcase>
-    <Window bordered class="bg-base-300">
-        <div class="px-4 py-4 bg-base-200 w-52">
-            <pre data-prefix=">">Hello</pre>
-            Hello!
-        </div>
-    </Window>
+    <AvatarGroup avatar={{}} space="-5rem">
+        <Avatar
+            status="online"
+            imgProps={{
+                src: 'https://picsum.photos/seed/test01/200',
+                alt: 'test',
+            }}
+        />
+        <Avatar
+            imgProps={{
+                src: 'https://picsum.photos/seed/test02/200',
+                alt: 'test',
+            }}
+        />
+        <Avatar
+            status="online"
+            imgProps={{
+                src: 'https://picsum.photos/seed/test03/200',
+                alt: 'test',
+            }}
+        />
+    </AvatarGroup>
 </Showcase>

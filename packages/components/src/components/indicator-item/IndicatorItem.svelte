@@ -16,7 +16,7 @@
      */
     export let vertical = 'top';
 
-    let className;
+    let className = undefined;
     /**
      * @type {string}
      */

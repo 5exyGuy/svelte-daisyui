@@ -10,14 +10,14 @@
     /**
      * @type {'1' | '2' | 1 | 2}
      */
-    export let half;
+    export let half = undefined;
 
     /**
      * @type {'squircle' | 'heart' | 'hexagon' | 'hexagon2' | 'decagon' | 'pentagon' | 'diamond' | 'square' | 'circle' | 'parallelogram' | 'parallelogram2' | 'parallelogram3' | 'parallelogram4' | 'star' | 'star2' | 'triangle' | 'triangle2' | 'triangle3' | 'triangle4'}
      */
     export let type = 'circle';
 
-    let className;
+    let className = undefined;
     export { className as class };
 
     // -----------------------------------------------------------

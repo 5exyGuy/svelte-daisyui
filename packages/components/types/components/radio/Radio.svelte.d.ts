@@ -3,14 +3,14 @@ import type { SvelteComponentTyped } from "svelte";
 
 export interface RadioProps {
   /**
-   * @default 'medium'
+   * @default 'md'
    */
-  size?: "tiny" | "small" | "medium" | "large";
+  size?: "xs" | "sm" | "md" | "lg";
 
   /**
    * @default undefined
    */
-  color:
+  color?:
     | "primary"
     | "secondary"
     | "accent"
@@ -22,7 +22,7 @@ export interface RadioProps {
   /**
    * @default undefined
    */
-  name: string;
+  name?: string;
 
   /**
    * @default false
@@ -32,7 +32,7 @@ export interface RadioProps {
   /**
    * @default undefined
    */
-  class: string;
+  class?: string;
 }
 
 export default class Radio extends SvelteComponentTyped<

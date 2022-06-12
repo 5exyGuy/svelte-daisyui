@@ -19,7 +19,7 @@ export interface StackProps
   /**
    * @default undefined
    */
-  class: string;
+  class?: string;
 }
 
 export default class Stack extends SvelteComponentTyped<

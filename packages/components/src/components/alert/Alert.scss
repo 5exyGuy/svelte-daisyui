@@ -2,20 +2,33 @@
 @use '../variables.scss' as *;
 @use '../escape.scss' as *;
 
-.alert {
-    @apply flex w-full flex-col items-center justify-between gap-4 space-y-2 md:flex-row md:space-y-0;
-    @apply bg-base-200 p-4;
+.dui-alert {
+    @apply bg-base-200 space-y-2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem;
     border-radius: var(--box-border-radius, 1rem);
 
-    & > :global(*) {
-        @apply flex items-center gap-2;
+    @media (min-width: theme('screens.md')) {
+        @apply space-y-0;
+        flex-direction: row;
     }
 
-    & > :global(.alert-icon) {
-        @apply flex-none;
+    & > * {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
 
-    @mixin alert-props($prefix: '') {
+    & > .dui-alert-icon {
+        flex: none;
+    }
+
+    @mixin responsive-props($prefix: '') {
         $prefix: escape($prefix);
 
         @each $color in list.join($brand-colors, $functional-colors) {
@@ -25,11 +38,11 @@
         }
     }
 
-    @include alert-props();
+    @include responsive-props();
 
     @each $screen-size in $tailwind-screen-sizes {
         @screen #{$screen-size} {
-            @include alert-props('#{$screen-size}:');
+            @include responsive-props('#{$screen-size}:');
         }
     }
 }

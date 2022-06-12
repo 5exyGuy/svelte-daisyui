@@ -27,11 +27,11 @@
     export let step = 1;
 
     /**
-     * @type {'tiny' | 'small' | 'medium' | 'large'}
+     * @type {'xs' | 'sm' | 'md' | 'lg'}
      */
-    export let size = 'medium';
+    export let size = 'md';
 
-    let className;
+    let className = undefined;
     /**
      * @type {string}
      */

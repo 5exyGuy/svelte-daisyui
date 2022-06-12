@@ -16,7 +16,7 @@
      */
     export let end = false;
 
-    let className;
+    let className = undefined;
     /**
      * @type {string}
      */

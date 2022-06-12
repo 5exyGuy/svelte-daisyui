@@ -9,14 +9,14 @@
     /**
      * @type {'rotate' | 'flip'}
      */
-    export let animation;
+    export let animation = undefined;
 
     /**
      * @type {boolean}
      */
     export let state = false;
 
-    let className;
+    let className = undefined;
     /**
      * @type {string}
      */

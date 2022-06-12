@@ -5,17 +5,17 @@ export interface TabGroupProps {
   /**
    * @default undefined
    */
-  type: "bordered" | "lifted" | "boxed";
+  type?: "bordered" | "lifted" | "boxed";
 
   /**
-   * @default 'medium'
+   * @default 'md'
    */
-  size?: "tiny" | "small" | "medium" | "large";
+  size?: "xs" | "sm" | "md" | "lg";
 
   /**
    * @default undefined
    */
-  class: string;
+  class?: string;
 }
 
 export default class TabGroup extends SvelteComponentTyped<

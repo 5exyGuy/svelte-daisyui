@@ -12,9 +12,9 @@
     export let alignment = 'horizontal';
 
     /**
-     * @type {'tiny' | 'small' | 'medium' | 'large'}
+     * @type {'xs' | 'sm' | 'md' | 'lg'}
      */
-    export let size = 'medium';
+    export let size = 'md';
 
     let className;
     /**

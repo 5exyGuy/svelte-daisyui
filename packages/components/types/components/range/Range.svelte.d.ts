@@ -23,14 +23,14 @@ export interface RangeProps {
   step?: number;
 
   /**
-   * @default 'medium'
+   * @default 'md'
    */
-  size?: "tiny" | "small" | "medium" | "large";
+  size?: "xs" | "sm" | "md" | "lg";
 
   /**
    * @default undefined
    */
-  class: string;
+  class?: string;
 }
 
 export default class Range extends SvelteComponentTyped<RangeProps, {}, {}> {}

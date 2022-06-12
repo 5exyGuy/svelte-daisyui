@@ -11,7 +11,7 @@
      */
     export let color;
 
-    let className;
+    let className = undefined;
     /**
      * @type {string}
      */

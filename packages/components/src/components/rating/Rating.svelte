@@ -7,16 +7,16 @@
     // -----------------------------------------------------------
 
     /**
-     * @type {'tiny' | 'small' | 'medium' | 'large'}
+     * @type {'xs' | 'sm' | 'md' | 'lg'}
      */
-    export let size = 'medium';
+    export let size = 'md';
 
     /**
      * @type {boolean}
      */
     export let half = false;
 
-    let className;
+    let className = undefined;
     /**
      * @type {string}
      */

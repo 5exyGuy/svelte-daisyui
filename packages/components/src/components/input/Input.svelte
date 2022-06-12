@@ -9,17 +9,17 @@
     /**
      * @type {string}
      */
-    export let placeholder;
+    export let placeholder = undefined;
 
     /**
-     * @type {'tiny' | 'small' | 'medium' | 'large'}
+     * @type {'xs' | 'sm' | 'md' | 'lg'}
      */
-    export let size = 'medium';
+    export let size = 'md';
 
     /**
      * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost'}
      */
-    export let color;
+    export let color = undefined;
 
     /**
      * @type {boolean}
@@ -31,7 +31,7 @@
      */
     export let bordered = false;
 
-    let className;
+    let className = undefined;
     /**
      * @type {string}
      */
