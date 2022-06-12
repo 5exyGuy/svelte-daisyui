@@ -18,7 +18,7 @@ export interface StepItemProps {
   /**
    * @default undefined
    */
-  class: string;
+  class?: string;
 }
 
 export default class StepItem extends SvelteComponentTyped<

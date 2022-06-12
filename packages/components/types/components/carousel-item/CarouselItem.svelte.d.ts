@@ -5,7 +5,7 @@ export interface CarouselItemProps {
   /**
    * @default undefined
    */
-  class: string;
+  class?: string;
 }
 
 export default class CarouselItem extends SvelteComponentTyped<

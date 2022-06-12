@@ -3,9 +3,9 @@ import type { SvelteComponentTyped } from "svelte";
 
 export interface RatingProps {
   /**
-   * @default 'medium'
+   * @default 'md'
    */
-  size?: "tiny" | "small" | "medium" | "large";
+  size?: "xs" | "sm" | "md" | "lg";
 
   /**
    * @default false
@@ -15,7 +15,7 @@ export interface RatingProps {
   /**
    * @default undefined
    */
-  class: string;
+  class?: string;
 }
 
 export default class Rating extends SvelteComponentTyped<

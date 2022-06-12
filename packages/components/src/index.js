@@ -25,7 +25,7 @@ export { default as Code } from './components/code/Code.svelte';
 // Collapse
 export { default as Collapse } from './components/collapse/Collapse.svelte';
 // Countdown
-export { default as Countdown } from './components/countdown/Countdown.svelte'; // Not working, implement better solution
+export { default as Countdown } from './components/countdown/Countdown.svelte'; // TODO: Not working, implement better solution
 // Divider
 export { default as Divider } from './components/divider/Divider.svelte';
 // Drawer

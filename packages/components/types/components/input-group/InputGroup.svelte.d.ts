@@ -8,9 +8,9 @@ export interface InputGroupProps {
   alignment?: "horizontal" | "vertical";
 
   /**
-   * @default 'medium'
+   * @default 'md'
    */
-  size?: "tiny" | "small" | "medium" | "large";
+  size?: "xs" | "sm" | "md" | "lg";
 
   /**
    * @default undefined

@@ -9,24 +9,24 @@
     /**
      * @type {string}
      */
-    export let title;
+    export let title = undefined;
 
     /**
      * @type {string}
      */
-    export let value;
+    export let value = undefined;
 
     /**
      * @type {string}
      */
-    export let description;
+    export let description = undefined;
 
     /**
      * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'}
      */
-    export let background;
+    export let background = undefined;
 
-    let className;
+    let className = undefined;
     /**
      * @type {string}
      */

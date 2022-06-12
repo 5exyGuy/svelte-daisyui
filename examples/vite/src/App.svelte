@@ -2,7 +2,6 @@
     import {
         Avatar,
         AvatarGroup,
-        Artboard,
         Alert,
         Badge,
         Button,
@@ -77,6 +76,10 @@
     </div>
 
     <Showcase>
+        <Button on:click={() => (drawerVisible = !drawerVisible)}>
+            Open Drawer
+        </Button>
+
         <Navbar rounded class="bg-base-200">
             <svelte:fragment slot="start"
                 ><Button>Start</Button></svelte:fragment
@@ -90,11 +93,6 @@
         </Navbar>
         <Icon component={ChevronCircleUp} size={5} />
         <Icon component={ChevronCircleUp} size={3} spin />
-
-        <Button slot="focus" on:click={() => (drawerVisible = !drawerVisible)}
-            >Open Drawer</Button
-        >
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
 
         <Dropdown>
             <Button slot="focus">Open Dropdown</Button>
@@ -118,8 +116,6 @@
                 <Avatar class="h-20 w-20" src="https://picsum.photos/200" />
             {/each}
         </AvatarGroup>
-        <!-- Artboard -->
-        <Artboard class="!bg-base-200" demo size={1}>320×568</Artboard>
         <!-- Alert -->
         <Alert screen={{ sm: { color: 'warning' } }} color="info" showIcon>
             Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -259,28 +255,34 @@
         </div>
         <div>
             <Stack>
+                <!-- svelte-ignore a11y-img-redundant-alt -->
                 <img
                     src="https://api.lorem.space/image/face?w=112&h=112&hash=8B7BASC2"
                     alt="Image 1"
                 />
+                <!-- svelte-ignore a11y-img-redundant-alt -->
                 <img
                     src="https://api.lorem.space/image/face?w=112&h=112&hash=SADSADAS"
                     alt="Image 2"
                 />
+                <!-- svelte-ignore a11y-img-redundant-alt -->
                 <img
                     src="https://api.lorem.space/image/face?w=112&h=112&hash=A89D0DE6"
                     alt="Image 3"
                 />
             </Stack>
             <Stack direction="right">
+                <!-- svelte-ignore a11y-img-redundant-alt -->
                 <img
                     src="https://api.lorem.space/image/face?w=112&h=112&hash=SADSDEWW"
                     alt="Image 1"
                 />
+                <!-- svelte-ignore a11y-img-redundant-alt -->
                 <img
                     src="https://api.lorem.space/image/face?w=112&h=112&hash=SSSDASDW"
                     alt="Image 2"
                 />
+                <!-- svelte-ignore a11y-img-redundant-alt -->
                 <img
                     src="https://api.lorem.space/image/face?w=112&h=112&hash=A89D0DE6"
                     alt="Image 3"

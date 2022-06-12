@@ -11,7 +11,7 @@
      */
     export let alignment = 'horizontal';
 
-    let className;
+    let className = undefined;
     /**
      * @type {string}
      */

@@ -7,26 +7,26 @@
     // -----------------------------------------------------------
 
     /**
-     * @type {'tiny' | 'small' | 'medium' | 'large'}
+     * @type {'xs' | 'sm' | 'md' | 'lg'}
      */
-    export let size = 'medium';
+    export let size = 'md';
 
     /**
      * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'}
      */
-    export let color;
+    export let color = undefined;
 
     /**
      * @type {string}
      */
-    export let name;
+    export let name = undefined;
 
     /**
      * @type {boolean}
      */
     export let checked = false;
 
-    let className;
+    let className = undefined;
     /**
      * @type {string}
      */

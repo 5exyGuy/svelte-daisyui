@@ -54,5 +54,5 @@ export interface IconProps
 export default class Icon extends SvelteComponentTyped<
   IconProps,
   {},
-  { default: { props: { [key: string]: any } } }
+  { default: {} }
 > {}

@@ -5,7 +5,7 @@
     // Properties
     // -----------------------------------------------------------
 
-    let className;
+    let className = undefined;
     /**
      * @type {string}
      */

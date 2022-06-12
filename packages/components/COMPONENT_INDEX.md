@@ -456,7 +456,7 @@ None.
 | :-------- | :------- | :--------------- | :------- | ------------------------------------------------- | ------------------------- | ----------- |
 | snap      | No       | <code>let</code> | No       | <code>'start' &#124; 'center' &#124; 'end'</code> | <code>'start'</code>      | --          |
 | alignment | No       | <code>let</code> | No       | <code>'horizontal' &#124; 'vertical'</code>       | <code>'horizontal'</code> | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code>                               | <code>undefined</code>    | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>                               | <code>undefined</code>    | --          |
 
 ### Slots
 
@@ -474,7 +474,7 @@ None.
 
 | Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
 | :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
-| class     | Yes      | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -663,7 +663,7 @@ None.
 | :-------- | :------- | :--------------- | :------- | --------------------------------------------------------------- | ---------------------- | ----------- |
 | position  | No       | <code>let</code> | No       | <code>'top' &#124; 'bottom' &#124; 'left' &#124; 'right'</code> | <code>'bottom'</code>  | --          |
 | end       | No       | <code>let</code> | No       | <code>boolean</code>                                            | <code>false</code>     | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code>                                             | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>                                             | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -729,9 +729,9 @@ export interface Screen {
 
 ### Slots
 
-| Slot name | Default | Props                                           | Fallback |
-| :-------- | :------ | :---------------------------------------------- | :------- |
-| --        | Yes     | <code>{ props: { [key: string]: any } } </code> | --       |
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
 
 ### Events
 
@@ -743,7 +743,7 @@ None.
 
 | Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
 | :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
-| class     | Yes      | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -763,7 +763,7 @@ None.
 | :--------- | :------- | :--------------- | :------- | -------------------------------------------------- | ---------------------- | ----------- |
 | horizontal | No       | <code>let</code> | No       | <code>'start' &#124; 'center' &#124; 'end'</code>  | <code>'end'</code>     | --          |
 | vertical   | No       | <code>let</code> | No       | <code>'top' &#124; 'middle' &#124; 'bottom'</code> | <code>'top'</code>     | --          |
-| class      | Yes      | <code>let</code> | No       | <code>string</code>                                | <code>undefined</code> | --          |
+| class      | No       | <code>let</code> | No       | <code>string</code>                                | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -781,12 +781,12 @@ None.
 
 | Prop name   | Required | Kind             | Reactive | Type                                                                                                                                    | Default value          | Description |
 | :---------- | :------- | :--------------- | :------- | --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
-| placeholder | Yes      | <code>let</code> | No       | <code>string</code>                                                                                                                     | <code>undefined</code> | --          |
-| size        | No       | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large'</code>                                                                       | <code>'medium'</code>  | --          |
-| color       | Yes      | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; 'ghost'</code> | <code>undefined</code> | --          |
+| placeholder | No       | <code>let</code> | No       | <code>string</code>                                                                                                                     | <code>undefined</code> | --          |
+| size        | No       | <code>let</code> | No       | <code>'xs' &#124; 'sm' &#124; 'md' &#124; 'lg'</code>                                                                                   | <code>'md'</code>      | --          |
+| color       | No       | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; 'ghost'</code> | <code>undefined</code> | --          |
 | disabled    | No       | <code>let</code> | No       | <code>boolean</code>                                                                                                                    | <code>false</code>     | --          |
 | bordered    | No       | <code>let</code> | No       | <code>boolean</code>                                                                                                                    | <code>false</code>     | --          |
-| class       | Yes      | <code>let</code> | No       | <code>string</code>                                                                                                                     | <code>undefined</code> | --          |
+| class       | No       | <code>let</code> | No       | <code>string</code>                                                                                                                     | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -800,11 +800,11 @@ None.
 
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                                                              | Default value             | Description |
-| :-------- | :------- | :--------------- | :------- | ----------------------------------------------------------------- | ------------------------- | ----------- |
-| alignment | No       | <code>let</code> | No       | <code>'horizontal' &#124; 'vertical'</code>                       | <code>'horizontal'</code> | --          |
-| size      | No       | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large'</code> | <code>'medium'</code>     | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code>                                               | <code>undefined</code>    | --          |
+| Prop name | Required | Kind             | Reactive | Type                                                  | Default value             | Description |
+| :-------- | :------- | :--------------- | :------- | ----------------------------------------------------- | ------------------------- | ----------- |
+| alignment | No       | <code>let</code> | No       | <code>'horizontal' &#124; 'vertical'</code>           | <code>'horizontal'</code> | --          |
+| size      | No       | <code>let</code> | No       | <code>'xs' &#124; 'sm' &#124; 'md' &#124; 'lg'</code> | <code>'md'</code>         | --          |
+| class     | Yes      | <code>let</code> | No       | <code>string</code>                                   | <code>undefined</code>    | --          |
 
 ### Slots
 
@@ -909,9 +909,9 @@ None.
 
 | Prop name | Required | Kind             | Reactive | Type                                                                                                                                                                                                                                                                                                                                                                 | Default value          | Description |
 | :-------- | :------- | :--------------- | :------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
-| half      | Yes      | <code>let</code> | No       | <code>'1' &#124; '2' &#124; 1 &#124; 2</code>                                                                                                                                                                                                                                                                                                                        | <code>undefined</code> | --          |
+| half      | No       | <code>let</code> | No       | <code>'1' &#124; '2' &#124; 1 &#124; 2</code>                                                                                                                                                                                                                                                                                                                        | <code>undefined</code> | --          |
 | type      | No       | <code>let</code> | No       | <code>'squircle' &#124; 'heart' &#124; 'hexagon' &#124; 'hexagon2' &#124; 'decagon' &#124; 'pentagon' &#124; 'diamond' &#124; 'square' &#124; 'circle' &#124; 'parallelogram' &#124; 'parallelogram2' &#124; 'parallelogram3' &#124; 'parallelogram4' &#124; 'star' &#124; 'star2' &#124; 'triangle' &#124; 'triangle2' &#124; 'triangle3' &#124; 'triangle4'</code> | <code>'circle'</code>  | --          |
-| class     | Yes      | <code>let</code> | No       | --                                                                                                                                                                                                                                                                                                                                                                   | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | --                                                                                                                                                                                                                                                                                                                                                                   | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -1019,11 +1019,11 @@ None.
 
 | Prop name | Required | Kind             | Reactive | Type                                                                                                                     | Default value          | Description |
 | :-------- | :------- | :--------------- | :------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------- | ----------- |
-| size      | No       | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large'</code>                                                        | <code>'medium'</code>  | --          |
-| color     | Yes      | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error'</code> | <code>undefined</code> | --          |
-| name      | Yes      | <code>let</code> | No       | <code>string</code>                                                                                                      | <code>undefined</code> | --          |
+| size      | No       | <code>let</code> | No       | <code>'xs' &#124; 'sm' &#124; 'md' &#124; 'lg'</code>                                                                    | <code>'md'</code>      | --          |
+| color     | No       | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error'</code> | <code>undefined</code> | --          |
+| name      | No       | <code>let</code> | No       | <code>string</code>                                                                                                      | <code>undefined</code> | --          |
 | checked   | No       | <code>let</code> | No       | <code>boolean</code>                                                                                                     | <code>false</code>     | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code>                                                                                                      | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>                                                                                                      | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -1039,14 +1039,14 @@ None.
 
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                                                              | Default value          | Description |
-| :-------- | :------- | :--------------- | :------- | ----------------------------------------------------------------- | ---------------------- | ----------- |
-| min       | No       | <code>let</code> | No       | <code>number</code>                                               | <code>0</code>         | --          |
-| max       | No       | <code>let</code> | No       | <code>number</code>                                               | <code>100</code>       | --          |
-| value     | No       | <code>let</code> | No       | <code>number</code>                                               | <code>0</code>         | --          |
-| step      | No       | <code>let</code> | No       | <code>number</code>                                               | <code>1</code>         | --          |
-| size      | No       | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large'</code> | <code>'medium'</code>  | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code>                                               | <code>undefined</code> | --          |
+| Prop name | Required | Kind             | Reactive | Type                                                  | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | ----------------------------------------------------- | ---------------------- | ----------- |
+| min       | No       | <code>let</code> | No       | <code>number</code>                                   | <code>0</code>         | --          |
+| max       | No       | <code>let</code> | No       | <code>number</code>                                   | <code>100</code>       | --          |
+| value     | No       | <code>let</code> | No       | <code>number</code>                                   | <code>0</code>         | --          |
+| step      | No       | <code>let</code> | No       | <code>number</code>                                   | <code>1</code>         | --          |
+| size      | No       | <code>let</code> | No       | <code>'xs' &#124; 'sm' &#124; 'md' &#124; 'lg'</code> | <code>'md'</code>      | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>                                   | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -1060,11 +1060,11 @@ None.
 
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                                                              | Default value          | Description |
-| :-------- | :------- | :--------------- | :------- | ----------------------------------------------------------------- | ---------------------- | ----------- |
-| size      | No       | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large'</code> | <code>'medium'</code>  | --          |
-| half      | No       | <code>let</code> | No       | <code>boolean</code>                                              | <code>false</code>     | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code>                                               | <code>undefined</code> | --          |
+| Prop name | Required | Kind             | Reactive | Type                                                  | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | ----------------------------------------------------- | ---------------------- | ----------- |
+| size      | No       | <code>let</code> | No       | <code>'xs' &#124; 'sm' &#124; 'md' &#124; 'lg'</code> | <code>'md'</code>      | --          |
+| half      | No       | <code>let</code> | No       | <code>boolean</code>                                  | <code>false</code>     | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>                                   | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -1082,10 +1082,10 @@ None.
 
 | Prop name | Required | Kind             | Reactive | Type                                                                                                                                    | Default value          | Description |
 | :-------- | :------- | :--------------- | :------- | --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
-| color     | Yes      | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; 'ghost'</code> | <code>undefined</code> | --          |
-| size      | No       | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large'</code>                                                                       | <code>'medium'</code>  | --          |
+| color     | No       | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; 'ghost'</code> | <code>undefined</code> | --          |
+| size      | No       | <code>let</code> | No       | <code>'xs' &#124; 'sm' &#124; 'md' &#124; 'lg'</code>                                                                                   | <code>'md'</code>      | --          |
 | bordered  | No       | <code>let</code> | No       | <code>boolean</code>                                                                                                                    | <code>false</code>     | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code>                                                                                                                     | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>                                                                                                                     | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -1104,7 +1104,7 @@ None.
 | Prop name | Required | Kind             | Reactive | Type                                                                                                                               | Default value          | Description |
 | :-------- | :------- | :--------------- | :------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
 | direction | No       | <code>let</code> | No       | <code>'up' &#124; 'down' &#124; 'left' &#124; 'right' &#124; 'upleft' &#124; 'upright' &#124; 'downleft' &#124; 'downright'</code> | <code>'down'</code>    | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code>                                                                                                                | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>                                                                                                                | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -1124,7 +1124,7 @@ None.
 | :--------- | :------- | :--------------- | :------- | ------------------------------------------------------------------------------------------------------------------------ | ------------------------- | ----------- |
 | alignment  | No       | <code>let</code> | No       | <code>'horizontal' &#124; 'vertical'</code>                                                                              | <code>'horizontal'</code> | --          |
 | background | Yes      | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error'</code> | <code>undefined</code>    | --          |
-| class      | Yes      | <code>let</code> | No       | <code>string</code>                                                                                                      | <code>undefined</code>    | --          |
+| class      | No       | <code>let</code> | No       | <code>string</code>                                                                                                      | <code>undefined</code>    | --          |
 
 ### Slots
 
@@ -1142,11 +1142,11 @@ None.
 
 | Prop name   | Required | Kind             | Reactive | Type                                                                                                                     | Default value          | Description |
 | :---------- | :------- | :--------------- | :------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------- | ----------- |
-| title       | Yes      | <code>let</code> | No       | <code>string</code>                                                                                                      | <code>undefined</code> | --          |
-| value       | Yes      | <code>let</code> | No       | <code>string</code>                                                                                                      | <code>undefined</code> | --          |
-| description | Yes      | <code>let</code> | No       | <code>string</code>                                                                                                      | <code>undefined</code> | --          |
-| background  | Yes      | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error'</code> | <code>undefined</code> | --          |
-| class       | Yes      | <code>let</code> | No       | <code>string</code>                                                                                                      | <code>undefined</code> | --          |
+| title       | No       | <code>let</code> | No       | <code>string</code>                                                                                                      | <code>undefined</code> | --          |
+| value       | No       | <code>let</code> | No       | <code>string</code>                                                                                                      | <code>undefined</code> | --          |
+| description | No       | <code>let</code> | No       | <code>string</code>                                                                                                      | <code>undefined</code> | --          |
+| background  | No       | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error'</code> | <code>undefined</code> | --          |
+| class       | No       | <code>let</code> | No       | <code>string</code>                                                                                                      | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -1169,7 +1169,7 @@ None.
 | Prop name | Required | Kind             | Reactive | Type                                        | Default value             | Description |
 | :-------- | :------- | :--------------- | :------- | ------------------------------------------- | ------------------------- | ----------- |
 | alignment | No       | <code>let</code> | No       | <code>'horizontal' &#124; 'vertical'</code> | <code>'horizontal'</code> | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code>                         | <code>undefined</code>    | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>                         | <code>undefined</code>    | --          |
 
 ### Slots
 
@@ -1188,7 +1188,7 @@ None.
 | Prop name | Required | Kind             | Reactive | Type                                                                                                                                      | Default value          | Description |
 | :-------- | :------- | :--------------- | :------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- | ----------- |
 | color     | Yes      | <code>let</code> | No       | <code>'primary' &#124; 'secondary' &#124; 'accent' &#124; 'info' &#124; 'success' &#124; 'warning' &#124; 'error' &#124; 'neutral'</code> | <code>undefined</code> | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code>                                                                                                                       | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>                                                                                                                       | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -1207,8 +1207,8 @@ None.
 | Prop name | Required | Kind             | Reactive | Type                                | Default value          | Description |
 | :-------- | :------- | :--------------- | :------- | ----------------------------------- | ---------------------- | ----------- |
 | state     | No       | <code>let</code> | Yes      | <code>boolean</code>                | <code>false</code>     | --          |
-| animation | Yes      | <code>let</code> | No       | <code>'rotate' &#124; 'flip'</code> | <code>undefined</code> | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code>                 | <code>undefined</code> | --          |
+| animation | No       | <code>let</code> | No       | <code>'rotate' &#124; 'flip'</code> | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>                 | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -1227,11 +1227,11 @@ None.
 
 ### Props
 
-| Prop name | Required | Kind             | Reactive | Type                                                              | Default value          | Description |
-| :-------- | :------- | :--------------- | :------- | ----------------------------------------------------------------- | ---------------------- | ----------- |
-| type      | Yes      | <code>let</code> | No       | <code>'bordered' &#124; 'lifted' &#124; 'boxed'</code>            | <code>undefined</code> | --          |
-| size      | No       | <code>let</code> | No       | <code>'tiny' &#124; 'small' &#124; 'medium' &#124; 'large'</code> | <code>'medium'</code>  | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code>                                               | <code>undefined</code> | --          |
+| Prop name | Required | Kind             | Reactive | Type                                                   | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | ------------------------------------------------------ | ---------------------- | ----------- |
+| type      | No       | <code>let</code> | No       | <code>'bordered' &#124; 'lifted' &#124; 'boxed'</code> | <code>undefined</code> | --          |
+| size      | No       | <code>let</code> | No       | <code>'xs' &#124; 'sm' &#124; 'md' &#124; 'lg'</code>  | <code>'md'</code>      | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>                                    | <code>undefined</code> | --          |
 
 ### Slots
 
@@ -1250,7 +1250,7 @@ None.
 | Prop name | Required | Kind             | Reactive | Type                 | Default value          | Description |
 | :-------- | :------- | :--------------- | :------- | -------------------- | ---------------------- | ----------- |
 | active    | No       | <code>let</code> | No       | <code>boolean</code> | <code>false</code>     | --          |
-| class     | Yes      | <code>let</code> | No       | <code>string</code>  | <code>undefined</code> | --          |
+| class     | No       | <code>let</code> | No       | <code>string</code>  | <code>undefined</code> | --          |
 
 ### Slots
 

@@ -10,7 +10,7 @@ export interface StepGroupProps {
   /**
    * @default undefined
    */
-  class: string;
+  class?: string;
 }
 
 export default class StepGroup extends SvelteComponentTyped<
