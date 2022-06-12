@@ -13,6 +13,11 @@
     // Properties
     // -----------------------------------------------------------
 
+    /**
+     * @type {boolean}
+     */
+    export let bordered = false;
+
     let restClass = undefined;
     /**
      * @type {string}
@@ -23,13 +28,18 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({ prefix: 'dui-window', restClass });
+    $: classNames = classes({
+        prefix: 'dui-window',
+        classProps: { bordered: { value: 'bordered' } },
+        props: { bordered },
+        restClass,
+    });
 </script>
 
 <div class={classNames} {...$$restProps}>
     <slot />
 </div>
 
-<style lang="scss">
+<style lang="scss" global>
     @import 'Window.scss';
 </style>
