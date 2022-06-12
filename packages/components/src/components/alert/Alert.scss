@@ -1,9 +1,12 @@
 @use 'sass:list';
+@use 'sass:map';
 @use '../variables.scss' as *;
 @use '../escape.scss' as *;
 
 .dui-alert {
-    @apply bg-base-200 space-y-2;
+    @apply bg-base-200;
+    margin-top: 0.5rem;
+    margin-bottom: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,8 +16,8 @@
     padding: 1rem;
     border-radius: var(--box-border-radius, 1rem);
 
-    @media (min-width: theme('screens.md')) {
-        @apply space-y-0;
+    @media (min-width: map.get($screen-sizes, 'md')) {
+        margin-top: 0;
         flex-direction: row;
     }
 
@@ -32,7 +35,7 @@
         $prefix: escape($prefix);
 
         @each $color in list.join($brand-colors, $functional-colors) {
-            &.#{$prefix}alert-#{$color} {
+            &.#{$prefix}dui-alert-#{$color} {
                 @apply bg-#{$color} text-#{$color}-content;
             }
         }
@@ -40,8 +43,8 @@
 
     @include responsive-props();
 
-    @each $screen-size in $tailwind-screen-sizes {
-        @screen #{$screen-size} {
+    @each $name, $screen-size in $screen-sizes {
+        @media (min-width: #{$screen-size}) {
             @include responsive-props('#{$screen-size}:');
         }
     }

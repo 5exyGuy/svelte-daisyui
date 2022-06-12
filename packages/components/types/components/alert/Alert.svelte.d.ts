@@ -1,52 +1,35 @@
 /// <reference types="svelte" />
-import type { SvelteComponentTyped } from "svelte";
-
-export type Color =
-  | "primary"
-  | "secondary"
-  | "accent"
-  | "info"
-  | "success"
-  | "warning"
-  | "error";
-
-export interface ResponsiveProperties {
-  color?: Color;
-}
-
-export interface Screen {
-  sm?: ResponsiveProperties;
-  md?: ResponsiveProperties;
-  lg?: ResponsiveProperties;
-  xl?: ResponsiveProperties;
-  "2xl"?: ResponsiveProperties;
-}
+import type { SvelteComponentTyped } from 'svelte';
 
 export interface AlertProps
-  extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap["div"]> {
-  /**
-   * @default undefined
-   */
-  color?: Color;
+    extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap['div']> {
+    /**
+     * Background color of component. Functional colors such as `info`, success, warning and error add an icon on the left side.
+     * @default undefined
+     */
+    color?: Color;
 
-  /**
-   * @default true
-   */
-  showIcon?: boolean;
+    /**
+     * Show an icon defaulted to the functional colors, e.g. info, success, warning and error.
+     * @default true
+     */
+    showIcon?: boolean;
 
-  /**
-   * @default undefined
-   */
-  class?: string;
+    /**
+     * A space-separated list of the classes of the element.
+     * @default undefined
+     */
+    class?: string;
 
-  /**
-   * @default undefined
-   */
-  screen?: Screen;
+    /**
+     * Responsive properties based on minimum screen widths.
+     * @default undefined
+     */
+    screen?: Screen;
 }
 
 export default class Alert extends SvelteComponentTyped<
-  AlertProps,
-  {},
-  { default: {} }
+    AlertProps,
+    {},
+    { default: {} }
 > {}

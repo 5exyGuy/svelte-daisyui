@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import MdInfoOutline from 'svelte-icons/md/MdInfoOutline.svelte';
     import FaRegCheckCircle from 'svelte-icons/fa/FaRegCheckCircle.svelte';
     import MdWarning from 'svelte-icons/md/MdWarning.svelte';
@@ -9,6 +9,7 @@
         FunctionalColor,
         classes,
     } from '@svelte-daisyui/shared';
+    import type { StringKeyOf } from 'type-fest';
 
     // -----------------------------------------------------------
     //  Type Definitions
@@ -19,25 +20,29 @@
      *
      * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'} Color
      * @typedef {{ color?: Color }} ResponsiveProperties
-     * @typedef {{ sm?: ResponsiveProperties, md?: ResponsiveProperties, lg?: ResponsiveProperties, xl?: ResponsiveProperties, '2xl'?: ResponsiveProperties }} Screen
      */
+
+    type Color = StringKeyOf<typeof BrandColor & typeof FunctionalColor>;
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
     /**
+     * Background color of component. Functional colors such as `info`, `success`, `warning` and `error` add a default icon on the left.
      * @type {Color}
      */
-    export let color = undefined;
+    export let color: Color = undefined;
 
     /**
+     * Show an icon defaulted to the functional colors, e.g. `info`, `success`, `warning` and `error`.
      * @type {boolean}
      */
-    export let showIcon = true;
+    export let showIcon: boolean = true;
 
-    let restClass = undefined;
+    let restClass: string = undefined;
     /**
+     * A space-separated list of the classes of the element.
      * @type {string}
      */
     export { restClass as class };
@@ -47,6 +52,7 @@
     // -----------------------------------------------------------
 
     /**
+     * Responsive properties based on minimum screen widths.
      * @type {Screen}
      */
     export let screen = undefined;
