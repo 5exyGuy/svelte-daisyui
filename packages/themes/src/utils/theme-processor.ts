@@ -10,6 +10,10 @@ import {
 } from '../constants';
 import color from 'color';
 
+type RecursiveKeyValuePair<K extends keyof any = string, V = string> = {
+    [key: string]: V | RecursiveKeyValuePair<K, V>;
+};
+
 export class ThemeProcessor {
     public mainTheme?: string;
     public darkTheme?: string;
@@ -128,7 +132,7 @@ export class ThemeProcessor {
         return processedTheme;
     }
 
-    public generate(): Object {
+    public generate(): RecursiveKeyValuePair {
         const includedThemes = [] as Array<Theme>;
 
         // Validating the config

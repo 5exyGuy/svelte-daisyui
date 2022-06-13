@@ -1,52 +1,46 @@
-import type { TailwindConfig } from 'tailwindcss/tailwind-config';
+import type { Config } from 'tailwindcss';
 
-function withOpacityValue(variable: string) {
-    return ({
-        opacityValue,
-    }: {
-        opacityVariable: string;
-        opacityValue: string;
-    }) => {
-        if (!opacityValue) return `hsl(var(${variable}))`;
-        return `hsl(var(${variable}) / ${opacityValue})`;
-    };
-}
-
-export const TAILWIND_CONFIG: TailwindConfig = {
+export const TAILWIND_CONFIG: Config = {
     content: ['./src/**/*.{svelte,js,ts}'],
     theme: {
         extend: {
             colors: {
                 transparent: 'transparent',
                 current: 'currentColor',
-                primary: withOpacityValue('--primary'),
-                'primary-content': withOpacityValue('--primary-content'),
-                'primary-focus': withOpacityValue('--primary-focus'),
-                secondary: withOpacityValue('--secondary'),
-                'secondary-content': withOpacityValue('--secondary-content'),
-                'secondary-focus': withOpacityValue('--secondary-focus'),
-                accent: withOpacityValue('--accent'),
-                'accent-content': withOpacityValue('--accent-content'),
-                'accent-focus': withOpacityValue('--accent-focus'),
-                neutral: withOpacityValue('--neutral'),
-                'neutral-content': withOpacityValue('--neutral-content'),
-                'neutral-focus': withOpacityValue('--neutral-focus'),
-                'base-100': withOpacityValue('--base-100'),
-                'base-200': withOpacityValue('--base-200'),
-                'base-300': withOpacityValue('--base-300'),
-                'base-content': withOpacityValue('--base-content'),
-                info: withOpacityValue('--info'),
-                'info-content': withOpacityValue('--info-content'),
-                'info-focus': withOpacityValue('--info-focus'),
-                success: withOpacityValue('--success'),
-                'success-content': withOpacityValue('--success-content'),
-                'success-focus': withOpacityValue('--success-focus'),
-                warning: withOpacityValue('--warning'),
-                'warning-content': withOpacityValue('--warning-content'),
-                'warning-focus': withOpacityValue('--warning-focus'),
-                error: withOpacityValue('--error'),
-                'error-content': withOpacityValue('--error-content'),
-                'error-focus': withOpacityValue('--error-focus'),
+                primary: 'hsl(var(--primary) / <alpha-value>)',
+                'primary-content':
+                    'hsl(var(--primary-content) / <alpha-value>)',
+                'primary-focus': 'hsl(var(--primary-focus) / <alpha-value>)',
+                secondary: 'hsl(var(--secondary) / <alpha-value>)',
+                'secondary-content':
+                    'hsl(var(--secondary-content) / <alpha-value>)',
+                'secondary-focus':
+                    'hsl(var(--secondary-focus) / <alpha-value>)',
+                accent: 'hsl(var(--accent) / <alpha-value>)',
+                'accent-content': 'hsl(var(--accent-content) / <alpha-value>)',
+                'accent-focus': 'hsl(var(--accent-focus) / <alpha-value>)',
+                neutral: 'hsl(var(--neutral) / <alpha-value>)',
+                'neutral-content':
+                    'hsl(var(--neutral-content) / <alpha-value>)',
+                'neutral-focus': 'hsl(var(--neutral-focus) / <alpha-value>)',
+                'base-100': 'hsl(var(--base-100) / <alpha-value>)',
+                'base-200': 'hsl(var(--base-200) / <alpha-value>)',
+                'base-300': 'hsl(var(--base-300) / <alpha-value>)',
+                'base-content': 'hsl(var(--base-content) / <alpha-value>)',
+                info: 'hsl(var(--info) / <alpha-value>)',
+                'info-content': 'hsl(var(--info-content) / <alpha-value>)',
+                'info-focus': 'hsl(var(--info-focus) / <alpha-value>)',
+                success: 'hsl(var(--success) / <alpha-value>)',
+                'success-content':
+                    'hsl(var(--success-content) / <alpha-value>)',
+                'success-focus': 'hsl(var(--success-focus) / <alpha-value>)',
+                warning: 'hsl(var(--warning) / <alpha-value>)',
+                'warning-content':
+                    'hsl(var(--warning-content) / <alpha-value>)',
+                'warning-focus': 'hsl(var(--warning-focus) / <alpha-value>)',
+                error: 'hsl(var(--error) / <alpha-value>)',
+                'error-content': 'hsl(var(--error-content) / <alpha-value>)',
+                'error-focus': 'hsl(var(--error-focus) / <alpha-value>)',
             },
         },
     },
