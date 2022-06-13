@@ -14,6 +14,14 @@ export interface ResponsiveProperties {
   color?: Color;
 }
 
+export interface Screen {
+  sm?: ResponsiveProperties;
+  md?: ResponsiveProperties;
+  lg?: ResponsiveProperties;
+  xl?: ResponsiveProperties;
+  "2xl"?: ResponsiveProperties;
+}
+
 export interface AlertProps
   extends svelte.JSX.HTMLAttributes<HTMLElementTagNameMap["div"]> {
   /**

@@ -43,12 +43,13 @@
     export { restClass as class };
 
     // -----------------------------------------------------------
-    // Screen
+    // Screenaaaa
     // -----------------------------------------------------------
 
     /**
      * Responsive properties based on minimum screen widths.
      * @typedef {{ color?: Color }} ResponsiveProperties
+     * @typedef {{ sm?: ResponsiveProperties; md?: ResponsiveProperties; lg?: ResponsiveProperties; xl?: ResponsiveProperties; '2xl'?: ResponsiveProperties }} Screen
      * @type {Screen}
      */
     export let screen = undefined;

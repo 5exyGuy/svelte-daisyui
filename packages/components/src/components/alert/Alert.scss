@@ -5,7 +5,7 @@
 @use '../colors.scss';
 
 .dui-alert {
-    @include colors.background('base-200');
+    background-color: colors.get-hsl('base-200');
     margin-top: 0.5rem;
     margin-bottom: 0;
     display: flex;
@@ -37,8 +37,8 @@
 
         @each $color in list.join($brand-colors, $functional-colors) {
             &.#{$prefix}dui-alert-#{$color} {
-                @include colors.background($color);
-                @include colors.text($color);
+                background-color: colors.get-hsl($color);
+                color: colors.get-hsl-content($color);
             }
         }
     }

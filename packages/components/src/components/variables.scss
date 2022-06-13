@@ -1,9 +1,6 @@
 $brand-colors: primary, secondary, accent;
 $functional-colors: info, success, warning, error;
-
-$daisyui-sizes: xs, sm, md, lg;
-$tailwind-sizes: xs, sm, base, lg, xl, 2xl, 3xl, 4xl, 5xl, 6xl, 7xl, 8xl, 9xl;
-$tailwind-screen-sizes: sm, md, lg, xl, 2xl;
+$sizes: xs, sm, md, lg;
 $screen-sizes: (
     'sm': 640px,
     'md': 768px,

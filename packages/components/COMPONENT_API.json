@@ -64,6 +64,11 @@
           "type": "{ color?: Color }",
           "name": "ResponsiveProperties",
           "ts": "interface ResponsiveProperties { color?: Color }"
+        },
+        {
+          "type": "{ sm?: ResponsiveProperties; md?: ResponsiveProperties; lg?: ResponsiveProperties; xl?: ResponsiveProperties; '2xl'?: ResponsiveProperties }",
+          "name": "Screen",
+          "ts": "interface Screen { sm?: ResponsiveProperties; md?: ResponsiveProperties; lg?: ResponsiveProperties; xl?: ResponsiveProperties; '2xl'?: ResponsiveProperties }"
         }
       ],
       "rest_props": { "type": "Element", "name": "div" }

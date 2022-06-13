@@ -60,18 +60,38 @@ $color-map: (
     base-content: var(--base-content),
 );
 
-@function get-color($color) {
+@function get-var($color) {
     @return map.get($color-map, $color);
 }
 
-@mixin background($color, $opacity: 1) {
-    background-color: hsla(get-color($color), $opacity);
+@function get-content-var($color) {
+    @return map.get($color-map, $color + '-content');
 }
 
-@mixin text($color, $opacity: 1) {
-    color: hsla(get-color($color), $opacity);
+@function get-focus-var($color) {
+    @return map.get($color-map, $color + '-focus');
 }
 
-@mixin border($color, $opacity: 1) {
-    border-color: hsla(get-color($color), $opacity);
+@function get-hsl($color) {
+    @return hsl(get-var($color));
+}
+
+@function get-hsl-content($color) {
+    @return hsl(get-content-var($color));
+}
+
+@function get-hsl-focus($color) {
+    @return hsl(get-focus-var($color));
+}
+
+@function get-hsla($color, $alpha: 1) {
+    @return hsla(get-var($color, $alpha), $alpha);
+}
+
+@function get-hsla-content($color, $alpha: 1) {
+    @return hsla(get-content-var($color, $alpha), $alpha);
+}
+
+@function get-hsla-focus($color, $alpha: 1) {
+    @return hsla(get-focus-var($color, $alpha), $alpha);
 }
