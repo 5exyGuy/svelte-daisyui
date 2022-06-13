@@ -1,14 +1,14 @@
 <script>
+    import {
+        classes,
+        BrandColor,
+        FunctionalColor,
+    } from '@svelte-daisyui/shared';
     import MdInfoOutline from 'svelte-icons/md/MdInfoOutline.svelte';
     import FaRegCheckCircle from 'svelte-icons/fa/FaRegCheckCircle.svelte';
     import MdWarning from 'svelte-icons/md/MdWarning.svelte';
     import MdErrorOutline from 'svelte-icons/md/MdErrorOutline.svelte';
     import Icon from '../icon/Icon.svelte';
-    import {
-        BrandColor,
-        FunctionalColor,
-        classes,
-    } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
     //  Type Definitions
@@ -16,9 +16,6 @@
 
     /**
      * @restProps {div}
-     *
-     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'} Color
-     * @typedef {{ color?: Color }} ResponsiveProperties
      */
 
     // -----------------------------------------------------------
@@ -27,6 +24,7 @@
 
     /**
      * Background color of component. Functional colors such as `info`, `success`, `warning` and `error` add a default icon on the left.
+     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'} Color
      * @type {Color}
      */
     export let color = undefined;
@@ -50,6 +48,7 @@
 
     /**
      * Responsive properties based on minimum screen widths.
+     * @typedef {{ color?: Color }} ResponsiveProperties
      * @type {Screen}
      */
     export let screen = undefined;

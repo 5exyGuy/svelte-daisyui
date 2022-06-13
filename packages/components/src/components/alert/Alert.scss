@@ -2,9 +2,10 @@
 @use 'sass:map';
 @use '../variables.scss' as *;
 @use '../escape.scss' as *;
+@use '../colors.scss';
 
 .dui-alert {
-    @apply bg-base-200;
+    @include colors.background('base-200');
     margin-top: 0.5rem;
     margin-bottom: 0;
     display: flex;
@@ -36,7 +37,8 @@
 
         @each $color in list.join($brand-colors, $functional-colors) {
             &.#{$prefix}dui-alert-#{$color} {
-                @apply bg-#{$color} text-#{$color}-content;
+                @include colors.background($color);
+                @include colors.text($color);
             }
         }
     }

@@ -3,7 +3,6 @@ import svelte from 'rollup-plugin-svelte';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import preprocess from 'svelte-preprocess';
-import postcss from 'rollup-plugin-postcss';
 import css from 'rollup-plugin-css-only';
 import sveld from 'sveld';
 import pkg from './package.json';
@@ -19,11 +18,7 @@ export default {
             emitCss: true,
             preprocess: preprocess({ postcss: true }),
         }),
-        css({
-            // output: (styles, styleNodes) => {
-            //     // console.log(styleNodes);
-            // },
-        }),
+        css({ output: 'bundle.css' }),
         resolve(),
         commonjs(),
         terser(),

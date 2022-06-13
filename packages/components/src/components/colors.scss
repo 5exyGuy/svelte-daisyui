@@ -1,0 +1,77 @@
+@use 'sass:map';
+
+$primary: var(--primary);
+$primary-content: var(--primary-content);
+$primary-focus: var(--primary-focus);
+$secondary: var(--secondary);
+$secondary-content: var(--secondary-content);
+$secondary-focus: var(--secondary-focus);
+$accent: var(--accent);
+$accent-content: var(--accent-content);
+$accent-focus: var(--accent-focus);
+$neutral: var(--neutral);
+$neutral-content: var(--neutral-content);
+$neutral-focus: var(--neutral-focus);
+$success: var(--success);
+$success-content: var(--success-content);
+$success-focus: var(--success-focus);
+$info: var(--info);
+$info-content: var(--info-content);
+$info-focus: var(--info-focus);
+$warning: var(--warning);
+$warning-content: var(--warning-content);
+$warning-focus: var(--warning-focus);
+$error: var(--error);
+$error-content: var(--error-content);
+$error-focus: var(--error-focus);
+$base-100: var(--base-100);
+$base-200: var(--base-200);
+$base-300: var(--base-300);
+$base-content: var(--base-content);
+
+$color-map: (
+    primary: var(--primary),
+    primary-content: var(--primary-content),
+    primary-focus: var(--primary-focus),
+    secondary: var(--secondary),
+    secondary-content: var(--secondary-content),
+    secondary-focus: var(--secondary-focus),
+    accent: var(--accent),
+    accent-content: var(--accent-content),
+    accent-focus: var(--accent-focus),
+    neutral: var(--neutral),
+    neutral-content: var(--neutral-content),
+    neutral-focus: var(--neutral-focus),
+    success: var(--success),
+    success-content: var(--success-content),
+    success-focus: var(--success-focus),
+    info: var(--info),
+    info-content: var(--info-content),
+    info-focus: var(--info-focus),
+    warning: var(--warning),
+    warning-content: var(--warning-content),
+    warning-focus: var(--warning-focus),
+    error: var(--error),
+    error-content: var(--error-content),
+    error-focus: var(--error-focus),
+    base-100: var(--base-100),
+    base-200: var(--base-200),
+    base-300: var(--base-300),
+    base-content: var(--base-content),
+);
+
+@function get-color($color) {
+    @return map.get($color-map, $color);
+}
+
+@mixin background($color, $opacity: 1) {
+    background-color: hsla(get-color($color), $opacity);
+}
+
+@mixin text($color, $opacity: 1) {
+    color: hsla(get-color($color), $opacity);
+}
+
+@mixin border($color, $opacity: 1) {
+    border-color: hsla(get-color($color), $opacity);
+}
