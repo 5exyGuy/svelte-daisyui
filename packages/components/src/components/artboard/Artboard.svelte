@@ -7,7 +7,6 @@
 
     /**
      * @restProps {div}
-     *
      * @typedef {1 | 2 | 3 | 4 | 5 | 6} Size
      * @typedef {'horizontal' | 'vertical'} Alignment
      */
@@ -29,7 +28,7 @@
     /**
      * @type {Alignment}
      */
-    export let alignment = undefined;
+    export let alignment = 'horizontal';
 
     let restClass = undefined;
     /**
@@ -42,7 +41,7 @@
     // -----------------------------------------------------------
 
     $: classNames = classes({
-        prefix: 'artboard',
+        prefix: 'dui-artboard',
         classProps: {
             size: { value: ArtboardSize },
             demo: { value: 'demo' },

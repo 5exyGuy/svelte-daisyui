@@ -1,11 +1,12 @@
+@use '../escape' as *;
+@use '../variables';
+@use '../colors';
 @use 'sass:list';
 @use 'sass:map';
-@use '../variables.scss' as *;
-@use '../escape.scss' as *;
-@use '../colors.scss';
+
 
 .dui-alert {
-    background-color: colors.get-hsl('base-200');
+    background-color: colors.get('base-200');
     margin-top: 0.5rem;
     margin-bottom: 0;
     display: flex;
@@ -17,7 +18,7 @@
     padding: 1rem;
     border-radius: var(--box-border-radius, 1rem);
 
-    @media (min-width: map.get($screen-sizes, 'md')) {
+    @media (min-width: map.get(variables.$screen-sizes, 'md')) {
         margin-top: 0;
         flex-direction: row;
     }
@@ -28,26 +29,22 @@
         gap: 0.5rem;
     }
 
-    & > .dui-alert-icon {
-        flex: none;
-    }
-
     @mixin responsive-props($prefix: '') {
         $prefix: escape($prefix);
 
-        @each $color in list.join($brand-colors, $functional-colors) {
+        @each $color in list.join(colors.$brand, colors.$functional) {
             &.#{$prefix}dui-alert-#{$color} {
-                background-color: colors.get-hsl($color);
-                color: colors.get-hsl-content($color);
+                background-color: colors.get($color);
+                color: colors.get-content($color);
             }
         }
     }
 
     @include responsive-props();
 
-    @each $name, $screen-size in $screen-sizes {
+    @each $name, $screen-size in variables.$screen-sizes {
         @media (min-width: #{$screen-size}) {
-            @include responsive-props('#{$screen-size}:');
+            @include responsive-props('#{$name}:');
         }
     }
 }

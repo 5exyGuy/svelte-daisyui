@@ -1,5 +1,8 @@
 @use 'sass:map';
 
+$brand: primary, secondary, accent;
+$functional: info, success, warning, error;
+
 $primary: var(--primary);
 $primary-content: var(--primary-content);
 $primary-focus: var(--primary-focus);
@@ -60,38 +63,24 @@ $color-map: (
     base-content: var(--base-content),
 );
 
-@function get-var($color) {
-    @return map.get($color-map, $color);
+@function get($color, $alpha: 1) {
+    $color-get: map.get($color-map, $color);
+
+    @if $color-get == null {
+        @error "Color #{$color}";
+    }
+
+    @if $alpha < 0 or $alpha >= 1 {
+        @return hsl($color-get);
+    }
+
+    @return hsla($color-get, $alpha);
 }
 
-@function get-content-var($color) {
-    @return map.get($color-map, $color + '-content');
+@function get-content($color, $alpha: 1) {
+    @return get($color + '-content', $alpha);
 }
 
-@function get-focus-var($color) {
-    @return map.get($color-map, $color + '-focus');
-}
-
-@function get-hsl($color) {
-    @return hsl(get-var($color));
-}
-
-@function get-hsl-content($color) {
-    @return hsl(get-content-var($color));
-}
-
-@function get-hsl-focus($color) {
-    @return hsl(get-focus-var($color));
-}
-
-@function get-hsla($color, $alpha: 1) {
-    @return hsla(get-var($color, $alpha), $alpha);
-}
-
-@function get-hsla-content($color, $alpha: 1) {
-    @return hsla(get-content-var($color, $alpha), $alpha);
-}
-
-@function get-hsla-focus($color, $alpha: 1) {
-    @return hsla(get-focus-var($color, $alpha), $alpha);
+@function get-focus($color, $alpha: 1) {
+    @return get($color + '-focus', $alpha);
 }

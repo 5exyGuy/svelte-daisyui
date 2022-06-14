@@ -1,5 +1,3 @@
-$brand-colors: primary, secondary, accent;
-$functional-colors: info, success, warning, error;
 $sizes: xs, sm, md, lg;
 $screen-sizes: (
     'sm': 640px,
@@ -8,3 +6,4 @@ $screen-sizes: (
     'xl': 1280px,
     '2xl': 1536px,
 );
+$box-border-radius: var(--box-border-radius);

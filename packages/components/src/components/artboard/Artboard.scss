@@ -1,7 +1,8 @@
-@use 'sass:map';
+@use '../escape' as *;
+@use '../variables';
+@use '../colors';
 @use 'sass:list';
-@use '../variables.scss' as *;
-@use '../escape.scss' as *;
+@use 'sass:map';
 
 $sizes: (
     1: (
@@ -40,8 +41,9 @@ $sizes: (
     height: 568px;
 
     &.dui-artboard-demo {
-        @apply bg-base-100 text-base-content;
-        border-radius: var(--box-border-radius);
+        background-color: colors.get('base-100');
+        color: colors.get-content('base');
+        border-radius: variables.$box-border-radius;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
             0 1px 2px 0 rgba(0, 0, 0, 0.06);
     }
@@ -49,17 +51,14 @@ $sizes: (
     &.dui-artboard-phone {
         @each $size, $vector2 in $sizes {
             &-#{$size} {
-                width: map.get($vector2, 'x');
-                height: map.get($vector2, 'y');
+                &.dui-artboard-horizontal {
+                    width: map.get($vector2, 'y');
+                    height: map.get($vector2, 'x');
+                }
 
                 &.dui-artboard-vertical {
                     width: map.get($vector2, 'x');
                     height: map.get($vector2, 'y');
-                }
-
-                &.dui-artboard-horizontal {
-                    width: map.get($vector2, 'y');
-                    height: map.get($vector2, 'x');
                 }
             }
         }

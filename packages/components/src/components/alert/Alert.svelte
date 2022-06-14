@@ -9,6 +9,7 @@
     import MdWarning from 'svelte-icons/md/MdWarning.svelte';
     import MdErrorOutline from 'svelte-icons/md/MdErrorOutline.svelte';
     import Icon from '../icon/Icon.svelte';
+    import AlertIcon from './AlertIcon.svelte';
 
     // -----------------------------------------------------------
     //  Type Definitions
@@ -16,6 +17,9 @@
 
     /**
      * @restProps {div}
+     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'} Color
+     * @typedef {{ color?: Color }} ResponsiveProperties
+     * @typedef {{ sm?: ResponsiveProperties; md?: ResponsiveProperties; lg?: ResponsiveProperties; xl?: ResponsiveProperties; '2xl'?: ResponsiveProperties }} Screen
      */
 
     // -----------------------------------------------------------
@@ -24,7 +28,6 @@
 
     /**
      * Background color of component. Functional colors such as `info`, `success`, `warning` and `error` add a default icon on the left.
-     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'} Color
      * @type {Color}
      */
     export let color = undefined;
@@ -48,8 +51,6 @@
 
     /**
      * Responsive properties based on minimum screen widths.
-     * @typedef {{ color?: Color }} ResponsiveProperties
-     * @typedef {{ sm?: ResponsiveProperties; md?: ResponsiveProperties; lg?: ResponsiveProperties; xl?: ResponsiveProperties; '2xl'?: ResponsiveProperties }} Screen
      * @type {Screen}
      */
     export let screen = undefined;
@@ -70,21 +71,21 @@
 <div class={classNames} {...$$restProps}>
     {#if showIcon && color}
         {#if color === 'info'}
-            <div class="dui-alert-icon">
+            <AlertIcon>
                 <Icon size={1.5} component={MdInfoOutline} />
-            </div>
+            </AlertIcon>
         {:else if color === 'success'}
-            <div class="dui-alert-icon">
+            <AlertIcon>
                 <Icon size={1.5} component={FaRegCheckCircle} />
-            </div>
+            </AlertIcon>
         {:else if color === 'warning'}
-            <div class="dui-alert-icon">
+            <AlertIcon>
                 <Icon size={1.5} component={MdWarning} />
-            </div>
+            </AlertIcon>
         {:else if color === 'error'}
-            <div class="dui-alert-icon">
+            <AlertIcon>
                 <Icon size={1.5} component={MdErrorOutline} />
-            </div>
+            </AlertIcon>
         {/if}
     {/if}
     <slot />
