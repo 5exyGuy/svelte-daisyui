@@ -4,7 +4,6 @@
 @use 'sass:list';
 @use 'sass:map';
 
-
 .dui-alert {
     background-color: colors.get('base-200');
     margin-top: 0.5rem;
@@ -27,6 +26,14 @@
         display: flex;
         align-items: center;
         gap: 0.5rem;
+    }
+
+    & > .dui-alert-icon {
+        flex: none;
+    }
+
+    & > .dui-alert-actions {
+        flex: none;
     }
 
     @mixin responsive-props($prefix: '') {

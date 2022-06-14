@@ -1,16 +1,9 @@
-import type { Primitive, StringKeyOf } from 'type-fest';
-import type { ScreenSize } from '../enums';
-import type { ClassPropData } from './class-prop-data.interface';
+import type { Screen } from "../types";
 
-export interface ClassesParams<Props extends string> {
+export interface ClassesParams<T> {
     prefix: string;
-    classProps?: Partial<Record<Props, ClassPropData>>;
-    props?: Partial<Record<Props, Primitive>>;
-    screen?: Partial<
-        Record<
-            StringKeyOf<typeof ScreenSize>,
-            Partial<Record<Props, Primitive>>
-        >
-    >;
+    propData?: { [K in keyof T]?: T[K] extends boolean ? string : T[K] extends string ? Record<T[K], string> : string };
+    propValues?: Partial<T>;
+    screen?: Screen<T>;
     restClass?: string;
 }

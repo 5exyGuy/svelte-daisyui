@@ -1,9 +1,11 @@
+@use '../colors';
+
 .dui-avatar-group {
     display: flex;
     // overflow: hidden;
 
     & > .dui-avatar {
-        @apply border-base-100;
+        border-color: colors.$base-100;
         // overflow: hidden;
         border-radius: 9999px;
         border-width: 4px;

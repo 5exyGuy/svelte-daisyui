@@ -19,12 +19,12 @@
     /**
      * @type {typeof import('svelte').SvelteComponent}
      */
-    export let component;
+    export let component = undefined;
 
     /**
      * @type {number}
      */
-    export let size;
+    export let size = undefined;
 
     /**
      * @type {number}
@@ -62,18 +62,14 @@
 
     $: classNames = classes({
         prefix: 'icon',
-        classProps: { spin: { value: 'spin' } },
-        props: { spin },
+        propData: { spin: 'spin' },
+        propValues: { spin },
         screen,
         restClass,
     });
 </script>
 
-<div
-    class={classNames}
-    style={`height: ${size ?? height}em; width: ${size ?? width}em;`}
-    {...$$restProps}
->
+<div class={classNames} style={`height: ${size ?? height}em; width: ${size ?? width}em;`} {...$$restProps}>
     {#if component}
         <svelte:component this={component} />
     {:else}

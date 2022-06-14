@@ -1,73 +1,81 @@
-import type { ClassesParams, ClassPropData } from '../interfaces';
+import type { ClassesParams } from '../interfaces';
 import type { Primitive, StringKeyOf } from 'type-fest';
 import type { ScreenSize } from '../enums';
 
-export function classes<Props extends string>({
+export function classes<T>({
     prefix,
-    classProps = {},
-    props = {},
+    propData = {},
+    propValues = {},
     screen = {},
     restClass = '',
-}: ClassesParams<Props>): string {
+}: ClassesParams<T>): string {
     const classList = [prefix];
 
-    for (const prop in props) {
-        const propValue = props[prop] as Primitive;
-        const classPropData = classProps[prop] as ClassPropData;
+    for (const prop in propValues) {
+        const propValue = propValues[prop] as Primitive;
+        const classPropData = propData[prop] as string | Record<string, string>;
 
-        if (!propValue || !classPropData.value) continue;
+        if (!propValue || !classPropData) continue;
 
         if (
             typeof propValue === 'boolean' &&
             propValue &&
-            classPropData.value &&
-            typeof classPropData.value === 'string'
+            classPropData &&
+            typeof classPropData === 'string'
         )
-            classList.push(`${prefix}-${classPropData.value}`);
+            classList.push(`${prefix}-${classPropData}`);
         else if (
             typeof propValue === 'string' &&
-            classPropData.value &&
-            typeof classPropData.value === 'object' &&
-            classPropData.value[propValue]
+            classPropData &&
+            typeof classPropData === 'object' &&
+            classPropData[propValue]
         )
-            classList.push(`${prefix}-${classPropData.value[propValue]}`);
+            classList.push(`${prefix}-${classPropData[propValue]}`);
     }
 
     for (const screenSize in screen) {
-        const screenProps = screen[
-            screenSize as StringKeyOf<typeof ScreenSize>
-        ] as Partial<Record<Props, string>>;
+        const screenProps = screen[screenSize as StringKeyOf<typeof ScreenSize>] as Partial<T>;
         for (const prop in screenProps) {
             const propValue = screenProps[prop] as Primitive;
-            const classPropData = classProps[prop] as ClassPropData;
+            const classPropData = propData[prop] as string | Record<string, string>;
 
-            if (!propValue || !classPropData.value) continue;
+            if (!propValue || !classPropData) continue;
 
             if (
                 typeof propValue === 'boolean' &&
                 propValue &&
-                classPropData.value &&
-                typeof classPropData.value === 'string'
+                classPropData &&
+                typeof classPropData === 'string'
             )
                 classList.push(
-                    `${screenSize}:${prefix}-${classPropData.value}`,
+                    `${screenSize}:${prefix}-${classPropData}`,
                 );
             else if (
                 typeof propValue === 'string' &&
-                classPropData.value &&
-                typeof classPropData.value === 'object' &&
-                classPropData.value[propValue]
+                classPropData &&
+                typeof classPropData === 'object' &&
+                classPropData[propValue]
             )
                 classList.push(
-                    `${screenSize}:${prefix}-${classPropData.value[propValue]}`,
+                    `${screenSize}:${prefix}-${classPropData[propValue]}`,
                 );
         }
     }
 
-    if (restClass && typeof restClass === 'string' && restClass.length > 0) {
+    if (restClass && restClass.length > 0) {
         const restClassList = restClass.split(' ');
         classList.push(...restClassList);
     }
 
     return classList.join(' ');
 }
+
+
+interface Example {
+    color: 'primary' | 'secondary';
+}
+
+classes<Example>({
+    prefix: '',
+    propData: {color: {primary: '', secondary: ''}}
+});

@@ -1,5 +1,6 @@
-@use '../variables.scss' as *;
-@use '../escape.scss' as *;
+@use '../escape' as *;
+@use '../variables';
+@use '../colors';
 
 .dui-avatar {
     position: relative;
@@ -27,6 +28,7 @@
 
     @mixin avatar-status($bg-color) {
         &:before {
+            background-color: colors.get($bg-color);
             @apply #{$bg-color};
             content: '';
             display: block;
@@ -37,15 +39,15 @@
             height: 15%;
             top: 7%;
             right: 7%;
-            box-shadow: 0 0 0 2px var(--base-100);
+            box-shadow: 0 0 0 2px colors.$base-100;
         }
     }
 
     &.dui-avatar-online {
-        @include avatar-status('bg-success');
+        @include avatar-status('success');
     }
 
     &.dui-avatar-offline {
-        @include avatar-status('bg-base-300');
+        @include avatar-status('base-300');
     }
 }

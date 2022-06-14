@@ -1,26 +1,26 @@
-<script>
-    import {
-        classes,
-        BrandColor,
-        FunctionalColor,
-    } from '@svelte-daisyui/shared';
+<script lang="ts">
+    import { classes, BrandColor, FunctionalColor, type Screen, type ClassesParams } from '@svelte-daisyui/shared';
+    import type { SvelteComponent } from 'svelte';
+    import type { StringKeyOf } from 'type-fest';
     import MdInfoOutline from 'svelte-icons/md/MdInfoOutline.svelte';
     import FaRegCheckCircle from 'svelte-icons/fa/FaRegCheckCircle.svelte';
     import MdWarning from 'svelte-icons/md/MdWarning.svelte';
     import MdErrorOutline from 'svelte-icons/md/MdErrorOutline.svelte';
     import Icon from '../icon/Icon.svelte';
-    import AlertIcon from './AlertIcon.svelte';
 
     // -----------------------------------------------------------
-    //  Type Definitions
+    //  Type Definitions and Interfaces
     // -----------------------------------------------------------
 
-    /**
-     * @restProps {div}
-     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'} Color
-     * @typedef {{ color?: Color }} ResponsiveProperties
-     * @typedef {{ sm?: ResponsiveProperties; md?: ResponsiveProperties; lg?: ResponsiveProperties; xl?: ResponsiveProperties; '2xl'?: ResponsiveProperties }} Screen
-     */
+    type Color = StringKeyOf<typeof BrandColor & typeof FunctionalColor>;
+
+    interface Properties {
+        color: Color;
+    }
+
+    interface ResponsiveProperties {
+        color: Color;
+    }
 
     // -----------------------------------------------------------
     // Properties
@@ -28,67 +28,71 @@
 
     /**
      * Background color of component. Functional colors such as `info`, `success`, `warning` and `error` add a default icon on the left.
-     * @type {Color}
      */
-    export let color = undefined;
+    export let color: Color = undefined;
+
+    export let icon: typeof SvelteComponent =
+        color === 'info'
+            ? MdInfoOutline
+            : color === 'success'
+            ? FaRegCheckCircle
+            : color === 'warning'
+            ? MdWarning
+            : color === 'error'
+            ? MdErrorOutline
+            : undefined;
+
+    export let message: string = undefined;
 
     /**
      * Show an icon defaulted to the functional colors, e.g. `info`, `success`, `warning` and `error`.
-     * @type {boolean}
      */
     export let showIcon = true;
 
     let restClass = undefined;
     /**
      * A space-separated list of the classes of the element.
-     * @type {string}
      */
     export { restClass as class };
 
     // -----------------------------------------------------------
-    // Screenaaaa
+    // Screen
     // -----------------------------------------------------------
 
     /**
-     * Responsive properties based on minimum screen widths.
-     * @type {Screen}
+     * Responsive properties for the component.
      */
-    export let screen = undefined;
+    export let screen: Screen<ResponsiveProperties> = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({
+    $: classNames = classes<Properties>({
         prefix: 'dui-alert',
-        classProps: { color: { value: { ...BrandColor, ...FunctionalColor } } },
-        props: { color },
+        propData: { color: { ...BrandColor, ...FunctionalColor } },
+        propValues: { color },
         screen,
         restClass,
-    });
+    } as ClassesParams<Properties>);
 </script>
 
 <div class={classNames} {...$$restProps}>
-    {#if showIcon && color}
-        {#if color === 'info'}
-            <AlertIcon>
-                <Icon size={1.5} component={MdInfoOutline} />
-            </AlertIcon>
-        {:else if color === 'success'}
-            <AlertIcon>
-                <Icon size={1.5} component={FaRegCheckCircle} />
-            </AlertIcon>
-        {:else if color === 'warning'}
-            <AlertIcon>
-                <Icon size={1.5} component={MdWarning} />
-            </AlertIcon>
-        {:else if color === 'error'}
-            <AlertIcon>
-                <Icon size={1.5} component={MdErrorOutline} />
-            </AlertIcon>
-        {/if}
+    {#if $$slots.default}
+        <slot />
+    {:else if message}
+        <div>
+            {#if showIcon}
+                <Icon size={1.5} component={icon} />
+            {/if}
+            <span>{message}</span>
+        </div>
     {/if}
-    <slot />
+    {#if $$slots.actions}
+        <div class="dui-alert-actions">
+            <slot name="actions" />
+        </div>
+    {/if}
 </div>
 
 <style lang="scss" global>

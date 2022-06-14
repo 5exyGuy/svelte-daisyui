@@ -3,6 +3,9 @@
 ## Components
 
 - [`Alert`](#alert)
+- [`AlertActions`](#alertactions)
+- [`AlertContent`](#alertcontent)
+- [`AlertIcon`](#alerticon)
 
 ---
 
@@ -41,6 +44,60 @@ export interface Screen {
 | showIcon  | No       | <code>let</code> | No       | <code>boolean</code> | <code>true</code>      | Show an icon defaulted to the functional colors, e.g. `info`, `success`, `warning` and `error`.                                   |
 | class     | No       | <code>let</code> | No       | <code>string</code>  | <code>undefined</code> | A space-separated list of the classes of the element.                                                                             |
 | screen    | No       | <code>let</code> | No       | <code>Screen</code>  | <code>undefined</code> | Responsive properties based on minimum screen widths.                                                                             |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `AlertActions`
+
+### Props
+
+| Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
+| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `AlertContent`
+
+### Props
+
+| Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
+| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
+
+### Slots
+
+| Slot name | Default | Props | Fallback |
+| :-------- | :------ | :---- | :------- |
+| --        | Yes     | --    | --       |
+
+### Events
+
+None.
+
+## `AlertIcon`
+
+### Props
+
+| Prop name | Required | Kind             | Reactive | Type                | Default value          | Description |
+| :-------- | :------- | :--------------- | :------- | ------------------- | ---------------------- | ----------- |
+| class     | No       | <code>let</code> | No       | <code>string</code> | <code>undefined</code> | --          |
 
 ### Slots
 

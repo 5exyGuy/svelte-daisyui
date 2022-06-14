@@ -1,38 +1,42 @@
-<script>
+<script lang="ts">
     import { classes, ArtboardSize, Alignment } from '@svelte-daisyui/shared';
+    import type { StringKeyOf } from 'type-fest';
 
     // -----------------------------------------------------------
     //  Type Definitions
     // -----------------------------------------------------------
 
-    /**
-     * @restProps {div}
-     * @typedef {1 | 2 | 3 | 4 | 5 | 6} Size
-     * @typedef {'horizontal' | 'vertical'} Alignment
-     */
+    interface Properties {
+        size: StringKeyOf<typeof ArtboardSize>;
+        demo: boolean;
+        alignment: StringKeyOf<typeof Alignment>;
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
     /**
-     * @type {Size}
+     * Fixed size of container.
      */
-    export let size = undefined;
+    export let size: Properties['size'] = undefined;
 
     /**
-     * @type {boolean}
+     * Adds shadow and glow. Elements are placed in the centre.
      */
-    export let demo = false;
+    export let demo: Properties['demo'] = false;
 
     /**
-     * @type {Alignment}
+     * Horizontal and vertical alignment of the container.
      */
-    export let alignment = 'horizontal';
+    export let alignment: Properties['alignment'] = 'horizontal';
 
     let restClass = undefined;
     /**
-     * @type {string}
+     * A space-separated list of the classes of the element.
+     * Classes allows CSS and JavaScript to select and access
+     * specific elements via the class selectors or functions
+     * like the method Document.getElementsByClassName().
      */
     export { restClass as class };
 
@@ -40,14 +44,10 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({
+    $: classNames = classes<Properties>({
         prefix: 'dui-artboard',
-        classProps: {
-            size: { value: ArtboardSize },
-            demo: { value: 'demo' },
-            alignment: { value: Alignment },
-        },
-        props: { size, demo, alignment },
+        propData: { size: ArtboardSize, demo: 'demo', alignment: Alignment },
+        propValues: { size, demo, alignment },
         restClass,
     });
 </script>

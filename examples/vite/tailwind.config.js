@@ -4,7 +4,7 @@
 module.exports = {
     content: ['./src/**/*.{svelte,js,ts}'],
     theme: {
-        main: 'mano-tema-1',
+        main: 'light',
         dark: 'dark',
         included: ['dark', 'light', 'mano-tema-1', 'mano-tema-2'],
         excluded: ['mano-tema-2'],

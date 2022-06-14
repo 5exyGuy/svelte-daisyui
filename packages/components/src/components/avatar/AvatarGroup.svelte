@@ -35,10 +35,7 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({
-        prefix: 'dui-avatar-group',
-        restClass,
-    });
+    $: classNames = classes({ prefix: 'dui-avatar-group', restClass });
 
     // -----------------------------------------------------------
     // Functionality
