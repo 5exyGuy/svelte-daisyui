@@ -1,6 +1,4 @@
 export { Alignment } from './alignment.enum';
-export { ArtboardSize } from './artboard-size.enum';
-export { AvatarStatus } from './avatar-status.enum';
 export { BaseColor } from './base-color.enum';
 export { BrandColor } from './brand-color.enum';
 export { ButtonShape } from './button-shape.enum';

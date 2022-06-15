@@ -1,29 +1,21 @@
-<script>
+<script lang="ts">
     import { classes } from '@svelte-daisyui/shared';
     import { setContext } from 'svelte';
     import { writable } from 'svelte/store';
-
-    // -----------------------------------------------------------
-    //  Type Definitions
-    // -----------------------------------------------------------
-
-    /**
-     * @restProps {div}
-     */
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
     /**
-     * @type {string}
+     *
      */
     export let space = '-1.5rem';
 
     /**
-     * @type {import('./Avatar.svelte').AvatarProps}
+     *
      */
-    export let avatar = {};
+    export let items = {};
 
     let restClass = undefined;
     /**
@@ -44,9 +36,9 @@
     const avatars = writable([]);
     setContext('AvatarGroup', {
         avatars,
-        add: (ref) => {
+        add: (ref: HTMLDivElement) => {
             avatars.update((_) => [..._, { ref, index: _.length }]);
-            ref.style.zIndex = $avatars.length;
+            ref.style.zIndex = String($avatars.length);
         },
     });
 </script>
