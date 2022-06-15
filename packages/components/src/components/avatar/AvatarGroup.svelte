@@ -1,7 +1,8 @@
 <script lang="ts">
-    import { classes } from '@svelte-daisyui/shared';
     import { setContext } from 'svelte';
     import { writable } from 'svelte/store';
+    import { classes } from '../../utils';
+    import type { AvatarGroupProps } from './avatar-group-props';
 
     // -----------------------------------------------------------
     // Properties
@@ -10,16 +11,11 @@
     /**
      *
      */
-    export let space = '-1.5rem';
+    export let space: AvatarGroupProps['space'] = '-1.5rem';
 
+    let restClass: AvatarGroupProps['class'] = undefined;
     /**
      *
-     */
-    export let items = {};
-
-    let restClass = undefined;
-    /**
-     * @type {string}
      */
     export { restClass as class };
 

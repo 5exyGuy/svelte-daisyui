@@ -15,6 +15,11 @@
      */
     export let status: AvatarProps['status'] = undefined;
 
+    /**
+     *
+     */
+    export let size: AvatarProps['size'] = undefined;
+
     let restClass: AvatarProps['class'] = undefined;
     /**
      *
@@ -22,15 +27,25 @@
     export { restClass as class };
 
     // -----------------------------------------------------------
+    // Screen
+    // -----------------------------------------------------------
+
+    /**
+     * Responsive properties for the component.
+     */
+    export let screen: AvatarProps['screen'] = undefined;
+
+    // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({
+    $: classNames = classes<AvatarProps>({
         prefix: 'dui-avatar',
-        classProps: { status: { value: AvatarStatus } },
-        props: { status },
+        propData: { status: AvatarStatus },
+        propValues: { status },
+        screen,
         restClass,
-    } as ClassesParams<AvatarClassProps>);
+    } as ClassesParams<AvatarClassProps>); // TODO: Implement matchMedia for "size" property
 
     // -----------------------------------------------------------
     // Functionality

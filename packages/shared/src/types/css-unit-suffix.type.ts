@@ -1,0 +1,16 @@
+export type CSSUnitSuffix =
+    | ''
+    | 'px'
+    | 'cm'
+    | 'mm'
+    | 'Q'
+    | 'in'
+    | 'pc'
+    | 'pt'
+    | 'rem'
+    | 'em'
+    | 'vw'
+    | 'vh'
+    | 'vmin'
+    | 'vmax'
+    | '%';
