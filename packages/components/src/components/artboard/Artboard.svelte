@@ -1,16 +1,10 @@
 <script lang="ts">
-    import { classes, ArtboardSize, Alignment } from '@svelte-daisyui/shared';
     import type { StringKeyOf } from 'type-fest';
-
-    // -----------------------------------------------------------
-    //  Type Definitions
-    // -----------------------------------------------------------
-
-    interface Properties {
-        size: StringKeyOf<typeof ArtboardSize>;
-        demo: boolean;
-        alignment: StringKeyOf<typeof Alignment>;
-    }
+    import { Alignment } from '../../enums';
+    import type { ClassesParams } from '../../interfaces';
+    import { classes } from '../../utils';
+    import type { ArtboardClassProps } from './artboard-props.interface';
+    import { ArtboardSize } from './artboard-size.enum';
 
     // -----------------------------------------------------------
     // Properties
@@ -19,24 +13,21 @@
     /**
      * Fixed size of container.
      */
-    export let size: Properties['size'] = undefined;
+    export let size: StringKeyOf<typeof ArtboardSize>;
 
     /**
-     * Adds shadow and glow. Elements are placed in the centre.
+     * Adds shadow and glow. Elements are placed in the center.
      */
-    export let demo: Properties['demo'] = false;
+    export let demo: boolean = false;
 
     /**
      * Horizontal and vertical alignment of the container.
      */
-    export let alignment: Properties['alignment'] = 'horizontal';
+    export let alignment: StringKeyOf<typeof Alignment> = 'horizontal';
 
-    let restClass = undefined;
+    let restClass;
     /**
      * A space-separated list of the classes of the element.
-     * Classes allows CSS and JavaScript to select and access
-     * specific elements via the class selectors or functions
-     * like the method Document.getElementsByClassName().
      */
     export { restClass as class };
 
@@ -44,12 +35,12 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes<Properties>({
+    $: classNames = classes<ArtboardClassProps>({
         prefix: 'dui-artboard',
         propData: { size: ArtboardSize, demo: 'demo', alignment: Alignment },
         propValues: { size, demo, alignment },
         restClass,
-    });
+    } as ClassesParams<ArtboardClassProps>);
 </script>
 
 <div class={classNames} {...$$restProps}>

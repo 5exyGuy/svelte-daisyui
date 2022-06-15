@@ -22,9 +22,7 @@
 
         "esModuleInterop": true,
         "skipLibCheck": false,
-        "forceConsistentCasingInFileNames": true,
-
-        "types": ["node", "jest"]
+        "forceConsistentCasingInFileNames": true
     },
     "include": ["src/**/*.ts"]
 }

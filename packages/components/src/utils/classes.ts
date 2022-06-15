@@ -12,17 +12,12 @@ export function classes<T>({
     const classList = [prefix];
 
     for (const prop in propValues) {
-        const propValue = propValues[prop] as Primitive;
+        const propValue = propValues[prop];
         const classPropData = propData[prop] as string | Record<string, string>;
 
         if (!propValue || !classPropData) continue;
 
-        if (
-            typeof propValue === 'boolean' &&
-            propValue &&
-            classPropData &&
-            typeof classPropData === 'string'
-        )
+        if (typeof propValue === 'boolean' && propValue && classPropData && typeof classPropData === 'string')
             classList.push(`${prefix}-${classPropData}`);
         else if (
             typeof propValue === 'string' &&
@@ -36,29 +31,20 @@ export function classes<T>({
     for (const screenSize in screen) {
         const screenProps = screen[screenSize as StringKeyOf<typeof ScreenSize>] as Partial<T>;
         for (const prop in screenProps) {
-            const propValue = screenProps[prop] as Primitive;
+            const propValue = screenProps[prop];
             const classPropData = propData[prop] as string | Record<string, string>;
 
             if (!propValue || !classPropData) continue;
 
-            if (
-                typeof propValue === 'boolean' &&
-                propValue &&
-                classPropData &&
-                typeof classPropData === 'string'
-            )
-                classList.push(
-                    `${screenSize}:${prefix}-${classPropData}`,
-                );
+            if (typeof propValue === 'boolean' && propValue && classPropData && typeof classPropData === 'string')
+                classList.push(`${screenSize}:${prefix}-${classPropData}`);
             else if (
                 typeof propValue === 'string' &&
                 classPropData &&
                 typeof classPropData === 'object' &&
                 classPropData[propValue]
             )
-                classList.push(
-                    `${screenSize}:${prefix}-${classPropData[propValue]}`,
-                );
+                classList.push(`${screenSize}:${prefix}-${classPropData[propValue]}`);
         }
     }
 
@@ -70,12 +56,11 @@ export function classes<T>({
     return classList.join(' ');
 }
 
-
 interface Example {
     color: 'primary' | 'secondary';
 }
 
 classes<Example>({
     prefix: '',
-    propData: {color: {primary: '', secondary: ''}}
+    propData: { color: { primary: '', secondary: '' } },
 });
