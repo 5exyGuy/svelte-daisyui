@@ -29,7 +29,6 @@
     @mixin avatar-status($bg-color) {
         &:before {
             background-color: colors.get($bg-color);
-            @apply #{$bg-color};
             content: '';
             display: block;
             position: absolute;

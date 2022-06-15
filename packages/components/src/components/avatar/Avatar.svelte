@@ -1,6 +1,7 @@
 <script lang="ts">
     import { getContext, onMount } from 'svelte';
     import type { ClassesParams } from '../../interfaces';
+    import { initMedia } from '../../stores/screen-size.store';
     import { classes } from '../../utils';
     import type { AvatarGroupContext } from './avatar-group-context.interface';
     import type { AvatarClassProps, AvatarProps } from './avatar-props.interface';
@@ -50,6 +51,8 @@
     // -----------------------------------------------------------
     // Functionality
     // -----------------------------------------------------------
+
+    initMedia();
 
     let ref: HTMLDivElement;
 

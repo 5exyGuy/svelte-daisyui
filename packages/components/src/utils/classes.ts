@@ -54,16 +54,5 @@ export function classes<T>({
         classList.push(...restClassList);
     }
 
-    console.log(classList);
-
     return classList.join(' ');
 }
-
-interface Example {
-    color: 'primary' | 'secondary';
-}
-
-classes<Example>({
-    prefix: '',
-    propData: { color: { primary: '', secondary: '' } },
-});

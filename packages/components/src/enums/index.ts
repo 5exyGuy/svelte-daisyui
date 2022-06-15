@@ -3,7 +3,6 @@ export { BaseColor } from './base-color.enum';
 export { BrandColor } from './brand-color.enum';
 export { ButtonShape } from './button-shape.enum';
 export { CardPadding } from './card-padding.enum';
-export { CollapseIcon } from './collapse-icon.enum';
 export { Direction } from './direction.enum';
 export { FunctionalColor } from './functional-color.enum';
 export { HorizontalAlignment } from './horizontal-alignment.enum';
