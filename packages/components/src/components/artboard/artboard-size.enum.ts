@@ -1,8 +1,8 @@
 export enum ArtboardSize {
-    'phone-1' = 'phone-1',
-    'phone-2' = 'phone-2',
-    'phone-3' = 'phone-3',
-    'phone-4' = 'phone-4',
-    'phone-5' = 'phone-5',
-    'phone-6' = 'phone-6',
+    '320x568' = 'phone-1',
+    '375x667' = 'phone-2',
+    '414x736' = 'phone-3',
+    '375x812' = 'phone-4',
+    '414x896' = 'phone-5',
+    '320x1024' = 'phone-6',
 }

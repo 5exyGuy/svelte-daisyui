@@ -53,6 +53,8 @@ export function classes<T>({
         classList.push(...restClassList);
     }
 
+    console.log(classList);
+
     return classList.join(' ');
 }
 

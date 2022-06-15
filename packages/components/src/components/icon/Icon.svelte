@@ -1,5 +1,5 @@
-<script>
-    import { classes } from '@svelte-daisyui/shared';
+<script lang="ts">
+    import { classes } from '../../utils';
 
     // -----------------------------------------------------------
     //  Type Definitions

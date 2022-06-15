@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { AlertProps } from './alert-props.interface';
-    import type { ClassesParams } from '../../interfaces';
     import { BrandColor, FunctionalColor } from '../../enums';
+    import type { ClassesParams } from '../../interfaces';
     import { classes } from '../../utils';
     import MdInfoOutline from 'svelte-icons/md/MdInfoOutline.svelte';
     import FaRegCheckCircle from 'svelte-icons/fa/FaRegCheckCircle.svelte';
@@ -16,7 +16,7 @@
     /**
      * Background color of component. Functional colors such as `info`, `success`, `warning` and `error` add a default icon on the left.
      */
-    export let color: AlertProps['color'];
+    export let color: AlertProps['color'] = undefined;
 
     /**
      * The icon that will appear before the content.
@@ -35,14 +35,14 @@
     /**
      * The message that will be visible inside the Alert container.
      */
-    export let message: AlertProps['message'];
+    export let message: AlertProps['message'] = undefined;
 
     /**
      * Show an icon defaulted to the functional colors, e.g. `info`, `success`, `warning` and `error`.
      */
     export let showIcon: AlertProps['showIcon'] = true;
 
-    let restClass: AlertProps['class'];
+    let restClass: AlertProps['class'] = undefined;
     /**
      * A space-separated list of the classes of the element.
      */
