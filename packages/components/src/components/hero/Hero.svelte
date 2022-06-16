@@ -1,5 +1,5 @@
 <script>
-    import { classes } from '../../utils';
+    import { classes } from '../../utilities';
 
     // -----------------------------------------------------------
     // Properties

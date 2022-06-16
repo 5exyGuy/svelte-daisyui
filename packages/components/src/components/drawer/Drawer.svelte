@@ -1,7 +1,7 @@
 <script>
     import { onMount } from 'svelte';
 
-    import { classes } from '../../utils';
+    import { classes } from '../../utilities';
 
     // -----------------------------------------------------------
     // Properties

@@ -1,9 +1,9 @@
 import type { ClassesParams } from '../interfaces';
-import type { Primitive, StringKeyOf } from 'type-fest';
+import type { StringKeyOf } from 'type-fest';
 import type { ScreenSize } from '../enums';
 
 // TODO: Implement matchMedia
-export function classes<T>({
+export function createComponentUtilities<T>({
     prefix,
     propData = {},
     propValues = {},
@@ -56,3 +56,7 @@ export function classes<T>({
 
     return classList.join(' ');
 }
+
+function generateDefaultClasses() {}
+
+function generateResponsiveClasses() {}

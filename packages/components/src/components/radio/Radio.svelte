@@ -1,6 +1,6 @@
 <script>
     import { BrandColor, FunctionalColor, Size } from '../../enums';
-    import { classes } from '../../utils';
+    import { classes } from '../../utilities';
 
     // -----------------------------------------------------------
     // Properties

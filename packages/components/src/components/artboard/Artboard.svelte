@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Alignment } from '../../enums';
     import type { ClassesParams } from '../../interfaces';
-    import { classes } from '../../utils/classes';
+    import { classes } from '../../utilities/component.utility';
     import type { ArtboardClassProps, ArtboardProps } from './artboard-props.interface';
     import { ArtboardSize } from './artboard-size.enum';
 

@@ -1,5 +1,5 @@
 <script>
-    import { classes } from '../../utils';
+    import { classes } from '../../utilities';
     import { MaskHalfType } from './mask-half-type.enum';
     import { MaskType } from './mask-type.enum';
 

@@ -1,6 +1,6 @@
 <script>
     import { Alignment } from '../../enums';
-    import { classes } from '../../utils';
+    import { classes } from '../../utilities';
 
     // -----------------------------------------------------------
     // Properties

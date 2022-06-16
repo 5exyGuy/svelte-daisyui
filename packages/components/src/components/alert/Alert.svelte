@@ -2,7 +2,7 @@
     import type { AlertProps } from './alert-props.interface';
     import { BrandColor, FunctionalColor } from '../../enums';
     import type { ClassesParams } from '../../interfaces';
-    import { classes } from '../../utils';
+    import { classes } from '../../utilities';
     import MdInfoOutline from 'svelte-icons/md/MdInfoOutline.svelte';
     import FaRegCheckCircle from 'svelte-icons/fa/FaRegCheckCircle.svelte';
     import MdWarning from 'svelte-icons/md/MdWarning.svelte';

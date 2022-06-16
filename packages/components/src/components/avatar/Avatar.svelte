@@ -1,8 +1,8 @@
 <script lang="ts">
     import { getContext, onMount } from 'svelte';
     import type { ClassesParams } from '../../interfaces';
-    import { initMedia } from '../../stores/screen-size.store';
-    import { classes } from '../../utils';
+    import { initMedia } from '../../utilities/screen-size.store';
+    import { classes } from '../../utilities';
     import type { AvatarGroupContext } from './avatar-group-context.interface';
     import type { AvatarClassProps, AvatarProps } from './avatar-props.interface';
     import { AvatarStatus } from './avatar-status.enum';
@@ -19,7 +19,7 @@
     /**
      *
      */
-    export let size: AvatarProps['size'] = undefined;
+    // export let size: AvatarProps['size'] = undefined;
 
     let restClass: AvatarProps['class'] = undefined;
     /**
@@ -37,7 +37,7 @@
     export let screen: AvatarProps['screen'] = undefined;
 
     // -----------------------------------------------------------
-    // Classes and Styles
+    // Classes
     // -----------------------------------------------------------
 
     $: classNames = classes<AvatarProps>({
@@ -46,7 +46,7 @@
         propValues: { status },
         screen,
         restClass,
-    } as ClassesParams<AvatarClassProps>); // TODO: Implement matchMedia for "size" property
+    } as ClassesParams<AvatarClassProps>);
 
     // -----------------------------------------------------------
     // Functionality

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { classes } from '../../utils';
+    import { classes } from '../../utilities';
 
     // -----------------------------------------------------------
     //  Type Definitions

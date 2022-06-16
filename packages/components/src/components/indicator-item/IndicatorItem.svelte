@@ -1,6 +1,6 @@
 <script>
     import { HorizontalAlignment, VerticalAlignment } from '../../enums';
-    import { classes } from '../../utils';
+    import { classes } from '../../utilities';
 
     // -----------------------------------------------------------
     // Properties

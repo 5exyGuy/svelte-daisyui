@@ -1,7 +1,7 @@
 <script lang="ts">
     import { setContext } from 'svelte';
     import { writable } from 'svelte/store';
-    import { classes } from '../../utils';
+    import { classes } from '../../utilities';
     import type { AvatarGroupProps } from './avatar-group-props';
 
     // -----------------------------------------------------------
