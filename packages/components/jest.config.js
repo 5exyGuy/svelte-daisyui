@@ -1,7 +1,5 @@
+/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
 module.exports = {
-    transform: {
-        '^.+\\.svelte$': 'svelte-jester',
-        '^.+\\.js$': 'babel-jest',
-    },
-    moduleFileExtensions: ['js', 'svelte'],
+    preset: 'ts-jest',
+    testEnvironment: 'node',
 };

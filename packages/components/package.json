@@ -21,8 +21,10 @@
         "@rollup/plugin-commonjs": "^22.0.0",
         "@rollup/plugin-node-resolve": "^13.3.0",
         "@svelte-daisyui/shared": "workspace:^1.0.0",
+        "@types/jest": "^28.1.1",
         "@types/tailwindcss": "^3.0.10",
         "autoprefixer": "^10.4.7",
+        "jest": "^28.1.1",
         "postcss": "^8.4.14",
         "postcss-load-config": "^4.0.1",
         "prettier": "^2.6.2",
@@ -37,6 +39,8 @@
         "svelte": "^3.48.0",
         "svelte-preprocess": "^4.10.7",
         "tailwindcss": "^3.1.2",
-        "type-fest": "^2.13.0"
+        "ts-jest": "^28.0.4",
+        "type-fest": "^2.13.0",
+        "typescript": "^4.7.3"
     }
 }
