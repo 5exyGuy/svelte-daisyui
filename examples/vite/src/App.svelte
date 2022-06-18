@@ -1,8 +1,8 @@
 <script>
-    import Avatar from '@svelte-daisyui/components/src/components/avatar/Avatar.svelte';
     import Showcase from './Showcase.svelte';
+    import Test from '@svelte-daisyui/components/src/components/test/Test.svelte';
 </script>
 
 <Showcase>
-    <Avatar />
+    <Test />
 </Showcase>

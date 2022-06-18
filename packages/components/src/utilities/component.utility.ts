@@ -1,25 +1,19 @@
 import type { StringKeyOf } from 'type-fest';
 import { ScreenSize } from '../enums';
 import type { Screen } from '../types';
-import { writable, Writable, get } from 'svelte/store';
+import { writable, Writable } from 'svelte/store';
 import { ScreenSizeMinWidth } from '../enums/screen-size-min-width.enum';
 import { onMount } from 'svelte';
 
-export function createComponentUtilities() {
-    return { generateDefaultClasses, generateResponsiveClasses, createResponsiveProperties };
-}
-
 //
 //
 //
 
-interface DefaultClasses<T> {
-    prefix: string;
-    data: { [K in keyof T]: T[K] extends boolean ? string : T[K] extends string ? Record<T[K], string> : string };
-    values: T;
-}
-
-function generateDefaultClasses<T>({ prefix, data, values }: DefaultClasses<T>): Array<string> {
+export function generateDefaultClasses<T>(
+    prefix: string,
+    data: { [K in keyof T]: T[K] extends boolean ? string : T[K] extends string ? Record<T[K], string> : string },
+    values: T,
+): Array<string> {
     const classList = [prefix];
 
     Object.entries(values).forEach(([propName, propValue]) => {
@@ -40,15 +34,16 @@ function generateDefaultClasses<T>({ prefix, data, values }: DefaultClasses<T>):
 //
 //
 
-interface ResponsiveClasses<T> extends Omit<DefaultClasses<T>, 'values'> {
-    values: Screen<T>;
-}
-
-function generateResponsiveClasses<T>({ prefix, data, values }: ResponsiveClasses<T>): Array<string> {
+export function generateResponsiveClasses<T>(
+    prefix: string,
+    data: { [K in keyof T]: T[K] extends boolean ? string : T[K] extends string ? Record<T[K], string> : string },
+    values: Screen<T>,
+): Array<string> {
     const classList = [] as Array<string>;
 
     Object.keys(ScreenSize).forEach((screenSize: StringKeyOf<typeof ScreenSize>) => {
-        const screenProps = values[screenSize as StringKeyOf<typeof ScreenSize>];
+        const screenProps = values[ScreenSize[screenSize]];
+        if (!screenProps) return;
 
         Object.entries(screenProps).forEach(([propName, propValue]) => {
             const propData = data[propName] as string | Record<keyof T, string>;
@@ -56,9 +51,9 @@ function generateResponsiveClasses<T>({ prefix, data, values }: ResponsiveClasse
             if (!propValue || !propData) return;
 
             if (typeof propValue === 'boolean' && propValue && propData && typeof propData === 'string')
-                classList.push(`${screenSize}:${prefix}-${propData}`);
+                classList.push(`${ScreenSize[screenSize]}:${prefix}-${propData}`);
             else if (typeof propValue === 'string' && propData && typeof propData === 'object' && propData[propValue])
-                classList.push(`${screenSize}:${prefix}-${propData[propValue]}`);
+                classList.push(`${ScreenSize[screenSize]}:${prefix}-${propData[propValue]}`);
         });
     });
 
@@ -69,32 +64,26 @@ function generateResponsiveClasses<T>({ prefix, data, values }: ResponsiveClasse
 //
 //
 
-interface ResponsiveProperties<T> extends Pick<ResponsiveClasses<T>, 'values'> {
-    defaultValues: T;
-}
-
 interface ResponsivePropertiesResult<T> {
-    stores: {
-        defaultValues: Writable<T>;
-        values: Writable<Screen<T>>;
-        medias: Writable<Map<StringKeyOf<typeof ScreenSize>, MediaQueryList>>;
-    };
+    defaultValues: Writable<T>;
+    values: Writable<Screen<T>>;
+    screenSize: Writable<ScreenSize>;
 }
 
-function createResponsiveProperties<T>({
-    defaultValues,
-    values,
-}: ResponsiveProperties<T>): { [K in keyof T]: Writable<T[K]> } & ResponsivePropertiesResult<T> {
+export function createResponsiveProperties<T>(
+    defaultValues: T,
+    values: Screen<T>,
+): { [K in keyof T]: Writable<T[K]> } & ResponsivePropertiesResult<T> {
     const defaultValuesStore = writable<typeof defaultValues>(defaultValues);
     const valuesStore = writable<typeof values>(values);
     const responsivePropertiesStore = {} as { [K in keyof T]: Writable<T[K]> };
-    const mediasStore = writable(new Map<StringKeyOf<typeof ScreenSize>, MediaQueryList>());
+    const screenSizeStore = writable<ScreenSize>();
 
-    Object.entries(defaultValues).forEach(
-        ([propName, propValue]) => (responsivePropertiesStore[propName] = writable(propValue)),
-    );
+    // Create responsive properties from default values
+    Object.keys(defaultValues).forEach((propName) => (responsivePropertiesStore[propName] = writable()));
 
-    Object.entries(values).forEach(([screenSize, screenProps]) =>
+    // Create missing responsive properties from values
+    Object.values(values).forEach((screenProps) =>
         Object.keys(screenProps).forEach((propName) => {
             if (responsivePropertiesStore[propName]) return;
             responsivePropertiesStore[propName] = writable();
@@ -102,32 +91,81 @@ function createResponsiveProperties<T>({
     );
 
     onMount(() => {
-        Object.keys(ScreenSize).forEach((screenSize: StringKeyOf<typeof ScreenSize>) => {
-            const media = window.matchMedia(`(min-width: ${ScreenSizeMinWidth[screenSize]})`);
-            mediasStore.update((medias) => medias.set(screenSize, media));
-        });
+        // Create media queries from screen sizes
+        const mediaQueries = Object.keys(ScreenSize).map((screenSize: ScreenSize) => [
+            ScreenSize[screenSize],
+            window.matchMedia(`(min-width: ${ScreenSizeMinWidth[screenSize]})`),
+        ]) as [ScreenSize, MediaQueryList][];
+        // Flip media queries to map screen size to media query
+        const sizeByMedia = Object.fromEntries(
+            mediaQueries.map(([screenSize, mediaQuery]) => [mediaQuery.media, screenSize]),
+        ) as Record<`(min-width: ${StringKeyOf<Record<ScreenSizeMinWidth, string>>})`, ScreenSize>;
 
-        const medias = get(mediasStore);
+        const currentScreenSize = mediaQueries.reverse().find(([, mediaQuery]) => mediaQuery.matches);
+        if (currentScreenSize) screenSizeStore.set(currentScreenSize[0]);
+        updatePropertyValues(defaultValues, values, responsivePropertiesStore, currentScreenSize?.[0]);
 
-        function handleMediaChange({ matches, media }: MediaQueryListEvent) {}
+        // Create media query listeners
+        function handleMediaChange({ matches, media }: MediaQueryListEvent) {
+            if (!matches) {
+                const mediaQueryIndex = mediaQueries.findIndex(
+                    ([_screenSize, mediaQuery]) => mediaQuery.media === media,
+                );
+                if (mediaQueryIndex === -1) screenSizeStore.set(undefined);
+                const previousMediaQuery = mediaQueries[mediaQueryIndex - 1];
+                const screenSize = previousMediaQuery ? previousMediaQuery[0] : undefined;
+                updatePropertyValues(defaultValues, values, responsivePropertiesStore, screenSize);
+                screenSizeStore.set(screenSize);
 
-        medias.forEach((media) => media.addEventListener('change', handleMediaChange));
+                return;
+            }
 
+            const screenSize = sizeByMedia[media as `(min-width: ${StringKeyOf<Record<ScreenSizeMinWidth, string>>})`];
+
+            updatePropertyValues(defaultValues, values, responsivePropertiesStore, screenSize);
+
+            screenSizeStore.set(screenSize);
+        }
+
+        // Add media query listeners
+        mediaQueries.forEach(([_screenSize, mediaQuery]) => mediaQuery.addEventListener('change', handleMediaChange));
+
+        // Remove media query listeners on unmount
         return () => {
-            medias.forEach((media) => media.removeEventListener('change', handleMediaChange));
+            mediaQueries.forEach(([_screenSize, mediaQuery]) =>
+                mediaQuery.removeEventListener('change', handleMediaChange),
+            );
         };
     });
 
     return {
-        stores: { defaultValues: defaultValuesStore, values: valuesStore, medias: mediasStore },
+        defaultValues: defaultValuesStore,
+        values: valuesStore,
+        screenSize: screenSizeStore,
         ...responsivePropertiesStore,
     };
 }
 
+function updatePropertyValues<T>(
+    defaultValues: T,
+    values: Screen<T>,
+    responsiveProperties: { [K in keyof T]: Writable<T[K]> },
+    screenSize: ScreenSize,
+) {
+    const props = screenSize ? values[screenSize] : defaultValues;
+    if (!props) return;
+
+    Object.entries(props).forEach(([propName, propValue]) => {
+        const propStore = responsiveProperties[propName];
+        propStore.set(propValue);
+    });
+}
+
 function updateResponsiveProperties<T>(
-    { defaultValues, values }: ResponsiveProperties<T>,
+    defaultValues: T,
+    values: Screen<T>,
     result: { [K in keyof T]: Writable<T[K]> } & ResponsivePropertiesResult<T>,
 ) {
-    result.stores.defaultValues.set(defaultValues);
-    result.stores.values.set(values);
+    result.defaultValues.set(defaultValues);
+    result.values.set(values);
 }
