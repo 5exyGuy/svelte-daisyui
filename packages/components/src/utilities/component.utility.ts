@@ -1,11 +1,10 @@
 import type { StringKeyOf } from 'type-fest';
 import { ScreenSize } from '../enums';
 import type { Screen } from '../types';
-import type { Writable } from 'svelte/store';
+import { writable, Writable, get } from 'svelte/store';
 import { ScreenSizeMinWidth } from '../enums/screen-size-min-width.enum';
 import { onMount } from 'svelte';
 
-// TODO: Implement matchMedia
 export function createComponentUtilities() {
     return { generateDefaultClasses, generateResponsiveClasses, createResponsiveProperties };
 }
@@ -74,18 +73,41 @@ interface ResponsiveProperties<T> extends Pick<ResponsiveClasses<T>, 'values'> {
     defaultValues: T;
 }
 
-function createResponsiveProperties<T>({ defaultValues, values }: ResponsiveProperties<T>): {
-    [K in keyof T]: Writable<T[K]>;
-} {
-    const responsiveProperties = {} as { [K in keyof T]: Writable<T[K]> };
+interface ResponsivePropertiesResult<T> {
+    stores: {
+        defaultValues: Writable<T>;
+        values: Writable<Screen<T>>;
+        medias: Writable<Map<StringKeyOf<typeof ScreenSize>, MediaQueryList>>;
+    };
+}
+
+function createResponsiveProperties<T>({
+    defaultValues,
+    values,
+}: ResponsiveProperties<T>): { [K in keyof T]: Writable<T[K]> } & ResponsivePropertiesResult<T> {
+    const defaultValuesStore = writable<typeof defaultValues>(defaultValues);
+    const valuesStore = writable<typeof values>(values);
+    const responsivePropertiesStore = {} as { [K in keyof T]: Writable<T[K]> };
+    const mediasStore = writable(new Map<StringKeyOf<typeof ScreenSize>, MediaQueryList>());
+
+    Object.entries(defaultValues).forEach(
+        ([propName, propValue]) => (responsivePropertiesStore[propName] = writable(propValue)),
+    );
+
+    Object.entries(values).forEach(([screenSize, screenProps]) =>
+        Object.keys(screenProps).forEach((propName) => {
+            if (responsivePropertiesStore[propName]) return;
+            responsivePropertiesStore[propName] = writable();
+        }),
+    );
 
     onMount(() => {
-        const medias = new Map<StringKeyOf<typeof ScreenSize>, MediaQueryList>();
-
         Object.keys(ScreenSize).forEach((screenSize: StringKeyOf<typeof ScreenSize>) => {
             const media = window.matchMedia(`(min-width: ${ScreenSizeMinWidth[screenSize]})`);
-            medias.set(screenSize, media);
+            mediasStore.update((medias) => medias.set(screenSize, media));
         });
+
+        const medias = get(mediasStore);
 
         function handleMediaChange({ matches, media }: MediaQueryListEvent) {}
 
@@ -96,5 +118,16 @@ function createResponsiveProperties<T>({ defaultValues, values }: ResponsiveProp
         };
     });
 
-    return { ...responsiveProperties };
+    return {
+        stores: { defaultValues: defaultValuesStore, values: valuesStore, medias: mediasStore },
+        ...responsivePropertiesStore,
+    };
+}
+
+function updateResponsiveProperties<T>(
+    { defaultValues, values }: ResponsiveProperties<T>,
+    result: { [K in keyof T]: Writable<T[K]> } & ResponsivePropertiesResult<T>,
+) {
+    result.stores.defaultValues.set(defaultValues);
+    result.stores.values.set(values);
 }
