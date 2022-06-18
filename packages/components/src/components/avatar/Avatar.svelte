@@ -1,8 +1,6 @@
 <script lang="ts">
     import { getContext, onMount } from 'svelte';
     import type { ClassesParams } from '../../interfaces';
-    import { initMedia } from '../../utilities/screen-size.store';
-    import { classes } from '../../utilities';
     import type { AvatarGroupContext } from './avatar-group-context.interface';
     import type { AvatarClassProps, AvatarProps } from './avatar-props.interface';
     import { AvatarStatus } from './avatar-status.enum';
@@ -40,19 +38,17 @@
     // Classes
     // -----------------------------------------------------------
 
-    $: classNames = classes<AvatarProps>({
-        prefix: 'dui-avatar',
-        propData: { status: AvatarStatus },
-        propValues: { status },
-        screen,
-        restClass,
-    } as ClassesParams<AvatarClassProps>);
+    // $: classNames = classes<AvatarProps>({
+    //     prefix: 'dui-avatar',
+    //     propData: { status: AvatarStatus },
+    //     propValues: { status },
+    //     screen,
+    //     restClass,
+    // } as ClassesParams<AvatarClassProps>);
 
     // -----------------------------------------------------------
     // Functionality
     // -----------------------------------------------------------
-
-    initMedia();
 
     let ref: HTMLDivElement;
 
@@ -63,7 +59,7 @@
     });
 </script>
 
-<div class={classNames} {...$$restProps} bind:this={ref}>
+<div {...$$restProps} bind:this={ref}>
     <slot />
 </div>
 

@@ -1,7 +1,7 @@
 export enum ScreenSizeMinWidth {
-    sm = '640px',
-    md = '768px',
-    lg = '1024px',
-    xl = '1280px',
-    '2xl' = '1536px',
+    Small = '640px',
+    Medium = '768px',
+    Large = '1024px',
+    ExtraLarge = '1280px',
+    '2ExtraLarge' = '1536px',
 }
