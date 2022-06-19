@@ -110,27 +110,20 @@ export function createResponsiveProperties<T>(
 
         // Create media query listeners
         function handleMediaChange({ matches, media }: MediaQueryListEvent) {
-            const random = Math.floor(Math.random() * 100);
-            console.time(`${media} [${random}]`);
-
             if (!matches) {
                 const mediaQueryIndex = mediaQueries.findIndex(([, mediaQuery]) => mediaQuery.media === media);
                 if (mediaQueryIndex === -1 || mediaQueryIndex + 1 === mediaQueries.length) {
                     screenSizeStore.set(undefined);
-                    console.timeEnd(`${media} [${random}]`);
                     return;
                 }
                 const previousMediaQuery = mediaQueries[mediaQueryIndex + 1];
                 screenSizeStore.set(previousMediaQuery ? previousMediaQuery[0] : undefined);
-                console.timeEnd(`${media} [${random}]`);
                 return;
             }
 
             screenSizeStore.set(
                 sizeByMedia[media as `(min-width: ${StringKeyOf<Record<ScreenSizeMinWidth, string>>})`],
             );
-
-            console.timeEnd(`${media} [${random}]`);
         }
 
         const unsubScreenSize = screenSizeStore.subscribe((_screenSize) => {
