@@ -1,8 +1,13 @@
 <script lang="ts">
-    import { getContext, onMount } from 'svelte';
-    import type { ClassesParams } from '../../interfaces';
+    import { beforeUpdate, getContext, onMount } from 'svelte';
+    import {
+        createResponsiveProperties,
+        generateDefaultClasses,
+        generateResponsiveClasses,
+        joinClasses,
+    } from '../../utilities/component.utility';
     import type { AvatarGroupContext } from './avatar-group-context.interface';
-    import type { AvatarClassProps, AvatarProps } from './avatar-props.interface';
+    import type { AvatarClassProps, AvatarProps, AvatarResponsiveProps } from './avatar-props.interface';
     import { AvatarStatus } from './avatar-status.enum';
 
     // -----------------------------------------------------------
@@ -17,7 +22,7 @@
     /**
      *
      */
-    // export let size: AvatarProps['size'] = undefined;
+    export let size: AvatarProps['size'] = '6rem';
 
     let restClass: AvatarProps['class'] = undefined;
     /**
@@ -38,17 +43,20 @@
     // Classes
     // -----------------------------------------------------------
 
-    // $: classNames = classes<AvatarProps>({
-    //     prefix: 'dui-avatar',
-    //     propData: { status: AvatarStatus },
-    //     propValues: { status },
-    //     screen,
-    //     restClass,
-    // } as ClassesParams<AvatarClassProps>);
+    $: classNames = joinClasses(
+        generateDefaultClasses<AvatarClassProps>('dui-avatar', { status: AvatarStatus }, { status }),
+        [restClass],
+    );
 
     // -----------------------------------------------------------
     // Functionality
     // -----------------------------------------------------------
+
+    const { update, size: _size } = createResponsiveProperties<AvatarResponsiveProps>({ size }, screen, ['size']);
+
+    beforeUpdate(() => {
+        update({ size }, screen);
+    });
 
     let ref: HTMLDivElement;
 
@@ -59,7 +67,7 @@
     });
 </script>
 
-<div {...$$restProps} bind:this={ref}>
+<div class={classNames} {...$$restProps} style:width={$_size} style:height={$_size} bind:this={ref}>
     <slot />
 </div>
 

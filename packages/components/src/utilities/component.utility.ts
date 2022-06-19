@@ -1,13 +1,9 @@
-import type { StringKeyOf } from 'type-fest';
+import type { StringKeyOf, ValueOf } from 'type-fest';
 import { ScreenSize } from '../enums';
 import type { Screen } from '../types';
-import { writable, Writable, get } from 'svelte/store';
+import { writable, Writable, Readable, readable, Subscriber } from 'svelte/store';
 import { ScreenSizeMinWidth } from '../enums/screen-size-min-width.enum';
 import { onMount } from 'svelte';
-
-//
-//
-//
 
 export function generateDefaultClasses<T>(
     prefix: string,
@@ -30,14 +26,11 @@ export function generateDefaultClasses<T>(
     return classList;
 }
 
-//
-//
-//
-
 export function generateResponsiveClasses<T>(
     prefix: string,
     data: { [K in keyof T]: T[K] extends boolean ? string : T[K] extends string ? Record<T[K], string> : string },
     values: Screen<T>,
+    include: Record<keyof T, boolean>,
 ): Array<string> {
     const classList = [] as Array<string>;
 
@@ -46,6 +39,7 @@ export function generateResponsiveClasses<T>(
         if (!screenProps) return;
 
         Object.entries(screenProps).forEach(([propName, propValue]) => {
+            if (!include[propName]) return;
             const propData = data[propName] as string | Record<keyof T, string>;
 
             if (!propValue || !propData) return;
@@ -60,45 +54,41 @@ export function generateResponsiveClasses<T>(
     return classList;
 }
 
-//
-//
-//
+export function joinClasses(...classList: Array<Array<string>>): string {
+    return classList.reduce((acc, curr) => acc.concat(curr), []).join(' ');
+}
 
 interface ResponsivePropertiesResult<T> {
-    defaultValues: Writable<T>;
-    values: Writable<Screen<T>>;
-    screenSize: Writable<ScreenSize>;
     update: (defaultValues: T, values: Screen<T>) => void;
 }
+
+const SCREEN_SIZES = Object.values(ScreenSize).reverse() as Array<StringKeyOf<Record<ScreenSize, string>>>;
 
 export function createResponsiveProperties<T>(
     defaultValues: T,
     values: Screen<T>,
-): { [K in keyof T]: Writable<T[K]> } & ResponsivePropertiesResult<T> {
+    include: Array<keyof T>,
+): Record<keyof T, Readable<ValueOf<T, keyof T>>> & ResponsivePropertiesResult<T> {
     const defaultValuesStore = writable<typeof defaultValues>(defaultValues);
     const valuesStore = writable<typeof values>(values);
-    const responsivePropertiesStore = {} as { [K in keyof T]: Writable<T[K]> };
+    const responsivePropertyStores = [] as Array<[keyof T, Readable<ValueOf<T>>]>;
+    const responsivePropertySetters = {} as Record<keyof T, Subscriber<ValueOf<T>>>;
     const screenSizeStore = writable<ScreenSize>();
 
     // Create responsive properties from default values
-    Object.keys(defaultValues).forEach((propName) => (responsivePropertiesStore[propName] = writable()));
-
-    // Create missing responsive properties from values
-    Object.values(values).forEach((screenProps) =>
-        Object.keys(screenProps).forEach((propName) => {
-            if (responsivePropertiesStore[propName]) return;
-            responsivePropertiesStore[propName] = writable();
-        }),
-    );
+    include.forEach((propName) => {
+        const propStore = readable<ValueOf<T>>(undefined, (set) => {
+            responsivePropertySetters[propName] = set;
+        });
+        responsivePropertyStores.push([propName, propStore]);
+    });
 
     onMount(() => {
         // Create media queries from screen sizes
-        const mediaQueries = Object.keys(ScreenSize)
-            .map((screenSize: ScreenSize) => [
-                ScreenSize[screenSize],
-                window.matchMedia(`(min-width: ${ScreenSizeMinWidth[screenSize]})`),
-            ])
-            .reverse() as [ScreenSize, MediaQueryList][];
+        const mediaQueries = SCREEN_SIZES.map((screenSize: ScreenSize) => [
+            ScreenSize[screenSize],
+            window.matchMedia(`(min-width: ${ScreenSizeMinWidth[screenSize]})`),
+        ]) as [ScreenSize, MediaQueryList][];
         // Flip media queries to map screen size to media query
         const sizeByMedia = Object.fromEntries(
             mediaQueries.map(([screenSize, mediaQuery]) => [mediaQuery.media, screenSize]),
@@ -128,27 +118,43 @@ export function createResponsiveProperties<T>(
 
         const unsubScreenSize = screenSizeStore.subscribe((_screenSize) => {
             screenSize = _screenSize;
-            updateResponsiveProperties(defaultValues, values, responsivePropertiesStore, _screenSize);
+            updateResponsiveProperties(
+                defaultValues,
+                values,
+                responsivePropertyStores,
+                responsivePropertySetters,
+                screenSize,
+            );
         });
 
         const unsubDefaultValues = defaultValuesStore.subscribe((_defaultValues) => {
             defaultValues = _defaultValues;
-            updateResponsiveProperties(_defaultValues, values, responsivePropertiesStore, screenSize);
+            updateResponsiveProperties(
+                defaultValues,
+                values,
+                responsivePropertyStores,
+                responsivePropertySetters,
+                screenSize,
+            );
         });
 
         const unsubValues = valuesStore.subscribe((_values) => {
             values = _values;
-            updateResponsiveProperties(defaultValues, _values, responsivePropertiesStore, screenSize);
+            updateResponsiveProperties(
+                defaultValues,
+                values,
+                responsivePropertyStores,
+                responsivePropertySetters,
+                screenSize,
+            );
         });
 
         // Add media query listeners
-        mediaQueries.forEach(([_screenSize, mediaQuery]) => mediaQuery.addEventListener('change', handleMediaChange));
+        mediaQueries.forEach(([, mediaQuery]) => mediaQuery.addEventListener('change', handleMediaChange));
 
         // Remove media query listeners on unmount
         return () => {
-            mediaQueries.forEach(([_screenSize, mediaQuery]) =>
-                mediaQuery.removeEventListener('change', handleMediaChange),
-            );
+            mediaQueries.forEach(([, mediaQuery]) => mediaQuery.removeEventListener('change', handleMediaChange));
             unsubScreenSize();
             unsubDefaultValues();
             unsubValues();
@@ -156,28 +162,30 @@ export function createResponsiveProperties<T>(
     });
 
     return {
-        defaultValues: defaultValuesStore,
-        values: valuesStore,
-        screenSize: screenSizeStore,
         update: (defaultValues: T, values: Screen<T>) => {
             defaultValuesStore.set(defaultValues);
             valuesStore.set(values);
         },
-        ...responsivePropertiesStore,
+        ...Object.fromEntries(responsivePropertyStores),
     };
 }
 
 function updateResponsiveProperties<T>(
     defaultValues: T,
     values: Screen<T>,
-    responsiveProperties: { [K in keyof T]: Writable<T[K]> },
+    responsiveProperties: Array<Record<keyof T, Readable<ValueOf<T, keyof T>>>>,
+    responsivePropertySetters: Record<keyof T, Subscriber<ValueOf<T>>>,
     screenSize: ScreenSize,
 ) {
-    const props = screenSize ? values[screenSize] : defaultValues;
-    if (!props) return;
+    if (!screenSize) {
+        responsiveProperties.forEach(([propName]) => responsivePropertySetters[propName](defaultValues[propName]));
+        return;
+    }
 
-    Object.entries(props).forEach(([propName, propValue]) => {
-        const propStore = responsiveProperties[propName];
-        propStore.set(propValue);
+    Object.keys(responsiveProperties).forEach((propName) => {
+        const propValue = values[propName][screenSize];
+        if (propValue) {
+            responsivePropertySetters[propName](propValue);
+        }
     });
 }

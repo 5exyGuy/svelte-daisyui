@@ -10,7 +10,7 @@ export interface AvatarProps extends Omit<svelte.JSX.HTMLAttributes<HTMLDivEleme
     status?: StringKeyOf<typeof AvatarStatus>;
 
     /**
-     * @default undefined
+     * @default '6rem'
      */
     size?: CSSUnit;
 
