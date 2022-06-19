@@ -93,41 +93,48 @@ export function createResponsiveProperties<T>(
 
     onMount(() => {
         // Create media queries from screen sizes
-        const mediaQueries = Object.keys(ScreenSize).map((screenSize: ScreenSize) => [
-            ScreenSize[screenSize],
-            window.matchMedia(`(min-width: ${ScreenSizeMinWidth[screenSize]})`),
-        ]) as [ScreenSize, MediaQueryList][];
+        const mediaQueries = Object.keys(ScreenSize)
+            .map((screenSize: ScreenSize) => [
+                ScreenSize[screenSize],
+                window.matchMedia(`(min-width: ${ScreenSizeMinWidth[screenSize]})`),
+            ])
+            .reverse() as [ScreenSize, MediaQueryList][];
         // Flip media queries to map screen size to media query
         const sizeByMedia = Object.fromEntries(
             mediaQueries.map(([screenSize, mediaQuery]) => [mediaQuery.media, screenSize]),
         ) as Record<`(min-width: ${StringKeyOf<Record<ScreenSizeMinWidth, string>>})`, ScreenSize>;
 
-        const mediaQuery = mediaQueries.reverse().find(([, mediaQuery]) => mediaQuery.matches);
-        let screenSize = mediaQuery ? sizeByMedia[mediaQuery[0]] : undefined;
+        const mediaQuery = mediaQueries.find(([, mediaQuery]) => mediaQuery.matches);
+        let screenSize = mediaQuery ? mediaQuery[0] : undefined;
         screenSizeStore.set(screenSize);
 
         // Create media query listeners
         function handleMediaChange({ matches, media }: MediaQueryListEvent) {
+            const random = Math.floor(Math.random() * 100);
+            console.time(`${media} [${random}]`);
+
             if (!matches) {
                 const mediaQueryIndex = mediaQueries.findIndex(([, mediaQuery]) => mediaQuery.media === media);
-                if (mediaQueryIndex === -1 || mediaQueryIndex - 1 === -1) {
+                if (mediaQueryIndex === -1 || mediaQueryIndex + 1 === mediaQueries.length) {
                     screenSizeStore.set(undefined);
+                    console.timeEnd(`${media} [${random}]`);
                     return;
                 }
-                const previousMediaQuery = mediaQueries[mediaQueryIndex - 1];
-                console.log(previousMediaQuery ? previousMediaQuery[0] : undefined);
+                const previousMediaQuery = mediaQueries[mediaQueryIndex + 1];
                 screenSizeStore.set(previousMediaQuery ? previousMediaQuery[0] : undefined);
+                console.timeEnd(`${media} [${random}]`);
                 return;
             }
 
-            console.log(sizeByMedia[media as `(min-width: ${StringKeyOf<Record<ScreenSizeMinWidth, string>>})`]);
             screenSizeStore.set(
                 sizeByMedia[media as `(min-width: ${StringKeyOf<Record<ScreenSizeMinWidth, string>>})`],
             );
+
+            console.timeEnd(`${media} [${random}]`);
         }
 
         const unsubScreenSize = screenSizeStore.subscribe((_screenSize) => {
-            _screenSize = screenSize;
+            screenSize = _screenSize;
             updateResponsiveProperties(defaultValues, values, responsivePropertiesStore, _screenSize);
         });
 
@@ -181,12 +188,3 @@ function updateResponsiveProperties<T>(
         propStore.set(propValue);
     });
 }
-
-// function updateResponsiveProperties<T>(
-//     defaultValues: T,
-//     values: Screen<T>,
-//     result: { [K in keyof T]: Writable<T[K]> } & ResponsivePropertiesResult<T>,
-// ) {
-//     result.defaultValues.set(defaultValues);
-//     result.values.set(values);
-// }
