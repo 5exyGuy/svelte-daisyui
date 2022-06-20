@@ -1,1 +1,1 @@
-export { createComponentUtilities } from './component.utility';
+export * from './component.utility';

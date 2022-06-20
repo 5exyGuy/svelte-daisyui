@@ -8,7 +8,7 @@ export interface AlertProps extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
      * Background color of component. Functional colors such as `info`, `success`, `warning` and `error` add a default icon on the left.
      * @default undefined
      */
-    color: StringKeyOf<typeof BrandColor & typeof FunctionalColor>;
+    color?: StringKeyOf<typeof BrandColor & typeof FunctionalColor>;
 
     /**
      * Show an icon defaulted to the functional colors, e.g. `info`, `success`, `warning` and `error`.
