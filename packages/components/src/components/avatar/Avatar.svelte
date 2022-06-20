@@ -53,10 +53,7 @@
     // -----------------------------------------------------------
 
     const { update, size: _size } = createResponsiveProperties<AvatarResponsiveProps>({ size }, screen, ['size']);
-
-    beforeUpdate(() => {
-        update({ size }, screen);
-    });
+    $: size && screen && update({ size }, screen);
 
     let ref: HTMLDivElement;
 

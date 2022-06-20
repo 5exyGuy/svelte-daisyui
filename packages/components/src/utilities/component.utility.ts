@@ -62,18 +62,17 @@ interface ResponsivePropertiesResult<T> {
     update: (defaultValues: T, values: Screen<T>) => void;
 }
 
-const SCREEN_SIZES = Object.values(ScreenSize).reverse() as Array<StringKeyOf<Record<ScreenSize, string>>>;
+const SCREEN_SIZES = Object.entries(ScreenSize).reverse() as Array<[StringKeyOf<typeof ScreenSize>, ScreenSize]>;
 
 export function createResponsiveProperties<T>(
     defaultValues: T,
     values: Screen<T>,
     include: Array<keyof T>,
-): Record<keyof T, Readable<ValueOf<T, keyof T>>> & ResponsivePropertiesResult<T> {
-    const defaultValuesStore = writable<typeof defaultValues>(defaultValues);
-    const valuesStore = writable<typeof values>(values);
+): Record<keyof T, Readable<ValueOf<T>>> & ResponsivePropertiesResult<T> {
     const responsivePropertyStores = [] as Array<[keyof T, Readable<ValueOf<T>>]>;
     const responsivePropertySetters = {} as Record<keyof T, Subscriber<ValueOf<T>>>;
-    const screenSizeStore = writable<ScreenSize>();
+
+    let screenSize: ScreenSize;
 
     // Create responsive properties from default values
     include.forEach((propName) => {
@@ -85,9 +84,9 @@ export function createResponsiveProperties<T>(
 
     onMount(() => {
         // Create media queries from screen sizes
-        const mediaQueries = SCREEN_SIZES.map((screenSize: ScreenSize) => [
-            ScreenSize[screenSize],
-            window.matchMedia(`(min-width: ${ScreenSizeMinWidth[screenSize]})`),
+        const mediaQueries = SCREEN_SIZES.map(([key, screenSize]) => [
+            screenSize,
+            window.matchMedia(`(min-width: ${ScreenSizeMinWidth[key]})`),
         ]) as [ScreenSize, MediaQueryList][];
         // Flip media queries to map screen size to media query
         const sizeByMedia = Object.fromEntries(
@@ -95,28 +94,9 @@ export function createResponsiveProperties<T>(
         ) as Record<`(min-width: ${StringKeyOf<Record<ScreenSizeMinWidth, string>>})`, ScreenSize>;
 
         const mediaQuery = mediaQueries.find(([, mediaQuery]) => mediaQuery.matches);
-        let screenSize = mediaQuery ? mediaQuery[0] : undefined;
-        screenSizeStore.set(screenSize);
+        screenSize = mediaQuery ? mediaQuery[0] : undefined;
 
-        // Create media query listeners
-        function handleMediaChange({ matches, media }: MediaQueryListEvent) {
-            if (!matches) {
-                const mediaQueryIndex = mediaQueries.findIndex(([, mediaQuery]) => mediaQuery.media === media);
-                if (mediaQueryIndex === -1 || mediaQueryIndex + 1 === mediaQueries.length) {
-                    screenSizeStore.set(undefined);
-                    return;
-                }
-                const previousMediaQuery = mediaQueries[mediaQueryIndex + 1];
-                screenSizeStore.set(previousMediaQuery ? previousMediaQuery[0] : undefined);
-                return;
-            }
-
-            screenSizeStore.set(
-                sizeByMedia[media as `(min-width: ${StringKeyOf<Record<ScreenSizeMinWidth, string>>})`],
-            );
-        }
-
-        const unsubScreenSize = screenSizeStore.subscribe((_screenSize) => {
+        function updateScreenSize(_screenSize: ScreenSize) {
             screenSize = _screenSize;
             updateResponsiveProperties(
                 defaultValues,
@@ -125,29 +105,25 @@ export function createResponsiveProperties<T>(
                 responsivePropertySetters,
                 screenSize,
             );
-        });
+        }
 
-        const unsubDefaultValues = defaultValuesStore.subscribe((_defaultValues) => {
-            defaultValues = _defaultValues;
-            updateResponsiveProperties(
-                defaultValues,
-                values,
-                responsivePropertyStores,
-                responsivePropertySetters,
-                screenSize,
-            );
-        });
+        updateScreenSize(screenSize);
 
-        const unsubValues = valuesStore.subscribe((_values) => {
-            values = _values;
-            updateResponsiveProperties(
-                defaultValues,
-                values,
-                responsivePropertyStores,
-                responsivePropertySetters,
-                screenSize,
-            );
-        });
+        // Create media query listeners
+        function handleMediaChange({ matches, media }: MediaQueryListEvent) {
+            if (!matches) {
+                const mediaQueryIndex = mediaQueries.findIndex(([, mediaQuery]) => mediaQuery.media === media);
+                if (mediaQueryIndex === -1 || mediaQueryIndex + 1 === mediaQueries.length) {
+                    updateScreenSize(undefined);
+                    return;
+                }
+                const previousMediaQuery = mediaQueries[mediaQueryIndex + 1];
+                updateScreenSize(previousMediaQuery ? previousMediaQuery[0] : undefined);
+                return;
+            }
+
+            updateScreenSize(sizeByMedia[media as `(min-width: ${StringKeyOf<Record<ScreenSizeMinWidth, string>>})`]);
+        }
 
         // Add media query listeners
         mediaQueries.forEach(([, mediaQuery]) => mediaQuery.addEventListener('change', handleMediaChange));
@@ -155,37 +131,55 @@ export function createResponsiveProperties<T>(
         // Remove media query listeners on unmount
         return () => {
             mediaQueries.forEach(([, mediaQuery]) => mediaQuery.removeEventListener('change', handleMediaChange));
-            unsubScreenSize();
-            unsubDefaultValues();
-            unsubValues();
         };
     });
 
     return {
-        update: (defaultValues: T, values: Screen<T>) => {
-            defaultValuesStore.set(defaultValues);
-            valuesStore.set(values);
+        update: (_defaultValues: T, _values: Screen<T>) => {
+            defaultValues = _defaultValues;
+            values = _values;
+
+            updateResponsiveProperties(
+                defaultValues,
+                values,
+                responsivePropertyStores,
+                responsivePropertySetters,
+                screenSize,
+            );
         },
-        ...Object.fromEntries(responsivePropertyStores),
+        ...(Object.fromEntries(responsivePropertyStores) as Record<keyof T, Readable<ValueOf<T>>>),
     };
 }
 
 function updateResponsiveProperties<T>(
     defaultValues: T,
     values: Screen<T>,
-    responsiveProperties: Array<Record<keyof T, Readable<ValueOf<T, keyof T>>>>,
+    responsivePropertyStores: Array<[keyof T, Readable<ValueOf<T>>]>,
     responsivePropertySetters: Record<keyof T, Subscriber<ValueOf<T>>>,
     screenSize: ScreenSize,
 ) {
     if (!screenSize) {
-        responsiveProperties.forEach(([propName]) => responsivePropertySetters[propName](defaultValues[propName]));
+        responsivePropertyStores.forEach(([propName]) => {
+            const defaultPropValue = defaultValues[propName];
+            if (!defaultPropValue) return;
+            responsivePropertySetters[propName](defaultPropValue);
+        });
         return;
     }
 
-    Object.keys(responsiveProperties).forEach((propName) => {
-        const propValue = values[propName][screenSize];
-        if (propValue) {
-            responsivePropertySetters[propName](propValue);
+    responsivePropertyStores.forEach(([propName]) => {
+        const screenSizeProps = values ? values[screenSize] : undefined;
+        if (!screenSizeProps) {
+            const [, screenSize] = SCREEN_SIZES.find(([, screenSize]) => {
+                const screenSizeProps = values ? values[screenSize] : undefined;
+                return screenSizeProps ? !!screenSizeProps[propName] : false;
+            });
+            if (!screenSize) return;
+            responsivePropertySetters[propName](values[screenSize][propName]);
         }
+
+        const propValue = screenSizeProps ? screenSizeProps[propName] : undefined;
+        if (!propValue) return;
+        responsivePropertySetters[propName](propValue);
     });
 }
