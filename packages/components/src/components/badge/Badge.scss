@@ -1,66 +1,100 @@
+@use '../escape' as *;
+@use '../variables';
+@use '../colors';
 @use 'sass:list';
-@use '../variables.scss' as *;
-@use '../escape.scss' as *;
+@use 'sass:map';
 
-.badge {
-    @apply border border-neutral bg-neutral text-neutral-content;
-    @apply inline-flex items-center justify-center transition duration-200 ease-in-out;
+.dui-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 1px;
+    border-color: colors.get('neutral');
+    background-color: colors.get('neutral');
+    color: colors.get-content('neutral');
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow,
+        transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
     border-radius: var(--badge-border-radius);
     width: fit-content;
+
+    // dui-badge-md
+    & {
+        height: 1.25rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        padding-left: 0.563rem;
+        padding-right: 0.563rem;
+    }
 
     @mixin badge-props($prefix: '') {
         $prefix: escape($prefix);
 
-        @each $color in list.join($brand-colors, $functional-colors) {
-            &.#{$prefix}badge-#{$color} {
-                @apply border-#{$color} bg-#{$color} text-#{$color}-content;
+        @each $color in list.join(colors.$brand, colors.$functional) {
+            &.#{$prefix}dui-badge-#{$color} {
+                border-color: colors.get($color);
+                background-color: colors.get($color);
+                color: colors.get-content($color);
             }
         }
 
-        &.#{$prefix}badge-ghost {
-            @apply border-base-200 bg-base-200 text-base-content;
+        &.#{$prefix}dui-badge-ghost {
+            border-color: colors.get('base-200');
+            background-color: colors.get('base-200');
+            color: colors.get-content('base');
         }
 
-        &.#{$prefix}badge-outline {
-            @apply border-current border-opacity-50 text-current;
-            @apply bg-transparent #{!important};
+        &.#{$prefix}dui-badge-outline {
+            border-color: currentColor;
+            color: currentColor;
+            background-color: transparent !important;
 
-            @each $color in list.join($brand-colors, $functional-colors) {
-                &.badge-#{$color} {
-                    @apply text-#{$color};
+            @each $color in list.join(colors.$brand, colors.$functional) {
+                &.dui-badge-#{$color} {
+                    color: colors.get($color);
                 }
 
-                @each $screen-size in $tailwind-screen-sizes {
-                    @screen #{$screen-size} {
-                        $size-prefix: escape('#{$screen-size}:');
+                @each $name, $screen-size in variables.$screen-sizes {
+                    @media (min-width: #{$screen-size}) {
+                        $size-prefix: escape('#{$name}:');
+
                         &.#{$size-prefix}badge-#{$color} {
-                            @apply text-#{$color};
+                            color: colors.get($color);
                         }
                     }
                 }
             }
         }
 
-        &.#{$prefix}badge-xs {
-            @apply h-3 text-xs leading-3;
+        &.#{$prefix}dui-badge-xs {
+            height: 0.75rem;
+            font-size: 0.75rem;
+            line-height: 0.75rem;
             padding-left: 0.313rem;
             padding-right: 0.313rem;
         }
 
-        &.#{$prefix}badge-sm {
-            @apply h-4 text-xs leading-4;
+        &.#{$prefix}dui-badge-sm {
+            height: 1rem;
+            font-size: 0.75rem;
+            line-height: 1rem;
             padding-left: 0.438rem;
             padding-right: 0.438rem;
         }
 
-        &.#{$prefix}badge-md {
-            @apply h-5 text-sm leading-5;
+        &.#{$prefix}dui-badge-md {
+            height: 1.25rem;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
             padding-left: 0.563rem;
             padding-right: 0.563rem;
         }
 
-        &.#{$prefix}badge-lg {
-            @apply h-6 text-base leading-6;
+        &.#{$prefix}dui-badge-lg {
+            height: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.5rem;
             padding-left: 0.688rem;
             padding-right: 0.688rem;
         }
@@ -68,9 +102,9 @@
 
     @include badge-props();
 
-    @each $screen-size in $tailwind-screen-sizes {
-        @screen #{$screen-size} {
-            @include badge-props('#{$screen-size}:');
+    @each $name, $screen-size in variables.$screen-sizes {
+        @media (min-width: #{$screen-size}) {
+            @include badge-props('#{$name}:');
         }
     }
 }

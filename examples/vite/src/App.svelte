@@ -4,13 +4,14 @@
     import Artboard from '@svelte-daisyui/components/src/components/artboard/Artboard.svelte';
     import AvatarGroup from '@svelte-daisyui/components/src/components/avatar/AvatarGroup.svelte';
     import Avatar from '@svelte-daisyui/components/src/components/avatar/Avatar.svelte';
+    import Badge from '@svelte-daisyui/components/src/components/badge/Badge.svelte';
 </script>
 
 <Showcase>
     <Alert color="error" screen={{ md: { color: 'accent' } }}>Hello world</Alert>
     <Artboard alignment="vertical" size="320x568" demo>Hello world</Artboard>
 
-    <AvatarGroup space="-1.5rem" screen={{ lg: { space: '0rem' } }}>
+    <AvatarGroup space="-1.5rem">
         <Avatar size="2.5rem" screen={{ lg: { size: '4rem' } }}>
             <img alt="" src="https://picsum.photos/seed/picsum1/200/" />
         </Avatar>
@@ -24,4 +25,5 @@
             <div class="bg-accent text-accent-content">KK</div>
         </Avatar>
     </AvatarGroup>
+    <Badge color="error" size="md">Hello world</Badge>
 </Showcase>

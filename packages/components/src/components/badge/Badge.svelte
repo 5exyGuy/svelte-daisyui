@@ -1,37 +1,21 @@
-<script>
-    import {
-        classes,
-        BrandColor,
-        FunctionalColor,
-        Size,
-    } from '@svelte-daisyui/shared';
-
-    // -----------------------------------------------------------
-    // Type Definitions
-    // -----------------------------------------------------------
-
-    /**
-     * @restProps {div}
-     *
-     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost'} Color
-     * @typedef {'xs' | 'sm' | 'md' | 'lg'} Size
-     * @typedef {{ color?: Color, size?: Size }} Properties
-     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
-     */
+<script lang="ts">
+    import { BrandColor, FunctionalColor, Size } from '../../enums';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
+    import type { BadgeClassProps, BadgeProps, BadgeResponsiveProps } from './badge-props.interface';
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
     /**
-     * @type {Color}
+     *
      */
-    export let color = undefined;
+    export let color: BadgeProps['color'] = undefined;
 
     /**
-     * @type {Size}
+     *
      */
-    export let size = undefined;
+    export let size: BadgeProps['size'] = undefined;
 
     /**
      * @type {boolean}
@@ -57,29 +41,30 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({
-        prefix: 'badge',
-        classProps: {
-            color: {
-                value: {
-                    ...BrandColor,
-                    ...FunctionalColor,
-                    ...{ ghost: 'ghost' },
-                },
-            },
-            size: { value: Size },
-            outline: { value: 'outline' },
-        },
-        props: { color, size, outline },
-        screen,
-        restClass,
-    });
+    const PREFIX = 'dui-badge';
+    const COLORS = { ...BrandColor, ...FunctionalColor, ...{ ghost: 'ghost' } };
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<BadgeClassProps>(
+            PREFIX,
+            { color: COLORS, outline: 'outline', size: Size },
+            { color, outline, size },
+        ),
+        generateResponsiveClasses<BadgeResponsiveProps>(
+            PREFIX,
+            { color: COLORS, outline: 'outline', size: Size },
+            screen,
+            { color: true, outline: true, size: true },
+        ),
+        [restClass],
+    );
 </script>
 
 <div class={classNames} {...$$restProps}>
     <slot />
 </div>
 
-<style lang="scss">
+<style lang="scss" global>
     @import 'Badge.scss';
 </style>

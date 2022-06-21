@@ -2,7 +2,9 @@
     import { setContext } from 'svelte';
     import { writable } from 'svelte/store';
     import { createResponsiveProperties, joinClasses } from '../../utilities';
+    import type { AvatarGroupContext } from './avatar-group-context.interface';
     import type { AvatarGroupProps, AvatarGroupResponsiveProps } from './avatar-group-props';
+    import Avatar from './Avatar.svelte';
 
     // -----------------------------------------------------------
     // Properties
@@ -45,12 +47,15 @@
     });
     $: space && update({ space }, screen);
 
-    const avatars = writable([]);
-    setContext('AvatarGroup', {
-        avatars,
+    const avatars = [] as Array<HTMLDivElement>;
+    setContext<AvatarGroupContext>('AvatarGroup', {
         add: (ref: HTMLDivElement) => {
-            avatars.update((_) => [..._, { ref, index: _.length }]);
-            ref.style.zIndex = String($avatars.length);
+            avatars.push(ref);
+
+            avatars.forEach((avatarRef, index) => {
+                // avatarRef.style.zIndex = String(avatars.length - 1 - index);
+                avatarRef.style.zIndex = String(index);
+            });
         },
     });
 </script>
