@@ -31,4 +31,4 @@ export interface ArtboardProps extends Omit<svelte.JSX.HTMLAttributes<HTMLDivEle
 
 export interface ArtboardResponsiveProps extends Pick<ArtboardProps, 'size' | 'alignment'> {}
 
-export interface ArtboardClassProps extends Omit<ArtboardProps, 'screen'> {}
+export interface ArtboardClassProps extends Pick<ArtboardProps, 'size' | 'alignment' | 'demo'> {}

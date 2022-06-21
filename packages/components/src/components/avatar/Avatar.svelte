@@ -1,11 +1,6 @@
 <script lang="ts">
-    import { beforeUpdate, getContext, onMount } from 'svelte';
-    import {
-        createResponsiveProperties,
-        generateDefaultClasses,
-        generateResponsiveClasses,
-        joinClasses,
-    } from '../../utilities/component.utility';
+    import { getContext, onMount } from 'svelte';
+    import { createResponsiveProperties, generateDefaultClasses, joinClasses } from '../../utilities/component.utility';
     import type { AvatarGroupContext } from './avatar-group-context.interface';
     import type { AvatarClassProps, AvatarProps, AvatarResponsiveProps } from './avatar-props.interface';
     import { AvatarStatus } from './avatar-status.enum';
@@ -23,6 +18,11 @@
      *
      */
     export let size: AvatarProps['size'] = '6rem';
+
+    /**
+     *
+     */
+    export let placeholder: boolean = false;
 
     let restClass: AvatarProps['class'] = undefined;
     /**
@@ -43,8 +43,15 @@
     // Classes
     // -----------------------------------------------------------
 
+    const PREFIX = 'dui-avatar';
+
     $: classNames = joinClasses(
-        generateDefaultClasses<AvatarClassProps>('dui-avatar', { status: AvatarStatus }, { status }),
+        [PREFIX],
+        generateDefaultClasses<AvatarClassProps>(
+            PREFIX,
+            { status: AvatarStatus, placeholder: 'placeholder' },
+            { status, placeholder },
+        ),
         [restClass],
     );
 
@@ -52,19 +59,19 @@
     // Functionality
     // -----------------------------------------------------------
 
-    const { update, size: _size } = createResponsiveProperties<AvatarResponsiveProps>({ size }, screen, ['size']);
-    $: size && screen && update({ size }, screen);
+    const { update, size: _size } = createResponsiveProperties<AvatarResponsiveProps>({ size }, screen, { size: true });
+    $: size && update({ size }, screen);
 
     let ref: HTMLDivElement;
 
     const avatarGroup = getContext<AvatarGroupContext>('AvatarGroup');
 
     onMount(() => {
-        if (avatarGroup) avatarGroup.add(ref);
+        avatarGroup && avatarGroup.add(ref);
     });
 </script>
 
-<div class={classNames} {...$$restProps} style:width={$_size} style:height={$_size} bind:this={ref}>
+<div class={classNames} style:width={$_size} style:height={$_size} bind:this={ref} {...$$restProps}>
     <slot />
 </div>
 

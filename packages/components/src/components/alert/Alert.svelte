@@ -60,18 +60,13 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
+    const PREFIX = 'dui-alert';
+    const COLORS = { ...BrandColor, ...FunctionalColor };
+
     $: classNames = joinClasses(
-        generateDefaultClasses<AlertClassProps>(
-            'dui-alert',
-            { color: { ...BrandColor, ...FunctionalColor } },
-            { color },
-        ),
-        generateResponsiveClasses<AlertResponsiveProps>(
-            'dui-alert',
-            { color: { ...BrandColor, ...FunctionalColor } },
-            screen,
-            { color: true },
-        ),
+        [PREFIX],
+        generateDefaultClasses<AlertClassProps>(PREFIX, { color: COLORS }, { color }),
+        generateResponsiveClasses<AlertResponsiveProps>(PREFIX, { color: COLORS }, screen, { color: true }),
         [restClass],
     );
 </script>

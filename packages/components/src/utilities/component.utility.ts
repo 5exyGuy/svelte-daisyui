@@ -1,18 +1,22 @@
 import type { StringKeyOf, ValueOf } from 'type-fest';
 import { ScreenSize } from '../enums';
 import type { Screen } from '../types';
-import { readable, type Readable, type Subscriber } from 'svelte/store';
+import { Readable, writable, Writable, type Subscriber } from 'svelte/store';
 import { ScreenSizeMinWidth } from '../enums/screen-size-min-width.enum';
 import { onMount } from 'svelte';
 
 const SCREEN_SIZES = Object.entries(ScreenSize).reverse() as Array<[StringKeyOf<typeof ScreenSize>, ScreenSize]>;
+// const SCREEN_SIZE_INDICES = Object.fromEntries(SCREEN_SIZES.map(([screenSize], index) => [screenSize, index]));
+// console.log(SCREEN_SIZE_INDICES);
 
 export function generateDefaultClasses<T>(
     prefix: string,
-    data: { [K in keyof T]: T[K] extends boolean ? string : T[K] extends string ? Record<T[K], string> : string },
+    data: {
+        [K in keyof T]: T[K] extends boolean ? string : T[K] extends string ? Record<T[K], string> : string;
+    },
     values: T,
 ): Array<string> {
-    const classList = [prefix];
+    const classList = [];
 
     Object.entries(values).forEach(([propName, propValue]) => {
         const propData = data[propName] as string | Record<keyof T, string>;
@@ -30,7 +34,9 @@ export function generateDefaultClasses<T>(
 
 export function generateResponsiveClasses<T>(
     prefix: string,
-    data: { [K in keyof T]: T[K] extends boolean ? string : T[K] extends string ? Record<T[K], string> : string },
+    data: {
+        [K in keyof T]: T[K] extends boolean ? string : T[K] extends string ? Record<T[K], string> : string;
+    },
     values: Screen<T>,
     include: Record<keyof T, boolean>,
 ): Array<string> {
@@ -78,10 +84,9 @@ export function createResponsiveProperties<T>(
     Object.entries<boolean>(include).forEach(([propName, include]) => {
         if (!include) return;
 
-        const propStore = readable<ValueOf<T>>(undefined, (set) => {
-            responsivePropertySetters[propName] = set;
-        });
-        responsivePropertyStores.push([propName as keyof T, propStore]);
+        const propStore = writable<ValueOf<T>>();
+        responsivePropertySetters[propName] = propStore.set;
+        responsivePropertyStores.push([propName as keyof T, { subscribe: propStore.subscribe }]);
     });
 
     onMount(() => {
@@ -100,6 +105,7 @@ export function createResponsiveProperties<T>(
 
         function updateScreenSize(_screenSize: ScreenSize) {
             screenSize = _screenSize;
+
             updateResponsiveProperties(
                 defaultValues,
                 values,
@@ -114,6 +120,7 @@ export function createResponsiveProperties<T>(
         // Create media query listeners
         function handleMediaChange({ matches, media }: MediaQueryListEvent) {
             if (!matches) {
+                // TODO: Optimize
                 const mediaQueryIndex = mediaQueries.findIndex(([, mediaQuery]) => mediaQuery.media === media);
                 if (mediaQueryIndex === -1 || mediaQueryIndex + 1 === mediaQueries.length)
                     return updateScreenSize(undefined);
@@ -158,7 +165,7 @@ function updateResponsiveProperties<T>(
     responsivePropertySetters: Record<keyof T, Subscriber<ValueOf<T>>>,
     screenSize: ScreenSize,
 ) {
-    if (!screenSize) {
+    if (!screenSize || !values) {
         responsivePropertyStores.forEach(([propName]) => {
             const defaultPropValue = defaultValues[propName];
             if (!defaultPropValue) return;
@@ -170,15 +177,24 @@ function updateResponsiveProperties<T>(
     responsivePropertyStores.forEach(([propName]) => {
         const screenSizeProps = values ? values[screenSize] : undefined;
         if (!screenSizeProps) {
-            const [, screenSize] = SCREEN_SIZES.find(([, screenSize]) => {
+            // TODO: Optimize
+
+            const screenSize = SCREEN_SIZES.find(([, screenSize]) => {
                 const screenSizeProps = values ? values[screenSize] : undefined;
                 return screenSizeProps ? !!screenSizeProps[propName] : false;
             });
-            if (!screenSize) return;
-            responsivePropertySetters[propName](values[screenSize][propName]);
+            if (!screenSize) {
+                const defaultPropValue = defaultValues[propName];
+                if (!defaultPropValue) return;
+
+                responsivePropertySetters[propName](defaultPropValue);
+                return;
+            }
+            responsivePropertySetters[propName](values[screenSize[1]][propName]);
+            return;
         }
 
-        const propValue = screenSizeProps ? screenSizeProps[propName] : undefined;
+        const propValue = screenSizeProps[propName];
         if (!propValue) return;
         responsivePropertySetters[propName](propValue);
     });
