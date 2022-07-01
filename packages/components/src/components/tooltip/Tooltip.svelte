@@ -1,47 +1,31 @@
-<script>
-    import {
-        classes,
-        BrandColor,
-        FunctionalColor,
-        Position,
-    } from '@svelte-daisyui/shared';
-
-    // -----------------------------------------------------------
-    //  Type Definitions
-    // -----------------------------------------------------------
-
-    /**
-     * @restProps {div}
-     *
-     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'} Color
-     * @typedef {'top' | 'bottom' | 'left' | 'right'} Position
-     * @typedef {{ color?: Color, position?: Position, open?: boolean }} Properties
-     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
-     */
+<script lang="ts">
+    import { BrandColor, FunctionalColor, Position } from '../../enums';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
+    import type { TooltipClassProps, TooltipProps, TooltipResponsiveProps } from './tooltip-props.interface';
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
     /**
-     * @type {Color}
+     *
      */
-    export let color = undefined;
+    export let color: TooltipProps['color'] = undefined;
 
     /**
-     * @type {boolean}
+     *
      */
-    export let open = false;
+    export let show: TooltipProps['show'] = false;
 
     /**
-     * @type {Position}
+     *
      */
-    export let position = undefined;
+    export let position: TooltipProps['position'] = undefined;
 
-    let restClass = undefined;
     /**
-     * @type {string}
+     *
      */
+    let restClass: TooltipProps['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------
@@ -49,25 +33,36 @@
     // -----------------------------------------------------------
 
     /**
-     * @type {Screen}
+     *
      */
-    export let screen = undefined;
+    export let screen: TooltipProps['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({
-        prefix: 'dui-tooltip',
-        classProps: {
-            open: { value: 'open' },
-            position: { value: Position },
-            color: { value: { ...BrandColor, ...FunctionalColor } },
-        },
-        props: { open, position, color },
-        screen,
-        restClass,
-    });
+    const PREFIX = 'dui-tooltip';
+    const COLORS = { ...BrandColor, ...FunctionalColor };
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<TooltipClassProps>(
+            PREFIX,
+            {
+                color: COLORS,
+                position: Position,
+                show: 'open',
+            },
+            { color, position, show },
+        ),
+        generateResponsiveClasses<TooltipResponsiveProps>(
+            PREFIX,
+            { color: COLORS, position: Position, show: 'open' },
+            screen,
+            { color: true, position: true, show: true },
+        ),
+        [restClass],
+    );
 </script>
 
 <div class={classNames}>

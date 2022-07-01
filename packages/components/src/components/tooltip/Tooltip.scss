@@ -1,9 +1,13 @@
+@use '../escape' as *;
+@use '../variables';
+@use '../colors';
 @use 'sass:list';
-@use '../variables.scss' as *;
-@use '../escape.scss' as *;
+@use 'sass:map';
 
 div.dui-tooltip {
-    @apply relative inline-block text-center;
+    display: inline-block;
+    position: relative;
+    text-align: center;
     --tooltip-offset: calc(100% + 1px + var(--tooltip-tail, 0px));
     --tooltip-tail: 3px;
     --tooltip-color: hsl(var(--neutral));
@@ -11,75 +15,96 @@ div.dui-tooltip {
     --tooltip-tail-offset: calc(100% + 1px - var(--tooltip-tail));
 
     &:after {
-        @apply opacity-0 transition delay-100 duration-200 ease-in-out;
-        @apply absolute block w-0 h-0 border-solid;
-        @apply -translate-x-1/2 top-auto left-1/2 right-auto;
         content: '';
+        display: block;
+        position: absolute;
+        top: auto;
+        left: 50%;
+        right: auto;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        opacity: 0;
+        transform: translateX(-50%);
         border-width: var(--tooltip-tail, 0);
         bottom: var(--tooltip-tail-offset);
         border-color: var(--tooltip-color) transparent transparent transparent;
+        transition-property: border-color, opacity, transform;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 200ms;
+        transition-delay: 100ms;
     }
 
     &:hover:after {
-        @apply opacity-100 delay-75;
+        opacity: 1;
+        transition-delay: 75ms;
     }
 
-    @mixin tooltip-props($prefix: '') {
+    @mixin responsive-props($prefix: '') {
         $prefix: escape($prefix);
 
         &.#{$prefix}dui-tooltip-open:after {
-            @apply opacity-100 delay-75;
+            opacity: 1;
+            transition-delay: 75ms;
         }
 
-        @each $color in list.join($brand-colors, $functional-colors) {
+        @each $color in list.join(colors.$brand, colors.$functional) {
             &.#{$prefix}dui-tooltip-#{$color} {
-                --tooltip-color: hsl(var(--#{$color}));
-                --tooltip-text-color: hsl(var(--#{$color}-content));
+                --tooltip-color: colors.get($color);
+                --tooltip-text-color: colors.get-content($color);
             }
         }
 
         &.#{$prefix}dui-tooltip-top {
             &:after {
-                @apply -translate-x-1/2 translate-y-0 top-auto left-1/2 right-auto;
+                transform: translateX(-50%) translateY(0);
+                top: auto;
+                left: 50%;
+                right: auto;
                 bottom: var(--tooltip-tail-offset);
-                border-color: var(--tooltip-color) transparent transparent
-                    transparent;
+                border-color: var(--tooltip-color) transparent transparent transparent;
             }
         }
 
         &.#{$prefix}dui-tooltip-bottom {
             &:after {
-                @apply -translate-x-1/2 translate-y-0 left-1/2 right-auto bottom-auto;
+                transform: translateX(-50%) translateY(0);
+                left: 50%;
+                right: auto;
+                bottom: auto;
                 top: var(--tooltip-tail-offset);
-                border-color: transparent transparent var(--tooltip-color)
-                    transparent;
+                border-color: transparent transparent var(--tooltip-color) transparent;
             }
         }
 
         &.#{$prefix}dui-tooltip-left {
             &:after {
-                @apply translate-x-0 -translate-y-1/2 top-1/2 left-auto bottom-auto;
+                transform: translateX(0) translateY(-50%);
+                top: 50%;
+                left: auto;
+                bottom: auto;
                 right: var(--tooltip-tail-offset);
-                border-color: transparent transparent transparent
-                    var(--tooltip-color);
+                border-color: transparent transparent transparent var(--tooltip-color);
             }
         }
 
         &.#{$prefix}dui-tooltip-right {
             &:after {
-                @apply translate-x-0 -translate-y-1/2 top-1/2 right-auto bottom-auto;
+                transform: translateX(0) translateY(-50%);
+                top: 50%;
+                right: auto;
+                bottom: auto;
                 left: var(--tooltip-tail-offset);
-                border-color: transparent var(--tooltip-color) transparent
-                    transparent;
+                border-color: transparent var(--tooltip-color) transparent transparent;
             }
         }
     }
 
-    @include tooltip-props();
+    @include responsive-props();
 
-    @each $screen-size in $tailwind-screen-sizes {
-        @screen #{$screen-size} {
-            @include tooltip-props('#{$screen-size}:');
+    @each $name, $screen-size in variables.$screen-sizes {
+        @media (min-width: #{$screen-size}) {
+            @include responsive-props('#{$name}:');
         }
     }
 }
