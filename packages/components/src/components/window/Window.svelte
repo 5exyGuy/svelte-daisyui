@@ -1,39 +1,28 @@
-<script>
-    import { classes } from '@svelte-daisyui/shared';
-
-    // -----------------------------------------------------------
-    //  Type Definitions
-    // -----------------------------------------------------------
-
-    /**
-     * @restProps {div}
-     */
+<script lang="ts">
+    import type { WindowsProps } from './windows-props.interface';
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
     /**
-     * @type {boolean}
+     *
      */
-    export let bordered = false;
+    export let bordered: WindowsProps['bordered'] = false;
 
-    let restClass = undefined;
     /**
-     * @type {string}
+     *
      */
+    let restClass: WindowsProps['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({
-        prefix: 'dui-window',
-        classProps: { bordered: { value: 'bordered' } },
-        props: { bordered },
-        restClass,
-    });
+    const PREFIX = 'dui-window';
+
+    $: classNames = '';
 </script>
 
 <div class={classNames} {...$$restProps}>

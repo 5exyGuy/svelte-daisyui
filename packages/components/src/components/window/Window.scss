@@ -1,22 +1,32 @@
+@use '../colors.scss';
+
 .dui-window {
-    @apply relative overflow-hidden overflow-x-auto;
-    @apply pt-5;
+    position: relative;
+    overflow: hidden;
+    overflow-x: auto;
+    padding-top: 1.25rem;
     border-radius: var(--box-border-radius);
 
     &.dui-window-bordered {
-        @apply border border-base-300;
+        border: 1px solid colors.get('base-300');
     }
 
     &:before {
         content: '';
-        @apply mb-4 block h-3 w-3 rounded-full opacity-30;
+        display: block;
+        margin-bottom: 1rem;
+        height: 0.75rem;
+        width: 0.75rem;
+        border-radius: 9999px;
+        opacity: 0.3;
         box-shadow: 1.4em 0, 2.8em 0, 4.2em 0;
     }
 
     pre[data-prefix] {
         &:before {
             content: attr(data-prefix);
-            @apply inline-block text-right;
+            display: inline-block;
+            text-align: right;
         }
     }
 }
