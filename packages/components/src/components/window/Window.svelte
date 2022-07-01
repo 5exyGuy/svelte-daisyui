@@ -1,5 +1,6 @@
 <script lang="ts">
-    import type { WindowsProps } from './windows-props.interface';
+    import { generateDefaultClasses, joinClasses } from '../../utilities';
+    import type { WindowClassProps, WindowsProps } from './windows-props.interface';
 
     // -----------------------------------------------------------
     // Properties
@@ -22,7 +23,11 @@
 
     const PREFIX = 'dui-window';
 
-    $: classNames = '';
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<WindowClassProps>(PREFIX, { bordered: 'bordered' }, { bordered }),
+        [restClass],
+    );
 </script>
 
 <div class={classNames} {...$$restProps}>

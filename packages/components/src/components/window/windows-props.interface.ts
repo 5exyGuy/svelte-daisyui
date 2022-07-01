@@ -4,3 +4,5 @@ export interface WindowsProps extends svelte.JSX.HTMLAttributes<HTMLDivElement> 
      */
     bordered?: boolean;
 }
+
+export interface WindowClassProps extends Pick<WindowsProps, 'bordered'> {}
