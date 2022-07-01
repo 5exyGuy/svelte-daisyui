@@ -23,10 +23,10 @@
      */
     export let demo: ArtboardProps['demo'] = false;
 
-    let restClass: ArtboardProps['class'] = undefined;
     /**
      * A space-separated list of the classes of the element.
      */
+    let restClass: ArtboardProps['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------

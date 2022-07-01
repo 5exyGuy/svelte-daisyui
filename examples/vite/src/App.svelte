@@ -5,6 +5,8 @@
     import AvatarGroup from '@svelte-daisyui/components/src/components/avatar/AvatarGroup.svelte';
     import Avatar from '@svelte-daisyui/components/src/components/avatar/Avatar.svelte';
     import Badge from '@svelte-daisyui/components/src/components/badge/Badge.svelte';
+    import BreadcrumbGroup from '@svelte-daisyui/components/src/components/breadcrumbs/BreadcrumbGroup.svelte';
+    import BreadcrumbItem from '@svelte-daisyui/components/src/components/breadcrumbs/BreadcrumbItem.svelte';
 </script>
 
 <Showcase>
@@ -25,5 +27,15 @@
             <div class="bg-accent text-accent-content">KK</div>
         </Avatar>
     </AvatarGroup>
-    <Badge color="error" size="md">Hello world</Badge>
+    <Badge color="success">Hello world</Badge>
+    <BreadcrumbGroup
+        items={[
+            { text: 'test', href: 'test' },
+            { text: 'test', href: 'test' },
+        ]}
+    >
+        <BreadcrumbItem>Home</BreadcrumbItem>
+        <BreadcrumbItem>Documents</BreadcrumbItem>
+        <BreadcrumbItem>Add Document</BreadcrumbItem>
+    </BreadcrumbGroup>
 </Showcase>

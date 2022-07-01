@@ -41,10 +41,10 @@
      */
     export let showIcon: AlertProps['showIcon'] = true;
 
-    let restClass: AlertProps['class'] = undefined;
     /**
      * A space-separated list of the classes of the element.
      */
+    let restClass: AlertProps['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------

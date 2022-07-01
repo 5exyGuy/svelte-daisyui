@@ -22,12 +22,12 @@
     /**
      *
      */
-    export let placeholder: boolean = false;
+    export let placeholder: AvatarProps['placeholder'] = false;
 
-    let restClass: AvatarProps['class'] = undefined;
     /**
-     *
+     * A space-separated list of the classes of the element.
      */
+    let restClass: AvatarProps['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------

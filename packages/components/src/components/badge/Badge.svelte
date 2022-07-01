@@ -18,14 +18,14 @@
     export let size: BadgeProps['size'] = undefined;
 
     /**
-     * @type {boolean}
+     *
      */
-    export let outline = false;
+    export let outline: BadgeProps['outline'] = false;
 
-    let restClass = undefined;
     /**
-     * @type {string}
+     * A space-separated list of the classes of the element.
      */
+    let restClass: BadgeProps['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------
@@ -33,9 +33,9 @@
     // -----------------------------------------------------------
 
     /**
-     * @type {Screen}
+     *
      */
-    export let screen = undefined;
+    export let screen: BadgeProps['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles

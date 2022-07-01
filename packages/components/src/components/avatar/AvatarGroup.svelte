@@ -1,10 +1,8 @@
 <script lang="ts">
     import { setContext } from 'svelte';
-    import { writable } from 'svelte/store';
     import { createResponsiveProperties, joinClasses } from '../../utilities';
     import type { AvatarGroupContext } from './avatar-group-context.interface';
-    import type { AvatarGroupProps, AvatarGroupResponsiveProps } from './avatar-group-props';
-    import Avatar from './Avatar.svelte';
+    import type { AvatarGroupProps, AvatarGroupResponsiveProps } from './avatar-group-props.interface';
 
     // -----------------------------------------------------------
     // Properties
@@ -15,10 +13,10 @@
      */
     export let space: AvatarGroupProps['space'] = '-1.5rem';
 
-    let restClass: AvatarGroupProps['class'] = undefined;
     /**
-     *
+     * A space-separated list of the classes of the element.
      */
+    let restClass: AvatarGroupProps['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------
