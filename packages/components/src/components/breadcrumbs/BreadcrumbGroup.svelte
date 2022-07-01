@@ -1,56 +1,46 @@
-<script>
-    import { classes } from '@svelte-daisyui/shared';
+<script lang="ts">
+    import { joinClasses } from '../../utilities';
+    import type { BreadcrumbGroupProps } from './breadcrumb-group-props.interface';
     import BreadcrumbItem from './BreadcrumbItem.svelte';
-
-    // -----------------------------------------------------------
-    // Type Definitions
-    // -----------------------------------------------------------
-
-    /**
-     * @slot {{ item: BreadcrumbItem }} item
-     * @restProps {div}
-     *
-     * @typedef {{ text?: string, href?: string }} BreadcrumbItem
-     */
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
     /**
-     * @type {Array<BreadcrumbItem>}
+     *
      */
-    export let items = undefined;
+    export let items: BreadcrumbGroupProps['items'] = undefined;
 
-    let restClass = undefined;
     /**
-     * @type {string}
+     * A space-separated list of the classes of the element.
      */
+    let restClass: BreadcrumbGroupProps['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({ prefix: 'breadcrumb-group', restClass });
+    const PREFIX = 'dui-breadcrumb-group';
+
+    $: classNames = joinClasses([PREFIX, restClass]);
 </script>
 
-<div class={classNames}>
-    <ul>
-        {#if $$slots.default}
-            <slot />
-        {:else if items}
-            {#each items as item}
-                <slot name="item" {item}>
-                    <BreadcrumbItem href={item.href}>
-                        {item.text}
-                    </BreadcrumbItem>
-                </slot>
-            {/each}
-        {/if}
-    </ul>
-</div>
+<ul class={classNames} {...$$restProps}>
+    {#if $$slots.default}
+        <slot />
+    {:else if items}
+        {#each items as item}
+            <slot name="item" {item}>
+                <BreadcrumbItem href={item.href}>
+                    {item.text}
+                </BreadcrumbItem>
+            </slot>
+        {/each}
+    {/if}
+</ul>
 
-<style lang="scss">
+<style lang="scss" global>
     @import 'BreadcrumbGroup.scss';
 </style>

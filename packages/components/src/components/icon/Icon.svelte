@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { classes } from '../../utilities';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
 
     // -----------------------------------------------------------
     //  Type Definitions
@@ -60,13 +60,9 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({
-        prefix: 'icon',
-        propData: { spin: 'spin' },
-        propValues: { spin },
-        screen,
+    $: classNames = joinClasses(generateDefaultClasses('alert-dui'), generateResponsiveClasses('alert-dui'), [
         restClass,
-    });
+    ]);
 </script>
 
 <div class={classNames} style={`height: ${size ?? height}em; width: ${size ?? width}em;`} {...$$restProps}>

@@ -1,28 +1,41 @@
-:global(.breadcrumb-group) {
-    & > :global(ul) {
-        & > :global(li.breadcrumb-item) {
-            @apply flex items-center;
+ul.dui-breadcrumb-group {
+    & > li.dui-breadcrumb-item {
+        display: flex;
+        align-items: center;
 
-            & > :global(a) {
-                @apply flex cursor-pointer items-center hover:underline;
+        & > a {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
 
-                &:focus {
-                    @apply outline-none;
-                }
-
-                &:focus-visible {
-                    outline: 2px solid currentColor;
-                    outline-offset: 2px;
-                }
+            &:hover {
+                text-decoration-line: underline;
             }
 
-            & + :global(*:before) {
-                content: '';
-                @apply ml-2 mr-3 block h-2 w-2 rotate-45 transform opacity-40;
-                border-top: 1px solid;
-                border-right: 1px solid;
-                background-color: transparent;
+            &:focus {
+                outline: 2px solid transparent;
+                outline-offset: 2px;
             }
+
+            &:focus-visible {
+                outline: 2px solid currentColor;
+                outline-offset: 2px;
+            }
+        }
+
+        & + *:before {
+            display: block;
+            content: '';
+            margin-left: 0.5rem;
+            margin-right: 0.75rem;
+            height: 0.375rem;
+            width: 0.375rem;
+            opacity: 0.4;
+            border-top: 1px solid;
+            border-right: 1px solid;
+            background-color: transparent;
+            transform: rotate(45deg);
+            // @apply rotate-45 transform;
         }
     }
 }

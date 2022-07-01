@@ -1,8 +1,8 @@
 <script lang="ts">
     import { getContext, onMount } from 'svelte';
-    import type { ClassesParams } from '../../interfaces';
+    import { createResponsiveProperties, generateDefaultClasses, joinClasses } from '../../utilities/component.utility';
     import type { AvatarGroupContext } from './avatar-group-context.interface';
-    import type { AvatarClassProps, AvatarProps } from './avatar-props.interface';
+    import type { AvatarClassProps, AvatarProps, AvatarResponsiveProps } from './avatar-props.interface';
     import { AvatarStatus } from './avatar-status.enum';
 
     // -----------------------------------------------------------
@@ -17,12 +17,17 @@
     /**
      *
      */
-    // export let size: AvatarProps['size'] = undefined;
+    export let size: AvatarProps['size'] = '6rem';
 
-    let restClass: AvatarProps['class'] = undefined;
     /**
      *
      */
+    export let placeholder: AvatarProps['placeholder'] = false;
+
+    /**
+     * A space-separated list of the classes of the element.
+     */
+    let restClass: AvatarProps['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------
@@ -38,28 +43,35 @@
     // Classes
     // -----------------------------------------------------------
 
-    // $: classNames = classes<AvatarProps>({
-    //     prefix: 'dui-avatar',
-    //     propData: { status: AvatarStatus },
-    //     propValues: { status },
-    //     screen,
-    //     restClass,
-    // } as ClassesParams<AvatarClassProps>);
+    const PREFIX = 'dui-avatar';
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<AvatarClassProps>(
+            PREFIX,
+            { status: AvatarStatus, placeholder: 'placeholder' },
+            { status, placeholder },
+        ),
+        [restClass],
+    );
 
     // -----------------------------------------------------------
     // Functionality
     // -----------------------------------------------------------
+
+    const { update, size: _size } = createResponsiveProperties<AvatarResponsiveProps>({ size }, screen, { size: true });
+    $: size && update({ size }, screen);
 
     let ref: HTMLDivElement;
 
     const avatarGroup = getContext<AvatarGroupContext>('AvatarGroup');
 
     onMount(() => {
-        if (avatarGroup) avatarGroup.add(ref);
+        avatarGroup && avatarGroup.add(ref);
     });
 </script>
 
-<div {...$$restProps} bind:this={ref}>
+<div class={classNames} style:width={$_size} style:height={$_size} bind:this={ref} {...$$restProps}>
     <slot />
 </div>
 

@@ -1,8 +1,8 @@
 <script lang="ts">
     import { setContext } from 'svelte';
-    import { writable } from 'svelte/store';
-    import { classes } from '../../utilities';
-    import type { AvatarGroupProps } from './avatar-group-props';
+    import { createResponsiveProperties, joinClasses } from '../../utilities';
+    import type { AvatarGroupContext } from './avatar-group-context.interface';
+    import type { AvatarGroupProps, AvatarGroupResponsiveProps } from './avatar-group-props.interface';
 
     // -----------------------------------------------------------
     // Properties
@@ -13,33 +13,52 @@
      */
     export let space: AvatarGroupProps['space'] = '-1.5rem';
 
-    let restClass: AvatarGroupProps['class'] = undefined;
     /**
-     *
+     * A space-separated list of the classes of the element.
      */
+    let restClass: AvatarGroupProps['class'] = undefined;
     export { restClass as class };
+
+    // -----------------------------------------------------------
+    // Screen
+    // -----------------------------------------------------------
+
+    /**
+     * Responsive properties for the component.
+     */
+    export let screen: AvatarGroupProps['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({ prefix: 'dui-avatar-group', restClass });
+    const PREFIX = 'dui-avatar-group';
+
+    $: classNames = joinClasses([PREFIX], [restClass]);
 
     // -----------------------------------------------------------
     // Functionality
     // -----------------------------------------------------------
 
-    const avatars = writable([]);
-    setContext('AvatarGroup', {
-        avatars,
+    const { update, space: _space } = createResponsiveProperties<AvatarGroupResponsiveProps>({ space }, screen, {
+        space: true,
+    });
+    $: space && update({ space }, screen);
+
+    const avatars = [] as Array<HTMLDivElement>;
+    setContext<AvatarGroupContext>('AvatarGroup', {
         add: (ref: HTMLDivElement) => {
-            avatars.update((_) => [..._, { ref, index: _.length }]);
-            ref.style.zIndex = String($avatars.length);
+            avatars.push(ref);
+
+            avatars.forEach((avatarRef, index) => {
+                // avatarRef.style.zIndex = String(avatars.length - 1 - index);
+                avatarRef.style.zIndex = String(index);
+            });
         },
     });
 </script>
 
-<div class={classNames} style={`--avatar-group-x-space:${space}`}>
+<div class={classNames} style:--avatar-group-x-space={$_space}>
     <slot />
 </div>
 

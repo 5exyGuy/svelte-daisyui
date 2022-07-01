@@ -1,8 +1,7 @@
 <script lang="ts">
-    import type { AlertProps } from './alert-props.interface';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
+    import type { AlertClassProps, AlertProps, AlertResponsiveProps } from './alert-props.interface';
     import { BrandColor, FunctionalColor } from '../../enums';
-    import type { ClassesParams } from '../../interfaces';
-    import { classes } from '../../utilities';
     import MdInfoOutline from 'svelte-icons/md/MdInfoOutline.svelte';
     import FaRegCheckCircle from 'svelte-icons/fa/FaRegCheckCircle.svelte';
     import MdWarning from 'svelte-icons/md/MdWarning.svelte';
@@ -42,10 +41,10 @@
      */
     export let showIcon: AlertProps['showIcon'] = true;
 
-    let restClass: AlertProps['class'] = undefined;
     /**
      * A space-separated list of the classes of the element.
      */
+    let restClass: AlertProps['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------
@@ -61,13 +60,15 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes<AlertProps>({
-        prefix: 'dui-alert',
-        propData: { color: { ...BrandColor, ...FunctionalColor } },
-        propValues: { color },
-        screen,
-        restClass,
-    } as ClassesParams<AlertProps>);
+    const PREFIX = 'dui-alert';
+    const COLORS = { ...BrandColor, ...FunctionalColor };
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<AlertClassProps>(PREFIX, { color: COLORS }, { color }),
+        generateResponsiveClasses<AlertResponsiveProps>(PREFIX, { color: COLORS }, screen, { color: true }),
+        [restClass],
+    );
 </script>
 
 <div class={classNames} {...$$restProps}>

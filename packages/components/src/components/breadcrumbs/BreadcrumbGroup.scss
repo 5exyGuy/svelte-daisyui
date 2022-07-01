@@ -1,9 +1,10 @@
-.breadcrumb-group {
-    @apply py-2;
-    @apply max-w-full overflow-x-auto;
-
-    & > :global(ul) {
-        @apply flex items-center whitespace-nowrap;
-        min-height: min-content;
-    }
+ul.dui-breadcrumb-group {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    max-width: 100%;
+    overflow-x: auto;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    min-height: min-content;
 }

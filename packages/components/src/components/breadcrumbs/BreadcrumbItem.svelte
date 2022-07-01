@@ -1,34 +1,26 @@
-<script>
-    import { classes } from '@svelte-daisyui/shared';
-
-    // -----------------------------------------------------------
-    //  Type Definitions
-    // -----------------------------------------------------------
-
-    /**
-     * @restProps {li}
-     */
+<script lang="ts">
+    import { joinClasses } from '../../utilities';
+    import type { BreadcrumbItemProps } from './breadcrumb-item-props.interface';
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {string}
-     */
-    export let href = undefined;
+    export let href: BreadcrumbItemProps['href'] = undefined;
 
-    let restClass = undefined;
     /**
-     * @type {string}
+     * A space-separated list of the classes of the element.
      */
+    let restClass: BreadcrumbItemProps['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({ prefix: 'breadcrumb-item', restClass });
+    const PREFIX = 'dui-breadcrumb-item';
+
+    $: classNames = joinClasses([PREFIX, restClass]);
 </script>
 
 <li class={classNames} on:click>
@@ -39,6 +31,6 @@
     {/if}
 </li>
 
-<style lang="scss">
+<style lang="scss" global>
     @import 'BreadcrumbItem.scss';
 </style>

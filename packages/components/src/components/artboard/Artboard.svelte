@@ -1,8 +1,7 @@
 <script lang="ts">
     import { Alignment } from '../../enums';
-    import type { ClassesParams } from '../../interfaces';
-    import { classes } from '../../utilities/component.utility';
-    import type { ArtboardClassProps, ArtboardProps } from './artboard-props.interface';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
+    import type { ArtboardClassProps, ArtboardProps, ArtboardResponsiveProps } from './artboard-props.interface';
     import { ArtboardSize } from './artboard-size.enum';
 
     // -----------------------------------------------------------
@@ -24,10 +23,10 @@
      */
     export let demo: ArtboardProps['demo'] = false;
 
-    let restClass: ArtboardProps['class'] = undefined;
     /**
      * A space-separated list of the classes of the element.
      */
+    let restClass: ArtboardProps['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------
@@ -43,13 +42,27 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes<ArtboardClassProps>({
-        prefix: 'dui-artboard',
-        propData: { size: ArtboardSize, alignment: Alignment, demo: 'demo' },
-        propValues: { size, alignment, demo },
-        screen,
-        restClass,
-    } as ClassesParams<ArtboardClassProps>);
+    const PREFIX = 'dui-artboard';
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<ArtboardClassProps>(
+            PREFIX,
+            {
+                alignment: Alignment,
+                demo: 'demo',
+                size: ArtboardSize,
+            },
+            { alignment, demo, size },
+        ),
+        generateResponsiveClasses<ArtboardResponsiveProps>(
+            PREFIX,
+            { alignment: Alignment, size: ArtboardSize },
+            screen,
+            { alignment: true, size: true },
+        ),
+        [restClass],
+    );
 </script>
 
 <div class={classNames} {...$$restProps}>
