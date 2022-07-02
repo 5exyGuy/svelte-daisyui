@@ -3,64 +3,64 @@
 $brand: primary, secondary, accent;
 $functional: info, success, warning, error;
 
-$primary: var(--primary);
-$primary-content: var(--primary-content);
-$primary-focus: var(--primary-focus);
-$secondary: var(--secondary);
-$secondary-content: var(--secondary-content);
-$secondary-focus: var(--secondary-focus);
-$accent: var(--accent);
-$accent-content: var(--accent-content);
-$accent-focus: var(--accent-focus);
-$neutral: var(--neutral);
-$neutral-content: var(--neutral-content);
-$neutral-focus: var(--neutral-focus);
-$success: var(--success);
-$success-content: var(--success-content);
-$success-focus: var(--success-focus);
-$info: var(--info);
-$info-content: var(--info-content);
-$info-focus: var(--info-focus);
-$warning: var(--warning);
-$warning-content: var(--warning-content);
-$warning-focus: var(--warning-focus);
-$error: var(--error);
-$error-content: var(--error-content);
-$error-focus: var(--error-focus);
-$base-100: var(--base-100);
-$base-200: var(--base-200);
-$base-300: var(--base-300);
-$base-content: var(--base-content);
+$primary: var(--primary, 259, 94%, 51%);
+$primary-content: var(--primary-content, 0, 0%, 100%);
+$primary-focus: var(--primary-focus, 259, 94%, 41%);
+$secondary: var(--secondary, 314, 100%, 47%);
+$secondary-content: var(--secondary-content, 0, 0%, 100%);
+$secondary-focus: var(--secondary-focus, 314, 100%, 38%);
+$accent: var(--accent, 174, 60%, 51%);
+$accent-content: var(--accent-content, 175, 44%, 15%);
+$accent-focus: var(--accent-focus, 174, 60%, 41%);
+$neutral: var(--neutral, 219, 14%, 28%);
+$neutral-content: var(--neutral-content, 0, 0%, 100%);
+$neutral-focus: var(--neutral-focus, 219, 14%, 22%);
+$success: var(--success, 158, 64%, 52%);
+$success-content: var(--success-content, 158, 100%, 10%);
+$success-focus: var(--success-focus, 158, 64%, 42%);
+$info: var(--info, 198, 93%, 60%);
+$info-content: var(--info-content, 198, 100%, 12%);
+$info-focus: var(--info-focus, 198, 93%, 48%);
+$warning: var(--warning, 43, 96%, 56%);
+$warning-content: var(--warning-content, 43, 100%, 11%);
+$warning-focus: var(--warning-focus, 43, 96%, 45%);
+$error: var(--error, 0, 91%, 71%);
+$error-content: var(--error-content, 0, 100%, 14%);
+$error-focus: var(--error-focus, 0, 91%, 57%);
+$base-100: var(--base-100, 0, 0%, 100%);
+$base-200: var(--base-200, 0, 0%, 90%);
+$base-300: var(--base-300, 0, 0%, 81%);
+$base-content: var(--base-content, 215, 28%, 17%);
 
 $color-map: (
-    primary: var(--primary),
-    primary-content: var(--primary-content),
-    primary-focus: var(--primary-focus),
-    secondary: var(--secondary),
-    secondary-content: var(--secondary-content),
-    secondary-focus: var(--secondary-focus),
-    accent: var(--accent),
-    accent-content: var(--accent-content),
-    accent-focus: var(--accent-focus),
-    neutral: var(--neutral),
-    neutral-content: var(--neutral-content),
-    neutral-focus: var(--neutral-focus),
-    success: var(--success),
-    success-content: var(--success-content),
-    success-focus: var(--success-focus),
-    info: var(--info),
-    info-content: var(--info-content),
-    info-focus: var(--info-focus),
-    warning: var(--warning),
-    warning-content: var(--warning-content),
-    warning-focus: var(--warning-focus),
-    error: var(--error),
-    error-content: var(--error-content),
-    error-focus: var(--error-focus),
-    base-100: var(--base-100),
-    base-200: var(--base-200),
-    base-300: var(--base-300),
-    base-content: var(--base-content),
+    primary: $primary,
+    primary-content: $primary-content,
+    primary-focus: $primary-focus,
+    secondary: $secondary,
+    secondary-content: $secondary-content,
+    secondary-focus: $secondary-focus,
+    accent: $accent,
+    accent-content: $accent-content,
+    accent-focus: $accent-focus,
+    neutral: $neutral,
+    neutral-content: $neutral-content,
+    neutral-focus: $neutral-focus,
+    success: $success,
+    success-content: $success-content,
+    success-focus: $success-focus,
+    info: $info,
+    info-content: $info-content,
+    info-focus: $info-focus,
+    warning: $warning,
+    warning-content: $warning-content,
+    warning-focus: $warning-focus,
+    error: $error,
+    error-content: $error-content,
+    error-focus: $error-focus,
+    base-100: $base-100,
+    base-200: $base-200,
+    base-300: $base-300,
+    base-content: $base-content,
 );
 
 @function get($color, $alpha: 1) {

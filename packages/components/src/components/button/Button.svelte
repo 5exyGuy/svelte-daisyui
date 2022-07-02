@@ -1,79 +1,62 @@
-<script>
-    import {
-        classes,
-        BrandColor,
-        FunctionalColor,
-        Size,
-        ButtonShape,
-    } from '@svelte-daisyui/shared';
-
-    // -----------------------------------------------------------
-    // Type Definitions
-    // -----------------------------------------------------------
-
-    /**
-     * @restProps {button}
-     *
-     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost' | 'link'} Color
-     * @typedef {'xs' | 'sm' | 'md' | 'lg'} Size
-     * @typedef {'square' | 'circle'} Shape
-     * @typedef {{ color?: Color, size?: Size, shape?: Shape, active?: boolean, block?: boolean, outline?: boolean, loading?: boolean, animation?: boolean }} Properties
-     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
-     */
+<script lang="ts">
+    import { BrandColor, FunctionalColor, Size } from '../../enums';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
+    import type { ButtonClassProps, ButtonProps, ButtonResponsiveProps } from './button-props.interface';
+    import { ButtonShape } from './button-shape.enum';
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
     /**
-     * @type {Color}
+     *
      */
-    export let color = undefined;
+    export let color: ButtonProps['color'] = undefined;
 
     /**
-     * @type {Size}
+     *
      */
-    export let size = undefined;
+    export let size: ButtonProps['size'] = 'md';
 
     /**
-     * @type {Shape}
+     *
      */
-    export let shape = undefined;
+    export let shape: ButtonProps['shape'] = undefined;
 
     /**
-     * @type {boolean}
+     *
      */
-    export let active = false;
+    export let active: ButtonProps['active'] = false;
 
     /**
-     * @type {boolean}
+     *
      */
-    export let block = false;
+    export let block: ButtonProps['block'] = false;
 
     /**
-     * @type {boolean}
+     *
      */
-    export let outline = false;
+    export let outline: ButtonProps['outline'] = false;
 
     /**
-     * @type {boolean}
+     *
      */
-    export let loading = false;
+    export let loading: ButtonProps['loading'] = false;
 
     /**
-     * @type {boolean}
+     *
      */
-    export let disabled = false;
+    export let disabled: ButtonProps['disabled'] = false;
 
     /**
-     * @type {boolean}
+     *
      */
-    export let animation = false;
+    export let animate: ButtonProps['animate'] = false;
 
-    let restClass = undefined;
     /**
-     * @type {string}
+     *
      */
+    let restClass: ButtonProps['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------
@@ -81,57 +64,44 @@
     // -----------------------------------------------------------
 
     /**
-     * @type {Screen}
+     *
      */
-    export let screen = undefined;
+    export let screen: ButtonProps['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({
-        prefix: 'btn',
-        classProps: {
-            color: {
-                value: {
-                    ...BrandColor,
-                    ...FunctionalColor,
-                    ...{ ghost: 'ghost', link: 'link' },
-                },
+    const PREFIX = 'dui-btn';
+    const COLORS = { ...BrandColor, ...FunctionalColor, ...{ ghost: 'ghost', link: 'link' } };
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<ButtonClassProps>(
+            PREFIX,
+            {
+                active: 'active',
+                animate: 'no-animation',
+                block: 'block',
+                outline: 'outline',
+                loading: 'loading',
+                color: COLORS,
+                shape: ButtonShape,
+                size: Size,
             },
-            size: { value: Size },
-            shape: { value: ButtonShape },
-            active: { value: 'active' },
-            block: { value: 'block' },
-            outline: { value: 'outline' },
-            loading: { value: 'loading' },
-            animation: { value: 'no-animation' },
-        },
-        props: {
-            color,
-            size,
-            shape,
-            active,
-            block: block && !shape,
-            outline,
-            loading,
-            animation,
-        },
-        restClass,
-        screen,
-    });
+            { active, animate, block, outline, loading, color, shape, size },
+        ),
+        generateResponsiveClasses<ButtonResponsiveProps>(
+            PREFIX,
+            { block: 'block', color: COLORS, shape: ButtonShape, size: Size },
+            screen,
+            { block: true, color: true, shape: true, size: true },
+        ),
+        [restClass],
+    );
 </script>
 
-<button
-    class={classNames}
-    {disabled}
-    {...$$restProps}
-    on:click
-    on:focus
-    on:mouseover
-    on:mouseenter
-    on:mouseleave
->
+<button class={classNames} {disabled} {...$$restProps} on:click on:focus on:mouseover on:mouseenter on:mouseleave>
     <slot />
 </button>
 

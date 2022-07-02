@@ -6,4 +6,27 @@ $screen-sizes: (
     'xl': 1280px,
     '2xl': 1536px,
 );
-$box-border-radius: var(--box-border-radius);
+
+$box-border-radius: var(--box-border-radius, 1rem);
+$button-border-radius: var(--button-border-radius, 0.5rem);
+$button-border-width: var(--button-border-width, 1px);
+$button-text-transform: var(--button-text-transform, uppercase);
+$button-focus-scale: var(--button-focus-scale, 0.95);
+$button-animation-duration: var(--button-animation-duration, 0.25s);
+$input-animation-duration: var(--input-animation-duration, 0.2s);
+$badge-border-radius: var(--badge-border-radius, 1.9rem);
+$tab-border: var(--tab-border, 1px);
+$tab-radius: var(--tab-radius, 0.5rem);
+
+$theme-variables: (
+    box-border-radius: $box-border-radius,
+    button-border-radius: $button-border-radius,
+    button-border-width: $button-border-width,
+    button-text-transform: $button-text-transform,
+    button-focus-scale: $button-focus-scale,
+    button-animation-duration: $button-animation-duration,
+    input-animation-duration: $input-animation-duration,
+    badge-border-radius: $badge-border-radius,
+    tab-border: $tab-border,
+    tab-radius: $tab-radius,
+);

@@ -1,29 +1,24 @@
 <script lang="ts">
-    import { classes } from '@svelte-daisyui/shared';
-
-    // -----------------------------------------------------------
-    // Type Definitions
-    // -----------------------------------------------------------
-
-    /**
-     * @restProps {div}
-     */
+    import { joinClasses } from '../../utilities';
+    import type { ButtonGroupProps } from './button-group-props.interface';
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    let restClass = undefined;
     /**
-     * @type {string}
+     * A space-separated list of the classes of the element.
      */
+    let restClass: ButtonGroupProps['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({ prefix: 'dui-btn-group', restClass });
+    const PREFIX = 'dui-button-group';
+
+    $: classNames = joinClasses([PREFIX, restClass]);
 </script>
 
 <div class={classNames} {...$$restProps}>

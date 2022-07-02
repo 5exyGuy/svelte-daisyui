@@ -1,9 +1,16 @@
-.dui-btn-group {
-    @apply flex flex-wrap;
+@use '../escape' as *;
+@use '../variables';
+@use '../colors';
 
-    & > input[type='radio']:checked.btn,
-    & > .btn-active {
-        @apply border-primary bg-primary text-primary-content;
+.dui-btn-group {
+    display: flex;
+    flex-wrap: wrap;
+
+    & > input[type='radio']:checked.dui-btn,
+    & > .dui-btn.dui-btn-active {
+        border-color: colors.get('primary');
+        background-color: colors.get('primary');
+        color: colors.get-content('primary');
 
         &:focus-visible {
             --tw-border-opacity: 1;
@@ -11,19 +18,22 @@
         }
     }
 
-    & > .btn:not(:first-of-type) {
-        @apply -ml-px rounded-l-none;
+    & > .dui-btn:not(:first-of-type) {
+        margin-left: -1px;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
     }
 
-    & > .btn:not(:last-of-type) {
-        @apply rounded-r-none;
+    & > .dui-btn:not(:last-of-type) {
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
     }
 
-    & > input[type='radio'].btn {
-        @apply appearance-none;
+    & > input[type='radio'].dui-btn {
+        appearance: none;
     }
 
-    & > input[type='radio'].btn:before {
+    & > input[type='radio'].dui-btn:before {
         content: attr(data-title);
     }
 }

@@ -7,6 +7,7 @@
     import Badge from '@svelte-daisyui/components/src/components/badge/Badge.svelte';
     import BreadcrumbGroup from '@svelte-daisyui/components/src/components/breadcrumbs/BreadcrumbGroup.svelte';
     import BreadcrumbItem from '@svelte-daisyui/components/src/components/breadcrumbs/BreadcrumbItem.svelte';
+    import Button from '@svelte-daisyui/components/src/components/button/Button.svelte';
 </script>
 
 <Showcase>
@@ -38,4 +39,5 @@
         <BreadcrumbItem>Documents</BreadcrumbItem>
         <BreadcrumbItem>Add Document</BreadcrumbItem>
     </BreadcrumbGroup>
+    <Button>Hello world</Button>
 </Showcase>

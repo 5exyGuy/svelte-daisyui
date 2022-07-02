@@ -1,12 +1,33 @@
+@use '../escape' as *;
+@use '../variables';
+@use '../colors';
 @use 'sass:list';
-@use '../variables.scss' as *;
-@use '../escape.scss' as *;
 
-.btn {
-    @apply inline-flex flex-shrink-0 cursor-pointer select-none flex-wrap items-center justify-center border-transparent text-center transition duration-200 ease-in-out;
-    @apply h-12 px-4 text-sm;
-    @apply border-neutral bg-neutral text-neutral-content;
-    @apply font-semibold uppercase no-underline;
+.dui-btn {
+    display: inline-flex;
+    flex-shrink: 0;
+    cursor: pointer;
+    user-select: none;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border-color: colors.get('neutral');
+    background-color: colors.get('neutral');
+    color: colors.get-content('neutral');
+    text-align: center;
+    height: 3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration-line: none;
+
+    transition-property: color, background-color, border-color;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+
     border-width: var(---button-border-width, 1px);
     animation: button-pop var(--button-animation-duration, 0.25s) ease-out;
     text-transform: var(--button-text-transform, uppercase);
@@ -17,7 +38,7 @@
     @mixin btn-props($prefix: '') {
         $prefix: escape($prefix);
 
-        &.#{$prefix}btn-no-animation {
+        &.#{$prefix}dui-btn-no-animation {
             --button-animation-duration: 0;
             --button-focus-scale: 1;
         }
@@ -25,76 +46,96 @@
 
     @include btn-props();
 
-    &.btn-active:hover,
-    &.btn-active:focus {
+    &.dui-btn-active:hover,
+    &.dui-btn-active:focus {
         animation: none;
     }
 
-    &.btn-active:hover,
-    &.btn-active:focus {
+    &.dui-btn-active:hover,
+    &.dui-btn-active:focus {
         transform: scale(var(--button-focus-scale, 0.95));
     }
 
     &:hover,
-    &.btn-active {
-        @apply border-neutral-focus bg-neutral-focus;
+    &.dui-btn-active {
+        border-color: colors.get-focus('neutral');
+        background-color: colors.get-focus('neutral');
     }
 
     &:focus-visible {
-        outline: 2px solid hsl(var(--neutral-focus));
+        outline: 2px solid colors.get-focus('neutral');
         outline-offset: 2px;
     }
 
-    @each $color in list.join($brand-colors, $functional-colors) {
-        &.btn-#{$color} {
-            @apply border-#{$color} bg-#{$color} text-#{$color}-content;
+    @each $color in list.join(colors.$brand, colors.$functional) {
+        &.dui-btn-#{$color} {
+            border-color: colors.get($color);
+            background-color: colors.get($color);
+            color: colors.get-content($color);
 
             &:hover,
-            &.btn-active {
-                @apply border-#{$color}-focus bg-#{$color}-focus;
+            &.dui-btn-active {
+                border-color: colors.get-focus($color);
+                background-color: colors.get-focus($color);
             }
 
             &:focus-visible {
-                outline: 2px solid hsl(var(--#{$color}));
+                outline: 2px solid colors.get($color);
             }
         }
     }
 
-    &.btn-ghost {
-        @apply border border-transparent bg-transparent text-current;
+    &.dui-btn-ghost {
+        border: 1px solid transparent;
+        background-color: transparent;
+        color: currentColor;
+
         &:hover,
-        &.btn-active {
+        &.dui-btn-active {
             @apply border-opacity-0 bg-base-content bg-opacity-20;
         }
+
         &:focus-visible {
             outline: 2px solid 0 0 2px currentColor;
         }
     }
 
-    &.btn-link {
-        @apply border-transparent bg-transparent text-primary;
+    &.dui-btn-link {
+        border-color: transparent;
+        background-color: transparent;
+        color: colors.get('primary');
+
         &:hover,
-        &.btn-active {
-            @apply border-transparent bg-transparent underline;
+        &.dui-btn-active {
+            border-color: transparent;
+            background-color: transparent;
+            text-decoration-line: underline;
         }
+
         &:focus-visible {
             outline: 2px solid 0 0 2px currentColor;
         }
     }
 
-    &.btn-outline {
-        @apply border-current bg-transparent text-base-content;
+    &.dui-btn-outline {
+        border-color: currentColor;
+        background-color: transparent;
+        color: colors.get-content('base');
 
         &:hover {
-            @apply border-base-content bg-base-content text-base-100;
+            border-color: colors.get-content('base');
+            background-color: colors.get-content('base');
+            color: colors.get('base-100');
         }
 
-        @each $color in list.join($brand-colors, $functional-colors) {
-            &.btn-#{$color} {
-                @apply text-#{$color};
+        @each $color in list.join(colors.$brand, colors.$functional) {
+            &.dui-btn-#{$color} {
+                color: colors.get($color);
 
                 &:hover {
-                    @apply border-#{$color}-focus bg-#{$color}-focus text-#{$color}-content;
+                    border-color: colors.get-focus($color);
+                    background-color: colors.get-focus($color);
+                    color: colors.get-content($color);
                 }
             }
         }
@@ -105,31 +146,37 @@
         @apply border-opacity-0 bg-neutral bg-opacity-20 text-base-content text-opacity-20;
     }
 
-    &.btn-loading {
-        &.btn-square:before,
-        &.btn-circle:before {
-            @apply mr-0;
+    &.dui-btn-loading {
+        &.dui-btn-square:before,
+        &.dui-btn-circle:before {
+            margin-right: 0;
         }
 
-        &.btn-xl:before,
-        &.btn-lg:before {
-            @apply h-5 w-5;
+        &.dui-btn-xl:before,
+        &.dui-btn-lg:before {
+            height: 1.25rem;
+            width: 1.25rem;
         }
 
-        &.btn-sm:before,
-        &.btn-xs:before {
-            @apply h-3 w-3;
+        &.dui-btn-sm:before,
+        &.dui-btn-xs:before {
+            height: 0.75rem;
+            width: 0.75rem;
         }
 
         &,
         &:hover {
-            @apply pointer-events-none;
+            pointer-events: none;
         }
 
         &:before {
-            @apply mr-2 h-4 w-4 rounded-full border-2;
-            animation: spin 2s linear infinite;
             content: '';
+            margin-right: 0.5rem;
+            height: 1rem;
+            width: 1rem;
+            border-radius: 9999px;
+            border-width: 2px;
+            animation: spin 2s linear infinite;
             border-top-color: transparent;
             border-left-color: transparent;
             border-bottom-color: currentColor;
@@ -144,78 +191,99 @@
     }
 
     &:disabled {
-        @apply pointer-events-none;
+        pointer-events: none;
     }
 
-    &.btn-xs {
-        @apply h-6 px-2;
+    &.dui-btn-xs {
+        height: 1.5rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
         min-height: 1.5rem;
         font-size: 0.75rem;
     }
 
-    &.btn-sm {
-        @apply h-8 px-3;
+    &.dui-btn-sm {
+        height: 2rem;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
         min-height: 2rem;
         font-size: 0.875rem;
     }
 
-    &.btn-md {
-        @apply h-12 px-4;
+    &.dui-btn-md {
+        height: 3rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
         min-height: 3rem;
         font-size: 0.875rem;
     }
 
-    &.btn-lg {
-        @apply h-16 px-6;
+    &.dui-btn-lg {
+        height: 4rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
         min-height: 4rem;
         font-size: 1.125rem;
     }
 
-    &.btn-wide {
-        @apply w-64;
+    &.dui-btn-wide {
+        width: 16rem;
     }
 
-    &.btn-block {
-        @apply w-full;
+    &.dui-btn-block {
+        width: 100%;
     }
 
-    &.btn-square {
-        @apply h-12 w-12 p-0;
+    &.dui-btn-square {
+        height: 3rem;
+        width: 3rem;
+        padding: 0;
 
-        &.btn-xs {
-            @apply h-6 w-6/12;
+        &.dui-btn-xs {
+            height: 1.5rem;
+            width: 50%;
         }
 
-        &.btn-sm {
-            @apply h-8 w-28;
+        &.dui-btn-sm {
+            height: 2rem;
+            width: 7rem;
         }
 
-        &.btn-md {
-            @apply h-12 w-12;
+        &.dui-btn-md {
+            height: 3rem;
+            width: 3rem;
         }
 
-        &.btn-lg {
-            @apply h-16 w-16;
+        &.dui-btn-lg {
+            height: 4rem;
+            width: 4rem;
         }
     }
 
-    &.btn-circle {
-        @apply h-12 w-12 rounded-full p-0;
+    &.dui-btn-circle {
+        height: 3rem;
+        width: 3rem;
+        border-radius: 9999px;
+        padding: 0;
 
-        &.btn-xs {
-            @apply h-6 w-6;
+        &.dui-btn-xs {
+            height: 1.5rem;
+            width: 1.5rem;
         }
 
-        &.btn-sm {
-            @apply h-8 w-8;
+        &.dui-btn-sm {
+            height: 2rem;
+            width: 2rem;
         }
 
-        &.btn-md {
-            @apply h-12 w-12;
+        &.dui-btn-md {
+            height: 3rem;
+            width: 3rem;
         }
 
-        &.btn-lg {
-            @apply h-16 w-16;
+        &.dui-btn-lg {
+            height: 4rem;
+            width: 4rem;
         }
     }
 }
