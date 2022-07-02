@@ -7,7 +7,15 @@
     import Badge from '@svelte-daisyui/components/src/components/badge/Badge.svelte';
     import BreadcrumbGroup from '@svelte-daisyui/components/src/components/breadcrumbs/BreadcrumbGroup.svelte';
     import BreadcrumbItem from '@svelte-daisyui/components/src/components/breadcrumbs/BreadcrumbItem.svelte';
+<<<<<<< HEAD
     import Button from '@svelte-daisyui/components/src/components/button/Button.svelte';
+=======
+
+    import Toggle from '@svelte-daisyui/components/src/components/toggle/Toggle.svelte';
+    import Tooltip from '@svelte-daisyui/components/src/components/tooltip/Tooltip.svelte';
+    import TooltipWrapper from '@svelte-daisyui/components/src/components/tooltip/TooltipWrapper.svelte';
+    import Window from '@svelte-daisyui/components/src/components/window/Window.svelte';
+>>>>>>> 266b4b9e67c6be3a30505e5ef00a1935f8e3b02c
 </script>
 
 <Showcase>

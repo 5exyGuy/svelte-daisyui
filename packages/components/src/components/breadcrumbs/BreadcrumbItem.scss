@@ -1,7 +1,10 @@
+@use '../colors.scss';
+
 ul.dui-breadcrumb-group {
     & > li.dui-breadcrumb-item {
         display: flex;
         align-items: center;
+        color: colors.get-content('base');
 
         & > a {
             display: flex;
