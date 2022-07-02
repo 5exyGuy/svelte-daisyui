@@ -1,57 +1,41 @@
-<script>
-    import {
-        classes,
-        BrandColor,
-        FunctionalColor,
-        Size,
-    } from '@svelte-daisyui/shared';
-
-    // -----------------------------------------------------------
-    //  Type Definitions
-    // -----------------------------------------------------------
-
-    /**
-     * @restProps {input}
-     *
-     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'} Color
-     * @typedef {'xs' | 'sm' | 'md' | 'lg'} Size
-     * @typedef {{ color?: Color, size?: Size }} Properties
-     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
-     */
+<script lang="ts">
+    import { BrandColor, FunctionalColor, Size } from '../../enums';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
+    import type { ToggleClassProps, ToggleProps, ToggleResponsiveProps } from './toggle-props.interface';
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
     /**
-     * @type {Color}
+     *
      */
-    export let color = undefined;
+    export let color: ToggleProps['color'] = undefined;
 
     /**
-     * @type {Size}
+     *
      */
-    export let size = undefined;
+    export let size: ToggleProps['size'] = 'md';
 
     /**
-     * @type {boolean}
+     *
      */
-    export let disabled = false;
+    export let disabled: ToggleProps['disabled'] = false;
 
     /**
-     * @type {boolean}
+     *
      */
-    export let checked = false;
+    export let checked: ToggleProps['checked'] = false;
 
     /**
-     * @type {boolean}
+     *
      */
-    export let indeterminate = false;
+    export let indeterminate: ToggleProps['indeterminate'] = false;
 
-    let restClass = undefined;
     /**
-     * @type {string}
+     *
      */
+    let restClass: ToggleProps['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------
@@ -59,7 +43,7 @@
     // -----------------------------------------------------------
 
     /**
-     * @type {Screen}
+     *
      */
     export let screen = undefined;
 
@@ -67,25 +51,21 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({
-        prefix: 'dui-toggle',
-        classProps: {
-            color: { value: { ...BrandColor, ...FunctionalColor } },
-            size: { value: Size },
-        },
-        props: { color, size },
-        screen,
-        restClass,
-    });
+    const PREFIX = 'dui-toggle';
+    const COLORS = { ...BrandColor, ...FunctionalColor };
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<ToggleClassProps>(PREFIX, { color: COLORS, size: Size }, { color, size }),
+        generateResponsiveClasses<ToggleResponsiveProps>(PREFIX, { color: COLORS, size: Size }, screen, {
+            color: true,
+            size: true,
+        }),
+        [restClass],
+    );
 </script>
 
-<input
-    type="checkbox"
-    {disabled}
-    {checked}
-    {indeterminate}
-    class={classNames}
-/>
+<input type="checkbox" {disabled} {checked} {indeterminate} class={classNames} {...$$restProps} />
 
 <style lang="scss" global>
     @import 'Toggle.scss';

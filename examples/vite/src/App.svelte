@@ -7,6 +7,11 @@
     import Badge from '@svelte-daisyui/components/src/components/badge/Badge.svelte';
     import BreadcrumbGroup from '@svelte-daisyui/components/src/components/breadcrumbs/BreadcrumbGroup.svelte';
     import BreadcrumbItem from '@svelte-daisyui/components/src/components/breadcrumbs/BreadcrumbItem.svelte';
+
+    import Toggle from '@svelte-daisyui/components/src/components/toggle/Toggle.svelte';
+    import Tooltip from '@svelte-daisyui/components/src/components/tooltip/Tooltip.svelte';
+    import TooltipWrapper from '@svelte-daisyui/components/src/components/tooltip/TooltipWrapper.svelte';
+    import Window from '@svelte-daisyui/components/src/components/window/Window.svelte';
 </script>
 
 <Showcase>
@@ -38,4 +43,11 @@
         <BreadcrumbItem>Documents</BreadcrumbItem>
         <BreadcrumbItem>Add Document</BreadcrumbItem>
     </BreadcrumbGroup>
+
+    <Toggle />
+    <TooltipWrapper>
+        <Tooltip>Hello world</Tooltip>
+        <div>Hover me</div>
+    </TooltipWrapper>
+    <Window bordered><div class="flex justify-center px-4 py-16 bg-base-200">Hello!</div></Window>
 </Showcase>
