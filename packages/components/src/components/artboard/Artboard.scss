@@ -1,6 +1,6 @@
-@use '../escape' as *;
-@use '../variables';
-@use '../colors';
+@use '../escape.scss' as *;
+@use '../variables.scss';
+@use '../themes.scss';
 @use 'sass:list';
 @use 'sass:map';
 
@@ -37,14 +37,15 @@ $artboard-sizes: (
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    // Default size
     width: 320px;
     height: 568px;
 
     &.dui-artboard-demo {
-        background-color: colors.get('base-100');
-        color: colors.get-content('base');
-        border-radius: variables.$box-border-radius;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        @include themes.bg-color('base-100'); // base-100
+        @include themes.text-color-content('base'); // base-content
+        @include themes.box-border-radius();
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.102), 0 1px 2px rgba(0, 0, 0, 0.059);
     }
 
     @mixin responsive-alignments($vector2, $prefix: '') {

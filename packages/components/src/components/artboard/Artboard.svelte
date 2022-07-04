@@ -10,21 +10,25 @@
 
     /**
      * Fixed size of container.
+     * @default '320x568'
      */
-    export let size: ArtboardProps['size'] = undefined;
+    export let size: ArtboardProps['size'] = '320x568';
 
     /**
      * Horizontal and vertical alignment of the container.
+     * @default 'horizontal'
      */
     export let alignment: ArtboardProps['alignment'] = 'horizontal';
 
     /**
      * Adds shadow and glow. Elements are placed in the center.
+     * @default false
      */
     export let demo: ArtboardProps['demo'] = false;
 
     /**
      * A space-separated list of the classes of the element.
+     * @default undefined
      */
     let restClass: ArtboardProps['class'] = undefined;
     export { restClass as class };
@@ -35,6 +39,7 @@
 
     /**
      * Responsive properties for the component.
+     * @default undefined
      */
     export let screen: ArtboardProps['screen'] = undefined;
 

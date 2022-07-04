@@ -1,7 +1,7 @@
 <script>
     import Showcase from './Showcase.svelte';
     import Alert from '@svelte-daisyui/components/src/components/alert/Alert.svelte';
-    // import Artboard from '@svelte-daisyui/components/src/components/artboard/Artboard.svelte';
+    import Artboard from '@svelte-daisyui/components/src/components/artboard/Artboard.svelte';
     // import AvatarGroup from '@svelte-daisyui/components/src/components/avatar/AvatarGroup.svelte';
     // import Avatar from '@svelte-daisyui/components/src/components/avatar/Avatar.svelte';
     // import Badge from '@svelte-daisyui/components/src/components/badge/Badge.svelte';
@@ -12,9 +12,9 @@
 
 <Showcase>
     <Alert color="error" screen={{ md: { color: 'accent' } }}>Hello world</Alert>
-    <!-- <Artboard alignment="vertical" size="320x568" demo>Hello world</Artboard>
+    <Artboard alignment="vertical" size="320x568" demo>Hello world</Artboard>
 
-    <AvatarGroup space="-1.5rem">
+    <!-- <AvatarGroup space="-1.5rem">
         <Avatar size="2.5rem">
             <img alt="" src="https://picsum.photos/seed/picsum1/200/" />
         </Avatar>
