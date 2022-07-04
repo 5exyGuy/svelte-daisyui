@@ -14,11 +14,13 @@
 
     /**
      * Background color of component. Functional colors such as `info`, `success`, `warning` and `error` add a default icon on the left.
+     * @default undefined
      */
     export let color: AlertProps['color'] = undefined;
 
     /**
      * The icon that will appear before the content.
+     * @default undefined
      */
     export let icon: AlertProps['icon'] =
         color === 'info'
@@ -33,16 +35,19 @@
 
     /**
      * The message that will be visible inside the Alert container.
+     * @default undefined
      */
     export let message: AlertProps['message'] = undefined;
 
     /**
      * Show an icon defaulted to the functional colors, e.g. `info`, `success`, `warning` and `error`.
+     * @default true
      */
     export let showIcon: AlertProps['showIcon'] = true;
 
     /**
      * A space-separated list of the classes of the element.
+     * @default undefined
      */
     let restClass: AlertProps['class'] = undefined;
     export { restClass as class };
@@ -53,8 +58,9 @@
 
     /**
      * Responsive properties for the component.
+     * @default undefined
      */
-    export let screen: AlertProps['screen'];
+    export let screen: AlertProps['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles

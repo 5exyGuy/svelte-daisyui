@@ -1,0 +1,121 @@
+@use 'sass:map';
+
+$brand: primary, secondary, accent;
+$functional: info, success, warning, error;
+
+$primary: var(--primary, 87 13 248);
+$primary-content: var(--primary-content, 255 255 255);
+$primary-focus: var(--primary-focus, 68 6 203);
+$secondary: var(--secondary, 240 0 184);
+$secondary-content: var(--secondary-content, 255 255 255);
+$secondary-focus: var(--secondary-focus, 192 0 147);
+$accent: var(--accent, 55 205 190);
+$accent-content: var(--accent-content, 22 56 53);
+$accent-focus: var(--accent-focus, 42 166 154);
+$neutral: var(--neutral, 61 68 81);
+$neutral-content: var(--neutral-content, 255 255 255);
+$neutral-focus: var(--neutral-focus, 49 54 65);
+$base-100: var(--base-100, 255 255 255);
+$base-200: var(--base-200, 230 230 230);
+$base-300: var(--base-300, 207 207 207);
+$base-content: var(--base-content, 31 41 55);
+$success: var(--success, 54 211 153);
+$success-content: var(--success-content, 0 53 33);
+$success-focus: var(--success-focus, 42 166 154);
+$info: var(--info, 58 191 248);
+$info-content: var(--info-content, 0 43 61);
+$info-focus: var(--info-focus, 8 168 236);
+$warning: var(--warning, 251 189 35);
+$warning-content: var(--warning-content, 57 41 0);
+$warning-focus: var(--warning-focus, 225 161 4);
+$error: var(--error, 248 114 114);
+$error-content: var(--error-content, 72 0 0);
+$error-focus: var(--error-focus, 245 45 45);
+
+$color-map: (
+    primary: $primary,
+    primary-content: $primary-content,
+    primary-focus: $primary-focus,
+    secondary: $secondary,
+    secondary-content: $secondary-content,
+    secondary-focus: $secondary-focus,
+    accent: $accent,
+    accent-content: $accent-content,
+    accent-focus: $accent-focus,
+    neutral: $neutral,
+    neutral-content: $neutral-content,
+    neutral-focus: $neutral-focus,
+    success: $success,
+    success-content: $success-content,
+    success-focus: $success-focus,
+    info: $info,
+    info-content: $info-content,
+    info-focus: $info-focus,
+    warning: $warning,
+    warning-content: $warning-content,
+    warning-focus: $warning-focus,
+    error: $error,
+    error-content: $error-content,
+    error-focus: $error-focus,
+    base-100: $base-100,
+    base-200: $base-200,
+    base-300: $base-300,
+    base-content: $base-content,
+);
+
+@mixin text-color($color, $alpha: 1) {
+    $color-get: map.get($color-map, $color);
+    --tw-text-opacity: #{$alpha};
+    color: rgb($color-get / var(--tw-text-opacity));
+}
+
+@mixin text-color-content($color, $alpha: 1) {
+    @include text-color($color + '-content', $alpha);
+}
+
+@mixin bg-color-focus($color, $alpha: 1) {
+    @include text-color($color + '-focus', $alpha);
+}
+
+@mixin bg-color($color, $alpha: 1) {
+    $color-get: map.get($color-map, $color);
+    --tw-bg-opacity: #{$alpha};
+    background-color: rgb($color-get / var(--tw-bg-opacity));
+}
+
+@mixin bg-color-content($color, $alpha: 1) {
+    @include bg-color($color + '-content', $alpha);
+}
+
+@mixin bg-color-focus($color, $alpha: 1) {
+    @include bg-color($color + '-focus', $alpha);
+}
+
+@mixin border-color($color, $alpha: 1) {
+    $color-get: map.get($color-map, $color);
+    --tw-border-opacity: #{$alpha};
+    border-color: rgb($color-get / var(--tw-border-opacity));
+}
+
+@mixin border-color-content($color, $alpha: 1) {
+    @include border-color($color + '-content', $alpha);
+}
+
+@mixin border-color-focus($color, $alpha: 1) {
+    @include border-color($color + '-focus', $alpha);
+}
+
+$box-border-radius: var(--box-border-radius, 1rem);
+$button-border-radius: var(--button-border-radius, 0.5rem);
+$button-border-width: var(--button-border-width, 1px);
+$button-text-transform: var(--button-text-transform, uppercase);
+$button-focus-scale: var(--button-focus-scale, 0.95);
+$button-animation-duration: var(--button-animation-duration, 0.25s);
+$input-animation-duration: var(--input-animation-duration, 0.2s);
+$badge-border-radius: var(--badge-border-radius, 1.9rem);
+$tab-border: var(--tab-border, 1px);
+$tab-radius: var(--tab-radius, 0.5rem);
+
+@mixin box-border-radius() {
+    border-radius: $box-border-radius;
+}

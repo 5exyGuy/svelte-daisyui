@@ -1,22 +1,20 @@
 @use '../escape.scss' as *;
 @use '../variables.scss';
-@use '../colors.scss';
+@use '../themes.scss';
 @use 'sass:list';
 @use 'sass:map';
 
 .dui-alert {
-    @apply bg-base-200;
-    background-color: colors.get('base-200');
-    margin-top: 0.5rem;
-    margin-bottom: 0;
+    @include themes.bg-color('base-200');
+    @include themes.box-border-radius();
+
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    width: 100%;
     padding: 1rem;
-    border-radius: variables.$box-border-radius;
 
     @media (min-width: map.get(variables.$screen-sizes, 'md')) {
         margin-top: 0;
@@ -40,10 +38,10 @@
     @mixin responsive-props($prefix: '') {
         $prefix: escape($prefix);
 
-        @each $color in list.join(colors.$brand, colors.$functional) {
+        @each $color in list.join(themes.$brand, themes.$functional) {
             &.#{$prefix}dui-alert-#{$color} {
-                background-color: colors.get($color);
-                color: colors.get-content($color);
+                @include themes.bg-color($color);
+                @include themes.text-color-content($color);
             }
         }
     }
