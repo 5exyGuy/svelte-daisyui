@@ -40,10 +40,12 @@
     // Functionality
     // -----------------------------------------------------------
 
-    const { update, space: _space } = createResponsiveProperties<AvatarGroupResponsiveProps>({ space }, screen, {
+    const result = createResponsiveProperties<AvatarGroupResponsiveProps>({ space }, screen, {
         space: true,
     });
-    $: space && update({ space }, screen);
+    const { space: _space } = result;
+
+    $: space && screen && result.update({ space }, screen);
 
     const avatars = [] as Array<HTMLDivElement>;
     setContext<AvatarGroupContext>('AvatarGroup', {

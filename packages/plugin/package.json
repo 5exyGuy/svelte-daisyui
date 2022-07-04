@@ -11,24 +11,24 @@
         "types": "dts-bundle-generator -o dist/index.d.ts src/index.ts"
     },
     "dependencies": {
-        "tailwindcss": "^3.1.2"
+        "tailwindcss": "^3.1.4"
     },
     "devDependencies": {
-        "@rollup/plugin-commonjs": "^22.0.0",
+        "@rollup/plugin-commonjs": "^22.0.1",
         "@rollup/plugin-node-resolve": "^13.3.0",
         "@rollup/plugin-typescript": "^8.3.3",
         "@svelte-daisyui/shared": "workspace:^1.0.0",
         "@svelte-daisyui/themes": "workspace:^1.0.0",
-        "@types/jest": "^28.1.1",
-        "@types/node": "^17.0.42",
-        "@types/tailwindcss": "^3.0.10",
-        "dts-bundle-generator": "^6.11.0",
-        "jest": "^28.1.1",
-        "rollup": "^2.75.6",
-        "rollup-plugin-node-externals": "^4.0.0",
+        "@types/jest": "^28.1.4",
+        "@types/node": "^18.0.1",
+        "@types/tailwindcss": "^3.0.11",
+        "dts-bundle-generator": "^6.12.0",
+        "jest": "^28.1.2",
+        "rollup": "^2.75.7",
+        "rollup-plugin-node-externals": "^4.1.1",
         "rollup-plugin-terser": "^7.0.2",
-        "ts-jest": "^28.0.4",
+        "ts-jest": "^28.0.5",
         "tslib": "^2.4.0",
-        "typescript": "^4.7.3"
+        "typescript": "^4.7.4"
     }
 }

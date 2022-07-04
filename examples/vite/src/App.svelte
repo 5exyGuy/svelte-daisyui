@@ -7,15 +7,7 @@
     import Badge from '@svelte-daisyui/components/src/components/badge/Badge.svelte';
     import BreadcrumbGroup from '@svelte-daisyui/components/src/components/breadcrumbs/BreadcrumbGroup.svelte';
     import BreadcrumbItem from '@svelte-daisyui/components/src/components/breadcrumbs/BreadcrumbItem.svelte';
-<<<<<<< HEAD
     import Button from '@svelte-daisyui/components/src/components/button/Button.svelte';
-=======
-
-    import Toggle from '@svelte-daisyui/components/src/components/toggle/Toggle.svelte';
-    import Tooltip from '@svelte-daisyui/components/src/components/tooltip/Tooltip.svelte';
-    import TooltipWrapper from '@svelte-daisyui/components/src/components/tooltip/TooltipWrapper.svelte';
-    import Window from '@svelte-daisyui/components/src/components/window/Window.svelte';
->>>>>>> 266b4b9e67c6be3a30505e5ef00a1935f8e3b02c
 </script>
 
 <Showcase>
@@ -23,16 +15,16 @@
     <Artboard alignment="vertical" size="320x568" demo>Hello world</Artboard>
 
     <AvatarGroup space="-1.5rem">
-        <Avatar size="2.5rem" screen={{ lg: { size: '4rem' } }}>
+        <Avatar size="2.5rem">
             <img alt="" src="https://picsum.photos/seed/picsum1/200/" />
         </Avatar>
-        <Avatar size="3rem" screen={{ lg: { size: '3.5rem' } }} status="online">
+        <Avatar size="3rem" status="online">
             <img alt="" src="https://picsum.photos/seed/picsum2/200/" />
         </Avatar>
-        <Avatar size="3.5rem" screen={{ lg: { size: '3rem' } }} placeholder>
+        <Avatar size="3.5rem" placeholder>
             <div class="bg-primary text-primary-content">K</div>
         </Avatar>
-        <Avatar size="4rem" screen={{ lg: { size: '2.5rem' } }} placeholder>
+        <Avatar size="4rem" placeholder>
             <div class="bg-accent text-accent-content">KK</div>
         </Avatar>
     </AvatarGroup>

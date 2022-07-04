@@ -1,6 +1,6 @@
-@use '../escape' as *;
-@use '../variables';
-@use '../colors';
+@use '../escape.scss' as *;
+@use '../variables.scss';
+@use '../colors.scss';
 @use 'sass:list';
 @use 'sass:map';
 
@@ -16,7 +16,7 @@
     gap: 1rem;
     width: 100%;
     padding: 1rem;
-    border-radius: variables.$border-radius;
+    border-radius: variables.$box-border-radius;
 
     @media (min-width: map.get(variables.$screen-sizes, 'md')) {
         margin-top: 0;
