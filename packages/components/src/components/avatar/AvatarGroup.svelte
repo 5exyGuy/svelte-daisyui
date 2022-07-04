@@ -9,12 +9,13 @@
     // -----------------------------------------------------------
 
     /**
-     *
+     * @default '-1.5rem'
      */
     export let space: AvatarGroupProps['space'] = '-1.5rem';
 
     /**
      * A space-separated list of the classes of the element.
+     * @default undefined
      */
     let restClass: AvatarGroupProps['class'] = undefined;
     export { restClass as class };
@@ -25,6 +26,7 @@
 
     /**
      * Responsive properties for the component.
+     * @default undefined
      */
     export let screen: AvatarGroupProps['screen'] = undefined;
 
@@ -60,7 +62,7 @@
     });
 </script>
 
-<div class={classNames} style:--avatar-group-x-space={$_space}>
+<div class={classNames} style:--avatar-group-x-space={$_space} {...$$restProps}>
     <slot />
 </div>
 

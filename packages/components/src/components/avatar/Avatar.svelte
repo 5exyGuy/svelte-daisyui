@@ -10,22 +10,23 @@
     // -----------------------------------------------------------
 
     /**
-     *
+     * @default undefined
      */
     export let status: AvatarProps['status'] = undefined;
 
     /**
-     *
+     * @default '6rem'
      */
     export let size: AvatarProps['size'] = '6rem';
 
     /**
-     *
+     * @default false
      */
     export let placeholder: AvatarProps['placeholder'] = false;
 
     /**
      * A space-separated list of the classes of the element.
+     * @default undefined
      */
     let restClass: AvatarProps['class'] = undefined;
     export { restClass as class };
@@ -36,6 +37,7 @@
 
     /**
      * Responsive properties for the component.
+     * @default undefined
      */
     export let screen: AvatarProps['screen'] = undefined;
 
@@ -66,9 +68,7 @@
 
     const avatarGroup = getContext<AvatarGroupContext>('AvatarGroup');
 
-    onMount(() => {
-        avatarGroup && avatarGroup.add(ref);
-    });
+    onMount(() => avatarGroup && avatarGroup.add(ref));
 </script>
 
 <div class={classNames} style:width={$_size} style:height={$_size} bind:this={ref} {...$$restProps}>
