@@ -1,17 +1,28 @@
 <script lang="ts">
     import { joinClasses } from '../../utilities';
-    import type { BreadcrumbItemProps } from './breadcrumb-item-props.interface';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLLIElement> {
+        href?: string;
+    }
+
+    interface $$Events {
+        click: MouseEvent;
+    }
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    export let href: BreadcrumbItemProps['href'] = undefined;
-
-    /**
-     * A space-separated list of the classes of the element.
-     */
-    let restClass: BreadcrumbItemProps['class'] = undefined;
+    export let href: $$Props['href'] = undefined;
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------
@@ -23,7 +34,7 @@
     $: classNames = joinClasses([PREFIX, restClass]);
 </script>
 
-<li class={classNames} on:click>
+<li class={classNames} on:click {...$$restProps}>
     {#if href}
         <a {href}><slot /></a>
     {:else}

@@ -1,17 +1,22 @@
-<script>
+<script lang="ts">
     import Showcase from './Showcase.svelte';
     import Alert from '@svelte-daisyui/components/src/components/alert/Alert.svelte';
     import Artboard from '@svelte-daisyui/components/src/components/artboard/Artboard.svelte';
     import AvatarGroup from '@svelte-daisyui/components/src/components/avatar/AvatarGroup.svelte';
     import Avatar from '@svelte-daisyui/components/src/components/avatar/Avatar.svelte';
     import Badge from '@svelte-daisyui/components/src/components/badge/Badge.svelte';
-    // import BreadcrumbGroup from '@svelte-daisyui/components/src/components/breadcrumbs/BreadcrumbGroup.svelte';
-    // import BreadcrumbItem from '@svelte-daisyui/components/src/components/breadcrumbs/BreadcrumbItem.svelte';
+    import BreadcrumbGroup from '@svelte-daisyui/components/src/components/breadcrumbs/BreadcrumbGroup.svelte';
+    import BreadcrumbItem from '@svelte-daisyui/components/src/components/breadcrumbs/BreadcrumbItem.svelte';
     // import Button from '@svelte-daisyui/components/src/components/button/Button.svelte';
+
+    const breadcrumbs = [
+        { text: 'Breadcrumb #1', href: 'test' },
+        { text: 'Breadcrumb #2', href: 'test' },
+    ];
 </script>
 
 <Showcase>
-    <Alert color="error" screen={{ md: { color: 'accent' } }}>Hello world</Alert>
+    <Alert>Hello world</Alert>
     <Artboard alignment="vertical" size="320x568" demo>Hello world</Artboard>
 
     <AvatarGroup space="-1.5rem">
@@ -29,15 +34,8 @@
         </Avatar>
     </AvatarGroup>
     <Badge>Hello world</Badge>
-    <!--<BreadcrumbGroup
-        items={[
-            { text: 'test', href: 'test' },
-            { text: 'test', href: 'test' },
-        ]}
-    >
-        <BreadcrumbItem>Home</BreadcrumbItem>
-        <BreadcrumbItem>Documents</BreadcrumbItem>
-        <BreadcrumbItem>Add Document</BreadcrumbItem>
+    <BreadcrumbGroup items={breadcrumbs}>
+        <BreadcrumbItem slot="item" let:item href={item.href}>{item.text}</BreadcrumbItem>
     </BreadcrumbGroup>
-    <Button>Hello world</Button> -->
+    <!--<Button>Hello world</Button> -->
 </Showcase>

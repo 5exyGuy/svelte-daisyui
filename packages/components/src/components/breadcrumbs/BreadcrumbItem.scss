@@ -1,10 +1,11 @@
-@use '../colors.scss';
+@use '../themes.scss';
 
 ul.dui-breadcrumb-group {
     & > li.dui-breadcrumb-item {
+        @include themes.text-color-content('base');
+
         display: flex;
         align-items: center;
-        color: colors.get-content('base');
 
         & > a {
             display: flex;
@@ -38,7 +39,6 @@ ul.dui-breadcrumb-group {
             border-right: 1px solid;
             background-color: transparent;
             transform: rotate(45deg);
-            // @apply rotate-45 transform;
         }
     }
 }

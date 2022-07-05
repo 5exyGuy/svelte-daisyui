@@ -17,21 +17,6 @@
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 200ms;
 
-    // // Default color (neutral)
-    // & {
-    //     @include themes.border-color('neutral');
-    //     @include themes.bg-color('neutral');
-    //     @include themes.text-color-content('neutral');
-    // }
-    // // Default size (md)
-    // & {
-    //     height: 1.25rem;
-    //     font-size: 0.875rem;
-    //     line-height: 1.25rem;
-    //     padding-left: 0.563rem;
-    //     padding-right: 0.563rem;
-    // }
-
     @mixin responsive-props($prefix: '') {
         $prefix: escape($prefix);
 

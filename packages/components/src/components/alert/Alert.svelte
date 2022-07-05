@@ -1,28 +1,42 @@
 <script lang="ts">
     import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
-    import type { AlertClassProps, AlertProps, AlertResponsiveProps } from './alert-props.interface';
     import { BrandColor, FunctionalColor } from '../../enums';
     import MdInfoOutline from 'svelte-icons/md/MdInfoOutline.svelte';
     import FaRegCheckCircle from 'svelte-icons/fa/FaRegCheckCircle.svelte';
     import MdWarning from 'svelte-icons/md/MdWarning.svelte';
     import MdErrorOutline from 'svelte-icons/md/MdErrorOutline.svelte';
     import Icon from '../icon/Icon.svelte';
+    import type { StringKeyOf } from 'type-fest';
+    import type { Screen } from '../../types';
+    import type { SvelteComponent } from 'svelte';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
+        color?: StringKeyOf<typeof BrandColor & typeof FunctionalColor> | 'base';
+        showIcon?: boolean;
+        icon?: typeof SvelteComponent;
+        message?: string;
+        class?: string;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'color'> {}
+    interface $$ClassProps extends Pick<$$Props, 'color'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * Background color of component. Functional colors such as `info`, `success`, `warning` and `error` add a default icon on the left.
-     * @default undefined
-     */
-    export let color: AlertProps['color'] = undefined;
-
-    /**
-     * The icon that will appear before the content.
-     * @default undefined
-     */
-    export let icon: AlertProps['icon'] =
+    export let color: $$Props['color'] = 'base';
+    export let icon: $$Props['icon'] =
         color === 'info'
             ? MdInfoOutline
             : color === 'success'
@@ -32,47 +46,23 @@
             : color === 'error'
             ? MdErrorOutline
             : undefined;
-
-    /**
-     * The message that will be visible inside the Alert container.
-     * @default undefined
-     */
-    export let message: AlertProps['message'] = undefined;
-
-    /**
-     * Show an icon defaulted to the functional colors, e.g. `info`, `success`, `warning` and `error`.
-     * @default true
-     */
-    export let showIcon: AlertProps['showIcon'] = true;
-
-    /**
-     * A space-separated list of the classes of the element.
-     * @default undefined
-     */
-    let restClass: AlertProps['class'] = undefined;
+    export let message: $$Props['message'] = undefined;
+    export let showIcon: $$Props['showIcon'] = true;
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
-
-    // -----------------------------------------------------------
-    // Screen
-    // -----------------------------------------------------------
-
-    /**
-     * Responsive properties for the component.
-     * @default undefined
-     */
-    export let screen: AlertProps['screen'] = undefined;
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
     const PREFIX = 'dui-alert';
-    const COLORS = { ...BrandColor, ...FunctionalColor };
+    const COLORS = { ...BrandColor, ...FunctionalColor, ...{ base: 'base' } };
 
     $: classNames = joinClasses(
         [PREFIX],
-        generateDefaultClasses<AlertClassProps>(PREFIX, { color: COLORS }, { color }),
-        generateResponsiveClasses<AlertResponsiveProps>(PREFIX, { color: COLORS }, screen, { color: true }),
+        generateDefaultClasses<$$ClassProps>(PREFIX, { color: COLORS }, { color }),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { color: COLORS }, screen, { color: true }),
         [restClass],
     );
 </script>

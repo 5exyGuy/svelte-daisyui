@@ -1,34 +1,34 @@
 <script lang="ts">
+    import type { CSSUnit } from '@svelte-daisyui/shared';
     import { setContext } from 'svelte';
+    import type { Screen } from '../../types';
     import { createResponsiveProperties, joinClasses } from '../../utilities';
     import type { AvatarGroupContext } from './avatar-group-context.interface';
-    import type { AvatarGroupProps, AvatarGroupResponsiveProps } from './avatar-group-props.interface';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
+        space?: CSSUnit;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'space'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @default '-1.5rem'
-     */
-    export let space: AvatarGroupProps['space'] = '-1.5rem';
-
-    /**
-     * A space-separated list of the classes of the element.
-     * @default undefined
-     */
-    let restClass: AvatarGroupProps['class'] = undefined;
+    export let space: $$Props['space'] = '-1.5rem';
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
-
-    // -----------------------------------------------------------
-    // Screen
-    // -----------------------------------------------------------
-
-    /**
-     * Responsive properties for the component.
-     * @default undefined
-     */
-    export let screen: AvatarGroupProps['screen'] = undefined;
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
@@ -42,12 +42,11 @@
     // Functionality
     // -----------------------------------------------------------
 
-    const result = createResponsiveProperties<AvatarGroupResponsiveProps>({ space }, screen, {
+    const { update, space: _space } = createResponsiveProperties<$$ResponsiveProps>({ space }, screen, {
         space: true,
     });
-    const { space: _space } = result;
 
-    $: space && screen && result.update({ space }, screen);
+    $: space && screen && update({ space }, screen);
 
     const avatars = [] as Array<HTMLDivElement>;
     setContext<AvatarGroupContext>('AvatarGroup', {

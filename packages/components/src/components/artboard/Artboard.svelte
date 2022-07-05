@@ -1,47 +1,42 @@
 <script lang="ts">
+    // import type { CSSUnit } from '@svelte-daisyui/shared';
+    import type { StringKeyOf } from 'type-fest';
     import { Alignment } from '../../enums';
+    import type { Screen } from '../../types';
     import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
-    import type { ArtboardClassProps, ArtboardProps, ArtboardResponsiveProps } from './artboard-props.interface';
     import { ArtboardSize } from './artboard-size.enum';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends Omit<svelte.JSX.HTMLAttributes<HTMLDivElement>, 'size'> {
+        size?: StringKeyOf<typeof ArtboardSize>;
+        alignment?: StringKeyOf<typeof Alignment>;
+        demo?: boolean;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'size' | 'alignment'> {}
+    interface $$ClassProps extends Pick<$$Props, 'size' | 'alignment' | 'demo'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * Fixed size of container.
-     * @default '320x568'
-     */
-    export let size: ArtboardProps['size'] = '320x568';
-
-    /**
-     * Horizontal and vertical alignment of the container.
-     * @default 'horizontal'
-     */
-    export let alignment: ArtboardProps['alignment'] = 'horizontal';
-
-    /**
-     * Adds shadow and glow. Elements are placed in the center.
-     * @default false
-     */
-    export let demo: ArtboardProps['demo'] = false;
-
-    /**
-     * A space-separated list of the classes of the element.
-     * @default undefined
-     */
-    let restClass: ArtboardProps['class'] = undefined;
+    export let size: $$Props['size'] = '320x568';
+    // export let width: CSSUnit = undefined;
+    // export let height: CSSUnit = undefined;
+    export let alignment: $$Props['alignment'] = 'horizontal';
+    export let demo: $$Props['demo'] = false;
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
-
-    // -----------------------------------------------------------
-    // Screen
-    // -----------------------------------------------------------
-
-    /**
-     * Responsive properties for the component.
-     * @default undefined
-     */
-    export let screen: ArtboardProps['screen'] = undefined;
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
@@ -51,7 +46,7 @@
 
     $: classNames = joinClasses(
         [PREFIX],
-        generateDefaultClasses<ArtboardClassProps>(
+        generateDefaultClasses<$$ClassProps>(
             PREFIX,
             {
                 alignment: Alignment,
@@ -60,12 +55,10 @@
             },
             { alignment, demo, size },
         ),
-        generateResponsiveClasses<ArtboardResponsiveProps>(
-            PREFIX,
-            { alignment: Alignment, size: ArtboardSize },
-            screen,
-            { alignment: true, size: true },
-        ),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { alignment: Alignment, size: ArtboardSize }, screen, {
+            alignment: true,
+            size: true,
+        }),
         [restClass],
     );
 </script>

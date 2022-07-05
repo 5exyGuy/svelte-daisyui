@@ -5,7 +5,6 @@
 @use 'sass:map';
 
 .dui-alert {
-    @include themes.bg-color('base-200');
     @include themes.box-border-radius();
 
     display: flex;
@@ -17,7 +16,6 @@
     padding: 1rem;
 
     @media (min-width: map.get(variables.$screen-sizes, 'md')) {
-        margin-top: 0;
         flex-direction: row;
     }
 
@@ -37,6 +35,11 @@
 
     @mixin responsive-props($prefix: '') {
         $prefix: escape($prefix);
+
+        &.#{$prefix}dui-alert-base {
+            @include themes.bg-color('base-200');
+            @include themes.text-color-content('base');
+        }
 
         @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
             &.#{$prefix}dui-alert-#{$color} {

@@ -1,22 +1,32 @@
 <script lang="ts">
     import { joinClasses } from '../../utilities';
-    import type { BreadcrumbGroupProps } from './breadcrumb-group-props.interface';
     import BreadcrumbItem from './BreadcrumbItem.svelte';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    type T = $$Generic<{ text?: string; href?: string }>;
+
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLUListElement> {
+        items?: Array<T>;
+    }
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+        item: {
+            item: T;
+        };
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @default undefined
-     */
-    export let items: BreadcrumbGroupProps['items'] = undefined;
-
-    /**
-     * A space-separated list of the classes of the element.
-     * @default undefined
-     */
-    let restClass: BreadcrumbGroupProps['class'] = undefined;
+    export let items: $$Props['items'] = undefined;
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------

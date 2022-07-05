@@ -1,42 +1,38 @@
 <script lang="ts">
+    import type { StringKeyOf } from 'type-fest';
     import { BrandColor, FunctionalColor, Size } from '../../enums';
+    import type { Screen } from '../../types';
     import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
-    import type { BadgeClassProps, BadgeProps, BadgeResponsiveProps } from './badge-props.interface';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends Omit<svelte.JSX.HTMLAttributes<HTMLDivElement>, 'size'> {
+        color?: StringKeyOf<typeof BrandColor & typeof FunctionalColor> | 'neutral' | 'ghost';
+        size?: StringKeyOf<typeof Size>;
+        outline?: boolean;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'color' | 'size' | 'outline'> {}
+    interface $$ClassProps extends Pick<$$Props, 'color' | 'size' | 'outline'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @default 'neutral'
-     */
-    export let color: BadgeProps['color'] = 'neutral';
-
-    /**
-     * @default 'md'
-     */
-    export let size: BadgeProps['size'] = 'md';
-
-    /**
-     * @default false
-     */
-    export let outline: BadgeProps['outline'] = false;
-
-    /**
-     * A space-separated list of the classes of the element.
-     * @default undefined
-     */
-    let restClass: BadgeProps['class'] = undefined;
+    export let color: $$Props['color'] = 'neutral';
+    export let size: $$Props['size'] = 'md';
+    export let outline: $$Props['outline'] = false;
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
-
-    // -----------------------------------------------------------
-    // Screen
-    // -----------------------------------------------------------
-
-    /**
-     * @default undefined
-     */
-    export let screen: BadgeProps['screen'] = undefined;
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
@@ -47,16 +43,20 @@
 
     $: classNames = joinClasses(
         [PREFIX],
-        generateDefaultClasses<BadgeClassProps>(
+        generateDefaultClasses<$$ClassProps>(
             PREFIX,
             { color: COLORS, outline: 'outline', size: Size },
             { color, outline, size },
         ),
-        generateResponsiveClasses<BadgeResponsiveProps>(
+        generateResponsiveClasses<$$ResponsiveProps>(
             PREFIX,
             { color: COLORS, outline: 'outline', size: Size },
             screen,
-            { color: true, outline: true, size: true },
+            {
+                color: true,
+                outline: true,
+                size: true,
+            },
         ),
         [restClass],
     );

@@ -1,45 +1,47 @@
 <script lang="ts">
+    import type { CSSUnit } from '@svelte-daisyui/shared';
     import { getContext, onMount } from 'svelte';
+    import type { StringKeyOf } from 'type-fest';
+    import type { BrandColor, FunctionalColor } from '../../enums';
+    import type { Screen } from '../../types';
     import { createResponsiveProperties, generateDefaultClasses, joinClasses } from '../../utilities/component.utility';
     import type { AvatarGroupContext } from './avatar-group-context.interface';
-    import type { AvatarClassProps, AvatarProps, AvatarResponsiveProps } from './avatar-props.interface';
     import { AvatarStatus } from './avatar-status.enum';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends Omit<svelte.JSX.HTMLAttributes<HTMLDivElement>, 'size' | 'placeholder'> {
+        status?: StringKeyOf<typeof AvatarStatus>;
+        size?: CSSUnit;
+        placeholder?: boolean;
+        ring?: {
+            color: StringKeyOf<typeof BrandColor & typeof FunctionalColor>;
+            offsetColor?: StringKeyOf<typeof BrandColor & typeof FunctionalColor>;
+            offsetSize?: CSSUnit;
+        };
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'size'> {}
+    interface $$ClassProps extends Pick<$$Props, 'status' | 'placeholder'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @default undefined
-     */
-    export let status: AvatarProps['status'] = undefined;
-
-    /**
-     * @default '6rem'
-     */
-    export let size: AvatarProps['size'] = '6rem';
-
-    /**
-     * @default false
-     */
-    export let placeholder: AvatarProps['placeholder'] = false;
-
-    /**
-     * A space-separated list of the classes of the element.
-     * @default undefined
-     */
-    let restClass: AvatarProps['class'] = undefined;
+    export let status: $$Props['status'] = undefined;
+    export let size: $$Props['size'] = '6rem';
+    export let placeholder: $$Props['placeholder'] = false;
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
-
-    // -----------------------------------------------------------
-    // Screen
-    // -----------------------------------------------------------
-
-    /**
-     * Responsive properties for the component.
-     * @default undefined
-     */
-    export let screen: AvatarProps['screen'] = undefined;
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes
@@ -49,7 +51,7 @@
 
     $: classNames = joinClasses(
         [PREFIX],
-        generateDefaultClasses<AvatarClassProps>(
+        generateDefaultClasses<$$ClassProps>(
             PREFIX,
             { status: AvatarStatus, placeholder: 'placeholder' },
             { status, placeholder },
@@ -61,8 +63,8 @@
     // Functionality
     // -----------------------------------------------------------
 
-    const { update, size: _size } = createResponsiveProperties<AvatarResponsiveProps>({ size }, screen, { size: true });
-    $: size && update({ size }, screen);
+    const { update, size: _size } = createResponsiveProperties<$$ResponsiveProps>({ size }, screen, { size: true });
+    $: size && screen && update({ size }, screen);
 
     let ref: HTMLDivElement;
 
