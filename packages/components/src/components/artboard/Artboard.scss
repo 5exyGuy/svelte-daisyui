@@ -37,9 +37,12 @@ $artboard-sizes: (
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     // Default size
-    width: 320px;
-    height: 568px;
+    & {
+        width: 320px;
+        height: 568px;
+    }
 
     &.dui-artboard-demo {
         @include themes.bg-color('base-100'); // base-100

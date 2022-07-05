@@ -4,7 +4,7 @@
     import Artboard from '@svelte-daisyui/components/src/components/artboard/Artboard.svelte';
     import AvatarGroup from '@svelte-daisyui/components/src/components/avatar/AvatarGroup.svelte';
     import Avatar from '@svelte-daisyui/components/src/components/avatar/Avatar.svelte';
-    // import Badge from '@svelte-daisyui/components/src/components/badge/Badge.svelte';
+    import Badge from '@svelte-daisyui/components/src/components/badge/Badge.svelte';
     // import BreadcrumbGroup from '@svelte-daisyui/components/src/components/breadcrumbs/BreadcrumbGroup.svelte';
     // import BreadcrumbItem from '@svelte-daisyui/components/src/components/breadcrumbs/BreadcrumbItem.svelte';
     // import Button from '@svelte-daisyui/components/src/components/button/Button.svelte';
@@ -28,8 +28,8 @@
             <div class="bg-accent text-accent-content">KK</div>
         </Avatar>
     </AvatarGroup>
-    <!-- <Badge color="success">Hello world</Badge>
-    <BreadcrumbGroup
+    <Badge>Hello world</Badge>
+    <!--<BreadcrumbGroup
         items={[
             { text: 'test', href: 'test' },
             { text: 'test', href: 'test' },

@@ -1,7 +1,7 @@
 @use 'sass:map';
 
-$brand: primary, secondary, accent;
-$functional: info, success, warning, error;
+$brand-colors: primary, secondary, accent;
+$functional-colors: info, success, warning, error;
 
 $primary: var(--primary, 87 13 248);
 $primary-content: var(--primary-content, 255 255 255);
@@ -118,4 +118,8 @@ $tab-radius: var(--tab-radius, 0.5rem);
 
 @mixin box-border-radius() {
     border-radius: $box-border-radius;
+}
+
+@mixin badge-border-radius() {
+    border-radius: $badge-border-radius;
 }

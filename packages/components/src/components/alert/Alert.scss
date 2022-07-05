@@ -38,7 +38,7 @@
     @mixin responsive-props($prefix: '') {
         $prefix: escape($prefix);
 
-        @each $color in list.join(themes.$brand, themes.$functional) {
+        @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
             &.#{$prefix}dui-alert-#{$color} {
                 @include themes.bg-color($color);
                 @include themes.text-color-content($color);

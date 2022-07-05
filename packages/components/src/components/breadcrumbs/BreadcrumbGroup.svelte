@@ -8,12 +8,13 @@
     // -----------------------------------------------------------
 
     /**
-     *
+     * @default undefined
      */
     export let items: BreadcrumbGroupProps['items'] = undefined;
 
     /**
      * A space-separated list of the classes of the element.
+     * @default undefined
      */
     let restClass: BreadcrumbGroupProps['class'] = undefined;
     export { restClass as class };

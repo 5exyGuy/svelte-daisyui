@@ -4,9 +4,9 @@ import type { StringKeyOf } from 'type-fest';
 
 export interface BadgeProps extends Omit<svelte.JSX.HTMLAttributes<HTMLDivElement>, 'size'> {
     /**
-     * @default undefined
+     * @default 'neutral'
      */
-    color?: StringKeyOf<typeof BrandColor & typeof FunctionalColor> | 'ghost';
+    color?: StringKeyOf<typeof BrandColor & typeof FunctionalColor> | 'neutral' | 'ghost';
 
     /**
      * @default 'md'

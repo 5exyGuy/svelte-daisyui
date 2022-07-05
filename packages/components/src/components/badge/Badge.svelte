@@ -8,22 +8,23 @@
     // -----------------------------------------------------------
 
     /**
-     *
+     * @default 'neutral'
      */
-    export let color: BadgeProps['color'] = undefined;
+    export let color: BadgeProps['color'] = 'neutral';
 
     /**
-     *
+     * @default 'md'
      */
-    export let size: BadgeProps['size'] = undefined;
+    export let size: BadgeProps['size'] = 'md';
 
     /**
-     *
+     * @default false
      */
     export let outline: BadgeProps['outline'] = false;
 
     /**
      * A space-separated list of the classes of the element.
+     * @default undefined
      */
     let restClass: BadgeProps['class'] = undefined;
     export { restClass as class };
@@ -33,7 +34,7 @@
     // -----------------------------------------------------------
 
     /**
-     *
+     * @default undefined
      */
     export let screen: BadgeProps['screen'] = undefined;
 
@@ -42,7 +43,7 @@
     // -----------------------------------------------------------
 
     const PREFIX = 'dui-badge';
-    const COLORS = { ...BrandColor, ...FunctionalColor, ...{ ghost: 'ghost' } };
+    const COLORS = { ...BrandColor, ...FunctionalColor, ...{ neutral: 'neutral', ghost: 'ghost' } };
 
     $: classNames = joinClasses(
         [PREFIX],
