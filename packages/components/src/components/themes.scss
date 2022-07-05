@@ -67,6 +67,10 @@ $color-map: (
     @return map.get($color-map, $color);
 }
 
+@function get-color-rgb($color) {
+    @return rgb(get-color($color) / var(--tw-text-opacity));
+}
+
 // Text color
 
 @mixin text-color($color, $alpha: 1) {
@@ -184,7 +188,7 @@ $tab-radius: var(--tab-radius, 0.5rem);
     @if $value {
         --button-animation-duration: #{$value};
     } @else {
-        transition-duration: $button-animation-duration;
+        animation: button-pop $button-animation-duration ease-out;
     }
 }
 

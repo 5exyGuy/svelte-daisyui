@@ -1,6 +1,6 @@
 @use '../themes.scss';
 
-ul.dui-breadcrumb-group {
+.dui-breadcrumb-group > ul {
     & > li.dui-breadcrumb-item {
         @include themes.text-color-content('base');
 

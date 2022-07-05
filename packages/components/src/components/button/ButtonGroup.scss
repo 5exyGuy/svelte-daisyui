@@ -1,6 +1,4 @@
-@use '../escape' as *;
-@use '../variables';
-@use '../colors';
+@use '../themes.scss';
 
 .dui-btn-group {
     display: flex;
@@ -8,13 +6,13 @@
 
     & > input[type='radio']:checked.dui-btn,
     & > .dui-btn.dui-btn-active {
-        border-color: colors.get('primary');
-        background-color: colors.get('primary');
-        color: colors.get-content('primary');
+        @include themes.border-color('primary');
+        @include themes.bg-color('primary');
+        @include themes.text-color('primary-content');
 
         &:focus-visible {
             --tw-border-opacity: 1;
-            outline: 2px solid hsl(var(--primary) / var(--tw-border-opacity));
+            outline: 2px solid rgb(themes.$primary / var(--tw-border-opacity));
         }
     }
 

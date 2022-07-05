@@ -16,131 +16,41 @@
     font-weight: 600;
     text-decoration-line: none;
 
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow,
-        transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
+    transition-property: color, background-color, border-color, transform;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 200ms;
 
-    animation: button-pop themes.$button-animation-duration ease-out;
+    @keyframes button-pop {
+        0% {
+            @include themes.button-focus-scale();
+        }
+        40% {
+            transform: scale(1.02);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
 
+    @include themes.button-animation-duration();
     @include themes.button-border-width();
     @include themes.button-border-radius();
     @include themes.button-text-transform();
 
-    @mixin responsive-props($prefix: '') {
-        $prefix: escape($prefix);
+    &:active:hover,
+    &:active:focus {
+        @include themes.button-focus-scale();
 
-        &.#{$prefix}dui-btn-no-animation {
-            @include themes.button-animation-duration(0);
-            @include themes.button-focus-scale(1);
-        }
-    }
-
-    @include responsive-props();
-
-    &.dui-btn-active:hover,
-    &.dui-btn-active:focus {
         animation: none;
     }
 
-    &.dui-btn-active:hover,
-    &.dui-btn-active:focus {
-        @include themes.button-focus-scale();
-    }
-
-    &:hover,
-    &.dui-btn-active {
-        @include themes.border-color-focus('neutral');
-        @include themes.bg-color-focus('neutral');
-    }
-
     &:focus-visible {
-        outline: 2px solid themes.$neutral-focus;
+        --tw-text-opacity: 1;
         outline-offset: 2px;
     }
 
-    @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
-        &.dui-btn-#{$color} {
-            @include themes.border-color($color);
-            @include themes.bg-color($color);
-            @include themes.text-color-content($color);
-
-            &:hover,
-            &.dui-btn-active {
-                @include themes.border-color-focus($color);
-                @include themes.bg-color-focus($color);
-            }
-
-            &:focus-visible {
-                outline: 2px solid themes.get-color($color);
-            }
-        }
-    }
-
-    &.dui-btn-neutral {
-        @include themes.border-color('neutral');
-        @include themes.bg-color('neutral');
-        @include themes.text-color-content('neutral');
-    }
-
-    &.dui-btn-ghost {
-        border: 1px solid transparent;
-        background-color: transparent;
-        color: currentColor;
-
-        &:hover,
-        &.dui-btn-active {
-            @include themes.bg-color-content('base');
-            @include themes.border-opacity(0);
-            @include themes.bg-opacity(0.2);
-        }
-
-        &:focus-visible {
-            outline: 2px solid 0 0 2px currentColor;
-        }
-    }
-
-    &.dui-btn-link {
-        @include themes.text-color('primary');
-
-        border-color: transparent;
-        background-color: transparent;
-
-        &:hover,
-        &.dui-btn-active {
-            border-color: transparent;
-            background-color: transparent;
-            text-decoration-line: underline;
-        }
-
-        &:focus-visible {
-            outline: 2px solid 0 0 2px currentColor;
-        }
-    }
-
-    &.dui-btn-outline {
-        @include themes.text-color-content('base');
-
-        border-color: currentColor;
-        background-color: transparent;
-
-        &:hover {
-            @include themes.border-color-content('base');
-            @include themes.bg-color-content('base');
-            @include themes.text-color('base-100');
-        }
-
-        @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
-            &.dui-btn-#{$color} {
-                @include themes.text-color($color);
-
-                &:hover {
-                    @include themes.border-color-focus($color);
-                    @include themes.bg-color-focus($color);
-                    @include themes.text-color-content($color);
-                }
-            }
-        }
+    &:disabled {
+        pointer-events: none;
     }
 
     &:disabled,
@@ -152,165 +62,260 @@
         @include themes.text-opacity(0.2);
     }
 
-    &.dui-btn-loading {
-        &.dui-btn-square:before,
-        &.dui-btn-circle:before {
-            margin-right: 0;
+    @mixin properties($prefix: '') {
+        $prefix: escape($prefix);
+
+        &.#{$prefix}dui-btn-no-animation {
+            @include themes.button-animation-duration(0);
+            @include themes.button-focus-scale(1);
         }
 
-        &.dui-btn-xl:before,
-        &.dui-btn-lg:before {
-            height: 1.25rem;
-            width: 1.25rem;
+        @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
+            &.dui-btn-#{$color} {
+                @include themes.border-color($color);
+                @include themes.bg-color($color);
+                @include themes.text-color-content($color);
+
+                &:hover,
+                &.dui-btn-active {
+                    @include themes.border-color-focus($color);
+                    @include themes.bg-color-focus($color);
+                }
+
+                &:focus-visible {
+                    outline: 2px solid rgb(themes.get-color($color) / var(--tw-border-opacity));
+                }
+            }
         }
 
-        &.dui-btn-sm:before,
-        &.dui-btn-xs:before {
-            height: 0.75rem;
-            width: 0.75rem;
+        &.dui-btn-neutral {
+            @include themes.border-color('neutral');
+            @include themes.bg-color('neutral');
+            @include themes.text-color-content('neutral');
+
+            &:hover,
+            &.dui-btn-active {
+                @include themes.border-color-focus('neutral');
+                @include themes.bg-color-focus('neutral');
+            }
+
+            &:focus-visible {
+                outline: 2px solid rgb(themes.$neutral-focus / var(--tw-text-opacity));
+            }
         }
 
-        &,
-        &:hover {
-            pointer-events: none;
+        &.dui-btn-ghost {
+            border: 1px solid transparent;
+            background-color: transparent;
+            color: currentColor;
+
+            &:hover,
+            &.dui-btn-active {
+                @include themes.bg-color-content('base');
+                @include themes.border-opacity(0);
+                @include themes.bg-opacity(0.2);
+            }
+
+            &:focus-visible {
+                outline: 2px solid 0 0 2px currentColor;
+            }
         }
 
-        &:before {
-            content: '';
-            margin-right: 0.5rem;
-            height: 1rem;
-            width: 1rem;
-            border-radius: 9999px;
-            border-width: 2px;
-            animation: spin 2s linear infinite;
-            border-top-color: transparent;
-            border-left-color: transparent;
-            border-bottom-color: currentColor;
-            border-right-color: currentColor;
+        &.dui-btn-link {
+            @include themes.text-color('primary');
+
+            border-color: transparent;
+            background-color: transparent;
+
+            &:hover,
+            &.dui-btn-active {
+                border-color: transparent;
+                background-color: transparent;
+                text-decoration-line: underline;
+            }
+
+            &:focus-visible {
+                outline: 2px solid 0 0 2px currentColor;
+            }
         }
 
-        @media (prefers-reduced-motion: reduce) {
+        &.dui-btn-outline {
+            @include themes.text-color-content('base');
+
+            border-color: currentColor;
+            background-color: transparent;
+
+            &:hover {
+                @include themes.border-color-content('base');
+                @include themes.bg-color-content('base');
+                @include themes.text-color('base-100');
+            }
+
+            @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
+                &.dui-btn-#{$color} {
+                    @include themes.text-color($color);
+
+                    &:hover {
+                        @include themes.border-color-focus($color);
+                        @include themes.bg-color-focus($color);
+                        @include themes.text-color-content($color);
+                    }
+                }
+            }
+        }
+
+        &.dui-btn-loading {
+            &.dui-btn-square:before,
+            &.dui-btn-circle:before {
+                margin-right: 0;
+            }
+
+            &.dui-btn-xl:before,
+            &.dui-btn-lg:before {
+                height: 1.25rem;
+                width: 1.25rem;
+            }
+
+            &.dui-btn-sm:before,
+            &.dui-btn-xs:before {
+                height: 0.75rem;
+                width: 0.75rem;
+            }
+
+            &,
+            &:hover {
+                pointer-events: none;
+            }
+
+            @keyframes spin {
+                from {
+                    transform: rotate(0deg);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+
             &:before {
-                animation: spin 10s linear infinite;
+                content: '';
+                margin-right: 0.5rem;
+                height: 1rem;
+                width: 1rem;
+                border-radius: 9999px;
+                border-width: 2px;
+                animation: spin 2s linear infinite;
+                border-top-color: transparent;
+                border-left-color: transparent;
+                border-bottom-color: currentColor;
+                border-right-color: currentColor;
+            }
+
+            @media (prefers-reduced-motion: reduce) {
+                &:before {
+                    animation: spin 10s linear infinite;
+                }
+            }
+        }
+
+        &.dui-btn-xs {
+            height: 1.5rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            min-height: 1.5rem;
+            font-size: 0.75rem;
+        }
+
+        &.dui-btn-sm {
+            height: 2rem;
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+            min-height: 2rem;
+            font-size: 0.875rem;
+        }
+
+        &.dui-btn-md {
+            height: 3rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            min-height: 3rem;
+            font-size: 0.875rem;
+        }
+
+        &.dui-btn-lg {
+            height: 4rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            min-height: 4rem;
+            font-size: 1.125rem;
+        }
+
+        &.dui-btn-wide {
+            width: 16rem;
+        }
+
+        &.dui-btn-block {
+            width: 100%;
+        }
+
+        &.dui-btn-square {
+            height: 3rem;
+            width: 3rem;
+            padding: 0;
+
+            &.dui-btn-xs {
+                height: 1.5rem;
+                width: 50%;
+            }
+
+            &.dui-btn-sm {
+                height: 2rem;
+                width: 7rem;
+            }
+
+            &.dui-btn-md {
+                height: 3rem;
+                width: 3rem;
+            }
+
+            &.dui-btn-lg {
+                height: 4rem;
+                width: 4rem;
+            }
+        }
+
+        &.dui-btn-circle {
+            height: 3rem;
+            width: 3rem;
+            border-radius: 9999px;
+            padding: 0;
+
+            &.dui-btn-xs {
+                height: 1.5rem;
+                width: 1.5rem;
+            }
+
+            &.dui-btn-sm {
+                height: 2rem;
+                width: 2rem;
+            }
+
+            &.dui-btn-md {
+                height: 3rem;
+                width: 3rem;
+            }
+
+            &.dui-btn-lg {
+                height: 4rem;
+                width: 4rem;
             }
         }
     }
 
-    &:disabled {
-        pointer-events: none;
-    }
+    @include properties();
 
-    &.dui-btn-xs {
-        height: 1.5rem;
-        padding-left: 0.5rem;
-        padding-right: 0.5rem;
-        min-height: 1.5rem;
-        font-size: 0.75rem;
-    }
-
-    &.dui-btn-sm {
-        height: 2rem;
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
-        min-height: 2rem;
-        font-size: 0.875rem;
-    }
-
-    &.dui-btn-md {
-        height: 3rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        min-height: 3rem;
-        font-size: 0.875rem;
-    }
-
-    &.dui-btn-lg {
-        height: 4rem;
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-        min-height: 4rem;
-        font-size: 1.125rem;
-    }
-
-    &.dui-btn-wide {
-        width: 16rem;
-    }
-
-    &.dui-btn-block {
-        width: 100%;
-    }
-
-    &.dui-btn-square {
-        height: 3rem;
-        width: 3rem;
-        padding: 0;
-
-        &.dui-btn-xs {
-            height: 1.5rem;
-            width: 50%;
+    @each $name, $screen-size in variables.$screen-sizes {
+        @media (min-width: #{$screen-size}) {
+            @include properties('#{$name}:');
         }
-
-        &.dui-btn-sm {
-            height: 2rem;
-            width: 7rem;
-        }
-
-        &.dui-btn-md {
-            height: 3rem;
-            width: 3rem;
-        }
-
-        &.dui-btn-lg {
-            height: 4rem;
-            width: 4rem;
-        }
-    }
-
-    &.dui-btn-circle {
-        height: 3rem;
-        width: 3rem;
-        border-radius: 9999px;
-        padding: 0;
-
-        &.dui-btn-xs {
-            height: 1.5rem;
-            width: 1.5rem;
-        }
-
-        &.dui-btn-sm {
-            height: 2rem;
-            width: 2rem;
-        }
-
-        &.dui-btn-md {
-            height: 3rem;
-            width: 3rem;
-        }
-
-        &.dui-btn-lg {
-            height: 4rem;
-            width: 4rem;
-        }
-    }
-}
-
-@keyframes button-pop {
-    0% {
-        @include themes.button-focus-scale();
-    }
-    40% {
-        transform: scale(1.02);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
     }
 }

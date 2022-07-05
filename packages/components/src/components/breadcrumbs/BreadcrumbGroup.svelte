@@ -8,7 +8,7 @@
 
     type T = $$Generic<{ text?: string; href?: string }>;
 
-    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLUListElement> {
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
         items?: Array<T>;
     }
 
@@ -38,19 +38,21 @@
     $: classNames = joinClasses([PREFIX, restClass]);
 </script>
 
-<ul class={classNames} {...$$restProps}>
-    {#if $$slots.default}
-        <slot />
-    {:else if items}
-        {#each items as item}
-            <slot name="item" {item}>
-                <BreadcrumbItem href={item.href}>
-                    {item.text}
-                </BreadcrumbItem>
-            </slot>
-        {/each}
-    {/if}
-</ul>
+<div class={classNames} {...$$restProps}>
+    <ul>
+        {#if $$slots.default}
+            <slot />
+        {:else if items}
+            {#each items as item}
+                <slot name="item" {item}>
+                    <BreadcrumbItem href={item.href}>
+                        {item.text}
+                    </BreadcrumbItem>
+                </slot>
+            {/each}
+        {/if}
+    </ul>
+</div>
 
 <style lang="scss" global>
     @import 'BreadcrumbGroup.scss';

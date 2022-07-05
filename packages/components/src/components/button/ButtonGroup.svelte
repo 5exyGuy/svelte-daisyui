@@ -1,15 +1,27 @@
 <script lang="ts">
+    import type { StringKeyOf } from 'type-fest';
+    import type { Alignment } from '../../enums';
     import { joinClasses } from '../../utilities';
-    import type { ButtonGroupProps } from './button-group-props.interface';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
+        alignment?: StringKeyOf<typeof Alignment>;
+    }
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * A space-separated list of the classes of the element.
-     */
-    let restClass: ButtonGroupProps['class'] = undefined;
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------

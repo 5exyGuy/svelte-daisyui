@@ -37,5 +37,5 @@
     <BreadcrumbGroup items={breadcrumbs}>
         <BreadcrumbItem slot="item" let:item href={item.href}>{item.text}</BreadcrumbItem>
     </BreadcrumbGroup>
-    <Button>Hello world</Button>
+    <Button loading>Hello world</Button>
 </Showcase>
