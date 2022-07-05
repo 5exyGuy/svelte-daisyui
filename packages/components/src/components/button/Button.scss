@@ -1,6 +1,6 @@
-@use '../escape' as *;
-@use '../variables';
-@use '../colors';
+@use '../escape.scss' as *;
+@use '../variables.scss';
+@use '../themes.scss';
 @use 'sass:list';
 
 .dui-btn {
@@ -11,40 +11,32 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    border-color: colors.get('neutral');
-    background-color: colors.get('neutral');
-    color: colors.get-content('neutral');
     text-align: center;
-    height: 3rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    font-size: 0.875rem;
     line-height: 1.25rem;
     font-weight: 600;
-    text-transform: uppercase;
     text-decoration-line: none;
 
-    transition-property: color, background-color, border-color;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow,
+        transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 200ms;
 
-    border-width: var(---button-border-width, 1px);
-    animation: button-pop var(--button-animation-duration, 0.25s) ease-out;
-    text-transform: var(--button-text-transform, uppercase);
-    border-radius: var(--button-border-radius);
-    min-height: 3rem;
-    line-height: 1em;
+    animation: button-pop themes.$button-animation-duration ease-out;
 
-    @mixin btn-props($prefix: '') {
+    @include themes.button-border-width();
+    @include themes.button-border-radius();
+    @include themes.button-text-transform();
+
+    @mixin responsive-props($prefix: '') {
         $prefix: escape($prefix);
 
         &.#{$prefix}dui-btn-no-animation {
-            --button-animation-duration: 0;
-            --button-focus-scale: 1;
+            @include themes.button-animation-duration(0);
+            @include themes.button-focus-scale(1);
         }
     }
 
-    @include btn-props();
+    @include responsive-props();
 
     &.dui-btn-active:hover,
     &.dui-btn-active:focus {
@@ -53,36 +45,42 @@
 
     &.dui-btn-active:hover,
     &.dui-btn-active:focus {
-        transform: scale(var(--button-focus-scale, 0.95));
+        @include themes.button-focus-scale();
     }
 
     &:hover,
     &.dui-btn-active {
-        border-color: colors.get-focus('neutral');
-        background-color: colors.get-focus('neutral');
+        @include themes.border-color-focus('neutral');
+        @include themes.bg-color-focus('neutral');
     }
 
     &:focus-visible {
-        outline: 2px solid colors.get-focus('neutral');
+        outline: 2px solid themes.$neutral-focus;
         outline-offset: 2px;
     }
 
-    @each $color in list.join(colors.$brand, colors.$functional) {
+    @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
         &.dui-btn-#{$color} {
-            border-color: colors.get($color);
-            background-color: colors.get($color);
-            color: colors.get-content($color);
+            @include themes.border-color($color);
+            @include themes.bg-color($color);
+            @include themes.text-color-content($color);
 
             &:hover,
             &.dui-btn-active {
-                border-color: colors.get-focus($color);
-                background-color: colors.get-focus($color);
+                @include themes.border-color-focus($color);
+                @include themes.bg-color-focus($color);
             }
 
             &:focus-visible {
-                outline: 2px solid colors.get($color);
+                outline: 2px solid themes.get-color($color);
             }
         }
+    }
+
+    &.dui-btn-neutral {
+        @include themes.border-color('neutral');
+        @include themes.bg-color('neutral');
+        @include themes.text-color-content('neutral');
     }
 
     &.dui-btn-ghost {
@@ -92,7 +90,9 @@
 
         &:hover,
         &.dui-btn-active {
-            @apply border-opacity-0 bg-base-content bg-opacity-20;
+            @include themes.bg-color-content('base');
+            @include themes.border-opacity(0);
+            @include themes.bg-opacity(0.2);
         }
 
         &:focus-visible {
@@ -101,9 +101,10 @@
     }
 
     &.dui-btn-link {
+        @include themes.text-color('primary');
+
         border-color: transparent;
         background-color: transparent;
-        color: colors.get('primary');
 
         &:hover,
         &.dui-btn-active {
@@ -118,24 +119,25 @@
     }
 
     &.dui-btn-outline {
+        @include themes.text-color-content('base');
+
         border-color: currentColor;
         background-color: transparent;
-        color: colors.get-content('base');
 
         &:hover {
-            border-color: colors.get-content('base');
-            background-color: colors.get-content('base');
-            color: colors.get('base-100');
+            @include themes.border-color-content('base');
+            @include themes.bg-color-content('base');
+            @include themes.text-color('base-100');
         }
 
-        @each $color in list.join(colors.$brand, colors.$functional) {
+        @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
             &.dui-btn-#{$color} {
-                color: colors.get($color);
+                @include themes.text-color($color);
 
                 &:hover {
-                    border-color: colors.get-focus($color);
-                    background-color: colors.get-focus($color);
-                    color: colors.get-content($color);
+                    @include themes.border-color-focus($color);
+                    @include themes.bg-color-focus($color);
+                    @include themes.text-color-content($color);
                 }
             }
         }
@@ -143,7 +145,11 @@
 
     &:disabled,
     &:disabled:hover {
-        @apply border-opacity-0 bg-neutral bg-opacity-20 text-base-content text-opacity-20;
+        @include themes.border-opacity(0);
+        @include themes.bg-color('neutral');
+        @include themes.bg-opacity(0.2);
+        @include themes.text-color-content('base');
+        @include themes.text-opacity(0.2);
     }
 
     &.dui-btn-loading {
@@ -290,7 +296,7 @@
 
 @keyframes button-pop {
     0% {
-        transform: scale(var(--button-focus-scale, 0.95));
+        @include themes.button-focus-scale();
     }
     40% {
         transform: scale(1.02);

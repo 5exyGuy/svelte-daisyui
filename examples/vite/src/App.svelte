@@ -7,7 +7,7 @@
     import Badge from '@svelte-daisyui/components/src/components/badge/Badge.svelte';
     import BreadcrumbGroup from '@svelte-daisyui/components/src/components/breadcrumbs/BreadcrumbGroup.svelte';
     import BreadcrumbItem from '@svelte-daisyui/components/src/components/breadcrumbs/BreadcrumbItem.svelte';
-    // import Button from '@svelte-daisyui/components/src/components/button/Button.svelte';
+    import Button from '@svelte-daisyui/components/src/components/button/Button.svelte';
 
     const breadcrumbs = [
         { text: 'Breadcrumb #1', href: 'test' },
@@ -37,5 +37,5 @@
     <BreadcrumbGroup items={breadcrumbs}>
         <BreadcrumbItem slot="item" let:item href={item.href}>{item.text}</BreadcrumbItem>
     </BreadcrumbGroup>
-    <!--<Button>Hello world</Button> -->
+    <Button>Hello world</Button>
 </Showcase>

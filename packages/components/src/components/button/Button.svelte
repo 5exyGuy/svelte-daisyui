@@ -11,7 +11,7 @@
     /**
      *
      */
-    export let color: ButtonProps['color'] = undefined;
+    export let color: ButtonProps['color'] = 'neutral';
 
     /**
      *
@@ -73,7 +73,7 @@
     // -----------------------------------------------------------
 
     const PREFIX = 'dui-btn';
-    const COLORS = { ...BrandColor, ...FunctionalColor, ...{ ghost: 'ghost', link: 'link' } };
+    const COLORS = { ...BrandColor, ...FunctionalColor, ...{ neutral: 'neutral', ghost: 'ghost', link: 'link' } };
 
     $: classNames = joinClasses(
         [PREFIX],
