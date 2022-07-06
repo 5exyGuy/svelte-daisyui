@@ -45,45 +45,25 @@ $artboard-sizes: (
     }
 
     &.dui-artboard-demo {
-        @include themes.bg-color('base-100'); // base-100
-        @include themes.text-color-content('base'); // base-content
+        @include themes.bg-color('base-100');
+        @include themes.text-color('base-content');
         @include themes.box-border-radius();
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.102), 0 1px 2px rgba(0, 0, 0, 0.059);
     }
 
-    @mixin responsive-alignments($vector2, $prefix: '') {
-        $prefix: escape($prefix);
+    &.dui-artboard-phone {
+        @each $size, $vector2 in $artboard-sizes {
+            &-#{$size} {
+                &.dui-artboard-horizontal {
+                    width: map.get($vector2, 'y');
+                    height: map.get($vector2, 'x');
+                }
 
-        &.#{$prefix}dui-artboard-horizontal {
-            width: map.get($vector2, 'y');
-            height: map.get($vector2, 'x');
-        }
-
-        &.#{$prefix}dui-artboard-vertical {
-            width: map.get($vector2, 'x');
-            height: map.get($vector2, 'y');
-        }
-    }
-
-    @mixin responsive-props($prefix: '') {
-        $prefix: escape($prefix);
-
-        &.#{$prefix}dui-artboard-phone {
-            @each $size, $vector2 in $artboard-sizes {
-                &-#{$size} {
-                    &.dui-artboard-horizontal {
-                        width: map.get($vector2, 'y');
-                        height: map.get($vector2, 'x');
-                    }
-
-                    &.dui-artboard-vertical {
-                        width: map.get($vector2, 'x');
-                        height: map.get($vector2, 'y');
-                    }
+                &.dui-artboard-vertical {
+                    width: map.get($vector2, 'x');
+                    height: map.get($vector2, 'y');
                 }
             }
         }
     }
-
-    @include responsive-props();
 }

@@ -33,21 +33,15 @@
         flex: none;
     }
 
-    @mixin responsive-props($prefix: '') {
-        $prefix: escape($prefix);
-
-        &.#{$prefix}dui-alert-base {
-            @include themes.bg-color('base-200');
-            @include themes.text-color-content('base');
-        }
-
-        @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
-            &.#{$prefix}dui-alert-#{$color} {
-                @include themes.bg-color($color);
-                @include themes.text-color-content($color);
-            }
-        }
+    &.dui-alert-base {
+        @include themes.bg-color('base-200');
+        @include themes.text-color-content('base');
     }
 
-    @include responsive-props();
+    @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
+        &.dui-alert-#{$color} {
+            @include themes.bg-color($color);
+            @include themes.text-color-content($color);
+        }
+    }
 }

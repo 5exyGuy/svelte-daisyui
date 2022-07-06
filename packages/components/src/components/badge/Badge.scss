@@ -17,73 +17,67 @@
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 200ms;
 
-    @mixin responsive-props($prefix: '') {
-        $prefix: escape($prefix);
+    &.dui-badge-neutral {
+        @include themes.border-color('neutral');
+        @include themes.bg-color('neutral');
+        @include themes.text-color-content('neutral');
+    }
 
-        &.#{$prefix}dui-badge-neutral {
-            @include themes.border-color('neutral');
-            @include themes.bg-color('neutral');
-            @include themes.text-color-content('neutral');
-        }
-
-        @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
-            &.#{$prefix}dui-badge-#{$color} {
-                @include themes.border-color($color);
-                @include themes.bg-color($color);
-                @include themes.text-color-content($color);
-            }
-        }
-
-        &.#{$prefix}dui-badge-ghost {
-            @include themes.border-color('base-200');
-            @include themes.bg-color('base-200');
-            @include themes.text-color-content('base');
-        }
-
-        &.#{$prefix}dui-badge-outline {
-            border-color: currentColor;
-            color: currentColor;
-            background-color: transparent !important;
-
-            @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
-                &.dui-badge-#{$color} {
-                    @include themes.text-color($color);
-                }
-            }
-        }
-
-        &.#{$prefix}dui-badge-xs {
-            height: 0.75rem;
-            font-size: 0.75rem;
-            line-height: 0.75rem;
-            padding-left: 0.313rem;
-            padding-right: 0.313rem;
-        }
-
-        &.#{$prefix}dui-badge-sm {
-            height: 1rem;
-            font-size: 0.75rem;
-            line-height: 1rem;
-            padding-left: 0.438rem;
-            padding-right: 0.438rem;
-        }
-
-        &.#{$prefix}dui-badge-md {
-            height: 1.25rem;
-            font-size: 0.875rem;
-            line-height: 1.25rem;
-            padding-left: 0.563rem;
-            padding-right: 0.563rem;
-        }
-
-        &.#{$prefix}dui-badge-lg {
-            height: 1.5rem;
-            font-size: 1rem;
-            line-height: 1.5rem;
-            padding-left: 0.688rem;
-            padding-right: 0.688rem;
+    @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
+        &.dui-badge-#{$color} {
+            @include themes.border-color($color);
+            @include themes.bg-color($color);
+            @include themes.text-color-content($color);
         }
     }
 
-    @include responsive-props();
+    &.dui-badge-ghost {
+        @include themes.border-color('base-200');
+        @include themes.bg-color('base-200');
+        @include themes.text-color-content('base');
+    }
+
+    &.dui-badge-outline {
+        border-color: currentColor;
+        color: currentColor;
+        background-color: transparent !important;
+
+        @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
+            &.dui-badge-#{$color} {
+                @include themes.text-color($color);
+            }
+        }
+    }
+
+    &.dui-badge-xs {
+        height: 0.75rem;
+        font-size: 0.75rem;
+        line-height: 0.75rem;
+        padding-left: 0.313rem;
+        padding-right: 0.313rem;
+    }
+
+    &.dui-badge-sm {
+        height: 1rem;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        padding-left: 0.438rem;
+        padding-right: 0.438rem;
+    }
+
+    &.dui-badge-md {
+        height: 1.25rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        padding-left: 0.563rem;
+        padding-right: 0.563rem;
+    }
+
+    &.dui-badge-lg {
+        height: 1.5rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        padding-left: 0.688rem;
+        padding-right: 0.688rem;
+    }
 }
