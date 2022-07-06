@@ -50,10 +50,4 @@
     }
 
     @include responsive-props();
-
-    @each $name, $screen-size in variables.$screen-sizes {
-        @media (min-width: #{$screen-size}) {
-            @include responsive-props('#{$name}:');
-        }
-    }
 }

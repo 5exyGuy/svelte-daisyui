@@ -1,0 +1,324 @@
+.dui-alert {
+    border-radius: var(--box-border-radius, 1rem);
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+}
+@media (min-width: 768px) {
+    .dui-alert {
+        flex-direction: row;
+    }
+}
+.dui-alert > * {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.dui-alert > .dui-alert-icon {
+    flex: none;
+}
+.dui-alert > .dui-alert-actions {
+    flex: none;
+}
+.dui-alert.dui-alert-base {
+    --tw-bg-opacity: 1;
+    background-color: rgb(var(--base-200, 230 230 230) / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(var(--base-content, 31 41 55) / var(--tw-text-opacity));
+}
+.dui-alert.dui-alert-primary {
+    --tw-bg-opacity: 1;
+    background-color: rgb(var(--primary, 87 13 248) / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(var(--primary-content, 255 255 255) / var(--tw-text-opacity));
+}
+.dui-alert.dui-alert-secondary {
+    --tw-bg-opacity: 1;
+    background-color: rgb(var(--secondary, 240 0 184) / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(var(--secondary-content, 255 255 255) / var(--tw-text-opacity));
+}
+.dui-alert.dui-alert-accent {
+    --tw-bg-opacity: 1;
+    background-color: rgb(var(--accent, 55 205 190) / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(var(--accent-content, 22 56 53) / var(--tw-text-opacity));
+}
+.dui-alert.dui-alert-info {
+    --tw-bg-opacity: 1;
+    background-color: rgb(var(--info, 58 191 248) / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(var(--info-content, 0 43 61) / var(--tw-text-opacity));
+}
+.dui-alert.dui-alert-success {
+    --tw-bg-opacity: 1;
+    background-color: rgb(var(--success, 54 211 153) / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(var(--success-content, 0 53 33) / var(--tw-text-opacity));
+}
+.dui-alert.dui-alert-warning {
+    --tw-bg-opacity: 1;
+    background-color: rgb(var(--warning, 251 189 35) / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(var(--warning-content, 57 41 0) / var(--tw-text-opacity));
+}
+.dui-alert.dui-alert-error {
+    --tw-bg-opacity: 1;
+    background-color: rgb(var(--error, 248 114 114) / var(--tw-bg-opacity));
+    --tw-text-opacity: 1;
+    color: rgb(var(--error-content, 72 0 0) / var(--tw-text-opacity));
+}
+@media (min-width: 640px) {
+    .dui-alert.sm\:dui-alert-base {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--base-200, 230 230 230) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--base-content, 31 41 55) / var(--tw-text-opacity));
+    }
+    .dui-alert.sm\:dui-alert-primary {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--primary, 87 13 248) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--primary-content, 255 255 255) / var(--tw-text-opacity));
+    }
+    .dui-alert.sm\:dui-alert-secondary {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--secondary, 240 0 184) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--secondary-content, 255 255 255) / var(--tw-text-opacity));
+    }
+    .dui-alert.sm\:dui-alert-accent {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--accent, 55 205 190) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--accent-content, 22 56 53) / var(--tw-text-opacity));
+    }
+    .dui-alert.sm\:dui-alert-info {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--info, 58 191 248) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--info-content, 0 43 61) / var(--tw-text-opacity));
+    }
+    .dui-alert.sm\:dui-alert-success {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--success, 54 211 153) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--success-content, 0 53 33) / var(--tw-text-opacity));
+    }
+    .dui-alert.sm\:dui-alert-warning {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--warning, 251 189 35) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--warning-content, 57 41 0) / var(--tw-text-opacity));
+    }
+    .dui-alert.sm\:dui-alert-error {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--error, 248 114 114) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--error-content, 72 0 0) / var(--tw-text-opacity));
+    }
+}
+@media (min-width: 768px) {
+    .dui-alert.md\:dui-alert-base {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--base-200, 230 230 230) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--base-content, 31 41 55) / var(--tw-text-opacity));
+    }
+    .dui-alert.md\:dui-alert-primary {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--primary, 87 13 248) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--primary-content, 255 255 255) / var(--tw-text-opacity));
+    }
+    .dui-alert.md\:dui-alert-secondary {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--secondary, 240 0 184) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--secondary-content, 255 255 255) / var(--tw-text-opacity));
+    }
+    .dui-alert.md\:dui-alert-accent {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--accent, 55 205 190) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--accent-content, 22 56 53) / var(--tw-text-opacity));
+    }
+    .dui-alert.md\:dui-alert-info {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--info, 58 191 248) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--info-content, 0 43 61) / var(--tw-text-opacity));
+    }
+    .dui-alert.md\:dui-alert-success {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--success, 54 211 153) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--success-content, 0 53 33) / var(--tw-text-opacity));
+    }
+    .dui-alert.md\:dui-alert-warning {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--warning, 251 189 35) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--warning-content, 57 41 0) / var(--tw-text-opacity));
+    }
+    .dui-alert.md\:dui-alert-error {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--error, 248 114 114) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--error-content, 72 0 0) / var(--tw-text-opacity));
+    }
+}
+@media (min-width: 1024px) {
+    .dui-alert.lg\:dui-alert-base {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--base-200, 230 230 230) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--base-content, 31 41 55) / var(--tw-text-opacity));
+    }
+    .dui-alert.lg\:dui-alert-primary {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--primary, 87 13 248) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--primary-content, 255 255 255) / var(--tw-text-opacity));
+    }
+    .dui-alert.lg\:dui-alert-secondary {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--secondary, 240 0 184) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--secondary-content, 255 255 255) / var(--tw-text-opacity));
+    }
+    .dui-alert.lg\:dui-alert-accent {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--accent, 55 205 190) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--accent-content, 22 56 53) / var(--tw-text-opacity));
+    }
+    .dui-alert.lg\:dui-alert-info {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--info, 58 191 248) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--info-content, 0 43 61) / var(--tw-text-opacity));
+    }
+    .dui-alert.lg\:dui-alert-success {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--success, 54 211 153) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--success-content, 0 53 33) / var(--tw-text-opacity));
+    }
+    .dui-alert.lg\:dui-alert-warning {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--warning, 251 189 35) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--warning-content, 57 41 0) / var(--tw-text-opacity));
+    }
+    .dui-alert.lg\:dui-alert-error {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--error, 248 114 114) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--error-content, 72 0 0) / var(--tw-text-opacity));
+    }
+}
+@media (min-width: 1280px) {
+    .dui-alert.xl\:dui-alert-base {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--base-200, 230 230 230) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--base-content, 31 41 55) / var(--tw-text-opacity));
+    }
+    .dui-alert.xl\:dui-alert-primary {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--primary, 87 13 248) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--primary-content, 255 255 255) / var(--tw-text-opacity));
+    }
+    .dui-alert.xl\:dui-alert-secondary {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--secondary, 240 0 184) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--secondary-content, 255 255 255) / var(--tw-text-opacity));
+    }
+    .dui-alert.xl\:dui-alert-accent {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--accent, 55 205 190) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--accent-content, 22 56 53) / var(--tw-text-opacity));
+    }
+    .dui-alert.xl\:dui-alert-info {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--info, 58 191 248) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--info-content, 0 43 61) / var(--tw-text-opacity));
+    }
+    .dui-alert.xl\:dui-alert-success {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--success, 54 211 153) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--success-content, 0 53 33) / var(--tw-text-opacity));
+    }
+    .dui-alert.xl\:dui-alert-warning {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--warning, 251 189 35) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--warning-content, 57 41 0) / var(--tw-text-opacity));
+    }
+    .dui-alert.xl\:dui-alert-error {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--error, 248 114 114) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--error-content, 72 0 0) / var(--tw-text-opacity));
+    }
+}
+@media (min-width: 1536px) {
+    .dui-alert.\32 xl\:dui-alert-base {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--base-200, 230 230 230) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--base-content, 31 41 55) / var(--tw-text-opacity));
+    }
+    .dui-alert.\32 xl\:dui-alert-primary {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--primary, 87 13 248) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--primary-content, 255 255 255) / var(--tw-text-opacity));
+    }
+    .dui-alert.\32 xl\:dui-alert-secondary {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--secondary, 240 0 184) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--secondary-content, 255 255 255) / var(--tw-text-opacity));
+    }
+    .dui-alert.\32 xl\:dui-alert-accent {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--accent, 55 205 190) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--accent-content, 22 56 53) / var(--tw-text-opacity));
+    }
+    .dui-alert.\32 xl\:dui-alert-info {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--info, 58 191 248) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--info-content, 0 43 61) / var(--tw-text-opacity));
+    }
+    .dui-alert.\32 xl\:dui-alert-success {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--success, 54 211 153) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--success-content, 0 53 33) / var(--tw-text-opacity));
+    }
+    .dui-alert.\32 xl\:dui-alert-warning {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--warning, 251 189 35) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--warning-content, 57 41 0) / var(--tw-text-opacity));
+    }
+    .dui-alert.\32 xl\:dui-alert-error {
+        --tw-bg-opacity: 1;
+        background-color: rgb(var(--error, 248 114 114) / var(--tw-bg-opacity));
+        --tw-text-opacity: 1;
+        color: rgb(var(--error-content, 72 0 0) / var(--tw-text-opacity));
+    }
+}

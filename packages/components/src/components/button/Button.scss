@@ -58,7 +58,7 @@
         @include themes.border-opacity(0);
         @include themes.bg-color('neutral');
         @include themes.bg-opacity(0.2);
-        @include themes.text-color-content('base');
+        @include themes.text-color('base-content');
         @include themes.text-opacity(0.2);
     }
 
@@ -71,15 +71,15 @@
         }
 
         @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
-            &.dui-btn-#{$color} {
+            &.#{$prefix}dui-btn-#{$color} {
                 @include themes.border-color($color);
                 @include themes.bg-color($color);
-                @include themes.text-color-content($color);
+                @include themes.text-color($color + '-content');
 
                 &:hover,
                 &.dui-btn-active {
-                    @include themes.border-color-focus($color);
-                    @include themes.bg-color-focus($color);
+                    @include themes.border-color($color + '-focus');
+                    @include themes.bg-color($color + '-focus');
                 }
 
                 &:focus-visible {
@@ -88,15 +88,15 @@
             }
         }
 
-        &.dui-btn-neutral {
+        &.#{$prefix}dui-btn-neutral {
             @include themes.border-color('neutral');
             @include themes.bg-color('neutral');
-            @include themes.text-color-content('neutral');
+            @include themes.text-color('neutral-content');
 
             &:hover,
             &.dui-btn-active {
-                @include themes.border-color-focus('neutral');
-                @include themes.bg-color-focus('neutral');
+                @include themes.border-color('neutral-focus');
+                @include themes.bg-color('neutral-focus');
             }
 
             &:focus-visible {
@@ -104,14 +104,14 @@
             }
         }
 
-        &.dui-btn-ghost {
+        &.#{$prefix}dui-btn-ghost {
             border: 1px solid transparent;
             background-color: transparent;
             color: currentColor;
 
             &:hover,
             &.dui-btn-active {
-                @include themes.bg-color-content('base');
+                @include themes.bg-color('base-content');
                 @include themes.border-opacity(0);
                 @include themes.bg-opacity(0.2);
             }
@@ -121,7 +121,7 @@
             }
         }
 
-        &.dui-btn-link {
+        &.#{$prefix}dui-btn-link {
             @include themes.text-color('primary');
 
             border-color: transparent;
@@ -139,15 +139,15 @@
             }
         }
 
-        &.dui-btn-outline {
-            @include themes.text-color-content('base');
+        &.#{$prefix}dui-btn-outline {
+            @include themes.text-color('base-content');
 
             border-color: currentColor;
             background-color: transparent;
 
             &:hover {
-                @include themes.border-color-content('base');
-                @include themes.bg-color-content('base');
+                @include themes.border-color('base-content');
+                @include themes.bg-color('base-content');
                 @include themes.text-color('base-100');
             }
 
@@ -156,15 +156,15 @@
                     @include themes.text-color($color);
 
                     &:hover {
-                        @include themes.border-color-focus($color);
-                        @include themes.bg-color-focus($color);
-                        @include themes.text-color-content($color);
+                        @include themes.border-color($color + '-focus');
+                        @include themes.bg-color($color + '-focus');
+                        @include themes.text-color($color + '-content');
                     }
                 }
             }
         }
 
-        &.dui-btn-loading {
+        &.#{$prefix}dui-btn-loading {
             &.dui-btn-square:before,
             &.dui-btn-circle:before {
                 margin-right: 0;
@@ -217,7 +217,7 @@
             }
         }
 
-        &.dui-btn-xs {
+        &.#{$prefix}dui-btn-xs {
             height: 1.5rem;
             padding-left: 0.5rem;
             padding-right: 0.5rem;
@@ -225,7 +225,7 @@
             font-size: 0.75rem;
         }
 
-        &.dui-btn-sm {
+        &.#{$prefix}dui-btn-sm {
             height: 2rem;
             padding-left: 0.75rem;
             padding-right: 0.75rem;
@@ -233,7 +233,7 @@
             font-size: 0.875rem;
         }
 
-        &.dui-btn-md {
+        &.#{$prefix}dui-btn-md {
             height: 3rem;
             padding-left: 1rem;
             padding-right: 1rem;
@@ -241,7 +241,7 @@
             font-size: 0.875rem;
         }
 
-        &.dui-btn-lg {
+        &.#{$prefix}dui-btn-lg {
             height: 4rem;
             padding-left: 1.5rem;
             padding-right: 1.5rem;
@@ -249,15 +249,15 @@
             font-size: 1.125rem;
         }
 
-        &.dui-btn-wide {
+        &.#{$prefix}dui-btn-wide {
             width: 16rem;
         }
 
-        &.dui-btn-block {
+        &.#{$prefix}dui-btn-block {
             width: 100%;
         }
 
-        &.dui-btn-square {
+        &.#{$prefix}dui-btn-square {
             height: 3rem;
             width: 3rem;
             padding: 0;
@@ -283,7 +283,7 @@
             }
         }
 
-        &.dui-btn-circle {
+        &.#{$prefix}dui-btn-circle {
             height: 3rem;
             width: 3rem;
             border-radius: 9999px;
@@ -312,10 +312,4 @@
     }
 
     @include properties();
-
-    @each $name, $screen-size in variables.$screen-sizes {
-        @media (min-width: #{$screen-size}) {
-            @include properties('#{$name}:');
-        }
-    }
 }

@@ -71,12 +71,14 @@ $artboard-sizes: (
         &.#{$prefix}dui-artboard-phone {
             @each $size, $vector2 in $artboard-sizes {
                 &-#{$size} {
-                    @include responsive-alignments($vector2);
+                    &.dui-artboard-horizontal {
+                        width: map.get($vector2, 'y');
+                        height: map.get($vector2, 'x');
+                    }
 
-                    @each $name, $screen-size in variables.$screen-sizes {
-                        @media (min-width: #{$screen-size}) {
-                            @include responsive-alignments($vector2, '#{$name}:');
-                        }
+                    &.dui-artboard-vertical {
+                        width: map.get($vector2, 'x');
+                        height: map.get($vector2, 'y');
                     }
                 }
             }
@@ -84,10 +86,4 @@ $artboard-sizes: (
     }
 
     @include responsive-props();
-
-    @each $name, $screen-size in variables.$screen-sizes {
-        @media (min-width: #{$screen-size}) {
-            @include responsive-props('#{$name}:');
-        }
-    }
 }
