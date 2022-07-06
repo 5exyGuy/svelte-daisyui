@@ -8,6 +8,7 @@
     import BreadcrumbGroup from '@svelte-daisyui/components/src/components/breadcrumbs/BreadcrumbGroup.svelte';
     import BreadcrumbItem from '@svelte-daisyui/components/src/components/breadcrumbs/BreadcrumbItem.svelte';
     import Button from '@svelte-daisyui/components/src/components/button/Button.svelte';
+    import Card from '@svelte-daisyui/components/src/components/card/Card.svelte';
 
     const breadcrumbs = [
         { text: 'Breadcrumb #1', href: 'test' },
@@ -38,4 +39,10 @@
         <BreadcrumbItem slot="item" let:item href={item.href}>{item.text}</BreadcrumbItem>
     </BreadcrumbGroup>
     <Button>Hello world</Button>
+    <Card side class="bg-base-100 text-base-content">
+        <figure slot="upper" class="w-6"><div class="bg-info" /></figure>
+        <h2 let:className class={className} slot="title">Title</h2>
+        <svelte:fragment slot="body">Body</svelte:fragment>
+        <div let:className class={className} slot="actions">Actions</div>
+    </Card>
 </Showcase>
