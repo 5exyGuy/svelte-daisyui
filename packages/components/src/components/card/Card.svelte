@@ -1,16 +1,5 @@
-<script>
+<script lang="ts">
     import { classes, CardPadding } from '@svelte-daisyui/shared';
-
-    // -----------------------------------------------------------
-    // Type Definitions
-    // -----------------------------------------------------------
-
-    /**
-
-     * @typedef {'normal' | 'compact'} Padding
-     * @typedef {{ padding?: Padding }} Properties
-     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
-     */
 
     // -----------------------------------------------------------
     // Properties
