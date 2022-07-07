@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { StringKeyOf } from 'type-fest';
-    import { HorizontalAlignment } from '../../enums';
+    import { HorizontalAlignment, VerticalAlignment } from '../../enums';
     import { generateDefaultClasses, joinClasses } from '../../utilities';
 
     // -----------------------------------------------------------
@@ -8,10 +8,11 @@
     // -----------------------------------------------------------
 
     interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
-        alignment?: StringKeyOf<typeof HorizontalAlignment>;
+        alignment?: StringKeyOf<typeof VerticalAlignment>;
+        justify?: StringKeyOf<typeof HorizontalAlignment>;
     }
 
-    interface $$ClassProps extends Pick<$$Props, 'alignment'> {}
+    interface $$ClassProps extends Pick<$$Props, 'alignment' | 'justify'> {}
 
     interface $$Events {}
 
@@ -23,7 +24,8 @@
     // Properties
     // -----------------------------------------------------------
 
-    export let alignment: $$Props['alignment'] = 'start';
+    export let alignment: $$Props['alignment'] = 'top';
+    export let justify: $$Props['justify'] = 'start';
     let restClass: $$Props['class'] = undefined;
     export { restClass as class };
 
@@ -35,7 +37,11 @@
 
     $: classNames = joinClasses(
         [PREFIX],
-        generateDefaultClasses<$$ClassProps>(PREFIX, { alignment: HorizontalAlignment }, { alignment }),
+        generateDefaultClasses<$$ClassProps>(
+            PREFIX,
+            { alignment: VerticalAlignment, justify: HorizontalAlignment },
+            { alignment, justify },
+        ),
         [restClass],
     );
 </script>

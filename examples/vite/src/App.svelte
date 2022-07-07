@@ -46,8 +46,8 @@
         <BreadcrumbItem slot="item" let:item href={item.href}>{item.text}</BreadcrumbItem>
     </BreadcrumbGroup>
     <Button>Hello world</Button>
-    <Card side class="bg-base-100 text-base-content">
-        <CardFigure><img alt="" src="https://api.lorem.space/image/game?w=800&h=800" /></CardFigure>
+    <Card fullImage class="bg-base-100 text-base-content w-[600px]">
+        <CardFigure><img alt="" src="https://api.lorem.space/image/game?w=600&h=400" /></CardFigure>
         <CardBody>
             <CardTitle>Title</CardTitle>
             <CardContent>
@@ -55,7 +55,7 @@
                 industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
                 scrambled it to make a type specimen book.
             </CardContent>
-            <CardActions alignment="end"><Button color="primary">Hello world</Button></CardActions>
+            <CardActions alignment="middle" justify="center"><Button color="primary">Hello world</Button></CardActions>
         </CardBody>
     </Card>
 </Showcase>
