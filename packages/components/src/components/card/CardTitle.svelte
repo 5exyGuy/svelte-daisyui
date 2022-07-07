@@ -29,9 +29,9 @@
     $: classNames = joinClasses([PREFIX], [restClass]);
 </script>
 
-<div class={classNames} {...$$restProps}>
+<h2 class={classNames} {...$$restProps}>
     <slot />
-</div>
+</h2>
 
 <style lang="scss" global>
     @import 'CardTitle.scss';

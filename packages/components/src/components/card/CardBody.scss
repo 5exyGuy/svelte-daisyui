@@ -1,0 +1,33 @@
+@use '../themes.scss';
+
+.dui-card {
+    &.dui-card-compact > .dui-card-body {
+        padding: 1rem;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+    }
+
+    &.dui-card-normal > .dui-card-body {
+        padding: 2rem;
+        font-size: 1rem;
+        line-height: 1.5rem;
+    }
+
+    & > .dui-card-body {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+        gap: 0.5rem;
+
+        p {
+            flex-grow: 1;
+        }
+    }
+
+    &.dui-card-image-full > .dui-card-body {
+        @include themes.text-color('neutral-content');
+
+        position: relative;
+        z-index: 20;
+    }
+}

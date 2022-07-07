@@ -1,0 +1,21 @@
+@use '../themes.scss';
+
+.dui-card {
+    & > .dui-card-figure {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &.dui-card-side > .dui-card-figure > * {
+        max-width: unset;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &.dui-card-image-full > .dui-card-figure > img {
+        height: 100%;
+        object-fit: cover;
+    }
+}

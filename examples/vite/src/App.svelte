@@ -10,6 +10,11 @@
         BreadcrumbItem,
         Button,
         Card,
+        CardBody,
+        CardTitle,
+        CardActions,
+        CardFigure,
+        CardContent,
     } from '@svelte-daisyui/components/src';
 
     const breadcrumbs = [
@@ -41,10 +46,16 @@
         <BreadcrumbItem slot="item" let:item href={item.href}>{item.text}</BreadcrumbItem>
     </BreadcrumbGroup>
     <Button>Hello world</Button>
-    <Card class="bg-base-100 text-base-content">
-        <figure slot="upper" class="h-2 bg-info" />
-        <h2 let:className class={className} slot="title">Title</h2>
-        <svelte:fragment slot="body">Body</svelte:fragment>
-        <div let:className class={className} slot="actions">Actions</div>
+    <Card side class="bg-base-100 text-base-content">
+        <CardFigure><img alt="" src="https://api.lorem.space/image/game?w=800&h=800" /></CardFigure>
+        <CardBody>
+            <CardTitle>Title</CardTitle>
+            <CardContent>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book.
+            </CardContent>
+            <CardActions alignment="end"><Button color="primary">Hello world</Button></CardActions>
+        </CardBody>
     </Card>
 </Showcase>

@@ -24,15 +24,15 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    const PREFIX = 'dui-figure';
+    const PREFIX = 'dui-card-content';
 
     $: classNames = joinClasses([PREFIX], [restClass]);
 </script>
 
-<figure class={classNames} {...$$restProps}>
+<div class={classNames} {...$$restProps}>
     <slot />
-</figure>
+</div>
 
 <style lang="scss" global>
-    @import 'Figure.scss';
+    @import 'CardContent.scss';
 </style>

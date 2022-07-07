@@ -1,0 +1,18 @@
+.dui-card > .dui-card-body > .dui-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 0.5rem;
+
+    &.dui-card-actions-start {
+        justify-content: flex-start;
+    }
+
+    &.dui-card-actions-center {
+        justify-content: center;
+    }
+
+    &.dui-card-actions-end {
+        justify-content: flex-end;
+    }
+}

@@ -16,11 +16,7 @@ export { default as Button } from './components/button/Button.svelte';
 export { default as Card } from './components/card/Card.svelte';
 export { default as CardActions } from './components/card/CardActions.svelte';
 export { default as CardBody } from './components/card/CardBody.svelte';
+export { default as CardContent } from './components/card/CardContent.svelte';
+export { default as CardFigure } from './components/card/CardFigure.svelte';
 export { default as CardTitle } from './components/card/CardTitle.svelte';
 // Carousel
-
-// Figure
-export { default as Figure } from './components/figure/Figure.svelte';
-
-// Image
-export { default as Image } from './components/image/Image.svelte';

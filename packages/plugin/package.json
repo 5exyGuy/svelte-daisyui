@@ -20,7 +20,7 @@
         "@svelte-daisyui/shared": "workspace:^1.0.0",
         "@svelte-daisyui/themes": "workspace:^1.0.0",
         "@types/jest": "^28.1.4",
-        "@types/node": "^18.0.1",
+        "@types/node": "^18.0.3",
         "@types/tailwindcss": "^3.0.11",
         "dts-bundle-generator": "^6.12.0",
         "jest": "^28.1.2",

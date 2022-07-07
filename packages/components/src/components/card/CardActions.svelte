@@ -1,11 +1,17 @@
 <script lang="ts">
-    import { joinClasses } from '../../utilities';
+    import type { StringKeyOf } from 'type-fest';
+    import { HorizontalAlignment } from '../../enums';
+    import { generateDefaultClasses, joinClasses } from '../../utilities';
 
     // -----------------------------------------------------------
     // Type Definitions
     // -----------------------------------------------------------
 
-    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {}
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
+        alignment?: StringKeyOf<typeof HorizontalAlignment>;
+    }
+
+    interface $$ClassProps extends Pick<$$Props, 'alignment'> {}
 
     interface $$Events {}
 
@@ -17,6 +23,7 @@
     // Properties
     // -----------------------------------------------------------
 
+    export let alignment: $$Props['alignment'] = 'start';
     let restClass: $$Props['class'] = undefined;
     export { restClass as class };
 
@@ -26,7 +33,11 @@
 
     const PREFIX = 'dui-card-actions';
 
-    $: classNames = joinClasses([PREFIX], [restClass]);
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(PREFIX, { alignment: HorizontalAlignment }, { alignment }),
+        [restClass],
+    );
 </script>
 
 <div class={classNames} {...$$restProps}>
