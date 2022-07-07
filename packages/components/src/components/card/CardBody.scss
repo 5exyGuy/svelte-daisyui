@@ -19,6 +19,21 @@
         flex: 1 1 auto;
         gap: 0.5rem;
 
+        &.dui-card-body-start {
+            align-items: flex-start;
+            text-align: start;
+        }
+
+        &.dui-card-body-center {
+            align-items: center;
+            text-align: center;
+        }
+
+        &.dui-card-body-end {
+            align-items: flex-end;
+            text-align: end;
+        }
+
         p {
             flex-grow: 1;
         }

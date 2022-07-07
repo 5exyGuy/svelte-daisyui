@@ -48,7 +48,7 @@
     <Button>Hello world</Button>
     <Card fullImage class="bg-base-100 text-base-content w-[600px]">
         <CardFigure><img alt="" src="https://api.lorem.space/image/game?w=600&h=400" /></CardFigure>
-        <CardBody>
+        <CardBody justify="center">
             <CardTitle>Title</CardTitle>
             <CardContent>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the

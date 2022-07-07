@@ -11,7 +11,6 @@
         alignment?: StringKeyOf<typeof VerticalAlignment>;
         justify?: StringKeyOf<typeof HorizontalAlignment>;
     }
-
     interface $$ClassProps extends Pick<$$Props, 'alignment' | 'justify'> {}
 
     interface $$Events {}
