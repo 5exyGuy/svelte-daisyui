@@ -22,12 +22,6 @@
 
     interface $$Slots {
         default: {};
-        title: {
-            className: 'dui-card-title';
-        };
-        actions: {
-            className: 'dui-card-actions';
-        };
     }
 
     // -----------------------------------------------------------
@@ -66,19 +60,7 @@
 </script>
 
 <div class={classNames} {...$$restProps}>
-    <slot name="upper" />
-    {#if $$slots.body || $$slots.title || $$slots.actions}
-        <div class="dui-card-body">
-            {#if $$slots.title}
-                <slot className="dui-card-title" name="title" />
-            {/if}
-            <slot name="body" />
-            {#if $$slots.actions}
-                <slot className="dui-card-actions" name="actions" />
-            {/if}
-        </div>
-    {/if}
-    <slot name="lower" />
+    <slot />
 </div>
 
 <style lang="scss" global>

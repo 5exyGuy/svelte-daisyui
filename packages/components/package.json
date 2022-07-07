@@ -11,8 +11,8 @@
     ],
     "license": "MIT",
     "scripts": {
-        "dev": "rollup -c -w",
-        "build": "rollup -c"
+        "disabled-dev": "rollup -c -w",
+        "disabled-build": "rollup -c"
     },
     "dependencies": {
         "svelte-icons": "^2.1.0"

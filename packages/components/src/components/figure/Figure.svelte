@@ -5,7 +5,7 @@
     // Type Definitions
     // -----------------------------------------------------------
 
-    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {}
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLElement> {}
 
     interface $$Events {}
 
@@ -24,15 +24,15 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    const PREFIX = 'dui-card-body';
+    const PREFIX = 'dui-figure';
 
     $: classNames = joinClasses([PREFIX], [restClass]);
 </script>
 
-<div class={classNames} {...$$restProps}>
+<figure class={classNames} {...$$restProps}>
     <slot />
-</div>
+</figure>
 
 <style lang="scss" global>
-    @import 'CardBody.scss';
+    @import 'Figure.scss';
 </style>

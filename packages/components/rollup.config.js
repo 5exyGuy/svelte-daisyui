@@ -4,11 +4,10 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import preprocess from 'svelte-preprocess';
 import css from 'rollup-plugin-css-only';
-import sveld from 'sveld';
 import pkg from './package.json';
 
 export default {
-    input: 'src/index.js',
+    input: 'src/index.ts',
     output: [
         { file: pkg.module, format: 'es' },
         { file: pkg.main, format: 'umd', name: 'svelte-daisyui' },
@@ -22,9 +21,5 @@ export default {
         resolve(),
         commonjs(),
         terser(),
-        sveld({
-            markdown: true,
-            json: true,
-        }),
     ],
 };
