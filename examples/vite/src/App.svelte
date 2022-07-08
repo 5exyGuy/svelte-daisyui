@@ -15,6 +15,9 @@
         CardActions,
         CardFigure,
         CardContent,
+        CarouselGroup,
+        CarouselItem,
+        Checkbox,
     } from '@svelte-daisyui/components/src';
 
     const breadcrumbs = [
@@ -58,4 +61,25 @@
             <CardActions alignment="middle" justify="center"><Button color="primary">Hello world</Button></CardActions>
         </CardBody>
     </Card>
+    <!-- <CarouselGroup class="w-full">
+        <CarouselItem class="relative w-full">
+            <img src="https://placeimg.com/800/300/arch" alt="Burger" class="w-full" />
+        </CarouselItem>
+        <CarouselItem class="relative w-full">
+            <img src="https://placeimg.com/800/300/arch" alt="Burger" class="w-full" />
+        </CarouselItem>
+        <CarouselItem class="relative w-full">
+            <img src="https://placeimg.com/800/300/arch" alt="Burger" class="w-full" />
+        </CarouselItem>
+        <CarouselItem class="relative w-full">
+            <img src="https://placeimg.com/800/300/arch" alt="Burger" class="w-full" />
+        </CarouselItem>
+        <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+            <Button>1</Button>
+            <Button>2</Button>
+            <Button>3</Button>
+            <Button>4</Button>
+        </div> 
+    </CarouselGroup> -->
+    <Checkbox checked size="xs" color="primary" disabled />
 </Showcase>

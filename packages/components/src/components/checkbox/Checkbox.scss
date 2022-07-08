@@ -1,0 +1,140 @@
+@use '../variables.scss';
+@use '../themes.scss';
+@use 'sass:list';
+
+.dui-checkbox {
+    @include themes.border-color('base-content');
+    @include themes.border-opacity(0.2);
+    @include themes.button-border-radius();
+
+    flex-shrink: 0;
+    cursor: pointer;
+    appearance: none;
+    border-width: 1px;
+
+    --chkbg: #{themes.$base-content};
+    --chkfg: #{themes.$base-100};
+
+    &:focus-visible {
+        outline: 2px solid rgb(themes.get-color('base-content'));
+        outline-offset: 2px;
+    }
+
+    &:checked {
+        @include themes.bg-color('base-content');
+
+        background-repeat: no-repeat;
+        animation: checkmark themes.$input-animation-duration ease-in-out;
+        background-image: linear-gradient(-45deg, transparent 65%, rgb(var(--chkbg)) 65.99%),
+            linear-gradient(45deg, transparent 75%, rgb(var(--chkbg)) 75.99%),
+            linear-gradient(-45deg, rgb(var(--chkbg)) 40%, transparent 40.99%),
+            linear-gradient(
+                45deg,
+                rgb(var(--chkbg)) 30%,
+                rgb(var(--chkfg)) 30.99%,
+                rgb(var(--chkfg)) 40%,
+                transparent 40.99%
+            ),
+            linear-gradient(-45deg, rgb(var(--chkfg)) 50%, rgb(var(--chkbg)) 50.99%);
+    }
+
+    &:indeterminate {
+        @include themes.bg-color('base-content');
+
+        background-repeat: no-repeat;
+        animation: checkmark themes.$input-animation-duration ease-in-out;
+        background-image: linear-gradient(90deg, transparent 80%, rgb(var(--chkbg)) 80%),
+            linear-gradient(-90deg, transparent 80%, rgb(var(--chkbg)) 80%),
+            linear-gradient(
+                0deg,
+                rgb(var(--chkbg)) 43%,
+                rgb(var(--chkfg)) 43%,
+                rgb(var(--chkfg)) 57%,
+                rgb(var(--chkbg)) 57%
+            );
+    }
+
+    &:disabled {
+        @include themes.bg-color('base-content');
+
+        cursor: not-allowed;
+        border-color: transparent;
+        opacity: 0.2;
+    }
+
+    @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
+        &.dui-checkbox-#{$color} {
+            @include themes.border-color($color);
+
+            --chkbg: #{themes.get-color($color)};
+            --chkfg: #{themes.get-color($color + '-content')};
+
+            &:hover {
+                @include themes.border-color($color);
+            }
+
+            &:focus-visible {
+                outline: 2px solid rgb(themes.get-color($color));
+            }
+
+            &:checked {
+                @include themes.border-color($color);
+                @include themes.bg-color($color);
+                @include themes.text-color($color + '-content');
+            }
+        }
+    }
+
+    &.dui-checkbox-xs {
+        height: 1rem;
+        width: 1rem;
+    }
+
+    &.dui-checkbox-sm {
+        height: 1.25rem;
+        width: 1.25rem;
+    }
+
+    &.dui-checkbox-md {
+        height: 1.5rem;
+        width: 1.5rem;
+    }
+
+    &.dui-checkbox-lg {
+        height: 2rem;
+        width: 2rem;
+    }
+}
+
+@keyframes checkmark {
+    0% {
+        background-position-y: 5px;
+    }
+    50% {
+        background-position-y: -2px;
+    }
+    100% {
+        background-position-y: 0;
+    }
+}
+
+body[dir='rtl'] {
+    .dui-checkbox {
+        --chkbg: #{themes.$base-content};
+        --chkfg: #{themes.$base-100};
+
+        &:checked {
+            background-image: linear-gradient(45deg, transparent 65%, rgb(var(--chkbg)) 65.99%),
+                linear-gradient(-45deg, transparent 75%, rgb(var(--chkbg)) 75.99%),
+                linear-gradient(45deg, rgb(var(--chkbg)) 40%, transparent 40.99%),
+                linear-gradient(
+                    -45deg,
+                    rgb(var(--chkbg)) 30%,
+                    rgb(var(--chkfg)) 30.99%,
+                    rgb(var(--chkfg)) 40%,
+                    transparent 40.99%
+                ),
+                linear-gradient(45deg, rgb(var(--chkfg)) 50%, rgb(var(--chkbg)) 50.99%);
+        }
+    }
+}

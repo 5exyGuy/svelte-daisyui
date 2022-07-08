@@ -20,3 +20,7 @@ export { default as CardContent } from './components/card/CardContent.svelte';
 export { default as CardFigure } from './components/card/CardFigure.svelte';
 export { default as CardTitle } from './components/card/CardTitle.svelte';
 // Carousel
+export { default as CarouselGroup } from './components/carousel/CarouselGroup.svelte';
+export { default as CarouselItem } from './components/carousel/CarouselItem.svelte';
+// Checkbox
+export { default as Checkbox } from './components/checkbox/Checkbox.svelte';

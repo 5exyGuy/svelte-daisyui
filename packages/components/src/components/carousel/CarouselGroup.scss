@@ -1,0 +1,22 @@
+.dui-carousel-group {
+    display: flex;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    &.dui-carousel-group-horizontal {
+        flex-direction: row;
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+    }
+
+    &.dui-carousel-group-vertical {
+        flex-direction: column;
+        overflow-y: scroll;
+        scroll-snap-type: y mandatory;
+    }
+}

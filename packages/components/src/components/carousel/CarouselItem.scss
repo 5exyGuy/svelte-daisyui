@@ -1,0 +1,20 @@
+.dui-carousel-group {
+    & > .dui-carousel-item {
+        display: flex;
+        position: relative;
+        flex: none;
+        box-sizing: content-box;
+    }
+
+    &.dui-carousel-group-start > .dui-carousel-item {
+        scroll-snap-align: start;
+    }
+
+    &.dui-carousel-group-center > .dui-carousel-item {
+        scroll-snap-align: center;
+    }
+
+    &.dui-carousel-group-end > .dui-carousel-item {
+        scroll-snap-align: end;
+    }
+}

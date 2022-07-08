@@ -1,96 +1,63 @@
-<script>
-    import {
-        classes,
-        BrandColor,
-        FunctionalColor,
-        Size,
-    } from '@svelte-daisyui/shared';
+<script lang="ts">
+    import type { StringKeyOf } from 'type-fest';
+    import { BrandColor, FunctionalColor, Size } from '../../enums';
+    import type { Screen } from '../../types';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
 
     // -----------------------------------------------------------
-    //  Type Definitions
+    // Type Definitions
     // -----------------------------------------------------------
 
-    /**
-     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'} Color
-     * @typedef {'xs' | 'sm' | 'md' | 'lg'} Size
-     * @typedef {{ color?: Color, size?: Size }} Properties
-     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
-     */
+    interface $$Props extends Omit<svelte.JSX.HTMLAttributes<HTMLInputElement>, 'size'> {
+        color?: StringKeyOf<typeof BrandColor & typeof FunctionalColor>;
+        size?: StringKeyOf<typeof Size>;
+        checked?: boolean;
+        disabled?: boolean;
+        indeterminate?: boolean;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'color' | 'size'> {}
+    interface $$ClassProps extends Pick<$$Props, 'color' | 'size'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {Properties['color']}
-     */
-    export let color = undefined;
-
-    /**
-     * @type {Properties['size']}
-     */
-    export let size = undefined;
-
-    /**
-     * @type {boolean}
-     */
-    export let checked = false;
-
-    /**
-     * @type {boolean}
-     */
-    export let disabled = false;
-
-    /**
-     * @type {boolean}
-     */
-    export let indeterminate = false;
-
-    let restClass = undefined;
-    /**
-     * @type {string}
-     */
+    export let color: $$Props['color'] = undefined;
+    export let size: $$Props['size'] = 'md';
+    export let checked: $$Props['checked'] = false;
+    export let disabled: $$Props['disabled'] = false;
+    export let indeterminate: $$Props['indeterminate'] = false;
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
-
-    // -----------------------------------------------------------
-    // Screen
-    // -----------------------------------------------------------
-
-    /**
-     * @type {Screen}
-     */
-    export let screen = undefined;
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({
-        prefix: 'checkbox',
-        classProps: {
-            color: {
-                value: { ...BrandColor, ...FunctionalColor },
-            },
-            size: {
-                value: { ...Size },
-            },
-        },
-        props: { color, size },
-        screen,
-        restClass,
-    });
+    const PREFIX = 'dui-checkbox';
+    const COLORS = { ...BrandColor, ...FunctionalColor };
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(PREFIX, { color: COLORS, size: Size }, { color, size }),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { color: COLORS, size: Size }, screen, {
+            color: true,
+            size: true,
+        }),
+        [restClass],
+    );
 </script>
 
-<input
-    class={classNames}
-    type="checkbox"
-    {checked}
-    on:change
-    {disabled}
-    {indeterminate}
-/>
+<input class={classNames} type="checkbox" {checked} on:change {disabled} {indeterminate} {...$$restProps} />
 
-<style lang="scss">
-    @import 'CheckboxStyled.scss';
-    @import 'CheckboxUnstyled.scss';
+<style lang="scss" global>
+    @import 'Checkbox.scss';
 </style>
