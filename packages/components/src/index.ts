@@ -24,3 +24,5 @@ export { default as CarouselGroup } from './components/carousel/CarouselGroup.sv
 export { default as CarouselItem } from './components/carousel/CarouselItem.svelte';
 // Checkbox
 export { default as Checkbox } from './components/checkbox/Checkbox.svelte';
+// Code
+export { default as Code } from './components/code/Code.svelte';

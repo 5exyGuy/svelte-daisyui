@@ -18,6 +18,7 @@
         CarouselGroup,
         CarouselItem,
         Checkbox,
+        Code,
     } from '@svelte-daisyui/components/src';
 
     const breadcrumbs = [
@@ -82,4 +83,9 @@
         </div> 
     </CarouselGroup> -->
     <Checkbox checked size="xs" color="primary" disabled />
+    <Code>
+        <pre data-prefix="$"><code>npm i @svelte-daisyui</code></pre>
+        <pre data-prefix=">" class="text-warning"><code>installing...</code></pre>
+        <pre data-prefix=">" class="text-success"><code>Done!</code></pre>
+    </Code>
 </Showcase>

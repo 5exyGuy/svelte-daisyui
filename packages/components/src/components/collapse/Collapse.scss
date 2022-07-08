@@ -1,12 +1,20 @@
+@use '../themes.scss';
+
 .collapse {
+    display: grid;
+    position: relative;
+    overflow: hidden;
+
     &:focus-visible {
-        outline: 2px solid hsl(var(--neutral-focus));
+        outline: 2px solid rgb(themes.get-color('neutral-focus'));
         outline-offset: 2px;
     }
 
     &.collapse-arrow > .collapse-title:after {
-        @apply absolute block h-2 w-2 transition-all ease-in-out;
-        transition-duration: 0.2s;
+        display: block;
+        position: absolute;
+        height: 0.5rem;
+        width: 0.5rem;
         top: 1.4rem;
         right: 1.4rem;
         content: '';
@@ -14,39 +22,63 @@
         transform: rotate(45deg);
         box-shadow: 2px 2px;
         pointer-events: none;
+
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 200ms;
     }
 
     &.collapse-plus > .collapse-title:after {
-        @apply absolute block h-2 w-2 transition-all duration-300 ease-in-out;
+        display: block;
+        position: absolute;
+        height: 0.5rem;
+        width: 0.5rem;
         top: 0.9rem;
         right: 1.4rem;
         content: '+';
         pointer-events: none;
+
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 300ms;
     }
 
     &:not(.collapse-open):not(.collapse-close) > .collapse-title {
-        @apply cursor-pointer;
+        cursor: pointer;
     }
 
     &:focus:not(.collapse-open):not(.collapse-close) > .collapse-title {
         cursor: unset;
     }
 
+    & > .collapse-title,
+    & > .collapse-content {
+        grid-column-start: 1;
+        grid-row-start: 1;
+    }
+
     & > .collapse-title {
-        @apply w-full p-4 pr-12;
+        width: 100%;
+        padding: 1rem;
+        padding-right: 3rem;
         min-height: 3.75rem;
         transition: background-color 0.2s ease-in-out;
     }
 
     & > .collapse-content {
-        @apply px-4;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        grid-row-start: 2;
+        overflow: hidden;
+        max-height: 0px;
         cursor: unset;
         transition: padding 0.2s ease-in-out, background-color 0.2s ease-in-out;
     }
 
     &.collapse-open > .collapse-content,
     &:focus:not(.collapse-close) > .collapse-content {
-        @apply pb-4;
+        padding-bottom: 1rem;
+        max-height: 9000px;
         transition: padding 0.2s ease-in-out, background-color 0.2s ease-in-out;
     }
 

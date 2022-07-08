@@ -1,16 +1,29 @@
-.code {
-    @apply min-w-[18rem] bg-neutral py-5 text-neutral-content;
-    @apply relative overflow-hidden overflow-x-auto;
-    border-radius: var(--box-border-radius);
+@use '../themes.scss';
+
+.dui-code {
+    @include themes.bg-color('neutral');
+    @include themes.text-color('neutral-content');
+    @include themes.box-border-radius();
+
+    position: relative;
+    overflow: hidden;
+    overflow-x: auto;
+    min-width: 18rem;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
 
     &:before {
-        @apply mb-4 block h-3 w-3 rounded-full opacity-30;
+        margin-bottom: 1rem;
+        height: 0.75rem;
+        width: 0.75rem;
+        border-radius: 9999px;
+        opacity: 0.3;
         box-shadow: 1.4em 0, 2.8em 0, 4.2em 0;
         content: '';
     }
 
-    :global(pre) {
-        @apply pr-5;
+    pre {
+        padding-right: 1.25rem;
 
         &:before {
             content: '';
@@ -18,10 +31,12 @@
         }
     }
 
-    :global(pre[data-prefix]) {
+    pre[data-prefix] {
         &:before {
-            @apply inline-block text-right;
-            @apply w-8 opacity-50;
+            display: inline-block;
+            text-align: right;
+            width: 2rem;
+            opacity: 0.5;
             content: attr(data-prefix);
         }
     }
