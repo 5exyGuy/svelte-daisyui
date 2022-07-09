@@ -1,56 +1,50 @@
-<script>
-    import { classes, Alignment } from '@svelte-daisyui/shared';
+<script lang="ts">
+    import type { StringKeyOf } from 'type-fest';
+    import { Alignment } from '../../enums';
+    import type { Screen } from '../../types';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
 
     // -----------------------------------------------------------
-    //  Type Definitions
+    // Type Definitions
     // -----------------------------------------------------------
 
-    /**
-     * @restProps {div}
-     *
-     * @typedef {'vertical' | 'horizontal'} Alignment
-     * @typedef {{ alignment?: Alignment }} Properties
-     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
-     */
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
+        alignment?: StringKeyOf<typeof Alignment>;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'alignment'> {}
+    interface $$ClassProps extends Pick<$$Props, 'alignment'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {Alignment}
-     */
-    export let alignment = 'vertical';
-
-    let restClass = undefined;
-    /**
-     * @type {string}
-     */
+    export let alignment: $$Props['alignment'] = 'horizontal';
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
-
-    // -----------------------------------------------------------
-    // Screen
-    // -----------------------------------------------------------
-
-    /**
-     * @type {Screen}
-     */
-    export let screen = undefined;
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({
-        prefix: 'dui-divider',
-        classProps: { alignment: { value: Alignment } },
-        props: { alignment },
-        screen,
-        restClass,
-    });
+    const PREFIX = 'dui-divider';
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(PREFIX, { alignment: Alignment }, { alignment }),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { alignment: Alignment }, screen, { alignment: true }),
+        [restClass],
+    );
 </script>
 
-<div class={classNames}>
+<div class={classNames} {...$$restProps}>
     <slot />
 </div>
 

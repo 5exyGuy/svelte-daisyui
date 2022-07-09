@@ -19,7 +19,10 @@
         CarouselItem,
         Checkbox,
         Code,
+        Collapse,
+        CollapseTitle,
     } from '@svelte-daisyui/components/src';
+    import CollapseContent from '@svelte-daisyui/components/src/components/collapse/CollapseContent.svelte';
 
     const breadcrumbs = [
         { text: 'Breadcrumb #1', href: 'test' },
@@ -88,4 +91,8 @@
         <pre data-prefix=">" class="text-warning"><code>installing...</code></pre>
         <pre data-prefix=">" class="text-success"><code>Done!</code></pre>
     </Code>
+    <Collapse icon="plus" class="border border-base-300 rounded-2xl bg-base-200 text-base-content">
+        <CollapseTitle>Collapse Title</CollapseTitle>
+        <CollapseContent>Collapse Content</CollapseContent>
+    </Collapse>
 </Showcase>

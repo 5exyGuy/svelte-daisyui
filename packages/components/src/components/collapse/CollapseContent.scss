@@ -1,0 +1,22 @@
+@use '../themes.scss';
+
+.dui-collapse {    
+    & > .dui-collapse-content {
+        grid-column-start: 1;
+        grid-row-start: 1;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        grid-row-start: 2;
+        overflow: hidden;
+        max-height: 0px;
+        cursor: unset;
+        transition: padding 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    }
+
+    &.dui-collapse-open > .dui-collapse-content,
+    &:focus:not(.dui-collapse-close) > .dui-collapse-content {
+        padding-bottom: 1rem;
+        max-height: 9000px;
+        transition: padding 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    }
+}

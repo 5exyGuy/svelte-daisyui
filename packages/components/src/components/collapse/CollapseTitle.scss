@@ -1,0 +1,64 @@
+@use '../themes.scss';
+
+.dui-collapse {
+    &.dui-collapse-arrow > .dui-collapse-title:after {
+        display: block;
+        position: absolute;
+        height: 0.5rem;
+        width: 0.5rem;
+        top: 1.4rem;
+        right: 1.4rem;
+        content: '';
+        transform-origin: 75% 75%;
+        transform: rotate(45deg);
+        box-shadow: 2px 2px;
+        pointer-events: none;
+
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 200ms;
+    }
+
+    &.dui-collapse-plus > .dui-collapse-title:after {
+        display: block;
+        position: absolute;
+        height: 0.5rem;
+        width: 0.5rem;
+        top: 0.9rem;
+        right: 1.4rem;
+        content: '+';
+        pointer-events: none;
+
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 300ms;
+    }
+
+    &:not(.dui-collapse-open):not(.dui-collapse-close) > .dui-collapse-title {
+        cursor: pointer;
+    }
+
+    &:focus:not(.dui-collapse-open):not(.dui-collapse-close) > .dui-collapse-title {
+        cursor: unset;
+    }
+
+    & > .dui-collapse-title {grid-column-start: 1;
+        grid-row-start: 1;
+        width: 100%;
+        padding: 1rem;
+        padding-right: 3rem;
+        min-height: 3.75rem;
+        transition: background-color 0.2s ease-in-out;
+    }
+
+
+    &.dui-collapse-open.dui-collapse-arrow > .dui-collapse-title:after,
+    &.dui-collapse-arrow:focus:not(.dui-collapse-close) > .dui-collapse-title:after {
+        transform: rotate(225deg);
+    }
+
+    &.dui-collapse-open.dui-collapse-plus > .dui-collapse-title:after,
+    &.dui-collapse-plus:focus:not(.dui-collapse-close) > .dui-collapse-title:after {
+        content: '−';
+    }
+}

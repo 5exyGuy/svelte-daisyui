@@ -1,56 +1,54 @@
-@use 'sass:list';
-@use '../variables.scss' as *;
-@use '../escape.scss' as *;
+@use '../themes.scss';
 
 .dui-divider {
-    @apply flex items-center self-stretch;
-    @apply whitespace-nowrap;
+    display: flex;
+    align-items: center;
+    align-self: stretch;
+    white-space: nowrap;
 
     &:not(:empty) {
-        @apply gap-4;
+        gap: 1rem;
     }
 
     &:before,
     &:after {
-        @apply flex-grow;
-        @apply h-0.5 w-full;
-        @apply bg-base-content bg-opacity-10;
+        @include themes.bg-color('base-content', 0.1);
+
+        flex-grow: 1;
+        height: 0.125rem;
+        width: 100%;
         content: '';
     }
 
-    @mixin divider-props($prefix: '') {
-        $prefix: escape($prefix);
+    &.dui-divider-vertical {
+        flex-direction: row;
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        height: 1rem;
+        width: auto;
 
-        &.#{$prefix}dui-divider-vertical {
-            @apply mx-0 my-4 h-4 w-auto;
-            @apply flex-row;
-
-            &:before {
-                @apply h-0.5 w-full;
-            }
-            &:after {
-                @apply h-0.5 w-full;
-            }
-        }
-
-        &.#{$prefix}dui-divider-horizontal {
-            @apply my-0 mx-4 h-auto w-4;
-            @apply flex-col;
-
-            &:before {
-                @apply h-full w-0.5;
-            }
-            &:after {
-                @apply h-full w-0.5;
-            }
+        &:before,
+        &:after {
+            height: 0.125rem;
+            width: 100%;
         }
     }
 
-    @include divider-props();
+    &.dui-divider-horizontal {
+        flex-direction: column;
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        height: auto;
+        width: 1rem;
 
-    @each $screen-size in $tailwind-screen-sizes {
-        @screen #{$screen-size} {
-            @include divider-props('#{$screen-size}:');
+        &:before,
+        &:after {
+            height: 100%;
+            width: 0.125rem;
         }
     }
 }

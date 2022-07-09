@@ -1,98 +1,71 @@
-<script>
+<script lang="ts">
     import { onMount } from 'svelte';
+    import { generateDefaultClasses, joinClasses } from '../../utilities';
 
-    import { classes } from '../../utilities';
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
+        visible?: boolean;
+        mobile?: boolean;
+        end?: boolean;
+    }
+    interface $$ClassProps extends Pick<$$Props, 'visible' | 'mobile' | 'end'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {boolean}
-     */
     export let visible = false;
-
-    /**
-     * @type {boolean}
-     */
     export let mobile = false;
-
-    /**
-     * @type {boolean}
-     */
     export let end = false;
-
-    let className;
-    /**
-     * @type {string}
-     */
-    export { className as class };
+    let restClass = undefined;
+    export { restClass as class };
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'drawer',
-        {
-            visible: {
-                condition: visible,
-                value: 'open',
-            },
-            mobile: {
-                condition: mobile,
-                value: 'mobile',
-            },
-            end: {
-                condition: end,
-                value: 'end',
-            },
-        },
-        className,
+    const PREFIX = 'dui-drawer';
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(
+            PREFIX,
+            { visible: 'visible', mobile: 'mobile', end: 'end' },
+            { visible, mobile, end },
+        ),
+        [restClass],
     );
 
     // -----------------------------------------------------------
     //                       Functionality
     // -----------------------------------------------------------
 
-    let drawerSideRef;
+    let drawerSideRef: HTMLDivElement;
 
-    onMount(() => {
-        if (visible) drawerSideRef.focus();
-    });
+    onMount(() => visible && drawerSideRef.focus());
 
-    $: if (drawerSideRef && visible) {
-        drawerSideRef.focus();
-    }
+    $: drawerSideRef && visible && drawerSideRef.focus();
 
-    // const drawerSideFocus = () => {
-    //     console.log('focus');
-    // };
-    const drawerSideBlur = () => {
-        visible = false;
-    };
+    const drawerSideBlur = () => (visible = false);
 </script>
 
-<div class={classNames}>
-    <div class="drawer-content">
-        {#if $$slots.default}
-            <slot />
-        {:else if $$slots.content}
-            <slot name="content" />
-        {/if}
-    </div>
-    <div
-        class="drawer-side"
-        tabindex="-1"
-        bind:this={drawerSideRef}
-        on:blur={drawerSideBlur}
-    >
+<div class={classNames} {...$$restProps}>
+    <slot />
+    <div class="dui-drawer-side" tabindex="-1" bind:this={drawerSideRef} on:blur={drawerSideBlur}>
         <div tabindex="0" class="drawer-overlay" />
-        <slot name="side" />
+        <slot name="content" />
     </div>
 </div>
 
-<style global lang="scss">
-    @import 'DrawerStyled.scss';
-    @import 'DrawerUnstyled.scss';
+<style lang="scss" global>
+    @import 'Drawer.scss';
 </style>
