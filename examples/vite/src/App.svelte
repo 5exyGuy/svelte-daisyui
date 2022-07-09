@@ -21,6 +21,8 @@
         Code,
         Collapse,
         CollapseTitle,
+        Dropdown,
+        DropdownContent,
     } from '@svelte-daisyui/components/src';
     import CollapseContent from '@svelte-daisyui/components/src/components/collapse/CollapseContent.svelte';
 
@@ -95,4 +97,9 @@
         <CollapseTitle>Collapse Title</CollapseTitle>
         <CollapseContent>Collapse Content</CollapseContent>
     </Collapse>
+    <Dropdown>
+        <div class="text-base-content" tabindex={0}>Dropdown #1</div>
+        <div class="text-base-content" tabindex={0}>Dropdown #2</div>
+        <DropdownContent class="p-4 shadow bg-base-300 text-base-content rounded-2xl w-52">Hello world</DropdownContent>
+    </Dropdown>
 </Showcase>

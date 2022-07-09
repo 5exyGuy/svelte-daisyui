@@ -1,0 +1,9 @@
+.dui-dropdown {
+    display: inline-block;
+    position: relative;
+
+    & > *:focus {
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+    }
+}
