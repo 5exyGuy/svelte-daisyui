@@ -25,6 +25,8 @@
         DropdownContent,
         Hero,
         HeroContent,
+        IndicatorGroup,
+        IndicatorItem,
     } from '@svelte-daisyui/components/src';
     import CollapseContent from '@svelte-daisyui/components/src/components/collapse/CollapseContent.svelte';
 
@@ -120,4 +122,11 @@
             </div>
         </HeroContent>
     </Hero>
+
+    <IndicatorGroup>
+        <IndicatorItem horizontal="center" vertical="middle"><Badge>BAD</Badge></IndicatorItem>
+        <Avatar size="10rem">
+            <img alt="" src="https://picsum.photos/seed/picsum1/200/" />
+        </Avatar>
+    </IndicatorGroup>
 </Showcase>

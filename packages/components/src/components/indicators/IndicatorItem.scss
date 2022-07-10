@@ -1,43 +1,42 @@
-.dui-indicator-group> .dui-indicator-item {
+.dui-indicator-group > .dui-indicator-item {
     position: absolute;
-    right: 0;
-    left: auto;
-    top: 0;
-    bottom: auto;
+    left: var(--indicator-left, 0);
+    right: var(--indicator-right, auto);
+    top: var(--indicator-top, 0);
     transform: translateX(var(--indicator-translate-x, 50%)) translateY(var(--indicator-translate-y, -50%));
     z-index: 1;
 
-    &.indicator-item-start {
+    &.dui-indicator-item-start {
         left: 0;
         right: auto;
         --indicator-translate-x: -50%;
     }
 
-    &.indicator-item-center {
+    &.dui-indicator-item-center {
         left: 50%;
         right: 50%;
         --indicator-translate-x: -50%;
     }
 
-    &.indicator-item-end {
+    &.dui-indicator-item-end {
         left: auto;
         right: 0;
         --indicator-translate-x: 50%;
     }
 
-    &.indicator-item-bottom {
+    &.dui-indicator-item-bottom {
         top: auto;
         bottom: 0;
         --indicator-translate-y: 50%;
     }
 
-    &.indicator-item-middle {
+    &.dui-indicator-item-middle {
         top: 50%;
         bottom: 50%;
         --indicator-translate-y: -50%;
     }
 
-    &.indicator-item-top {
+    &.dui-indicator-item-top {
         top: 0;
         bottom: auto;
         --indicator-translate-y: -50%;
