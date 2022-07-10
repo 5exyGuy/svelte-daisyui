@@ -1,13 +1,13 @@
-.icon {
-    @apply inline-block;
+.dui-icon {
+    display: inline-block;
 
-    &.icon-spin {
-        animation: loadingCircle 1s infinite linear;
+    @keyframes loadingCircle {
+        to {
+            transform: rotate(360deg);
+        }
     }
-}
-
-@keyframes loadingCircle {
-    to {
-        transform: rotate(360deg);
+ 
+    &.dui-icon-spin {
+        animation: loadingCircle 1s infinite linear;
     }
 }

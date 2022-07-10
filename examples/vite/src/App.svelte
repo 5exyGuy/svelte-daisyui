@@ -23,6 +23,8 @@
         CollapseTitle,
         Dropdown,
         DropdownContent,
+        Hero,
+        HeroContent,
     } from '@svelte-daisyui/components/src';
     import CollapseContent from '@svelte-daisyui/components/src/components/collapse/CollapseContent.svelte';
 
@@ -102,4 +104,20 @@
         <div class="text-base-content" tabindex={0}>Dropdown #2</div>
         <DropdownContent class="p-4 shadow bg-base-300 text-base-content rounded-2xl w-52">Hello world</DropdownContent>
     </Dropdown>
+
+    <Hero
+        class="bg-base-200 text-base-content min-h-screen"
+        style="background-image: url(https://placeimg.com/1000/800/nature);"
+    >
+        <HeroContent class="text-center">
+            <div class="max-w-md">
+                <h1 class="text-5xl font-bold">Hello there</h1>
+                <p class="py-6">
+                    Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi.
+                    In deleniti eaque aut repudiandae et a id nisi.
+                </p>
+                <Button color="primary">Get Started</Button>
+            </div>
+        </HeroContent>
+    </Hero>
 </Showcase>

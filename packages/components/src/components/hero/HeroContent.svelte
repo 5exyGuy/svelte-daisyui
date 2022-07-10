@@ -24,16 +24,15 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    const PREFIX = 'dui-hero';
+    const PREFIX = 'dui-hero-content';
 
     $: classNames = joinClasses([PREFIX], [restClass]);
 </script>
 
 <div class={classNames} {...$$restProps}>
-    <div class="dui-hero-overlay" />
     <slot />
 </div>
 
 <style lang="scss" global>
-    @import 'Hero.scss';
+    @import 'HeroContent.scss';
 </style>

@@ -1,10 +1,12 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
-
     import type { StringKeyOf } from 'type-fest';
     import { Position } from '../../enums';
     import type { Screen } from '../../types';
     import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
+    
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
 
     interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
         position?: StringKeyOf<typeof Position>;
@@ -56,15 +58,9 @@
     // -----------------------------------------------------------
     // Functionality
     // -----------------------------------------------------------
-
-    onMount(() => {});
-
-    const processClick = (event: MouseEvent) => {
-        console.log(event);
-    };
 </script>
 
-<div class={classNames} {...$$restProps} on:click={processClick}>
+<div class={classNames} {...$$restProps}>
     <slot />
 </div>
 

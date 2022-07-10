@@ -1,0 +1,45 @@
+.dui-indicator-group> .dui-indicator-item {
+    position: absolute;
+    right: 0;
+    left: auto;
+    top: 0;
+    bottom: auto;
+    transform: translateX(var(--indicator-translate-x, 50%)) translateY(var(--indicator-translate-y, -50%));
+    z-index: 1;
+
+    &.indicator-item-start {
+        left: 0;
+        right: auto;
+        --indicator-translate-x: -50%;
+    }
+
+    &.indicator-item-center {
+        left: 50%;
+        right: 50%;
+        --indicator-translate-x: -50%;
+    }
+
+    &.indicator-item-end {
+        left: auto;
+        right: 0;
+        --indicator-translate-x: 50%;
+    }
+
+    &.indicator-item-bottom {
+        top: auto;
+        bottom: 0;
+        --indicator-translate-y: 50%;
+    }
+
+    &.indicator-item-middle {
+        top: 50%;
+        bottom: 50%;
+        --indicator-translate-y: -50%;
+    }
+
+    &.indicator-item-top {
+        top: 0;
+        bottom: auto;
+        --indicator-translate-y: -50%;
+    }
+}

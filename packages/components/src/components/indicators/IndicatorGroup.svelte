@@ -1,28 +1,38 @@
-<script>
-    import { classes } from '../../utilities';
+<script lang="ts">
+    import { joinClasses } from '../../utilities';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    let className = undefined;
-    /**
-     * @type {string}
-     */
-    export { className as class };
+    let restClass: $$Props['class'] = undefined;
+    export { restClass as class };
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes('indicator-group', {}, className);
+    const PREFIX = 'dui-indicator-group';
+
+    $: classNames = joinClasses([PREFIX], [restClass]);
 </script>
 
-<div class={classNames}>
+<div class={classNames} {...$$restProps}>
     <slot />
 </div>
 
-<style lang="scss">
-    @import 'IndicatorGroupStyled.scss';
-    @import 'IndicatorGroupUnstyled.scss';
+<style lang="scss" global>
+    @import 'IndicatorGroup.scss';
 </style>

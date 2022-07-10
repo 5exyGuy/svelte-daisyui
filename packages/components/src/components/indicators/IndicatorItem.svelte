@@ -1,54 +1,70 @@
-<script>
+<script lang="ts">
+    import type { StringKeyOf } from 'type-fest';
     import { HorizontalAlignment, VerticalAlignment } from '../../enums';
-    import { classes } from '../../utilities';
+    import type { Screen } from '../../types';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLSpanElement> {
+        horizontal?: StringKeyOf<typeof HorizontalAlignment>;
+        vertical?: StringKeyOf<typeof VerticalAlignment>;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'horizontal' | 'vertical'> {}
+    interface $$ClassProps extends Pick<$$Props, 'horizontal' | 'vertical'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {'start' | 'center' | 'end'}
-     */
-    export let horizontal = 'end';
-
-    /**
-     * @type {'top' | 'middle' | 'bottom'}
-     */
-    export let vertical = 'top';
-
-    let className = undefined;
-    /**
-     * @type {string}
-     */
-    export { className as class };
+    export let horizontal: $$Props['horizontal'] = 'end';
+    export let vertical: $$Props['vertical'] = 'top';
+    let restClass: $$Props['class'] = undefined;
+    export { restClass as class };
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'indicator-item',
-        {
-            horizontal: {
-                condition: !!horizontal,
-                key: horizontal,
-                value: HorizontalAlignment,
+    const PREFIX = 'dui-indicator-item';
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(
+            PREFIX,
+            {
+                horizontal: HorizontalAlignment,
+                vertical: VerticalAlignment,
             },
-            vertical: {
-                condition: !!vertical,
-                key: vertical,
-                value: VerticalAlignment,
+            { horizontal, vertical },
+        ),
+        generateResponsiveClasses<$$ResponsiveProps>(
+            PREFIX,
+            {
+                horizontal: HorizontalAlignment,
+                vertical: VerticalAlignment,
             },
-        },
-        className,
+            screen,
+            { horizontal: true, vertical: true },
+        ),
+        [restClass],
     );
 </script>
 
-<span class={classNames}>
+<span class={classNames} {...$$restProps}>
     <slot />
 </span>
 
-<style lang="scss">
-    @import 'IndicatorItemStyled.scss';
-    @import 'IndicatorItemUnstyled.scss';
+<style lang="scss" global>
+    @import 'IndicatorItem.scss';
 </style>

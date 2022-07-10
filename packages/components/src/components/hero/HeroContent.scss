@@ -1,0 +1,11 @@
+@use '../themes.scss';
+
+.dui-hero > .dui-hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+    max-width: 80rem;
+    gap: 1rem;
+    padding: 1rem;
+}

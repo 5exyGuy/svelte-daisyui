@@ -1,0 +1,23 @@
+@use '../themes.scss';
+
+.dui-hero {
+    display: grid;
+    width: 100%;
+    place-items: center;
+    background-size: cover;
+    background-position: center;
+
+    & > * {
+        grid-column-start: 1;
+        grid-row-start: 1;
+    }
+
+    & > .dui-hero-overlay {
+        @include themes.bg-color('neutral', 0.5);
+
+        grid-column-start: 1;
+        grid-row-start: 1;
+        height: 100%;
+        width: 100%;
+    }
+}

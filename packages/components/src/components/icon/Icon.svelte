@@ -1,68 +1,60 @@
 <script lang="ts">
+    import type { CSSUnit } from '@svelte-daisyui/shared';
+    import type { SvelteComponent } from 'svelte';
+    import type { Screen } from '../../types';
     import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
 
     // -----------------------------------------------------------
-    //  Type Definitions
+    // Type Definitions
     // -----------------------------------------------------------
 
-    /**
-     * @restProps {div}
-     *
-     * @typedef {{ spin?: boolean }} Properties
-     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
-     */
+    interface $$Props extends Omit<svelte.JSX.HTMLAttributes<HTMLDivElement>, 'size'> {
+        component?: SvelteComponent;
+        size?: CSSUnit;
+        height?: CSSUnit;
+        width?: CSSUnit;
+        spin?: boolean;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'size' | 'height' | 'width' | 'spin'> {}
+    interface $$ClassProps extends Pick<$$Props, 'spin'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {typeof import('svelte').SvelteComponent}
-     */
-    export let component = undefined;
-
-    /**
-     * @type {number}
-     */
-    export let size = undefined;
-
-    /**
-     * @type {number}
-     */
-    export let height = 1;
-
-    /**
-     * @type {number}
-     */
-    export let width = 1;
-
-    /**
-     * @type {boolean}
-     */
-    export let spin = false;
-
-    let restClass = undefined;
-    /**
-     * @type {string}
-     */
+    export let component: $$Props['component'] = undefined;
+    export let size: $$Props['size'] = undefined;
+    export let height: $$Props['height'] = '1rem';
+    export let width: $$Props['width'] = '1rem';
+    export let spin: $$Props['spin'] = false;
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
-
-    // -----------------------------------------------------------
-    // Screen
-    // -----------------------------------------------------------
-
-    /**
-     * @type {Screen}
-     */
-    export let screen = undefined;
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = joinClasses(generateDefaultClasses('alert-dui'), generateResponsiveClasses('alert-dui'), [
-        restClass,
-    ]);
+    const PREFIX = 'dui-icon';
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(PREFIX, { spin: 'spin' }, { spin }),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { spin: 'spin' }, screen, {
+            height: false,
+            size: false,
+            spin: true,
+            width: false,
+        }),
+        [restClass],
+    );
 </script>
 
 <div class={classNames} style={`height: ${size ?? height}em; width: ${size ?? width}em;`} {...$$restProps}>

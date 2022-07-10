@@ -39,3 +39,13 @@ export { default as Divider } from './components/divider/Divider.svelte';
 // Dropdown
 export { default as Dropdown } from './components/dropdown/Dropdown.svelte';
 export { default as DropdownContent } from './components/dropdown/DropdownContent.svelte';
+// Footer
+
+// Hero
+export { default as Hero } from './components/hero/Hero.svelte';
+export { default as HeroContent } from './components/hero/HeroContent.svelte';
+// Icon
+export { default as Icon } from './components/icon/Icon.svelte';
+// Indicator
+export { default as IndicatorGroup } from './components/indicators/IndicatorGroup.svelte';
+export { default as IndicatorItem } from './components/indicators/IndicatorItem.svelte';
