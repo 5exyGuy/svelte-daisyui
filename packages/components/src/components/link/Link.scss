@@ -1,43 +1,40 @@
+@use '../themes.scss';
 @use 'sass:list';
-@use '../variables.scss' as *;
-@use '../escape.scss' as *;
 
-.link {
-    @apply cursor-pointer underline;
-
-    @mixin link-props($prefix: '') {
-        $prefix: escape($prefix);
-
-        &.#{$prefix}link-hover {
-            @apply no-underline hover:underline;
-        }
-
-        @each $color
-            in list.append(
-                list.join($brand-colors, $functional-colors),
-                'neutral'
-            )
-        {
-            &.#{$prefix}link-#{$color} {
-                @apply text-#{$color} hover:text-#{$color}-focus;
-            }
-        }
-    }
-
-    @include link-props();
-
-    @each $screen-size in $tailwind-screen-sizes {
-        @screen #{$screen-size} {
-            @include link-props('#{$screen-size}:');
-        }
-    }
+.dui-link {
+    cursor: pointer;
+    text-decoration-line: underline;
 
     &:focus {
-        @apply outline-none;
+        outline: 2px solid transparent;
+        outline-offset: 2px;
     }
 
     &:focus-visible {
         outline: 2px solid currentColor;
         outline-offset: 2px;
+    }
+
+    &.dui-link-hover {
+        text-decoration-line: none;
+
+        &:hover {
+            text-decoration-line: underline;
+        }
+    }
+
+    @each $color
+        in list.append(
+            list.join(themes.$brand-colors, themes.$functional-colors),
+            'neutral'
+        )
+    {
+        &.dui-link-#{$color} {
+            @include themes.text-color($color);
+            
+            &:hover {
+                @include themes.text-color($color + '-focus');
+            }
+        }
     }
 }

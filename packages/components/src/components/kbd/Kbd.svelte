@@ -1,64 +1,53 @@
-<script>
-    import { classes, Size } from '@svelte-daisyui/shared';
+<script lang="ts">
+    import type { StringKeyOf } from 'type-fest';
+    import { Size } from '../../enums';
+    import type { Screen } from '../../types';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
 
     // -----------------------------------------------------------
-    //  Type Definitions
+    // Type Definitions
     // -----------------------------------------------------------
 
-    /**
-     * @slot {{ props: { [key: string]: any } }}
-     * @restProps {kbd}
-     *
-     * @typedef {'xs' | 'sm' | 'md' | 'lg'} Size
-     * @typedef {{ size?: Size }} Properties
-     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
-     */
+    interface $$Props extends Omit<svelte.JSX.HTMLAttributes<HTMLElement>, 'size'> {
+        size?: StringKeyOf<typeof Size>;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'size'> {}
+    interface $$ClassProps extends Pick<$$Props, 'size'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {Size}
-     */
-    export let size = undefined;
-
-    let restClass = undefined;
-    /**
-     * @type {string}
-     */
+    export let size: $$Props['size'] = undefined;
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
-
-    // -----------------------------------------------------------
-    // Screen
-    // -----------------------------------------------------------
-
-    /**
-     * @type {Screen}
-     */
-    export let screen = undefined;
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({
-        prefix: 'kbd',
-        classProps: {
-            size: {
-                value: Size,
-            },
-        },
-        props: { size },
-        screen,
-        restClass,
-    });
+    const PREFIX = 'dui-kbd';
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(PREFIX, { size: Size }, { size }),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { size: Size }, screen, { size: true }),
+        [restClass],
+    );
 </script>
 
 <kbd class={classNames} {...$$restProps}>
     <slot />
 </kbd>
 
-<style lang="scss">
+<style lang="scss" global>
     @import 'Kbd.scss';
 </style>

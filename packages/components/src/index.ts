@@ -49,3 +49,10 @@ export { default as Icon } from './components/icon/Icon.svelte';
 // Indicator
 export { default as IndicatorGroup } from './components/indicators/IndicatorGroup.svelte';
 export { default as IndicatorItem } from './components/indicators/IndicatorItem.svelte';
+// Input Group
+
+// Kbd
+export { default as Kbd } from './components/kbd/Kbd.svelte';
+// Link
+export { default as Link } from './components/link/Link.svelte';
+// Mask

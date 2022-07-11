@@ -124,9 +124,15 @@
     </Hero>
 
     <IndicatorGroup>
-        <IndicatorItem horizontal="center" vertical="middle"><Badge>BAD</Badge></IndicatorItem>
-        <Avatar size="10rem">
-            <img alt="" src="https://picsum.photos/seed/picsum1/200/" />
-        </Avatar>
+        <IndicatorItem horizontal="start" vertical="top"><Badge color="info">BADGE</Badge></IndicatorItem>
+        <IndicatorItem horizontal="start" vertical="middle"><Badge color="info">BADGE</Badge></IndicatorItem>
+        <IndicatorItem horizontal="start" vertical="bottom"><Badge color="info">BADGE</Badge></IndicatorItem>
+        <IndicatorItem horizontal="center" vertical="top"><Badge color="info">BADGE</Badge></IndicatorItem>
+        <IndicatorItem horizontal="center" vertical="middle"><Badge color="info">BADGE</Badge></IndicatorItem>
+        <IndicatorItem horizontal="center" vertical="bottom"><Badge color="info">BADGE</Badge></IndicatorItem>
+        <IndicatorItem horizontal="end" vertical="top"><Badge color="info">BADGE</Badge></IndicatorItem>
+        <IndicatorItem horizontal="end" vertical="middle"><Badge color="info">BADGE</Badge></IndicatorItem>
+        <IndicatorItem horizontal="end" vertical="bottom"><Badge color="info">BADGE</Badge></IndicatorItem>
+        <div class="grid w-60 h-32 bg-base-300 place-items-center">content</div>
     </IndicatorGroup>
 </Showcase>

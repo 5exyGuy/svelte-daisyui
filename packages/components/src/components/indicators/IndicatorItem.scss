@@ -1,9 +1,6 @@
 .dui-indicator-group > .dui-indicator-item {
     position: absolute;
-    left: var(--indicator-left, 0);
-    right: var(--indicator-right, auto);
-    top: var(--indicator-top, 0);
-    transform: translateX(var(--indicator-translate-x, 50%)) translateY(var(--indicator-translate-y, -50%));
+    transform: translateX(var(--indicator-translate-x)) translateY(var(--indicator-translate-y));
     z-index: 1;
 
     &.dui-indicator-item-start {

@@ -1,82 +1,61 @@
-<script>
-    import {
-        BrandColor,
-        classes,
-        FunctionalColor,
-    } from '@svelte-daisyui/shared';
+<script lang="ts">
+    import type { StringKeyOf } from 'type-fest';
+    import { BrandColor, FunctionalColor } from '../../enums';
+    import type { Screen } from '../../types';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
 
     // -----------------------------------------------------------
-    //  Type Definitions
+    // Type Definitions
     // -----------------------------------------------------------
 
-    /**
-     * @restProps {a}
-     *
-     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'neutral'} Color
-     * @typedef {{ color?: Color, hover?: boolean }} Properties
-     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
-     */
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLElement> {
+        color?: StringKeyOf<typeof BrandColor & typeof FunctionalColor> | 'neutral';
+        hover?: boolean;
+        href?: string;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'color' | 'hover'> {}
+    interface $$ClassProps extends Pick<$$Props, 'color' | 'hover'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {Color}
-     */
     export let color = undefined;
-
-    /**
-     * @type {boolean}
-     */
     export let hover = false;
-
-    /**
-     * @type {string}
-     */
     export let href = '#';
-
     let restClass = undefined;
-    /**
-     * @type {string}
-     */
     export { restClass as class };
-
-    // -----------------------------------------------------------
-    // Screen
-    // -----------------------------------------------------------
-
-    /**
-     * @type {Screen}
-     */
     export let screen = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({
-        prefix: 'link',
-        classProps: {
-            color: {
-                value: {
-                    ...BrandColor,
-                    ...FunctionalColor,
-                    ...{ neutral: 'neutral' },
-                },
-            },
-            hover: { value: 'hover' },
-        },
-        props: { color, hover },
-        screen,
-        restClass,
-    });
+    const PREFIX = 'dui-link';
+    const COLORS = { ...BrandColor, ...FunctionalColor, ...{ neutral: 'neutral' } };
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(PREFIX, { color: COLORS, hover: 'hover' }, { color, hover }),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { color: COLORS, hover: 'hover' }, screen, {
+            color: true,
+            hover: true,
+        }),
+        [restClass],
+    );
 </script>
 
 <a {href} class={classNames} {...$$restProps}>
     <slot />
 </a>
 
-<style lang="scss">
+<style lang="scss" global>
     @import 'Link.scss';
 </style>
