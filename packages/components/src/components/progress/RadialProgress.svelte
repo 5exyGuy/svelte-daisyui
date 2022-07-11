@@ -1,35 +1,37 @@
-<script>
-    import { classes } from '@svelte-daisyui/shared';
+<script lang="ts">
+    import { joinClasses } from '../../utilities';
 
     // -----------------------------------------------------------
-    //  Type Definitions
+    // Type Definitions
     // -----------------------------------------------------------
 
-    /**
-     * @slot {{ value: number }}
-     * @restProps {div}
-     */
+    interface $$Props extends Omit<svelte.JSX.HTMLAttributes<HTMLProgressElement>, 'size'> {
+        value?: number;
+    }
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {
+            value: number;
+        };
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {number}
-     */
-    export let value = 0;
-
-    let restClass = undefined;
-    /**
-     * @type {string}
-     */
+    export let value: $$Props['value'] = 0;
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({ prefix: 'dui-radial-progress', restClass });
+    const PREFIX = 'dui-radial-progress';
+
+    $: classNames = joinClasses([PREFIX], [restClass]);
 </script>
 
 <div class={classNames} style={`--value:${value}`} {...$$restProps}>
@@ -40,6 +42,6 @@
     {/if}
 </div>
 
-<style lang="scss">
+<style lang="scss" global>
     @import 'RadialProgress.scss';
 </style>

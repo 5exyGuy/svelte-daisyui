@@ -1,62 +1,57 @@
-<script>
-    import { Size } from '../../enums';
-    import { classes } from '../../utilities';
+<script lang="ts">
+    import type { StringKeyOf } from 'type-fest';
+    import { BrandColor, FunctionalColor, Size } from '../../enums';
+    import type { Screen } from '../../types';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends Omit<svelte.JSX.HTMLAttributes<HTMLInputElement>, 'size'> {
+        color?: StringKeyOf<typeof BrandColor & typeof FunctionalColor>;
+        size?: StringKeyOf<typeof Size>;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'color' | 'size'> {}
+    interface $$ClassProps extends Pick<$$Props, 'color' | 'size'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {number}
-     */
-    export let min = 0;
-
-    /**
-     * @type {number}
-     */
-    export let max = 100;
-
-    /**
-     * @type {number}
-     */
-    export let value = 0;
-
-    /**
-     * @type {number}
-     */
-    export let step = 1;
-
-    /**
-     * @type {'xs' | 'sm' | 'md' | 'lg'}
-     */
-    export let size = 'md';
-
-    let className = undefined;
-    /**
-     * @type {string}
-     */
-    export { className as class };
+    export let color: $$Props['color'] = undefined;
+    export let size: $$Props['size'] = 'md';
+    let restClass: $$Props['class'] = undefined;
+    export { restClass as class };
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'range',
-        {
-            size: {
-                condition: !!size,
-                key: size,
-                value: Size,
-            },
-        },
-        className,
+    const PREFIX = 'dui-range';
+    const COLORS = { ...BrandColor, ...FunctionalColor };
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(PREFIX, { color: COLORS, size: Size }, { color, size }),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { color: COLORS, size: Size }, screen, {
+            color: true,
+            size: true,
+        }),
+        [restClass],
     );
 </script>
 
-<input class={classNames} type="range" {min} {max} {step} {value} />
+<input type="range" class={classNames} {...$$restProps} />
 
-<style lang="scss">
-    @import 'RangeStyled.scss';
-    @import 'RangeUnstyled.scss';
+<style lang="scss" global>
+    @import 'Range.scss';
 </style>

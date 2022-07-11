@@ -1,82 +1,57 @@
-<script>
-    import {
-        classes,
-        BrandColor,
-        FunctionalColor,
-        Size,
-    } from '@svelte-daisyui/shared';
+<script lang="ts">
+    import type { StringKeyOf } from 'type-fest';
+    import { BrandColor, FunctionalColor, Size } from '../../enums';
+    import type { Screen } from '../../types';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
 
     // -----------------------------------------------------------
     // Type Definitions
     // -----------------------------------------------------------
 
-    /**
-     * @restProps {progress}
-     *
-     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'} Color
-     * @typedef {'xs' | 'sm' | 'md' | 'lg'} Size
-     * @typedef {{ color?: Color, size?: Size }} Properties
-     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
-     */
+    interface $$Props extends Omit<svelte.JSX.HTMLAttributes<HTMLProgressElement>, 'size'> {
+        color?: StringKeyOf<typeof BrandColor & typeof FunctionalColor>;
+        size?: StringKeyOf<typeof Size>;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'color' | 'size'> {}
+    interface $$ClassProps extends Pick<$$Props, 'color' | 'size'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {Color}
-     */
-    export let color = undefined;
-
-    /**
-     * @type {Size}
-     */
-    export let size = 'md';
-
-    /**
-     * @type {number}
-     */
-    export let value = 0;
-
-    /**
-     * @type {number}
-     */
-    export let max = 100;
-
-    let restClass = undefined;
-    /**
-     * @type {string}
-     */
+    export let color: $$Props['color'] = undefined;
+    export let size: $$Props['size'] = 'md';
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
-
-    // -----------------------------------------------------------
-    // Screen
-    // -----------------------------------------------------------
-
-    /**
-     * @type {Screen}
-     */
-    export let screen = undefined;
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({
-        prefix: 'progress',
-        classProps: {
-            color: { value: { ...BrandColor, ...FunctionalColor } },
-            size: { value: Size },
-        },
-        props: { color, size },
-        screen,
-        restClass,
-    });
+    const PREFIX = 'dui-progress';
+    const COLORS = { ...BrandColor, ...FunctionalColor };
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(PREFIX, { color: COLORS, size: Size }, { color, size }),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { color: COLORS, size: Size }, screen, {
+            color: true,
+            size: true,
+        }),
+        [restClass],
+    );
 </script>
 
-<progress class={classNames} {value} {max} {...$$restProps} />
+<progress class={classNames} {...$$restProps} />
 
-<style lang="scss">
-    @import 'ProgressStyled.scss';
-    @import 'ProgressUnstyled.scss';
+<style lang="scss" global>
+    @import 'Progress.scss';
 </style>

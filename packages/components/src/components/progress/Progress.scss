@@ -1,0 +1,56 @@
+@use '../themes.scss';
+@use 'sass:list';
+
+.dui-progress {
+    @include themes.box-border-radius();
+
+    position: relative;
+    height: 0.5rem;
+    width: 100%;
+    appearance: none;
+    overflow: hidden;
+
+    &::-moz-progress-bar {
+        @include themes.bg-color('neutral');
+    }
+
+    &:indeterminate::after {
+        @include themes.bg-color('neutral');
+    }
+
+    @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
+        &.dui-progress-#{$color}::-moz-progress-bar,
+        &.dui-progress-#{$color}:indeterminate::after,
+        &.dui-progress-#{$color}::-webkit-progress-value {
+            @include themes.bg-color($color);
+        }
+    }
+
+    &::-webkit-progress-bar {
+        @include themes.bg-color('neutral', 0.2);
+        @include themes.box-border-radius();
+    }
+
+    &::-webkit-progress-value {
+        @include themes.bg-color('neutral-focus');
+        @include themes.box-border-radius();
+    }
+
+    @keyframes progress-loading {
+        50% {
+            left: 107%;
+        }
+    }
+
+    &:indeterminate::after {
+        @include themes.box-border-radius();
+
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: -40%;
+        width: 33.333333%;
+        content: '';
+        animation: progress-loading 5s infinite ease-in-out;
+    }
+}

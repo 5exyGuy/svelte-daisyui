@@ -1,0 +1,121 @@
+@use '../themes.scss';
+@use 'sass:list';
+
+.dui-select {
+    // Colors
+    @include themes.border-color('base-content', 0);
+    @include themes.bg-color('base-100');
+
+    display: inline-flex;
+    min-height: 3rem;
+    flex-shrink: 0;
+    cursor: pointer;
+    user-select: none;
+    appearance: none;
+    height: 3rem;
+    padding-left: 1rem;
+    padding-right: 2.5rem;
+    font-size: 0.875rem;
+    line-height: 2;
+    border-width: 1px;
+    padding-right: 2.5rem;
+    font-weight: 600;
+    border-radius: var(--button-border-radius);
+    background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+        linear-gradient(135deg, currentColor 50%, transparent 50%);
+    background-position: calc(100% - 20px) calc(1px + 50%), calc(100% - 16px) calc(1px + 50%);
+    background-size: 4px 4px, 4px 4px;
+    background-repeat: no-repeat;
+
+    // Transitions
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow,
+        transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+
+    &.dui-select-bordered {
+        // Colors
+        @include themes.border-opacity(0.2);
+    }
+
+    &:focus {
+        outline: 2px solid rgb(themes.get-color('base-content') / 0.2);
+        outline-offset: 2px;
+    }
+
+    @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
+        &.dui-select-#{$color} {
+            // Colors
+            @include themes.border-color($color);
+
+            &:focus {
+                outline: 2px solid rgb(themes.get-color($color));
+            }
+        }
+    }
+
+    &.dui-select-ghost {
+        // Colors
+        @include themes.bg-opacity(0.05);
+
+        &:focus {
+            // Colors
+            @include themes.text-color('base-content');
+            @include themes.bg-opacity(1);
+        }
+    }
+
+    &:disabled {
+        // Colors
+        @include themes.border-color('base-200');
+        @include themes.bg-color('base-200');
+        @include themes.text-opacity(0.2);
+        @include themes.placeholder-color('base-content', 0.2);
+
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+
+    &.dui-select-md {
+        min-height: 3rem;
+        height: 3rem;
+        padding-left: 1rem;
+        padding-right: 2.5rem;
+        font-size: 0.875rem;
+        line-height: 2;
+    }
+
+    &.dui-select-lg {
+        min-height: 4rem;
+        height: 4rem;
+        padding-left: 1.5rem;
+        padding-right: 2rem;
+        font-size: 1.125rem;
+        line-height: 2;
+    }
+
+    &.dui-select-sm {
+        @apply h-8 pl-3 pr-8 text-sm leading-8;
+        min-height: 2rem;
+        height: 2rem;
+        padding-left: 0.75rem;
+        padding-right: 2rem;
+        font-size: 0.875rem;
+        line-height: 2rem;
+    }
+
+    &.dui-select-xs {
+        min-height: 1.5rem;
+        height: 1.5rem;
+        padding-left: 0.5rem;
+        padding-right: 2rem;
+        font-size: 0.75rem;
+        line-height: 1.625;
+    }
+
+    // &-multiple,
+    // &[multiple],
+    // &[size]&:not([size='1']) {
+    //     @apply bg-none pr-4;
+    // }
+}

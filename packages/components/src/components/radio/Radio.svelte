@@ -1,62 +1,57 @@
-<script>
+<script lang="ts">
+    import type { StringKeyOf } from 'type-fest';
     import { BrandColor, FunctionalColor, Size } from '../../enums';
-    import { classes } from '../../utilities';
+    import type { Screen } from '../../types';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends Omit<svelte.JSX.HTMLAttributes<HTMLInputElement>, 'size'> {
+        color?: StringKeyOf<typeof BrandColor & typeof FunctionalColor>;
+        size?: StringKeyOf<typeof Size>;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'color' | 'size'> {}
+    interface $$ClassProps extends Pick<$$Props, 'color' | 'size'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {'xs' | 'sm' | 'md' | 'lg'}
-     */
-    export let size = 'md';
-
-    /**
-     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'}
-     */
-    export let color = undefined;
-
-    /**
-     * @type {string}
-     */
-    export let name = undefined;
-
-    /**
-     * @type {boolean}
-     */
-    export let checked = false;
-
-    let className = undefined;
-    /**
-     * @type {string}
-     */
-    export { className as class };
+    export let color: $$Props['color'] = undefined;
+    export let size: $$Props['size'] = 'md';
+    let restClass: $$Props['class'] = undefined;
+    export { restClass as class };
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'radio',
-        {
-            size: {
-                condition: !!size,
-                key: size,
-                value: Size,
-            },
-            color: {
-                condition: !!color,
-                key: color,
-                value: { ...BrandColor, ...FunctionalColor },
-            },
-        },
-        className,
+    const PREFIX = 'dui-radio';
+    const COLORS = { ...BrandColor, ...FunctionalColor };
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(PREFIX, { color: COLORS, size: Size }, { color, size }),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { color: COLORS, size: Size }, screen, {
+            color: true,
+            size: true,
+        }),
+        [restClass],
     );
 </script>
 
-<input type="radio" on:change class={classNames} {name} {checked} />
+<input type="radio" class={classNames} {...$$restProps} />
 
-<style lang="scss">
-    @import 'RadioStyled.scss';
-    @import 'RadioUnstyled.scss';
+<style lang="scss" global>
+    @import 'Radio.scss';
 </style>

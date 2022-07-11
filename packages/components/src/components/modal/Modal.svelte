@@ -1,3 +1,6 @@
+<script lang="ts" context="module">
+</script>
+
 <script lang="ts">
     import Button from '../button/Button.svelte';
     import Icon from '../../icon/Icon.svelte';
@@ -50,12 +53,7 @@
 </script>
 
 <div class={`modal${visible ? ' modal-open' : ''}`} data-visible={visible}>
-    <div
-        tabindex="0"
-        class={classes.join(' ')}
-        on:blur={boxBlur}
-        bind:this={modalRef}
-    >
+    <div tabindex="0" class={classes.join(' ')} on:blur={boxBlur} bind:this={modalRef}>
         {#if showHeader}
             <div class="modal-header">
                 {#if title || showCustomTitle}
@@ -69,11 +67,7 @@
                 {/if}
                 {#if showCloseButton}
                     <div class="modal-header-close">
-                        <Button
-                            type="Ghost"
-                            shape="Square"
-                            onClick={toggleVisibility}
-                        >
+                        <Button type="Ghost" shape="Square" onClick={toggleVisibility}>
                             <Icon size={2}>
                                 <svelte:component this={closeIcon} />
                             </Icon>

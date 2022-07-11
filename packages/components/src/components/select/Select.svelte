@@ -1,67 +1,71 @@
-<script>
+<script lang="ts">
+    import type { StringKeyOf } from 'type-fest';
     import { BrandColor, FunctionalColor, Size } from '../../enums';
-    import { classes } from '../../utilities';
+    import type { Screen } from '../../types';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends Omit<svelte.JSX.HTMLAttributes<HTMLSelectElement>, 'size'> {
+        color?: StringKeyOf<typeof BrandColor & typeof FunctionalColor>;
+        size?: StringKeyOf<typeof Size>;
+        bordered?: boolean;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'color' | 'size' | 'bordered'> {}
+    interface $$ClassProps extends Pick<$$Props, 'color' | 'size' | 'bordered'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost'}
-     */
-    export let color = undefined;
-
-    /**
-     * @type {'xs' | 'sm' | 'md' | 'lg'}
-     */
-    export let size = 'md';
-
-    /**
-     * @type {boolean}
-     */
-    export let bordered = false;
-
-    let className = undefined;
-    /**
-     * @type {string}
-     */
-    export { className as class };
+    export let color: $$Props['color'] = undefined;
+    export let size: $$Props['size'] = 'md';
+    export let bordered: $$Props['bordered'] = false;
+    let restClass: $$Props['class'] = undefined;
+    export { restClass as class };
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'select',
-        {
-            color: {
-                condition: !!color,
-                key: color,
-                value: {
-                    ...BrandColor,
-                    ...FunctionalColor,
-                    ...{ ghost: 'ghost' },
-                },
+    const PREFIX = 'dui-select';
+    const COLORS = { ...BrandColor, ...FunctionalColor };
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(
+            PREFIX,
+            { color: COLORS, size: Size, bordered: 'bordered' },
+            { color, size, bordered },
+        ),
+        generateResponsiveClasses<$$ResponsiveProps>(
+            PREFIX,
+            { color: COLORS, size: Size, bordered: 'bordered' },
+            screen,
+            {
+                color: true,
+                size: true,
+                bordered: true,
             },
-            size: {
-                condition: !!size,
-                key: size,
-                value: Size,
-            },
-            bordered: {
-                condition: bordered,
-                value: 'bordered',
-            },
-        },
-        className,
+        ),
+        [restClass],
     );
 </script>
 
-<select class={classNames}>
+<select class={classNames} {...$$restProps}>
     <slot />
 </select>
 
-<style lang="scss">
-    @import 'SelectStyled.scss';
-    @import 'SelectUnstyled.scss';
+<style lang="scss" global>
+    @import 'Select.scss';
 </style>

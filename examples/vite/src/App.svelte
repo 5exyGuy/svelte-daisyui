@@ -27,6 +27,12 @@
         HeroContent,
         IndicatorGroup,
         IndicatorItem,
+        Kbd,
+        Link,
+        Progress,
+        Radio,
+        Range,
+        Select,
     } from '@svelte-daisyui/components/src';
     import CollapseContent from '@svelte-daisyui/components/src/components/collapse/CollapseContent.svelte';
 
@@ -135,4 +141,12 @@
         <IndicatorItem horizontal="end" vertical="bottom"><Badge color="info">BADGE</Badge></IndicatorItem>
         <div class="grid w-60 h-32 bg-base-300 place-items-center">content</div>
     </IndicatorGroup>
+
+    <Kbd>CTRL + C</Kbd>
+    <Link hover color="primary">Hello world</Link>
+
+    <Progress color="primary" value="32" max="100" />
+    <Radio />
+    <Range />
+    <Select />
 </Showcase>

@@ -23,15 +23,10 @@
         }
     }
 
-    @each $color
-        in list.append(
-            list.join(themes.$brand-colors, themes.$functional-colors),
-            'neutral'
-        )
-    {
+    @each $color in list.append(list.join(themes.$brand-colors, themes.$functional-colors), 'neutral') {
         &.dui-link-#{$color} {
             @include themes.text-color($color);
-            
+
             &:hover {
                 @include themes.text-color($color + '-focus');
             }

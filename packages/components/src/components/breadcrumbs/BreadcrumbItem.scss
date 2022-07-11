@@ -2,7 +2,7 @@
 
 .dui-breadcrumb-group > ul {
     & > li.dui-breadcrumb-item {
-        @include themes.text-color-content('base');
+        @include themes.text-color('base-content');
 
         display: flex;
         align-items: center;

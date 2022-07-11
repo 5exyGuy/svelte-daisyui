@@ -35,13 +35,13 @@
 
     &.dui-alert-base {
         @include themes.bg-color('base-200');
-        @include themes.text-color-content('base');
+        @include themes.text-color('base-content');
     }
 
     @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
         &.dui-alert-#{$color} {
             @include themes.bg-color($color);
-            @include themes.text-color-content($color);
+            @include themes.text-color($color + '-content');
         }
     }
 }

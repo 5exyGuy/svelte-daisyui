@@ -1,50 +1,53 @@
+@use '../themes.scss';
+
 .dui-radial-progress {
-    @apply w-[var(--size)] h-[var(--size)] bg-transparent rounded-full place-content-center inline-grid relative;
-    vertical-align: middle;
-    box-sizing: content-box;
     --value: 0;
     --size: 5rem;
     --thickness: calc(var(--size) / 10);
 
-    &::-moz-progress-bar {
-        @apply bg-transparent appearance-none;
-    }
+    display: inline-grid;
+    position: relative;
+    height: var(--size);
+    width: var(--size);
+    background-color: transparent;
+    box-sizing: content-box;
+    vertical-align: middle;
+    border-radius: 9999px;
+    place-content: center;
 
-    &::-webkit-progress-value {
-        @apply bg-transparent appearance-none;
-    }
-
+    &::-moz-progress-bar,
+    &::-webkit-progress-value,
     &::-webkit-progress-bar {
-        @apply bg-transparent appearance-none;
+        background-color: transparent;
+        appearance: none;
     }
 
     &:before,
     &:after {
-        @apply absolute rounded-full;
+        position: absolute;
+        border-radius: 9999px;
         content: '';
     }
 
     &:before {
-        @apply inset-0;
-        background: radial-gradient(farthest-side, currentColor 98%, #0000)
-                top/var(--thickness) var(--thickness) no-repeat,
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: radial-gradient(farthest-side, currentColor 98%, #0000) top/var(--thickness) var(--thickness)
+                no-repeat,
             conic-gradient(currentColor calc(var(--value) * 1%), #0000 0);
         -webkit-mask: radial-gradient(
             farthest-side,
             #0000 calc(99% - var(--thickness)),
             #000 calc(100% - var(--thickness))
         );
-        mask: radial-gradient(
-            farthest-side,
-            #0000 calc(99% - var(--thickness)),
-            #000 calc(100% - var(--thickness))
-        );
+        mask: radial-gradient(farthest-side, #0000 calc(99% - var(--thickness)), #000 calc(100% - var(--thickness)));
     }
 
     &:after {
-        @apply bg-current;
+        background-color: currentColor;
         inset: calc(50% - var(--thickness) / 2);
-        transform: rotate(calc(var(--value) * 3.6deg - 90deg))
-            translate(calc(var(--size) / 2 - 50%));
+        transform: rotate(calc(var(--value) * 3.6deg - 90deg)) translate(calc(var(--size) / 2 - 50%));
     }
 }

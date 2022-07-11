@@ -1,52 +1,58 @@
-<script>
-    import { classes } from '../../utilities';
+<script lang="ts">
+    import type { StringKeyOf } from 'type-fest';
+    import type { Screen } from '../../types';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
     import { MaskHalfType } from './mask-half-type.enum';
     import { MaskType } from './mask-type.enum';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
+        half?: StringKeyOf<typeof MaskHalfType>;
+        type?: StringKeyOf<typeof MaskType>;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'half' | 'type'> {}
+    interface $$ClassProps extends Pick<$$Props, 'half' | 'type'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {'1' | '2' | 1 | 2}
-     */
-    export let half = undefined;
-
-    /**
-     * @type {'squircle' | 'heart' | 'hexagon' | 'hexagon2' | 'decagon' | 'pentagon' | 'diamond' | 'square' | 'circle' | 'parallelogram' | 'parallelogram2' | 'parallelogram3' | 'parallelogram4' | 'star' | 'star2' | 'triangle' | 'triangle2' | 'triangle3' | 'triangle4'}
-     */
-    export let type = 'circle';
-
-    let className = undefined;
-    export { className as class };
+    export let half: $$Props['half'] = undefined;
+    export let type: $$Props['type'] = 'circle';
+    let restClass: $$Props['class'] = undefined;
+    export { restClass as class };
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'mask',
-        {
-            half: {
-                condition: !!half,
-                key: half,
-                value: MaskHalfType,
-            },
-            type: {
-                condition: !!type,
-                key: type,
-                value: MaskType,
-            },
-        },
-        className,
+    const PREFIX = 'dui-mask';
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(PREFIX, { half: MaskHalfType, type: MaskType }, { half, type }),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { half: MaskHalfType, type: MaskType }, screen, {
+            half: true,
+            type: true,
+        }),
+        [restClass],
     );
 </script>
 
-<div class={classNames}>
+<div class={classNames} {...$$restProps}>
     <slot />
 </div>
 
-<style lang="scss">
-    @import 'MaskStyled.scss';
-    @import 'MaskUnstyled.scss';
+<style lang="scss" global>
+    @import 'Mask.scss';
 </style>

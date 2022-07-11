@@ -79,14 +79,6 @@ $color-map: (
     color: rgb($color-get / var(--tw-text-opacity));
 }
 
-@mixin text-color-content($color, $alpha: 1) {
-    @include text-color($color + '-content', $alpha);
-}
-
-@mixin text-color-focus($color, $alpha: 1) {
-    @include text-color($color + '-focus', $alpha);
-}
-
 @mixin text-opacity($alpha: 1) {
     --tw-text-opacity: #{$alpha};
 }
@@ -97,14 +89,6 @@ $color-map: (
     $color-get: map.get($color-map, $color);
     --tw-bg-opacity: #{$alpha};
     background-color: rgb($color-get / var(--tw-bg-opacity));
-}
-
-@mixin bg-color-content($color, $alpha: 1) {
-    @include bg-color($color + '-content', $alpha);
-}
-
-@mixin bg-color-focus($color, $alpha: 1) {
-    @include bg-color($color + '-focus', $alpha);
 }
 
 @mixin bg-opacity($alpha: 1) {
@@ -119,16 +103,20 @@ $color-map: (
     border-color: rgb($color-get / var(--tw-border-opacity));
 }
 
-@mixin border-color-content($color, $alpha: 1) {
-    @include border-color($color + '-content', $alpha);
-}
-
-@mixin border-color-focus($color, $alpha: 1) {
-    @include border-color($color + '-focus', $alpha);
-}
-
 @mixin border-opacity($alpha: 1) {
     --tw-border-opacity: #{$alpha};
+}
+
+// Placeholder color
+
+@mixin placeholder-color($color, $alpha: 1) {
+    $color-get: map.get($color-map, $color);
+    --tw-placeholder-opacity: #{$alpha};
+    --tw-placeholder-color: rgb($color-get / var(--tw-placeholder-opacity));
+}
+
+@mixin placeholder-opacity($alpha: 1) {
+    --tw-placeholder-opacity: #{$alpha};
 }
 
 // Theme variables

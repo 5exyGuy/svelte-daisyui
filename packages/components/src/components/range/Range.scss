@@ -1,0 +1,134 @@
+@use '../themes.scss';
+@use 'sass:list';
+
+.dui-range {
+    @include themes.box-border-radius();
+
+    --range-shdw: themes.get-color('base-content');
+
+    background-color: transparent;
+    overflow: hidden;
+    cursor: pointer;
+    height: 1.5rem;
+    width: 100%;
+    -webkit-appearance: none;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:focus-visible::-webkit-slider-thumb {
+        --focus-shadow: 0 0 0 6px rgb(themes.get-color('base-100')) inset, 0 0 0 2rem rgb(var(--range-shdw)) inset;
+    }
+
+    &:focus-visible::-moz-range-thumb {
+        --focus-shadow: 0 0 0 6px rgb(themes.get-color('base-100')) inset, 0 0 0 2rem rgb(var(--range-shdw)) inset;
+    }
+
+    &::-webkit-slider-runnable-track,
+    &::-moz-range-track {
+        @include themes.bg-color('base-content', 0.1);
+        @include themes.box-border-radius();
+
+        height: 0.5rem;
+        width: 100%;
+    }
+
+    &::-webkit-slider-thumb,
+    &::-moz-range-thumb {
+        @include themes.bg-color('base-100');
+        @include themes.box-border-radius();
+
+        --filler-size: 100rem;
+        --filler-offset: 0.6rem;
+
+        position: relative;
+        height: 1.5rem;
+        width: 1.5rem;
+        border-style: none;
+        -webkit-appearance: none;
+        top: 50%;
+        color: rgb(var(--range-shdw));
+        transform: translateY(-50%);
+        box-shadow: 0 0 0 3px rgb(var(--range-shdw)) inset, var(--focus-shadow, 0 0),
+            calc(var(--filler-size) * -1 - var(--filler-offset)) 0 0 var(--filler-size);
+
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 300ms;
+    }
+
+    @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
+        &.dui-range-#{$color} {
+            --range-shdw: themes.get-color($color);
+        }
+    }
+
+    &.dui-range-xs {
+        height: 1rem;
+
+        &::-webkit-slider-runnable-track,
+        &::-moz-range-track {
+            height: 0.25rem;
+        }
+
+        &::-webkit-slider-thumb,
+        &::-moz-range-thumb {
+            --filler-offset: 0.4rem;
+
+            height: 1rem;
+            width: 1rem;
+        }
+    }
+
+    &.dui-range-sm {
+        height: 1.25rem;
+
+        &::-webkit-slider-runnable-track,
+        &::-moz-range-track {
+            height: 0.25rem;
+        }
+
+        &::-webkit-slider-thumb,
+        &::-moz-range-thumb {
+            --filler-offset: 0.5rem;
+
+            height: 1.25rem;
+            width: 1.25rem;
+        }
+    }
+
+    &.dui-range-md {
+        height: 1.5rem;
+
+        &::-webkit-slider-runnable-track,
+        &::-moz-range-track {
+            height: 0.5rem;
+        }
+
+        &::-webkit-slider-thumb,
+        &::-moz-range-thumb {
+            --filler-offset: 0.6rem;
+
+            height: 1.5rem;
+            width: 1.5rem;
+        }
+    }
+
+    &.dui-range-lg {
+        height: 2rem;
+
+        &::-webkit-slider-runnable-track,
+        &::-moz-range-track {
+            height: 1rem;
+        }
+
+        &::-webkit-slider-thumb,
+        &::-moz-range-thumb {
+            --filler-offset: 1rem;
+
+            height: 2rem;
+            width: 2rem;
+        }
+    }
+}
