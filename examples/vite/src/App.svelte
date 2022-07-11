@@ -146,7 +146,14 @@
     <Link hover color="primary">Hello world</Link>
 
     <Progress color="primary" value="32" max="100" />
-    <Radio />
-    <Range />
-    <Select />
+    <Radio color="info" />
+    <Range color="secondary" min="0" max="100" value="40" />
+    <Select>
+        <option disabled selected>Pick your favorite Simpson</option>
+        <option>Homer</option>
+        <option>Marge</option>
+        <option>Bart</option>
+        <option>Lisa</option>
+        <option>Maggie</option>
+    </Select>
 </Showcase>

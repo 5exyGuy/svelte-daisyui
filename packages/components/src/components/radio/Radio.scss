@@ -6,8 +6,6 @@
 
     --chkbg: themes.get-color('base-content');
 
-    height: 1.5rem;
-    width: 1.5rem;
     cursor: pointer;
     appearance: none;
     border-radius: 9999px;
@@ -36,7 +34,7 @@
     }
 
     &:checked {
-        @include themes.border-color('base-content');
+        @include themes.bg-color('base-content');
         animation: radiomark themes.$input-animation-duration ease-in-out;
         box-shadow: 0 0 0 4px rgb(themes.get-color('base-100')) inset, 0 0 0 4px rgb(themes.get-color('base-100')) inset;
     }

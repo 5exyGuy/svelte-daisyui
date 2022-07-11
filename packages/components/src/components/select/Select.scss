@@ -5,22 +5,15 @@
     // Colors
     @include themes.border-color('base-content', 0);
     @include themes.bg-color('base-100');
+    @include themes.button-border-radius();
 
     display: inline-flex;
-    min-height: 3rem;
     flex-shrink: 0;
     cursor: pointer;
     user-select: none;
     appearance: none;
-    height: 3rem;
-    padding-left: 1rem;
-    padding-right: 2.5rem;
-    font-size: 0.875rem;
-    line-height: 2;
     border-width: 1px;
-    padding-right: 2.5rem;
     font-weight: 600;
-    border-radius: var(--button-border-radius);
     background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
         linear-gradient(135deg, currentColor 50%, transparent 50%);
     background-position: calc(100% - 20px) calc(1px + 50%), calc(100% - 16px) calc(1px + 50%);
