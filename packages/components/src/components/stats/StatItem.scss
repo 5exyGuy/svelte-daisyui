@@ -1,0 +1,60 @@
+@use '../themes.scss';
+@use 'sass:list';
+
+.dui-stat-group {
+    & > .dui-stat-item {
+        @include themes.border-color('base-content', 0.1);
+
+        display: inline-grid;
+        width: 100%;
+        grid-template-columns: repeat(1, 1fr);
+        column-gap: 1rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+
+        &.dui-stat-item-figure {
+            grid-column-start: 2;
+            grid-row-start: 1;
+            grid-row: span 3 / span 3;
+            place-self: center;
+            justify-self: end;
+        }
+
+        &.dui-stat-item-title,
+        &.dui-stat-item-value,
+        &.dui-stat-item-desc,
+        &.dui-stat-item-actions {
+            grid-column-start: 1;
+            white-space: nowrap;
+        }
+
+        & > .dui-stat-item-title {
+            opacity: 0.6;
+        }
+
+        & > .dui-stat-item-value {
+            font-size: 2.25rem;
+            line-height: 2.5rem;
+            font-weight: 800;
+        }
+
+        & > .dui-stat-item-desc {
+            font-size: 0.75rem;
+            line-height: 1rem;
+            opacity: 0.6;
+        }
+
+        & > .dui-stat-item-actions {
+            margin-top: 1rem;
+        }
+
+        @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
+            &.dui-stat-item-#{$color} {
+                @include themes.bg-color($color);
+                @include themes.text-color($color + '-content');
+            }
+        }
+    }
+}

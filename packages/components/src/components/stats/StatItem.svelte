@@ -1,55 +1,57 @@
-<script>
+<script lang="ts">
+    import type { StringKeyOf } from 'type-fest';
     import { BrandColor, FunctionalColor } from '../../enums';
-    import { classes } from '../../utilities';
+    import type { Screen } from '../../types';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
+        title?: string;
+        value?: string;
+        description?: string;
+        background?: StringKeyOf<typeof BrandColor & typeof FunctionalColor>;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'background'> {}
+    interface $$ClassProps extends Pick<$$Props, 'background'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {string}
-     */
-    export let title = undefined;
-
-    /**
-     * @type {string}
-     */
-    export let value = undefined;
-
-    /**
-     * @type {string}
-     */
-    export let description = undefined;
-
-    /**
-     * @type {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error'}
-     */
-    export let background = undefined;
-
-    let className = undefined;
-    /**
-     * @type {string}
-     */
-    export { className as class };
+    export let title: $$Props['title'] = undefined;
+    export let value: $$Props['value'] = undefined;
+    export let description: $$Props['description'] = undefined;
+    export let background: $$Props['background'] = undefined;
+    let restClass: $$Props['class'] = undefined;
+    export { restClass as class };
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'stat-item',
-        {
-            background: {
-                condition: !!background,
-                key: background,
-                value: { ...BrandColor, ...FunctionalColor },
-            },
-        },
-        className,
+    const PREFIX = 'dui-stat-item';
+    const COLORS = { ...BrandColor, ...FunctionalColor };
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(PREFIX, { background: COLORS }, { background }),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { background: COLORS }, screen, { background: true }),
+        [restClass],
     );
 </script>
 
-<div class={classNames}>
+<div class={classNames} {...$$restProps}>
     {#if $$slots.figure}
         <div class="stat-item-figure">
             <slot name="figure" />
@@ -89,7 +91,6 @@
     {/if}
 </div>
 
-<style lang="scss">
-    @import 'StatItemStyled.scss';
-    @import 'StatItemUnstyled.scss';
+<style lang="scss" global>
+    @import 'StatItem.scss';
 </style>
