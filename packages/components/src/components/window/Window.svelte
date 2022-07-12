@@ -1,21 +1,32 @@
 <script lang="ts">
-    import { generateDefaultClasses, joinClasses } from '../../utilities';
-    import type { WindowClassProps, WindowsProps } from './windows-props.interface';
+    import type { Screen } from '../../types';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
+        bordered?: boolean;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'bordered'> {}
+    interface $$ClassProps extends Pick<$$Props, 'bordered'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     *
-     */
-    export let bordered: WindowsProps['bordered'] = false;
-
-    /**
-     *
-     */
-    let restClass: WindowsProps['class'] = undefined;
+    export let bordered: $$Props['bordered'] = false;
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
@@ -25,7 +36,8 @@
 
     $: classNames = joinClasses(
         [PREFIX],
-        generateDefaultClasses<WindowClassProps>(PREFIX, { bordered: 'bordered' }, { bordered }),
+        generateDefaultClasses<$$ClassProps>(PREFIX, { bordered: 'bordered' }, { bordered }),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { bordered: 'bordered' }, screen, { bordered: true }),
         [restClass],
     );
 </script>

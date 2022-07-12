@@ -1,38 +1,53 @@
-<script>
-    import { classes } from '@svelte-daisyui/shared';
-    import { StackDirection } from './stack-direction.enum';
+<script lang="ts">
+    import type { StringKeyOf } from 'type-fest';
+    import { Direction } from '../../enums';
+    import type { Screen } from '../../types';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLSelectElement> {
+        direction?: StringKeyOf<typeof Direction>;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'direction'> {}
+    interface $$ClassProps extends Pick<$$Props, 'direction'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     *  @type {'up' | 'down' | 'left' | 'right' | 'upleft' | 'upright' | 'downleft' | 'downright'}
-     */
-    export let direction = 'down';
-
-    let restClass = undefined;
-    /**
-     * @type {string}
-     */
+    export let direction: $$Props['direction'] = 'down';
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({
-        prefix: 'stack',
-        classProps: { direction: { value: StackDirection } },
-        props: { direction },
-        restClass,
-    });
+    const PREFIX = 'dui-stack';
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(PREFIX, { direction: Direction }, { direction }),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { direction: Direction }, screen, { direction: true }),
+        [restClass],
+    );
 </script>
 
 <div class={classNames} {...$$restProps}>
     <slot />
 </div>
 
-<style lang="scss">
+<style lang="scss" global>
     @import 'Stack.scss';
 </style>

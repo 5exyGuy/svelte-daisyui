@@ -1,165 +1,156 @@
-.stack {
-    @apply place-items-center items-end;
-    @apply inline-grid;
+.dui-stack {
+    display: inline-grid;
+    place-items: center;
+    align-items: flex-end;
 
-    & > :global(*) {
-        @apply col-start-1 row-start-1;
-        @apply w-full;
-        @apply opacity-60;
+    & > * {
+        grid-column-start: 1;
+        grid-row-start: 1;
+    }
+
+    & > *:not(:nth-child(1)):not(:nth-child(2)) {
+        opacity: 0.6;
         z-index: 1;
     }
 
-    & > :global(*:nth-child(2)) {
-        @apply opacity-80;
+    & > *:nth-child(2) {
+        opacity: 0.8;
         z-index: 2;
     }
 
-    & > :global(*:nth-child(1)) {
-        @apply opacity-100;
+    & > *:nth-child(1) {
+        opacity: 1;
         z-index: 3;
     }
 
-    &.stack-up {
-        @apply mb-4;
+    &.dui-stack-up {
+        margin-bottom: 1rem;
 
-        & > :global(*) {
-            @apply translate-x-0 translate-y-0 scale-90;
+        & > *:not(:nth-child(1)):not(:nth-child(2)) {
+            transform: scale(0.9);
         }
 
-        & > :global(*:nth-child(2)) {
-            @apply translate-x-0 translate-y-2 -scale-95;
+        & > *:nth-child(2) {
+            transform: translateY(0.5rem) scale(0.95);
         }
 
-        & > :global(*:nth-child(1)) {
-            @apply translate-x-0 translate-y-4 scale-100;
-        }
-    }
-
-    &.stack-down {
-        @apply mb-4;
-
-        & > :global(*) {
-            @apply translate-x-0 translate-y-4 scale-90;
-        }
-
-        & > :global(*:nth-child(2)) {
-            @apply translate-x-0 translate-y-2 -scale-95;
-        }
-
-        & > :global(*:nth-child(1)) {
-            @apply translate-x-0 translate-y-0 scale-100;
+        & > *:nth-child(1) {
+            transform: translateY(1rem) scale(1);
         }
     }
 
-    &.stack-left {
-        @apply mr-4;
+    &.dui-stack-down {
+        margin-bottom: 1rem;
 
-        & > :global(*) {
-            @apply translate-x-0 translate-y-0 scale-90;
+        & > *:not(:nth-child(1)):not(:nth-child(2)) {
+            transform: translateY(1rem) scale(0.9);
         }
 
-        & > :global(*:nth-child(2)) {
-            @apply translate-x-2 translate-y-0 scale-95;
+        & > *:nth-child(2) {
+            transform: translateY(0.5rem) scale(0.95);
         }
 
-        & > :global(*:nth-child(1)) {
-            @apply translate-x-4 translate-y-0 scale-100;
-        }
-    }
-
-    &.stack-right {
-        @apply mr-4;
-
-        & > :global(*) {
-            @apply translate-x-4 translate-y-0 scale-90;
-        }
-
-        & > :global(*:nth-child(2)) {
-            @apply translate-x-2 translate-y-0 scale-95;
-        }
-
-        & > :global(*:nth-child(1)) {
-            @apply translate-x-0 translate-y-0 scale-100;
+        & > *:nth-child(1) {
+            transform: scale(1);
         }
     }
 
-    &.stack-upleft {
-        @apply ml-4 mt-4;
+    &.dui-stack-left {
+        margin-right: 1rem;
 
-        & > :global(*) {
-            @apply -translate-x-4 -translate-y-4 scale-90;
+        & > *:not(:nth-child(1)):not(:nth-child(2)) {
+            transform: scale(0.9);
         }
 
-        & > :global(*:nth-child(2)) {
-            @apply -translate-x-2 -translate-y-2 scale-95;
+        & > *:nth-child(2) {
+            transform: translateX(0.5rem) scale(0.95);
         }
 
-        & > :global(*:nth-child(1)) {
-            @apply translate-x-0 translate-y-0 scale-100;
-        }
-    }
-
-    &.stack-upleft {
-        @apply ml-4 mt-4;
-
-        & > :global(*) {
-            @apply -translate-x-4 -translate-y-4 scale-90;
-        }
-
-        & > :global(*:nth-child(2)) {
-            @apply -translate-x-2 -translate-y-2 scale-95;
-        }
-
-        & > :global(*:nth-child(1)) {
-            @apply translate-x-0 translate-y-0 scale-100;
+        & > *:nth-child(1) {
+            transform: translateX(1rem) scale(1);
         }
     }
 
-    &.stack-upright {
-        @apply mr-4 mt-4;
+    &.dui-stack-right {
+        margin-right: 1rem;
 
-        & > :global(*) {
-            @apply translate-x-4 -translate-y-4 scale-90;
+        & > *:not(:nth-child(1)):not(:nth-child(2)) {
+            transform: translateX(1rem) scale(0.9);
         }
 
-        & > :global(*:nth-child(2)) {
-            @apply translate-x-2 -translate-y-2 scale-95;
+        & > *:nth-child(2) {
+            transform: translateX(0.5rem) scale(0.95);
         }
 
-        & > :global(*:nth-child(1)) {
-            @apply translate-x-0 translate-y-0 scale-100;
-        }
-    }
-
-    &.stack-downleft {
-        @apply ml-4 mb-4;
-
-        & > :global(*) {
-            @apply -translate-x-4 translate-y-4 scale-90;
-        }
-
-        & > :global(*:nth-child(2)) {
-            @apply -translate-x-2 translate-y-2 scale-95;
-        }
-
-        & > :global(*:nth-child(1)) {
-            @apply translate-x-0 translate-y-0 scale-100;
+        & > *:nth-child(1) {
+            transform: scale(1);
         }
     }
 
-    &.stack-downright {
-        @apply mr-4 mb-4;
+    &.dui-stack-upleft {
+        margin-left: 1rem;
+        margin-top: 1rem;
 
-        & > :global(*) {
-            @apply translate-x-4 translate-y-4 scale-90;
+        & > *:not(:nth-child(1)):not(:nth-child(2)) {
+            transform: translateX(-1rem) translateY(-1rem) scale(0.9);
         }
 
-        & > :global(*:nth-child(2)) {
-            @apply translate-x-2 translate-y-2 scale-95;
+        & > *:nth-child(2) {
+            transform: translateX(-0.5rem) translateY(-0.5rem) scale(0.95);
         }
 
-        & > :global(*:nth-child(1)) {
-            @apply translate-x-0 translate-y-0 scale-100;
+        & > *:nth-child(1) {
+            transform: scale(1);
+        }
+    }
+
+    &.dui-stack-upright {
+        margin-right: 1rem;
+        margin-top: 1rem;
+
+        & > *:not(:nth-child(1)):not(:nth-child(2)) {
+            transform: translateX(1rem) translateY(-1rem) scale(0.9);
+        }
+
+        & > *:nth-child(2) {
+            transform: translateX(0.5rem) translateY(-0.5rem) scale(0.95);
+        }
+
+        & > *:nth-child(1) {
+            transform: scale(1);
+        }
+    }
+
+    &.dui-stack-downleft {
+        margin-left: 1rem;
+        margin-bottom: 1rem;
+
+        & > *:not(:nth-child(1)):not(:nth-child(2)) {
+            transform: translateX(-1rem) translateY(1rem) scale(0.9);
+        }
+
+        & > *:nth-child(2) {
+            transform: translateX(-0.5rem) translateY(0.5rem) scale(0.95);
+        }
+
+        & > *:nth-child(1) {
+            transform: scale(1);
+        }
+    }
+
+    &.dui-stack-downright {
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+        & > *:not(:nth-child(1)):not(:nth-child(2)) {
+            transform: translateX(1rem) translateY(1rem) scale(0.9);
+        }
+
+        & > *:nth-child(2) {
+            transform: translateX(0.5rem) translateY(0.5rem) scale(0.95);
+        }
+
+        & > *:nth-child(1) {
+            transform: scale(1);
         }
     }
 }

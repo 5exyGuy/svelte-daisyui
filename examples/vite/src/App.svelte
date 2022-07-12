@@ -33,6 +33,8 @@
         Radio,
         Range,
         Select,
+        Stack,
+        Window,
     } from '@svelte-daisyui/components/src';
     import CollapseContent from '@svelte-daisyui/components/src/components/collapse/CollapseContent.svelte';
 
@@ -156,4 +158,12 @@
         <option>Lisa</option>
         <option>Maggie</option>
     </Select>
+    <Stack direction="downright">
+        <div class="grid w-32 h-20 rounded bg-primary text-primary-content place-content-center">1</div>
+        <div class="grid w-32 h-20 rounded bg-accent text-accent-content place-content-center">2</div>
+        <div class="grid w-32 h-20 rounded bg-secondary text-secondary-content place-content-center">3</div>
+    </Stack>
+    <Window bordered>
+        <div class="flex justify-center px-4 py-16 border-t border-base-300">Hello!</div>
+    </Window>
 </Showcase>

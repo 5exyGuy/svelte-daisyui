@@ -1,14 +1,19 @@
-@use '../variables.scss';
+@use '../themes.scss';
 
 .dui-window {
+    // Colors
+    @include themes.text-color('base-content');
+    @include themes.box-border-radius();
+
     position: relative;
     overflow: hidden;
     overflow-x: auto;
     padding-top: 1.25rem;
-    border-radius: variables.$box-border-radius;
 
     &.dui-window-bordered {
-        @apply border-base-300;
+        // Colors
+        @include themes.border-color('base-300');
+
         border-width: 1px;
     }
 

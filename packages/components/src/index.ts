@@ -75,7 +75,7 @@ export { default as Range } from './components/range/Range.svelte';
 // Select
 export { default as Select } from './components/select/Select.svelte';
 // Stack
-
+export { default as Stack } from './components/stack/Stack.svelte';
 // Stats
 
 // Steps
@@ -93,3 +93,4 @@ export { default as Select } from './components/select/Select.svelte';
 // Tooltip
 
 // Window
+export { default as Window } from './components/window/Window.svelte';
