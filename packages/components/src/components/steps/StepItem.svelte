@@ -38,7 +38,6 @@
     <slot />
 </div>
 
-<style lang="scss">
-    @import 'StepItemStyled.scss';
-    @import 'StepItemUnstyled.scss';
+<style lang="scss" global>
+    @import 'StepItem.scss';
 </style>

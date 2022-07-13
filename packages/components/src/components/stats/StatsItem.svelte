@@ -45,7 +45,7 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    const PREFIX = 'dui-stat-item';
+    const PREFIX = 'dui-stats-item';
     const COLORS = { ...BrandColor, ...FunctionalColor };
 
     $: classNames = joinClasses(

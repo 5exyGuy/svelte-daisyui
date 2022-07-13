@@ -26,9 +26,7 @@
         content: attr(data-content);
     }
 
-    @each $color
-        in list.append(list.join($brand-colors, $functional-colors), 'neutral')
-    {
+    @each $color in list.append(list.join($brand-colors, $functional-colors), 'neutral') {
         &.step-item-#{$color} + :global(.step-item.step-item-#{$color}:before),
         &.step-item-#{$color}:after {
             @apply bg-#{$color} text-#{$color}-content;
@@ -63,3 +61,11 @@
         margin-left: 50%;
     }
 }
+
+// :global(.step-group.step-group-horizontal) > .step-item {
+//     @apply grid grid-cols-1 grid-rows-2 place-items-center text-center;
+// }
+
+// :global(.step-group.step-group-vertical) > .step-item {
+//     @apply grid grid-cols-2 grid-rows-1;
+// }

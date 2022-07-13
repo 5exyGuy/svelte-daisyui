@@ -34,11 +34,10 @@
     );
 </script>
 
-<div class={classNames}>
+<div class={classNames} {...$$restProps}>
     <slot />
 </div>
 
-<style lang="scss">
-    @import 'StepGroupStyled.scss';
-    @import 'StepGroupUnstyled.scss';
+<style lang="scss" global>
+    @import 'StepGroup.scss';
 </style>

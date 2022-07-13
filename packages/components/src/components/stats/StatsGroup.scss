@@ -1,7 +1,7 @@
 @use '../themes.scss';
 @use 'sass:list';
 
-.dui-stat-group {
+.dui-stats-group {
     // Colors
     @include themes.bg-color('base-100');
     @include themes.text-color('base-content');
@@ -9,14 +9,14 @@
 
     display: inline-grid;
 
-    &.dui-stat-group-horizontal {
+    &.dui-stats-group-horizontal {
         grid-auto-flow: column;
         overflow-x: auto;
 
         @apply divide-x divide-y-0;
     }
 
-    &.dui-stat-group-vertical {
+    &.dui-stats-group-vertical {
         grid-auto-flow: row;
         overflow-y: auto;
 
@@ -25,7 +25,7 @@
 
     // Primary, secondary, accent, success, info, warning, error
     @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
-        &.dui-stat-group-#{$color} {
+        &.dui-stats-group-#{$color} {
             @include themes.bg-color($color);
             @include themes.text-color($color + '-content');
         }

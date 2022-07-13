@@ -37,6 +37,7 @@
         Window,
     } from '@svelte-daisyui/components/src';
     import { Card } from '@svelte-daisyui/components/src/components/card';
+    import { StatsGroup } from '@svelte-daisyui/components/src/components/stats';
     import CollapseContent from '@svelte-daisyui/components/src/components/collapse/CollapseContent.svelte';
 
     const breadcrumbs = [
@@ -166,6 +167,16 @@
         <div class="grid w-32 h-20 rounded bg-accent text-accent-content place-content-center">2</div>
         <div class="grid w-32 h-20 rounded bg-secondary text-secondary-content place-content-center">3</div>
     </Stack>
+
+    <StatsGroup
+        items={[
+            { title: 'Title #1', value: '1.000 EUR', description: '21% more', background: 'warning' },
+            { title: 'Title #2', value: '1.000 EUR', description: '21% more', background: 'secondary' },
+            { title: 'Title #2', value: '1.000 EUR', description: '21% more', background: 'primary' },
+        ]}
+        alignment="horizontal"
+    />
+
     <Window bordered>
         <div class="flex justify-center px-4 py-16 border-t border-base-300">Hello!</div>
     </Window>
