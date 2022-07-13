@@ -3,6 +3,9 @@
     import { BrandColor, FunctionalColor } from '../../enums';
     import type { Screen } from '../../types';
     import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
+    import StatsItemDescription from './StatsItemDescription.svelte';
+    import StatsItemTitle from './StatsItemTitle.svelte';
+    import StatsItemValue from './StatsItemValue.svelte';
 
     // -----------------------------------------------------------
     // Type Definitions
@@ -22,6 +25,8 @@
 
     interface $$Slots {
         default: {};
+        figure: {};
+        actions: {};
     }
 
     // -----------------------------------------------------------
@@ -52,45 +57,23 @@
 </script>
 
 <div class={classNames} {...$$restProps}>
-    {#if $$slots.figure}
-        <div class="stat-item-figure">
-            <slot name="figure" />
-        </div>
-    {/if}
-    {#if $$slots.title || title}
-        <div class="stat-item-title">
-            {#if $$slots.title}
-                <slot name="title" />
-            {:else if title}
-                {title}
-            {/if}
-        </div>
-    {/if}
-    {#if $$slots.value || value}
-        <div class="stat-item-value">
-            {#if $$slots.value}
-                <slot name="value" />
-            {:else if value}
-                {value}
-            {/if}
-        </div>
-    {/if}
-    {#if $$slots.description || description}
-        <div class="stat-item-desc">
-            {#if $$slots.description}
-                <slot name="description" />
-            {:else if description}
-                {description}
-            {/if}
-        </div>
-    {/if}
-    {#if $$slots.actions}
-        <div class="stat-item-actions">
-            <slot name="actions" />
-        </div>
+    {#if $$slots.default}
+        <slot />
+    {:else}
+        <slot name="figure" />
+        {#if title}
+            <StatsItemTitle>{title}</StatsItemTitle>
+        {/if}
+        {#if value}
+            <StatsItemValue>{value}</StatsItemValue>
+        {/if}
+        {#if description}
+            <StatsItemDescription>{description}</StatsItemDescription>
+        {/if}
+        <slot name="actions" />
     {/if}
 </div>
 
 <style lang="scss" global>
-    @import 'StatItem.scss';
+    @import 'StatsItem.scss';
 </style>

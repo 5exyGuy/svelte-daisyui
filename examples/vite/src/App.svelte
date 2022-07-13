@@ -9,14 +9,14 @@
         BreadcrumbGroup,
         BreadcrumbItem,
         Button,
-        Card,
-        CardBody,
-        CardTitle,
-        CardActions,
-        CardFigure,
-        CardContent,
-        CarouselGroup,
-        CarouselItem,
+        // Card,
+        // CardBody,
+        // CardTitle,
+        // CardActions,
+        // CardFigure,
+        // CardContent,
+        // CarouselGroup,
+        // CarouselItem,
         Checkbox,
         Code,
         Collapse,
@@ -36,6 +36,7 @@
         Stack,
         Window,
     } from '@svelte-daisyui/components/src';
+    import { Card } from '@svelte-daisyui/components/src/components/card';
     import CollapseContent from '@svelte-daisyui/components/src/components/collapse/CollapseContent.svelte';
 
     const breadcrumbs = [
@@ -68,16 +69,18 @@
     </BreadcrumbGroup>
     <Button>Hello world</Button>
     <Card fullImage class="bg-base-100 text-base-content w-[600px]">
-        <CardFigure><img alt="" src="https://api.lorem.space/image/game?w=600&h=400" /></CardFigure>
-        <CardBody justify="center">
-            <CardTitle>Title</CardTitle>
-            <CardContent>
+        <Card.Figure><img alt="" src="https://api.lorem.space/image/game?w=600&h=400" /></Card.Figure>
+        <Card.Body justify="center">
+            <Card.Title>Title</Card.Title>
+            <Card.Content>
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                 industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
                 scrambled it to make a type specimen book.
-            </CardContent>
-            <CardActions alignment="middle" justify="center"><Button color="primary">Hello world</Button></CardActions>
-        </CardBody>
+            </Card.Content>
+            <Card.Actions alignment="middle" justify="center">
+                <Button color="primary">Hello world</Button>
+            </Card.Actions>
+        </Card.Body>
     </Card>
     <!-- <CarouselGroup class="w-full">
         <CarouselItem class="relative w-full">

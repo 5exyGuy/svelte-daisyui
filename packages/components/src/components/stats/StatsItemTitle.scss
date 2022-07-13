@@ -1,0 +1,8 @@
+@use '../themes.scss';
+@use 'sass:list';
+
+.dui-stats-group > .dui-stats-item > .dui-stats-item-title {
+    grid-column-start: 1;
+    white-space: nowrap;
+    opacity: 0.6;
+}

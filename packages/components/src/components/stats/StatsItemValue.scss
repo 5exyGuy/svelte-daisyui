@@ -1,0 +1,10 @@
+@use '../themes.scss';
+@use 'sass:list';
+
+.dui-stats-group > .dui-stats-item > .dui-stats-item-value {
+    grid-column-start: 1;
+    white-space: nowrap;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    font-weight: 800;
+}

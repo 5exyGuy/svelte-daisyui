@@ -59,5 +59,5 @@
 </div>
 
 <style lang="scss" global>
-    @import 'StatGroup.scss';
+    @import 'StatsGroup.scss';
 </style>
