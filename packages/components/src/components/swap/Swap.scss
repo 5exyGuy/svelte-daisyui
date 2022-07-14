@@ -1,4 +1,4 @@
-.swap {
+.dui-swap {
     display: inline-grid;
     position: relative;
     cursor: pointer;
@@ -29,10 +29,9 @@
         opacity: 1;
     }
 
-    &.swap-rotate {
+    &.dui-swap-rotate {
         & > :nth-child(1) {
             transform: rotate(45deg);
-            @apply rotate-45;
         }
 
         &[data-state='true'] > :nth-child(2) {
@@ -44,7 +43,7 @@
         }
     }
 
-    &.swap-flip {
+    &.dui-swap-flip {
         transform-style: preserve-3d;
         perspective: 16em;
 

@@ -53,7 +53,7 @@
             $prefix: escape($prefix);
 
             @each $color in list.join(colors.$brand, colors.$functional) {
-                &.#{$prefix}dui-toggle-#{$color}:checked {
+                &.dui-toggle-#{$color}:checked {
                     background-color: colors.get($color, 0.2);
                 }
             }
@@ -68,53 +68,41 @@
         }
     }
 
-    @mixin responsive-props($prefix: '') {
-        $prefix: escape($prefix);
-
-        @each $color in list.join(colors.$brand, colors.$functional) {
-            &.#{$prefix}dui-toggle-#{$color} {
-                &:focus-visible {
-                    outline: 2px solid colors.get($color);
-                }
-
-                &:checked {
-                    border-color: colors.get($color, 0.1);
-                    background-color: colors.get($color);
-                    color: colors.get-content($color);
-                }
+    @each $color in list.join(colors.$brand, colors.$functional) {
+        &.dui-toggle-#{$color} {
+            &:focus-visible {
+                outline: 2px solid colors.get($color);
             }
-        }
 
-        &.#{$prefix}dui-toggle-xs {
-            height: 1rem;
-            width: 1.5rem;
-            --handle-offset: 0.5rem;
-        }
-
-        &.#{$prefix}dui-toggle-sm {
-            height: 1.25rem;
-            height: 2rem;
-            --handle-offset: 0.75rem;
-        }
-
-        &.#{$prefix}dui-toggle-md {
-            height: 1.5rem;
-            width: 3rem;
-            --handle-offset: 1.5rem;
-        }
-
-        &.#{$prefix}dui-toggle-lg {
-            height: 2rem;
-            width: 4rem;
-            --handle-offset: 2rem;
+            &:checked {
+                border-color: colors.get($color, 0.1);
+                background-color: colors.get($color);
+                color: colors.get-content($color);
+            }
         }
     }
 
-    @include responsive-props();
+    &.dui-toggle-xs {
+        height: 1rem;
+        width: 1.5rem;
+        --handle-offset: 0.5rem;
+    }
 
-    @each $name, $screen-size in variables.$screen-sizes {
-        @media (min-width: #{$screen-size}) {
-            @include responsive-props('#{$name}:');
-        }
+    &.dui-toggle-sm {
+        height: 1.25rem;
+        height: 2rem;
+        --handle-offset: 0.75rem;
+    }
+
+    &.dui-toggle-md {
+        height: 1.5rem;
+        width: 3rem;
+        --handle-offset: 1.5rem;
+    }
+
+    &.dui-toggle-lg {
+        height: 2rem;
+        width: 4rem;
+        --handle-offset: 2rem;
     }
 }

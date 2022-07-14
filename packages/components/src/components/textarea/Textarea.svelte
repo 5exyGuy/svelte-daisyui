@@ -1,84 +1,56 @@
-<script>
-    import {
-        classes,
-        BrandColor,
-        FunctionalColor,
-    } from '@svelte-daisyui/shared';
+<script lang="ts">
+    import type { StringKeyOf } from 'type-fest';
+    import { BrandColor, FunctionalColor } from '../../enums';
+    import type { Screen } from '../../types';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
 
     // -----------------------------------------------------------
-    //  Type Definitions
+    // Type Definitions
     // -----------------------------------------------------------
 
-    /**
-     * @restProps {input}
-     *
-     * @typedef {'primary' | 'secondary' | 'accent' | 'info' | 'success' | 'warning' | 'error' | 'ghost'} Color
-     * @typedef {{ color?: Color }} Properties
-     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
-     */
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLTextAreaElement> {
+        color?: StringKeyOf<typeof BrandColor & typeof FunctionalColor> | 'ghost';
+        bordered?: boolean;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'color' | 'bordered'> {}
+    interface $$ClassProps extends Pick<$$Props, 'color' | 'bordered'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {Color}
-     */
-    export let color = undefined;
-
-    /**
-     * @type {string}
-     */
-    export let placeholder = undefined;
-
-    /**
-     * @type {boolean}
-     */
-    export let disabled = false;
-
-    /**
-     * @type {boolean}
-     */
-    export let bordered = false;
-
-    let restClass = undefined;
-    /**
-     * @type {string}
-     */
+    export let color: $$Props['color'] = undefined;
+    export let bordered: $$Props['bordered'] = false;
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
-
-    // -----------------------------------------------------------
-    // Screen
-    // -----------------------------------------------------------
-
-    /**
-     * @type {Screen}
-     */
-    export let screen = undefined;
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({
-        prefix: 'dui-textarea',
-        classProps: {
-            color: {
-                value: {
-                    ...BrandColor,
-                    ...FunctionalColor,
-                    ...{ ghost: 'ghost' },
-                },
-            },
-            bordered: { value: 'bordered' },
-        },
-        props: { color, bordered },
-        screen,
-        restClass,
-    });
+    const PREFIX = 'dui-textarea';
+    const COLORS = { ...BrandColor, ...FunctionalColor, ...{ ghost: 'ghost' } };
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(PREFIX, { bordered: 'bordered', color: COLORS }, { bordered, color }),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { bordered: 'bordered', color: COLORS }, screen, {
+            bordered: true,
+            color: true,
+        }),
+        [restClass],
+    );
 </script>
 
-<textarea class={classNames} {placeholder} {disabled} />
+<textarea class={classNames} {...$$restProps} />
 
 <style lang="scss" global>
     @import 'TextArea.scss';

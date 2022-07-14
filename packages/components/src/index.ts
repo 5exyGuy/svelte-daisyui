@@ -77,17 +77,24 @@ export { default as Select } from './components/select/Select.svelte';
 // Stack
 export { default as Stack } from './components/stack/Stack.svelte';
 // Stats
-
+export { default as StatsGroup } from './components/stats/StatsGroup.svelte';
+export { default as StatsItem } from './components/stats/StatsItem.svelte';
+export { default as StatsItemActions } from './components/stats/StatsItemActions.svelte';
+export { default as StatsItemDescription } from './components/stats/StatsItemDescription.svelte';
+export { default as StatsItemFigure } from './components/stats/StatsItemFigure.svelte';
+export { default as StatsItemTitle } from './components/stats/StatsItemTitle.svelte';
+export { default as StatsItemValue } from './components/stats/StatsItemValue.svelte';
 // Steps
-
+export { default as StepsGroup } from './components/steps/StepsGroup.svelte';
+export { default as StepsItem } from './components/steps/StepsItem.svelte';
 // Swap
-
+export { default as Swap } from './components/swap/Swap.svelte';
 // Table
 
 // Tabs
 
 // Textarea
-
+export { default as Textarea } from './components/textarea/Textarea.svelte';
 // Toggle
 
 // Tooltip
