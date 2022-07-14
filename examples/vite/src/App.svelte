@@ -38,6 +38,7 @@
     } from '@svelte-daisyui/components/src';
     import { Card } from '@svelte-daisyui/components/src/components/card';
     import { StatsGroup } from '@svelte-daisyui/components/src/components/stats';
+    import { StepsGroup, StepsItem } from '@svelte-daisyui/components/src/components/steps';
     import CollapseContent from '@svelte-daisyui/components/src/components/collapse/CollapseContent.svelte';
 
     const breadcrumbs = [
@@ -176,6 +177,9 @@
         ]}
         alignment="horizontal"
     />
+    <StepsGroup>
+        <StepsItem>Step 1</StepsItem>
+    </StepsGroup>
 
     <Window bordered>
         <div class="flex justify-center px-4 py-16 border-t border-base-300">Hello!</div>
