@@ -1,0 +1,67 @@
+.swap {
+    display: inline-grid;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    place-content: center;
+
+    & > * {
+        grid-column-start: 1;
+        grid-row-start: 1;
+        transition-property: transform, opacity;
+        transition-duration: 300ms;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    & > :nth-child(n + 3) {
+        display: none;
+    }
+
+    & > :nth-child(1) {
+        opacity: 0;
+    }
+
+    &[data-state='true'] > :nth-child(2) {
+        opacity: 0;
+    }
+
+    &[data-state='true'] > :nth-child(1) {
+        opacity: 1;
+    }
+
+    &.swap-rotate {
+        & > :nth-child(1) {
+            transform: rotate(45deg);
+            @apply rotate-45;
+        }
+
+        &[data-state='true'] > :nth-child(2) {
+            transform: rotate(-45deg);
+        }
+
+        &[data-state='true'] > :nth-child(1) {
+            transform: rotate(0deg);
+        }
+    }
+
+    &.swap-flip {
+        transform-style: preserve-3d;
+        perspective: 16em;
+
+        & > :nth-child(1) {
+            transform: rotateY(180deg);
+            backface-visibility: hidden;
+            opacity: 1;
+        }
+
+        &[data-state='true'] > :nth-child(2) {
+            transform: rotateY(-180deg);
+            backface-visibility: hidden;
+            opacity: 1;
+        }
+
+        &[data-state='true'] > :nth-child(1) {
+            transform: rotateY(0deg);
+        }
+    }
+}

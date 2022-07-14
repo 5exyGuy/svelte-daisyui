@@ -1,41 +1,47 @@
-<script>
-    import { classes } from '../../utilities';
-    import { SwapAnim } from './swap-anim.enum';
+<script lang="ts">
+    import type { StringKeyOf } from 'type-fest';
+    import type { Screen } from '../../types';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
+    import { SwapAnimation } from './swap-animation.enum';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
+        animation?: StringKeyOf<typeof SwapAnimation>;
+        state?: boolean;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'animation'> {}
+    interface $$ClassProps extends Pick<$$Props, 'animation'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {'rotate' | 'flip'}
-     */
-    export let animation = undefined;
-
-    /**
-     * @type {boolean}
-     */
-    export let state = false;
-
-    let className = undefined;
-    /**
-     * @type {string}
-     */
-    export { className as class };
+    export let animation: $$Props['animation'] = undefined;
+    export let state: $$Props['state'] = false;
+    let restClass: $$Props['class'] = undefined;
+    export { restClass as class };
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'swap',
-        {
-            animation: {
-                condition: !!animation,
-                key: animation,
-                value: SwapAnim,
-            },
-        },
-        className,
+    const PREFIX = 'dui-swap';
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(PREFIX, { animation: SwapAnimation }, { animation }),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { animation: SwapAnimation }, screen, { animation: true }),
+        [restClass],
     );
 
     // -----------------------------------------------------------
@@ -45,12 +51,11 @@
     const changeState = () => (state = !state);
 </script>
 
-<div class={classNames} on:click={changeState} on:click data-state={state}>
+<div class={classNames} on:click={changeState} on:click data-state={state} {...$$restProps}>
     <slot name="on" />
     <slot name="off" />
 </div>
 
-<style lang="scss">
-    @import 'SwapStyled.scss';
-    @import 'SwapUnstyled.scss';
+<style lang="scss" global>
+    @import 'Swap.scss';
 </style>
