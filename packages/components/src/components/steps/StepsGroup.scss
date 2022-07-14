@@ -1,7 +1,7 @@
 .dui-steps-group {
     display: inline-grid;
     overflow: hidden;
-    overflow-x: hidden;
+    overflow-x: auto;
     counter-reset: step;
 
     &.dui-steps-group-horizontal {

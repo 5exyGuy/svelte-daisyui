@@ -1,60 +1,62 @@
 @use '../themes.scss';
 @use 'sass:list';
 
-.dui-steps-group > .dui-steps-item {
-    display: grid;
-    place-items: center;
-    text-align: center;
-    min-width: 4rem;
-
-    &:before {
-        @include themes.bg-color('base-300');
-        @include themes.text-color('base-content');
-
-        top: 0;
-        grid-column-start: 1;
-        grid-row-start: 1;
-        height: 0.5rem;
-        width: 100%;
-        content: '';
-        margin-left: -100%;
-    }
-
-    &:after {
-        @include themes.bg-color('base-300');
+.dui-steps-group {
+    & > .dui-steps-item {
         @include themes.text-color('base-content');
 
         display: grid;
-        position: relative;
-        grid-column-start: 1;
-        grid-row-start: 1;
-        height: 2rem;
-        width: 2rem;
         place-items: center;
-        place-self: center;
-        border-radius: 9999px;
-        content: counter(step);
-        counter-increment: step;
-        z-index: 1;
-    }
+        text-align: center;
+        min-width: 4rem;
 
-    &:first-child:before {
-        content: none;
-    }
+        &:before {
+            @include themes.bg-color('base-300');
 
-    &[data-content]:after {
-        content: attr(data-content);
-    }
+            top: 0;
+            grid-column-start: 1;
+            grid-row-start: 1;
+            height: 0.5rem;
+            width: 100%;
+            content: '';
+            margin-left: -100%;
+        }
 
-    @each $color in list.append(list.join(themes.$brand-colors, themes.$functional-colors), 'neutral') {
-        &.dui-steps-item-#{$color} + .dui-steps-item.dui-steps-item-#{$color}:before,
-        &.dui-steps-item-#{$color}:after {
-            @include themes.bg-color($color);
-            @include themes.text-color($color + '-content');
+        &:after {
+            @include themes.bg-color('base-300');
+
+            display: grid;
+            position: relative;
+            grid-column-start: 1;
+            grid-row-start: 1;
+            height: 2rem;
+            width: 2rem;
+            place-items: center;
+            place-self: center;
+            border-radius: 9999px;
+            content: counter(step);
+            counter-increment: step;
+            z-index: 1;
+        }
+
+        &:first-child:before {
+            content: none;
+        }
+
+        &[data-content]:after {
+            content: attr(data-content);
+        }
+
+        @each $color in list.append(list.join(themes.$brand-colors, themes.$functional-colors), 'neutral') {
+            &.dui-steps-item-#{$color} + .dui-steps-item.dui-steps-item-#{$color}:before,
+            &.dui-steps-item-#{$color}:after {
+                @include themes.bg-color($color);
+                @include themes.text-color($color + '-content');
+            }
         }
     }
 
-    &.step-group-horizontal > .dui-steps-item {
+    &.dui-steps-group-horizontal > .dui-steps-item {
         grid-template-rows: 40px 1fr;
         grid-template-columns: auto;
 
@@ -70,7 +72,7 @@
         }
     }
 
-    &.step-group-vertical > .dui-steps-item {
+    &.dui-steps-group-vertical > .dui-steps-item {
         gap: 0.5rem;
         grid-template-columns: 40px 1fr;
         grid-template-rows: auto;
@@ -85,11 +87,3 @@
         }
     }
 }
-
-// :global(.step-group.step-group-horizontal) > .dui-steps-item {
-//     @apply grid grid-cols-1 grid-rows-2 place-items-center text-center;
-// }
-
-// :global(.step-group.step-group-vertical) > .dui-steps-item {
-//     @apply grid grid-cols-2 grid-rows-1;
-// }

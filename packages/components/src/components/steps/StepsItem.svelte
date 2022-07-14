@@ -10,6 +10,7 @@
 
     interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
         color?: StringKeyOf<typeof BrandColor & typeof FunctionalColor> | 'neutral';
+        content?: string;
         screen?: Screen<$$ResponsiveProps>;
     }
     interface $$ResponsiveProps extends Pick<$$Props, 'color'> {}
@@ -26,6 +27,7 @@
     // -----------------------------------------------------------
 
     export let color: $$Props['color'] = undefined;
+    export let content: $$Props['content'] = undefined;
     let restClass: $$Props['class'] = undefined;
     export { restClass as class };
     export let screen: $$Props['screen'] = undefined;
@@ -47,7 +49,7 @@
     );
 </script>
 
-<div class={classNames} {...$$restProps}>
+<div data-content={content} class={classNames} {...$$restProps}>
     <slot />
 </div>
 

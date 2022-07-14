@@ -177,9 +177,15 @@
         ]}
         alignment="horizontal"
     />
-    <StepsGroup>
-        <StepsItem>Step 1</StepsItem>
-    </StepsGroup>
+    <StepsGroup
+        alignment="vertical"
+        items={[
+            { color: 'primary', title: 'Step 1' },
+            { color: 'primary', title: 'Step 2' },
+            { color: 'error', title: 'Step 3' },
+            { color: 'secondary', title: 'Step 4' },
+        ]}
+    />
 
     <Window bordered>
         <div class="flex justify-center px-4 py-16 border-t border-base-300">Hello!</div>
