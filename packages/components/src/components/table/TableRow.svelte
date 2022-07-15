@@ -1,60 +1,56 @@
-<script>
-    import { classes } from '@svelte-daisyui/shared';
+<script lang="ts">
+    import type { Screen } from '../../types';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
 
     // -----------------------------------------------------------
-    //  Type Definitions
+    // Type Definitions
     // -----------------------------------------------------------
 
-    /**
-     * @typedef {{ active?: boolean, hover?: boolean }} Properties
-     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
-     */
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLTableRowElement> {
+        active?: boolean;
+        hover?: boolean;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'active' | 'hover'> {}
+    interface $$ClassProps extends Pick<$$Props, 'active' | 'hover'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {Properties['active']}
-     */
-    export let active = false;
-
-    /**
-     * @type {Properties['hover']}
-     */
-    export let hover = false;
-
-    let restClass = undefined;
-    /**
-     * @type {string}
-     */
+    export let active: $$Props['active'] = false;
+    export let hover: $$Props['hover'] = false;
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
-
-    // -----------------------------------------------------------
-    // Screen
-    // -----------------------------------------------------------
-
-    /**
-     * @type {Screen}
-     */
-    export let screen = undefined;
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    const classNames = classes({
-        prefix: 'table-row',
-        classProps: {
-            active: { value: 'active' },
-            hover: { value: 'hover' },
-        },
-        props: { active, hover },
-        screen,
-        restClass,
-    });
+    const PREFIX = 'dui-table-row';
+
+    const classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(PREFIX, { active: 'active', hover: 'hover' }, { active, hover }),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { active: 'active', hover: 'hover' }, screen, {
+            active: true,
+            hover: true,
+        }),
+        [restClass],
+    );
 </script>
 
-<tr class={classNames}>
+<tr class={classNames} {...$$restProps}>
     <slot />
 </tr>
+
+<style lang="scss" global>
+    @import 'TableRow.scss';
+</style>

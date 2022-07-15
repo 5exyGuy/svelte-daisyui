@@ -1,59 +1,55 @@
-<script>
-    import { classes, HorizontalAlignment } from '@svelte-daisyui/shared';
+<script lang="ts">
+    import type { StringKeyOf } from 'type-fest';
+    import { HorizontalAlignment } from '../../enums';
+    import type { Screen } from '../../types';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
 
     // -----------------------------------------------------------
-    //  Type Definitions
+    // Type Definitions
     // -----------------------------------------------------------
 
-    /**
-     * @typedef {'start' | 'center' | 'end'} HorizontalAlignment
-     * @typedef {{ alignment?: HorizontalAlignment }} Properties
-     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
-     */
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLTableRowElement> {
+        alignment?: StringKeyOf<typeof HorizontalAlignment>;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'alignment'> {}
+    interface $$ClassProps extends Pick<$$Props, 'alignment'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {Properties['alignment']}
-     */
     export let alignment = undefined;
-
     let restClass = undefined;
-    /**
-     * @type {string}
-     */
     export { restClass as class };
-
-    // -----------------------------------------------------------
-    // Screen
-    // -----------------------------------------------------------
-
-    /**
-     * @type {Screen}
-     */
     export let screen = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    const classNames = classes({
-        prefix: 'table-cell',
-        classProps: {
-            alignment: { value: HorizontalAlignment },
-        },
-        props: { alignment },
-        screen,
-        restClass,
-    });
+    const PREFIX = 'dui-table-cell';
+
+    const classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(PREFIX, { alignment: HorizontalAlignment }, { alignment }),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { alignment: HorizontalAlignment }, screen, {
+            alignment: true,
+        }),
+        [restClass],
+    );
 </script>
 
-<td class={classNames}>
+<td class={classNames} {...$$restProps}>
     <slot />
 </td>
 
-<style lang="scss">
+<style lang="scss" global>
     @import 'TableCell.scss';
 </style>

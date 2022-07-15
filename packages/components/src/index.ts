@@ -92,7 +92,8 @@ export { default as Swap } from './components/swap/Swap.svelte';
 // Table
 
 // Tabs
-
+export { default as TabsGroup } from './components/tabs/TabsGroup.svelte';
+export { default as TabsItem } from './components/tabs/TabsItem.svelte';
 // Textarea
 export { default as Textarea } from './components/textarea/Textarea.svelte';
 // Toggle

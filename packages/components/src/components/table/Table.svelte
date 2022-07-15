@@ -1,102 +1,79 @@
-<script>
-    import {
-        classes,
-        TablePadding,
-        HorizontalAlignment,
-    } from '@svelte-daisyui/shared';
+<script lang="ts">
+    import type { Primitive, StringKeyOf } from 'type-fest';
+    import type { Screen } from '../../types';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
+    import type { ITableHeader } from './table-header.interface';
+    import { TablePadding } from './table-padding.enum';
     import TableBody from './TableBody.svelte';
     import TableCell from './TableCell.svelte';
-    import TableFooter from './TableFooter.svelte';
     import TableHeader from './TableHeader.svelte';
     import TableHeaderCell from './TableHeaderCell.svelte';
     import TableRow from './TableRow.svelte';
 
     // -----------------------------------------------------------
-    //  Type Definitions
+    // Type Definitions
     // -----------------------------------------------------------
 
-    /**
-     * @typedef {'normal' | 'compact'} Padding
-     * @typedef {{ padding?: Padding, zebra?: boolean }} Properties
-     * @typedef {{ sm?: Properties, md?: Properties, lg?: Properties, xl?: Properties, '2xl'?: Properties }} Screen
-     *
-     * @typedef {'start' | 'center' | 'end'} HorizontalAlignment
-     * @typedef {{ text?: string, value?: string, alignment?: HorizontalAlignment}} Header
-     * @typedef {{ text?: string, value?: string, alignment?: HorizontalAlignment}} Footer
-     * @typedef {Record<string, import('type-fest').Primitive>} Item
-     */
+    interface $$Props extends Omit<svelte.JSX.HTMLAttributes<HTMLTableElement>, 'headers'> {
+        padding?: StringKeyOf<typeof TablePadding>;
+        zebra?: boolean;
+        headers?: Array<ITableHeader>;
+        items?: Array<Record<string, Primitive>>;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'padding' | 'zebra'> {}
+    interface $$ClassProps extends Pick<$$Props, 'padding' | 'zebra'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+        header: {
+            header: ITableHeader;
+        };
+        item: {
+            item: Record<string, Primitive>;
+            header: ITableHeader;
+        };
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     * @type {Properties['padding']}
-     */
-    export let padding = undefined;
-
-    /**
-     * @type {Properties['zebra']}
-     */
-    export let zebra = false;
-
-    /**
-     * @type {Array<Header>}
-     */
-    export let headers = undefined;
-
-    /**
-     * @type {Array<Footer>}
-     */
-    export let footers = undefined;
-
-    /**
-     * @type {Array<Item>}
-     */
-    export let items = undefined;
-
-    let restClass = undefined;
-    /**
-     * @type {string}
-     */
+    export let padding: $$Props['padding'] = undefined;
+    export let zebra: $$Props['zebra'] = false;
+    export let headers: $$Props['headers'] = undefined;
+    export let items: $$Props['items'] = undefined;
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
-
-    // -----------------------------------------------------------
-    // Screen
-    // -----------------------------------------------------------
-
-    /**
-     * @type {Screen}
-     */
-    export let screen = undefined;
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    const classNames = classes({
-        prefix: 'table',
-        classProps: {
-            padding: { value: TablePadding },
-            zebra: { value: 'zebra' },
-        },
-        props: {
-            padding,
-            zebra,
-        },
-        screen,
-        restClass,
-    });
+    const PREFIX = 'dui-table';
+
+    const classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(PREFIX, { padding: TablePadding, zebra: 'zebra' }, { padding, zebra }),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { padding: TablePadding, zebra: 'zebra' }, screen, {
+            padding: true,
+            zebra: true,
+        }),
+        [restClass],
+    );
 
     // -----------------------------------------------------------
     // Functionality
     // -----------------------------------------------------------
 </script>
 
-<table class={classNames}>
+<table class={classNames} {...$$restProps}>
     {#if $$slots.default}
         <slot />
-    {:else if items}
+    {:else if items && Array.isArray(items)}
         {#if headers && Array.isArray(headers)}
             <TableHeader>
                 <TableRow>
@@ -113,7 +90,7 @@
         <TableBody>
             {#each items as item}
                 <TableRow>
-                    {#each headers ?? footers ?? [] as header}
+                    {#each headers ?? [] as header}
                         <slot name="item" {item} {header}>
                             <TableCell alignment={header.alignment}>
                                 {item[header.value]}
@@ -123,22 +100,9 @@
                 </TableRow>
             {/each}
         </TableBody>
-        {#if footers && Array.isArray(footers)}
-            <TableFooter>
-                <TableRow>
-                    {#each footers as footer}
-                        <slot name="footer" {footer}>
-                            <TableHeaderCell>
-                                {footer.text}
-                            </TableHeaderCell>
-                        </slot>
-                    {/each}
-                </TableRow>
-            </TableFooter>
-        {/if}
     {/if}
 </table>
 
-<style global lang="scss">
+<style lang="scss" global>
     @import 'Table.scss';
 </style>
