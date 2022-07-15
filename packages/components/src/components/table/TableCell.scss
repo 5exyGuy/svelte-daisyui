@@ -1,163 +1,115 @@
-:global(table.table) {
-    & > :global(thead.table-header) > :global(tr.table-row),
-    & > :global(tbody.table-body) > :global(tr.table-row),
-    & > :global(tfoot.table-footer) > :global(tr.table-row) {
-        & > td.table-cell {
-            @apply whitespace-nowrap p-4 align-middle;
-            @apply bg-base-100 text-base-content;
+@use '../themes.scss';
 
-            &.table-cell-start {
-                @apply text-left;
+.dui-table {
+    & > .dui-table-header > .dui-table-row,
+    & > .dui-table-body > .dui-table-row,
+    & > .dui-table-footer > .dui-table-row {
+        & > .dui-table-cell {
+            white-space: nowrap;
+            vertical-align: middle;
+
+            &.dui-table-cell-start {
+                text-align: left;
             }
 
-            &.table-cell-center {
-                @apply text-center;
+            &.dui-table-cell-center {
+                text-align: center;
             }
 
-            &.table-cell-end {
-                @apply text-right;
+            &.dui-table-cell-end {
+                text-align: right;
             }
         }
     }
 
-    & > :global(thead.table-header) > :global(tr.table-row) > td.table-cell,
-    & > :global(tfoot.table-footer) > :global(tr.table-row) > td.table-cell {
-        @apply bg-base-200 text-base-content text-xs font-bold uppercase;
+    & > .dui-table-body > .dui-table-row > .dui-table-cell {
+        @include themes.bg-color('base-100');
+        @include themes.text-color('base-content');
     }
 
-    &
-        > :global(:first-child)
-        > :global(tr.table-row:first-child)
-        > td.table-cell {
+    & > .dui-table-header,
+    & > .dui-table-footer {
+        & > .dui-table-row > .dui-table-cell {
+            @include themes.bg-color('base-200');
+            @include themes.text-color('base-content');
+
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+    }
+
+    & > :first-child > .dui-table-row:first-child > .dui-table-cell {
         &:first-child {
-            @apply rounded-tl-lg;
+            border-top-left-radius: 0.5rem;
         }
 
         &:last-child {
-            @apply rounded-tr-lg;
+            border-top-right-radius: 0.5rem;
         }
     }
 
-    &
-        > :global(:last-child)
-        > :global(tr.table-row:last-child)
-        > td.table-cell {
+    & > :last-child > .dui-table-row:last-child > .dui-table-cell {
         &:first-child {
-            @apply rounded-bl-lg;
+            border-bottom-left-radius: 0.5rem;
         }
 
         &:last-child {
-            @apply rounded-br-lg;
+            border-bottom-right-radius: 0.5rem;
         }
     }
 
-    &:not(.table-zebra)
-        > :global(thead.table-header)
-        > :global(tr.table-row:not(:last-child))
-        > td.table-cell,
-    &:not(.table-zebra)
-        > :global(tbody.table-body)
-        > :global(tr.table-row:not(:last-child))
-        > td.table-cell,
-    &:not(.table-zebra)
-        > :global(tfoot.table-body)
-        > :global(tr.table-row:not(:last-child))
-        > td.table-cell {
-        @apply border-b border-base-200;
+    &.dui-table-zebra > .dui-table-body > .dui-table-row:nth-child(even) > .dui-table-cell {
+        @include themes.bg-color('base-200');
     }
-}
 
-// Active
-:global(table.table)
-    > :global(thead.table-header)
-    > :global(tr.table-row.table-row-active)
-    > td.table-cell,
-:global(table.table)
-    > :global(thead.table-header)
-    > :global(tr.table-row.table-row-active:nth-child(even))
-    > td.table-cell,
-:global(table.table)
-    > :global(tbody.table-body)
-    > :global(tr.table-row.table-row-active)
-    > td.table-cell,
-:global(table.table)
-    > :global(tbody.table-body)
-    > :global(tr.table-row.table-row-active:nth-child(even))
-    > td.table-cell,
-:global(table.table)
-    > :global(thead.table-footer)
-    > :global(tr.table-row.table-row-active)
-    > td.table-cell,
-:global(table.table)
-    > :global(thead.table-footer)
-    > :global(tr.table-row.table-row-active:nth-child(even))
-    > td.table-cell {
-    @apply bg-base-300;
-}
+    &:not(.dui-table-zebra) > .dui-table-header,
+    &:not(.dui-table-zebra) > .dui-table-body {
+        & > .dui-table-row:not(:last-child) > .dui-table-cell {
+            @include themes.border-color('base-200');
 
-// Hover
-:global(table.table)
-    > :global(thead.table-header)
-    > :global(tr.table-row.table-row-hover:hover)
-    > td.table-cell,
-:global(table.table)
-    > :global(thead.table-header)
-    > :global(tr.table-row.table-row-hover:hover:nth-child(even):hover)
-    > td.table-cell,
-:global(table.table)
-    > :global(tbody.table-body)
-    > :global(tr.table-row.table-row-hover:hover)
-    > td.table-cell,
-:global(table.table)
-    > :global(tbody.table-body)
-    > :global(tr.table-row.table-row-hover:hover:nth-child(even):hover)
-    > td.table-cell,
-:global(table.table)
-    > :global(tfoot.table-footer)
-    > :global(tr.table-row.table-row-hover:hover)
-    > td.table-cell,
-:global(table.table)
-    > :global(tfoot.table-footer)
-    > :global(tr.table-row.table-row-hover:hover:nth-child(even):hover)
-    > td.table-cell {
-    @apply bg-base-300;
-}
+            border-bottom-width: 1px;
+        }
+    }
 
-// Normal
-:global(table.table.table-normal)
-    > :global(thead.table-header)
-    > :global(tr.table-row)
-    > td.table-cell,
-:global(table.table.table-normal)
-    > :global(tbody.table-body)
-    > :global(tr.table-row)
-    > td.table-cell,
-:global(table.table.table-normal)
-    > :global(tfoot.table-footer)
-    > :global(tr.table-row)
-    > td.table-cell {
-    @apply p-4 text-base;
-}
+    & > .dui-table-header,
+    & > .dui-table-body,
+    & > .dui-table-footer {
+        & > .dui-table-row.dui-table-row-active,
+        & > .dui-table-row.dui-table-row-active:nth-child(even) {
+            & > .dui-table-cell {
+                @include themes.bg-color('base-300');
+            }
+        }
+    }
 
-// Compact
-:global(table.table.table-compact)
-    > :global(thead.table-header)
-    > :global(tr.table-row)
-    > td.table-cell,
-:global(table.table.table-compact)
-    > :global(tbody.table-body)
-    > :global(tr.table-row)
-    > td.table-cell,
-:global(table.table.table-compact)
-    > :global(tfoot.table-footer)
-    > :global(tr.table-row)
-    > td.table-cell {
-    @apply p-2 text-sm;
-}
+    & > .dui-table-header,
+    & > .dui-table-body,
+    & > .dui-table-footer {
+        & > .dui-table-row.dui-table-row-hover:hover,
+        & > .dui-table-row.dui-table-row-hover:hover:nth-child(even):hover {
+            & > .dui-table-cell {
+                @include themes.bg-color('base-300');
+            }
+        }
+    }
 
-:global(table.table.table-zebra)
-    > :global(tbody.table-body)
-    > :global(tr.table-row:nth-child(even))
-    > td.table-cell {
-    @apply bg-base-200;
+    &.dui-table-normal > .dui-table-header,
+    &.dui-table-normal > .dui-table-body,
+    &.dui-table-normal > .dui-table-footer {
+        & > .dui-table-row > .dui-table-cell {
+            padding: 1rem;
+            font-size: 1rem;
+            line-height: 1.5rem;
+        }
+    }
+
+    &.dui-table-compact > .dui-table-header,
+    &.dui-table-compact > .dui-table-body,
+    &.dui-table-compact > .dui-table-footer {
+        & > .dui-table-row > .dui-table-cell {
+            padding: 0.5rem;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+    }
 }

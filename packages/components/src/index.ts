@@ -90,7 +90,13 @@ export { default as StepsItem } from './components/steps/StepsItem.svelte';
 // Swap
 export { default as Swap } from './components/swap/Swap.svelte';
 // Table
-
+export { default as Table } from './components/table/Table.svelte';
+export { default as TableBody } from './components/table/TableBody.svelte';
+export { default as TableCell } from './components/table/TableCell.svelte';
+export { default as TableFooter } from './components/table/TableFooter.svelte';
+export { default as TableHeader } from './components/table/TableHeader.svelte';
+export { default as TableHeaderCell } from './components/table/TableHeaderCell.svelte';
+export { default as TableRow } from './components/table/TableRow.svelte';
 // Tabs
 export { default as TabsGroup } from './components/tabs/TabsGroup.svelte';
 export { default as TabsItem } from './components/tabs/TabsItem.svelte';

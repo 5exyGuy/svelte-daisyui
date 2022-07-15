@@ -38,6 +38,7 @@
         StatsGroup,
         StepsGroup,
         Swap,
+        Table,
     } from '@svelte-daisyui/components/src';
     import CollapseContent from '@svelte-daisyui/components/src/components/collapse/CollapseContent.svelte';
 
@@ -198,6 +199,21 @@
             /></svg
         >
     </Swap>
+
+    <Table
+        zebra
+        padding="normal"
+        headers={[
+            { text: 'Name', value: 'name' },
+            { text: 'Job', value: 'job' },
+            { text: 'Color', value: 'color' },
+        ]}
+        items={[
+            { name: 'John Doe', job: 'Web Developer', color: '#00ff00' },
+            { name: 'Jane Doe', job: 'Web Designer', color: '#ff0000' },
+            { name: 'Bob Doe', job: 'Web Developer', color: '#0000ff' },
+        ]}
+    />
 
     <Window bordered>
         <div class="flex justify-center px-4 py-16 border-t border-base-300">Hello!</div>

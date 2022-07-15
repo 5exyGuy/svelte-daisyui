@@ -41,7 +41,7 @@
     // Properties
     // -----------------------------------------------------------
 
-    export let padding: $$Props['padding'] = undefined;
+    export let padding: $$Props['padding'] = 'normal';
     export let zebra: $$Props['zebra'] = false;
     export let headers: $$Props['headers'] = undefined;
     export let items: $$Props['items'] = undefined;
@@ -68,6 +68,9 @@
     // -----------------------------------------------------------
     // Functionality
     // -----------------------------------------------------------
+
+    export function addRow() {}
+    export function deleteRow() {}
 </script>
 
 <table class={classNames} {...$$restProps}>
