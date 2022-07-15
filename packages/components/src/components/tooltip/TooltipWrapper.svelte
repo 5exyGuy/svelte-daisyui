@@ -1,45 +1,38 @@
 <script lang="ts">
+    import type { StringKeyOf } from 'type-fest';
     import { BrandColor, FunctionalColor, Position } from '../../enums';
+    import type { Screen } from '../../types';
     import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
-    import type {
-        TooltipClassProps,
-        TooltipWrapperProps,
-        TooltipWrapperResponsiveProps,
-    } from './tooltip-wrapper-props.interface';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
+        color?: StringKeyOf<typeof BrandColor & typeof FunctionalColor>;
+        position?: StringKeyOf<typeof Position>;
+        show?: boolean;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'color' | 'position' | 'show'> {}
+    interface $$ClassProps extends Pick<$$Props, 'color' | 'position' | 'show'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     *
-     */
-    export let color: TooltipWrapperProps['color'] = undefined;
-
-    /**
-     *
-     */
-    export let position: TooltipWrapperProps['position'] = 'top';
-
-    /**
-     *
-     */
-    export let show: TooltipWrapperProps['show'] = false;
-
-    /**
-     *
-     */
-    let restClass: TooltipWrapperProps['class'] = undefined;
+    export let color: $$Props['color'] = undefined;
+    export let position: $$Props['position'] = 'top';
+    export let show: $$Props['show'] = false;
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
-
-    // -----------------------------------------------------------
-    // Screen
-    // -----------------------------------------------------------
-
-    /**
-     *
-     */
-    export let screen: TooltipWrapperProps['screen'] = undefined;
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
@@ -50,7 +43,7 @@
 
     $: classNames = joinClasses(
         [PREFIX],
-        generateDefaultClasses<TooltipClassProps>(
+        generateDefaultClasses<$$ClassProps>(
             PREFIX,
             {
                 color: COLORS,
@@ -59,7 +52,7 @@
             },
             { color, position, show },
         ),
-        generateResponsiveClasses<TooltipWrapperResponsiveProps>(
+        generateResponsiveClasses<$$ResponsiveProps>(
             PREFIX,
             { color: COLORS, position: Position, show: 'open' },
             screen,
@@ -70,7 +63,6 @@
 </script>
 
 <div class={classNames} {...$$restProps}>
-    <slot name="content" />
     <slot />
 </div>
 

@@ -98,6 +98,7 @@ export { default as Textarea } from './components/textarea/Textarea.svelte';
 // Toggle
 export { default as Toggle } from './components/toggle/Toggle.svelte';
 // Tooltip
-
+export { default as Tooltip } from './components/tooltip/Tooltip.svelte';
+export { default as TooltipWrapper } from './components/tooltip/TooltipWrapper.svelte';
 // Window
 export { default as Window } from './components/window/Window.svelte';

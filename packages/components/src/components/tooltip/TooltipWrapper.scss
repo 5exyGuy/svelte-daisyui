@@ -1,17 +1,16 @@
-@use '../escape' as *;
-@use '../variables';
-@use '../colors';
+@use '../themes.scss';
 @use 'sass:list';
 
-div.dui-tooltip-wrapper {
+.dui-tooltip-wrapper {
+    --tooltip-offset: calc(100% + 1px + var(--tooltip-tail, 0px));
+    --tooltip-tail: 3px;
+    --tooltip-color: rgb(themes.get-color('neutral'));
+    --tooltip-text-color: rgb(themes.get-color('neutral-content'));
+    --tooltip-tail-offset: calc(100% + 1px - var(--tooltip-tail));
+
     display: inline-block;
     position: relative;
     text-align: center;
-    --tooltip-offset: calc(100% + 1px + var(--tooltip-tail, 0px));
-    --tooltip-tail: 3px;
-    --tooltip-color: hsl(var(--neutral));
-    --tooltip-text-color: hsl(var(--neutral-content));
-    --tooltip-tail-offset: calc(100% + 1px - var(--tooltip-tail));
 
     &:after {
         content: '';
@@ -28,6 +27,7 @@ div.dui-tooltip-wrapper {
         border-width: var(--tooltip-tail, 0);
         bottom: var(--tooltip-tail-offset);
         border-color: var(--tooltip-color) transparent transparent transparent;
+
         transition-property: border-color, opacity, transform;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 200ms;
@@ -39,71 +39,59 @@ div.dui-tooltip-wrapper {
         transition-delay: 75ms;
     }
 
-    @mixin responsive-props($prefix: '') {
-        $prefix: escape($prefix);
+    &.dui-tooltip-open:after {
+        opacity: 1;
+        transition-delay: 75ms;
+    }
 
-        &.#{$prefix}dui-tooltip-open:after {
-            opacity: 1;
-            transition-delay: 75ms;
-        }
-
-        @each $color in list.join(colors.$brand, colors.$functional) {
-            &.#{$prefix}dui-tooltip-#{$color} {
-                --tooltip-color: colors.get($color);
-                --tooltip-text-color: colors.get-content($color);
-            }
-        }
-
-        &.#{$prefix}dui-tooltip-top {
-            &:after {
-                transform: translateX(-50%) translateY(0);
-                top: auto;
-                left: 50%;
-                right: auto;
-                bottom: var(--tooltip-tail-offset);
-                border-color: var(--tooltip-color) transparent transparent transparent;
-            }
-        }
-
-        &.#{$prefix}dui-tooltip-bottom {
-            &:after {
-                transform: translateX(-50%) translateY(0);
-                left: 50%;
-                right: auto;
-                bottom: auto;
-                top: var(--tooltip-tail-offset);
-                border-color: transparent transparent var(--tooltip-color) transparent;
-            }
-        }
-
-        &.#{$prefix}dui-tooltip-left {
-            &:after {
-                transform: translateX(0) translateY(-50%);
-                top: 50%;
-                left: auto;
-                bottom: auto;
-                right: var(--tooltip-tail-offset);
-                border-color: transparent transparent transparent var(--tooltip-color);
-            }
-        }
-
-        &.#{$prefix}dui-tooltip-right {
-            &:after {
-                transform: translateX(0) translateY(-50%);
-                top: 50%;
-                right: auto;
-                bottom: auto;
-                left: var(--tooltip-tail-offset);
-                border-color: transparent var(--tooltip-color) transparent transparent;
-            }
+    @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
+        &.dui-tooltip-#{$color} {
+            --tooltip-color: themes.get-color($color);
+            --tooltip-text-color: themes.get-color($color + '-content');
         }
     }
 
-    @include responsive-props();
+    &.dui-tooltip-top {
+        &:after {
+            transform: translateX(-50%) translateY(0);
+            top: auto;
+            left: 50%;
+            right: auto;
+            bottom: var(--tooltip-tail-offset);
+            border-color: var(--tooltip-color) transparent transparent transparent;
+        }
+    }
 
-    @each $name, $screen-size in variables.$screen-sizes {
-        @media (min-width: #{$screen-size}) {
-            @include responsive-props('#{$name}:');
+    &.dui-tooltip-bottom {
+        &:after {
+            transform: translateX(-50%) translateY(0);
+            left: 50%;
+            right: auto;
+            bottom: auto;
+            top: var(--tooltip-tail-offset);
+            border-color: transparent transparent var(--tooltip-color) transparent;
+        }
+    }
+
+    &.dui-tooltip-left {
+        &:after {
+            transform: translateX(0) translateY(-50%);
+            top: 50%;
+            left: auto;
+            bottom: auto;
+            right: var(--tooltip-tail-offset);
+            border-color: transparent transparent transparent var(--tooltip-color);
+        }
+    }
+
+    &.dui-tooltip-right {
+        &:after {
+            transform: translateX(0) translateY(-50%);
+            top: 50%;
+            right: auto;
+            bottom: auto;
+            left: var(--tooltip-tail-offset);
+            border-color: transparent var(--tooltip-color) transparent transparent;
         }
     }
 }

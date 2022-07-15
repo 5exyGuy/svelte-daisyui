@@ -1,15 +1,23 @@
 <script lang="ts">
     import { joinClasses } from '../../utilities';
-    import type { TooltipProps } from './tooltip-props.interface';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     *
-     */
-    let restClass: TooltipProps['class'] = undefined;
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------
@@ -18,7 +26,7 @@
 
     const PREFIX = 'dui-tooltip';
 
-    $: classNames = joinClasses([PREFIX, restClass]);
+    $: classNames = joinClasses([PREFIX], [restClass]);
 </script>
 
 <div class={classNames} {...$$restProps}>

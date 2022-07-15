@@ -1,10 +1,12 @@
-@use '../escape' as *;
-@use '../variables';
-@use '../colors';
+@use '../themes.scss';
 @use 'sass:list';
 
-div.dui-tooltip-wrapper {
-    & > div.dui-tooltip-content {
+.dui-tooltip-wrapper {
+    & > .dui-tooltip-content {
+        background-color: var(--tooltip-color);
+        bottom: var(--tooltip-offset);
+        color: var(--tooltip-text-color);
+
         position: absolute;
         pointer-events: none;
         opacity: 0;
@@ -20,82 +22,68 @@ div.dui-tooltip-wrapper {
         padding-bottom: 0.25rem;
         font-size: 0.875rem;
         line-height: 1.25rem;
+        width: max-content;
+
         transition-property: color, background-color, border-color, opacity, transform;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 200ms;
         transition-delay: 100ms;
-        background-color: var(--tooltip-color);
-        bottom: var(--tooltip-offset);
-        color: var(--tooltip-text-color);
-        width: max-content;
     }
 
-    &:hover > div.dui-tooltip-content {
+    &:hover > .dui-tooltip-content {
         opacity: 1;
         transition-delay: 75ms;
     }
 
-    @mixin responsive-props($prefix: '') {
-        $prefix: escape($prefix);
+    &.dui-tooltip-open > .dui-tooltip-content {
+        opacity: 1;
+        transition-delay: 75ms;
+    }
 
-        &.#{$prefix}dui-tooltip-open > div.dui-tooltip-content {
-            opacity: 1;
-            transition-delay: 75ms;
-        }
-
-        @each $color in list.join(colors.$brand, colors.$functional) {
-            &.#{$prefix}dui-tooltip-#{$color} {
-                --tooltip-color: hsl(var(--#{$color}));
-                --tooltip-text-color: hsl(var(--#{$color}-content));
-            }
-        }
-
-        &.#{$prefix}dui-tooltip-top {
-            & > div.dui-tooltip-content {
-                transform: translateX(-50%) translateY(0);
-                top: auto;
-                left: 50%;
-                right: auto;
-                bottom: var(--tooltip-offset);
-            }
-        }
-
-        &.#{$prefix}dui-tooltip-bottom {
-            & > div.dui-tooltip-content {
-                transform: translateX(-50%) translateY(0);
-                left: 50%;
-                right: auto;
-                bottom: auto;
-                top: var(--tooltip-offset);
-            }
-        }
-
-        &.#{$prefix}dui-tooltip-left {
-            & > div.dui-tooltip-content {
-                transform: translateX(0) translateY(-50%);
-                top: 50%;
-                left: auto;
-                bottom: auto;
-                right: var(--tooltip-offset);
-            }
-        }
-
-        &.#{$prefix}dui-tooltip-right {
-            & > div.dui-tooltip-content {
-                transform: translateX(0) translateY(-50%);
-                top: 50%;
-                right: auto;
-                bottom: auto;
-                left: var(--tooltip-offset);
-            }
+    @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
+        &.dui-tooltip-#{$color} {
+            --tooltip-color: rgb(themes.get-color($color));
+            --tooltip-text-color: rgb(themes.get-color($color + '-content'));
         }
     }
 
-    @include responsive-props();
+    &.dui-tooltip-top {
+        & > .dui-tooltip-content {
+            transform: translateX(-50%) translateY(0);
+            top: auto;
+            left: 50%;
+            right: auto;
+            bottom: var(--tooltip-offset);
+        }
+    }
 
-    @each $name, $screen-size in variables.$screen-sizes {
-        @media (min-width: #{$screen-size}) {
-            @include responsive-props('#{$name}:');
+    &.dui-tooltip-bottom {
+        & > .dui-tooltip-content {
+            transform: translateX(-50%) translateY(0);
+            left: 50%;
+            right: auto;
+            bottom: auto;
+            top: var(--tooltip-offset);
+        }
+    }
+
+    &.dui-tooltip-left {
+        & > .dui-tooltip-content {
+            transform: translateX(0) translateY(-50%);
+            top: 50%;
+            left: auto;
+            bottom: auto;
+            right: var(--tooltip-offset);
+        }
+    }
+
+    &.dui-tooltip-right {
+        & > .dui-tooltip-content {
+            transform: translateX(0) translateY(-50%);
+            top: 50%;
+            right: auto;
+            bottom: auto;
+            left: var(--tooltip-offset);
         }
     }
 }
