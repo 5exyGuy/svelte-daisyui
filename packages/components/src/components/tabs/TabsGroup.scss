@@ -1,0 +1,14 @@
+@use '../themes.scss';
+
+.dui-tabs-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+
+    &.dui-tabs-group-boxed {
+        @include themes.bg-color('base-200');
+        @include themes.button-border-radius();
+
+        padding: 0.25rem;
+    }
+}

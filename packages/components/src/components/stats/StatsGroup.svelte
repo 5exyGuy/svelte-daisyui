@@ -5,8 +5,6 @@
     import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
     import type { IStatsItem } from './stats-item.interface';
     import StatsItem from './StatsItem.svelte';
-    import StatsItemTitle from './StatsItemTitle.svelte';
-    import StatsItemValue from './StatsItemValue.svelte';
 
     // -----------------------------------------------------------
     // Type Definitions

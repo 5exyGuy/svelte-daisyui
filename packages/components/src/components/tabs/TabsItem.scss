@@ -1,0 +1,198 @@
+@use '../themes.scss';
+
+.tabs-group {
+    & > .tabs-item {
+        @include themes.text-opacity(0.5);
+
+        &:hover {
+            @include themes.text-opacity(1);
+        }
+
+        --tab-padding: 1rem;
+        --tab-color: hsla(var(--base-content) / var(--tw-text-opacity, 1));
+        --tab-bg: hsla(var(--base-100) / var(--tw-bg-opacity, 1));
+        --tab-border-color: hsla(var(--base-300) / var(--tw-bg-opacity, 1));
+
+        color: var(--tab-color);
+        padding-left: var(--tab-padding, 1rem);
+        padding-right: var(--tab-padding, 1rem);
+
+        display: inline-flex;
+        position: relative;
+        cursor: pointer;
+        user-select: none;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        &.tabs-item-active {
+            @include themes.border-color('base-content');
+            @include themes.text-opacity(1);
+        }
+
+        &:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+        }
+
+        &:focus-visible {
+            outline: 2px solid currentColor;
+            outline-offset: -3px;
+        }
+    }
+
+    &.tabs-group-md {
+        & > .tabs-item {
+            --tab-padding: 1rem;
+
+            height: 2rem;
+            font-size: 0.875rem;
+            line-height: 2;
+        }
+    }
+
+    &.tabs-group-lg {
+        & > .tabs-item {
+            --tab-padding: 1.25rem;
+
+            height: 3rem;
+            font-size: 1.125rem;
+            line-height: 2;
+        }
+    }
+
+    &.tabs-group-sm {
+        & > .tabs-item {
+            --tab-padding: 0.75rem;
+
+            height: 1.5rem;
+            font-size: 0.875rem;
+            line-height: 0.75rem;
+        }
+    }
+
+    &.tabs-group-xs {
+        & > .tabs-item {
+            --tab-padding: 0.5rem;
+
+            height: 1.25rem;
+            font-size: 0.75rem;
+            line-height: 0.75rem;
+        }
+    }
+
+    &.tabs-group-bordered {
+        & > .tabs-item {
+            @include themes.border-color('base-content', 0.2);
+
+            border-style: solid;
+            border-bottom-width: calc(var(--tab-border, 1px) + 1px);
+        }
+    }
+
+    &.tabs-group-lifted {
+        & > .tabs-item {
+            border: var(--tab-border, 1px) solid transparent;
+            border-width: 0 0 var(--tab-border, 1px) 0;
+            border-top-left-radius: var(--tab-radius, 0.5rem);
+            border-top-right-radius: var(--tab-radius, 0.5rem);
+            border-bottom-color: var(--tab-border-color);
+            padding-left: var(--tab-padding, 1rem);
+            padding-right: var(--tab-padding, 1rem);
+            padding-top: var(--tab-border, 1px);
+
+            &:focus-visible {
+                border-bottom-right-radius: var(--tab-radius, 0.5rem);
+                border-bottom-left-radius: var(--tab-radius, 0.5rem);
+            }
+
+            &.tabs-item-active {
+                background-color: var(--tab-bg);
+                border-width: var(--tab-border, 1px) var(--tab-border, 1px) 0 var(--tab-border, 1px);
+                border-left-color: var(--tab-border-color);
+                border-right-color: var(--tab-border-color);
+                border-top-color: var(--tab-border-color);
+                padding-left: calc(var(--tab-padding, 1rem) - var(--tab-border, 1px));
+                padding-right: calc(var(--tab-padding, 1rem) - var(--tab-border, 1px));
+                padding-bottom: var(--tab-border, 1px);
+                padding-top: 0;
+
+                &:before,
+                &:after {
+                    z-index: 1;
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    width: var(--tab-radius, 0.5rem);
+                    height: var(--tab-radius, 0.5rem);
+                    bottom: 0;
+                    --tab-grad: calc(68% - var(--tab-border, 1px));
+                    --tab-corner-bg: radial-gradient(
+                        circle at var(--circle-pos),
+                        transparent var(--tab-grad),
+                        var(--tab-border-color) calc(var(--tab-grad) + 0.3px),
+                        var(--tab-border-color) calc(var(--tab-grad) + var(--tab-border, 1px)),
+                        var(--tab-bg) calc(var(--tab-grad) + var(--tab-border, 1px) + 0.3px)
+                    );
+                }
+
+                &:before {
+                    left: calc(var(--tab-radius, 0.5rem) * -1);
+                    --circle-pos: top left;
+                    background-image: var(--tab-corner-bg);
+
+                    /* RTL quick fix */
+                    [dir='rtl'] & {
+                        --circle-pos: top right;
+                    }
+                }
+
+                &:after {
+                    right: calc(var(--tab-radius, 0.5rem) * -1);
+                    --circle-pos: top right;
+                    background-image: var(--tab-corner-bg);
+
+                    /* RTL quick fix */
+                    [dir='rtl'] & {
+                        --circle-pos: top left;
+                    }
+                }
+
+                &:first-child:before {
+                    background: none;
+                }
+
+                &:last-child:after {
+                    background: none;
+                }
+
+                & + .tabs-item.tabs-item-active {
+                    &:before {
+                        background: none;
+                    }
+                }
+            }
+        }
+    }
+
+    &.tabs-group-boxed {
+        & > .tabs-item.tabs-item-active {
+            @include themes.bg-color('primary');
+            @include themes.text-color('primary-content');
+            @include themes.button-border-radius();
+
+            &:hover {
+                @include themes.bg-color('primary-content');
+            }
+        }
+    }
+
+    &.tabs-group-lifted > .tabs-item.tabs-item-active {
+        & + .tabs-item.tabs-item-active {
+            &:before {
+                background: none;
+            }
+        }
+    }
+}

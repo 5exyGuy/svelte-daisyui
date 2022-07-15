@@ -1,4 +1,4 @@
-export enum TabGroupType {
+export enum TabsGroupType {
     bordered = 'bordered',
     lifted = 'lifted',
     boxed = 'boxed',
