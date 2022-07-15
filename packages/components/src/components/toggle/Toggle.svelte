@@ -1,51 +1,36 @@
 <script lang="ts">
+    import type { StringKeyOf } from 'type-fest';
     import { BrandColor, FunctionalColor, Size } from '../../enums';
+    import type { Screen } from '../../types';
     import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
-    import type { ToggleClassProps, ToggleProps, ToggleResponsiveProps } from './toggle-props.interface';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends Omit<svelte.JSX.HTMLAttributes<HTMLInputElement>, 'size'> {
+        color?: StringKeyOf<typeof BrandColor & typeof FunctionalColor>;
+        size?: StringKeyOf<typeof Size>;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'color' | 'size'> {}
+    interface $$ClassProps extends Pick<$$Props, 'color' | 'size'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    /**
-     *
-     */
-    export let color: ToggleProps['color'] = undefined;
-
-    /**
-     *
-     */
-    export let size: ToggleProps['size'] = 'md';
-
-    /**
-     *
-     */
-    export let disabled: ToggleProps['disabled'] = false;
-
-    /**
-     *
-     */
-    export let checked: ToggleProps['checked'] = false;
-
-    /**
-     *
-     */
-    export let indeterminate: ToggleProps['indeterminate'] = false;
-
-    /**
-     *
-     */
-    let restClass: ToggleProps['class'] = undefined;
+    export let color: $$Props['color'] = undefined;
+    export let size: $$Props['size'] = 'md';
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
-
-    // -----------------------------------------------------------
-    // Screen
-    // -----------------------------------------------------------
-
-    /**
-     *
-     */
-    export let screen = undefined;
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
@@ -56,8 +41,8 @@
 
     $: classNames = joinClasses(
         [PREFIX],
-        generateDefaultClasses<ToggleClassProps>(PREFIX, { color: COLORS, size: Size }, { color, size }),
-        generateResponsiveClasses<ToggleResponsiveProps>(PREFIX, { color: COLORS, size: Size }, screen, {
+        generateDefaultClasses<$$ClassProps>(PREFIX, { color: COLORS, size: Size }, { color, size }),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { color: COLORS, size: Size }, screen, {
             color: true,
             size: true,
         }),
@@ -65,7 +50,7 @@
     );
 </script>
 
-<input type="checkbox" {disabled} {checked} {indeterminate} class={classNames} {...$$restProps} />
+<input type="checkbox" class={classNames} {...$$restProps} />
 
 <style lang="scss" global>
     @import 'Toggle.scss';
