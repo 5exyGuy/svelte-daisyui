@@ -1,0 +1,82 @@
+@use '../themes.scss';
+
+.dui-rating {
+    display: inline-flex;
+    position: relative;
+
+    & > input {
+        @include themes.bg-color('base-content');
+
+        @keyframes rating-pop {
+            0% {
+                transform: translateY(-0.125em);
+            }
+            40% {
+                transform: translateY(-0.125em);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        cursor: pointer;
+        height: 1.5rem;
+        width: 1.5rem;
+        appearance: none;
+        -webkit-appearance: none;
+        animation: rating-pop themes.$input-animation-duration ease-out;
+
+        &.dui-rating-hidden {
+            width: 0.5rem;
+            background-color: transparent;
+        }
+
+        &:hover ~ input {
+            @include themes.bg-opacity(0.5);
+        }
+
+        &:checked ~ input {
+            @include themes.bg-opacity(0.2);
+        }
+
+        &:focus-visible {
+            transform: translateY(-0.125em);
+
+            transition-property: transform;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 300ms;
+        }
+
+        &:active:focus {
+            animation: none;
+        }
+
+        &:active:focus {
+            transform: translateY(-0.125em);
+        }
+    }
+
+    &.dui-rating-xs > input {
+        height: 0.75rem;
+        width: 0.75rem;
+    }
+
+    &.dui-rating-sm > input {
+        height: 1rem;
+        width: 1rem;
+    }
+
+    &.dui-rating-md > input {
+        height: 1.5rem;
+        width: 1.5rem;
+    }
+
+    &.dui-rating-lg > input {
+        height: 2.5rem;
+        width: 2.5rem;
+    }
+
+    &.dui-rating-half > input:not(.dui-rating-hidden) {
+        width: 0.75rem;
+    }
+}

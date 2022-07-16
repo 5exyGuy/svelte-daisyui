@@ -156,7 +156,7 @@
 
     <Kbd>CTRL + C</Kbd>
     <Link hover color="primary">Hello world</Link>
-    <Navbar rounded>
+    <Navbar color="primary" rounded>
         <NavbarStart>Start</NavbarStart>
         <NavbarCenter>Center</NavbarCenter>
         <NavbarEnd>End</NavbarEnd>

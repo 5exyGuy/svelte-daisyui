@@ -19,7 +19,6 @@
         showIcon?: boolean;
         icon?: typeof SvelteComponent;
         message?: string;
-        class?: string;
         screen?: Screen<$$ResponsiveProps>;
     }
     interface $$ResponsiveProps extends Pick<$$Props, 'color'> {}
