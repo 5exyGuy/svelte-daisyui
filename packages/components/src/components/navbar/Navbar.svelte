@@ -1,61 +1,59 @@
-<script>
-    import { classes } from '../../utilities';
+<script lang="ts">
+    import type { StringKeyOf } from 'type-fest';
+    import { BaseColor, BrandColor, FunctionalColor } from '../../enums';
+    import type { Screen } from '../../types';
+    import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
+        color?: StringKeyOf<typeof BrandColor & typeof FunctionalColor & typeof BaseColor> | 'neutral';
+        rounded?: boolean;
+        screen?: Screen<$$ResponsiveProps>;
+    }
+    interface $$ResponsiveProps extends Pick<$$Props, 'color' | 'rounded'> {}
+    interface $$ClassProps extends Pick<$$Props, 'color' | 'rounded'> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    // export let background: BrandColorKey | FunctionalColorKey | BaseColorKey =
-    //     'Base-100';
-    /**
-     * @type {boolean}
-     */
-    export let rounded = false;
-
-    let className;
-    /**
-     * @type {string}
-     */
-    export { className as class };
+    export let color: $$Props['color'] = 'neutral';
+    export let rounded: $$Props['rounded'] = false;
+    let restClass: $$Props['class'] = undefined;
+    export { restClass as class };
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes(
-        'navbar',
-        {
-            rounded: {
-                condition: rounded,
-                value: 'rounded',
-            },
-        },
-        className,
+    const PREFIX = 'dui-navbar';
+    const COLORS = { ...BrandColor, ...FunctionalColor, ...BaseColor, ...{ neutral: 'neutral' } };
+
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(PREFIX, { color: COLORS, rounded: 'rounded' }, { color, rounded }),
+        generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { color: COLORS, rounded: 'rounded' }, screen, {
+            color: true,
+            rounded: true,
+        }),
+        [restClass],
     );
 </script>
 
-<div class={classNames}>
-    {#if $$slots.default}
-        <slot />
-    {/if}
-    {#if !$$slots.default && $$slots.start}
-        <div class="navbar-start">
-            <slot name="start" />
-        </div>
-    {/if}
-    {#if !$$slots.default && $$slots.center}
-        <div class="navbar-center">
-            <slot name="center" />
-        </div>
-    {/if}
-    {#if !$$slots.default && $$slots.end}
-        <div class="navbar-end">
-            <slot name="end" />
-        </div>
-    {/if}
+<div class={classNames} {...$$restProps}>
+    <slot />
 </div>
 
-<style lang="scss">
-    @import 'NavbarStyled.scss';
-    @import 'NavbarUnstyled.scss';
+<style lang="scss" global>
+    @import 'Navbar.scss';
 </style>

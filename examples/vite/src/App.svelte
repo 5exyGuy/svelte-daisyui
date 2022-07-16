@@ -39,6 +39,10 @@
         StepsGroup,
         Swap,
         Table,
+        Navbar,
+        NavbarStart,
+        NavbarEnd,
+        NavbarCenter,
     } from '@svelte-daisyui/components/src';
     import CollapseContent from '@svelte-daisyui/components/src/components/collapse/CollapseContent.svelte';
 
@@ -152,7 +156,11 @@
 
     <Kbd>CTRL + C</Kbd>
     <Link hover color="primary">Hello world</Link>
-
+    <Navbar rounded>
+        <NavbarStart>Start</NavbarStart>
+        <NavbarCenter>Center</NavbarCenter>
+        <NavbarEnd>End</NavbarEnd>
+    </Navbar>
     <Progress color="primary" value="32" max="100" />
     <Radio color="info" />
     <Range color="secondary" min="0" max="100" value="40" />

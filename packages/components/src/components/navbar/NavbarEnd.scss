@@ -1,0 +1,6 @@
+@use '../themes.scss';
+
+.dui-navbar > .dui-navbar-end {
+    width: 100%;
+    justify-content: flex-end;
+}

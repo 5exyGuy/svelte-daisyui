@@ -1,0 +1,36 @@
+@use '../themes.scss';
+@use 'sass:list';
+
+.dui-navbar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem;
+    min-height: 4rem;
+
+    &.dui-navbar-rounded {
+        @include themes.box-border-radius();
+    }
+
+    & > * {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    $colors: list.join(themes.$brand-colors, themes.$functional-colors);
+    $colors: list.append($colors, 'neutral');
+
+    @each $color in $colors {
+        &.dui-navbar-#{$color} {
+            @include themes.bg-color($color);
+            @include themes.text-color($color + '-content');
+        }
+    }
+
+    @each $color in themes.$base-colors {
+        &.dui-navbar-#{$color} {
+            @include themes.bg-color($color);
+            @include themes.text-color('base-content');
+        }
+    }
+}

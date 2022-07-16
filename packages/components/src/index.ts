@@ -62,7 +62,10 @@ export { default as Mask } from './components/mask/Mask.svelte';
 // Modal
 
 // Navbar
-
+export { default as Navbar } from './components/navbar/Navbar.svelte';
+export { default as NavbarCenter } from './components/navbar/NavbarCenter.svelte';
+export { default as NavbarEnd } from './components/navbar/NavbarEnd.svelte';
+export { default as NavbarStart } from './components/navbar/NavbarStart.svelte';
 // Progress
 export { default as Progress } from './components/progress/Progress.svelte';
 export { default as RadialProgress } from './components/progress/RadialProgress.svelte';

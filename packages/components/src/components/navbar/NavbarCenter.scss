@@ -1,0 +1,5 @@
+@use '../themes.scss';
+
+.dui-navbar > .dui-navbar-center {
+    flex-shrink: 0;
+}
