@@ -31,11 +31,15 @@
             background-color: transparent;
         }
 
-        &:hover ~ input {
-            @include themes.bg-opacity(0.5);
+        // TODO: Fix this
+
+        &:checked ~ input ~ label,
+        &:checked ~ label ~ label {
+            @include themes.bg-opacity(0.2);
         }
 
-        &:checked ~ input {
+        &:not(:checked) ~ label:hover,
+        &:not(:checked) ~ label:hover ~ label {
             @include themes.bg-opacity(0.2);
         }
 

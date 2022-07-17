@@ -43,6 +43,7 @@
         NavbarStart,
         NavbarEnd,
         NavbarCenter,
+        Rating,
     } from '@svelte-daisyui/components/src';
     import CollapseContent from '@svelte-daisyui/components/src/components/collapse/CollapseContent.svelte';
 
@@ -164,6 +165,18 @@
     <Progress color="primary" value="32" max="100" />
     <Radio color="info" />
     <Range color="secondary" min="0" max="100" value="40" />
+    <Rating>
+        <input type="radio" name="rating" id="rating-5">
+        <label for="rating-5"></label>
+        <input type="radio" name="rating" id="rating-4">
+        <label for="rating-4"></label>
+        <input type="radio" name="rating" id="rating-3">
+        <label for="rating-3"></label>
+        <input type="radio" name="rating" id="rating-2">
+        <label for="rating-2"></label>
+        <input type="radio" name="rating" id="rating-1">
+        <label for="rating-1"></label>
+    </Rating>
     <Select>
         <option disabled selected>Pick your favorite Simpson</option>
         <option>Homer</option>

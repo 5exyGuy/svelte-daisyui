@@ -74,7 +74,7 @@ export { default as Radio } from './components/radio/Radio.svelte';
 // Range
 export { default as Range } from './components/range/Range.svelte';
 // Rating
-
+export { default as Rating } from './components/rating/Rating.svelte';
 // Select
 export { default as Select } from './components/select/Select.svelte';
 // Stack
