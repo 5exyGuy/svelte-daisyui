@@ -50,7 +50,7 @@ export { default as Icon } from './components/icon/Icon.svelte';
 export { default as IndicatorGroup } from './components/indicators/IndicatorGroup.svelte';
 export { default as IndicatorItem } from './components/indicators/IndicatorItem.svelte';
 // Input Group
-
+export { default as InputGroup } from './components/input-group/InputGroup.svelte';
 // Kbd
 export { default as Kbd } from './components/kbd/Kbd.svelte';
 // Link
@@ -58,7 +58,8 @@ export { default as Link } from './components/link/Link.svelte';
 // Mask
 export { default as Mask } from './components/mask/Mask.svelte';
 // Menu
-
+export { default as Menu } from './components/menu/Menu.svelte';
+export { default as MenuItem } from './components/menu/MenuItem.svelte';
 // Modal
 
 // Navbar

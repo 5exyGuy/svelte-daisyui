@@ -1,0 +1,20 @@
+.dui-menu {
+    & > .dui-menu-item {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+        position: relative;
+    }
+
+    &.dui-menu-horizontal {
+        & > .dui-menu-item {
+            flex-direction: row;
+        }
+    }
+
+    &.dui-menu-vertical {
+        & > .dui-menu-item {
+            flex-direction: column;
+        }
+    }
+}

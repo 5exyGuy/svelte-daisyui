@@ -1,9 +1,0 @@
-.menu {
-    &.menu-horizontal {
-        @apply inline-flex flex-row;
-    }
-
-    &.menu-vertical {
-        @apply flex flex-col;
-    }
-}

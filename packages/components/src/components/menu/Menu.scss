@@ -1,0 +1,11 @@
+.dui-menu {
+    &.dui-menu-horizontal {
+        display: inline-flex;
+        flex-direction: row;
+    }
+
+    &.dui-menu-vertical {
+        display: flex;
+        flex-direction: column;
+    }
+}

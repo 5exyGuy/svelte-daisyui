@@ -1,0 +1,91 @@
+@use '../themes.scss';
+
+.dui-input-group {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+
+    & > *,
+    & > .input {
+        border-radius: 0;
+    }
+
+    &.dui-input-group-md {
+        font-size: 0.875rem;
+        line-height: 2;
+    }
+
+    &.dui-input-group-lg {
+        font-size: 1.125rem;
+        line-height: 2;
+    }
+
+    &.dui-input-group-sm {
+        font-size: 0.875rem;
+        line-height: 2rem;
+    }
+
+    &.dui-input-group-xs {
+        font-size: 0.75rem;
+        line-height: 1.625;
+    }
+
+    span {
+        @include themes.bg-color('base-300');
+
+        display: flex;
+        align-items: center;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    & > :first-child {
+        border-top-left-radius: themes.$button-border-radius;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: themes.$button-border-radius;
+        border-bottom-right-radius: 0;
+    }
+
+    & > :last-child {
+        border-top-left-radius: 0;
+        border-top-right-radius: themes.$button-border-radius;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: themes.$button-border-radius;
+    }
+
+    &.dui-input-group-horizontal {
+        flex-direction: row;
+
+        & > :first-child {
+            border-top-left-radius: themes.$button-border-radius;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: themes.$button-border-radius;
+            border-bottom-right-radius: 0;
+        }
+
+        & > :last-child {
+            border-top-left-radius: 0;
+            border-top-right-radius: themes.$button-border-radius;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: themes.$button-border-radius;
+        }
+    }
+
+    &.dui-input-group-vertical {
+        flex-direction: column;
+
+        & > :first-child {
+            border-top-left-radius: themes.$button-border-radius;
+            border-top-right-radius: themes.$button-border-radius;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        & > :last-child {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: themes.$button-border-radius;
+            border-bottom-right-radius: themes.$button-border-radius;
+        }
+    }
+}

@@ -1,28 +1,38 @@
-<script>
-    import { classes } from '../../utilities';
+<script lang="ts">
+    import { joinClasses } from '../../utilities';
+
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
+
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLLIElement> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    let className = undefined;
-    /**
-     * @type {string}
-     */
-    export { className as class };
+    let restClass = undefined;
+    export { restClass as class };
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes('menu-item', {}, className);
+    const PREFIX = 'dui-menu-item';
+
+    $: classNames = joinClasses([PREFIX], [restClass]);
 </script>
 
-<div class={classNames}>
+<li class={classNames} {...$$restProps}>
     <slot />
-</div>
+</li>
 
-<style lang="scss">
-    @import 'MenuItemStyled.scss';
-    @import 'MenuItemUnstyled.scss';
+<style lang="scss" global>
+    @import 'MenuItem.scss';
 </style>
