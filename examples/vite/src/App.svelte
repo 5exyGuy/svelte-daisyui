@@ -159,7 +159,7 @@
 
     <Kbd>CTRL + C</Kbd>
     <Link hover color="primary">Hello world</Link>
-    <Menu>
+    <Menu alignment="horizontal">
         <MenuItem>Hello world</MenuItem>
         <MenuItem>Hello world</MenuItem>
     </Menu>

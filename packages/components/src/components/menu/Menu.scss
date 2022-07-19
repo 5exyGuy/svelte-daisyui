@@ -1,4 +1,9 @@
+@use '../themes.scss';
+
 .dui-menu {
+    @include themes.bg-color('base-100');
+    @include themes.text-color('base-content');
+
     &.dui-menu-horizontal {
         display: inline-flex;
         flex-direction: row;
@@ -7,5 +12,9 @@
     &.dui-menu-vertical {
         display: flex;
         flex-direction: column;
+    }
+
+    &.dui-menu-rounded {
+        border-radius: themes.$box-border-radius;
     }
 }
