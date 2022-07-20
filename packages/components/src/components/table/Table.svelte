@@ -15,6 +15,7 @@
     // -----------------------------------------------------------
 
     interface $$Props extends Omit<svelte.JSX.HTMLAttributes<HTMLTableElement>, 'headers'> {
+        overflowX?: boolean;
         padding?: StringKeyOf<typeof TablePadding>;
         zebra?: boolean;
         headers?: Array<ITableHeader>;
@@ -41,6 +42,7 @@
     // Properties
     // -----------------------------------------------------------
 
+    export let overflowX: $$Props['overflowX'] = true;
     export let padding: $$Props['padding'] = 'normal';
     export let zebra: $$Props['zebra'] = false;
     export let headers: $$Props['headers'] = undefined;
@@ -73,38 +75,75 @@
     export function deleteRow() {}
 </script>
 
-<table class={classNames} {...$$restProps}>
-    {#if $$slots.default}
-        <slot />
-    {:else if items && Array.isArray(items)}
-        {#if headers && Array.isArray(headers)}
-            <TableHeader>
-                <TableRow>
-                    {#each headers as header}
-                        <slot name="header" {header}>
-                            <TableHeaderCell>
-                                {header.text}
-                            </TableHeaderCell>
-                        </slot>
+{#if overflowX}
+    <div class="dui-table-overflow-x">
+        <table class={classNames} {...$$restProps}>
+            {#if $$slots.default}
+                <slot />
+            {:else if items && Array.isArray(items)}
+                {#if headers && Array.isArray(headers)}
+                    <TableHeader>
+                        <TableRow>
+                            {#each headers as header}
+                                <slot name="header" {header}>
+                                    <TableHeaderCell>
+                                        {header.text}
+                                    </TableHeaderCell>
+                                </slot>
+                            {/each}
+                        </TableRow>
+                    </TableHeader>
+                {/if}
+                <TableBody>
+                    {#each items as item}
+                        <TableRow>
+                            {#each headers ?? [] as header}
+                                <slot name="item" {item} {header}>
+                                    <TableCell alignment={header.alignment}>
+                                        {item[header.value]}
+                                    </TableCell>
+                                </slot>
+                            {/each}
+                        </TableRow>
                     {/each}
-                </TableRow>
-            </TableHeader>
+                </TableBody>
+            {/if}
+        </table>
+    </div>
+{:else}
+    <table class={classNames} {...$$restProps}>
+        {#if $$slots.default}
+            <slot />
+        {:else if items && Array.isArray(items)}
+            {#if headers && Array.isArray(headers)}
+                <TableHeader>
+                    <TableRow>
+                        {#each headers as header}
+                            <slot name="header" {header}>
+                                <TableHeaderCell>
+                                    {header.text}
+                                </TableHeaderCell>
+                            </slot>
+                        {/each}
+                    </TableRow>
+                </TableHeader>
+            {/if}
+            <TableBody>
+                {#each items as item}
+                    <TableRow>
+                        {#each headers ?? [] as header}
+                            <slot name="item" {item} {header}>
+                                <TableCell alignment={header.alignment}>
+                                    {item[header.value]}
+                                </TableCell>
+                            </slot>
+                        {/each}
+                    </TableRow>
+                {/each}
+            </TableBody>
         {/if}
-        <TableBody>
-            {#each items as item}
-                <TableRow>
-                    {#each headers ?? [] as header}
-                        <slot name="item" {item} {header}>
-                            <TableCell alignment={header.alignment}>
-                                {item[header.value]}
-                            </TableCell>
-                        </slot>
-                    {/each}
-                </TableRow>
-            {/each}
-        </TableBody>
-    {/if}
-</table>
+    </table>
+{/if}
 
 <style lang="scss" global>
     @import 'Table.scss';

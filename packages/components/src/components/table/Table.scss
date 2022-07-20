@@ -1,4 +1,7 @@
-.dui-table {
-    position: relative;
-    text-align: left;
+.dui-table-overflow-x {
+    overflow-x: auto;
+
+    & > .dui-table {
+        width: 100%;
+    }
 }

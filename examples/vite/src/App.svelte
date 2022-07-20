@@ -79,8 +79,8 @@
         <BreadcrumbItem slot="item" let:item href={item.href}>{item.text}</BreadcrumbItem>
     </BreadcrumbGroup>
     <Button>Hello world</Button>
-    <Card fullImage class="bg-base-100 text-base-content w-[600px]">
-        <CardFigure><img alt="" src="https://api.lorem.space/image/game?w=600&h=400" /></CardFigure>
+    <Card fullImage class="bg-base-100 text-base-content w-[300px]">
+        <CardFigure><img alt="" src="https://api.lorem.space/image/game?w=300&h=400" /></CardFigure>
         <CardBody justify="center">
             <CardTitle>Title</CardTitle>
             <CardContent>
@@ -160,10 +160,21 @@
 
     <Kbd>CTRL + C</Kbd>
     <Link hover color="primary">Hello world</Link>
-    <Menu alignment="vertical">
-        <MenuTitle>Title</MenuTitle>
-        <MenuItem>Hello world</MenuItem>
-        <MenuItem>Hello world</MenuItem>
+    <Menu alignment="vertical" class="w-52">
+        <MenuTitle>Category</MenuTitle>
+        <MenuItem bordered>Item 1</MenuItem>
+        <MenuItem hoverBordered>item 2</MenuItem>
+        <MenuTitle>Category</MenuTitle>
+        <MenuItem>Item 1</MenuItem>
+        <MenuItem>Item 2</MenuItem>
+    </Menu>
+    <Menu alignment="horizontal">
+        <MenuTitle>Category</MenuTitle>
+        <MenuItem bordered>Item 1</MenuItem>
+        <MenuItem hoverBordered>item 2</MenuItem>
+        <MenuTitle>Category</MenuTitle>
+        <MenuItem>Item 1</MenuItem>
+        <MenuItem>Item 2</MenuItem>
     </Menu>
     <Navbar color="primary" rounded>
         <NavbarStart>Start</NavbarStart>

@@ -1,16 +1,18 @@
 <script lang="ts">
-    import { joinClasses } from '../../utilities';
+    import { generateDefaultClasses, joinClasses } from '../../utilities';
 
     // -----------------------------------------------------------
     // Type Definitions
     // -----------------------------------------------------------
 
     interface $$Props extends svelte.JSX.HTMLAttributes<HTMLLIElement> {
-        active: boolean;
-        bordered: boolean;
-        hoverable: boolean;
-        disabled: boolean;
+        active?: boolean;
+        hoverActive?: boolean;
+        bordered?: boolean;
+        hoverBordered?: boolean;
+        disabled?: boolean;
     }
+    interface $$ClassProps extends Pick<$$Props, 'active' | 'bordered' | 'hoverActive' | 'hoverBordered'> {}
 
     interface $$Events {}
 
@@ -22,6 +24,11 @@
     // Properties
     // -----------------------------------------------------------
 
+    export let active: $$Props['active'] = false;
+    export let hoverActive: $$Props['hoverActive'] = false;
+    export let bordered: $$Props['bordered'] = false;
+    export let hoverBordered: $$Props['hoverBordered'] = false;
+    export let disabled: $$Props['disabled'] = false;
     let restClass: $$Props['class'] = undefined;
     export { restClass as class };
 
@@ -31,10 +38,26 @@
 
     const PREFIX = 'dui-menu-item';
 
-    $: classNames = joinClasses([PREFIX], [restClass]);
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(
+            PREFIX,
+            { active: 'active', bordered: 'bordered', hoverActive: 'hover-active', hoverBordered: 'hover-bordered' },
+            { active, bordered, hoverActive, hoverBordered },
+        ),
+        [restClass],
+    );
+
+    // -----------------------------------------------------------
+    // Functionality
+    // -----------------------------------------------------------
+
+    function onClick(event: MouseEvent) {
+        event.preventDefault();
+    }
 </script>
 
-<li class={classNames} {...$$restProps}>
+<li class={classNames} {disabled} {...$$restProps} on:click>
     <slot />
 </li>
 

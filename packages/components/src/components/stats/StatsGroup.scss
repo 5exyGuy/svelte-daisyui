@@ -3,8 +3,6 @@
 
 .dui-stats-group {
     // Colors
-    @include themes.bg-color('base-100');
-    @include themes.text-color('base-content');
     @include themes.box-border-radius();
 
     display: inline-grid;

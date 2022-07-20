@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { CSSUnit } from '@svelte-daisyui/shared';
+    import { createEventDispatcher, setContext } from 'svelte';
     import type { StringKeyOf } from 'type-fest';
     import { Alignment } from '../../enums';
     import type { Screen } from '../../types';
@@ -59,12 +60,15 @@
     // Functionality
     // -----------------------------------------------------------
 
-    function addPaddingAttribute(element: HTMLElement, padding: CSSUnit) {
-        padding && element.setAttribute('padding', padding);
-    }
+    // const dispatch = createEventDispatcher();
+    // const menuItems =
+
+    // setContext('menu', {
+
+    // });
 </script>
 
-<ul class={classNames} style:padding use:addPaddingAttribute={padding} {...$$restProps}>
+<ul style:padding data-padding={padding} class={classNames} {...$$restProps}>
     <slot />
 </ul>
 

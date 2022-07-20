@@ -1,29 +1,32 @@
-<script>
-    import { classes } from '@svelte-daisyui/shared';
+<script lang="ts">
+    import { joinClasses } from '../../utilities';
 
     // -----------------------------------------------------------
-    //  Type Definitions
+    // Type Definitions
     // -----------------------------------------------------------
 
-    /**
-     * @restProps {div}
-     */
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {}
+
+    interface $$Events {}
+
+    interface $$Slots {
+        default: {};
+    }
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    let restClass = undefined;
-    /**
-     * @type {string}
-     */
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------
     // Classes and Styles
     // -----------------------------------------------------------
 
-    $: classNames = classes({ prefix: 'dui-footer', restClass });
+    const PREFIX = 'dui-footer';
+
+    $: classNames = joinClasses([PREFIX], [restClass]);
 </script>
 
 <div class={classNames} {...$$restProps}>

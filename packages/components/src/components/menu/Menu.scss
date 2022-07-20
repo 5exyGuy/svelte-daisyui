@@ -7,6 +7,7 @@
     &.dui-menu-horizontal {
         display: inline-flex;
         flex-direction: row;
+        overflow-x: auto;
     }
 
     &.dui-menu-vertical {
