@@ -46,6 +46,7 @@
         Rating,
         Menu,
         MenuItem,
+        MenuTitle,
     } from '@svelte-daisyui/components/src';
     import CollapseContent from '@svelte-daisyui/components/src/components/collapse/CollapseContent.svelte';
 
@@ -159,7 +160,8 @@
 
     <Kbd>CTRL + C</Kbd>
     <Link hover color="primary">Hello world</Link>
-    <Menu alignment="horizontal">
+    <Menu alignment="vertical">
+        <MenuTitle>Title</MenuTitle>
         <MenuItem>Hello world</MenuItem>
         <MenuItem>Hello world</MenuItem>
     </Menu>

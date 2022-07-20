@@ -5,7 +5,12 @@
     // Type Definitions
     // -----------------------------------------------------------
 
-    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLLIElement> {}
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLLIElement> {
+        active: boolean;
+        bordered: boolean;
+        hoverable: boolean;
+        disabled: boolean;
+    }
 
     interface $$Events {}
 
@@ -17,7 +22,7 @@
     // Properties
     // -----------------------------------------------------------
 
-    let restClass = undefined;
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------

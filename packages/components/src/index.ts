@@ -60,6 +60,7 @@ export { default as Mask } from './components/mask/Mask.svelte';
 // Menu
 export { default as Menu } from './components/menu/Menu.svelte';
 export { default as MenuItem } from './components/menu/MenuItem.svelte';
+export { default as MenuTitle } from './components/menu/MenuTitle.svelte';
 // Modal
 
 // Navbar
