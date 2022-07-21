@@ -41,6 +41,8 @@ export { default as Dropdown } from './components/dropdown/Dropdown.svelte';
 export { default as DropdownContent } from './components/dropdown/DropdownContent.svelte';
 // Footer
 
+// Fragment
+export { default as Fragment } from './components/fragment/Fragment.svelte';
 // Hero
 export { default as Hero } from './components/hero/Hero.svelte';
 export { default as HeroContent } from './components/hero/HeroContent.svelte';
@@ -68,6 +70,8 @@ export { default as Navbar } from './components/navbar/Navbar.svelte';
 export { default as NavbarCenter } from './components/navbar/NavbarCenter.svelte';
 export { default as NavbarEnd } from './components/navbar/NavbarEnd.svelte';
 export { default as NavbarStart } from './components/navbar/NavbarStart.svelte';
+// Portal
+export { default as Portal } from './components/portal/Portal.svelte';
 // Progress
 export { default as Progress } from './components/progress/Progress.svelte';
 export { default as RadialProgress } from './components/progress/RadialProgress.svelte';

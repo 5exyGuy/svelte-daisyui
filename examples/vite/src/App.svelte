@@ -47,6 +47,7 @@
         Menu,
         MenuItem,
         MenuTitle,
+        Fragment,
     } from '@svelte-daisyui/components/src';
     import CollapseContent from '@svelte-daisyui/components/src/components/collapse/CollapseContent.svelte';
 
@@ -57,6 +58,8 @@
 </script>
 
 <Showcase>
+    <Fragment><Alert>Hello world</Alert></Fragment>
+
     <Alert>Hello world</Alert>
     <Artboard alignment="vertical" size="320x568" demo>Hello world</Artboard>
 
