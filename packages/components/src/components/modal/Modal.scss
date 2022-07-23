@@ -1,14 +1,39 @@
+@use '../themes.scss';
+@use 'sass:map';
+
 .modal {
-    @apply pointer-events-none invisible fixed inset-0 flex items-end justify-center opacity-0 sm:items-center;
-    @apply bg-neutral-focus bg-opacity-40 duration-200 ease-in-out;
-    transition-property: transform, opacity;
+    @include themes.bg-color('neutral-focus', 0.4);
+
+    @apply sm:items-center;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: fixed;
+    pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     overflow-y: hidden;
     overscroll-behavior: contain;
     z-index: 999;
 
+    transition-property: transform, opacity;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+
+    // @media (min-width: map.get()) {
+
+    // }
+
     &.modal-open,
     &[data-visible='true'] {
-        @apply pointer-events-auto visible opacity-100;
+        pointer-events: auto;
+        visibility: visible;
+        opacity: 1;
 
         & > .modal-box {
             @apply translate-y-0 scale-100;
@@ -29,21 +54,6 @@
             }
             & > .modal-header-close {
                 @apply flex-none justify-self-end;
-            }
-        }
-
-        & > .modal-actions {
-            @apply flex flex-wrap;
-            @apply mt-6 space-x-2;
-
-            &.modal-actions-left {
-                @apply justify-start;
-            }
-            &.modal-actions-center {
-                @apply justify-center;
-            }
-            &.modal-actions-right {
-                @apply justify-end;
             }
         }
     }

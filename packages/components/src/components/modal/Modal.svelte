@@ -2,59 +2,79 @@
 </script>
 
 <script lang="ts">
-    import Button from '../button/Button.svelte';
-    import Icon from '../../icon/Icon.svelte';
-    import MdClose from 'svelte-icons/md/MdClose.svelte';
-    import { afterUpdate, onMount, SvelteComponent } from 'svelte';
-    // import { ModalClosePosition } from './modal-close-position.enum';
-    import { ModalActionsPosition } from './modal-actions-position.enum';
+    import { joinClasses } from '../../utilities';
+
     import Portal from '../portal/Portal.svelte';
 
-    // Props
-    export let closeOnBlur: boolean = false; // Close modal on blur
-    export let showHeader: boolean = true; // Show header
-    export let showCustomTitle: boolean = false; // Show custom header title
-    export let title: string = undefined; // Show default header title
-    export let showCloseButton: boolean = true; // Show close button on header
-    // export let closePosition: keyof typeof ModalClosePosition = 'Right';
-    export let closeIcon: typeof SvelteComponent = MdClose;
-    export let showActions: boolean = false; // Show actions
-    export let actionsPosition: keyof typeof ModalActionsPosition = 'Right';
-    export let visible: boolean = false;
-    let className: string = '';
-    export { className as class };
+    // -----------------------------------------------------------
+    // Type Definitions
+    // -----------------------------------------------------------
 
-    // Classes
-    const classes: string[] = [];
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLUListElement> {
+        title?: string;
+        centered?: boolean;
+        overflow?: boolean;
+        opened?: boolean;
+        withCloseButton?: boolean;
+        closeOnBlur?: boolean;
+        closeOnEscape?: boolean;
+        // screen?: Screen<$$ResponsiveProps>;
+    }
+    // interface $$ResponsiveProps extends Pick<$$Props, > {}
+    // interface $$ClassProps extends Pick<$$Props, > {}
 
-    classes.push('modal-box');
+    interface $$Events {}
 
-    $: classNames = className.length > 0 ? className.split(' ') : [];
-    classes.push(...classNames);
+    interface $$Slots {
+        default: {};
+    }
 
-    // Variables
-    let modalRef: HTMLElement;
+    // -----------------------------------------------------------
+    // Properties
+    // -----------------------------------------------------------
 
-    // Functions
-    const focusBox = () => {
-        if (visible) modalRef.focus();
-    };
+    // export let closeOnBlur: boolean = false; // Close modal on blur
+    // export let closeOnEscape = true;
+    // export let title: string = undefined; // Show default header title
+    // export let showCloseButton: boolean = true; // Show close button on header
+    // export let closeIcon: typeof SvelteComponent = MdClose;
+    // export let visible: boolean = false;
+    let restClass: string = undefined;
+    export { restClass as class };
 
-    const boxBlur = () => {
-        if (closeOnBlur && visible) toggleVisibility();
-    };
+    // -----------------------------------------------------------
+    // Classes and Styles
+    // -----------------------------------------------------------
 
-    const toggleVisibility = () => {
-        visible = !visible;
-        focusBox();
-    };
+    const PREFIX = 'dui-modal';
 
-    onMount(() => focusBox());
-    afterUpdate(() => focusBox());
+    $: classNames = joinClasses([PREFIX], [restClass]);
+
+    // -----------------------------------------------------------
+    // Functionality
+    // -----------------------------------------------------------
+
+    // let modalRef: HTMLElement;
+
+    // const focusBox = () => {
+    //     if (visible) modalRef.focus();
+    // };
+
+    // const boxBlur = () => {
+    //     if (closeOnBlur && visible) toggleVisibility();
+    // };
+
+    // const toggleVisibility = () => {
+    //     visible = !visible;
+    //     focusBox();
+    // };
+
+    // onMount(() => focusBox());
+    // afterUpdate(() => focusBox());
 </script>
 
 <Portal>
-    <div class={`modal${visible ? ' modal-open' : ''}`} data-visible={visible}>
+    <div data-visible={visible} {...$$restProps}>
         <div tabindex="0" class={classes.join(' ')} on:blur={boxBlur} bind:this={modalRef}>
             {#if showHeader}
                 <div class="modal-header">
@@ -80,11 +100,6 @@
             {/if}
             <slot />
         </div>
-        {#if showActions}
-            <div class={`modal-actions ${ModalActionsPosition[actionsPosition]}`}>
-                <slot name="actions" />
-            </div>
-        {/if}
     </div>
 </Portal>
 

@@ -1,6 +1,5 @@
 <script lang="ts">
     import type { CSSUnit } from '@svelte-daisyui/shared';
-    import { createEventDispatcher, setContext } from 'svelte';
     import type { StringKeyOf } from 'type-fest';
     import { Alignment } from '../../enums';
     import type { Screen } from '../../types';
