@@ -1,10 +1,12 @@
-<script lang="ts" context="module">
-</script>
-
+<!-- <script lang="ts" context="module">
+</script> -->
 <script lang="ts">
-    import { joinClasses } from '../../utilities';
+    import type { StringKeyOf } from 'type-fest';
 
+    import type { Screen } from '../../types';
+    import { joinClasses } from '../../utilities';
     import Portal from '../portal/Portal.svelte';
+    import type { ModalOverflow } from './modal-overflow.enum';
 
     // -----------------------------------------------------------
     // Type Definitions
@@ -13,15 +15,15 @@
     interface $$Props extends svelte.JSX.HTMLAttributes<HTMLUListElement> {
         title?: string;
         centered?: boolean;
-        overflow?: boolean;
+        overflow?: StringKeyOf<typeof ModalOverflow>;
         opened?: boolean;
         withCloseButton?: boolean;
         closeOnBlur?: boolean;
         closeOnEscape?: boolean;
-        // screen?: Screen<$$ResponsiveProps>;
+        screen?: Screen<$$ResponsiveProps>;
     }
-    // interface $$ResponsiveProps extends Pick<$$Props, > {}
-    // interface $$ClassProps extends Pick<$$Props, > {}
+    interface $$ResponsiveProps extends Pick<$$Props, 'centered' | 'overflow'> {}
+    interface $$ClassProps extends Pick<$$Props, 'centered' | 'overflow'> {}
 
     interface $$Events {}
 
@@ -33,14 +35,16 @@
     // Properties
     // -----------------------------------------------------------
 
-    // export let closeOnBlur: boolean = false; // Close modal on blur
-    // export let closeOnEscape = true;
-    // export let title: string = undefined; // Show default header title
-    // export let showCloseButton: boolean = true; // Show close button on header
-    // export let closeIcon: typeof SvelteComponent = MdClose;
-    // export let visible: boolean = false;
-    let restClass: string = undefined;
+    export let title: $$Props['title'] = undefined;
+    export let centered: $$Props['centered'] = false;
+    export let overflow: $$Props['overflow'] = 'outside';
+    export let opened: $$Props['opened'] = false;
+    export let withCloseButton: $$Props['withCloseButton'] = true;
+    export let closeOnBlur: $$Props['closeOnBlur'] = true;
+    export let closeOnEscape: $$Props['closeOnEscape'] = true;
+    let restClass: $$Props['class'] = undefined;
     export { restClass as class };
+    export let screen: $$Props['screen'] = undefined;
 
     // -----------------------------------------------------------
     // Classes and Styles
@@ -73,33 +77,9 @@
     // afterUpdate(() => focusBox());
 </script>
 
-<Portal>
-    <div data-visible={visible} {...$$restProps}>
-        <div tabindex="0" class={classes.join(' ')} on:blur={boxBlur} bind:this={modalRef}>
-            {#if showHeader}
-                <div class="modal-header">
-                    {#if title || showCustomTitle}
-                        <div class="modal-header-title">
-                            {#if title && !showCustomTitle}
-                                <h2 class="text-xl font-semibold">{title}</h2>
-                            {:else if showCustomTitle}
-                                <slot name="header-title" />
-                            {/if}
-                        </div>
-                    {/if}
-                    {#if showCloseButton}
-                        <div class="modal-header-close">
-                            <Button type="Ghost" shape="Square" onClick={toggleVisibility}>
-                                <Icon size={2}>
-                                    <svelte:component this={closeIcon} />
-                                </Icon>
-                            </Button>
-                        </div>
-                    {/if}
-                </div>
-            {/if}
-            <slot />
-        </div>
+<Portal class="">
+    <div class={classNames} {...$$restProps}>
+        <slot />
     </div>
 </Portal>
 

@@ -5,7 +5,7 @@
     // Type Definitions
     // -----------------------------------------------------------
 
-    interface $$Props {
+    interface $$Props extends Omit<svelte.JSX.HTMLAttributes<HTMLDivElement>, 'target'> {
         target?: HTMLElement | string;
     }
 
@@ -60,6 +60,6 @@
     }
 </script>
 
-<div use:portal={target} hidden>
+<div use:portal={target} {...$$restProps}>
     <slot />
 </div>
