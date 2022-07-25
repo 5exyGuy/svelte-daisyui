@@ -9,7 +9,7 @@
     // -----------------------------------------------------------
 
     interface $$Props extends Omit<svelte.JSX.HTMLAttributes<HTMLDivElement>, 'size'> {
-        component?: SvelteComponent;
+        component?: typeof SvelteComponent;
         size?: CSSUnit;
         height?: CSSUnit;
         width?: CSSUnit;
@@ -57,7 +57,7 @@
     );
 </script>
 
-<div class={classNames} style={`height: ${size ?? height}em; width: ${size ?? width}em;`} {...$$restProps}>
+<div class={classNames} style:height={`${size ?? height}rem`} style:width={`${size ?? width}rem`} {...$$restProps}>
     {#if component}
         <svelte:component this={component} />
     {:else}

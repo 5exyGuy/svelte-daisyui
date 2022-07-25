@@ -1,12 +1,14 @@
 .dui-icon {
     display: inline-block;
+    width: 1rem;
+    height: 1rem;
 
     @keyframes loadingCircle {
         to {
             transform: rotate(360deg);
         }
     }
- 
+
     &.dui-icon-spin {
         animation: loadingCircle 1s infinite linear;
     }

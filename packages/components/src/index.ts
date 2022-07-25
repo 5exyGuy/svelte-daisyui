@@ -64,7 +64,7 @@ export { default as Menu } from './components/menu/Menu.svelte';
 export { default as MenuItem } from './components/menu/MenuItem.svelte';
 export { default as MenuTitle } from './components/menu/MenuTitle.svelte';
 // Modal
-
+export { default as Modal } from './components/modal/Modal.svelte';
 // Navbar
 export { default as Navbar } from './components/navbar/Navbar.svelte';
 export { default as NavbarCenter } from './components/navbar/NavbarCenter.svelte';

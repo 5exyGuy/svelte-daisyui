@@ -1,60 +1,50 @@
 @use '../themes.scss';
 @use 'sass:map';
 
-.modal {
-    @include themes.bg-color('neutral-focus', 0.4);
-
-    @apply sm:items-center;
-
+.dui-modal {
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: flex-start;
+    overflow-y: auto;
     position: fixed;
-    pointer-events: none;
-    visibility: hidden;
-    opacity: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    overflow-y: hidden;
-    overscroll-behavior: contain;
-    z-index: 999;
+    padding: 48px 16px;
+    z-index: 200;
+    inset: 0;
 
-    transition-property: transform, opacity;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 200ms;
+    width: 100%;
+    height: 100%;
 
-    // @media (min-width: map.get()) {
+    & > .dui-modal-box {
+        @include themes.bg-color('base-100');
+        @include themes.text-color('base-content');
 
-    // }
+        border-radius: themes.$box-border-radius;
 
-    &.modal-open,
-    &[data-visible='true'] {
-        pointer-events: auto;
-        visibility: visible;
-        opacity: 1;
+        position: relative;
+        padding: 1.5rem;
+        // max-height: calc(100vh - 185px);
+        // overflow-y: auto;
+        // overscroll-behavior: contain;
 
-        & > .modal-box {
-            @apply translate-y-0 scale-100;
+        & > .dui-modal-box-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            margin-right: -9px;
+
+            & > .dui-modal-box-header-title {
+                font-size: 1.125rem;
+                line-height: 1.75rem;
+                font-weight: 700;
+            }
         }
     }
 
-    & > .modal-box {
-        @apply transform translate-y-10 sm:translate-y-0 sm:scale-90 transition duration-200 ease-in-out;
-        @apply max-h-full p-6 w-full sm:max-w-lg overflow-y-auto;
-        @apply bg-base-100 sm:rounded-2xl;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    & > .dui-modal-overlay {
+        @include themes.bg-color('neutral-focus', 0.8);
 
-        & > .modal-header {
-            @apply flex items-center mb-4;
-
-            & > .modal-header-title {
-                @apply flex-1;
-            }
-            & > .modal-header-close {
-                @apply flex-none justify-self-end;
-            }
-        }
+        position: fixed;
+        inset: 0;
     }
 }

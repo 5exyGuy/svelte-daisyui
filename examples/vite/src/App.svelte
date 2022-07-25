@@ -48,6 +48,7 @@
         MenuItem,
         MenuTitle,
         Fragment,
+        Modal,
     } from '@svelte-daisyui/components/src';
     import CollapseContent from '@svelte-daisyui/components/src/components/collapse/CollapseContent.svelte';
 
@@ -179,6 +180,11 @@
         <MenuItem>Item 1</MenuItem>
         <MenuItem>Item 2</MenuItem>
     </Menu>
+    <Modal title="Title">
+        {#each Array(50) as index}
+            <p>You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
+        {/each}
+    </Modal>
     <Navbar color="primary" rounded>
         <NavbarStart>Start</NavbarStart>
         <NavbarCenter>Center</NavbarCenter>

@@ -1,12 +1,15 @@
 <!-- <script lang="ts" context="module">
 </script> -->
 <script lang="ts">
+    import { onMount } from 'svelte';
     import type { StringKeyOf } from 'type-fest';
-
+    import Button from '../button/Button.svelte';
     import type { Screen } from '../../types';
     import { joinClasses } from '../../utilities';
     import Portal from '../portal/Portal.svelte';
     import type { ModalOverflow } from './modal-overflow.enum';
+    import IoMdClose from 'svelte-icons/io/IoMdClose.svelte';
+    import { Icon } from '../..';
 
     // -----------------------------------------------------------
     // Type Definitions
@@ -50,7 +53,7 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    const PREFIX = 'dui-modal';
+    const PREFIX = 'dui-modal-box';
 
     $: classNames = joinClasses([PREFIX], [restClass]);
 
@@ -73,12 +76,26 @@
     //     focusBox();
     // };
 
-    // onMount(() => focusBox());
+    onMount(() => {
+        // if (opened) {
+        window.document.body.style.overflow = 'hidden';
+        window.document.body.style.touchAction = 'none';
+        // }
+    });
     // afterUpdate(() => focusBox());
 </script>
 
-<Portal class="">
+<Portal class="dui-modal">
+    <div class="dui-modal-overlay" />
     <div class={classNames} {...$$restProps}>
+        <div class="dui-modal-box-header">
+            {#if title}
+                <h3 class="dui-modal-box-header-title">{title}</h3>
+            {/if}
+            <Button shape="square" size="sm" on:click={() => (opened = !opened)}>
+                <Icon size="1.5rem" component={IoMdClose} />
+            </Button>
+        </div>
         <slot />
     </div>
 </Portal>

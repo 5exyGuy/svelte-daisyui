@@ -21,7 +21,7 @@
     // Functionality
     // -----------------------------------------------------------
 
-    function portal(node: HTMLElement, target: $$Props['target']) {
+    function portal(node: HTMLElement, target: $$Props['target'] = 'body') {
         let targetEl: HTMLElement;
         async function update(newTarget: $$Props['target']) {
             target = newTarget;
