@@ -1,5 +1,7 @@
 <script lang="ts">
+    import { setContext } from 'svelte';
     import { joinClasses } from '../../utilities';
+    import type { DrawerWrapperContext } from './drawer-wrapper-context.interface';
 
     // -----------------------------------------------------------
     // Type Definitions
@@ -24,13 +26,15 @@
     // Classes and Styles
     // -----------------------------------------------------------
 
-    const PREFIX = 'dui-drawer';
+    const PREFIX = 'dui-drawer-wrapper';
 
     $: classNames = joinClasses([PREFIX], [restClass]);
 
     // -----------------------------------------------------------
     //                       Functionality
     // -----------------------------------------------------------
+
+    setContext<DrawerWrapperContext>('drawer-wrapper', {});
 </script>
 
 <div class={classNames} {...$$restProps}>
@@ -38,5 +42,5 @@
 </div>
 
 <style lang="scss" global>
-    @import 'Drawer.scss';
+    @import 'DrawerWrapper.scss';
 </style>
