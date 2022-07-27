@@ -59,7 +59,7 @@
         { text: 'Breadcrumb #2', href: 'test' },
     ];
 
-    let drawerOpened = false;
+    let drawerOpened = true;
 </script>
 
 <Showcase>
@@ -155,8 +155,8 @@
 
     <h1 class="font-extrabold text-4xl text-base-content mb-12 mt-6">Drawer</h1>
     <Button on:click={() => (drawerOpened = !drawerOpened)}>Toggle Drawer</Button>
-    <DrawerWrapper>
-        <div class="text-base-content">
+    <DrawerWrapper fixed>
+        <!-- <div class="text-base-content">
             What is Lorem Ipsum?
             <p class="my-2">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
@@ -175,8 +175,8 @@
                 search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have
                 evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
             </p>
-        </div>
-        <Drawer bind:opened={drawerOpened} position="right">
+        </div> -->
+        <Drawer bind:opened={drawerOpened} position="right" closeOnBlur>
             <div class="bg-primary text-primary-content w-full">Hello world</div>
         </Drawer>
     </DrawerWrapper>

@@ -4,14 +4,23 @@
     display: grid;
     position: relative;
     overflow: hidden;
+    visibility: hidden;
+
+    transition-property: all;
+    transition-duration: 300ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 
     &.dui-drawer-wrapper-fixed {
         position: fixed;
+        inset: 0;
     }
 
-    &.dui-drawer-wrapper-open > .dui-drawer-wrapper-overlay {
+    &.dui-drawer-wrapper-open {
         visibility: visible;
-        opacity: 1;
+
+        & > .dui-drawer-wrapper-overlay {
+            opacity: 1;
+        }
     }
 
     & > .dui-drawer-wrapper-overlay {
@@ -20,7 +29,6 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        visibility: hidden;
         opacity: 0;
         cursor: pointer;
         grid-column-start: 1;

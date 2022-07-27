@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { beforeUpdate, getContext, onMount } from 'svelte';
+    import { afterUpdate, beforeUpdate, getContext, onMount, tick } from 'svelte';
     import type { StringKeyOf } from 'type-fest';
     import { Position } from '../../enums';
     import { generateDefaultClasses, joinClasses } from '../../utilities';
@@ -51,29 +51,56 @@
     const context = getContext<DrawerWrapperContext>('dui-drawer-wrapper');
     let rootRef: HTMLDivElement;
 
-    function processBlur() {
-        if (!closeOnBlur) return;
-
+    function close() {
         opened = false;
         context?.opened?.set(false);
+
+        document.body.style.removeProperty('overflow');
+        document.body.style.removeProperty('touch-action');
+        if (document.body.style.length === 0) document.body.removeAttribute('style');
+    }
+
+    function processBlur() {
+        console.log('processBlur');
+        if (closeOnBlur) close();
     }
 
     function processKeydown(event: KeyboardEvent) {
-        if (event.key === 'Escape') {
-            opened = false;
-            context?.opened?.set(false);
-        }
+        if (event.key === 'Escape') close();
     }
 
-    onMount(() => opened && rootRef.focus());
+    onMount(() => {
+        if (opened) return;
+        rootRef.focus();
+        document.body.style.overflow = 'hidden';
+        document.body.style.touchAction = 'none';
+    });
     beforeUpdate(() => context?.opened?.set(opened));
+    afterUpdate(async () => {
+        if (opened) {
+            // TODO: Find a better way to do this
+            const interval = setInterval(() => {
+                if (window.getComputedStyle(rootRef).visibility === 'hidden') return;
+                clearInterval(interval);
+
+                rootRef.focus();
+                document.body.style.overflow = 'hidden';
+                document.body.style.touchAction = 'none';
+            }, 100);
+            return;
+        }
+
+        document.body.style.removeProperty('overflow');
+        document.body.style.removeProperty('touch-action');
+        if (document.body.style.length === 0) document.body.removeAttribute('style');
+    });
 </script>
 
-<div class={classNames} tabindex="-1" on:blur={processBlur} bind:this={rootRef} {...$$restProps}>
+<div class={classNames} tabindex="-1" on:blur={processBlur} data-opened={opened} bind:this={rootRef} {...$$restProps}>
     <slot />
 </div>
 
-<svelte:window on:keydown|preventDefault={processKeydown} />
+<svelte:window on:keydown={processKeydown} />
 
 <style lang="scss" global>
     @import 'Drawer.scss';

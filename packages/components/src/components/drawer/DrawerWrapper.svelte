@@ -2,6 +2,7 @@
     import { setContext } from 'svelte';
     import { writable } from 'svelte/store';
     import { generateDefaultClasses, joinClasses } from '../../utilities';
+    import Portal from '../portal/Portal.svelte';
     import type { DrawerWrapperContext } from './drawer-wrapper-context.interface';
 
     // -----------------------------------------------------------
@@ -52,10 +53,17 @@
     });
 </script>
 
-<div class={classNames} {...$$restProps}>
-    <div tabindex="-1" class="dui-drawer-wrapper-overlay" />
-    <slot />
-</div>
+{#if fixed}
+    <Portal class={classNames} {...$$restProps}>
+        <div class="dui-drawer-wrapper-overlay" />
+        <slot />
+    </Portal>
+{:else}
+    <div class={classNames} {...$$restProps}>
+        <div class="dui-drawer-wrapper-overlay" />
+        <slot />
+    </div>
+{/if}
 
 <style lang="scss" global>
     @import 'DrawerWrapper.scss';
