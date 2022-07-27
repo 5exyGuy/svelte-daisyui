@@ -1,13 +1,19 @@
 <script lang="ts">
     import { setContext } from 'svelte';
-    import { joinClasses } from '../../utilities';
+    import { writable } from 'svelte/store';
+    import { generateDefaultClasses, joinClasses } from '../../utilities';
     import type { DrawerWrapperContext } from './drawer-wrapper-context.interface';
 
     // -----------------------------------------------------------
     // Type Definitions
     // -----------------------------------------------------------
 
-    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {}
+    interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
+        fixed?: boolean;
+    }
+    interface $$ClassProps extends Pick<$$Props, 'fixed'> {
+        opened?: boolean;
+    }
 
     interface $$Events {}
 
@@ -19,6 +25,7 @@
     // Properties
     // -----------------------------------------------------------
 
+    export let fixed: $$Props['fixed'] = false;
     let restClass: $$Props['class'] = undefined;
     export { restClass as class };
 
@@ -28,16 +35,25 @@
 
     const PREFIX = 'dui-drawer-wrapper';
 
-    $: classNames = joinClasses([PREFIX], [restClass]);
+    $: classNames = joinClasses(
+        [PREFIX],
+        generateDefaultClasses<$$ClassProps>(PREFIX, { fixed: 'fixed', opened: 'open' }, { fixed, opened: $opened }),
+        [restClass],
+    );
 
     // -----------------------------------------------------------
     //                       Functionality
     // -----------------------------------------------------------
 
-    setContext<DrawerWrapperContext>('drawer-wrapper', {});
+    const opened = writable(false);
+
+    setContext<DrawerWrapperContext>(PREFIX, {
+        opened,
+    });
 </script>
 
 <div class={classNames} {...$$restProps}>
+    <div tabindex="-1" class="dui-drawer-wrapper-overlay" />
     <slot />
 </div>
 

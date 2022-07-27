@@ -35,7 +35,8 @@ export { default as CollapseTitle } from './components/collapse/CollapseTitle.sv
 // Divider
 export { default as Divider } from './components/divider/Divider.svelte';
 // Drawer
-
+export { default as Drawer } from './components/drawer/Drawer.svelte';
+export { default as DrawerWrapper } from './components/drawer/DrawerWrapper.svelte';
 // Dropdown
 export { default as Dropdown } from './components/dropdown/Dropdown.svelte';
 export { default as DropdownContent } from './components/dropdown/DropdownContent.svelte';

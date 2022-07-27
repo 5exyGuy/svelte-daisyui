@@ -1,2 +1,34 @@
-.drawer-wrapper {
+.dui-drawer-wrapper {
+    & > .dui-drawer-side {
+        position: absolute;
+        grid-column-start: 1;
+        grid-row-start: 1;
+        overflow: hidden;
+
+        transition: opacity, transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+        &.dui-drawer-side-left {
+            inset: 0 auto 0 0;
+            transform: translateX(-100%);
+        }
+
+        &.dui-drawer-side-right {
+            inset: 0 0 0 auto;
+            transform: translateX(100%);
+        }
+
+        &.dui-drawer-side-top {
+            inset: 0 0 auto 0;
+            transform: translateY(-100%);
+        }
+
+        &.dui-drawer-side-bottom {
+            inset: auto 0 0 0;
+            transform: translateY(100%);
+        }
+    }
+
+    &.dui-drawer-wrapper-open > .dui-drawer-side {
+        transform: translateX(0) translateY(0);
+    }
 }
