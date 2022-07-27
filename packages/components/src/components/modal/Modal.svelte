@@ -77,17 +77,20 @@
     // };
 
     onMount(() => {
+        setTimeout(() => {
+            opened = true;
+        }, 1000);
+
         // if (opened) {
-        window.document.body.style.overflow = 'hidden';
-        window.document.body.style.touchAction = 'none';
+        document.body.style.overflow = 'hidden';
+        document.body.style.touchAction = 'none';
         // }
     });
     // afterUpdate(() => focusBox());
 </script>
 
-<Portal class="dui-modal">
-    <div class="dui-modal-overlay" />
-    <div class={classNames} {...$$restProps}>
+<Portal class="dui-modal" data-opened={opened}>
+    <div class={classNames} tabindex="-1" {...$$restProps}>
         <div class="dui-modal-box-header">
             {#if title}
                 <h3 class="dui-modal-box-header-title">{title}</h3>
