@@ -177,7 +177,12 @@
             </p>
         </div> -->
         <Drawer bind:opened={drawerOpened} position="right" closeOnBlur>
-            <div class="bg-primary text-primary-content w-full">Hello world</div>
+            <div class="bg-primary text-primary-content w-full">
+                <Button>Click me</Button>
+                <Link>Click me #1</Link>
+                <Link>Click me #2</Link>
+                Hello world
+            </div>
         </Drawer>
     </DrawerWrapper>
 

@@ -4,6 +4,7 @@
     import { Position } from '../../enums';
     import { generateDefaultClasses, joinClasses } from '../../utilities';
     import type { DrawerWrapperContext } from './drawer-wrapper-context.interface';
+    import { focusTrap } from '../../actions';
 
     // -----------------------------------------------------------
     // Type Definitions
@@ -94,9 +95,18 @@
         document.body.style.removeProperty('touch-action');
         if (document.body.style.length === 0) document.body.removeAttribute('style');
     });
+
+    let enabled = false;
 </script>
 
-<div class={classNames} tabindex="-1" on:blur={processBlur} data-opened={opened} bind:this={rootRef} {...$$restProps}>
+<div
+    use:focusTrap={{ enabled }}
+    class={classNames}
+    tabindex="-1"
+    data-opened={opened}
+    bind:this={rootRef}
+    {...$$restProps}
+>
     <slot />
 </div>
 
