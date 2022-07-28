@@ -19,9 +19,15 @@ interface FocusTrapOptions {
 export function focusTrap(element: HTMLElement, { enabled = true }: FocusTrapOptions = {}) {
     if (!enabled) return;
 
-    const focusableElements = [...element.querySelectorAll(FOCUSABLE_ELEMENTS.join(','))] as Array<HTMLElement>;
+    const focusableElements = [...element.querySelectorAll(FOCUSABLE_ELEMENTS.join(','))].filter((element) => {
+        let computedStyle = document.defaultView.getComputedStyle(element, null);
+        return (
+            computedStyle.getPropertyValue('display') !== 'none' &&
+            computedStyle.getPropertyValue('visibility') !== 'hidden'
+        );
+    }) as Array<HTMLElement>;
     const oldFocusedElement = document.activeElement as HTMLElement;
-    let currentFocusedElement = document.activeElement as HTMLElement;
+    let currentFocusedElement = oldFocusedElement;
 
     const nextElement = (event: KeyboardEvent) => {
         if (!(!event.shiftKey && event.key === 'Tab')) return;

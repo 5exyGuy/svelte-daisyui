@@ -1,5 +1,5 @@
-import type { Writable } from 'svelte/store';
-
 export interface DrawerWrapperContext {
-    opened: Writable<boolean>;
+    changeVisibility(opened: boolean): void;
+    onVisibilityChange(listener: (opened: boolean) => void): void;
+    onOverlayClick(listener: () => void): void;
 }

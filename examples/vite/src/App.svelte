@@ -154,7 +154,7 @@
     </Collapse>
 
     <h1 class="font-extrabold text-4xl text-base-content mb-12 mt-6">Drawer</h1>
-    <Button on:click={() => (drawerOpened = !drawerOpened)}>Toggle Drawer</Button>
+    <Button on:click={() => (drawerOpened = true)}>Toggle Drawer</Button>
     <DrawerWrapper fixed>
         <!-- <div class="text-base-content">
             What is Lorem Ipsum?
