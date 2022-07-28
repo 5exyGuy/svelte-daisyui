@@ -50,44 +50,16 @@
     // -----------------------------------------------------------
 
     // TODO: Sometimes opened variable is not updated when the button is clicked.
-    const { changeVisibility, onVisibilityChange, onOverlayClick } =
-        getContext<DrawerWrapperContext>('dui-drawer-wrapper');
-
-    function processKeydown(event: KeyboardEvent) {
-        if (event.key !== 'Escape') return;
-
-        opened = false;
-        document.body.style.removeProperty('overflow');
-        document.body.style.removeProperty('touch-action');
-        if (document.body.style.length === 0) document.body.removeAttribute('style');
-    }
+    const { changeVisibility, onVisibilityChange } = getContext<DrawerWrapperContext>('dui-drawer-wrapper');
 
     onMount(() => changeVisibility(opened));
-    onVisibilityChange((opened) => {
-        if (opened) {
-            document.body.style.overflow = 'hidden';
-            document.body.style.touchAction = 'none';
-            return;
-        }
-
-        document.body.style.removeProperty('overflow');
-        document.body.style.removeProperty('touch-action');
-        if (document.body.style.length === 0) document.body.removeAttribute('style');
-    });
-    onOverlayClick(() => {
-        opened = false;
-        document.body.style.removeProperty('overflow');
-        document.body.style.removeProperty('touch-action');
-        if (document.body.style.length === 0) document.body.removeAttribute('style');
-    });
     beforeUpdate(() => changeVisibility(opened));
+    onVisibilityChange((_opened) => (opened = _opened));
 </script>
 
 <div class={classNames} data-opened={opened} use:focusTrap={{ enabled: opened }} {...$$restProps}>
     <slot />
 </div>
-
-<svelte:window on:keydown={processKeydown} />
 
 <style lang="scss" global>
     @import 'Drawer.scss';
