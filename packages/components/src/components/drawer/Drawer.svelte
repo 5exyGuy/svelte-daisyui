@@ -1,16 +1,18 @@
 <script lang="ts">
-    import { beforeUpdate, getContext, onMount } from 'svelte';
+    import { beforeUpdate, getContext, hasContext, onMount } from 'svelte';
     import type { StringKeyOf } from 'type-fest';
     import { Position } from '../../enums';
     import { generateDefaultClasses, joinClasses } from '../../utilities';
     import type { DrawerWrapperContext } from './drawer-wrapper-context.interface';
     import { focusTrap } from '../../actions';
+    import DrawerWrapper from './DrawerWrapper.svelte';
 
     // -----------------------------------------------------------
     // Type Definitions
     // -----------------------------------------------------------
 
     interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
+        name: string;
         position?: StringKeyOf<typeof Position>;
         opened?: boolean;
         closeOnBlur?: boolean;
@@ -27,6 +29,7 @@
     // Properties
     // -----------------------------------------------------------
 
+    export let name: $$Props['name'];
     export let position: $$Props['position'] = 'left';
     export let opened: $$Props['opened'] = false;
     export let closeOnBlur: $$Props['closeOnBlur'] = false;
@@ -50,16 +53,28 @@
     // -----------------------------------------------------------
 
     // TODO: Sometimes opened variable is not updated when the button is clicked.
-    const { changeVisibility, onVisibilityChange } = getContext<DrawerWrapperContext>('dui-drawer-wrapper');
+    const {
+        name: drawerName,
+        changeVisibility,
+        onVisibilityChange,
+    } = getContext<DrawerWrapperContext>('dui-drawer-wrapper');
 
     onMount(() => changeVisibility(opened));
     beforeUpdate(() => changeVisibility(opened));
     onVisibilityChange((_opened) => (opened = _opened));
 </script>
 
-<div class={classNames} data-opened={opened} use:focusTrap={{ enabled: opened }} {...$$restProps}>
-    <slot />
-</div>
+{#if !hasContext('dui-drawer-wrapper')}
+    <DrawerWrapper name="dui-drawer-wrapper-fixed">
+        <div class={classNames} data-opened={opened} use:focusTrap={{ enabled: opened }} {...$$restProps}>
+            <slot />
+        </div>
+    </DrawerWrapper>
+{:else if name === drawerName}
+    <div class={classNames} data-opened={opened} use:focusTrap={{ enabled: opened }} {...$$restProps}>
+        <slot />
+    </div>
+{/if}
 
 <style lang="scss" global>
     @import 'Drawer.scss';
