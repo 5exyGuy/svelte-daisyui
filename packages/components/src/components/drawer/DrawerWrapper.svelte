@@ -56,8 +56,6 @@
     setContext<DrawerWrapperContext>(PREFIX, {
         changeVisibility(opened: boolean) {
             if (opened) addScrollLock();
-            else removeScrollLock();
-
             openedStore.set(opened);
         },
         onVisibilityChange(listener: (opened: boolean) => void) {
@@ -67,12 +65,13 @@
 
     function processKeydown(event: KeyboardEvent) {
         if (event.key !== 'Escape') return;
-
-        openedStore.set(false);
-        removeScrollLock();
+        toggleVisiblity(false);
     }
 
     function addScrollLock() {
+        const paddingRight = parseInt(window.getComputedStyle(document.body).paddingRight, 10);
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+        document.body.style.paddingRight = `${paddingRight + scrollbarWidth}px`;
         document.body.style.overflow = 'hidden';
         document.body.style.touchAction = 'none';
     }
@@ -80,12 +79,14 @@
     function removeScrollLock() {
         document.body.style.removeProperty('overflow');
         document.body.style.removeProperty('touch-action');
+        document.body.style.removeProperty('padding-right');
         if (document.body.style.length === 0) document.body.removeAttribute('style');
     }
 
-    function close() {
-        removeScrollLock();
-        openedStore.set(false);
+    function toggleVisiblity(opened: boolean) {
+        if (opened) addScrollLock();
+        else removeScrollLock();
+        openedStore.set(opened);
     }
 
     afterUpdate(() => visibilityChangeListeners.forEach((listener) => listener($openedStore)));
@@ -93,12 +94,12 @@
 
 {#if fixed}
     <Portal class={classNames} {...$$restProps}>
-        <div class="dui-drawer-wrapper-overlay" on:click={close} />
+        <div class="dui-drawer-wrapper-overlay" on:click={() => toggleVisiblity(false)} />
         <slot />
     </Portal>
 {:else}
     <div class={classNames} {...$$restProps}>
-        <div class="dui-drawer-wrapper-overlay" on:click={close} />
+        <div class="dui-drawer-wrapper-overlay" on:click={() => toggleVisiblity(false)} />
         <slot />
     </div>
 {/if}
