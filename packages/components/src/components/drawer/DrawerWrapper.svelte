@@ -10,6 +10,7 @@
     // -----------------------------------------------------------
 
     interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
+        fixed?: boolean;
         name: string;
     }
     interface $$ClassProps {
@@ -27,6 +28,7 @@
     // Properties
     // -----------------------------------------------------------
 
+    export let fixed: $$Props['fixed'] = false;
     export let name: $$Props['name'];
     let restClass: $$Props['class'] = undefined;
     export { restClass as class };
@@ -54,8 +56,6 @@
     const openedStore = writable(false);
     const visibilityChangeListeners = [] as Array<(opened: boolean) => void>;
 
-    let fixed = false;
-
     setContext<DrawerWrapperContext>(PREFIX, {
         name,
         changeVisibility(opened: boolean) {
@@ -82,9 +82,11 @@
 </script>
 
 {#if fixed}
-    <Portal class={classNames} {...$$restProps}>
-        <div class="dui-drawer-wrapper-overlay" on:click={() => toggleVisiblity(false)} />
-        <slot />
+    <Portal>
+        <div class={classNames} {...$$restProps}>
+            <div class="dui-drawer-wrapper-overlay" on:click={() => toggleVisiblity(false)} />
+            <slot />
+        </div>
     </Portal>
 {:else}
     <div class={classNames} {...$$restProps}>

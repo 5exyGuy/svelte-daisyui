@@ -53,24 +53,24 @@
     // -----------------------------------------------------------
 
     // TODO: Sometimes opened variable is not updated when the button is clicked.
-    const {
-        name: drawerName,
-        changeVisibility,
-        onVisibilityChange,
-    } = getContext<DrawerWrapperContext>('dui-drawer-wrapper');
+    const drawerWrapperContext = getContext<DrawerWrapperContext>('dui-drawer-wrapper');
 
-    onMount(() => changeVisibility(opened));
-    beforeUpdate(() => changeVisibility(opened));
-    onVisibilityChange((_opened) => (opened = _opened));
+    if (drawerWrapperContext) {
+        const { changeVisibility, onVisibilityChange } = drawerWrapperContext;
+
+        onMount(() => changeVisibility(opened));
+        beforeUpdate(() => changeVisibility(opened));
+        onVisibilityChange((_opened) => (opened = _opened));
+    }
 </script>
 
 {#if !hasContext('dui-drawer-wrapper')}
-    <DrawerWrapper name="dui-drawer-wrapper-fixed">
+    <DrawerWrapper name="dui-drawer-wrapper-fixed" fixed>
         <div class={classNames} data-opened={opened} use:focusTrap={{ enabled: opened }} {...$$restProps}>
             <slot />
         </div>
     </DrawerWrapper>
-{:else if name === drawerName}
+{:else if name === drawerWrapperContext?.name}
     <div class={classNames} data-opened={opened} use:focusTrap={{ enabled: opened }} {...$$restProps}>
         <slot />
     </div>

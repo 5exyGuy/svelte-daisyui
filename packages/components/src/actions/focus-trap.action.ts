@@ -83,7 +83,7 @@ export function focusTrap(element: HTMLElement, { enabled = true }: FocusTrapOpt
             if (!enabled) {
                 window.removeEventListener('keydown', nextElement);
                 window.removeEventListener('keydown', previousElement);
-                // oldFocusedElement && oldFocusedElement.focus();
+                oldFocusedElement && oldFocusedElement.focus();
                 return;
             }
 
@@ -91,7 +91,6 @@ export function focusTrap(element: HTMLElement, { enabled = true }: FocusTrapOpt
             window.addEventListener('keydown', previousElement);
         },
         destroy() {
-            console.log('[focus-trap] destroy');
             currentFocusedElement.focus();
             window.removeEventListener('keydown', nextElement);
             window.removeEventListener('keydown', previousElement);

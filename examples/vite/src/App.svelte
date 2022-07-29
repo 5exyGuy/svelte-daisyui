@@ -169,8 +169,8 @@
     >
         Hello world
     </button>
-    <DrawerWrapper fixed>
-        <!-- <div class="text-base-content">
+    <!-- <DrawerWrapper name="mydrawer"> -->
+    <!-- <div class="text-base-content">
             What is Lorem Ipsum?
             <p class="my-2">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
@@ -190,15 +190,15 @@
                 evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
             </p>
         </div> -->
-        <Drawer bind:opened={drawerOpened} position="right" closeOnBlur>
-            <div class="bg-primary text-primary-content w-full">
-                <Button>Click me</Button>
-                <Link>Click me #1</Link>
-                <Link>Click me #2</Link>
-                Hello world
-            </div>
-        </Drawer>
-    </DrawerWrapper>
+    <Drawer name="mydrawer" bind:opened={drawerOpened} position="right" closeOnBlur>
+        <div class="bg-primary text-primary-content w-full">
+            <Button>Click me</Button>
+            <Link>Click me #1</Link>
+            <Link>Click me #2</Link>
+            Hello world
+        </div>
+    </Drawer>
+    <!-- </DrawerWrapper> -->
 
     <h1 class="font-extrabold text-4xl text-base-content mb-12 mt-6">Dropdown</h1>
     <Dropdown>

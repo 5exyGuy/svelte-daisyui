@@ -1,11 +1,15 @@
 <script lang="ts">
-    import { tick } from 'svelte';
+    import type { StringKeyOf } from 'type-fest';
+    import { portal } from '../../actions';
 
     // -----------------------------------------------------------
     // Type Definitions
     // -----------------------------------------------------------
 
-    interface $$Props extends Omit<svelte.JSX.HTMLAttributes<HTMLDivElement>, 'target'> {
+    // type T = $$Generic<StringKeyOf<HTMLElementTagNameMap>>;
+
+    interface $$Props extends Omit<svelte.JSX.HTMLAttributes<HTMLElement>, 'target'> {
+        element: StringKeyOf<HTMLElementTagNameMap>;
         target?: HTMLElement | string;
     }
 
@@ -15,51 +19,10 @@
         default: {};
     }
 
-    export let target: $$Props['target'] = 'body';
-
-    // -----------------------------------------------------------
-    // Functionality
-    // -----------------------------------------------------------
-
-    function portal(node: HTMLElement, target: $$Props['target'] = 'body') {
-        let targetEl: HTMLElement;
-        async function update(newTarget: $$Props['target']) {
-            target = newTarget;
-            if (typeof target === 'string') {
-                targetEl = document.querySelector(target);
-                if (targetEl === null) {
-                    await tick();
-                    targetEl = document.querySelector(target);
-                }
-                if (targetEl === null) {
-                    throw new Error(`No element found matching css selector: "${target}"`);
-                }
-            } else if (target instanceof HTMLElement) {
-                targetEl = target;
-            } else {
-                throw new TypeError(
-                    `Unknown portal target type: ${
-                        target === null ? 'null' : typeof target
-                    }. Allowed types: string (CSS selector) or HTMLElement.`,
-                );
-            }
-            targetEl.appendChild(node);
-            node.hidden = false;
-        }
-
-        function destroy() {
-            node.parentNode && node.parentNode.removeChild(node);
-        }
-
-        update(target);
-
-        return {
-            update,
-            destroy,
-        };
-    }
+    export let element: $$Props['element'] = 'div';
+    export let target: $$Props['target'] = document.body;
 </script>
 
-<div use:portal={target} {...$$restProps}>
+<svelte:element this={element} use:portal={target} {...$$restProps}>
     <slot />
-</div>
+</svelte:element>
