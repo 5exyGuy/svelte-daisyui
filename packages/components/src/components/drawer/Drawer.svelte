@@ -5,7 +5,7 @@
     import { generateDefaultClasses, joinClasses } from '../../utilities';
     import type { DrawerWrapperContext } from './drawer-wrapper-context.interface';
     import { focusTrap } from '../../actions';
-    import DrawerWrapper from './DrawerWrapper.svelte';
+    import DrawerWrapperFixed from './DrawerWrapperFixed.svelte';
 
     // -----------------------------------------------------------
     // Type Definitions
@@ -15,7 +15,7 @@
         name: string;
         position?: StringKeyOf<typeof Position>;
         opened?: boolean;
-        closeOnBlur?: boolean;
+        closeOnOverlayClick?: boolean;
     }
     interface $$ClassProps extends Pick<$$Props, 'position'> {}
 
@@ -32,7 +32,7 @@
     export let name: $$Props['name'];
     export let position: $$Props['position'] = 'left';
     export let opened: $$Props['opened'] = false;
-    export let closeOnBlur: $$Props['closeOnBlur'] = false;
+    export let closeOnOverlayClick: $$Props['closeOnOverlayClick'] = false;
     let restClass: $$Props['class'] = undefined;
     export { restClass as class };
 
@@ -65,13 +65,13 @@
 </script>
 
 {#if !hasContext('dui-drawer-wrapper')}
-    <DrawerWrapper name="dui-drawer-wrapper-fixed" fixed>
-        <div class={classNames} data-opened={opened} use:focusTrap={{ enabled: opened }} {...$$restProps}>
+    <DrawerWrapperFixed {name} {closeOnOverlayClick} bind:opened>
+        <div class={classNames} data-drawer-name={name} use:focusTrap={opened} {...$$restProps}>
             <slot />
         </div>
-    </DrawerWrapper>
+    </DrawerWrapperFixed>
 {:else if name === drawerWrapperContext?.name}
-    <div class={classNames} data-opened={opened} use:focusTrap={{ enabled: opened }} {...$$restProps}>
+    <div class={classNames} data-drawer-name={name} use:focusTrap={opened} {...$$restProps}>
         <slot />
     </div>
 {/if}

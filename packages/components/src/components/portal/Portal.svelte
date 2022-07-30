@@ -1,15 +1,13 @@
 <script lang="ts">
-    import type { StringKeyOf } from 'type-fest';
+    import { beforeUpdate } from 'svelte';
+
     import { portal } from '../../actions';
 
     // -----------------------------------------------------------
     // Type Definitions
     // -----------------------------------------------------------
 
-    // type T = $$Generic<StringKeyOf<HTMLElementTagNameMap>>;
-
-    interface $$Props extends Omit<svelte.JSX.HTMLAttributes<HTMLElement>, 'target'> {
-        element: StringKeyOf<HTMLElementTagNameMap>;
+    interface $$Props extends Omit<svelte.JSX.HTMLAttributes<HTMLDivElement>, 'target'> {
         target?: HTMLElement | string;
     }
 
@@ -19,10 +17,13 @@
         default: {};
     }
 
-    export let element: $$Props['element'] = 'div';
+    // -----------------------------------------------------------
+    // Properties
+    // -----------------------------------------------------------
+
     export let target: $$Props['target'] = document.body;
 </script>
 
-<svelte:element this={element} use:portal={target} {...$$restProps}>
+<div class="dui-portal" use:portal={target} hidden>
     <slot />
-</svelte:element>
+</div>

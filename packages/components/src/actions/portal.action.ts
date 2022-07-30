@@ -2,6 +2,7 @@ import { tick } from 'svelte';
 
 export function portal(node: HTMLElement, target: HTMLElement | string = document.body) {
     let targetEl: HTMLElement;
+
     async function update(newTarget: HTMLElement | string) {
         target = newTarget;
         if (typeof target === 'string') {

@@ -12,30 +12,18 @@ const FOCUSABLE_ELEMENTS = [
     '[tabindex]:not([tabindex^="-"])',
 ];
 
-interface FocusTrapOptions {
-    enabled?: boolean;
-}
-
-export function focusTrap(element: HTMLElement, { enabled = true }: FocusTrapOptions = {}) {
-    if (!enabled) return;
-
-    const focusableElements = [...element.querySelectorAll(FOCUSABLE_ELEMENTS.join(','))].filter((element) => {
-        let computedStyle = document.defaultView.getComputedStyle(element, null);
-        return (
-            computedStyle.getPropertyValue('display') !== 'none' &&
-            computedStyle.getPropertyValue('visibility') !== 'hidden'
-        );
-    }) as Array<HTMLElement>;
-    const oldFocusedElement = document.activeElement as HTMLElement;
+export function focusTrap(node: HTMLElement, enabled: boolean = true) {
+    let focusableElements = [...node.querySelectorAll(FOCUSABLE_ELEMENTS.join(','))] as Array<HTMLElement>;
+    let oldFocusedElement = document.activeElement as HTMLElement;
     let currentFocusedElement = oldFocusedElement;
 
-    const nextElement = (event: KeyboardEvent) => {
+    function nextElement(event: KeyboardEvent) {
         if (!(!event.shiftKey && event.key === 'Tab')) return;
-        event.preventDefault();
 
-        if (!element.contains(currentFocusedElement)) {
+        if (!node.contains(currentFocusedElement)) {
             currentFocusedElement = focusableElements[0];
             focusableElements[0] && focusableElements[0].focus();
+            event.preventDefault();
             return;
         }
 
@@ -45,20 +33,22 @@ export function focusTrap(element: HTMLElement, { enabled = true }: FocusTrapOpt
         if (focusableElements.length === index + 1) {
             currentFocusedElement = focusableElements[0];
             focusableElements[0] && focusableElements[0].focus();
+            event.preventDefault();
             return;
         }
 
         currentFocusedElement = focusableElements[index + 1];
         focusableElements[index + 1] && focusableElements[index + 1].focus();
-    };
-
-    const previousElement = (event: KeyboardEvent) => {
-        if (!(event.shiftKey && event.key === 'Tab')) return;
         event.preventDefault();
+    }
 
-        if (!element.contains(currentFocusedElement)) {
+    function previousElement(event: KeyboardEvent) {
+        if (!(event.shiftKey && event.key === 'Tab')) return;
+
+        if (!node.contains(currentFocusedElement)) {
             currentFocusedElement = focusableElements[focusableElements.length - 1];
             focusableElements[focusableElements.length - 1] && focusableElements[focusableElements.length - 1].focus();
+            event.preventDefault();
             return;
         }
 
@@ -68,32 +58,42 @@ export function focusTrap(element: HTMLElement, { enabled = true }: FocusTrapOpt
         if (index === 0) {
             currentFocusedElement = focusableElements[focusableElements.length - 1];
             focusableElements[focusableElements.length - 1] && focusableElements[focusableElements.length - 1].focus();
+            event.preventDefault();
             return;
         }
 
         currentFocusedElement = focusableElements[index - 1];
         focusableElements[index - 1] && focusableElements[index - 1].focus();
-    };
+        event.preventDefault();
+    }
 
-    window.addEventListener('keydown', nextElement);
-    window.addEventListener('keydown', previousElement);
-
-    return {
-        update() {
-            if (!enabled) {
-                window.removeEventListener('keydown', nextElement);
-                window.removeEventListener('keydown', previousElement);
-                oldFocusedElement && oldFocusedElement.focus();
-                return;
-            }
-
-            window.addEventListener('keydown', nextElement);
-            window.addEventListener('keydown', previousElement);
-        },
-        destroy() {
-            currentFocusedElement.focus();
+    function update(enabled: boolean) {
+        if (!enabled) {
             window.removeEventListener('keydown', nextElement);
             window.removeEventListener('keydown', previousElement);
-        },
+            oldFocusedElement && oldFocusedElement.focus();
+            return;
+        }
+
+        oldFocusedElement = document.activeElement as HTMLElement;
+        currentFocusedElement = oldFocusedElement;
+
+        window.addEventListener('keydown', nextElement);
+        window.addEventListener('keydown', previousElement);
+
+        focusableElements[0] && focusableElements[0].focus();
+    }
+    function destroy() {
+        window.removeEventListener('keydown', nextElement);
+        window.removeEventListener('keydown', previousElement);
+
+        oldFocusedElement.focus();
+    }
+
+    update(enabled);
+
+    return {
+        update,
+        destroy,
     };
 }

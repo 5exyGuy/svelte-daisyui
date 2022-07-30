@@ -59,7 +59,7 @@
         { text: 'Breadcrumb #2', href: 'test' },
     ];
 
-    let drawerOpened = true;
+    let drawerOpened = false;
 </script>
 
 <Showcase>
@@ -154,21 +154,8 @@
     </Collapse>
 
     <h1 class="font-extrabold text-4xl text-base-content mb-12 mt-6">Drawer</h1>
-    <Button
-        on:click={() => {
-            console.log('button clicked');
-            drawerOpened = true;
-        }}>Toggle Drawer</Button
-    >
-
-    <button
-        on:mousedown={() => {
-            console.log('button clicked');
-            drawerOpened = true;
-        }}
-    >
-        Hello world
-    </button>
+    <Button on:click={() => (drawerOpened = true)}>Show Drawer</Button>
+    <Button on:click={() => (drawerOpened = false)}>Hide Drawer</Button>
     <!-- <DrawerWrapper name="mydrawer"> -->
     <!-- <div class="text-base-content">
             What is Lorem Ipsum?
@@ -190,7 +177,7 @@
                 evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
             </p>
         </div> -->
-    <Drawer name="mydrawer" bind:opened={drawerOpened} position="right" closeOnBlur>
+    <Drawer name="mydrawer" bind:opened={drawerOpened} position="right" closeOnOverlayClick>
         <div class="bg-primary text-primary-content w-full">
             <Button>Click me</Button>
             <Link>Click me #1</Link>

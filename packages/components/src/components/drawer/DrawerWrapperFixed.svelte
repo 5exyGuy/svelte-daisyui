@@ -1,21 +1,18 @@
 <script lang="ts">
-    import { afterUpdate, setContext } from 'svelte';
-    import { writable } from 'svelte/store';
     import { generateDefaultClasses, joinClasses, lockSroll, unlockScroll } from '../../utilities';
     import Portal from '../portal/Portal.svelte';
-    import type { DrawerWrapperContext } from './drawer-wrapper-context.interface';
 
     // -----------------------------------------------------------
     // Type Definitions
     // -----------------------------------------------------------
 
     interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
-        fixed?: boolean;
         name: string;
+        opened: boolean;
+        closeOnOverlayClick: boolean;
     }
-    interface $$ClassProps {
-        opened?: boolean;
-        fixed?: boolean;
+    interface $$ClassProps extends Pick<$$Props, 'opened'> {
+        fixed: true;
     }
 
     interface $$Events {}
@@ -28,8 +25,9 @@
     // Properties
     // -----------------------------------------------------------
 
-    export let fixed: $$Props['fixed'] = false;
     export let name: $$Props['name'];
+    export let opened: $$Props['opened'];
+    export let closeOnOverlayClick: $$Props['closeOnOverlayClick'];
     let restClass: $$Props['class'] = undefined;
     export { restClass as class };
 
@@ -41,11 +39,7 @@
 
     $: classNames = joinClasses(
         [PREFIX],
-        generateDefaultClasses<$$ClassProps>(
-            PREFIX,
-            { fixed: 'fixed', opened: 'open' },
-            { fixed, opened: $openedStore },
-        ),
+        generateDefaultClasses<$$ClassProps>(PREFIX, { fixed: 'fixed', opened: 'open' }, { fixed: true, opened }),
         [restClass],
     );
 
@@ -53,47 +47,25 @@
     //                       Functionality
     // -----------------------------------------------------------
 
-    const openedStore = writable(false);
-    const visibilityChangeListeners = [] as Array<(opened: boolean) => void>;
-
-    setContext<DrawerWrapperContext>(PREFIX, {
-        name,
-        changeVisibility(opened: boolean) {
-            toggleVisiblity(opened);
-        },
-        onVisibilityChange(listener: (opened: boolean) => void) {
-            visibilityChangeListeners.push(listener);
-        },
-    });
-
     function processKeydown(event: KeyboardEvent) {
         if (event.key !== 'Escape') return;
         toggleVisiblity(false);
         event.preventDefault();
     }
 
-    function toggleVisiblity(opened: boolean) {
+    function toggleVisiblity(value: boolean) {
         if (opened) lockSroll();
         else unlockScroll();
-        openedStore.set(opened);
+        opened = value;
     }
-
-    afterUpdate(() => visibilityChangeListeners.forEach((listener) => listener($openedStore)));
 </script>
 
-{#if fixed}
-    <Portal>
-        <div class={classNames} {...$$restProps}>
-            <div class="dui-drawer-wrapper-overlay" on:click={() => toggleVisiblity(false)} />
-            <slot />
-        </div>
-    </Portal>
-{:else}
-    <div class={classNames} {...$$restProps}>
-        <div class="dui-drawer-wrapper-overlay" on:click={() => toggleVisiblity(false)} />
+<Portal>
+    <div class={classNames} data-drawer-name={name} {...$$restProps}>
+        <div class="dui-drawer-wrapper-overlay" on:click={() => closeOnOverlayClick && toggleVisiblity(false)} />
         <slot />
     </div>
-{/if}
+</Portal>
 
 <svelte:window on:keydown={processKeydown} />
 
