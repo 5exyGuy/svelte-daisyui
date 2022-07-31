@@ -14,7 +14,9 @@
     }
 
     &.dui-drawer-wrapper-open {
-        visibility: inherit;
+        visibility: visible;
+
+        transition: visibility 300ms linear 0ms;
 
         & > .dui-drawer-wrapper-overlay {
             opacity: 1;
@@ -33,5 +35,9 @@
         opacity: 0;
 
         transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+        & + *:not(.dui-drawer-side) {
+            visibility: visible;
+        }
     }
 }

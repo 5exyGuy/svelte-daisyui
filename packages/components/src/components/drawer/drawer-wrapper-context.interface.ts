@@ -1,5 +1,6 @@
+import type { Writable } from 'svelte/store';
+
 export interface DrawerWrapperContext {
     name: string;
-    changeVisibility(opened: boolean): void;
-    onVisibilityChange(fn: (opened: boolean) => void): void;
+    setupStores(stores: { opened: Writable<boolean>; closeOnBlur: Writable<boolean> }): void;
 }

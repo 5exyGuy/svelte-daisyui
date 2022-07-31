@@ -2,7 +2,7 @@
     const drawers = new Map<string, Writable<boolean>>();
     const fixedDrawers = new Map<string, Writable<boolean>>();
 
-    function addDrawer(name: string, openedStore: Writable<boolean>, fixed: boolean = false) {
+    export function addDrawer(name: string, openedStore: Writable<boolean>, fixed: boolean = false) {
         if (fixed) fixedDrawers.set(name, openedStore);
         else drawers.set(name, openedStore);
 
@@ -10,7 +10,7 @@
         openedStore.subscribe((opened) => {});
     }
 
-    function removeDrawer(name: string, fixed: boolean = false) {
+    export function removeDrawer(name: string, fixed: boolean = false) {
         if (fixed) fixedDrawers.delete(name);
         else drawers.delete(name);
     }
@@ -23,7 +23,7 @@
     import { generateDefaultClasses, joinClasses } from '../../utilities';
     import type { DrawerWrapperContext } from './drawer-wrapper-context.interface';
     import { focusTrap } from '../../actions';
-    import DrawerWrapperFixed from './DrawerWrapperFixed.svelte';
+    // import DrawerWrapperFixed from './DrawerWrapperFixed.svelte';
     import { Writable, writable } from 'svelte/store';
 
     // -----------------------------------------------------------
@@ -34,7 +34,7 @@
         name: string;
         position?: StringKeyOf<typeof Position>;
         opened?: boolean;
-        closeOnOverlayClick?: boolean;
+        closeOnBlur?: boolean;
     }
     interface $$ClassProps extends Pick<$$Props, 'position'> {}
 
@@ -51,7 +51,7 @@
     export let name: $$Props['name'];
     export let position: $$Props['position'] = 'left';
     export let opened: $$Props['opened'] = false;
-    export let closeOnOverlayClick: $$Props['closeOnOverlayClick'] = false;
+    export let closeOnBlur: $$Props['closeOnBlur'] = false;
     let restClass: $$Props['class'] = undefined;
     export { restClass as class };
 
@@ -71,22 +71,18 @@
     //                       Functionality
     // -----------------------------------------------------------
 
-    const drawerWrapperContext = getContext<DrawerWrapperContext>('dui-drawer-wrapper');
     const openedStore = writable(opened);
+    const closeOnBlurStore = writable(closeOnBlur);
 
+    const drawerWrapperContext = getContext<DrawerWrapperContext>('dui-drawer-wrapper');
+    if (hasContext('dui-drawer-wrapper'))
+        drawerWrapperContext.setupStores({ opened: openedStore, closeOnBlur: closeOnBlurStore });
+
+    openedStore.subscribe((value) => (opened = value));
     $: $openedStore = opened;
-    $: drawerWrapperContext && drawerWrapperContext.changeVisibility(opened);
 
-    if (hasContext('dui-drawer-wrapper') && name === drawerWrapperContext.name) {
-        const { onVisibilityChange } = drawerWrapperContext;
-
-        // onMount(() => changeVisibility(opened));
-        // beforeUpdate(() => changeVisibility(opened));
-        onVisibilityChange((_opened) => (opened = _opened));
-    }
-
-    onMount(() => addDrawer(name, openedStore, !hasContext('dui-drawer-wrapper')));
-    onDestroy(() => removeDrawer(name, !hasContext('dui-drawer-wrapper')));
+    onMount(() => addDrawer(name, openedStore, !drawerWrapperContext));
+    onDestroy(() => removeDrawer(name, !drawerWrapperContext));
 </script>
 
 {#if hasContext('dui-drawer-wrapper') && name === drawerWrapperContext.name}
@@ -94,11 +90,11 @@
         <slot />
     </div>
 {:else}
-    <DrawerWrapperFixed {name} {closeOnOverlayClick} bind:opened={$openedStore}>
-        <div class={classNames} data-drawer-name={name} use:focusTrap={$openedStore} {...$$restProps}>
-            <slot />
-        </div>
-    </DrawerWrapperFixed>
+    <!-- <DrawerWrapperFixed {name} {closeOnBlur} bind:opened={$openedStore}> -->
+    <div class={classNames} data-drawer-name={name} use:focusTrap={$openedStore} {...$$restProps}>
+        <slot />
+    </div>
+    <!-- </DrawerWrapperFixed> -->
 {/if}
 
 <style lang="scss" global>

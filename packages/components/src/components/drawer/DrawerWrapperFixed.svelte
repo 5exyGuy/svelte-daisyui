@@ -9,7 +9,7 @@
     interface $$Props extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
         name: string;
         opened: boolean;
-        closeOnOverlayClick: boolean;
+        closeOnBlur: boolean;
     }
     interface $$ClassProps extends Pick<$$Props, 'opened'> {
         fixed: true;
@@ -27,7 +27,7 @@
 
     export let name: $$Props['name'];
     export let opened: $$Props['opened'];
-    export let closeOnOverlayClick: $$Props['closeOnOverlayClick'];
+    export let closeOnBlur: $$Props['closeOnBlur'];
     let restClass: $$Props['class'] = undefined;
     export { restClass as class };
 
@@ -62,7 +62,7 @@
 
 <Portal>
     <div class={classNames} data-drawer-name={name} {...$$restProps}>
-        <div class="dui-drawer-wrapper-overlay" on:click={() => closeOnOverlayClick && toggleVisiblity(false)} />
+        <div class="dui-drawer-wrapper-overlay" on:click={() => closeOnBlur && toggleVisiblity(false)} />
         <slot />
     </div>
 </Portal>

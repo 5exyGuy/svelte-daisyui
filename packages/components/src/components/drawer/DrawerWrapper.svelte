@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { afterUpdate, setContext } from 'svelte';
+    import { setContext } from 'svelte';
     import { writable } from 'svelte/store';
     import { generateDefaultClasses, joinClasses, lockSroll, unlockScroll } from '../../utilities';
     import Portal from '../portal/Portal.svelte';
@@ -53,16 +53,14 @@
     //                       Functionality
     // -----------------------------------------------------------
 
-    const openedStore = writable(false);
-    const visibilityChangeListeners = [] as Array<(opened: boolean) => void>;
+    let openedStore = writable(false);
+    let closeOnBlurStore = writable(false);
 
     setContext<DrawerWrapperContext>(PREFIX, {
         name,
-        changeVisibility(opened: boolean) {
-            toggleVisiblity(opened);
-        },
-        onVisibilityChange(listener: (opened: boolean) => void) {
-            visibilityChangeListeners.push(listener);
+        setupStores({ opened, closeOnBlur }) {
+            openedStore = opened;
+            closeOnBlurStore = closeOnBlur;
         },
     });
 
@@ -75,22 +73,20 @@
     function toggleVisiblity(opened: boolean) {
         if (opened) lockSroll();
         else unlockScroll();
-        openedStore.set(opened);
+        $openedStore = opened;
     }
-
-    afterUpdate(() => visibilityChangeListeners.forEach((listener) => listener($openedStore)));
 </script>
 
 {#if fixed}
     <Portal>
         <div class={classNames} {...$$restProps}>
-            <div class="dui-drawer-wrapper-overlay" on:click={() => toggleVisiblity(false)} />
+            <div class="dui-drawer-wrapper-overlay" on:click={() => $closeOnBlurStore && toggleVisiblity(false)} />
             <slot />
         </div>
     </Portal>
 {:else}
     <div class={classNames} {...$$restProps}>
-        <div class="dui-drawer-wrapper-overlay" on:click={() => toggleVisiblity(false)} />
+        <div class="dui-drawer-wrapper-overlay" on:click={() => $closeOnBlurStore && toggleVisiblity(false)} />
         <slot />
     </div>
 {/if}
