@@ -80,6 +80,7 @@
 
     openedStore.subscribe((value) => (opened = value));
     $: $openedStore = opened;
+    $: $closeOnBlurStore = closeOnBlur;
 
     onMount(() => addDrawer(name, openedStore, !drawerWrapperContext));
     onDestroy(() => removeDrawer(name, !drawerWrapperContext));

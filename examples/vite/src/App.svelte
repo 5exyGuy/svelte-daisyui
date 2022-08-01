@@ -157,7 +157,7 @@
     <Button on:click={() => (drawerOpened = true)}>Show Drawer</Button>
     <!-- <Button on:click={() => (drawerOpened = false)}>Hide Drawer</Button> -->
     <DrawerWrapper name="mydrawer">
-        <div class="text-base-content">
+        <div class="text-base-content p-4">
             What is Lorem Ipsum?
             <p class="my-2">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
@@ -167,6 +167,7 @@
                 release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
                 software like Aldus PageMaker including versions of Lorem Ipsum.
             </p>
+            <Button on:click={() => (drawerOpened = true)}>Show Drawer</Button>
             Why do we use it?
             <p class="my-2">
                 It is a long established fact that a reader will be distracted by the readable content of a page when
@@ -178,7 +179,7 @@
             </p>
         </div>
         <Drawer name="mydrawer" bind:opened={drawerOpened} position="right" closeOnBlur>
-            <div class="bg-primary text-primary-content w-full">
+            <div class="bg-primary text-primary-content w-full p-4">
                 <Button>Click me</Button>
                 <Link>Click me #1</Link>
                 <Link>Click me #2</Link>
