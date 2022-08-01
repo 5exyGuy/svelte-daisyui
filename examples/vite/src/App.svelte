@@ -59,7 +59,8 @@
         { text: 'Breadcrumb #2', href: 'test' },
     ];
 
-    let drawerOpened = false;
+    let wrappedDrawer = false;
+    let fixedDrawer = false;
 </script>
 
 <Showcase>
@@ -154,7 +155,7 @@
     </Collapse>
 
     <h1 class="font-extrabold text-4xl text-base-content mb-12 mt-6">Drawer</h1>
-    <Button on:click={() => (drawerOpened = true)}>Show Drawer</Button>
+    <Button on:click={() => (wrappedDrawer = true)}>Show Wrapped Drawer</Button>
     <!-- <Button on:click={() => (drawerOpened = false)}>Hide Drawer</Button> -->
     <DrawerWrapper name="mydrawer">
         <div class="text-base-content p-4">
@@ -167,7 +168,7 @@
                 release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
                 software like Aldus PageMaker including versions of Lorem Ipsum.
             </p>
-            <Button on:click={() => (drawerOpened = true)}>Show Drawer</Button>
+            <Button on:click={() => (wrappedDrawer = true)}>Show Drawer</Button>
             Why do we use it?
             <p class="my-2">
                 It is a long established fact that a reader will be distracted by the readable content of a page when
@@ -178,8 +179,8 @@
                 evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
             </p>
         </div>
-        <Drawer name="mydrawer" bind:opened={drawerOpened} position="right" closeOnBlur>
-            <div class="bg-primary text-primary-content w-full p-4">
+        <Drawer name="mydrawer" bind:opened={wrappedDrawer} position="right" closeOnBlur>
+            <div class="bg-base-200 text-primary-content w-full h-full p-4">
                 <Button>Click me</Button>
                 <Link>Click me #1</Link>
                 <Link>Click me #2</Link>
@@ -187,6 +188,15 @@
             </div>
         </Drawer>
     </DrawerWrapper>
+    <Button on:click={() => (fixedDrawer = true)}>Show Fixed Drawer</Button>
+    <Drawer name="mydrawer" bind:opened={fixedDrawer} position="right" closeOnBlur>
+        <div class="bg-base-200 text-primary-content w-full h-full p-4">
+            <Button>Click me</Button>
+            <Link>Click me #1</Link>
+            <Link>Click me #2</Link>
+            Hello world
+        </div>
+    </Drawer>
 
     <h1 class="font-extrabold text-4xl text-base-content mb-12 mt-6">Dropdown</h1>
     <Dropdown>

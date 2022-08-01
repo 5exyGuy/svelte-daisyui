@@ -16,7 +16,7 @@
     &.dui-drawer-wrapper-open {
         visibility: visible;
 
-        transition: visibility 300ms linear 0ms;
+        transition: visibility 0ms linear;
 
         & > .dui-drawer-wrapper-overlay {
             opacity: 1;

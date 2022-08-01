@@ -2,7 +2,7 @@
     const drawers = new Map<string, Writable<boolean>>();
     const fixedDrawers = new Map<string, Writable<boolean>>();
 
-    export function addDrawer(name: string, openedStore: Writable<boolean>, fixed: boolean = false) {
+    function addDrawer(name: string, openedStore: Writable<boolean>, fixed: boolean = false) {
         if (fixed) fixedDrawers.set(name, openedStore);
         else drawers.set(name, openedStore);
 
@@ -10,7 +10,7 @@
         openedStore.subscribe((opened) => {});
     }
 
-    export function removeDrawer(name: string, fixed: boolean = false) {
+    function removeDrawer(name: string, fixed: boolean = false) {
         if (fixed) fixedDrawers.delete(name);
         else drawers.delete(name);
     }
@@ -23,8 +23,8 @@
     import { generateDefaultClasses, joinClasses } from '../../utilities';
     import type { DrawerWrapperContext } from './drawer-wrapper-context.interface';
     import { focusTrap } from '../../actions';
-    // import DrawerWrapperFixed from './DrawerWrapperFixed.svelte';
     import { Writable, writable } from 'svelte/store';
+    import DrawerWrapper from './DrawerWrapper.svelte';
 
     // -----------------------------------------------------------
     // Type Definitions
@@ -71,31 +71,41 @@
     //                       Functionality
     // -----------------------------------------------------------
 
-    const openedStore = writable(opened);
-    const closeOnBlurStore = writable(closeOnBlur);
+    const container = {
+        opened: writable(opened),
+        closeOnBlur: writable(closeOnBlur),
+    };
+    container.opened.subscribe((value) => (opened = value));
+    container.closeOnBlur.subscribe((value) => (closeOnBlur = value));
 
     const drawerWrapperContext = getContext<DrawerWrapperContext>('dui-drawer-wrapper');
-    if (hasContext('dui-drawer-wrapper'))
-        drawerWrapperContext.setupStores({ opened: openedStore, closeOnBlur: closeOnBlurStore });
+    if (hasContext('dui-drawer-wrapper')) drawerWrapperContext.setContainer(container);
 
-    openedStore.subscribe((value) => (opened = value));
-    $: $openedStore = opened;
-    $: $closeOnBlurStore = closeOnBlur;
-
-    onMount(() => addDrawer(name, openedStore, !drawerWrapperContext));
+    onMount(() => addDrawer(name, container.opened, !drawerWrapperContext));
     onDestroy(() => removeDrawer(name, !drawerWrapperContext));
+
+    function updateOpened(_opened: boolean) {
+        container.opened.set(_opened);
+    }
+
+    function updateCloseOnBlur(_closeOnBlur: boolean) {
+        container.closeOnBlur.set(_closeOnBlur);
+    }
+
+    $: updateOpened(opened);
+    $: updateCloseOnBlur(closeOnBlur);
 </script>
 
 {#if hasContext('dui-drawer-wrapper') && name === drawerWrapperContext.name}
-    <div class={classNames} data-drawer-name={name} use:focusTrap={$openedStore} {...$$restProps}>
+    <div class={classNames} data-drawer-name={name} use:focusTrap={opened} {...$$restProps}>
         <slot />
     </div>
 {:else}
-    <!-- <DrawerWrapperFixed {name} {closeOnBlur} bind:opened={$openedStore}> -->
-    <div class={classNames} data-drawer-name={name} use:focusTrap={$openedStore} {...$$restProps}>
-        <slot />
-    </div>
-    <!-- </DrawerWrapperFixed> -->
+    <DrawerWrapper {name} {opened} {closeOnBlur} {container} fixed>
+        <div class={classNames} data-drawer-name={name} use:focusTrap={opened} {...$$restProps}>
+            <slot />
+        </div>
+    </DrawerWrapper>
 {/if}
 
 <style lang="scss" global>

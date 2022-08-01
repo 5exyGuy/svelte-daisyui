@@ -20,3 +20,8 @@ export function unlockScroll(element: HTMLElement = document.body) {
     element.style.removeProperty('padding-right');
     if (element.style.length === 0) element.removeAttribute('style');
 }
+
+export function toggleScrollLock(value: boolean, element: HTMLElement = document.body) {
+    if (value) unlockScroll(element);
+    else lockSroll(element);
+}
