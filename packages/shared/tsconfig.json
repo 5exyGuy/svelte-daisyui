@@ -20,8 +20,11 @@
         "importsNotUsedAsValues": "error",
         "checkJs": true,
 
+        "preserveValueImports": true,
+        "isolatedModules": true,
+
         "esModuleInterop": true,
-        "skipLibCheck": false,
+        "skipLibCheck": true,
         "forceConsistentCasingInFileNames": true
     },
     "include": ["src/**/*.ts"]
