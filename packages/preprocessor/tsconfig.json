@@ -22,7 +22,11 @@
 
         "esModuleInterop": true,
         "skipLibCheck": false,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+
+        "paths": {
+            "@svelte-daisyui/shared": ["../shared/src/index.ts"]
+        }
     },
     "include": ["src/**/*.ts"]
 }
