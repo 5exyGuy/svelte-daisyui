@@ -1,5 +1,17 @@
 @use 'sass:map';
 
+$default-screen-sizes: (
+	'sm': 576px,
+	'md': 768px,
+	'lg': 992px,
+	'xl': 1200px,
+	'2xl': 1400px
+);
+
+@function get-default-screen-size($name) {
+	@return map.get($default-screen-sizes, $name);
+}
+
 $brand-colors: primary, secondary, accent;
 $functional-colors: info, success, warning, error;
 $base-colors: base-100, base-200, base-300;
@@ -34,90 +46,90 @@ $error-content: var(--error-content, 72 0 0);
 $error-focus: var(--error-focus, 245 45 45);
 
 $color-map: (
-    primary: $primary,
-    primary-content: $primary-content,
-    primary-focus: $primary-focus,
-    secondary: $secondary,
-    secondary-content: $secondary-content,
-    secondary-focus: $secondary-focus,
-    accent: $accent,
-    accent-content: $accent-content,
-    accent-focus: $accent-focus,
-    neutral: $neutral,
-    neutral-content: $neutral-content,
-    neutral-focus: $neutral-focus,
-    success: $success,
-    success-content: $success-content,
-    success-focus: $success-focus,
-    info: $info,
-    info-content: $info-content,
-    info-focus: $info-focus,
-    warning: $warning,
-    warning-content: $warning-content,
-    warning-focus: $warning-focus,
-    error: $error,
-    error-content: $error-content,
-    error-focus: $error-focus,
-    base-100: $base-100,
-    base-200: $base-200,
-    base-300: $base-300,
-    base-content: $base-content,
+	primary: $primary,
+	primary-content: $primary-content,
+	primary-focus: $primary-focus,
+	secondary: $secondary,
+	secondary-content: $secondary-content,
+	secondary-focus: $secondary-focus,
+	accent: $accent,
+	accent-content: $accent-content,
+	accent-focus: $accent-focus,
+	neutral: $neutral,
+	neutral-content: $neutral-content,
+	neutral-focus: $neutral-focus,
+	success: $success,
+	success-content: $success-content,
+	success-focus: $success-focus,
+	info: $info,
+	info-content: $info-content,
+	info-focus: $info-focus,
+	warning: $warning,
+	warning-content: $warning-content,
+	warning-focus: $warning-focus,
+	error: $error,
+	error-content: $error-content,
+	error-focus: $error-focus,
+	base-100: $base-100,
+	base-200: $base-200,
+	base-300: $base-300,
+	base-content: $base-content
 );
 
 @function get-color($color) {
-    @return map.get($color-map, $color);
+	@return map.get($color-map, $color);
 }
 
 @function get-color-rgb($color) {
-    @return rgb(get-color($color) / var(--tw-text-opacity));
+	@return rgb(get-color($color) / var(--tw-text-opacity));
 }
 
 // Text color
 
 @mixin text-color($color, $alpha: 1) {
-    $color-get: map.get($color-map, $color);
-    --tw-text-opacity: #{$alpha};
-    color: rgb($color-get / var(--tw-text-opacity));
+	$color-get: map.get($color-map, $color);
+	--tw-text-opacity: #{$alpha};
+	color: rgb($color-get / var(--tw-text-opacity));
 }
 
 @mixin text-opacity($alpha: 1) {
-    --tw-text-opacity: #{$alpha};
+	--tw-text-opacity: #{$alpha};
 }
 
 // Background color
 
 @mixin bg-color($color, $alpha: 1) {
-    $color-get: map.get($color-map, $color);
-    --tw-bg-opacity: #{$alpha};
-    background-color: rgb($color-get / var(--tw-bg-opacity));
+	$color-get: map.get($color-map, $color);
+	--tw-bg-opacity: #{$alpha};
+	background-color: rgb($color-get / var(--tw-bg-opacity));
 }
 
 @mixin bg-opacity($alpha: 1) {
-    --tw-bg-opacity: #{$alpha};
+	--tw-bg-opacity: #{$alpha};
 }
 
 // Border color
 
 @mixin border-color($color, $alpha: 1) {
-    $color-get: map.get($color-map, $color);
-    --tw-border-opacity: #{$alpha};
-    border-color: rgb($color-get / var(--tw-border-opacity));
+	$color-get: map.get($color-map, $color);
+	--tw-border-opacity: #{$alpha};
+	border-color: rgb($color-get / var(--tw-border-opacity));
 }
 
 @mixin border-opacity($alpha: 1) {
-    --tw-border-opacity: #{$alpha};
+	--tw-border-opacity: #{$alpha};
 }
 
 // Placeholder color
 
 @mixin placeholder-color($color, $alpha: 1) {
-    $color-get: map.get($color-map, $color);
-    --tw-placeholder-opacity: #{$alpha};
-    --tw-placeholder-color: rgb($color-get / var(--tw-placeholder-opacity));
+	$color-get: map.get($color-map, $color);
+	--tw-placeholder-opacity: #{$alpha};
+	--tw-placeholder-color: rgb($color-get / var(--tw-placeholder-opacity));
 }
 
 @mixin placeholder-opacity($alpha: 1) {
-    --tw-placeholder-opacity: #{$alpha};
+	--tw-placeholder-opacity: #{$alpha};
 }
 
 // Theme variables
@@ -134,81 +146,81 @@ $tab-border: var(--tab-border, 1px);
 $tab-radius: var(--tab-radius, 0.5rem);
 
 @mixin box-border-radius($value: null) {
-    @if $value {
-        --box-border-radius: #{$value};
-    } @else {
-        border-radius: $box-border-radius;
-    }
+	@if $value {
+		--box-border-radius: #{$value};
+	} @else {
+		border-radius: $box-border-radius;
+	}
 }
 
 @mixin button-border-radius($value: null) {
-    @if $value {
-        --button-border-radius: #{$value};
-    } @else {
-        border-radius: $button-border-radius;
-    }
+	@if $value {
+		--button-border-radius: #{$value};
+	} @else {
+		border-radius: $button-border-radius;
+	}
 }
 
 @mixin button-border-width($value: null) {
-    @if $value {
-        --button-border-width: #{$value};
-    } @else {
-        border-width: $button-border-width;
-    }
+	@if $value {
+		--button-border-width: #{$value};
+	} @else {
+		border-width: $button-border-width;
+	}
 }
 
 @mixin button-text-transform($value: null) {
-    @if $value {
-        --button-text-transform: #{$value};
-    } @else {
-        text-transform: $button-text-transform;
-    }
+	@if $value {
+		--button-text-transform: #{$value};
+	} @else {
+		text-transform: $button-text-transform;
+	}
 }
 
 @mixin button-focus-scale($value: null) {
-    @if $value {
-        --button-focus-scale: #{$value};
-    } @else {
-        transform: scale($button-focus-scale);
-    }
+	@if $value {
+		--button-focus-scale: #{$value};
+	} @else {
+		transform: scale($button-focus-scale);
+	}
 }
 
 @mixin button-animation-duration($value: null) {
-    @if $value {
-        --button-animation-duration: #{$value};
-    } @else {
-        animation: button-pop $button-animation-duration ease-out;
-    }
+	@if $value {
+		--button-animation-duration: #{$value};
+	} @else {
+		animation: button-pop $button-animation-duration ease-out;
+	}
 }
 
 @mixin input-animation-duration($value: null) {
-    @if $value {
-        --input-animation-duration: #{$value};
-    } @else {
-        transition-duration: $input-animation-duration;
-    }
+	@if $value {
+		--input-animation-duration: #{$value};
+	} @else {
+		transition-duration: $input-animation-duration;
+	}
 }
 
 @mixin badge-border-radius($value: null) {
-    @if $value {
-        --badge-border-radius: #{$value};
-    } @else {
-        border-radius: $badge-border-radius;
-    }
+	@if $value {
+		--badge-border-radius: #{$value};
+	} @else {
+		border-radius: $badge-border-radius;
+	}
 }
 
 @mixin tab-border($value: null) {
-    @if $value {
-        --tab-border: #{$value};
-    } @else {
-        border-width: $tab-border;
-    }
+	@if $value {
+		--tab-border: #{$value};
+	} @else {
+		border-width: $tab-border;
+	}
 }
 
 @mixin tab-radius($value: null) {
-    @if $value {
-        --tab-radius: #{$value};
-    } @else {
-        border-radius: $tab-radius;
-    }
+	@if $value {
+		--tab-radius: #{$value};
+	} @else {
+		border-radius: $tab-radius;
+	}
 }

@@ -1,47 +1,78 @@
 @use '../escape.scss' as *;
-@use '../variables.scss';
 @use '../themes.scss';
 @use 'sass:list';
 @use 'sass:map';
 
+$colors: base, primary, secondary, accent, info, success, warning, error;
+
+@mixin generate($color, $screen-sizes: null, $screen-size: null) {
+	@if not list.index($colors, $color) {
+		@error 'Invalid color `#{$color}`. Expected one of `#{$colors}`.';
+	}
+
+	@if $screen-size {
+		$screen-size: escape($screen-size + ':');
+	}
+
+	.dui-alert.#{$screen-size}dui-alert-#{$color} {
+		@if not $screen-size and $color == 'base' {
+			background-color: var(--#{$color}-200);
+			color: var(--#{$color}-content);
+		} @else if not $screen-size {
+			background-color: var(--#{$color});
+			color: var(--#{$color}-content);
+		} @else if $screen-size and $color == 'base' {
+			@media (min-width: #{map.get($screen-sizes, $screen-size)}) {
+				background-color: var(--#{$color}-200);
+				color: var(--#{$color}-content);
+			}
+		} @else if $screen-size {
+			@media (min-width: #{map.get($screen-sizes, $screen-size)}) {
+				background-color: var(--#{$color});
+				color: var(--#{$color}-content);
+			}
+		}
+	}
+}
+
 .dui-alert {
-    @include themes.box-border-radius();
+	@include themes.box-border-radius();
 
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    padding: 1rem;
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	padding: 1rem;
 
-    @media (min-width: map.get(variables.$screen-sizes, 'md')) {
-        flex-direction: row;
-    }
+	@media (min-width: get-default-screen-size('md')) {
+		flex-direction: row;
+	}
 
-    & > * {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
+	& > * {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
 
-    & > .dui-alert-icon {
-        flex: none;
-    }
+	& > .dui-alert-icon {
+		flex: none;
+	}
 
-    & > .dui-alert-actions {
-        flex: none;
-    }
+	& > .dui-alert-actions {
+		flex: none;
+	}
 
-    &.dui-alert-base {
-        @include themes.bg-color('base-200');
-        @include themes.text-color('base-content');
-    }
+	&.dui-alert-base {
+		@include themes.bg-color('base-200');
+		@include themes.text-color('base-content');
+	}
 
-    @each $color in list.join(themes.$brand-colors, themes.$functional-colors) {
-        &.dui-alert-#{$color} {
-            @include themes.bg-color($color);
-            @include themes.text-color($color + '-content');
-        }
-    }
+	@each $color in $colors {
+		&.dui-alert-#{$color} {
+			@include themes.bg-color($color);
+			@include themes.text-color($color + '-content');
+		}
+	}
 }
