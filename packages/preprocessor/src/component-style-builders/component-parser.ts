@@ -7,8 +7,8 @@ export function parseComponents<T>(componentName: string, code: string) {
             .split(/s+/)
             .filter(Boolean)
             .reduce((acc, attr) => {
-                const [name, value] = attr.split('=') as [string, string];
-                acc[name] = value.replaceAll(/['"{}]/g, '');
+                const [name, value] = attr.split('=') as [keyof T, string];
+                acc[name] = value.replaceAll(/['"{}]/g, '') as T[keyof T];
                 return acc;
             }, {} as T);
         return { ...attributes };

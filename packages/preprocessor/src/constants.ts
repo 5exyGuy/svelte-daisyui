@@ -1,5 +1,7 @@
+import { buildAlertStyles } from './component-style-builders/alert.style-builder';
+
 export const SCRIPT_REGEX = /<script(\s[^]*?)?>([^]*?)<\/script>/g;
 export const STYLE_REGEX = /<style(\s[^]*?)?>([^]*?)<\/style>/g;
 export const SVELTE_COMMENT_REGEX = /<!--[^]*?-->/g;
 
-export const COMPONENT_STYLE_BUILDERS = [];
+export const COMPONENT_STYLE_BUILDERS = [buildAlertStyles];

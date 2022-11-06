@@ -1,8 +1,9 @@
 import type { MarkupPreprocessor, PreprocessorGroup } from 'svelte/types/compiler/preprocess';
-import { SCRIPT_REGEX, STYLE_REGEX, SVELTE_COMMENT_REGEX } from './constants';
+import { COMPONENT_STYLE_BUILDERS, SCRIPT_REGEX, STYLE_REGEX, SVELTE_COMMENT_REGEX } from './constants';
 import type { PreprocessorOptions } from './interfaces/preprocess-options.interface';
+import { compile, compileString } from 'sass';
 
-export function preprocess({ includeDefaults }: PreprocessorOptions) {
+export function preprocess({ includeDefaults, screenSizes }: PreprocessorOptions) {
     function getHtmlMarkup(content: string) {
         return content.replace(SCRIPT_REGEX, '').replace(STYLE_REGEX, '').replace(SVELTE_COMMENT_REGEX, '');
     }
@@ -24,8 +25,16 @@ export function preprocess({ includeDefaults }: PreprocessorOptions) {
 
     const markup: MarkupPreprocessor = ({ content }) => {
         const code = getHtmlMarkup(content);
+        const { attributes: styleAttributes, content: styleContent } = getStyleMarkup(content);
 
-        // const { attributes: styleAttributes, content: styleContent } = getStyleMarkup(content);
+        const sassStyles = COMPONENT_STYLE_BUILDERS.reduce(
+            (prevValue, builder) => prevValue + builder(code, screenSizes),
+            '',
+        );
+        const { css } = compileString(sassStyles);
+
+        const styleContentWithNewLine = styleContent.endsWith('\n') ? styleContent : styleContent + '\n';
+        const newStyleContent = styleContentWithNewLine + css;
 
         return { code: content };
     };
