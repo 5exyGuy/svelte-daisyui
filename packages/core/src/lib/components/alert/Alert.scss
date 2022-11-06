@@ -1,42 +1,10 @@
 @use '../escape.scss' as *;
-@use '../themes.scss';
+@use '../scss' as *;
 @use 'sass:list';
 @use 'sass:map';
 
-$colors: base, primary, secondary, accent, info, success, warning, error;
-
-@mixin generate($color, $screen-sizes: null, $screen-size: null) {
-	@if not list.index($colors, $color) {
-		@error 'Invalid color `#{$color}`. Expected one of `#{$colors}`.';
-	}
-
-	@if $screen-size {
-		$screen-size: escape($screen-size + ':');
-	}
-
-	.dui-alert.#{$screen-size}dui-alert-#{$color} {
-		@if not $screen-size and $color == 'base' {
-			background-color: var(--#{$color}-200);
-			color: var(--#{$color}-content);
-		} @else if not $screen-size {
-			background-color: var(--#{$color});
-			color: var(--#{$color}-content);
-		} @else if $screen-size and $color == 'base' {
-			@media (min-width: #{map.get($screen-sizes, $screen-size)}) {
-				background-color: var(--#{$color}-200);
-				color: var(--#{$color}-content);
-			}
-		} @else if $screen-size {
-			@media (min-width: #{map.get($screen-sizes, $screen-size)}) {
-				background-color: var(--#{$color});
-				color: var(--#{$color}-content);
-			}
-		}
-	}
-}
-
 .dui-alert {
-	@include themes.box-border-radius();
+	@include box-border-radius();
 
 	display: flex;
 	width: 100%;
@@ -63,16 +31,41 @@ $colors: base, primary, secondary, accent, info, success, warning, error;
 	& > .dui-alert-actions {
 		flex: none;
 	}
+}
 
-	&.dui-alert-base {
-		@include themes.bg-color('base-200');
-		@include themes.text-color('base-content');
+$colors: base, primary, secondary, accent, info, success, warning, error;
+
+@mixin default($color: null) {
+	@if not list.index($colors, $color) {
+		@error 'Invalid color `#{$color}`. Expected one of `#{$colors}`.';
 	}
 
-	@each $color in $colors {
-		&.dui-alert-#{$color} {
-			@include themes.bg-color($color);
-			@include themes.text-color($color + '-content');
+	@if $color {
+		.dui-alert.dui-alert-#{$color} {
+			@include bg-color($color + if($color == 'base', '-200', ''));
+			@include text-color($color + '-content');
+		}
+	} @else {
+		@each $color in $colors {
+			.dui-alert.dui-alert-#{$color} {
+				@include bg-color($color + if($color == 'base', '-200', ''));
+				@include text-color($color + '-content');
+			}
+		}
+	}
+}
+
+@mixin responsive($color, $prefix, $screen-size) {
+	@if not list.index($colors, $color) {
+		@error 'Invalid color `#{$color}`. Expected one of `#{$colors}`.';
+	}
+
+	$prefix: escape($prefix + ':');
+
+	@media (min-width: $screen-size) {
+		.dui-alert.#{$prefix}dui-alert-#{$color} {
+			@include bg-color($color + if($color == 'base', '-200', ''));
+			@include text-color($color + '-content');
 		}
 	}
 }

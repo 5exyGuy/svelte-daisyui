@@ -76,14 +76,6 @@ $color-map: (
 	base-content: $base-content
 );
 
-@function get-color($color) {
-	@return map.get($color-map, $color);
-}
-
-@function get-color-rgb($color) {
-	@return rgb(get-color($color) / var(--tw-text-opacity));
-}
-
 // Text color
 
 @mixin text-color($color, $alpha: 1) {
