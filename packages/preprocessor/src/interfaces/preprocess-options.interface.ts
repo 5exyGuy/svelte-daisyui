@@ -1,1 +1,4 @@
-export interface PreprocessorOptions {}
+export interface PreprocessorOptions {
+    includeDefaults?: boolean;
+    // screenSizes?:
+}
