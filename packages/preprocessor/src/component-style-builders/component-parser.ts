@@ -14,5 +14,5 @@ export function parseComponents<T>(componentName: string, code: string) {
         return { ...attributes };
     });
 
-    return componentAttributes;
+    return componentAttributes as { [P in keyof T]: string }[];
 }
