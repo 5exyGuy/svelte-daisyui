@@ -1,9 +1,16 @@
 import type { MarkupPreprocessor, PreprocessorGroup } from 'svelte/types/compiler/preprocess';
 import { COMPONENT_STYLE_BUILDERS, SCRIPT_REGEX, STYLE_REGEX, SVELTE_COMMENT_REGEX } from './constants';
 import type { PreprocessorOptions } from './interfaces/preprocess-options.interface';
-import { compile, compileString } from 'sass';
+import { compileString } from 'sass';
+import { ScreenSizeMinWidth } from '../../shared/src';
 
-export function preprocess({ includeDefaults, screenSizes }: PreprocessorOptions) {
+export function preprocess(options?: PreprocessorOptions) {
+    const modifiedOptions = (options as Required<PreprocessorOptions>) ?? {};
+    modifiedOptions.includeDefaults = modifiedOptions.includeDefaults ?? false;
+    modifiedOptions.screenSizes = modifiedOptions.screenSizes
+        ? { ...ScreenSizeMinWidth, ...modifiedOptions.screenSizes }
+        : ScreenSizeMinWidth;
+
     function getHtmlMarkup(content: string) {
         return content.replace(SCRIPT_REGEX, '').replace(STYLE_REGEX, '').replace(SVELTE_COMMENT_REGEX, '');
     }
@@ -28,7 +35,7 @@ export function preprocess({ includeDefaults, screenSizes }: PreprocessorOptions
         const { attributes: styleAttributes, content: styleContent } = getStyleMarkup(content);
 
         const sassStyles = COMPONENT_STYLE_BUILDERS.reduce(
-            (prevValue, builder) => prevValue + builder(code, screenSizes),
+            (prevValue, builder) => prevValue + builder(code, modifiedOptions),
             '',
         );
         const { css } = compileString(sassStyles);

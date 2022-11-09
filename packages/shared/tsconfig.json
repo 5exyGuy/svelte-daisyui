@@ -25,7 +25,9 @@
 
         "esModuleInterop": true,
         "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+
+        "experimentalDecorators": true
     },
     "include": ["src/**/*.ts"]
 }
