@@ -1,0 +1,21 @@
+{
+  "name": "@svelte-daisyui/preprocessor-linux-x64-gnu",
+  "version": "1.0.0",
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "main": "preprocessor.linux-x64-gnu.node",
+  "files": [
+    "preprocessor.linux-x64-gnu.node"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10"
+  },
+  "libc": [
+    "glibc"
+  ]
+}
