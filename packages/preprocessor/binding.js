@@ -218,6 +218,6 @@ if (!nativeBinding) {
 	throw new Error(`Failed to load native binding`);
 }
 
-const { markup } = nativeBinding;
+const { PreprocessorGroup } = nativeBinding;
 
-module.exports.markup = markup;
+module.exports.PreprocessorGroup = PreprocessorGroup;

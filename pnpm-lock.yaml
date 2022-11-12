@@ -52,8 +52,13 @@ importers:
 
   packages/preprocessor:
     specifiers:
+      '@napi-rs/cli': ^2.12.0
       prettier: ^2.7.1
+      svelte: ^3.53.1
+    dependencies:
+      svelte: 3.53.1
     devDependencies:
+      '@napi-rs/cli': 2.12.0
       prettier: 2.7.1
 
   packages/shared:
@@ -217,6 +222,12 @@ packages:
     transitivePeerDependencies:
       - encoding
       - supports-color
+    dev: true
+
+  /@napi-rs/cli/2.12.0:
+    resolution: {integrity: sha512-DWx9jDpun9JqDBypiXKjcYMm7gEnh83bry7b6UkItpmVE3w3tNrj91fOEPKDbFQZ7EULfFt+aQBbqtUHq5oNzQ==}
+    engines: {node: '>= 10'}
+    hasBin: true
     dev: true
 
   /@nodelib/fs.scandir/2.1.5:
@@ -2469,7 +2480,6 @@ packages:
   /svelte/3.53.1:
     resolution: {integrity: sha512-Q4/hHkktZogGhN5iqxqSi9sjEVoe/NbIxX4hXEHoasTxj+TxEQVAq66LnDMdAZxjmsodkoI5F3slqsS68U7FNw==}
     engines: {node: '>= 8'}
-    dev: true
 
   /svelte2tsx/0.5.20_f4bsrsgtzvlkrtbz2ig7nipio4:
     resolution: {integrity: sha512-yNHmN/uoAnJ7d1XqVohiNA6TMFOxibHyEddUAHVt1PiLXtbwAJF3WaGYlg8QbOdoXzOVsVNCAlqRUIdULUm+OA==}
