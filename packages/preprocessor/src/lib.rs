@@ -1,4 +1,3 @@
-
 #![deny(clippy::all)]
 
 #[macro_use]
@@ -33,12 +32,18 @@ pub struct PreprocessorGroup {
 impl PreprocessorGroup {
     #[napi(constructor)]
     pub fn new(options: Option<PreprocessorOptions>) -> Self {
-        Self { options: options.unwrap_or(PreprocessorOptions { screen_sizes: std::collections::HashMap::new(), include_defaults: true, include_as_global: false }) }
+        Self {
+            options: options.unwrap_or(PreprocessorOptions {
+                screen_sizes: std::collections::HashMap::new(),
+                include_defaults: true,
+                include_as_global: false,
+            }),
+        }
     }
 
     #[napi]
     pub fn markup(&mut self, input: MarkupInput) -> Processed {
-        println!("{}", input.content);
+        println!("{}", input.filename);
 
         Processed {
             code: Some(input.content),
