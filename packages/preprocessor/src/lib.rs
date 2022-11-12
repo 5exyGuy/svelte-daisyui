@@ -26,6 +26,7 @@ pub struct Processed {
 #[napi]
 pub struct PreprocessorGroup {
     options: PreprocessorOptions,
+    current_dir: String,
 }
 
 #[napi]
@@ -38,12 +39,13 @@ impl PreprocessorGroup {
                 include_defaults: true,
                 include_as_global: false,
             }),
+            current_dir: std::env::current_dir().unwrap().to_str().unwrap().to_string()
         }
     }
 
     #[napi]
     pub fn markup(&mut self, input: MarkupInput) -> Processed {
-        println!("{}", input.filename);
+        println!("{}", self.current_dir);
 
         Processed {
             code: Some(input.content),
