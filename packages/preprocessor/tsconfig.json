@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+        "lib": ["ESNext", "DOM"],
+        "module": "ESNext",
+        "target": "ESNext",
+        "moduleResolution": "Node",
+
+        "strict": true,
+        "allowUnusedLabels": false,
+        "allowUnreachableCode": false,
+        "exactOptionalPropertyTypes": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noPropertyAccessFromIndexSignature": true,
+        "noUncheckedIndexedAccess": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+
+        "importsNotUsedAsValues": "error",
+        "checkJs": true,
+
+        "preserveValueImports": true,
+        "isolatedModules": true,
+
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+
+        "paths": {
+            "@svelte-daisyui/shared": ["../shared/src/index.ts"]
+        }
+    },
+    "include": ["src/**/*.ts"]
+}

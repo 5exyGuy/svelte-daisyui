@@ -1,39 +1,30 @@
 {
     "name": "@svelte-daisyui/preprocessor",
     "version": "1.0.0",
-    "author": "5exyGuy (Aurėjus Remeika)",
+    "main": "./dist/index.cjs.js",
+    "module": "./dist/index.es.js",
+    "types": "./dist/index.d.ts",
     "license": "MIT",
-    "main": "index.js",
-    "types": "index.d.ts",
-    "files": [
-        "index.js",
-        "index.d.ts",
-        "binding.js",
-        "binding.d.ts"
-    ],
-    "publishConfig": {
-        "registry": "https://registry.npmjs.org/",
-        "access": "public"
-    },
     "scripts": {
-        "artifacts": "napi artifacts",
-        "build": "napi build --platform --release --js binding.js --dts binding.d.ts --pipe \"prettier -w\"",
-        "build:debug": "napi build --platform --js binding.js  --dts binding.d.ts --pipe \"prettier -w\"",
-        "prepublishOnly": "napi prepublish -t npm",
-        "version": "napi version"
-    },
-    "napi": {
-        "name": "preprocessor",
-        "triples": {
-            "defaults": true
-        }
-    },
-    "engines": {
-        "node": ">= 10"
+        "build": "rollup -c && pnpm run types",
+        "dev": "rollup -c -w",
+        "types": "dts-bundle-generator -o dist/index.d.ts src/index.ts"
     },
     "devDependencies": {
-        "@napi-rs/cli": "^2.13.0",
-        "prettier": "^2.8.0",
-        "prettier-plugin-rust": "^0.1.8"
+        "@rollup/plugin-commonjs": "^23.0.2",
+        "@rollup/plugin-node-resolve": "^15.0.1",
+        "@rollup/plugin-typescript": "^9.0.2",
+        "@types/node": "^18.11.9",
+        "@types/sass": "^1.43.1",
+        "dts-bundle-generator": "^7.1.0",
+        "rollup": "^3.4.0",
+        "rollup-plugin-node-externals": "^5.0.2",
+        "rollup-plugin-terser": "^7.0.2",
+        "sass": "^1.56.1",
+        "svelte": "^3.53.1",
+        "tailwindcss": "^3.2.4",
+        "tslib": "^2.4.1",
+        "type-fest": "^3.2.0",
+        "typescript": "^4.9.3"
     }
 }
