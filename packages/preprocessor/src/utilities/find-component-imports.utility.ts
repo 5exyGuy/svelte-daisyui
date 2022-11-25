@@ -1,15 +1,8 @@
 import type { Nullable } from '@svelte-daisyui/shared';
-import { MAIN_MODULE_NAME } from '../constants';
+import { COMPONENT_NAMES, IMPORT_STATEMENT_REGEX, MAIN_MODULE_NAME } from '../constants';
 
-export function findComponentImports(code: string) {
-    // remove comments
-    // const codeWithoutComments = code.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '$1').trim();
-
-    const regex = new RegExp(
-        `import([ \n\t]*(?:[^\n\t\{\}]+)|(?:[ \n\t]*\{(?:[ \n\t]*[^ \n\t"'\{\}]+[ \n\t]*,?)+\})?[ \n\t]*)from[ \n\t]*['"]${MAIN_MODULE_NAME}\/?([^ \n\t/]+)?['"]`,
-    );
-
-    const matches = [...code.matchAll(regex)];
+export function findComponentImports(code: string, fileName: string) {
+    const matches = [...code.matchAll(IMPORT_STATEMENT_REGEX)];
     const componentImports = new Map<string, Nullable<string>>();
     if (matches.length === 0) return componentImports;
 
@@ -25,14 +18,21 @@ export function findComponentImports(code: string) {
                 .forEach((value) => {
                     const [name, alias] = value.trim().split(' as ') as [string, string?];
                     const aliasName = alias ?? name;
-                    if (componentImports.has(aliasName)) throw new Error(`Duplicate import name: ${aliasName}`);
+                    if (!COMPONENT_NAMES.has(aliasName))
+                        throw new Error(
+                            `${aliasName} component does not exist in ${MAIN_MODULE_NAME} package in ${fileName}`,
+                        );
+                    if (componentImports.has(aliasName))
+                        throw new Error(`Duplicate import name ${aliasName} in ${fileName}`);
                     componentImports.set(aliasName, name);
                 });
             // Default import
         } else if (componentName) {
             const [, alias] = importName.split(' as ') as [string, string?];
             const aliasName = (alias ?? componentName).replace(/\.svelte$/, '');
-            if (componentImports.has(aliasName)) throw new Error(`Duplicate import name: ${aliasName}`);
+            if (!COMPONENT_NAMES.has(aliasName))
+                throw new Error(`${aliasName} component does not exist in ${MAIN_MODULE_NAME} package in ${fileName}`);
+            if (componentImports.has(aliasName)) throw new Error(`Duplicate import name ${aliasName} in ${fileName}`);
             componentImports.set(aliasName, componentName.replace(/\.svelte$/, ''));
         }
     });
