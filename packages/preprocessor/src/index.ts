@@ -1,8 +1,7 @@
-import type { MarkupPreprocessor, PreprocessorGroup } from 'svelte/types/compiler/preprocess';
-import { COMPONENT_STYLE_BUILDERS, SCRIPT_REGEX, STYLE_REGEX, SVELTE_COMMENT_REGEX } from './constants';
+import type { MarkupPreprocessor, Preprocessor, PreprocessorGroup } from 'svelte/types/compiler/preprocess';
+import { STYLE_REGEX } from './constants';
 import type { PreprocessorOptions } from './interfaces/preprocess-options.interface';
-import { compileString } from 'sass';
-import { ScreenSizeMinWidth } from '../../shared/src';
+import { ScreenSizeMinWidth } from '@svelte-daisyui/shared';
 
 export function preprocess(options?: PreprocessorOptions) {
     const modifiedOptions = (options as Required<PreprocessorOptions>) ?? {};
@@ -11,12 +10,14 @@ export function preprocess(options?: PreprocessorOptions) {
         ? { ...ScreenSizeMinWidth, ...modifiedOptions.screenSizes }
         : ScreenSizeMinWidth;
 
-    function getHtmlMarkup(content: string) {
-        return content.replace(SCRIPT_REGEX, '').replace(STYLE_REGEX, '').replace(SVELTE_COMMENT_REGEX, '');
-    }
+    // function getHtmlMarkup(content: string) {
+    //     return content.replace(SCRIPT_REGEX, '').replace(STYLE_REGEX, '').replace(SVELTE_COMMENT_REGEX, '');
+    // }
 
     function getStyleMarkup(content: string) {
         const match = content.match(STYLE_REGEX);
+        if (!match) return;
+
         const attributes = (match ? (match[1] as string) : '')
             .split(/s+/)
             .filter(Boolean)
@@ -31,20 +32,26 @@ export function preprocess(options?: PreprocessorOptions) {
     }
 
     const markup: MarkupPreprocessor = ({ content }) => {
-        const code = getHtmlMarkup(content);
-        const { attributes: styleAttributes, content: styleContent } = getStyleMarkup(content);
+        // const code = getHtmlMarkup(content);
+        const style = getStyleMarkup(content);
 
-        const sassStyles = COMPONENT_STYLE_BUILDERS.reduce(
-            (prevValue, builder) => prevValue + builder(code, modifiedOptions),
-            '',
-        );
-        const { css } = compileString(sassStyles);
+        console.log(style);
 
-        const styleContentWithNewLine = styleContent.endsWith('\n') ? styleContent : styleContent + '\n';
-        const newStyleContent = styleContentWithNewLine + css;
+        // const sassStyles = COMPONENT_STYLE_BUILDERS.reduce(
+        //     (prevValue, builder) => prevValue + builder(code, modifiedOptions),
+        //     '',
+        // );
+        // const { css } = compileString(sassStyles);
 
-        return { code: content };
+        // const styleContentWithNewLine = styleContent.endsWith('\n') ? styleContent : styleContent + '\n';
+        // const newStyleContent = styleContentWithNewLine + css;
+
+        return { code: content + '<style global></style>' };
     };
 
-    return { markup } as PreprocessorGroup;
+    const style: Preprocessor = (input) => {
+        console.log(input);
+    };
+
+    return { markup, style } as PreprocessorGroup;
 }

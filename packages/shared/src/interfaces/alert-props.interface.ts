@@ -1,10 +1,8 @@
-import type { StringKeyOf } from 'type-fest';
-import type { BrandColor } from '../enums/brand-color.enum';
-import type { FunctionalColor } from '../enums/functional-color.enum';
-import type { Screen } from '../types/screen.type';
+import type { BrandColor, FunctionalColor } from '../enums';
+import type { Screen, StringKeyOf } from '../types';
 import type { SvelteComponent } from 'svelte';
 
-export interface AlertProps extends svelte.JSX.HTMLAttributes<HTMLDivElement> {
+export interface AlertProps {
     color?: StringKeyOf<typeof BrandColor & typeof FunctionalColor> | 'base';
     showIcon?: boolean;
     icon?: typeof SvelteComponent;

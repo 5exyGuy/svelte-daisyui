@@ -1,8 +1,7 @@
 import { parseComponents } from './component-parser';
-import type { AlertProps, AlertResponsiveProps, ScreenSizeNames } from '@svelte-daisyui/shared';
+import type { AlertProps, AlertResponsiveProps, ScreenSizeNames, StringKeyOf } from '@svelte-daisyui/shared';
 import type { PreprocessorOptions } from '../interfaces/preprocess-options.interface';
 import { ALERT } from '../constants/alert.constants';
-import type { StringKeyOf } from 'type-fest';
 
 export function buildAlertStyles(code: string, options: Required<PreprocessorOptions>) {
     const components = parseComponents<AlertProps>(ALERT.COMPONENT_NAME, code);

@@ -24,10 +24,8 @@
         "isolatedModules": true,
 
         "esModuleInterop": true,
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
-
-        "experimentalDecorators": true
+        "skipLibCheck": false,
+        "forceConsistentCasingInFileNames": true
     },
     "include": ["src/**/*.ts"]
 }
