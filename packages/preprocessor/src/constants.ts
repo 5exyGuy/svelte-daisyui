@@ -4,6 +4,7 @@ export const STYLE_REGEX = /<style(\s[^]*?)?>([^]*?)<\/style>/g;
 export const SVELTE_COMMENT_REGEX = /<!--[^]*?-->/g;
 export const IMPORT_STATEMENT_REGEX = new RegExp(
     `import([ \n\t]*(?:[^\n\t\{\}]+)|(?:[ \n\t]*\{(?:[ \n\t]*[^ \n\t"'\{\}]+[ \n\t]*,?)+\})?[ \n\t]*)from[ \n\t]*['"]${MAIN_MODULE_NAME}\/?([^ \n\t/]+)?['"]`,
+    'g',
 );
 export const COMPONENT_NAMES = new Set([
     'Alert',

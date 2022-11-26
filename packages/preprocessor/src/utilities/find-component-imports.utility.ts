@@ -11,31 +11,44 @@ export function findComponentImports(code: string, fileName: string) {
         importName = importName.trim();
 
         // Named import
-        if (importName.startsWith('{') && importName.endsWith('}')) {
-            importName
-                .slice(1, -1)
-                .split(',')
-                .forEach((value) => {
-                    const [name, alias] = value.trim().split(' as ') as [string, string?];
-                    const aliasName = alias ?? name;
-                    if (!COMPONENT_NAMES.has(aliasName))
-                        throw new Error(
-                            `${aliasName} component does not exist in ${MAIN_MODULE_NAME} package in ${fileName}`,
-                        );
-                    if (componentImports.has(aliasName))
-                        throw new Error(`Duplicate import name ${aliasName} in ${fileName}`);
-                    componentImports.set(aliasName, name);
-                });
-            // Default import
-        } else if (componentName) {
-            const [, alias] = importName.split(' as ') as [string, string?];
-            const aliasName = (alias ?? componentName).replace(/\.svelte$/, '');
-            if (!COMPONENT_NAMES.has(aliasName))
-                throw new Error(`${aliasName} component does not exist in ${MAIN_MODULE_NAME} package in ${fileName}`);
-            if (componentImports.has(aliasName)) throw new Error(`Duplicate import name ${aliasName} in ${fileName}`);
-            componentImports.set(aliasName, componentName.replace(/\.svelte$/, ''));
-        }
+        if (importName.startsWith('{') && importName.endsWith('}'))
+            addNamedImports(importName, componentImports, fileName);
+        // Default import
+        else if (componentName) addDefaultImports(importName, componentName, componentImports, fileName);
+        else throw new Error(`Invalid import statement in ${fileName}`);
     });
 
     return componentImports;
+}
+
+function addNamedImports(importName: string, componentImports: Map<string, Nullable<string>>, fileName: string) {
+    importName
+        .slice(1, -1)
+        .split(',')
+        .forEach((value) => {
+            const [name, alias] = value.trim().split(' as ') as [string, string?];
+            const aliasName = alias ?? name;
+            if (!COMPONENT_NAMES.has(name))
+                throw new Error(`Component named ${name} does not exist in ${MAIN_MODULE_NAME} package in ${fileName}`);
+            if (componentImports.has(aliasName))
+                throw new Error(`Duplicate component import name ${aliasName} in ${fileName}`);
+            componentImports.set(aliasName, name);
+        });
+}
+
+function addDefaultImports(
+    importName: string,
+    componentName: string,
+    componentImports: Map<string, Nullable<string>>,
+    fileName: string,
+) {
+    componentName = componentName.replace(/\.svelte$/, '');
+    const [, alias] = importName.split(' as ') as [string, string?];
+    const aliasName = alias ?? componentName;
+    if (!COMPONENT_NAMES.has(componentName))
+        throw new Error(
+            `Component named ${componentName} does not exist in ${MAIN_MODULE_NAME} package in ${fileName}`,
+        );
+    if (componentImports.has(aliasName)) throw new Error(`Duplicate component import name ${aliasName} in ${fileName}`);
+    componentImports.set(aliasName, componentName.replace(/\.svelte$/, ''));
 }

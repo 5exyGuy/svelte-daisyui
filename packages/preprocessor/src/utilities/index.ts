@@ -1,3 +1,4 @@
+export * from './component-parser.utility';
 export * from './get-attributes.utility';
 export * from './get-svelte-html-markup.utility';
 export * from './get-svelte-script.utility';

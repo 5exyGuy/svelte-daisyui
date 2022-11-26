@@ -1,4 +1,4 @@
-import { parseComponents } from './component-parser';
+import { parseComponents } from '../utilities/component-parser.utility';
 import type { AlertProps, AlertResponsiveProps, ScreenSizeNames, StringKeyOf } from '@svelte-daisyui/shared';
 import type { PreprocessorOptions } from '../interfaces/preprocess-options.interface';
 import { ALERT } from '../constants/alert.constants';
