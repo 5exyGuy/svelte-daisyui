@@ -18,11 +18,11 @@ function transformSchema<Props>(this: ComponentSchema<Props>, value: any) {
 
     const transformed = {} as Props;
 
-    Object.entries(this.propTypes).forEach((entry) => {
+    Object.entries(this.propData).forEach((entry) => {
         const [propName, type] = entry as [keyof Props, PropTypes];
         const propValue = value[propName];
         if (!propValue) {
-            transformed[propName] = this.propValues[propName].default;
+            transformed[propName] = this.propData[propName].default;
             return;
         }
 
@@ -41,8 +41,6 @@ function transformSchema<Props>(this: ComponentSchema<Props>, value: any) {
                 break;
         }
     });
-
-    console.log(transformed);
 
     return this.validate(transformed);
 }

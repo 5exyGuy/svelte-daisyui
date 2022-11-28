@@ -1,25 +1,22 @@
-import joi from 'joi';
 import { PropTypes } from '../enums';
 import type { AlertClassProps, AlertProps, ComponentSchema } from '../interfaces';
 import { createSchema } from './create-schema';
+import joi from 'joi';
 
 const name: ComponentSchema<AlertProps>['name'] = 'Alert';
-const propValues: ComponentSchema<AlertClassProps>['propValues'] = {
+const propData: ComponentSchema<AlertClassProps>['propData'] = {
     color: {
-        values: ['base', 'primary', 'secondary', 'accent', 'info', 'success', 'warning', 'error'],
+        type: PropTypes.String,
+        validValues: ['base', 'primary', 'secondary', 'accent', 'info', 'success', 'warning', 'error'],
         default: 'base',
     },
 };
-const propTypes: ComponentSchema<AlertClassProps>['propTypes'] = {
-    color: PropTypes.String,
-};
 const objectSchema: ComponentSchema<AlertProps>['objectSchema'] = joi.object<AlertProps>({
-    color: joi.string().valid(...propValues.color.values),
+    color: joi.string().valid(...propData.color.validValues),
 });
 
 export const AlertClassSchema = createSchema<AlertClassProps>({
     name,
-    propValues,
-    propTypes,
+    propData,
     objectSchema,
 });

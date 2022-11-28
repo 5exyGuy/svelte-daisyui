@@ -1,9 +1,11 @@
+import { AlertClassSchema } from '@svelte-daisyui/shared';
+
 export function parseComponents<T>(componentName: string, code: string) {
     const componentRegex = new RegExp(`<${componentName}(\\s[^]*?)?><\\/${componentName}>`, 'g');
     const matchAll = code.matchAll(componentRegex);
 
-    const componentAttributes = Array.from(matchAll).map((match) => {
-        const attributes = (match[1] as string)
+    const parsedComponents = Array.from(matchAll).map((match) => {
+        const parsedComponent = (match[1] as string)
             .split(/s+/)
             .filter(Boolean)
             .reduce((acc, attr) => {
@@ -11,8 +13,10 @@ export function parseComponents<T>(componentName: string, code: string) {
                 acc[name] = value.replaceAll(/['"{}]/g, '') as T[keyof T];
                 return acc;
             }, {} as T);
-        return { ...attributes };
+        const transformedComponent = AlertClassSchema.transform(parsedComponent);
+        if (transformedComponent.error) throw transformedComponent.error;
+        return transformedComponent.value;
     });
 
-    return componentAttributes as { [P in keyof T]: string }[];
+    return parsedComponents;
 }

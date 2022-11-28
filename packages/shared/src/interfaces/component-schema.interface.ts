@@ -1,11 +1,16 @@
 import type { ObjectSchema, ValidationResult } from 'joi';
 import type { PropTypes } from '../enums';
 
-export interface ComponentSchema<Props> {
+interface ComponentPropData<T, K extends keyof T> {
+    readonly type: PropTypes;
+    readonly validValues: Array<T[K]>;
+    readonly default: T[K];
+}
+
+export interface ComponentSchema<T> {
     readonly name: string;
-    readonly propValues: { [K in keyof Props]: { values: Array<Props[K]>; default: Props[K] } };
-    readonly propTypes: { [K in keyof Props]: PropTypes };
-    readonly objectSchema: ObjectSchema<Props>;
-    readonly validate: (value: any) => ValidationResult<Props>;
-    readonly transform: (value: any) => ValidationResult<Props>;
+    readonly propData: { [K in keyof T]: ComponentPropData<T, K> };
+    readonly objectSchema: ObjectSchema<T>;
+    readonly validate: (value: any) => ValidationResult<T>;
+    readonly transform: (value: any) => ValidationResult<T>;
 }
