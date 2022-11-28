@@ -1,1 +1,1 @@
-export * from './alert-class.schema';
+export * from './alert.schema';

@@ -22,7 +22,7 @@ function transformSchema<Props>(this: ComponentSchema<Props>, value: any) {
         const [propName, type] = entry as [keyof Props, PropTypes];
         const propValue = value[propName];
         if (!propValue) {
-            transformed[propName] = this.propData[propName].default;
+            transformed[propName] = this.propData[propName]!.default;
             return;
         }
 

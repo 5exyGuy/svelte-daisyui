@@ -1,13 +1,13 @@
 import type { BrandColor, FunctionalColor } from '../enums';
-import type { Screen, StringKeyOf } from '../types';
+import type { StringKeyOf } from '../types';
 import type { SvelteComponent } from 'svelte';
+import type { ComponentsProps } from './component-props.interface';
 
-export interface AlertProps {
+export interface AlertProps extends ComponentsProps<AlertResponsiveProps> {
     color: StringKeyOf<typeof BrandColor & typeof FunctionalColor> | 'base';
     showIcon: boolean;
     icon: typeof SvelteComponent;
     message: string;
-    screen: Screen<AlertResponsiveProps>;
 }
 
 export interface AlertResponsiveProps extends Pick<AlertProps, 'color'> {}
