@@ -1,5 +1,6 @@
 import { PropTypes } from '../enums';
 import type { ComponentSchema, ComponentsProps } from '../interfaces';
+import joi, { object } from 'joi';
 
 export function createSchema<Props extends ComponentsProps>(
     schema: Omit<ComponentSchema<Props>, 'validate' | 'transform'>,
