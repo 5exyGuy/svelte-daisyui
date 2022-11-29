@@ -1,7 +1,9 @@
 import { PropTypes } from '../enums';
-import type { ComponentSchema } from '../interfaces';
+import type { ComponentSchema, ComponentsProps } from '../interfaces';
 
-export function createSchema<Props>(schema: Omit<ComponentSchema<Props>, 'validate' | 'transform'>) {
+export function createSchema<Props extends ComponentsProps>(
+    schema: Omit<ComponentSchema<Props>, 'validate' | 'transform'>,
+) {
     return {
         ...schema,
         validate: validateSchema,
@@ -9,11 +11,11 @@ export function createSchema<Props>(schema: Omit<ComponentSchema<Props>, 'valida
     } as ComponentSchema<Props>;
 }
 
-function validateSchema<Props>(this: ComponentSchema<Props>, value: any) {
+function validateSchema<Props extends ComponentsProps>(this: ComponentSchema<Props>, value: any) {
     return this.objectSchema.validate(value);
 }
 
-function transformSchema<Props>(this: ComponentSchema<Props>, value: any) {
+function transformSchema<Props extends ComponentsProps>(this: ComponentSchema<Props>, value: any) {
     if (typeof value !== 'object') return;
 
     const transformed = {} as Props;
@@ -41,6 +43,9 @@ function transformSchema<Props>(this: ComponentSchema<Props>, value: any) {
                 break;
         }
     });
+
+    if (this.hasScreen && value.screen) {
+    }
 
     return this.validate(transformed);
 }
