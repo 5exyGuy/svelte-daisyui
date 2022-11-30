@@ -16,6 +16,9 @@ export const AlertSchema = createSchema<AlertProps>({
     hasScreen: true,
     propData,
     objectSchema: joi.object<AlertProps>({
-        color: joi.string().valid(...propData.color!.validValues),
+        color: joi
+            .string()
+            .valid(...propData.color!.validValues)
+            .optional(),
     }),
 });

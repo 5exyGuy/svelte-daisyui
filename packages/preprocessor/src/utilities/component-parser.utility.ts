@@ -10,7 +10,7 @@ export function parseComponents<Props extends ComponentsProps>(
     schema: ComponentSchema<Props>,
     options: PreprocessorOptions,
 ) {
-    const componentRegex = new RegExp(`<${componentName}(\\s[^]*?)?><\\/${componentName}>`, 'g');
+    const componentRegex = new RegExp(`<${componentName}(\s+[^/>]*)?\/?>`, 'g');
     const matchAll = code.matchAll(componentRegex);
 
     // { color: Set['primary', 'secondary'], screen: { sm: { color: Set['primary'] } } }
