@@ -1,17 +1,17 @@
-import type { MarkupPreprocessor, Preprocessor, PreprocessorGroup } from 'svelte/types/compiler/preprocess';
+import type { MarkupPreprocessor, PreprocessorGroup } from 'svelte/types/compiler/preprocess';
 import type { PreprocessorOptions } from './interfaces/preprocess-options.interface';
-import { getSvelteStyle, processOptions } from './utilities';
-import { findComponentImports } from './utilities/find-component-imports.utility';
+import { findComponentImports, getSvelteStyle, prepareStyleBuilders, processOptions } from './utilities';
 
 export function preprocess(options?: Partial<PreprocessorOptions>) {
-    processOptions(options);
+    const processedOptions = processOptions(options);
+    const styleBuilders = prepareStyleBuilders(processedOptions);
 
     const markup: MarkupPreprocessor = ({ content, filename }) => {
         const style = getSvelteStyle(content);
         if (style) return { code: content };
 
-        const componentImports = findComponentImports(content, filename);
-        if (componentImports.size === 0) return { code: content };
+        const componentImportAliases = findComponentImports(content, filename);
+        if (componentImportAliases.size === 0) return { code: content };
 
         return { code: content };
     };
