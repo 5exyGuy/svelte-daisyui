@@ -1,5 +1,5 @@
 import type { MarkupPreprocessor, PreprocessorGroup } from 'svelte/types/compiler/preprocess';
-import type { PreprocessorOptions } from './interfaces/preprocess-options.interface';
+import type { PreprocessorOptions } from './interfaces';
 import { findComponentImports, getSvelteStyle, prepareStyleBuilders, processOptions } from './utilities';
 
 export function preprocess(options?: Partial<PreprocessorOptions>) {
