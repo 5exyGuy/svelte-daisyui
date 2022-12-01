@@ -8,11 +8,16 @@ interface ComponentPropData<Props, PropName extends keyof Props> {
     readonly default: Props[PropName];
 }
 
+interface ComponentSchemaMap<Props> {
+    default: ObjectSchema<Props>;
+    screen?: ObjectSchema<Props>;
+}
+
 export interface ComponentSchema<Props> {
     readonly name: string;
     readonly hasScreen: boolean;
     readonly propData: { [PropName in keyof Props]?: ComponentPropData<Props, PropName> };
-    readonly objectSchema: ObjectSchema<Props>;
+    readonly map: ComponentSchemaMap<Props>;
     readonly validate: <CustomScreenSizeNames extends string = string>(
         value: any,
         screenSizes: Array<ScreenSizeNames | CustomScreenSizeNames>,

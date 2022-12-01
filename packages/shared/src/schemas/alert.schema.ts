@@ -15,10 +15,19 @@ export const AlertSchema = createSchema<AlertProps>({
     name: 'Alert',
     hasScreen: true,
     propData,
-    objectSchema: joi.object<AlertProps>({
-        color: joi
-            .string()
-            .valid(...propData.color!.validValues)
-            .optional(),
-    }),
+    map: {
+        default: joi.object<AlertProps>({
+            color: joi
+                .string()
+                .valid(...propData.color!.validValues)
+                .optional()
+                .default(propData.color!.default),
+        }),
+        screen: joi.object<AlertProps>({
+            color: joi
+                .string()
+                .valid(...propData.color!.validValues)
+                .optional(),
+        }),
+    },
 });

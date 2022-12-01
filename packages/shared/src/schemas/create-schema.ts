@@ -1,7 +1,7 @@
 import { PropTypes } from '../enums';
 import type { ComponentSchema, ComponentsProps } from '../interfaces';
-import joi from 'joi';
 import type { ScreenSizeNames } from '../types';
+import joi, { type ObjectSchema } from 'joi';
 
 export function createSchema<Props extends ComponentsProps>(
     schema: Omit<ComponentSchema<Props>, 'validate' | 'transform'>,
@@ -50,13 +50,6 @@ export function createSchema<Props extends ComponentsProps>(
         }, {} as Props);
     }
 
-    const objectSchemaWithDefaults = Object.keys(schema.objectSchema.describe()).reduce((objectSchema, key) => {
-        objectSchema.append({
-            [key]: schema.objectSchema.extract(key).default(schema.propData[key as keyof Props]!.default!),
-        });
-        return objectSchema;
-    }, joi.object<Props>());
-
     return {
         ...schema,
         // Schema validation
@@ -68,13 +61,13 @@ export function createSchema<Props extends ComponentsProps>(
             screenSizes = validateScreenSizeNames(screenSizes);
 
             const schema = this.hasScreen
-                ? objectSchemaWithDefaults.append({
+                ? this.map.default.append({
                       screen: screenSizes.reduce((acc, screenSize) => {
-                          acc[screenSize] = this.objectSchema.optional();
+                          acc[screenSize] = this.map.screen!;
                           return acc;
-                      }, {} as Record<typeof screenSizes[number], typeof this.objectSchema>),
+                      }, {} as Record<typeof screenSizes[number], ObjectSchema<Props>>),
                   })
-                : objectSchemaWithDefaults;
+                : this.map.default;
 
             return schema.validate(value);
         },
@@ -92,10 +85,10 @@ export function createSchema<Props extends ComponentsProps>(
             if (this.hasScreen && value.screen) {
                 const componentScreen = JSON.parse(value.screen);
 
-                transformed.screen = {};
                 Object.keys(screenSizes).forEach((screenSize) => {
                     const screenValue = componentScreen[screenSize];
                     if (!screenValue) return;
+                    transformed.screen = transformed.screen ?? {};
                     transformed.screen![screenSize] = transformValue(screenValue);
                 });
             }
