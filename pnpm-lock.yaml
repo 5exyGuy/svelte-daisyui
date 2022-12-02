@@ -61,6 +61,7 @@ importers:
       esbuild: ^0.15.15
       rollup: ^3.4.0
       rollup-plugin-esbuild: ^5.0.0
+      rollup-plugin-string: ^3.0.0
       sass: ^1.56.1
       svelte: ^3.53.1
     dependencies:
@@ -73,6 +74,7 @@ importers:
       esbuild: 0.15.15
       rollup: 3.4.0
       rollup-plugin-esbuild: 5.0.0_gy77k6wisfmkvlklwxkgcpqdui
+      rollup-plugin-string: 3.0.0
       sass: 1.56.1
 
   packages/shared:
@@ -1268,6 +1270,10 @@ packages:
     engines: {node: '>=4.0'}
     dev: true
 
+  /estree-walker/0.6.1:
+    resolution: {integrity: sha512-SqmZANLWS0mnatqbSfRP5g8OXZC12Fgg1IwNtLsyHDzJizORW4khDfjPqJZsemPWBB2uqykUah5YpQ6epsqC/w==}
+    dev: true
+
   /estree-walker/2.0.2:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
     dev: true
@@ -1867,6 +1873,18 @@ packages:
       rollup: 3.4.0
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /rollup-plugin-string/3.0.0:
+    resolution: {integrity: sha512-vqyzgn9QefAgeKi+Y4A7jETeIAU1zQmS6VotH6bzm/zmUQEnYkpIGRaOBPY41oiWYV4JyBoGAaBjYMYuv+6wVw==}
+    dependencies:
+      rollup-pluginutils: 2.8.2
+    dev: true
+
+  /rollup-pluginutils/2.8.2:
+    resolution: {integrity: sha512-EEp9NhnUkwY8aif6bxgovPHMoMoNr2FulJziTndpt5H9RdwC47GSGuII9XxpSdzVGM0GWrNPHV6ie1LTNJPaLQ==}
+    dependencies:
+      estree-walker: 0.6.1
     dev: true
 
   /rollup/2.79.1:
