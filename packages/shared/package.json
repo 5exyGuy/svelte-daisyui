@@ -16,10 +16,10 @@
         "svelte": "^3.53.1"
     },
     "devDependencies": {
-        "@types/node": "^18.11.9",
+        "@types/node": "^18.11.10",
         "dts-bundle-generator": "^7.1.0",
-        "esbuild": "^0.15.15",
-        "rollup": "^3.4.0",
+        "esbuild": "^0.15.16",
+        "rollup": "^3.5.1",
         "rollup-plugin-esbuild": "^5.0.0"
     }
 }

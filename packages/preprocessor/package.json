@@ -16,11 +16,11 @@
     },
     "devDependencies": {
         "@svelte-daisyui/shared": "workspace:^1.0.0",
-        "@types/node": "^18.11.9",
+        "@types/node": "^18.11.10",
         "@types/sass": "^1.43.1",
         "dts-bundle-generator": "^7.1.0",
-        "esbuild": "^0.15.15",
-        "rollup": "^3.4.0",
+        "esbuild": "^0.15.16",
+        "rollup": "^3.5.1",
         "rollup-plugin-esbuild": "^5.0.0",
         "sass": "^1.56.1"
     }
