@@ -1,5 +1,5 @@
 import type { ComponentsProps } from '@svelte-daisyui/shared';
-import type { PreprocessorOptions } from '../interfaces';
+import type { PreprocessorOptions } from '../interfaces/preprocess-options';
 
 export type UniqueComponentProps<
     Props extends ComponentsProps,

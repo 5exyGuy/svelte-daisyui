@@ -1,4 +1,4 @@
-export function getAttributes(value: string) {
+export function parseTagAttributes(value: string) {
     return value
         .split(/s+/)
         .filter(Boolean)

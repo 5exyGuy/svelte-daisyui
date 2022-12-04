@@ -1,6 +1,6 @@
 import { COMPONENT_NAMES, IMPORT_STATEMENT_REGEX, MAIN_MODULE_NAME } from '../constants';
 
-export function findComponentImports(code: string, fileName?: string) {
+export function findImportStatement(code: string, fileName?: string) {
     const matches = [...code.matchAll(IMPORT_STATEMENT_REGEX)];
     const componentImports = new Map<string, Set<string>>();
     if (matches.length === 0) return componentImports;

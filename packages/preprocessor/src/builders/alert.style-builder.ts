@@ -1,5 +1,6 @@
-import type { PreprocessorOptions, StyleBuilder } from '../interfaces';
+import type { PreprocessorOptions } from '../interfaces/preprocess-options';
+import type { StyleBuilder } from '../interfaces/style-builder';
 
-export default function createAlertStyleBuilder(options: PreprocessorOptions): StyleBuilder {
-    return { build: (aliases: string[], code: string) => code };
+export function createAlertStyleBuilder(options: PreprocessorOptions): StyleBuilder {
+    return { build: (aliases: Set<string>, code: string) => code };
 }

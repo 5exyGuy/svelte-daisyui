@@ -1,11 +1,11 @@
 import { SCRIPT_REGEX } from '../constants';
-import { getAttributes } from './get-attributes.utility';
+import { parseTagAttributes } from './parse-tag-attributes';
 
-export function getSvelteScript(code: string) {
+export function parseScript(code: string) {
     const match = code.match(SCRIPT_REGEX);
     if (!match) return;
 
-    const attributes = getAttributes(match[1]!);
+    const attributes = parseTagAttributes(match[1]!);
     const content = match[2]!.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '$1').trim();
 
     return { attributes, content };
