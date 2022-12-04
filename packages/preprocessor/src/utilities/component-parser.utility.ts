@@ -4,13 +4,12 @@ import type { UniqueComponentProps } from '../types';
 import { getAttributes } from './get-attributes.utility';
 
 export function parseComponents<Props extends ComponentsProps>(
-    // importNameAliases:
-    componentName: string,
+    importNameAliases: string[],
     code: string,
     schema: ComponentSchema<Props>,
     options: PreprocessorOptions,
 ) {
-    const componentRegex = new RegExp(`<${componentName}(\s+[^/>]*)?\/?>`, 'g');
+    const componentRegex = new RegExp(`<${importNameAliases.join('|')}(\s+[^/>]*)?\/?>`, 'g');
     const matchAll = code.matchAll(componentRegex);
 
     // { color: Set['primary', 'secondary'], screen: { sm: { color: Set['primary'] } } }

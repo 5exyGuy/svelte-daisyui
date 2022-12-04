@@ -1,2 +1,2 @@
-export * from './component-import.interface';
+export * from './style-builder.interface';
 export * from './preprocess-options.interface';
