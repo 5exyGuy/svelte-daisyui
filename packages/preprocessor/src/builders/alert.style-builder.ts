@@ -2,5 +2,9 @@ import type { PreprocessorOptions } from '../interfaces/preprocess-options';
 import type { StyleBuilder } from '../interfaces/style-builder';
 
 export function createAlertStyleBuilder(options: PreprocessorOptions): StyleBuilder {
-    return { build: (aliases: Set<string>, code: string) => code };
+    const build = (aliases: Set<string>, code: string) => {
+        return '';
+    };
+
+    return { build };
 }

@@ -18,12 +18,15 @@ export interface ComponentSchema<Props> {
     readonly hasScreen: boolean;
     readonly propData: { [PropName in keyof Props]?: ComponentPropData<Props, PropName> };
     readonly map: ComponentSchemaMap<Props>;
-    readonly validate: <CustomScreenSizeNames extends string = string>(
+    validate<CustomScreenSizeNames extends string = string>(
         value: any,
         screenSizes: Array<ScreenSizeNames | CustomScreenSizeNames>,
-    ) => ValidationResult<Props>;
-    readonly transform: <CustomScreenSizeNames extends string = string>(
+    ): ValidationResult<Props>;
+    transform<CustomScreenSizeNames extends string = string>(
         value: any,
         screenSizes: Array<ScreenSizeNames | CustomScreenSizeNames>,
-    ) => ValidationResult<Props>;
+    ): ValidationResult<Props>;
+    addScreenSizes<CustomScreenSizeNames extends string = string>(
+        screenSizes: Array<ScreenSizeNames | CustomScreenSizeNames>,
+    ): void;
 }

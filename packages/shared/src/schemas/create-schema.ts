@@ -6,6 +6,8 @@ import joi, { type ObjectSchema } from 'joi';
 export function createSchema<Props extends ComponentsProps>(
     schema: Omit<ComponentSchema<Props>, 'validate' | 'transform'>,
 ) {
+    let screenSizes: Array<ScreenSizeNames | string>;
+
     function validateValue(value: any) {
         const valueSchema = joi.object();
         const { error, value: validatedValue } = valueSchema.validate(value);
@@ -53,10 +55,7 @@ export function createSchema<Props extends ComponentsProps>(
     return {
         ...schema,
         // Schema validation
-        validate: function <CustomScreenSizeNames extends string = string>(
-            value: any,
-            screenSizes: Array<ScreenSizeNames | CustomScreenSizeNames>,
-        ) {
+        validate(value, screenSizes) {
             value = validateValue(value);
             screenSizes = validateScreenSizeNames(screenSizes);
 
@@ -72,10 +71,7 @@ export function createSchema<Props extends ComponentsProps>(
             return schema.validate(value);
         },
         // Schema transformation
-        transform: function <CustomScreenSizeNames extends string = string>(
-            value: any,
-            screenSizes: Array<ScreenSizeNames | CustomScreenSizeNames>,
-        ) {
+        transform(value, screenSizes) {
             value = validateValue(value);
             screenSizes = validateScreenSizeNames(screenSizes);
 
@@ -94,6 +90,9 @@ export function createSchema<Props extends ComponentsProps>(
             }
 
             return this.validate(transformed, screenSizes);
+        },
+        addScreenSizes(_screenSizes) {
+            screenSizes = validateScreenSizeNames(_screenSizes);
         },
     } as ComponentSchema<Props>;
 }
