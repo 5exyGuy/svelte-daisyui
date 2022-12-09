@@ -1,4 +1,4 @@
-export enum ScreenSizeMinWidth {
+export enum BreakpointSize {
     sm = '640px',
     md = '768px',
     lg = '1024px',

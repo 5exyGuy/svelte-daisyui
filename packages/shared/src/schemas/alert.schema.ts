@@ -13,7 +13,7 @@ const propData = {
 
 export const AlertSchema = createSchema<AlertProps>({
     name: 'Alert',
-    hasScreen: true,
+    hasBreakpoint: true,
     propData,
     map: {
         default: joi.object<AlertProps>({
@@ -23,7 +23,7 @@ export const AlertSchema = createSchema<AlertProps>({
                 .optional()
                 .default(propData.color!.default),
         }),
-        screen: joi.object<AlertProps>({
+        breakpoint: joi.object<AlertProps>({
             color: joi
                 .string()
                 .valid(...propData.color!.validValues)

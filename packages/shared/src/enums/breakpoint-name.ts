@@ -1,4 +1,4 @@
-export enum ScreenSize {
+export enum BreakpointName {
     sm = 'sm',
     md = 'md',
     lg = 'lg',

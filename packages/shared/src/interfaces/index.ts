@@ -1,3 +1,3 @@
-export * from './alert-props.interface';
-export * from './component-props.interface';
-export * from './component-schema.interface';
+export * from './alert-props';
+export * from './component-props';
+export * from './component-schema';

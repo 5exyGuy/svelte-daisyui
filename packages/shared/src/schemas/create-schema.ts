@@ -1,12 +1,12 @@
 import { PropTypes } from '../enums';
 import type { ComponentSchema, ComponentsProps } from '../interfaces';
-import type { ScreenSizeNames } from '../types';
+import type { BreakpointNames } from '../types';
 import joi, { type ObjectSchema } from 'joi';
 
 export function createSchema<Props extends ComponentsProps>(
-    schema: Omit<ComponentSchema<Props>, 'validate' | 'transform'>,
+    schema: Omit<ComponentSchema<Props>, 'validate' | 'transform' | 'setBreakpoints'>,
 ) {
-    let screenSizes: Array<ScreenSizeNames | string>;
+    let breakpoints: Array<BreakpointNames | string>;
 
     function validateValue(value: any) {
         const valueSchema = joi.object();
@@ -15,11 +15,11 @@ export function createSchema<Props extends ComponentsProps>(
         return validatedValue;
     }
 
-    function validateScreenSizeNames<CustomScreenSizeNames extends string = string>(
-        screenSizeNames: Array<ScreenSizeNames | CustomScreenSizeNames>,
+    function validateBreakpointNames<CustomBreakpointNames extends string = string>(
+        breakpointNames: Array<BreakpointNames | CustomBreakpointNames>,
     ) {
-        const screenSizeNamesSchema = joi.array<typeof screenSizeNames>().items(joi.string()).min(1).unique();
-        const { error, value } = screenSizeNamesSchema.validate(screenSizeNames);
+        const breakpointNamesSchema = joi.array<typeof breakpointNames>().items(joi.string()).min(1).unique();
+        const { error, value } = breakpointNamesSchema.validate(breakpointNames);
         if (error) throw error;
         return value;
     }
@@ -55,44 +55,43 @@ export function createSchema<Props extends ComponentsProps>(
     return {
         ...schema,
         // Schema validation
-        validate(value, screenSizes) {
+        validate(value) {
             value = validateValue(value);
-            screenSizes = validateScreenSizeNames(screenSizes);
 
-            const schema = this.hasScreen
+            const schema = this.hasBreakpoint
                 ? this.map.default.append({
-                      screen: screenSizes.reduce((acc, screenSize) => {
-                          acc[screenSize] = this.map.screen!;
+                      breakpoint: breakpoints.reduce((acc, breakpointName) => {
+                          acc[breakpointName] = this.map.breakpoint!;
                           return acc;
-                      }, {} as Record<typeof screenSizes[number], ObjectSchema<Props>>),
+                      }, {} as Record<typeof breakpoints[number], ObjectSchema<Props>>),
                   })
                 : this.map.default;
 
             return schema.validate(value);
         },
         // Schema transformation
-        transform(value, screenSizes) {
+        transform(value) {
             value = validateValue(value);
-            screenSizes = validateScreenSizeNames(screenSizes);
 
             // Transform the given value into a schema object
             const transformed = transformValue(value);
 
-            if (this.hasScreen && value.screen) {
-                const componentScreen = JSON.parse(value.screen);
+            if (this.hasBreakpoint && value.breakpoint) {
+                const componentBreakpoint = JSON.parse(value.breakpoint);
 
-                Object.keys(screenSizes).forEach((screenSize) => {
-                    const screenValue = componentScreen[screenSize];
-                    if (!screenValue) return;
-                    transformed.screen = transformed.screen ?? {};
-                    transformed.screen![screenSize] = transformValue(screenValue);
+                Object.keys(breakpoints).forEach((breakpointName) => {
+                    const breakpointValue = componentBreakpoint[breakpointName];
+                    if (!breakpointValue) return;
+                    transformed.breakpoint = transformed.breakpoint ?? {};
+                    transformed.breakpoint![breakpointName] = transformValue(breakpointValue);
                 });
             }
 
-            return this.validate(transformed, screenSizes);
+            return this.validate(transformed);
         },
-        addScreenSizes(_screenSizes) {
-            screenSizes = validateScreenSizeNames(_screenSizes);
+        setBreakpoints(customBreakpoints) {
+            breakpoints = validateBreakpointNames(customBreakpoints);
+            return this;
         },
     } as ComponentSchema<Props>;
 }

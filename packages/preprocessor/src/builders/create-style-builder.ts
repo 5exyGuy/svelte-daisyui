@@ -1,4 +1,4 @@
-import type { PreprocessorOptions } from '../interfaces/preprocess-options';
+import type { PreprocessorOptions } from '../interfaces';
 import { createAlertStyleBuilder } from './alert.style-builder';
 
 export function createStyleBuilder(options: PreprocessorOptions, componentName: string) {

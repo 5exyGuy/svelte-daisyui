@@ -1,5 +1,5 @@
-import { ScreenSizeMinWidth } from '@svelte-daisyui/shared/src';
-import type { PreprocessorOptions } from '../interfaces/preprocess-options';
+import { ScreenSizeMinWidth } from '@svelte-daisyui/shared';
+import type { PreprocessorOptions } from '../interfaces';
 
 export function processOptions(options?: Partial<PreprocessorOptions>) {
     options = (options as Required<PreprocessorOptions>) ?? {};

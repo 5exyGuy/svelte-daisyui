@@ -2,7 +2,7 @@ import type { MarkupPreprocessor, PreprocessorGroup } from 'svelte/types/compile
 import { createStyleBuilder } from './builders';
 import type { PreprocessorOptions } from './interfaces/preprocess-options';
 import type { StyleBuilder } from './interfaces/style-builder';
-import { findComponentImports } from './markup/find-import-statments';
+import { findImportStatement } from './markup/find-import-statments';
 import { parseStyle } from './markup/parse-style';
 import { processOptions } from './options/process-options';
 
@@ -14,7 +14,7 @@ export function preprocess(options?: Partial<PreprocessorOptions>) {
         const style = parseStyle(content);
         if (style) return { code: content };
 
-        const componentImportAliases = findComponentImports(content, filename);
+        const componentImportAliases = findImportStatement(content, filename);
         if (componentImportAliases.size === 0) return { code: content };
 
         const generatedStyles = Object.entries(componentImportAliases).reduce((prevValue, [componentName, aliases]) => {

@@ -1,7 +1,7 @@
 import type { ComponentSchema, ComponentsProps } from '@svelte-daisyui/shared';
-import type { PreprocessorOptions } from '../interfaces/preprocess-options';
-import type { UniqueComponentProps } from '../types/unique-component-props';
-import { parseTagAttributes } from './parse-tag-attributes';
+import type { PreprocessorOptions } from '../interfaces';
+import type { UniqueComponentProps } from '../types';
+import { parseElementAttributes } from './parse-element-attributes';
 
 export function parseComponents<Props extends ComponentsProps>(
     importNameAliases: string[],
@@ -17,7 +17,7 @@ export function parseComponents<Props extends ComponentsProps>(
     const uniqueComponentProps = {} as UniqueComponentProps<Props>;
 
     const parsedComponents = Array.from(matchAll).forEach((match) => {
-        const componentAttrs = parseTagAttributes(match[1]!);
+        const componentAttrs = parseElementAttributes(match[1]!);
         const { error, value: transformedComponent } = schema.transform(
             componentAttrs,
             Object.keys(options.screenSizes),
