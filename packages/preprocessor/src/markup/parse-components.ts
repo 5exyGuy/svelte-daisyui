@@ -18,10 +18,7 @@ export function parseComponents<Props extends ComponentsProps>(
 
     const parsedComponents = Array.from(matchAll).forEach((match) => {
         const componentAttrs = parseElementAttributes(match[1]!);
-        const { error, value: transformedComponent } = schema.transform(
-            componentAttrs,
-            Object.keys(options.screenSizes),
-        );
+        const { error, value: transformedComponent } = schema.transform(componentAttrs);
         if (error) throw error;
 
         Object.entries(transformedComponent!).forEach((entry) => {

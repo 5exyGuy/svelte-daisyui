@@ -6,4 +6,6 @@ export function createStyleBuilder(options: PreprocessorOptions, componentName: 
         case 'Alert':
             return createAlertStyleBuilder(options);
     }
+
+    throw new Error(`No style builder found for component ${componentName}`);
 }

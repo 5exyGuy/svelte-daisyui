@@ -2,6 +2,7 @@ export const MAIN_MODULE_NAME = '@svelte-daisyui/core';
 export const SCRIPT_REGEX = /<script(\s[^]*?)?(?:>([^]*?)<\/script>|\/>)/gi;
 export const STYLE_REGEX = /<style(\s[^]*?)?(?:>([^]*?)<\/style>|\/>)/gi;
 export const SVELTE_COMMENT_REGEX = /<!--[^]*?-->/g;
+export const SCRIPT_COMMENT_REGEX = /\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm;
 export const IMPORT_STATEMENT_REGEX = new RegExp(
     `import([ \n\t]*(?:[^\n\t\{\}]+)|(?:[ \n\t]*\{(?:[ \n\t]*[^ \n\t"'\{\}]+[ \n\t]*,?)+\})?[ \n\t]*)from[ \n\t]*['"]${MAIN_MODULE_NAME}\/?([^ \n\t/]+)?['"]`,
     'g',

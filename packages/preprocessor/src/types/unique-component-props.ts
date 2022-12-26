@@ -8,6 +8,6 @@ export type UniqueComponentProps<
     [PropName in keyof Props]: Set<Props[PropName]>;
 } & {
     screen?: {
-        [ScreenSize in keyof Options['screenSizes']]: { [PropName in keyof Props]: Set<Props[PropName]> };
+        [ScreenSize in keyof Options['breakpoints']]: { [PropName in keyof Props]: Set<Props[PropName]> };
     };
 };

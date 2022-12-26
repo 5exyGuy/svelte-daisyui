@@ -1,4 +1,4 @@
-import { SCRIPT_REGEX } from '../constants';
+import { SCRIPT_COMMENT_REGEX, SCRIPT_REGEX } from '../constants';
 import { parseElementAttributes } from './parse-element-attributes';
 
 export function parseScript(code: string) {
@@ -6,7 +6,7 @@ export function parseScript(code: string) {
     if (!match) return;
 
     const attributes = parseElementAttributes(match[1]!);
-    const content = match[2]!.replace(/\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm, '$1').trim();
+    const content = match[2]!.replace(SCRIPT_COMMENT_REGEX, '$1').trim();
 
     return { attributes, content };
 }
