@@ -17,13 +17,16 @@ export function preprocess(options?: Partial<PreprocessorOptions>) {
         const componentImportAliases = findImportStatement(content, filename);
         if (componentImportAliases.size === 0) return { code: content };
 
-        const generatedStyles = Object.entries(componentImportAliases).reduce((prevValue, [componentName, aliases]) => {
-            const styleBuilder =
-                styleBuilders.get(componentName) ?? createStyleBuilder(processedOptions, componentName)!;
-            styleBuilders.has(componentName) || styleBuilders.set(componentName, styleBuilder);
+        const generatedStyles = Array.from(componentImportAliases.entries()).reduce(
+            (prevValue, [componentName, aliases]) => {
+                const styleBuilder =
+                    styleBuilders.get(componentName) ?? createStyleBuilder(processedOptions, componentName)!;
+                styleBuilders.has(componentName) || styleBuilders.set(componentName, styleBuilder);
 
-            return prevValue + styleBuilder.build(aliases, content);
-        }, '');
+                return prevValue + styleBuilder.build(aliases, content);
+            },
+            '',
+        );
 
         return { code: content };
     };
