@@ -5,6 +5,7 @@ import joi from 'joi';
 
 const propData = {
     color: {
+        responsive: true,
         type: PropTypes.String,
         validValues: ['base', 'primary', 'secondary', 'accent', 'info', 'success', 'warning', 'error'],
         default: 'base',

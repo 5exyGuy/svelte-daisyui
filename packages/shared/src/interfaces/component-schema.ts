@@ -2,13 +2,14 @@ import type { ObjectSchema, ValidationResult } from 'joi';
 import type { PropTypes } from '../enums';
 import type { BreakpointNames } from '../types';
 
-interface ComponentPropData<Props, PropName extends keyof Props> {
+export interface ComponentPropData<Props, PropName extends keyof Props> {
+    readonly responsive: boolean;
     readonly type: PropTypes;
     readonly validValues: Array<Props[PropName]>;
     readonly default: Props[PropName];
 }
 
-interface ComponentSchemaMap<Props> {
+export interface ComponentSchemaMap<Props> {
     default: ObjectSchema<Props>;
     breakpoint?: ObjectSchema<Props>;
 }

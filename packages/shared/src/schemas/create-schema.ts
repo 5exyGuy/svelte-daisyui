@@ -1,5 +1,5 @@
 import { PropTypes } from '../enums';
-import type { ComponentSchema, ComponentsProps } from '../interfaces';
+import type { ComponentPropData, ComponentSchema, ComponentsProps } from '../interfaces';
 import type { BreakpointNames } from '../types';
 import joi, { type ObjectSchema } from 'joi';
 
@@ -26,7 +26,7 @@ export function createSchema<Props extends ComponentsProps>(
 
     function transformValue(value: any) {
         return Object.entries(schema.propData).reduce<Props>((transformed, entry) => {
-            const [propName, type] = entry as [keyof Props, PropTypes];
+            const [propName, propData] = entry as [keyof Props, ComponentPropData<Props, keyof Props>];
             const propValue = value[propName];
             if (!propValue) {
                 transformed[propName] = schema.propData[propName]!.default;

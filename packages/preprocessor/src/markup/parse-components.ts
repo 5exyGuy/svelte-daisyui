@@ -7,7 +7,6 @@ export function parseComponents<Props extends ComponentsProps>(
     importNameAliases: string[],
     code: string,
     schema: ComponentSchema<Props>,
-    options: PreprocessorOptions,
 ) {
     const componentRegex = new RegExp(`<${importNameAliases.join('|')}(\s+[^/>]*)?\/?>`, 'g');
     const matchAll = code.matchAll(componentRegex);
