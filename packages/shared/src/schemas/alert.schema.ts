@@ -16,19 +16,11 @@ export const AlertSchema = createSchema<AlertProps>({
     name: 'Alert',
     hasBreakpoint: true,
     propData,
-    map: {
-        default: joi.object<AlertProps>({
-            color: joi
-                .string()
-                .valid(...propData.color!.validValues)
-                .optional()
-                .default(propData.color!.default),
-        }),
-        breakpoint: joi.object<AlertProps>({
-            color: joi
-                .string()
-                .valid(...propData.color!.validValues)
-                .optional(),
-        }),
+    validationMap: {
+        color: joi
+            .string()
+            .valid(...propData.color!.validValues)
+            .optional()
+            .default(propData.color!.default),
     },
 });

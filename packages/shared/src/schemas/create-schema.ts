@@ -1,12 +1,12 @@
-import { PropTypes } from '../enums';
-import type { ComponentPropData, ComponentSchema, ComponentsProps } from '../interfaces';
+import { BreakpointName, PropTypes } from '../enums';
+import type { ComponentSchema, ComponentsProps } from '../interfaces';
 import type { BreakpointNames } from '../types';
-import joi, { type ObjectSchema } from 'joi';
+import joi, { type Schema } from 'joi';
 
 export function createSchema<Props extends ComponentsProps>(
     schema: Omit<ComponentSchema<Props>, 'validate' | 'transform' | 'setBreakpoints'>,
 ) {
-    let breakpoints: Array<BreakpointNames | string>;
+    let validationSchema = joi.object();
 
     function validateValue(value: any) {
         const valueSchema = joi.object();
@@ -18,22 +18,32 @@ export function createSchema<Props extends ComponentsProps>(
     function validateBreakpointNames<CustomBreakpointNames extends string = string>(
         breakpointNames: Array<BreakpointNames | CustomBreakpointNames>,
     ) {
-        const breakpointNamesSchema = joi.array<typeof breakpointNames>().items(joi.string()).min(1).unique();
+        const breakpointNamesSchema = joi
+            .array<typeof breakpointNames>()
+            .items(joi.string())
+            .unique()
+            .has(joi.string().valid(...Object.values(BreakpointName)));
         const { error, value } = breakpointNamesSchema.validate(breakpointNames);
         if (error) throw error;
         return value;
     }
 
     function transformValue(value: any) {
-        return Object.entries(schema.propData).reduce<Props>((transformed, entry) => {
-            const [propName, propData] = entry as [keyof Props, ComponentPropData<Props, keyof Props>];
+        return (Object.keys(schema.propData) as Array<keyof Props>).reduce((transformed, propName) => {
+            const propData = schema.propData[propName]!;
+
             const propValue = value[propName];
             if (!propValue) {
-                transformed[propName] = schema.propData[propName]!.default;
+                transformed[propName] = propData.default;
                 return transformed;
             }
 
-            switch (type) {
+            if (propData.responsive) {
+                transformed[propName] = JSON.parse(propValue) as Props[keyof Props];
+                return transformed;
+            }
+
+            switch (propData.type) {
                 case PropTypes.Boolean:
                     transformed[propName] = Boolean(propValue) as Props[keyof Props];
                     break;
@@ -57,40 +67,39 @@ export function createSchema<Props extends ComponentsProps>(
         // Schema validation
         validate(value) {
             value = validateValue(value);
-
-            const schema = this.hasBreakpoint
-                ? this.map.default.append({
-                      breakpoint: breakpoints.reduce((acc, breakpointName) => {
-                          acc[breakpointName] = this.map.breakpoint!;
-                          return acc;
-                      }, {} as Record<typeof breakpoints[number], ObjectSchema<Props>>),
-                  })
-                : this.map.default;
-
-            return schema.validate(value);
+            return validationSchema.validate(value);
         },
         // Schema transformation
         transform(value) {
             value = validateValue(value);
-
-            // Transform the given value into a schema object
-            const transformed = transformValue(value);
-
-            if (this.hasBreakpoint && value.breakpoint) {
-                const componentBreakpoint = JSON.parse(value.breakpoint);
-
-                Object.keys(breakpoints).forEach((breakpointName) => {
-                    const breakpointValue = componentBreakpoint[breakpointName];
-                    if (!breakpointValue) return;
-                    transformed.breakpoint = transformed.breakpoint ?? {};
-                    transformed.breakpoint![breakpointName] = transformValue(breakpointValue);
-                });
-            }
-
-            return this.validate(transformed);
+            return transformValue(value);
         },
         setBreakpoints(customBreakpoints) {
-            breakpoints = validateBreakpointNames(customBreakpoints);
+            customBreakpoints = validateBreakpointNames(customBreakpoints);
+
+            validationSchema = joi.object(
+                (Object.keys(schema.propData) as Array<keyof Props>).reduce((validationSchema, propName) => {
+                    const propData = schema.propData[propName]!;
+                    const propValidation = schema.validationMap[propName]!;
+                    if (!propData.responsive) {
+                        validationSchema[propName] = propValidation;
+                        return validationSchema;
+                    }
+
+                    validationSchema[propName] = joi.alternatives(
+                        joi.object(
+                            customBreakpoints.reduce((breakpointValidationSchema, breakpointName) => {
+                                breakpointValidationSchema[breakpointName] = propValidation;
+                                return breakpointValidationSchema;
+                            }, {} as { [BreakpointName in typeof customBreakpoints[number]]: Schema }),
+                        ),
+                        propValidation,
+                    );
+
+                    return validationSchema;
+                }, {} as { [PropName in keyof Props]: Schema }),
+            );
+
             return this;
         },
     } as ComponentSchema<Props>;
