@@ -18,5 +18,5 @@ export interface ComponentSchema<Props> {
     transform(value: any): Props;
     setBreakpoints<CustomBreakpointNames extends string = string>(
         customBreakpoints: Array<BreakpointNames | CustomBreakpointNames>,
-    ): this;
+    ): void;
 }

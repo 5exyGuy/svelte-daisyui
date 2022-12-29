@@ -1,5 +1,4 @@
 import type { ComponentSchema, ComponentsProps } from '@svelte-daisyui/shared';
-import type { UniqueComponentProps } from '../types';
 import { parseElementAttributes } from './parse-element-attributes';
 
 export function parseComponents<Props extends ComponentsProps>(
@@ -10,17 +9,17 @@ export function parseComponents<Props extends ComponentsProps>(
     const componentRegex = new RegExp(`<${importNameAliases.join('|')}(\s+[^/>]*)?\/?>`, 'g');
     const matchAll = code.matchAll(componentRegex);
 
-    // { color: Set['primary', 'secondary'], screen: { sm: { color: Set['primary'] } } }
-
     // const uniqueComponentProps = {} as UniqueComponentProps<Props>;
 
     Array.from(matchAll).forEach((match) => {
-        const componentAttrs = parseElementAttributes(match[1]!);
-        const { error, value: transformedComponent } = schema.transform(componentAttrs);
+        const componentAttributes = parseElementAttributes(match[1]!);
+        const transformedComponent = schema.transform(componentAttributes);
+        const { error, value } = schema.validate(transformedComponent!);
         if (error) throw error;
 
-        Object.entries(transformedComponent!).forEach((entry) => {
-            const [propName, propValue] = entry as [keyof Props, Props[keyof Props]];
+        (Object.keys(value) as Array<keyof Props>).forEach((propName) => {
+            const propValue = value[propName];
+
             // uniqueComponentProps[propName] = uniqueComponentProps[propName] ?? new Set();
             // (uniqueComponentProps[propName] as Set<Props[keyof Props]>).add(propValue);
         });

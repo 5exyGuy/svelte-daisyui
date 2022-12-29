@@ -20,7 +20,6 @@ export const AlertSchema = createSchema<AlertProps>({
         color: joi
             .string()
             .valid(...propData.color!.validValues)
-            .optional()
-            .default(propData.color!.default),
+            .optional(),
     },
 });
