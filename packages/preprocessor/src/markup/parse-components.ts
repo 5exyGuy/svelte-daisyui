@@ -19,11 +19,28 @@ export function parseComponents<Props extends ComponentProps>(
         if (error) throw error;
 
         (Object.keys(value!) as Array<keyof Props>).forEach((propName) => {
-            const propValue = value[propName];
+            const propValue = value[propName]!;
+            const propData = schema.propData[propName]!;
 
-            if (schema.propData[propName]!.responsive && typeof propValue === 'object') {
-                uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>;
+            if (!propData.responsive) {
+                (uniqueComponentProps[propName] as Set<Props[keyof Props]>) ?? new Set();
+                (uniqueComponentProps[propName] as Set<Props[keyof Props]>).add(propValue);
+                return;
             }
+
+            if (typeof propValue === 'object') {
+                (Object.keys(propValue) as Array<keyof ResponsiveProperty<typeof propValue>>).forEach((breakpoint) => {
+                    (uniqueComponentProps[propName] as ResponsiveProperty<Set<typeof propValue>>)[breakpoint] ??
+                        new Set();
+                    (uniqueComponentProps[propName] as ResponsiveProperty<Set<typeof propValue>>)[breakpoint]!.add(
+                        (propValue as ResponsiveProperty<typeof propValue>)[breakpoint],
+                    );
+                });
+                return;
+            }
+
+            (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>).default ?? new Set();
+            (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>).default!.add(propValue);
         });
     });
 
