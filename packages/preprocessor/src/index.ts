@@ -23,7 +23,7 @@ export function preprocess(options?: Partial<PreprocessorOptions>) {
                     styleBuilders.get(componentName) ?? createStyleBuilder(processedOptions, componentName)!;
                 styleBuilders.has(componentName) || styleBuilders.set(componentName, styleBuilder);
 
-                return prevValue + styleBuilder.build(aliases, content);
+                return prevValue + styleBuilder.build([...aliases], content);
             },
             '',
         );
