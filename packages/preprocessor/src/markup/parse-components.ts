@@ -18,29 +18,26 @@ export function parseComponents<Props extends ComponentProps>(
         const { error, value } = schema.validate(transformedComponent!);
         if (error) throw error;
 
-        (Object.keys(value!) as Array<keyof Props>).forEach((propName) => {
-            const propValue = value[propName]!;
-            const propData = schema.propData[propName]!;
-
-            if (!propData.responsive) {
+        (Object.entries(value!) as Array<[keyof Props, Props[keyof Props]]>).forEach(([propName, propValue]) => {
+            if (!schema.propData[propName]!.responsive) {
                 (uniqueComponentProps[propName] as Set<Props[keyof Props]>) ?? new Set();
                 (uniqueComponentProps[propName] as Set<Props[keyof Props]>).add(propValue);
                 return;
             }
 
-            if (typeof propValue === 'object') {
-                (Object.keys(propValue) as Array<keyof ResponsiveProperty<typeof propValue>>).forEach((breakpoint) => {
-                    (uniqueComponentProps[propName] as ResponsiveProperty<Set<typeof propValue>>)[breakpoint] ??
-                        new Set();
-                    (uniqueComponentProps[propName] as ResponsiveProperty<Set<typeof propValue>>)[breakpoint]!.add(
-                        (propValue as ResponsiveProperty<typeof propValue>)[breakpoint],
-                    );
-                });
+            if (typeof propValue !== 'object') {
+                (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>).default ?? new Set();
+                (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>).default!.add(propValue);
                 return;
             }
 
-            (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>).default ?? new Set();
-            (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>).default!.add(propValue);
+            (Object.keys(propValue!) as Array<keyof ResponsiveProperty<Props[keyof Props]>>).forEach((breakpoint) => {
+                (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>)[breakpoint] ??
+                    new Set();
+                (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>)[breakpoint]!.add(
+                    (propValue as ResponsiveProperty<Props[keyof Props]>)[breakpoint]!,
+                );
+            });
         });
     });
 
