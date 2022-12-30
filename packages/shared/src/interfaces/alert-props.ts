@@ -1,7 +1,7 @@
 import type { BrandColor, FunctionalColor } from '../enums';
 import type { StringKeyOf } from '../types';
 import type { SvelteComponent } from 'svelte';
-import type { ComponentProps } from './component-props';
+import type { ComponentProps } from '../types';
 
 export interface AlertProps extends ComponentProps<AlertResponsiveProps> {
     showIcon: boolean;

@@ -1,5 +1,5 @@
 import type { BreakpointName } from '../enums';
-import type { ResponsiveProperty, StringKeyOf } from '../types';
+import type { ResponsiveProperty, StringKeyOf } from '.';
 
 export type ComponentProps<
     ResponsiveProps extends {} = {},

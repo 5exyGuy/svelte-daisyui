@@ -1,21 +1,21 @@
 import { BreakpointName, PropTypes } from '../enums';
-import type { ComponentSchema, ComponentsProps } from '../interfaces';
-import type { BreakpointNames } from '../types';
+import type { ComponentSchema } from '../interfaces';
+import type { BreakpointNames, ComponentProps, ResponsiveProperty } from '../types';
 import joi, { type Schema } from 'joi';
 
-export function createSchema<Props extends ComponentsProps>(
+export function createSchema<Props extends ComponentProps>(
     schema: Omit<ComponentSchema<Props>, 'validate' | 'transform' | 'setBreakpoints'>,
 ) {
-    let validationSchema = joi.object();
+    let validationSchema = joi.object<Props>();
 
     function validateBreakpointNames<CustomBreakpointNames extends string = string>(
         breakpointNames: Array<BreakpointNames | CustomBreakpointNames>,
     ) {
         const breakpointNamesSchema = joi
             .array<typeof breakpointNames>()
-            .items(joi.string())
+            .items(joi.string<typeof breakpointNames[number]>())
             .unique()
-            .has(joi.string().valid(...Object.values(BreakpointName)));
+            .has(joi.string<BreakpointNames>().valid(...Object.values(BreakpointName)));
         const { error, value } = breakpointNamesSchema.validate(breakpointNames);
         if (error) throw error;
         return value;
@@ -70,7 +70,7 @@ export function createSchema<Props extends ComponentsProps>(
         setBreakpoints(customBreakpoints) {
             customBreakpoints = validateBreakpointNames(customBreakpoints);
 
-            validationSchema = joi.object(
+            validationSchema = joi.object<Props>(
                 (Object.keys(schema.propData) as Array<keyof Props>).reduce((partialSchema, propName) => {
                     const propData = schema.propData[propName]!;
                     const propValidation = schema.validationMap[propName]!;
@@ -80,7 +80,7 @@ export function createSchema<Props extends ComponentsProps>(
                     }
 
                     partialSchema[propName] = joi.alternatives(
-                        joi.object({
+                        joi.object<ResponsiveProperty<Props[typeof propName]>>({
                             default: propValidation.default(propData.default!),
                             ...customBreakpoints.reduce((partialSchema, breakpointName) => {
                                 partialSchema[breakpointName] = propValidation;
