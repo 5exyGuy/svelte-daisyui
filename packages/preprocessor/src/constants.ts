@@ -7,7 +7,7 @@ export const IMPORT_STATEMENT_REGEX = new RegExp(
     `import([ \n\t]*(?:[^\n\t\{\}]+)|(?:[ \n\t]*\{(?:[ \n\t]*[^ \n\t"'\{\}]+[ \n\t]*,?)+\})?[ \n\t]*)from[ \n\t]*['"]${MAIN_MODULE_NAME}\/?([^ \n\t/]+)?['"]`,
     'g',
 );
-export const COMPONENT_NAMES = new Set([
+export const COMPONENT_NAMES = [
     'Alert',
     'Artboard',
     'Avatar',
@@ -81,4 +81,4 @@ export const COMPONENT_NAMES = new Set([
     'Tooltip',
     'TooltipWrapper',
     'Window',
-]);
+] as const;
