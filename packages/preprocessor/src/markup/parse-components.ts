@@ -3,11 +3,11 @@ import type { UniqueComponentProps } from '../types';
 import { parseElementAttributes } from './parse-element-attributes';
 
 export function parseComponents<Props extends ComponentProps>(
-    importNameAliases: string[],
-    code: string,
     schema: ComponentSchema<Props>,
+    aliases: Array<string>,
+    code: string,
 ) {
-    const componentRegex = new RegExp(`<${importNameAliases.join('|')}(\s+[^/>]*)?\/?>`, 'g');
+    const componentRegex = new RegExp(`<${aliases.join('|')}(\s+[^/>]*)?\/?>`, 'g');
     const matchAll = code.matchAll(componentRegex);
 
     const uniqueComponentProps = {} as UniqueComponentProps<Props>;

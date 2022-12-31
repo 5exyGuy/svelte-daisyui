@@ -17,16 +17,16 @@ export function findImportStatement(code: string, fileName?: string) {
                 .slice(1, -1)
                 .split(',')
                 .forEach((value) => {
-                    const [name, alias] = value.trim().split(' as ') as [string, string?];
-                    const aliasName = alias ?? name;
-                    if (!COMPONENT_NAMES.has(name))
+                    const [componentName, alias] = value.trim().split(' as ') as [string, string?];
+                    const aliasName = alias ?? componentName;
+                    if (!COMPONENT_NAMES.find((name) => name === componentName))
                         throw new Error(
-                            `Component named ${name} does not exist in ${MAIN_MODULE_NAME} package in ${fileName}`,
+                            `Component named ${componentName} does not exist in ${MAIN_MODULE_NAME} package in ${fileName}`,
                         );
-                    if (componentImports.has(name) && componentImports.get(name)!.has(aliasName))
+                    if (componentImports.has(componentName) && componentImports.get(componentName)!.has(aliasName))
                         throw new Error(`Duplicate component import name ${aliasName} in ${fileName}`);
-                    componentImports.get(name) ?? componentImports.set(name, new Set());
-                    componentImports.get(name)?.add(aliasName);
+                    componentImports.get(componentName) ?? componentImports.set(componentName, new Set());
+                    componentImports.get(componentName)?.add(aliasName);
                 });
         }
         // Default import
@@ -34,7 +34,7 @@ export function findImportStatement(code: string, fileName?: string) {
             componentName = componentName.replace(/\.svelte$/, '');
             const [, alias] = importName.split(' as ') as [string, string?];
             const aliasName = alias ?? componentName;
-            if (!COMPONENT_NAMES.has(componentName))
+            if (!COMPONENT_NAMES.find((name) => name === componentName))
                 throw new Error(
                     `Component named ${componentName} does not exist in ${MAIN_MODULE_NAME} package in ${fileName}`,
                 );

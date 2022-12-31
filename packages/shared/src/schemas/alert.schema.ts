@@ -12,14 +12,17 @@ const propData = {
     },
 } as ComponentSchema<AlertProps>['propData'];
 
-export const AlertSchema = createSchema<AlertProps>({
-    name: 'Alert',
-    hasBreakpoint: true,
-    propData,
-    validationMap: {
-        color: joi
-            .string()
-            .valid(...propData.color!.validValues)
-            .optional(),
+export const AlertSchema = {
+    create() {
+        return createSchema<AlertProps>({
+            name: 'Alert',
+            propData,
+            validationMap: {
+                color: joi
+                    .string()
+                    .valid(...propData.color!.validValues)
+                    .optional(),
+            },
+        });
     },
-});
+} as const;
