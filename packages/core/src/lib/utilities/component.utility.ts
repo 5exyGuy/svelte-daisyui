@@ -1,8 +1,6 @@
-import type { StringKeyOf, ValueOf } from 'type-fest';
-import { ScreenSize } from '../enums';
-import type { Screen } from '../types';
 import { type Readable, writable, type Subscriber } from 'svelte/store';
 import { onMount } from 'svelte';
+import type { ComponentProps } from '@svelte-daisyui/shared';
 
 const SCREEN_SIZES = Object.entries(ScreenSize).reverse() as Array<
 	[StringKeyOf<typeof ScreenSize>, ScreenSize]
@@ -10,16 +8,16 @@ const SCREEN_SIZES = Object.entries(ScreenSize).reverse() as Array<
 // const SCREEN_SIZE_INDICES = Object.fromEntries(SCREEN_SIZES.map(([screenSize], index) => [screenSize, index]));
 // console.log(SCREEN_SIZE_INDICES);
 
-export function generateDefaultClasses<T>(
+export function generateDefaultClasses<Props extends ComponentProps>(
 	prefix: string,
 	data: {
-		[K in keyof T]: T[K] extends boolean
+		[PropName in keyof Props]: Props[PropName] extends boolean
 			? string
-			: T[K] extends string
-			? Record<T[K], string>
+			: Props[PropName] extends string
+			? Record<Props[PropName], string>
 			: string;
 	},
-	values: T
+	values: Props
 ): Array<string> {
 	const classList = [] as Array<string>;
 

@@ -12,7 +12,8 @@
 		"paths": {
 			"$lib": ["src/lib"],
 			"$lib/*": ["src/lib/*"],
-			"@svelte-daisyui/preprocessor": ["../preprocessor/src/index.ts"]
+			"@svelte-daisyui/preprocessor": ["../preprocessor/src/index.ts"],
+			"@svelte-daisyui/shared": ["../shared/src/index.ts"]
 		}
 	}
 }
