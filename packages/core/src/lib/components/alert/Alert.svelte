@@ -1,10 +1,17 @@
+<script lang="ts" context="module">
+	import { AlertSchema } from '@svelte-daisyui/shared';
+
+	const alertSchema = AlertSchema.create();
+</script>
+
 <script lang="ts">
-	import { generateDefaultClasses, generateResponsiveClasses, joinClasses } from '../../utilities';
+	import type { Nullable } from '@svelte-daisyui/shared';
+	import { generateComponentClasses, joinClasses } from '../../utilities';
 	// import MdInfoOutline from 'svelte-icons/md/MdInfoOutline.svelte';
 	// import FaRegCheckCircle from 'svelte-icons/fa/FaRegCheckCircle.svelte';
 	// import MdWarning from 'svelte-icons/md/MdWarning.svelte';
 	// import MdErrorOutline from 'svelte-icons/md/MdErrorOutline.svelte';
-	import Icon from '../icon/Icon.svelte';
+	// import Icon from '../icon/Icon.svelte';
 	import type { AlertProps } from '@svelte-daisyui/shared';
 
 	// -----------------------------------------------------------
@@ -12,26 +19,20 @@
 	// -----------------------------------------------------------
 
 	export let color: AlertProps['color'] = 'base';
-	export let icon: AlertProps['icon'] = undefined;
-	export let message: AlertProps['message'] = undefined;
+	export let icon: Nullable<AlertProps['icon']> = undefined;
+	export let message: Nullable<AlertProps['message']> = undefined;
 	export let showIcon: AlertProps['showIcon'] = true;
-	let restClass: string = undefined;
+	let restClass: Nullable<string> = undefined;
 	export { restClass as class };
 
 	// -----------------------------------------------------------
 	// Classes and Styles
 	// -----------------------------------------------------------
 
-	const PREFIX = 'dui-alert';
-	const COLORS = { ...BrandColor, ...FunctionalColor, ...{ base: 'base' } };
-
 	$: classNames = joinClasses(
-		[PREFIX],
-		generateDefaultClasses<$$ClassProps>(PREFIX, { color: COLORS }, { color }),
-		generateResponsiveClasses<$$ResponsiveProps>(PREFIX, { color: COLORS }, screen, {
-			color: true
-		}),
-		[restClass]
+		alertSchema.name.toLowerCase(),
+		generateComponentClasses<AlertProps>(alertSchema, { color }),
+		restClass ?? ''
 	);
 </script>
 
@@ -40,16 +41,16 @@
 		<slot />
 	{:else if $$slots.content}
 		<div>
-			{#if showIcon}
+			<!-- {#if showIcon}
 				<Icon size={1.5} component={icon} />
-			{/if}
+			{/if} -->
 			<slot name="content" />
 		</div>
 	{:else if message}
 		<div>
-			{#if showIcon}
+			<!-- {#if showIcon}
 				<Icon size={1.5} component={icon} />
-			{/if}
+			{/if} -->
 			<span>{message}</span>
 		</div>
 	{/if}
