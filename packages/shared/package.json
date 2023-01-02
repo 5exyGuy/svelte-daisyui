@@ -20,7 +20,7 @@
         "@types/node": "^18.11.18",
         "dts-bundle-generator": "^7.1.0",
         "esbuild": "^0.16.12",
-        "rollup": "^3.9.0",
+        "rollup": "^3.9.1",
         "rollup-plugin-esbuild": "^5.0.0"
     }
 }

@@ -1,12 +1,12 @@
 import adapter from '@sveltejs/adapter-auto';
-import sveltePreprocess from 'svelte-preprocess';
-import { preprocess } from '@svelte-daisyui/preprocessor';
+import { preprocess as daisyuiPreprocess } from '@svelte-daisyui/preprocessor';
+import { vitePreprocess } from '@sveltejs/kit/vite';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://github.com/sveltejs/svelte-preprocess
+	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
 	// for more information about preprocessors
-	preprocess: [sveltePreprocess(), preprocess()],
+	preprocess: [daisyuiPreprocess(), vitePreprocess()],
 
 	kit: {
 		adapter: adapter()
