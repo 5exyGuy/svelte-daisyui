@@ -1,2 +1,3 @@
-export * from './component.utility';
-export * from './scroll-lock.utility';
+export * from './generate-component-classes';
+export * from './lock-scroll';
+export * from './unlock-scroll';

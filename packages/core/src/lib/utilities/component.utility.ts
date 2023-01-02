@@ -1,98 +1,11 @@
 // import { type Readable, writable, type Subscriber } from 'svelte/store';
 // import { onMount } from 'svelte';
-import type { ComponentProps, ComponentSchema } from '@svelte-daisyui/shared';
 
 // const SCREEN_SIZES = Object.entries(ScreenSize).reverse() as Array<
 // 	[StringKeyOf<typeof ScreenSize>, ScreenSize]
 // >;
 // const SCREEN_SIZE_INDICES = Object.fromEntries(SCREEN_SIZES.map(([screenSize], index) => [screenSize, index]));
 // console.log(SCREEN_SIZE_INDICES);
-
-export function generateComponentClasses<Props extends ComponentProps>(
-	schema: ComponentSchema<Props>,
-	values: Partial<Props>
-) {
-	return '';
-}
-
-export function generateDefaultClasses<Props extends ComponentProps>(
-	prefix: string,
-	data: {
-		[PropName in keyof Props]: Props[PropName] extends boolean
-			? string
-			: Props[PropName] extends string
-			? Record<Props[PropName], string>
-			: string;
-	},
-	values: Props
-): Array<string> {
-	const classList = [] as Array<string>;
-
-	Object.entries(values).forEach(([propName, propValue]) => {
-		const propData = data[propName] as string | Record<keyof T, string>;
-
-		if (!propValue || !propData) return;
-
-		if (typeof propValue === 'boolean' && propValue && propData && typeof propData === 'string')
-			classList.push(`${prefix}-${propData}`);
-		else if (
-			typeof propValue === 'string' &&
-			propData &&
-			typeof propData === 'object' &&
-			propData[propValue]
-		)
-			classList.push(`${prefix}-${propData[propValue]}`);
-	});
-
-	return classList;
-}
-
-export function generateResponsiveClasses<T>(
-	prefix: string,
-	data: {
-		[K in keyof T]: T[K] extends boolean
-			? string
-			: T[K] extends string
-			? Record<T[K], string>
-			: string;
-	},
-	values: Screen<T>,
-	include: Record<keyof T, boolean>
-): Array<string> {
-	const classList = [] as Array<string>;
-
-	SCREEN_SIZES.forEach(([, screenSize]) => {
-		const screenProps = values ? values[screenSize] : undefined;
-		if (!screenProps) return;
-
-		Object.entries(screenProps).forEach(([propName, propValue]) => {
-			if (!include[propName]) return;
-			const propData = data[propName] as string | Record<keyof T, string>;
-
-			if (!propValue || !propData) return;
-
-			if (typeof propValue === 'boolean' && propValue && propData && typeof propData === 'string')
-				classList.push(`${screenSize}:${prefix}-${propData}`);
-			else if (
-				typeof propValue === 'string' &&
-				propData &&
-				typeof propData === 'object' &&
-				propData[propValue]
-			)
-				classList.push(`${screenSize}:${prefix}-${propData[propValue]}`);
-		});
-	});
-
-	return classList;
-}
-
-export function joinClasses(...classList: Array<string>) {
-	return classList
-		.filter(Boolean)
-		.filter((className) => typeof className === 'string')
-		.map((className) => className.trim())
-		.join(' ');
-}
 
 // interface ResponsivePropertiesResult<T> {
 // 	update: (defaultValues: T, values: Screen<T>) => void;
