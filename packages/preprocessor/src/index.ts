@@ -27,7 +27,7 @@ export function preprocess(options?: Partial<PreprocessorOptions>) {
         const componentImportAliases = findImportStatement(content, filename);
         if (componentImportAliases.size === 0) return { code: content };
 
-        // generateStyles([...componentImportAliases], content);
+        generateStyles([...componentImportAliases], content);
 
         return { code: content };
     };

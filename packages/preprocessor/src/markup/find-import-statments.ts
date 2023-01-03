@@ -4,13 +4,10 @@ export function findImportStatement(code: string, fileName?: string) {
     const matches = [...code.matchAll(IMPORT_STATEMENT_REGEX)];
     const componentImports = new Map<string, Set<string>>();
     if (matches.length === 0) return componentImports;
-
     matches.map((match) => {
         let [, importName, componentName] = match as [string, string, string?];
         importName = importName.trim();
-
         const isNamedImport = importName.startsWith('{') && importName.endsWith('}');
-
         // Named import
         if (isNamedImport && !componentName) {
             importName
@@ -40,13 +37,11 @@ export function findImportStatement(code: string, fileName?: string) {
                 );
             if (componentImports.has(componentName) && componentImports.get(componentName)!.has(aliasName))
                 throw new Error(`Duplicate component import name ${aliasName} in ${fileName}`);
-
             componentImports.get(componentName) ?? componentImports.set(componentName, new Set());
             componentImports.get(componentName)?.add(aliasName);
         }
         // Invalid import
         else throw new Error(`Invalid import statement in ${fileName}`);
     });
-
     return componentImports;
 }
