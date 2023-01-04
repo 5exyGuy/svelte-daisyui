@@ -17,6 +17,9 @@
         "svelte": "^3.55.0"
     },
     "devDependencies": {
+        "@rollup/plugin-commonjs": "^24.0.0",
+        "@rollup/plugin-json": "^6.0.0",
+        "@rollup/plugin-node-resolve": "^15.0.1",
         "@types/node": "^18.11.18",
         "@types/sass": "^1.43.1",
         "dts-bundle-generator": "^7.1.0",

@@ -5,6 +5,6 @@
     "license": "MIT",
     "type": "module",
     "files": [
-        "*.scss"
+        "dist/*.scss"
     ]
 }

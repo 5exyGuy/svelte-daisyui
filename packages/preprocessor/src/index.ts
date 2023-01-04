@@ -6,7 +6,7 @@ import { findImportStatement } from './markup/find-import-statments';
 import { parseStyle } from './markup/parse-style';
 import { processOptions } from './options/process-options';
 
-export function preprocess(options?: Partial<PreprocessorOptions>) {
+export function daisyuiPreprocess(options?: Partial<PreprocessorOptions>) {
     const processedOptions = processOptions(options);
     const styleBuilders = new Map<string, StyleBuilder>();
 
@@ -21,11 +21,10 @@ export function preprocess(options?: Partial<PreprocessorOptions>) {
     };
 
     const markup: MarkupPreprocessor = ({ content, filename }) => {
-        console.log('markup', filename);
         const style = parseStyle(content);
         if (!style) return { code: content };
 
-        const componentImportAliases = findImportStatement(content, filename);
+        const componentImportAliases = findImportStatement(processedOptions.modulePath, content, filename);
         if (componentImportAliases.size === 0) return { code: content };
 
         generateStyles([...componentImportAliases], content);
