@@ -1,0 +1,38 @@
+@use 'core.scss';
+@use 'sass:list';
+@use 'sass:map';
+
+$colors: base, primary, secondary, accent, info, success, warning, error;
+
+@mixin color($color) {
+    @if not list.index($colors, $color) {
+        @error 'Invalid color `#{$color}`. Expected one of `#{$colors}`.';
+    }
+
+    .dui-alert.dui-alert-#{$color} {
+        @include bg-color($color + if($color == 'base', '-200', ''));
+        @include text-color($color + '-content');
+    }
+}
+
+@mixin colors() {
+    @each $color in $colors {
+        .dui-alert.dui-alert-#{$color} {
+            @include bg-color($color + if($color == 'base', '-200', ''));
+            @include text-color($color + '-content');
+        }
+    }
+}
+
+@mixin responsive-color($color, $prefix, $screen-size) {
+    @if not list.index($colors, $color) {
+        @error 'Invalid color `#{$color}`. Expected one of `#{$colors}`.';
+    }
+
+    @media (min-width: $screen-size) {
+        .dui-alert.#{$prefix}dui-alert-#{$color} {
+            @include bg-color($color + if($color == 'base', '-200', ''));
+            @include text-color($color + '-content');
+        }
+    }
+}

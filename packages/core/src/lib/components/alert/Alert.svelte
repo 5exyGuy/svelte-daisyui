@@ -62,5 +62,37 @@
 </div>
 
 <style lang="scss" global>
-	@import 'Alert.scss';
+	@use '@svelte-daisyui/styles/core.scss' as core;
+	@use 'sass:list';
+	@use 'sass:map';
+
+	.alert {
+		@include core.box-border-radius();
+
+		display: flex;
+		width: 100%;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 1rem;
+
+		@media (min-width: core.get-default-screen-size('md')) {
+			flex-direction: row;
+		}
+
+		& > * {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+		}
+
+		& > .alert-icon {
+			flex: none;
+		}
+
+		& > .alert-actions {
+			flex: none;
+		}
+	}
 </style>

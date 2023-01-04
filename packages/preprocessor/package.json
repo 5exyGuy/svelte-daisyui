@@ -12,10 +12,11 @@
         "types": "dts-bundle-generator -o dist/index.d.ts src/index.ts"
     },
     "dependencies": {
+        "@svelte-daisyui/shared": "workspace:^1.0.0",
+        "@svelte-daisyui/styles": "workspace:^1.0.0",
         "svelte": "^3.55.0"
     },
     "devDependencies": {
-        "@svelte-daisyui/shared": "workspace:^1.0.0",
         "@types/node": "^18.11.18",
         "@types/sass": "^1.43.1",
         "dts-bundle-generator": "^7.1.0",

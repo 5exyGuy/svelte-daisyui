@@ -14,7 +14,8 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"dependencies": {
-		"@svelte-daisyui/shared": "workspace:^1.0.0"
+		"@svelte-daisyui/shared": "workspace:^1.0.0",
+		"@svelte-daisyui/styles": "workspace:^1.0.0"
 	},
 	"devDependencies": {
 		"@svelte-daisyui/preprocessor": "workspace:^1.0.0",

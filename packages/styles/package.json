@@ -1,0 +1,10 @@
+{
+    "name": "@svelte-daisyui/styles",
+    "version": "1.0.0",
+    "author": "5exyGuy (Aurėjus Remeika)",
+    "license": "MIT",
+    "type": "module",
+    "files": [
+        "*.scss"
+    ]
+}
