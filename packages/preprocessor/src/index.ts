@@ -21,8 +21,9 @@ export function preprocess(options?: Partial<PreprocessorOptions>) {
     };
 
     const markup: MarkupPreprocessor = ({ content, filename }) => {
+        console.log('markup', filename);
         const style = parseStyle(content);
-        if (style) return { code: content };
+        if (!style) return { code: content };
 
         const componentImportAliases = findImportStatement(content, filename);
         if (componentImportAliases.size === 0) return { code: content };
