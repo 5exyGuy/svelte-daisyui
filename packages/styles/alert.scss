@@ -2,6 +2,38 @@
 @use 'sass:list';
 @use 'sass:map';
 
+@mixin default() {
+    .alert {
+        @include core.box-border-radius();
+
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1rem;
+
+        @media (min-width: core.get-default-screen-size('md')) {
+            flex-direction: row;
+        }
+
+        & > * {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        & > .alert-icon {
+            flex: none;
+        }
+
+        & > .alert-actions {
+            flex: none;
+        }
+    }
+}
+
 $colors: base, primary, secondary, accent, info, success, warning, error;
 
 @mixin color($color) {
@@ -10,16 +42,16 @@ $colors: base, primary, secondary, accent, info, success, warning, error;
     }
 
     .dui-alert.dui-alert-#{$color} {
-        @include bg-color($color + if($color == 'base', '-200', ''));
-        @include text-color($color + '-content');
+        @include core.bg-color($color + if($color == 'base', '-200', ''));
+        @include core.text-color($color + '-content');
     }
 }
 
 @mixin colors() {
     @each $color in $colors {
         .dui-alert.dui-alert-#{$color} {
-            @include bg-color($color + if($color == 'base', '-200', ''));
-            @include text-color($color + '-content');
+            @include core.bg-color($color + if($color == 'base', '-200', ''));
+            @include core.text-color($color + '-content');
         }
     }
 }
@@ -31,8 +63,8 @@ $colors: base, primary, secondary, accent, info, success, warning, error;
 
     @media (min-width: $screen-size) {
         .dui-alert.#{$prefix}dui-alert-#{$color} {
-            @include bg-color($color + if($color == 'base', '-200', ''));
-            @include text-color($color + '-content');
+            @include core.bg-color($color + if($color == 'base', '-200', ''));
+            @include core.text-color($color + '-content');
         }
     }
 }

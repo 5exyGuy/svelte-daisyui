@@ -1,6 +1,6 @@
 import { AlertSchema } from '@svelte-daisyui/shared';
-import type { PreprocessorOptions, StyleBuilder } from '../../interfaces';
-import { parseComponents } from '../../markup';
+import type { PreprocessorOptions, StyleBuilder } from '../interfaces';
+import { parseComponents } from '../markup';
 
 export function createAlertStyleBuilder(options: PreprocessorOptions): StyleBuilder {
     const alertSchema = AlertSchema.create();

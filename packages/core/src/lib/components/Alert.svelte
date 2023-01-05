@@ -19,9 +19,9 @@
 	// -----------------------------------------------------------
 
 	export let color: AlertProps['color'] = 'base';
-	export let icon: Nullable<AlertProps['icon']> = undefined;
+	// export let icon: Nullable<AlertProps['icon']> = undefined;
 	export let message: Nullable<AlertProps['message']> = undefined;
-	export let showIcon: AlertProps['showIcon'] = true;
+	// export let showIcon: AlertProps['showIcon'] = true;
 	let restClass: Nullable<string> = undefined;
 	export { restClass as class };
 
@@ -40,7 +40,7 @@
 	{#if $$slots.default}
 		<slot />
 	{:else if $$slots.content}
-		<div>
+		<div class="alert-icon">
 			<!-- {#if showIcon}
 				<Icon size={1.5} component={icon} />
 			{/if} -->
@@ -55,44 +55,14 @@
 		</div>
 	{/if}
 	{#if $$slots.actions}
-		<div class="dui-alert-actions">
+		<div class="alert-actions">
 			<slot name="actions" />
 		</div>
 	{/if}
 </div>
 
 <style lang="scss" global>
-	@use '@svelte-daisyui/styles/core.scss' as core;
-	@use 'sass:list';
-	@use 'sass:map';
+	@use '@svelte-daisyui/styles/alert.scss';
 
-	.alert {
-		@include core.box-border-radius();
-
-		display: flex;
-		width: 100%;
-		flex-direction: column;
-		align-items: center;
-		justify-content: space-between;
-		gap: 1rem;
-		padding: 1rem;
-
-		@media (min-width: core.get-default-screen-size('md')) {
-			flex-direction: row;
-		}
-
-		& > * {
-			display: flex;
-			align-items: center;
-			gap: 0.5rem;
-		}
-
-		& > .alert-icon {
-			flex: none;
-		}
-
-		& > .alert-actions {
-			flex: none;
-		}
-	}
+	@include alert.default();
 </style>

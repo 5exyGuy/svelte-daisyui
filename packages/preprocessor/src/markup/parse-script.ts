@@ -2,7 +2,7 @@ import { SCRIPT_COMMENT_REGEX, SCRIPT_REGEX } from '../constants';
 import { parseElementAttributes } from './parse-element-attributes';
 
 export function parseScript(code: string) {
-    const match = code.match(SCRIPT_REGEX);
+    const match = SCRIPT_REGEX.exec(code);
     if (!match) return;
 
     const attributes = parseElementAttributes(match[1]!);

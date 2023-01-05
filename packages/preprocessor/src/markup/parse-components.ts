@@ -7,7 +7,7 @@ export function parseComponents<Props extends ComponentProps>(
     aliases: Array<string>,
     code: string,
 ) {
-    const componentRegex = new RegExp(`<${aliases.join('|')}(\s+[^/>]*)?\/?>`, 'g');
+    const componentRegex = new RegExp(`<${aliases.join('|')}(\\s+[^/>]*)?\\/?>`, 'g');
     const matchAll = code.matchAll(componentRegex);
 
     const uniqueComponentProps = {} as UniqueComponentProps<Props>;
@@ -21,13 +21,14 @@ export function parseComponents<Props extends ComponentProps>(
         (Object.entries(value!) as Array<[keyof Props, NonNullable<Props[keyof Props]>]>).forEach(
             ([propName, propValue]) => {
                 if (!schema.propData[propName]!.responsive) {
-                    (uniqueComponentProps[propName] as Set<Props[keyof Props]>) ?? new Set();
+                    (uniqueComponentProps[propName] as Set<Props[keyof Props]>) ??= new Set();
                     (uniqueComponentProps[propName] as Set<Props[keyof Props]>).add(propValue);
                     return;
                 }
 
                 if (typeof propValue !== 'object') {
-                    (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>).default ??
+                    uniqueComponentProps[propName] ??= { default: new Set() };
+                    (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>).default ??=
                         new Set();
                     (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>).default!.add(
                         propValue,

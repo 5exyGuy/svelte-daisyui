@@ -4,8 +4,11 @@ export const STYLE_REGEX = /<style(\s[^]*?)?(?:>([^]*?)<\/style>|\/>)/gi;
 export const SVELTE_COMMENT_REGEX = /<!--[^]*?-->/g;
 export const SCRIPT_COMMENT_REGEX = /\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm;
 //import(?:["'\s]*([\w*{}\n, ]+)from\s*)?["'\s](.*[@\w/_-]+)["'\s].*
-export const IMPORT_STATEMENT_REGEX = (modulePath: string) =>
-    new RegExp(`import(?:["'\s]*([\w*{}\n, ]+)from\s*)?["'\s]${modulePath}\/?([^ \n\t/]+)?["']`, 'g');
+export const IMPORT_STATEMENT_REGEX = (modulePath: string) => {
+    modulePath = modulePath.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    const regex = new RegExp(`import(?:["'\\s]*([\\w*{}\\n, ]+)from\\s*)?["']${modulePath}\/?([^ \\n\\t/]+)?["']`, 'g');
+    return regex;
+};
 export const COMPONENT_NAMES = [
     'Alert',
     'Artboard',
