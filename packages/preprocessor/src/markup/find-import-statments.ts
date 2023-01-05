@@ -2,11 +2,13 @@ import { COMPONENT_NAMES, IMPORT_STATEMENT_REGEX } from '../constants';
 
 export function findImportStatement(moduleName: string, code: string, fileName?: string) {
     const matches = [...code.matchAll(IMPORT_STATEMENT_REGEX(moduleName))];
+
     const componentImports = new Map<string, Set<string>>();
     if (matches.length === 0) return componentImports;
     matches.map((match) => {
         let [, importName, componentName] = match as [string, string, string?];
         importName = importName.trim();
+        componentName = componentName?.replace(/\.svelte$/, '').trim();
         const isNamedImport = importName.startsWith('{') && importName.endsWith('}');
         // Named import
         if (isNamedImport && !componentName) {

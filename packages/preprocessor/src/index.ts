@@ -22,7 +22,6 @@ export function daisyuiPreprocess(options?: Partial<PreprocessorOptions>) {
 
     const markup: MarkupPreprocessor = ({ content, filename }) => {
         const style = parseStyle(content);
-        if (!style) return { code: content };
 
         const componentImportAliases = findImportStatement(processedOptions.modulePath, content, filename);
         if (componentImportAliases.size === 0) return { code: content };

@@ -8,10 +8,11 @@ export function generateComponentClasses<Props extends ComponentProps>(
 
 	(Object.entries(values) as Array<[keyof Props, NonNullable<Props[keyof Props]>]>).forEach(
 		([propName, propValue]) => {
-			if (!schema.propData[propName]!.responsive && typeof propValue !== 'object') {
+			if (typeof propValue !== 'object') {
 				const { error, value } = schema.validationMap[propName]!.validate(propValue);
 				if (error) throw error;
 				classList.push(`${schema.name.toLowerCase()}-${value}`);
+				return;
 			}
 
 			(

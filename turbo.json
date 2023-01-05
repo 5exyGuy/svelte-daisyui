@@ -7,7 +7,8 @@
         },
         "dev": {
             "dependsOn": ["^dev"],
-            "outputs": ["dist/**", "package/**", ".svelte-kit/**"]
+            "outputs": ["dist/**", "package/**", ".svelte-kit/**"],
+            "cache": false
         }
     }
 }
