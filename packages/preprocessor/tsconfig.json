@@ -28,7 +28,8 @@
         "forceConsistentCasingInFileNames": true,
 
         "paths": {
-            "@svelte-daisyui/shared": ["../shared/src/index.ts"]
+            "@svelte-daisyui/shared": ["../shared/src/index.ts"],
+            "@svelte-daisyui/styles/*": ["../styles/*"]
         }
     },
     "include": ["src/**/*.ts"],
