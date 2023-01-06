@@ -14,10 +14,13 @@ const config = {
 	],
 
 	kit: {
+		files: {
+			lib: 'src',
+			routes: 'routes',
+			appTemplate: 'routes/app.html'
+		},
 		adapter: adapter()
-	},
-
-	package: {}
+	}
 };
 
 export default config;
