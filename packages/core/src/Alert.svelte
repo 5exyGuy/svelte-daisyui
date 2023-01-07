@@ -6,7 +6,7 @@
 
 <script lang="ts">
 	import type { Nullable } from '@svelte-daisyui/shared';
-	import { generateComponentClasses, joinClasses } from '../utilities';
+	import { generateComponentClasses, joinClasses } from './utilities';
 	// import MdInfoOutline from 'svelte-icons/md/MdInfoOutline.svelte';
 	// import FaRegCheckCircle from 'svelte-icons/fa/FaRegCheckCircle.svelte';
 	// import MdWarning from 'svelte-icons/md/MdWarning.svelte';

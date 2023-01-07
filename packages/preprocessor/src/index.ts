@@ -4,8 +4,6 @@ import type { PreprocessorOptions } from './interfaces/preprocess-options';
 import type { StyleBuilder } from './interfaces/style-builder';
 import { findImportStatement } from './markup/find-import-statments';
 import { processOptions } from './options/process-options';
-import { writeFileSync } from 'fs';
-import { relative } from 'path';
 import { parseHtml } from './markup';
 import MagicString from 'magic-string';
 
@@ -34,17 +32,8 @@ export function daisyuiPreprocess(options?: Partial<PreprocessorOptions>) {
         return { code: content };
     };
 
-    const style: Preprocessor = ({ content, attributes, filename }) => {
+    const style: Preprocessor = ({ content, filename }) => {
         const output = new MagicString(content, filename ? { filename } : undefined);
-
-        if (typeof attributes['src'] === 'string' && filename) {
-            const pathToStyles = relative(filename, attributes['src']);
-            output.append(currentGeneratedStyles);
-            const outputString = output.toString();
-            writeFileSync(pathToStyles, outputString);
-            return { code: outputString, map: output.generateMap() };
-        }
-
         output.append(currentGeneratedStyles);
         const outputString = output.toString();
         return { code: outputString, map: output.generateMap() };
