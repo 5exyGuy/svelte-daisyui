@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "@svelte-daisyui/shared": "workspace:^1.0.0",
+        "magic-string": "^0.27.0",
         "svelte": "^3.55.0"
     },
     "devDependencies": {
