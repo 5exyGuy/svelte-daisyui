@@ -10,7 +10,9 @@ const config = {
         daisyuiPreprocess({
             modulePath: '$lib',
         }),
-        vitePreprocess(),
+        vitePreprocess({
+            style: {},
+        }),
     ],
 
     kit: {

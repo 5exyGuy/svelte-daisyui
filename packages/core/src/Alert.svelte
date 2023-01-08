@@ -1,18 +1,21 @@
 <script lang="ts" context="module">
-    import { AlertSchema } from '@svelte-daisyui/shared';
+    import {
+        AlertSchema,
+        generateComponentClasses,
+        joinClasses,
+        type AlertProps as $$AlertProps,
+        type Nullable,
+    } from '@svelte-daisyui/shared';
 
     const alertSchema = AlertSchema.create();
 </script>
 
 <script lang="ts">
-    import type { Nullable } from '@svelte-daisyui/shared';
-    import { generateComponentClasses, joinClasses } from './utilities';
     // import MdInfoOutline from 'svelte-icons/md/MdInfoOutline.svelte';
     // import FaRegCheckCircle from 'svelte-icons/fa/FaRegCheckCircle.svelte';
     // import MdWarning from 'svelte-icons/md/MdWarning.svelte';
     // import MdErrorOutline from 'svelte-icons/md/MdErrorOutline.svelte';
     // import Icon from '../icon/Icon.svelte';
-    import type { AlertProps as $$AlertProps } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
     // Properties
