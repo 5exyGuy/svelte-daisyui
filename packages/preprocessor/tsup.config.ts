@@ -7,6 +7,7 @@ export default defineConfig({
     clean: true,
     format: 'esm',
     dts: true,
+    // external: ['@svelte-daisyui/shared'],
     noExternal: ['@svelte-daisyui/styles'],
     loader: {
         '.scss': 'text',

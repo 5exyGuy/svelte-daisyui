@@ -27,6 +27,8 @@
         "skipLibCheck": false,
         "forceConsistentCasingInFileNames": true,
 
+        "resolveJsonModule": true,
+
         "paths": {
             "@svelte-daisyui/shared": ["../shared/src/index.ts"],
             "@svelte-daisyui/styles/*": ["../styles/*"]
