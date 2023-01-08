@@ -6,5 +6,9 @@
     "type": "module",
     "files": [
         "*.scss"
-    ]
+    ],
+    "exports": {
+        "./alert.scss": "./alert.scss",
+        "./core.scss": "./core.scss"
+    }
 }
