@@ -1,8 +1,8 @@
-import type { ComponentProps, ComponentSchema, ResponsiveProperty } from '@svelte-daisyui/shared';
+import type { ComponentSchema, ResponsiveProperty } from '@svelte-daisyui/shared';
 import type { UniqueComponentProps } from '../types';
 import { parseElementAttributes } from './parse-element-attributes';
 
-export function parseComponents<Props extends ComponentProps>(
+export function parseComponents<Props, ResponsivePropNames extends keyof Props>(
     schema: ComponentSchema<Props>,
     aliases: Array<string>,
     code: string,
@@ -10,7 +10,7 @@ export function parseComponents<Props extends ComponentProps>(
     const componentRegex = new RegExp(`<${aliases.join('|')}(\\s+[^/>]*)?\\/?>`, 'g');
     const matchAll = code.matchAll(componentRegex);
 
-    const uniqueComponentProps = {} as UniqueComponentProps<Props>;
+    const uniqueComponentProps = {} as UniqueComponentProps<Props, ResponsivePropNames>;
 
     Array.from(matchAll).forEach((match) => {
         const componentAttributes = parseElementAttributes(match[1]!);

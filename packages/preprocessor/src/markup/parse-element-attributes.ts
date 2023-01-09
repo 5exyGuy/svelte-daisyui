@@ -7,7 +7,7 @@ export function parseElementAttributes(value: string) {
             let attrValue = value ? value.replace(/['"]/g, '') : true;
             if (typeof attrValue === 'string' && (attrValue === 'true' || attrValue === 'false'))
                 attrValue = Boolean(attrValue);
-            acc[name] = attrValue;
+            acc[name.trim()] = attrValue;
             return acc;
         }, {} as Record<string, string | boolean>);
 }

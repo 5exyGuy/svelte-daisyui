@@ -1,10 +1,7 @@
 import type { ComponentSchema } from '../../interfaces';
-import type { ComponentProps, ResponsiveProperty } from '../../types';
+import type { ResponsiveProperty } from '../../types';
 
-export function generateComponentClasses<Props extends ComponentProps>(
-    schema: ComponentSchema<Props>,
-    values: Partial<Props>,
-) {
+export function generateComponentClasses<Props>(schema: ComponentSchema<Props>, values: Partial<Props>) {
     const classList = [] as Array<string>;
 
     (Object.entries(values) as Array<[keyof Props, NonNullable<Props[keyof Props]>]>).forEach(

@@ -1,11 +1,9 @@
 import { BreakpointName, PropTypes } from '../enums';
 import type { ComponentSchema } from '../interfaces';
-import type { BreakpointNames, ComponentProps, ResponsiveProperty } from '../types';
+import type { BreakpointNames, ResponsiveProperty } from '../types';
 import joi, { type Schema } from 'joi';
 
-export function createSchema<Props extends ComponentProps>(
-    schema: Omit<ComponentSchema<Props>, 'validate' | 'transform' | 'setBreakpoints'>,
-) {
+export function createSchema<Props>(schema: Omit<ComponentSchema<Props>, 'validate' | 'transform' | 'setBreakpoints'>) {
     let validationSchema = joi.object<Props>();
 
     function validateBreakpointNames<CustomBreakpointNames extends string = string>(
@@ -13,7 +11,7 @@ export function createSchema<Props extends ComponentProps>(
     ) {
         const breakpointNamesSchema = joi
             .array<typeof breakpointNames>()
-            .items(joi.string<typeof breakpointNames[number]>())
+            .items(joi.string<(typeof breakpointNames)[number]>())
             .unique()
             .has(joi.string<BreakpointNames>().valid(...Object.values(BreakpointName)));
         const { error, value } = breakpointNamesSchema.validate(breakpointNames);
@@ -32,7 +30,11 @@ export function createSchema<Props extends ComponentProps>(
             }
 
             if (propData.responsive) {
-                transformed[propName] = JSON.parse(propValue) as Props[keyof Props];
+                try {
+                    transformed[propName] = JSON.parse(propValue) as Props[keyof Props];
+                } catch (e) {
+                    transformed[propName] = propValue as Props[keyof Props];
+                }
                 return transformed;
             }
 
@@ -85,7 +87,7 @@ export function createSchema<Props extends ComponentProps>(
                             ...customBreakpoints.reduce((partialSchema, breakpointName) => {
                                 partialSchema[breakpointName] = propValidation;
                                 return partialSchema;
-                            }, {} as { [BreakpointName in typeof customBreakpoints[number]]: Schema }),
+                            }, {} as { [BreakpointName in (typeof customBreakpoints)[number]]: Schema }),
                         }),
                         propValidation,
                     );

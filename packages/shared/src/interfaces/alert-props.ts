@@ -3,12 +3,13 @@ import type { StringKeyOf } from '../types';
 import type { SvelteComponent } from 'svelte';
 import type { ComponentProps } from '../types';
 
-export interface AlertProps extends ComponentProps<AlertResponsiveProps> {
+export interface AlertProps {
+    color: StringKeyOf<typeof BrandColor & typeof FunctionalColor> | 'base';
     showIcon: boolean;
     icon: typeof SvelteComponent;
     message: string;
 }
 
-export interface AlertResponsiveProps {
-    color: StringKeyOf<typeof BrandColor & typeof FunctionalColor> | 'base';
-}
+export type AlertResponsivePropNames = 'color';
+
+export type AlertComponentProps = ComponentProps<AlertProps, AlertResponsivePropNames>;
