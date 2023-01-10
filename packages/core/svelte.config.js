@@ -8,7 +8,7 @@ const config = {
     // for more information about preprocessors
     preprocess: [
         daisyuiPreprocess({
-            modulePath: '$lib',
+            dev: { componentLibPath: '$lib' },
         }),
         vitePreprocess(),
     ],

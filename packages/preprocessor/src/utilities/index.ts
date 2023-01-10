@@ -1,2 +1,2 @@
-export * from './convert-responsive-prop-to-array';
+export * from './convert-to-entries';
 export * from './find-styles-package';

@@ -1,9 +1,7 @@
-import sass from 'sass';
-import postcss, { AtRule, Root } from 'postcss';
-import { globalifyRulePlugin } from './globalify-rule-plugin';
+import type { AtRule, Root } from 'postcss';
 import { globalifySelector } from './globalify-selector';
 
-const globalAttrPlugin = (root: Root) => {
+export function globalifyPlugin(root: Root) {
     root.walkAtRules(/keyframes$/, (atrule) => {
         if (!atrule.params.startsWith('-global-')) {
             atrule.replaceWith(
@@ -26,13 +24,4 @@ const globalAttrPlugin = (root: Root) => {
             }),
         );
     });
-};
-
-export function compileGeneratedStyles(content: string, pathToStylesPackage: string) {
-    const sassResult = sass.compileString(content, {
-        style: 'compressed',
-        loadPaths: [pathToStylesPackage],
-    });
-    const postcssResult = postcss([globalifyRulePlugin, globalAttrPlugin]).process(sassResult.css);
-    return postcssResult.css;
 }

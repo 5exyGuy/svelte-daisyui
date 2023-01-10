@@ -1,20 +1,17 @@
-import type { Preprocessor, PreprocessorGroup } from 'svelte/types/compiler/preprocess';
+import type { MarkupPreprocessor, PreprocessorGroup } from 'svelte/types/compiler/preprocess';
 import { createStyleBuilder } from './builders';
-import { findImportStatement, parseHtml } from './markup';
+import { findImportStatement, parseHtml, parseScript, parseStyle } from './markup';
 import { main } from '../package.json';
 import { findStylesPackage } from './utilities';
 import { processOptions } from './options';
 import type { PreprocessorOptions, StyleBuilder } from './interfaces';
 import MagicString from 'magic-string';
-import { compileGeneratedStyles } from './markup/compile-generated-styles';
+import { compileGeneratedStyles } from './compiler/compile-generated-styles';
 
 export function daisyuiPreprocess(options?: Partial<PreprocessorOptions>) {
     const processedOptions = processOptions(options);
     const styleBuilders = new Map<string, StyleBuilder>();
-    const pathToStylesPackage = findStylesPackage(main);
-
-    let name = String();
-    let css = String();
+    const pathToStylesPackage = processedOptions?.dev?.stylesPath ?? findStylesPackage(main);
 
     const generateStyles = (componentImportAliases: Array<[string, Set<string>]>, content: string) => {
         const sassGeneratedStyles = componentImportAliases.reduce((prevValue, [componentName, aliases]) => {
@@ -28,24 +25,30 @@ export function daisyuiPreprocess(options?: Partial<PreprocessorOptions>) {
         return compileGeneratedStyles(sassGeneratedStyles, pathToStylesPackage);
     };
 
-    const script: Preprocessor = ({ content, filename, markup }) => {
-        const componentImportAliases = findImportStatement(processedOptions.modulePath, content, filename);
-        if (componentImportAliases.size === 0) return { code: content };
-        const htmlMarkup = parseHtml(markup);
-        name = filename ?? String();
-        css = generateStyles([...componentImportAliases], htmlMarkup);
-        console.log(css);
-        return { code: content };
-    };
-
-    const style: Preprocessor = ({ content, filename }) => {
-        if (filename !== name) return { code: content };
-
+    const markup: MarkupPreprocessor = ({ content, filename }) => {
         const output = new MagicString(content, filename ? { filename } : undefined);
-        output.append(css);
-        const outputString = output.toString();
-        return { code: outputString, map: output.generateMap() };
+
+        const script = parseScript(content);
+        if (!script) return { code: output.toString(), map: output.generateMap() };
+
+        const componentImportAliases = findImportStatement(
+            processedOptions.dev.componentLibPath,
+            script.content,
+            filename,
+        );
+        if (componentImportAliases.size === 0) return { code: output.toString(), map: output.generateMap() };
+
+        const html = parseHtml(content);
+        const css = generateStyles([...componentImportAliases], html);
+
+        const style = parseStyle(content);
+        if (!style) output.append(`\n<style>${css}</style>`);
+        output.appendLeft(style!.contentEndIndex, css);
+
+        console.log(output.toString());
+
+        return { code: output.toString(), map: output.generateMap() };
     };
 
-    return { script, style } as PreprocessorGroup;
+    return { markup } as PreprocessorGroup;
 }

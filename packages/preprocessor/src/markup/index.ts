@@ -1,6 +1,4 @@
 export * from './find-import-statments';
-export * from './globalify-rule-plugin';
-export * from './globalify-selector';
 export * from './insert-at-position';
 export * from './parse-components';
 export * from './parse-element-attributes';

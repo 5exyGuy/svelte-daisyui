@@ -1,5 +1,6 @@
 import type { ComponentSchema, ResponsiveProperty } from '@svelte-daisyui/shared';
 import type { UniqueComponentProps } from '../types';
+import { convertToEntries } from '../utilities';
 import { parseElementAttributes } from './parse-element-attributes';
 
 export function parseComponents<Props, ResponsivePropNames extends keyof Props>(
@@ -18,42 +19,31 @@ export function parseComponents<Props, ResponsivePropNames extends keyof Props>(
         const { error, value } = schema.validate(transformedComponent!);
         if (error) throw error;
 
-        (Object.entries(value!) as Array<[keyof Props, NonNullable<Props[keyof Props]>]>).forEach(
-            ([propName, propValue]) => {
-                if (!schema.propData[propName]!.responsive) {
-                    (uniqueComponentProps[propName] as Set<Props[keyof Props]>) ??= new Set();
-                    (uniqueComponentProps[propName] as Set<Props[keyof Props]>).add(propValue);
-                    return;
-                }
+        convertToEntries(value).forEach(([propName, propValue]) => {
+            if (!schema.propData[propName]!.responsive) {
+                (uniqueComponentProps[propName] as Set<Props[keyof Props]>) ??= new Set();
+                (uniqueComponentProps[propName] as Set<Props[keyof Props]>).add(propValue);
+                return;
+            }
 
-                if (typeof propValue !== 'object') {
-                    uniqueComponentProps[propName] ??= { default: new Set() };
-                    (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>).default ??=
-                        new Set();
-                    (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>).default!.add(
-                        propValue,
-                    );
-                    return;
-                }
-
-                (
-                    Object.entries(propValue) as Array<
-                        [
-                            keyof ResponsiveProperty<Props[keyof Props]>,
-                            NonNullable<
-                                ResponsiveProperty<Props[keyof Props]>[keyof ResponsiveProperty<Props[keyof Props]>]
-                            >,
-                        ]
-                    >
-                ).forEach(([breakpointName, breakpointValue]) => {
+            if (typeof propValue !== 'object') {
+                (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>) ??= {
+                    default: new Set(),
+                };
+                (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>).default ??= new Set();
+                (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>).default!.add(propValue);
+                return;
+            }
+            convertToEntries<ResponsiveProperty<Props[keyof Props]>>(propValue as any).forEach(
+                ([breakpointName, breakpointValue]) => {
                     (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>)[breakpointName] ??
                         new Set();
                     (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>)[
                         breakpointName
-                    ]!.add(breakpointValue);
-                });
-            },
-        );
+                    ]!.add(breakpointValue!);
+                },
+            );
+        });
     });
 
     return uniqueComponentProps;

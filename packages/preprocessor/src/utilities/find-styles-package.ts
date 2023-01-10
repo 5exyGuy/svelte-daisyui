@@ -1,12 +1,14 @@
+import { fileURLToPath } from 'url';
 import path from 'path';
 import fs from 'fs';
-import { fileURLToPath } from 'url';
 
 export function findStylesPackage(main: string) {
-    if (path.isAbsolute(main))
-        throw new Error(
+    if (path.isAbsolute(main)) {
+        console.warn(
             'The "main" field in the package.json must be a relative path inside the "@svelte-daisyui/preprocessor" package.',
         );
+        return;
+    }
 
     const currentDir = process.cwd();
     let pathToStylesPackage = path.join(currentDir, 'node_modules', '@svelte-daisyui', 'styles');
@@ -21,7 +23,8 @@ export function findStylesPackage(main: string) {
 
     if (fs.existsSync(pathToStylesPackage)) return pathToStylesPackage;
 
-    throw Error(
+    console.warn(
         'Could not find the @svelte-daisyui/styles package. Try reinstalling the "@svelte-daisyui/preprocessor" package or install the "@svelte-daisyui/styles" package manually inside your project.',
     );
+    return;
 }

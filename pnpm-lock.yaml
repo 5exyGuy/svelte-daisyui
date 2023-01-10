@@ -4,10 +4,12 @@ importers:
 
   .:
     specifiers:
+      '@svelte-daisyui/styles': workspace:^1.0.0
       eslint: ^8.31.0
       prettier: ^2.8.2
       turbo: ^1.6.3
     devDependencies:
+      '@svelte-daisyui/styles': link:packages/styles
       eslint: 8.31.0
       prettier: 2.8.2
       turbo: 1.6.3

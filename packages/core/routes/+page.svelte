@@ -9,9 +9,4 @@
     .test {
         color: red;
     }
-
-        .test1 {
-            color: blue;
-        }
-    
 </style>
