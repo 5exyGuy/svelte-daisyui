@@ -3,12 +3,13 @@ export const SCRIPT_REGEX = /<script(\s[^]*?)?(?:>([^]*?)<\/script>|\/>)/gi;
 export const STYLE_REGEX = /<style(\s[^]*?)?(?:>([^]*?)<\/style>|\/>)/gi;
 export const SVELTE_COMMENT_REGEX = /<!--[^]*?-->/g;
 export const SCRIPT_COMMENT_REGEX = /\/\*[\s\S]*?\*\/|([^\\:]|^)\/\/.*$/gm;
-//import(?:["'\s]*([\w*{}\n, ]+)from\s*)?["'\s](.*[@\w/_-]+)["'\s].*
 export const IMPORT_STATEMENT_REGEX = (modulePath: string) => {
     modulePath = modulePath.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
     const regex = new RegExp(`import(?:["'\\s]*([\\w*{}\\n, ]+)from\\s*)?["']${modulePath}\/?([^ \\n\\t/]+)?["']`, 'g');
     return regex;
 };
+export const SELECTOR_COMBINATOR_REGEX = /(?<!\\)(?:\\\\)*([ >+~,]\s*)(?![^[]+\]|\d)/g;
+export const GLOBAL_SELECTOR_REGEX = /:global(?!\()/;
 export const COMPONENT_NAMES = [
     'Alert',
     'Artboard',

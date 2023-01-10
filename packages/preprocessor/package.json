@@ -14,6 +14,7 @@
         "@svelte-daisyui/shared": "workspace:^1.0.0",
         "@svelte-daisyui/styles": "workspace:^1.0.0",
         "magic-string": "^0.27.0",
+        "postcss": "^8.4.21",
         "sass": "^1.57.1",
         "svelte": "^3.55.0"
     },

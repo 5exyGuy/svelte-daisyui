@@ -5,8 +5,8 @@ import { main } from '../package.json';
 import { findStylesPackage } from './utilities';
 import { processOptions } from './options';
 import type { PreprocessorOptions, StyleBuilder } from './interfaces';
-import sass from 'sass';
 import MagicString from 'magic-string';
+import { compileGeneratedStyles } from './markup/compile-generated-styles';
 
 export function daisyuiPreprocess(options?: Partial<PreprocessorOptions>) {
     const processedOptions = processOptions(options);
@@ -25,12 +25,7 @@ export function daisyuiPreprocess(options?: Partial<PreprocessorOptions>) {
             return prevValue + styleBuilder.build([...aliases], content);
         }, '');
 
-        const { css } = sass.compileString(sassGeneratedStyles, {
-            style: 'compressed',
-            loadPaths: [pathToStylesPackage],
-        });
-
-        return css;
+        return compileGeneratedStyles(sassGeneratedStyles, pathToStylesPackage);
     };
 
     const script: Preprocessor = ({ content, filename, markup }) => {
@@ -39,6 +34,7 @@ export function daisyuiPreprocess(options?: Partial<PreprocessorOptions>) {
         const htmlMarkup = parseHtml(markup);
         name = filename ?? String();
         css = generateStyles([...componentImportAliases], htmlMarkup);
+        console.log(css);
         return { code: content };
     };
 
