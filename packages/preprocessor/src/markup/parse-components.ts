@@ -1,6 +1,5 @@
-import type { ComponentSchema, ResponsiveProperty } from '@svelte-daisyui/shared';
+import { convertToEntries, type ComponentSchema, type ResponsiveProperty } from '@svelte-daisyui/shared';
 import type { UniqueComponentProps } from '../types';
-import { convertToEntries } from '../utilities';
 import { parseElementAttributes } from './parse-element-attributes';
 
 export function parseComponents<Props, ResponsivePropNames extends keyof Props>(
@@ -14,8 +13,10 @@ export function parseComponents<Props, ResponsivePropNames extends keyof Props>(
     const uniqueComponentProps = {} as UniqueComponentProps<Props, ResponsivePropNames>;
 
     Array.from(matchAll).forEach((match) => {
-        const componentAttributes = parseElementAttributes(match[1]!);
+        const componentAttributes = parseElementAttributes(match[1]);
+        console.log(componentAttributes);
         const transformedComponent = schema.transform(componentAttributes);
+
         const { error, value } = schema.validate(transformedComponent!);
         if (error) throw error;
 
@@ -36,7 +37,8 @@ export function parseComponents<Props, ResponsivePropNames extends keyof Props>(
             }
             convertToEntries<ResponsiveProperty<Props[keyof Props]>>(propValue as any).forEach(
                 ([breakpointName, breakpointValue]) => {
-                    (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>)[breakpointName] ??
+                    (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>) ??= {};
+                    (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>)[breakpointName] ??=
                         new Set();
                     (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>)[
                         breakpointName

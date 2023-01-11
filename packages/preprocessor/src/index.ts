@@ -29,7 +29,7 @@ export function daisyuiPreprocess(options?: Partial<PreprocessorOptions>) {
         const output = new MagicString(content, filename ? { filename } : undefined);
 
         const script = parseScript(content);
-        if (!script) return { code: output.toString(), map: output.generateMap() };
+        if (!script || !script.content) return { code: output.toString(), map: output.generateMap() };
 
         const componentImportAliases = findImportStatement(
             processedOptions.dev.componentLibPath,
@@ -42,9 +42,13 @@ export function daisyuiPreprocess(options?: Partial<PreprocessorOptions>) {
         const css = generateStyles([...componentImportAliases], html);
 
         const style = parseStyle(content);
-        if (!style) output.append(`\n<style>${css}</style>`);
-        output.appendLeft(style!.contentEndIndex, css);
+        if (!style) {
+            output.append(`\n<style>${css}</style>`);
+            console.log(output.toString());
+            return { code: output.toString(), map: output.generateMap() };
+        }
 
+        output.appendLeft(style!.contentEndIndex, css);
         console.log(output.toString());
 
         return { code: output.toString(), map: output.generateMap() };

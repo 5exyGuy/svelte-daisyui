@@ -62,6 +62,8 @@ $colors: base, primary, secondary, accent, info, success, warning, error;
     }
 
     @media (min-width: $screen-size) {
+        $prefix: $prefix + ':';
+
         .alert.#{$prefix}alert-#{$color} {
             @include core.bg-color($color + if($color == 'base', '-200', ''));
             @include core.text-color($color + '-content');

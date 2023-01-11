@@ -5,10 +5,10 @@ export function parseStyle(code: string) {
     const match = STYLE_REGEX.exec(code);
     if (!match) return;
 
-    const attributes = parseElementAttributes(match[1]!);
+    const attributes = parseElementAttributes(match[1]);
     const content = match[2];
 
-    if (attributes['src']) throw Error('src attribute is not supported on style tags.');
+    if (attributes?.['src']) throw Error('src attribute is not supported on style tags.');
     if (!content && match[0].endsWith('/>')) throw Error('Empty style tags must be self-closing.');
 
     const contentStartIndex = match.index + 6 + (match[1]?.length ?? 0);

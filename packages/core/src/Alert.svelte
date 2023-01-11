@@ -3,7 +3,7 @@
         AlertSchema,
         generateComponentClasses,
         joinClasses,
-        type AlertProps as $$AlertProps,
+        type AlertComponentProps,
         type Nullable,
     } from '@svelte-daisyui/shared';
 
@@ -21,9 +21,9 @@
     // Properties
     // -----------------------------------------------------------
 
-    export let color: $$AlertProps['color'] = 'base';
+    export let color: AlertComponentProps['color'] = 'base';
     // export let icon: Nullable<AlertProps['icon']> = undefined;
-    export let message: Nullable<$$AlertProps['message']> = undefined;
+    export let message: Nullable<AlertComponentProps['message']> = undefined;
     // export let showIcon: AlertProps['showIcon'] = true;
     let restClass: Nullable<string> = undefined;
     export { restClass as class };
@@ -34,7 +34,7 @@
 
     $: classNames = joinClasses(
         alertSchema.name.toLowerCase(),
-        generateComponentClasses<$$AlertProps>(alertSchema, { color }),
+        generateComponentClasses<AlertComponentProps>(alertSchema, { color }),
         restClass ?? '',
     );
 </script>

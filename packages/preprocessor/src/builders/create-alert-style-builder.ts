@@ -1,7 +1,6 @@
-import { AlertSchema, type AlertProps, type AlertResponsivePropNames } from '@svelte-daisyui/shared';
+import { AlertSchema, convertToEntries, type AlertProps, type AlertResponsivePropNames } from '@svelte-daisyui/shared';
 import type { PreprocessorOptions, StyleBuilder } from '../interfaces';
 import { parseComponents } from '../markup';
-import { convertToEntries } from '../utilities';
 
 export function createAlertStyleBuilder(options: PreprocessorOptions): StyleBuilder {
     const alertSchema = AlertSchema.create();

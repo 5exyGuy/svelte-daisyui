@@ -3,10 +3,4 @@
 </script>
 
 <h1 class="test">Page</h1>
-<Alert color="primary">Hello world</Alert>
-
-<style lang="scss">
-    .test {
-        color: red;
-    }
-</style>
+<Alert color={{ default: 'info', sm: 'accent' }}>Hello world</Alert>

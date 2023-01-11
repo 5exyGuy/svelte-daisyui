@@ -31,7 +31,11 @@ export function createSchema<Props>(schema: Omit<ComponentSchema<Props>, 'valida
 
             if (propData.responsive) {
                 try {
-                    transformed[propName] = JSON.parse(propValue) as Props[keyof Props];
+                    const sanitizedPropValue = propValue
+                        .replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2":')
+                        .replace(/'/g, '"');
+                    console.log(sanitizedPropValue);
+                    transformed[propName] = JSON.parse(sanitizedPropValue) as Props[keyof Props];
                 } catch (e) {
                     transformed[propName] = propValue as Props[keyof Props];
                 }
