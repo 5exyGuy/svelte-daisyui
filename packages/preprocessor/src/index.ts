@@ -7,6 +7,7 @@ import { processOptions } from './options';
 import type { PreprocessorOptions, StyleBuilder } from './interfaces';
 import MagicString from 'magic-string';
 import { compileGeneratedStyles } from './compiler/compile-generated-styles';
+import { parse } from 'svelte/compiler';
 
 export function daisyuiPreprocess(options?: Partial<PreprocessorOptions>) {
     const processedOptions = processOptions(options);
@@ -39,6 +40,8 @@ export function daisyuiPreprocess(options?: Partial<PreprocessorOptions>) {
         if (componentImportAliases.size === 0) return { code: output.toString(), map: output.generateMap() };
 
         const html = parseHtml(content);
+        const test = parse(html);
+        console.log(test.html.children);
         const css = generateStyles([...componentImportAliases], html);
 
         const style = parseStyle(content);

@@ -10,6 +10,7 @@ export const IMPORT_STATEMENT_REGEX = (modulePath: string) => {
 };
 export const SELECTOR_COMBINATOR_REGEX = /(?<!\\)(?:\\\\)*([ >+~,]\s*)(?![^[]+\]|\d)/g;
 export const GLOBAL_SELECTOR_REGEX = /:global(?!\()/;
+export const ATTRIBUTE_REGEX = /([a-zA-Z]+)(?:=({[^{}]+}|"[^"]*"|\S+))?/g;
 export const COMPONENT_NAMES = [
     'Alert',
     'Artboard',
