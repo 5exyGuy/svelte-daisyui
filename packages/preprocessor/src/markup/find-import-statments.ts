@@ -1,14 +1,20 @@
+import type { Nullable } from '@svelte-daisyui/shared';
 import { COMPONENT_NAMES, IMPORT_STATEMENT_REGEX } from '../constants';
 
-export function findImportStatement(componentLibPath: string, code: string, fileName?: string) {
-    if (!code) return new Map<string, Set<string>>();
+export function findImportStatement(componentLibPath: string, fileName?: string, ...content: Array<Nullable<string>>) {
+    // if (!instanceCode || !moduleCode) return new Map<string, Set<string>>();
 
-    const matches = [...code.matchAll(IMPORT_STATEMENT_REGEX(componentLibPath))];
-
+    const importStatmentRegex = IMPORT_STATEMENT_REGEX(componentLibPath);
+    const matchAll = content.reduce((array, c) => {
+        if (typeof c !== 'string') return array;
+        const matchAll = [...c.matchAll(importStatmentRegex)];
+        if (matchAll.length === 0) return array;
+        return [...array, ...matchAll];
+    }, [] as Array<RegExpMatchArray>);
     const componentImports = new Map<string, Set<string>>();
-    if (matches.length === 0) return componentImports;
+    if (matchAll.length === 0) return componentImports;
 
-    matches.map((match) => {
+    matchAll.map((match) => {
         let [, importName, componentName] = match as [string, string, string?];
         importName = importName.trim();
         componentName = componentName?.replace(/\.svelte$/, '').trim();

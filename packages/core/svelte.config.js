@@ -7,9 +7,9 @@ const config = {
     // Consult https://kit.svelte.dev/docs/integrations#preprocessors
     // for more information about preprocessors
     preprocess: [
-        // daisyuiPreprocess({
-        //     dev: { componentLibPath: '$lib' },
-        // }),
+        daisyuiPreprocess({
+            dev: { componentLibPath: '$lib' },
+        }),
         vitePreprocess(),
     ],
     kit: {

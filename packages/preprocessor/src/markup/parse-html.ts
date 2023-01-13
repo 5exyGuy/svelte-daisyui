@@ -1,5 +1,6 @@
-import { SCRIPT_REGEX, STYLE_REGEX, SVELTE_COMMENT_REGEX } from '../constants';
+import { SCRIPT_REGEX, STYLE_REGEX } from '../constants';
+import { parse } from 'svelte/compiler';
 
 export function parseHtml(content: string) {
-    return content.replace(SCRIPT_REGEX, '').replace(STYLE_REGEX, '').replace(SVELTE_COMMENT_REGEX, '');
+    return parse(content.replace(SCRIPT_REGEX, '').replace(STYLE_REGEX, '')).html;
 }
