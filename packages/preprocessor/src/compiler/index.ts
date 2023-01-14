@@ -1,3 +1,3 @@
-export * from './compile-generated-styles';
+export * from './compile-sass';
 export * from './globalify-plugin';
 export * from './globalify-selector';

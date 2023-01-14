@@ -1,9 +1,9 @@
 import type { Nullable } from '@svelte-daisyui/shared';
 import { COMPONENT_NAMES, IMPORT_STATEMENT_REGEX } from '../constants';
+import type { ScriptParseResult } from '../interfaces';
 
-export function findImportStatement(componentLibPath: string, fileName?: string, ...content: Array<Nullable<string>>) {
-    // if (!instanceCode || !moduleCode) return new Map<string, Set<string>>();
-
+export function findImportStatement(componentLibPath: string, script: ScriptParseResult, fileName?: string) {
+    const content = [script.instance?.content, script.module?.content] as Array<Nullable<string>>;
     const importStatmentRegex = IMPORT_STATEMENT_REGEX(componentLibPath);
     const matchAll = content.reduce((array, c) => {
         if (typeof c !== 'string') return array;

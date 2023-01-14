@@ -1,11 +1,9 @@
 import { SCRIPT_COMMENT_REGEX, SCRIPT_REGEX } from '../constants';
+import type { ScriptParseResult } from '../interfaces';
 import { parseElementAttributes } from './parse-element-attributes';
 
 export function parseScript(code: string) {
-    const script = {} as {
-        instance?: { attributes: Record<string, string | boolean>; content: string };
-        module?: { attributes: Record<string, string | boolean>; content: string };
-    };
+    const script = {} as ScriptParseResult;
 
     let match: RegExpExecArray | null;
     while ((match = SCRIPT_REGEX.exec(code))) {
@@ -17,5 +15,6 @@ export function parseScript(code: string) {
         }
         script.instance = { attributes, content };
     }
+
     return script;
 }

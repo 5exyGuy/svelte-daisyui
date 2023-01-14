@@ -2,7 +2,7 @@ import sass from 'sass';
 import postcss from 'postcss';
 import { globalifyPlugin } from '.';
 
-export function compileGeneratedStyles(content: string, stylesPath?: string) {
+export function compileSass(content: string, stylesPath?: string) {
     const sassResult = sass.compileString(content, {
         style: 'compressed',
         loadPaths: stylesPath ? [stylesPath] : [],
