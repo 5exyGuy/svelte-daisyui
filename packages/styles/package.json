@@ -8,7 +8,8 @@
         "*.scss"
     ],
     "exports": {
-        "./alert.scss": "./alert.scss",
-        "./core.scss": "./core.scss"
+        "./_alert.scss": "./_alert.scss",
+        "./_core.scss": "./_core.scss",
+        "./_escape.scss": "./_escape.scss"
     }
 }

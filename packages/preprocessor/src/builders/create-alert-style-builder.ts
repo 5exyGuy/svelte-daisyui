@@ -1,4 +1,5 @@
 import { AlertSchema, convertToEntries, type AlertProps, type AlertResponsivePropNames } from '@svelte-daisyui/shared';
+import type { TemplateNode } from 'svelte/types/compiler/interfaces';
 import type { PreprocessorOptions, StyleBuilder } from '../interfaces';
 import { parseComponents } from '../markup';
 
@@ -7,8 +8,13 @@ export function createAlertStyleBuilder(options: PreprocessorOptions): StyleBuil
     const breakpointNames = Object.keys(options.breakpoints);
     alertSchema.setBreakpoints(breakpointNames);
 
-    const build = (aliases: Array<string>, code: string) => {
-        const alertUniqueProperties = parseComponents<AlertProps, AlertResponsivePropNames>(alertSchema, aliases, code);
+    const build = (aliases: Set<string>, template: TemplateNode, html: string) => {
+        const alertUniqueProperties = parseComponents<AlertProps, AlertResponsivePropNames>(
+            alertSchema,
+            aliases,
+            template,
+            html,
+        );
 
         let alertStyles = '@use "alert";';
 

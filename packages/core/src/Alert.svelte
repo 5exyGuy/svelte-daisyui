@@ -65,7 +65,7 @@
 </div>
 
 <style lang="scss" global>
-    @use '@svelte-daisyui/styles/alert.scss';
+    @use '@svelte-daisyui/styles/_alert.scss';
 
     @include alert.default();
 </style>

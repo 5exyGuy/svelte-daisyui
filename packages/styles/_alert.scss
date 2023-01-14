@@ -1,6 +1,8 @@
 @use 'core';
+@use 'escape' as *;
 @use 'sass:list';
 @use 'sass:map';
+@use 'sass:string';
 
 @mixin default() {
     .alert {
@@ -62,7 +64,7 @@ $colors: base, primary, secondary, accent, info, success, warning, error;
     }
 
     @media (min-width: $screen-size) {
-        $prefix: $prefix + ':';
+        $prefix: escape($prefix + ':');
 
         .alert.#{$prefix}alert-#{$color} {
             @include core.bg-color($color + if($color == 'base', '-200', ''));
