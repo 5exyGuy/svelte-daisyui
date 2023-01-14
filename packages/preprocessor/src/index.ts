@@ -1,6 +1,6 @@
 import type { MarkupPreprocessor, PreprocessorGroup } from 'svelte/types/compiler/preprocess';
 import { buildComponentSassStyles } from './builders';
-import { findImportStatement, parseHtml, parseScript, parseStyle } from './markup';
+import { appendCssToStyles, findImportStatement, parseHtml, parseScript, parseStyle } from './markup';
 import { main } from '../package.json';
 import { findStylesPackage, generateOutput } from './utilities';
 import { processOptions } from './options';
@@ -16,13 +16,14 @@ export function daisyuiPreprocess(options?: Partial<PreprocessorOptions>) {
     const markup: MarkupPreprocessor = ({ content, filename }) => {
         const output = new MagicString(content, { filename });
         const script = parseScript(content);
-        const aliases = findImportStatement(processedOptions.dev.componentLibPath, script, filename);
+        const aliases = findImportStatement(processedOptions, script, filename);
         if (aliases.size === 0) return generateOutput(output);
 
         const html = parseHtml(content);
         const componentSassStyles = buildComponentSassStyles(processedOptions, styleBuilders, aliases, html);
         const css = compileSass(componentSassStyles, pathToStylesPackage);
         const style = parseStyle(content);
+        appendCssToStyles(output, style, css);
 
         return generateOutput(output);
     };

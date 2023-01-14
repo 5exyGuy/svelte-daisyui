@@ -1,10 +1,10 @@
 import type { Nullable } from '@svelte-daisyui/shared';
 import { COMPONENT_NAMES, IMPORT_STATEMENT_REGEX } from '../constants';
-import type { ScriptParseResult } from '../interfaces';
+import type { PreprocessorOptions, ScriptParseResult } from '../interfaces';
 
-export function findImportStatement(componentLibPath: string, script: ScriptParseResult, fileName?: string) {
+export function findImportStatement(options: PreprocessorOptions, script: ScriptParseResult, fileName?: string) {
     const content = [script.instance?.content, script.module?.content] as Array<Nullable<string>>;
-    const importStatmentRegex = IMPORT_STATEMENT_REGEX(componentLibPath);
+    const importStatmentRegex = IMPORT_STATEMENT_REGEX(options.dev.componentLibPath);
     const matchAll = content.reduce((array, c) => {
         if (typeof c !== 'string') return array;
         const matchAll = [...c.matchAll(importStatmentRegex)];
@@ -29,7 +29,7 @@ export function findImportStatement(componentLibPath: string, script: ScriptPars
                     const aliasName = alias ?? componentName;
                     if (!COMPONENT_NAMES.find((name) => name === componentName))
                         throw new Error(
-                            `Component named ${componentName} does not exist in ${componentLibPath} package in ${fileName}`,
+                            `Component named ${componentName} does not exist in ${options.dev.componentLibPath} package in ${fileName}`,
                         );
                     if (componentImports.has(componentName) && componentImports.get(componentName)!.has(aliasName))
                         throw new Error(`Duplicate component import name ${aliasName} in ${fileName}`);
@@ -44,7 +44,7 @@ export function findImportStatement(componentLibPath: string, script: ScriptPars
             const aliasName = alias ?? componentName;
             if (!COMPONENT_NAMES.find((name) => name === componentName))
                 throw new Error(
-                    `Component named ${componentName} does not exist in ${componentLibPath} package in ${fileName}`,
+                    `Component named ${componentName} does not exist in ${options.dev.componentLibPath} package in ${fileName}`,
                 );
             if (componentImports.has(componentName) && componentImports.get(componentName)!.has(aliasName))
                 throw new Error(`Duplicate component import name ${aliasName} in ${fileName}`);
