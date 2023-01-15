@@ -11,6 +11,7 @@
         "dev": "tsup --watch"
     },
     "dependencies": {
+        "@sinclair/typebox": "^0.25.20",
         "@svelte-daisyui/shared": "workspace:^1.0.0",
         "@svelte-daisyui/styles": "workspace:^1.0.0",
         "magic-string": "^0.27.0",

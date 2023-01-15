@@ -1,6 +1,5 @@
-import type { ValidationResult, Schema } from 'joi';
 import type { PropTypes } from '../enums';
-import type { BreakpointNames } from '../types';
+import type { TAnySchema } from '@sinclair/typebox';
 
 export interface ComponentPropData<Props, PropName extends keyof Props> {
     readonly responsive: boolean;
@@ -12,10 +11,5 @@ export interface ComponentPropData<Props, PropName extends keyof Props> {
 export interface ComponentSchema<Props> {
     readonly name: string;
     readonly propData: { [PropName in keyof Props]?: ComponentPropData<Props, PropName> };
-    readonly validationMap: { [PropName in keyof Props]?: Schema };
-    validate(value: any): ValidationResult<Props>;
-    transform(value: any): Props;
-    setBreakpoints<CustomBreakpointNames extends string = string>(
-        customBreakpoints: Array<BreakpointNames | CustomBreakpointNames>,
-    ): void;
+    readonly validationMap: { [PropName in keyof Props]?: TAnySchema };
 }
