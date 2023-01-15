@@ -1,2 +1,3 @@
 export * from './alert-schema';
-export * from './create-schema';
+export * from './transform-schema';
+export * from './validate-schema';

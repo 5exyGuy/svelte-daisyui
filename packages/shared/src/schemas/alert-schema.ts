@@ -1,7 +1,6 @@
 import { PropTypes } from '../enums';
 import type { AlertProps, ComponentSchema } from '../interfaces';
-import { createSchema } from './create-schema';
-import joi from 'joi';
+import { Type } from '@sinclair/typebox';
 
 const propData = {
     color: {
@@ -13,16 +12,9 @@ const propData = {
 } as ComponentSchema<AlertProps>['propData'];
 
 export const AlertSchema = {
-    create() {
-        return createSchema<AlertProps>({
-            name: 'Alert',
-            propData,
-            validationMap: {
-                color: joi
-                    .string()
-                    .valid(...propData.color!.validValues)
-                    .optional(),
-            },
-        });
+    name: 'Alert',
+    propData,
+    validationMap: {
+        color: Type.Union(propData.color!.validValues!.map((value) => Type.Literal(value))),
     },
-} as const;
+} as ComponentSchema<AlertProps>;
