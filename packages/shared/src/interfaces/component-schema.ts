@@ -1,5 +1,4 @@
 import type { PropTypes } from '../enums';
-import type { TAnySchema } from '@sinclair/typebox';
 
 export interface ComponentPropData<Props, PropName extends keyof Props> {
     readonly responsive: boolean;
@@ -10,6 +9,5 @@ export interface ComponentPropData<Props, PropName extends keyof Props> {
 
 export interface ComponentSchema<Props> {
     readonly name: string;
-    readonly propData: { [PropName in keyof Props]?: ComponentPropData<Props, PropName> };
-    readonly validationMap: { [PropName in keyof Props]?: TAnySchema };
+    readonly data: { [PropName in keyof Props]: ComponentPropData<Props, PropName> };
 }
