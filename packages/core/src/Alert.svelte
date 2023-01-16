@@ -6,8 +6,6 @@
         type AlertComponentProps,
         type Nullable,
     } from '@svelte-daisyui/shared';
-
-    const alertSchema = AlertSchema.create();
 </script>
 
 <script lang="ts">
@@ -33,8 +31,8 @@
     // -----------------------------------------------------------
 
     $: classNames = joinClasses(
-        alertSchema.name.toLowerCase(),
-        generateComponentClasses<AlertComponentProps>(alertSchema, { color }),
+        AlertSchema.name.toLowerCase(),
+        generateComponentClasses<AlertComponentProps>(AlertSchema, { color }),
         restClass ?? '',
     );
 </script>

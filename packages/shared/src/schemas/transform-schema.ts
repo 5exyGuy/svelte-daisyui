@@ -1,10 +1,11 @@
 import { PropTypes } from '../enums';
 import type { ComponentSchema } from '../interfaces';
+import { convertToKeys } from '../utilities';
 
 export function transformSchema<Props>(componentSchema: ComponentSchema<Props>, value: any) {
     if (typeof value !== 'object') throw new Error(`Expected an object, got ${typeof value}`);
 
-    return (Object.keys(componentSchema.data) as Array<keyof Props>).reduce((transformed, propName) => {
+    return convertToKeys(componentSchema.data).reduce((transformed, propName) => {
         const propData = componentSchema.data[propName]!;
 
         const propValue = value[propName];

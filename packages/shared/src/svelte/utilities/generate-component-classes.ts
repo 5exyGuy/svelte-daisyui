@@ -1,24 +1,25 @@
 import type { ComponentSchema } from '../../interfaces';
 import { convertToEntries } from '../../utilities';
 
-export function generateComponentClasses<Props>(schema: ComponentSchema<Props>, values: Partial<Props>) {
+export function generateComponentClasses<Props>(componentSchema: ComponentSchema<Props>, values: Partial<Props>) {
     const classList = [] as Array<string>;
 
     convertToEntries(values).forEach(([propName, propValue]) => {
         if (typeof propValue !== 'object') {
-            const { error, value } = schema.validationMap[propName]!.validate(propValue);
-            if (error) throw error;
-            classList.push(`${schema.name.toLowerCase()}-${value}`);
+            if (!componentSchema.data[propName]!.validation.validator(propValue))
+                throw new Error(`Invalid value for ${propName as string}`);
+            classList.push(`${componentSchema.name.toLowerCase()}-${propValue}`);
             return;
         }
 
         convertToEntries(propValue).forEach(([breakpointName, breakpointValue]) => {
-            const { error, value } = schema.validationMap[propName]!.validate(breakpointValue);
-            if (error) throw error;
+            if (!componentSchema.data[propName]!.validation.validator(breakpointValue as any))
+                throw new Error(`Invalid value for ${propName as string}`);
+
             classList.push(
                 `${
                     breakpointName !== 'default' ? (breakpointName as string) + ':' : ''
-                }${schema.name.toLowerCase()}-${value}`,
+                }${componentSchema.name.toLowerCase()}-${breakpointValue}`,
             );
         });
     });
