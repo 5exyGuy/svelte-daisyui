@@ -1,0 +1,88 @@
+@use 'core';
+@use 'escape' as *;
+@use 'sass:list';
+@use 'sass:map';
+
+$artboard-sizes: (
+    1: (
+        x: 320px,
+        y: 568px,
+    ),
+    2: (
+        x: 375px,
+        y: 667px,
+    ),
+    3: (
+        x: 414px,
+        y: 736px,
+    ),
+    4: (
+        x: 375px,
+        y: 812px,
+    ),
+    5: (
+        x: 414px,
+        y: 896px,
+    ),
+    6: (
+        x: 320px,
+        y: 1024px,
+    ),
+);
+
+@mixin default() {
+    .artboard {
+        display: flex;
+        flex: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@mixin size($size) {
+    &.artboard.artboard-phone {
+        @if not list.index(map.keys($artboard-sizes), $size) {
+            @error 'Invalid size `#{$size}`. Expected one of `#{$artboard-sizes}`.';
+        }
+
+        $vector2: map.get($artboard-sizes, $size);
+
+        &-#{$size} {
+            &.artboard-horizontal {
+                width: map.get($vector2, 'y');
+                height: map.get($vector2, 'x');
+            }
+
+            &.artboard-vertical {
+                width: map.get($vector2, 'x');
+                height: map.get($vector2, 'y');
+            }
+        }
+    }
+}
+
+@mixin responsive-size($size, $prefix, $screen-size) {
+}
+
+@mixin demo($value) {
+    .artboard.artboard-demo {
+        @include themes.bg-color('base-100');
+        @include themes.text-color('base-content');
+        @include themes.box-border-radius();
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.102), 0 1px 2px rgba(0, 0, 0, 0.059);
+    }
+}
+
+@mixin responsive-demo($enable, $prefix, $screen-size) {
+    @media (min-width: $screen-size) {
+        $prefix: escape($prefix + ':');
+
+        .artboard.#{$prefix}artboard-demo {
+            @include themes.bg-color('base-100');
+            @include themes.text-color('base-content');
+            @include themes.box-border-radius();
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.102), 0 1px 2px rgba(0, 0, 0, 0.059);
+        }
+    }
+}

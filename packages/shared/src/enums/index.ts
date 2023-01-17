@@ -1,4 +1,5 @@
 export * from './alignment';
+export * from './artboard-size';
 export * from './base-color';
 export * from './brand-color';
 export * from './direction';

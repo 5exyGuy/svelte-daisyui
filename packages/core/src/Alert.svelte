@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts">
     import {
         AlertSchema,
         generateComponentClasses,
@@ -6,9 +6,6 @@
         type AlertComponentProps,
         type Nullable,
     } from '@svelte-daisyui/shared';
-</script>
-
-<script lang="ts">
     // import MdInfoOutline from 'svelte-icons/md/MdInfoOutline.svelte';
     // import FaRegCheckCircle from 'svelte-icons/fa/FaRegCheckCircle.svelte';
     // import MdWarning from 'svelte-icons/md/MdWarning.svelte';

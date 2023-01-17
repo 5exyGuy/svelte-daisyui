@@ -3,4 +3,4 @@
 </script>
 
 <h1 class="test"><p>Page</p></h1>
-<Alert color={{ default: 'info', sm: 'accent' }}>Hello world</Alert>
+<Alert>Hello world</Alert>
