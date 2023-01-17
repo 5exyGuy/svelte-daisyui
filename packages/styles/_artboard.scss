@@ -40,32 +40,10 @@ $artboard-sizes: (
     }
 }
 
-@mixin size($size) {
-    &.artboard.artboard-phone {
-        @if not list.index(map.keys($artboard-sizes), $size) {
-            @error 'Invalid size `#{$size}`. Expected one of `#{$artboard-sizes}`.';
-        }
-
-        $vector2: map.get($artboard-sizes, $size);
-
-        &-#{$size} {
-            &.artboard-horizontal {
-                width: map.get($vector2, 'y');
-                height: map.get($vector2, 'x');
-            }
-
-            &.artboard-vertical {
-                width: map.get($vector2, 'x');
-                height: map.get($vector2, 'y');
-            }
-        }
-    }
+@mixin alignment($size) {
 }
 
-@mixin responsive-size($size, $prefix, $screen-size) {
-}
-
-@mixin demo($value) {
+@mixin demo() {
     .artboard.artboard-demo {
         @include themes.bg-color('base-100');
         @include themes.text-color('base-content');
@@ -74,15 +52,19 @@ $artboard-sizes: (
     }
 }
 
-@mixin responsive-demo($enable, $prefix, $screen-size) {
-    @media (min-width: $screen-size) {
-        $prefix: escape($prefix + ':');
+@mixin size-and-alignment($size, $alignment) {
+    &.artboard.artboard-phone {
+        @if not list.index(map.keys($artboard-sizes), $size) {
+            @error 'Invalid size `#{$size}`. Expected one of `#{$artboard-sizes}`.';
+        }
 
-        .artboard.#{$prefix}artboard-demo {
-            @include themes.bg-color('base-100');
-            @include themes.text-color('base-content');
-            @include themes.box-border-radius();
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.102), 0 1px 2px rgba(0, 0, 0, 0.059);
+        $vector2: map.get($artboard-sizes, $size);
+
+        &-#{$size} {
+            &.artboard-#{$alignment} {
+                width: map.get($vector2, if($alignment == 'horizontal', 'y', 'x'));
+                height: map.get($vector2, if($alignment == 'horizontal', 'x', 'y'));
+            }
         }
     }
 }

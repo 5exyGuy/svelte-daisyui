@@ -1,14 +1,9 @@
-import {
-    ArtboardSchema,
-    convertToEntries,
-    type ArtboardProps,
-    type ArtboardResponsivePropNames,
-} from '@svelte-daisyui/shared';
+import { ArtboardSchema, type ArtboardProps, type ArtboardResponsivePropNames } from '@svelte-daisyui/shared';
 import type { TemplateNode } from 'svelte/types/compiler/interfaces';
 import type { PreprocessorOptions, StyleBuilder } from '../../interfaces';
 import { parseComponents } from '../../markup';
 
-export function createArtboardStyleBuilder(options: PreprocessorOptions): StyleBuilder {
+export function createArtboardStyleBuilder(_options: PreprocessorOptions): StyleBuilder {
     const build = (aliases: Set<string>, template: TemplateNode, html: string) => {
         const uniqueProperties = parseComponents<ArtboardProps, ArtboardResponsivePropNames>(
             ArtboardSchema,
@@ -19,17 +14,12 @@ export function createArtboardStyleBuilder(options: PreprocessorOptions): StyleB
 
         let styles = '@use "artboard";';
 
-        convertToEntries(uniqueProperties.demo).forEach(([breakpointName, breakpointValues]) => {
-            breakpointValues!.forEach((demo) =>
-                breakpointName === 'default'
-                    ? (styles += `@include artboard.demo(${demo});`)
-                    : (styles += `@include artboard.responsive-demo(${demo}, ${breakpointName}, ${options.breakpoints[breakpointName]});`),
-            );
-        });
-
-        // TODO: Add support for orientation and size
-        // { default: 'horizontal', sm: 'vertical', md: 'horizontal' }
-        // { default: '320x568', sm: '375x812', lg: '414x736' }
+        uniqueProperties.alignment?.forEach((alignment) =>
+            uniqueProperties.size?.forEach(
+                (size) => (styles += `@include artboard.size-and-alignment(${size}, ${alignment});`),
+            ),
+        );
+        uniqueProperties.demo?.forEach((demo) => demo && (styles += `@include artboard.demo();`));
 
         return styles;
     };

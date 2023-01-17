@@ -5,28 +5,25 @@ export const ArtboardSchema = {
     name: 'Artboard',
     data: {
         alignment: {
-            responsive: true,
+            responsive: false,
             type: PropTypes.String,
             validation: {
-                required: false,
                 validator: (value: ArtboardProps['alignment']) => Alignment[value] !== undefined,
             },
             default: 'horizontal',
         },
         size: {
-            responsive: true,
+            responsive: false,
             type: PropTypes.String,
             validation: {
-                required: false,
                 validator: (value: ArtboardProps['size']) => ArtboardSize[value] !== undefined,
             },
             default: '320x568',
         },
         demo: {
-            responsive: true,
+            responsive: false,
             type: PropTypes.Boolean,
             validation: {
-                required: false,
                 validator: (value: ArtboardProps['demo']) => typeof value === 'boolean',
             },
             default: false,

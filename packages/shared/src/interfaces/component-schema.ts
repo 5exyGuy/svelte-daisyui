@@ -4,7 +4,6 @@ export interface ComponentPropData<Props, PropName extends keyof Props> {
     readonly responsive: boolean;
     readonly type: PropTypes;
     readonly validation: {
-        readonly required: boolean;
         readonly validator: (value?: Props[PropName]) => boolean;
     };
     readonly default: Props[PropName];
