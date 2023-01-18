@@ -1,5 +1,7 @@
-import type { TemplateNode } from 'svelte/types/compiler/interfaces';
+import type { ComponentSchema } from '@svelte-daisyui/shared';
+import type { BuildContext } from './build-context';
 
-export interface StyleBuilder {
-    build(aliases: Set<string>, template: TemplateNode, html: string): { libaries: string; components: string };
+export interface StyleBuilder<Props = unknown, ResponsivePropNames extends keyof Props = never> {
+    componentSchema: ComponentSchema<Props>;
+    build: (context: BuildContext<Props, ResponsivePropNames>) => void;
 }

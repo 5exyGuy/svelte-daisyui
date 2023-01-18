@@ -1,5 +1,5 @@
 import type { HtmlParseResult, PreprocessorOptions, StyleBuilder } from '../interfaces';
-import { createStyleBuilder } from './style-builder-factory';
+import { resolveStyleBuilder } from './resolve-style-builder';
 
 export function buildComponentSassStyles(
     options: PreprocessorOptions,
@@ -9,8 +9,7 @@ export function buildComponentSassStyles(
 ) {
     return Array.from(componentAliases.entries()).reduce((prevValue, [componentName, aliases]) => {
         const styleBuilder =
-            (styleBuilders.get(componentName) as StyleBuilder | undefined) ??
-            createStyleBuilder(options, componentName)!;
+            (styleBuilders.get(componentName) as StyleBuilder | undefined) ?? resolveStyleBuilder(componentName)!;
         styleBuilders.has(componentName) || styleBuilders.set(componentName, styleBuilder);
 
         const { libaries, components } = styleBuilder.build(aliases, html.template, html.content);

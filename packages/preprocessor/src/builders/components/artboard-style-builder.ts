@@ -4,32 +4,18 @@ import {
     type ArtboardProps,
     type ArtboardResponsivePropNames,
 } from '@svelte-daisyui/shared';
-import type { TemplateNode } from 'svelte/types/compiler/interfaces';
-import type { PreprocessorOptions, StyleBuilder } from '../../interfaces';
-import { parseComponents } from '../../markup';
+import { createStyleBuilder } from '../create-style-builder';
 
-export function createArtboardStyleBuilder(_options: PreprocessorOptions): StyleBuilder {
-    const build = (aliases: Set<string>, template: TemplateNode, html: string) => {
-        const uniqueProperties = parseComponents<ArtboardProps, ArtboardResponsivePropNames>(
-            ArtboardSchema,
-            aliases,
-            template,
-            html,
-        );
+export const ArtboardStyleBuilder = createStyleBuilder<ArtboardProps, ArtboardResponsivePropNames>(
+    ArtboardSchema,
+    (context) => {
+        context.useLib('artboard');
 
-        let libStyles = '@use "artboard";';
-        let componentStyles = '';
-
-        uniqueProperties.alignment?.forEach((alignment) =>
-            uniqueProperties.size?.forEach(
-                (size) =>
-                    (componentStyles += `@include artboard.size-and-alignment(${ArtboardSize[size]}, ${alignment});`),
+        context.uniqueProps.alignment?.forEach((alignment) =>
+            context.uniqueProps.size?.forEach((size) =>
+                context.includeMixin('artboard', 'size-and-alignment', ArtboardSize[size], alignment),
             ),
         );
-        uniqueProperties.demo?.forEach((demo) => demo && (componentStyles += `@include artboard.demo();`));
-
-        return { libaries: libStyles, components: componentStyles };
-    };
-
-    return { build };
-}
+        context.uniqueProps.demo?.forEach((demo) => demo && context.includeMixin('artboard', 'demo'));
+    },
+);

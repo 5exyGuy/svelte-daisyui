@@ -1,3 +1,4 @@
+export * from './build-context';
 export * from './html-parse-result';
 export * from './style-parse-result';
 export * from './node';
