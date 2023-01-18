@@ -12,17 +12,18 @@ export function createAlertStyleBuilder(options: PreprocessorOptions): StyleBuil
             html,
         );
 
-        let styles = '@use "alert";';
+        let libStyles = '@use "alert";';
+        let componentStyles = '';
 
         convertToEntries(uniqueProperties.color).forEach(([breakpointName, breakpointValues]) =>
             breakpointValues!.forEach((color) => {
                 breakpointName === 'default'
-                    ? (styles += `@include alert.color("${color}");`)
-                    : (styles += `@include alert.responsive-color("${color}", ${breakpointName}, ${options.breakpoints[breakpointName]});`);
+                    ? (componentStyles += `@include alert.color("${color}");`)
+                    : (componentStyles += `@include alert.responsive-color("${color}", ${breakpointName}, ${options.breakpoints[breakpointName]});`);
             }),
         );
 
-        return styles;
+        return { libaries: libStyles, components: componentStyles };
     };
 
     return { build };

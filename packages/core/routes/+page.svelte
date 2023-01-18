@@ -4,5 +4,5 @@
 </script>
 
 <h1 class="test"><p>Page</p></h1>
-<!-- <Alert>Hello world</Alert> -->
+<Alert>Hello world</Alert>
 <Artboard demo class="test">Hello world</Artboard>

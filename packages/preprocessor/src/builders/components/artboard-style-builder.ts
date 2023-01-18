@@ -17,18 +17,18 @@ export function createArtboardStyleBuilder(_options: PreprocessorOptions): Style
             html,
         );
 
-        let styles = '@use "artboard";';
+        let libStyles = '@use "artboard";';
+        let componentStyles = '';
 
         uniqueProperties.alignment?.forEach((alignment) =>
             uniqueProperties.size?.forEach(
-                (size) => (styles += `@include artboard.size-and-alignment(${ArtboardSize[size]}, ${alignment});`),
+                (size) =>
+                    (componentStyles += `@include artboard.size-and-alignment(${ArtboardSize[size]}, ${alignment});`),
             ),
         );
-        uniqueProperties.demo?.forEach((demo) => demo && (styles += `@include artboard.demo();`));
+        uniqueProperties.demo?.forEach((demo) => demo && (componentStyles += `@include artboard.demo();`));
 
-        console.log(styles);
-
-        return styles;
+        return { libaries: libStyles, components: componentStyles };
     };
 
     return { build };
