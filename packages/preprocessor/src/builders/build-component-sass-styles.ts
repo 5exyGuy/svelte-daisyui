@@ -1,5 +1,5 @@
 import type { HtmlParseResult, PreprocessorOptions, StyleBuilder } from '../interfaces';
-import { createStyleBuilder } from './create-style-builder';
+import { createStyleBuilder } from './style-builder-factory';
 
 export function buildComponentSassStyles(
     options: PreprocessorOptions,

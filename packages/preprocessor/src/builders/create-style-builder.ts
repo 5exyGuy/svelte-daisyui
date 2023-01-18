@@ -1,19 +1,8 @@
-import type { PreprocessorOptions, StyleBuilder } from '../interfaces';
-import { createAlertStyleBuilder, createArtboardStyleBuilder } from './components';
+import type { ComponentSchema } from '@svelte-daisyui/shared';
 
-export function createStyleBuilder(options: PreprocessorOptions, componentName: string) {
-    let styleBuilder: StyleBuilder;
-
-    switch (componentName) {
-        case 'Alert':
-            styleBuilder = createAlertStyleBuilder(options);
-            break;
-        case 'Artboard':
-            styleBuilder = createArtboardStyleBuilder(options);
-            break;
-        default:
-            throw new Error(`No style builder found for component ${componentName}`);
-    }
-
-    return styleBuilder;
+export function createStyleBuilder<Props, ResponsivePropNames>(
+    componentSchema: ComponentSchema<Props>,
+    build: (context: BuildContext<Props, ResponsivePropNames>) => void,
+) {
+    return { build };
 }

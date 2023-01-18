@@ -3,6 +3,9 @@ import type { TemplateNode } from 'svelte/types/compiler/interfaces';
 import type { PreprocessorOptions, StyleBuilder } from '../../interfaces';
 import { parseComponents } from '../../markup';
 
+// export const createAlertStyleBuilder =
+// createStyleBuilder<AlertProps, AlertResponsivePropNames>(AlertSchema, (context) => {});
+
 export function createAlertStyleBuilder(options: PreprocessorOptions): StyleBuilder {
     const build = (aliases: Set<string>, template: TemplateNode, html: string) => {
         const uniqueProperties = parseComponents<AlertProps, AlertResponsivePropNames>(
