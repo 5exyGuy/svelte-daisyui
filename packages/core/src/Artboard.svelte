@@ -33,7 +33,7 @@
 </div>
 
 <style lang="scss" global>
-    @import '@svelte-daisyui/styles/_artboard.scss';
+    @use '@svelte-daisyui/styles/_artboard.scss';
 
-    @import default();
+    @include artboard.default();
 </style>

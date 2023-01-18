@@ -1,3 +1,4 @@
+import { PropTypes } from '../../enums';
 import type { ComponentSchema } from '../../interfaces';
 import { convertToEntries } from '../../utilities';
 
@@ -5,17 +6,20 @@ export function generateComponentClasses<Props>(componentSchema: ComponentSchema
     const classList = [] as Array<string>;
 
     convertToEntries(values).forEach(([propName, propValue]) => {
+        const propData = componentSchema.data[propName];
+        if (!propData) return;
+
         if (typeof propValue !== 'object') {
-            if (!componentSchema.data[propName]!.validation.validator(propValue))
-                throw new Error(`Invalid value for ${propName as string}`);
+            if (!propData.validate(propValue)) throw new Error(`Invalid value for ${propName as string}`);
+            propValue = propData.transform ? propData.transform(propValue) : propValue;
             classList.push(`${componentSchema.name.toLowerCase()}-${propValue}`);
             return;
         }
 
         convertToEntries(propValue).forEach(([breakpointName, breakpointValue]) => {
-            if (!componentSchema.data[propName]!.validation.validator(breakpointValue as any))
-                throw new Error(`Invalid value for ${propName as string}`);
-
+            if (!propData.validate(breakpointValue as any)) throw new Error(`Invalid value for ${propName as string}`);
+            if (propData.type === PropTypes.Boolean && breakpointValue === false) return;
+            breakpointValue = propData.transform ? propData.transform(breakpointValue as any) : breakpointValue;
             classList.push(
                 `${
                     breakpointName !== 'default' ? (breakpointName as string) + ':' : ''

@@ -1,5 +1,5 @@
 import type { PreprocessorOptions, StyleBuilder } from '../interfaces';
-import { createAlertStyleBuilder } from './components';
+import { createAlertStyleBuilder, createArtboardStyleBuilder } from './components';
 
 export function createStyleBuilder(options: PreprocessorOptions, componentName: string) {
     let styleBuilder: StyleBuilder;
@@ -7,6 +7,9 @@ export function createStyleBuilder(options: PreprocessorOptions, componentName: 
     switch (componentName) {
         case 'Alert':
             styleBuilder = createAlertStyleBuilder(options);
+            break;
+        case 'Artboard':
+            styleBuilder = createArtboardStyleBuilder(options);
             break;
         default:
             throw new Error(`No style builder found for component ${componentName}`);

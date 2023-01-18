@@ -9,6 +9,7 @@
     ],
     "exports": {
         "./_alert.scss": "./_alert.scss",
+        "./_artboard.scss": "./_artboard.scss",
         "./_core.scss": "./_core.scss",
         "./_escape.scss": "./_escape.scss"
     }

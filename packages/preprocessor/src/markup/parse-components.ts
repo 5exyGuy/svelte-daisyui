@@ -24,8 +24,15 @@ export function parseComponents<Props, ResponsivePropNames extends keyof Props>(
             const componentAttributes = (node as Element).attributes.reduce((props, attribute) => {
                 if (attribute.type !== 'Attribute') return props;
                 const { name, value } = attribute as Attribute;
-                if (componentSchema.data[name as keyof Props])
+                if (!componentSchema.data[name as keyof Props]) return props;
+                if (typeof value === 'boolean') props[name as keyof Props] = value;
+                else if (
+                    Array.isArray(value) &&
+                    value.length === 1 &&
+                    (value[0].type === 'Text' || value[0].type === 'MustacheTag')
+                )
                     props[name as keyof Props] = html.substring(value[0].start + 1, value[0].end - 1);
+                else throw new Error(`Invalid attribute value for ${name}`);
                 return props;
             }, {} as Record<keyof Props, string>);
             const transformedComponentAttributes = transformSchema(componentSchema, componentAttributes);
