@@ -21,7 +21,7 @@
 
 @mixin status($status) {
     .avatar.avatar-#{$status}:before {
-        @include core.bg-color(if($status === 'online', 'success', 'base-300'));
+        @include core.bg-color(if($status == 'online', 'success', 'base-300'));
 
         content: '';
         display: block;

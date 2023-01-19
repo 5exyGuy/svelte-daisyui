@@ -9,7 +9,7 @@ export function transformSchema<Props>(componentSchema: ComponentSchema<Props>, 
         const propData = componentSchema.data[propName]!;
 
         const propValue = value[propName];
-        if (!propValue) {
+        if (!propValue && propData.default) {
             transformed[propName] = propData.default;
             return transformed;
         }

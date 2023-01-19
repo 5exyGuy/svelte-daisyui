@@ -5,7 +5,7 @@ export interface ComponentPropData<Props, PropName extends keyof Props> {
     readonly type: PropTypes;
     readonly validate: (value?: Props[PropName]) => boolean;
     readonly transform?: <T>(value?: Props[PropName]) => T;
-    readonly default: Props[PropName];
+    readonly default?: Props[PropName];
 }
 
 export interface ComponentSchema<Props> {

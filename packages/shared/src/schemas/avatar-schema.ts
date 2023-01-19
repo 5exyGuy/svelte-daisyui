@@ -1,5 +1,4 @@
-import { PropTypes } from '../enums';
-import { AvatarStatus } from '../enums/avatar-status.enum';
+import { AvatarStatus, PropTypes } from '../enums';
 import type { AvatarProps, ComponentSchema } from '../interfaces';
 
 export const AvatarSchema = {
@@ -34,7 +33,6 @@ export const AvatarSchema = {
             type: PropTypes.String,
             validate: (value) => AvatarStatus[value!] !== undefined,
             transform: (value) => AvatarStatus[value!],
-            default: 'online',
         },
     },
 } as ComponentSchema<AvatarProps>;

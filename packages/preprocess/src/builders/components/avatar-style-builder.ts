@@ -1,11 +1,12 @@
-import { AvatarSchema, type AvatarProps, type AvatarResponsivePropNames } from '@svelte-daisyui/shared';
-import { AvatarStatus } from '@svelte-daisyui/shared/src/enums/avatar-status.enum';
+import { AvatarSchema, AvatarStatus, type AvatarProps, type AvatarResponsivePropNames } from '@svelte-daisyui/shared';
 import { createStyleBuilder } from '../create-style-builder';
 
 export const AvatarStyleBuilder = createStyleBuilder<AvatarProps, AvatarResponsivePropNames>(
     AvatarSchema,
     (context) => {
         context.useLib('avatar');
+
+        console.log('context.uniqueProps', context.uniqueProps);
 
         context.uniqueProps.placeholder?.forEach(
             (placeholder) => placeholder && context.includeMixin('avatar', 'placeholder'),
