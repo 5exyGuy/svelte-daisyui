@@ -5,18 +5,18 @@ import {
     type ResponsiveProperty,
 } from '@svelte-daisyui/shared';
 import { walk } from 'svelte/compiler';
-import type { Attribute, Element, TemplateNode } from 'svelte/types/compiler/interfaces';
+import type { Attribute, Element } from 'svelte/types/compiler/interfaces';
+import type { HtmlParseResult } from '../interfaces';
 import type { UniqueComponentProps } from '../types';
 
 export function parseComponents<Props, ResponsivePropNames extends keyof Props>(
     componentSchema: ComponentSchema<Props>,
     aliases: Set<string>,
-    template: TemplateNode,
-    html: string,
+    html: HtmlParseResult,
 ) {
     const uniqueComponentProps = {} as UniqueComponentProps<Props, ResponsivePropNames>;
 
-    walk(template, {
+    walk(html.template, {
         enter: (node) => {
             if (node.type !== 'InlineComponent') return;
             if (!aliases.has((node as Element).name)) return;
@@ -31,7 +31,7 @@ export function parseComponents<Props, ResponsivePropNames extends keyof Props>(
                     value.length === 1 &&
                     (value[0].type === 'Text' || value[0].type === 'MustacheTag')
                 )
-                    props[name as keyof Props] = html.substring(value[0].start + 1, value[0].end - 1);
+                    props[name as keyof Props] = html.content.substring(value[0].start + 1, value[0].end - 1);
                 else throw new Error(`Invalid attribute value for ${name}`);
                 return props;
             }, {} as Record<keyof Props, string>);

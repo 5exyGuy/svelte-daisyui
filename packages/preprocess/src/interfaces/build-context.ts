@@ -6,4 +6,5 @@ export interface BuildContext<Props, ResponsivePropNames extends keyof Props = n
     uniqueProps: UniqueComponentProps<Props, ResponsivePropNames>;
     useLib(name: string): void;
     includeMixin(lib: string, fn: string, ...args: Array<string>): void;
+    toString(): { libraries: string; components: string };
 }

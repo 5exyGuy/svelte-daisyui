@@ -1,4 +1,6 @@
 import type { HtmlParseResult, PreprocessorOptions, StyleBuilder } from '../interfaces';
+import { parseComponents } from '../markup';
+import { createBuildContext } from './create-build-context';
 import { resolveStyleBuilder } from './resolve-style-builder';
 
 export function buildComponentSassStyles(
@@ -12,8 +14,11 @@ export function buildComponentSassStyles(
             (styleBuilders.get(componentName) as StyleBuilder | undefined) ?? resolveStyleBuilder(componentName)!;
         styleBuilders.has(componentName) || styleBuilders.set(componentName, styleBuilder);
 
-        const { libaries, components } = styleBuilder.build(aliases, html.template, html.content);
+        const uniqueProps = parseComponents(styleBuilder.componentSchema, aliases, html);
+        const buildContext = createBuildContext(options, uniqueProps);
+        styleBuilder.build(buildContext);
+        const result = buildContext.toString();
 
-        return `${libaries}${prevValue}${components}`;
+        return `${result.libraries}${prevValue}${result.components}`;
     }, '');
 }
