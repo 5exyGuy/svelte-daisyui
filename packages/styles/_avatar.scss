@@ -1,0 +1,47 @@
+@use 'core';
+
+@mixin default() {
+    .avatar {
+        position: relative;
+        display: inline-flex;
+
+        & > div {
+            display: block;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+        }
+
+        & > img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
+@mixin status($status) {
+    .avatar.avatar-#{$status}:before {
+        @include core.bg-color(if($status === 'online', 'success', 'base-300'));
+
+        content: '';
+        display: block;
+        position: absolute;
+        z-index: 10;
+        border-radius: 9999px;
+        width: 15%;
+        height: 15%;
+        top: 7%;
+        right: 7%;
+        box-shadow: 0 0 0 2px core.$base-100;
+    }
+}
+
+@mixin placeholder() {
+    .avatar.avatar-placeholder {
+        & > * {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}

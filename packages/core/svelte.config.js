@@ -1,5 +1,5 @@
 import adapter from '@sveltejs/adapter-auto';
-import { daisyuiPreprocess } from '@svelte-daisyui/preprocessor';
+import { daisyuiPreprocess } from '@svelte-daisyui/preprocess';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 
 /** @type {import('@sveltejs/kit').Config} */

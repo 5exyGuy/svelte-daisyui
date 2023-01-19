@@ -7,8 +7,8 @@ export const AlertSchema = {
         color: {
             responsive: true,
             type: PropTypes.String,
-            validate: (value: AlertProps['color']) =>
-                ['base', 'primary', 'secondary', 'accent', 'info', 'success', 'warning', 'error'].includes(value),
+            validate: (value) =>
+                ['base', 'primary', 'secondary', 'accent', 'info', 'success', 'warning', 'error'].includes(value!),
             default: 'base',
         },
     },
