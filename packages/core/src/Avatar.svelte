@@ -12,7 +12,7 @@
     // -----------------------------------------------------------
 
     export let status: Nullable<AvatarComponentProps['status']> = undefined;
-    export let size: AvatarComponentProps['size'] = '6rem';
+    // export let size: AvatarComponentProps['size'] = '6rem';
     export let placeholder: AvatarComponentProps['placeholder'] = false;
     let restClass: Nullable<string> = undefined;
     export { restClass as class };
@@ -23,7 +23,7 @@
 
     $: classNames = joinClasses(
         AvatarSchema.name.toLowerCase(),
-        generateComponentClasses<AvatarComponentProps>(AvatarSchema, { placeholder, size, status }),
+        generateComponentClasses<AvatarComponentProps>(AvatarSchema, { placeholder, status }),
         restClass ?? '',
     );
 

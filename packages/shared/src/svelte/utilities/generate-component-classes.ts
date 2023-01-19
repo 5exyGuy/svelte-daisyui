@@ -12,8 +12,10 @@ export function generateComponentClasses<Props>(componentSchema: ComponentSchema
         if (typeof propValue !== 'object') {
             if (!propData.validate(propValue) && propData.default)
                 throw new Error(`Invalid value for ${propName as string}`);
-            propValue = propData.transform ? propData.transform(propValue) : propValue;
-            classList.push(`${componentSchema.name.toLowerCase()}-${propValue}`);
+            if (propData.validate(propValue)) {
+                propValue = propData.transform ? propData.transform(propValue) : propValue;
+                classList.push(`${componentSchema.name.toLowerCase()}-${propValue}`);
+            }
             return;
         }
 
