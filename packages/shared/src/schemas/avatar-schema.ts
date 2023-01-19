@@ -12,7 +12,7 @@ export const AvatarSchema = {
             default: false,
         },
         size: {
-            responsive: true,
+            responsive: false,
             type: PropTypes.String,
             validate: (value) => typeof value === 'string',
             default: '6rem',

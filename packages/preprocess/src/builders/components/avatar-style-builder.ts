@@ -6,8 +6,6 @@ export const AvatarStyleBuilder = createStyleBuilder<AvatarProps, AvatarResponsi
     (context) => {
         context.useLib('avatar');
 
-        console.log('context.uniqueProps', context.uniqueProps);
-
         context.uniqueProps.placeholder?.forEach(
             (placeholder) => placeholder && context.includeMixin('avatar', 'placeholder'),
         );

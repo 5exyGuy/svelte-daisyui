@@ -1,5 +1,6 @@
 <script lang="ts">
     import {
+        AvatarSchema,
         generateComponentClasses,
         joinClasses,
         type AvatarComponentProps,
@@ -22,7 +23,7 @@
 
     $: classNames = joinClasses(
         AvatarSchema.name.toLowerCase(),
-        generateComponentClasses<AvatarComponentProps>(AvatarSchema, { status, size, placeholder }),
+        generateComponentClasses<AvatarComponentProps>(AvatarSchema, { placeholder, size, status }),
         restClass ?? '',
     );
 

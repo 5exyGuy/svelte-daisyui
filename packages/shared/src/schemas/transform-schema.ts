@@ -26,19 +26,21 @@ export function transformSchema<Props>(componentSchema: ComponentSchema<Props>, 
             return transformed;
         }
 
-        switch (propData.type) {
-            case PropTypes.Boolean:
-                transformed[propName] = Boolean(propValue) as Props[keyof Props];
-                break;
-            case PropTypes.Number:
-                transformed[propName] = Number(propValue) as Props[keyof Props];
-                break;
-            case PropTypes.Object:
-                transformed[propName] = JSON.parse(propValue) as Props[keyof Props];
-                break;
-            case PropTypes.String:
-                transformed[propName] = String(propValue) as Props[keyof Props];
-                break;
+        if (propValue) {
+            switch (propData.type) {
+                case PropTypes.Boolean:
+                    transformed[propName] = Boolean(propValue) as Props[keyof Props];
+                    break;
+                case PropTypes.Number:
+                    transformed[propName] = Number(propValue) as Props[keyof Props];
+                    break;
+                case PropTypes.Object:
+                    transformed[propName] = JSON.parse(propValue) as Props[keyof Props];
+                    break;
+                case PropTypes.String:
+                    transformed[propName] = String(propValue) as Props[keyof Props];
+                    break;
+            }
         }
 
         return transformed;
