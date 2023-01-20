@@ -1,5 +1,5 @@
 import type { BrandColor, FunctionalColor } from '../enums';
-import type { StringKeyOf } from '../types';
+import type { PickPropNames, StringKeyOf } from '../types';
 import type { SvelteComponent } from 'svelte';
 import type { ComponentProps } from '../types';
 
@@ -10,6 +10,8 @@ export interface AlertProps {
     message: string;
 }
 
-export type AlertResponsivePropNames = 'color';
+export type AlertResponsivePropNames = PickPropNames<AlertProps, 'color'>;
+
+export type AlertClassPropNames = PickPropNames<AlertProps, 'color'>;
 
 export type AlertComponentProps = ComponentProps<AlertProps, AlertResponsivePropNames>;

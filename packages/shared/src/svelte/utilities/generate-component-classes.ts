@@ -1,8 +1,14 @@
 import { PropTypes } from '../../enums';
 import type { ComponentSchema } from '../../interfaces';
+import type { ResponsiveProperty } from '../../types';
 import { convertToEntries } from '../../utilities';
 
-export function generateComponentClasses<Props>(componentSchema: ComponentSchema<Props>, values: Partial<Props>) {
+export function generateComponentClasses<ComponentProps, ClassPropNames extends keyof ComponentProps>(
+    componentSchema: ComponentSchema<{
+        [K in keyof ComponentProps]: Exclude<ComponentProps[K], ResponsiveProperty<ComponentProps[K]>>;
+    }>,
+    values: Partial<Pick<ComponentProps, ClassPropNames>>,
+) {
     const classList = [] as Array<string>;
 
     convertToEntries(values).forEach(([propName, propValue]) => {

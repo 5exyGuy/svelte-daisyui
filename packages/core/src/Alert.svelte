@@ -3,6 +3,7 @@
         AlertSchema,
         generateComponentClasses,
         joinClasses,
+        type AlertClassPropNames,
         type AlertComponentProps,
         type Nullable,
     } from '@svelte-daisyui/shared';
@@ -29,7 +30,7 @@
 
     $: classNames = joinClasses(
         AlertSchema.name.toLowerCase(),
-        generateComponentClasses<AlertComponentProps>(AlertSchema, { color }),
+        generateComponentClasses<AlertComponentProps, AlertClassPropNames>(AlertSchema, { color }),
         restClass ?? '',
     );
 </script>
