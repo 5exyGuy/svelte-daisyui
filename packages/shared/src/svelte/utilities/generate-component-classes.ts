@@ -18,10 +18,10 @@ export function generateComponentClasses<
         if (!propData) return;
 
         if (typeof propValue !== 'object') {
-            if (!propData.validate(propValue) && propData.default)
+            if (!propData.validate(propValue as Props[ClassPropNames]) && propData.default)
                 throw new Error(`Invalid value for ${propName as string}`);
-            if (propData.validate(propValue)) {
-                propValue = propData.transform ? propData.transform(propValue) : propValue;
+            if (propData.validate(propValue as Props[ClassPropNames])) {
+                propValue = propData.transform ? propData.transform(propValue as Props[ClassPropNames]) : propValue;
                 classList.push(`${componentSchema.name.toLowerCase()}-${propValue}`);
             }
             return;
