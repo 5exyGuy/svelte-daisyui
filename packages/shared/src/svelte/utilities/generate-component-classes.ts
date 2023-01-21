@@ -1,13 +1,10 @@
 import { PropTypes } from '../../enums';
 import type { ComponentSchema } from '../../interfaces';
-import type { ResponsiveProperty } from '../../types';
 import { convertToEntries } from '../../utilities';
 
-export function generateComponentClasses<ComponentProps, ClassPropNames extends keyof ComponentProps>(
-    componentSchema: ComponentSchema<{
-        [K in keyof ComponentProps]: Exclude<ComponentProps[K], ResponsiveProperty<ComponentProps[K]>>;
-    }>,
-    values: Partial<Pick<ComponentProps, ClassPropNames>>,
+export function generateComponentClasses<Props, ClassPropNames extends keyof Props>(
+    componentSchema: ComponentSchema<Pick<Props, ClassPropNames>>,
+    values: Partial<Pick<Props, ClassPropNames>>,
 ) {
     const classList = [] as Array<string>;
 
@@ -26,9 +23,12 @@ export function generateComponentClasses<ComponentProps, ClassPropNames extends 
         }
 
         convertToEntries(propValue).forEach(([breakpointName, breakpointValue]) => {
-            if (!propData.validate(breakpointValue as any)) throw new Error(`Invalid value for ${propName as string}`);
+            if (!propData.validate(breakpointValue as Props[ClassPropNames]))
+                throw new Error(`Invalid value for ${propName as string}`);
             if (propData.type === PropTypes.Boolean && breakpointValue === false) return;
-            breakpointValue = propData.transform ? propData.transform(breakpointValue as any) : breakpointValue;
+            breakpointValue = propData.transform
+                ? propData.transform(breakpointValue as Props[ClassPropNames])
+                : breakpointValue;
             classList.push(
                 `${
                     breakpointName !== 'default' ? (breakpointName as string) + ':' : ''
