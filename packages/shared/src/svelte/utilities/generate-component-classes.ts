@@ -1,10 +1,15 @@
 import { PropTypes } from '../../enums';
 import type { ComponentSchema } from '../../interfaces';
+import type { ComponentProps } from '../../types';
 import { convertToEntries } from '../../utilities';
 
-export function generateComponentClasses<Props, ClassPropNames extends keyof Props>(
-    componentSchema: ComponentSchema<Pick<Props, ClassPropNames>>,
-    values: Partial<Pick<Props, ClassPropNames>>,
+export function generateComponentClasses<
+    Props,
+    ClassPropNames extends keyof Props,
+    ResposivePropNames extends ClassPropNames,
+>(
+    componentSchema: ComponentSchema<Props>,
+    values: Partial<Pick<ComponentProps<Props, ResposivePropNames>, ClassPropNames>>,
 ) {
     const classList = [] as Array<string>;
 

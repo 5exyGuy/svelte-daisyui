@@ -3,18 +3,21 @@
         AvatarSchema,
         generateComponentClasses,
         joinClasses,
+        type AvatarClassPropNames,
         type AvatarComponentProps,
-        type Nullable,
+        type AvatarProps,
+        type AvatarResponsivePropNames,
+        type Undefinedable,
     } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
     // Properties
     // -----------------------------------------------------------
 
-    export let status: Nullable<AvatarComponentProps['status']> = undefined;
+    export let status: Undefinedable<AvatarComponentProps['status']> = undefined;
     // export let size: AvatarComponentProps['size'] = '6rem';
     export let placeholder: AvatarComponentProps['placeholder'] = false;
-    let restClass: Nullable<string> = undefined;
+    let restClass: Undefinedable<string> = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------
@@ -23,8 +26,11 @@
 
     $: classNames = joinClasses(
         AvatarSchema.name.toLowerCase(),
-        generateComponentClasses<AvatarComponentProps>(AvatarSchema, { placeholder, status }),
-        restClass ?? '',
+        generateComponentClasses<AvatarProps, AvatarClassPropNames, AvatarResponsivePropNames>(AvatarSchema, {
+            placeholder,
+            status,
+        }),
+        restClass,
     );
 
     // -----------------------------------------------------------

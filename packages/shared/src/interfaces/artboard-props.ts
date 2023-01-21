@@ -9,6 +9,6 @@ export interface ArtboardProps {
 
 export type ArtboardResponsivePropNames = never;
 
-export type ArtboardClassPropNames = 'alignment' | 'demo';
+export type ArtboardClassPropNames = 'alignment' | 'demo' | 'size';
 
 export type ArtboardComponentProps = ArtboardProps;

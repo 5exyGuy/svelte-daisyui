@@ -1,6 +1,6 @@
 import type { ResponsiveProperty } from '.';
 
-export type ComponentProps<Props, ResponsivePropNames extends keyof Props> = Omit<Props, ResponsivePropNames> & {
+export type ComponentProps<Props, ResponsivePropNames extends keyof Props> = Props & {
     [K in ResponsivePropNames]: ResponsiveProperty<Props[K]> | Props[K];
 };
 

@@ -15,4 +15,6 @@ export interface AvatarProps {
 
 export type AvatarResponsivePropNames = never;
 
+export type AvatarClassPropNames = 'status' | 'placeholder';
+
 export type AvatarComponentProps = AvatarProps;

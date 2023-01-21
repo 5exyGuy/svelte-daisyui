@@ -4,7 +4,7 @@ export * from './component-props';
 export * from './css-unit-suffix';
 export * from './css-unit';
 export * from './merge';
-export * from './nullable';
+export * from './undefinedable';
 export * from './pick-prop-names';
 export * from './responsive-property';
 export * from './string-key-of';

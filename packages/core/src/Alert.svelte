@@ -5,7 +5,9 @@
         joinClasses,
         type AlertClassPropNames,
         type AlertComponentProps,
-        type Nullable,
+        type AlertProps,
+        type AlertResponsivePropNames,
+        type Undefinedable,
     } from '@svelte-daisyui/shared';
     // import MdInfoOutline from 'svelte-icons/md/MdInfoOutline.svelte';
     // import FaRegCheckCircle from 'svelte-icons/fa/FaRegCheckCircle.svelte';
@@ -19,9 +21,9 @@
 
     export let color: AlertComponentProps['color'] = 'base';
     // export let icon: Nullable<AlertProps['icon']> = undefined;
-    export let message: Nullable<AlertComponentProps['message']> = undefined;
+    export let message: Undefinedable<AlertComponentProps['message']> = undefined;
     // export let showIcon: AlertProps['showIcon'] = true;
-    let restClass: Nullable<string> = undefined;
+    let restClass: Undefinedable<string> = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------
@@ -30,8 +32,8 @@
 
     $: classNames = joinClasses(
         AlertSchema.name.toLowerCase(),
-        generateComponentClasses<AlertComponentProps, AlertClassPropNames>(AlertSchema, { color }),
-        restClass ?? '',
+        generateComponentClasses<AlertProps, AlertResponsivePropNames, AlertClassPropNames>(AlertSchema, { color }),
+        restClass,
     );
 </script>
 

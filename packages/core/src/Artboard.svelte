@@ -3,8 +3,11 @@
         ArtboardSchema,
         generateComponentClasses,
         joinClasses,
+        type ArtboardClassPropNames,
         type ArtboardComponentProps,
-        type Nullable,
+        type ArtboardProps,
+        type ArtboardResponsivePropNames,
+        type Undefinedable,
     } from '@svelte-daisyui/shared';
 
     // -----------------------------------------------------------
@@ -14,7 +17,7 @@
     export let size: ArtboardComponentProps['size'] = '320x568';
     export let alignment: ArtboardComponentProps['alignment'] = 'horizontal';
     export let demo: ArtboardComponentProps['demo'] = false;
-    let restClass: Nullable<string> = undefined;
+    let restClass: Undefinedable<string> = undefined;
     export { restClass as class };
 
     // -----------------------------------------------------------
@@ -23,8 +26,12 @@
 
     $: classNames = joinClasses(
         ArtboardSchema.name.toLowerCase(),
-        generateComponentClasses<ArtboardComponentProps>(ArtboardSchema, { alignment, size, demo }),
-        restClass ?? '',
+        generateComponentClasses<ArtboardProps, ArtboardClassPropNames, ArtboardResponsivePropNames>(ArtboardSchema, {
+            alignment,
+            demo,
+            size,
+        }),
+        restClass,
     );
 </script>
 
