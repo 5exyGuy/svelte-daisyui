@@ -11,6 +11,7 @@
         "./_alert.scss": "./_alert.scss",
         "./_artboard.scss": "./_artboard.scss",
         "./_avatar.scss": "./_avatar.scss",
+        "./badge.scss": "./_badge.scss",
         "./_core.scss": "./_core.scss",
         "./_escape.scss": "./_escape.scss"
     }
