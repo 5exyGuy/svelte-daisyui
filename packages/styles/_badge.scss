@@ -27,6 +27,9 @@
     }
 }
 
+@mixin responsive-color($color, $prefix, $screen-size) {
+}
+
 @mixin size($size) {
     @if $size == 'xs' {
         .badge.badge-xs {
@@ -61,6 +64,9 @@
             padding-right: 0.688rem;
         }
     }
+}
+
+@mixin responsive-size($size, $prefix, $screen-size) {
 }
 
 @mixin outline($color) {
