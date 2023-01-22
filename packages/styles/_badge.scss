@@ -1,0 +1,76 @@
+@use 'core';
+@use 'escape';
+@use 'sass:list';
+@use 'sass:map';
+
+@mixin default() {
+    .badge {
+        @include core.badge-border-radius();
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-width: 1px;
+        width: fit-content;
+
+        transition-property: color, background-color, border-color;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 200ms;
+    }
+}
+
+@mixin color($color) {
+    .badge.badge-#{$color} {
+        @include core.border-color($color);
+        @include core.bg-color($color);
+        @include core.text-color($color + '-content');
+    }
+}
+
+@mixin size($size) {
+    @if $size == 'xs' {
+        .badge.badge-xs {
+            height: 0.75rem;
+            font-size: 0.75rem;
+            line-height: 0.75rem;
+            padding-left: 0.313rem;
+            padding-right: 0.313rem;
+        }
+    } @else if $size == 'sm' {
+        .badge.badge-sm {
+            height: 1rem;
+            font-size: 0.75rem;
+            line-height: 1rem;
+            padding-left: 0.438rem;
+            padding-right: 0.438rem;
+        }
+    } @else if $size == 'md' {
+        .badge.badge-md {
+            height: 1.25rem;
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+            padding-left: 0.563rem;
+            padding-right: 0.563rem;
+        }
+    } @else if $size == 'lg' {
+        .badge.badge-lg {
+            height: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.5rem;
+            padding-left: 0.688rem;
+            padding-right: 0.688rem;
+        }
+    }
+}
+
+@mixin outline($color) {
+    .badge.badge-outline {
+        border-color: currentColor;
+        color: currentColor;
+        background-color: transparent !important;
+
+        &.badge-#{$color} {
+            @include core.text-color($color);
+        }
+    }
+}
