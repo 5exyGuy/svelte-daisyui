@@ -1,5 +1,5 @@
-import type { Alignment, ArtboardSize } from '../enums';
-import type { StringKeyOf } from '../types';
+import type { Alignment, ArtboardSize } from '../../enums';
+import type { StringKeyOf } from '../../types';
 
 export interface ArtboardProps {
     size: StringKeyOf<typeof ArtboardSize>;

@@ -1,5 +1,5 @@
-import type { BrandColor, FunctionalColor, Size } from '../enums';
-import type { ComponentProps, StringKeyOf } from '../types';
+import type { BrandColor, FunctionalColor, Size } from '../../enums';
+import type { ComponentProps, StringKeyOf } from '../../types';
 
 export interface BadgeProps {
     color: StringKeyOf<typeof BrandColor & typeof FunctionalColor> | 'neutral' | 'ghost';

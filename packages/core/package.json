@@ -14,7 +14,8 @@
         "format": "prettier --plugin-search-dir . --write ."
     },
     "dependencies": {
-        "@svelte-daisyui/shared": "workspace:^1.0.0"
+        "@svelte-daisyui/shared": "workspace:^1.0.0",
+        "svelte": "^3.55.1"
     },
     "devDependencies": {
         "@svelte-daisyui/styles": "workspace:^1.0.0",
@@ -24,7 +25,6 @@
         "@sveltejs/package": "^1.0.2",
         "prettier": "^2.8.3",
         "prettier-plugin-svelte": "^2.9.0",
-        "svelte": "^3.55.1",
         "svelte-check": "^3.0.2",
         "tslib": "^2.4.1",
         "typescript": "^4.9.4",

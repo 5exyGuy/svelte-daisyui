@@ -31,6 +31,7 @@ importers:
       vite: ^4.0.4
     dependencies:
       '@svelte-daisyui/shared': link:../shared
+      svelte: 3.55.1
     devDependencies:
       '@svelte-daisyui/preprocess': link:../preprocess
       '@svelte-daisyui/styles': link:../styles
@@ -39,7 +40,6 @@ importers:
       '@sveltejs/package': 1.0.2_atrrhq7vg4ekua4nnyrpuardle
       prettier: 2.8.3
       prettier-plugin-svelte: 2.9.0_kdmmghgdi3ngrsq6otxkjilbry
-      svelte: 3.55.1
       svelte-check: 3.0.2_svelte@3.55.1
       tslib: 2.4.1
       typescript: 4.9.4

@@ -1,6 +1,6 @@
 // import type { BrandColor, FunctionalColor } from '../enums';
-import type { AvatarStatus } from '../enums/avatar-status';
-import type { CSSUnit, StringKeyOf } from '../types';
+import type { AvatarStatus } from '../../enums/avatar-status';
+import type { CSSUnit, StringKeyOf } from '../../types';
 
 export interface AvatarProps {
     status: StringKeyOf<typeof AvatarStatus>;

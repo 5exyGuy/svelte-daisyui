@@ -9,4 +9,4 @@
 <Alert>Hello world</Alert>
 <Artboard demo class="test">Hello world</Artboard>
 <Avatar>Avatar</Avatar>
-<Badge color={{ sm: 'primary' }}>Badge</Badge>
+<Badge color="info">Badge</Badge>

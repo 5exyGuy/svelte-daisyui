@@ -1,7 +1,7 @@
-import type { BrandColor, FunctionalColor } from '../enums';
-import type { PickPropNames, StringKeyOf } from '../types';
+import type { BrandColor, FunctionalColor } from '../../enums';
+import type { PickPropNames, StringKeyOf } from '../../types';
 import type { SvelteComponent } from 'svelte';
-import type { ComponentProps } from '../types';
+import type { ComponentProps } from '../../types';
 
 export interface AlertProps {
     color: StringKeyOf<typeof BrandColor & typeof FunctionalColor> | 'base';
