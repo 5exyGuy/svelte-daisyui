@@ -1,4 +1,10 @@
-import { convertToKeys, PropTypes, type ComponentSchema } from '@svelte-daisyui/shared';
+import {
+    convertToEntries,
+    convertToKeys,
+    PropTypes,
+    type ComponentSchema,
+    type ResponsiveProperty,
+} from '@svelte-daisyui/shared';
 import type { PreprocessorOptions } from '../interfaces';
 
 export function transformSchema<Props>(
@@ -18,9 +24,17 @@ export function transformSchema<Props>(
             try {
                 const sanitizedPropValue = JSON.parse(
                     propValue.replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2":').replace(/'/g, '"'),
-                ) as Props[keyof Props];
+                ) as ResponsiveProperty<Props[keyof Props]>;
 
-                transformed[propName] = sanitizedPropValue;
+                const responsiveProp = convertToEntries(sanitizedPropValue).reduce(
+                    (responsiveProp, [breakpointName, breakpointValue]) => {
+                        if (options.breakpoints[breakpointName]) responsiveProp[breakpointName] = breakpointValue;
+                        return responsiveProp;
+                    },
+                    {} as ResponsiveProperty<Props[keyof Props]>,
+                );
+
+                transformed[propName] = responsiveProp as Props[keyof Props];
             } catch (e) {
                 transformed[propName] = propValue as Props[keyof Props];
             }
