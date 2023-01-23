@@ -10,11 +10,10 @@ export function buildComponentSassStyles(
     html: HtmlParseResult,
 ) {
     return Array.from(componentAliases.entries()).reduce((prevValue, [componentName, aliases]) => {
-        const styleBuilder =
-            (styleBuilders.get(componentName) as StyleBuilder | undefined) ?? resolveStyleBuilder(componentName)!;
+        const styleBuilder = (styleBuilders.get(componentName) as StyleBuilder) ?? resolveStyleBuilder(componentName)!;
         styleBuilders.has(componentName) || styleBuilders.set(componentName, styleBuilder);
 
-        const uniqueProps = parseComponents(styleBuilder.componentSchema, aliases, html);
+        const uniqueProps = parseComponents(styleBuilder.componentSchema, aliases, html, options);
         const buildContext = createBuildContext(options, uniqueProps);
         styleBuilder.build(buildContext);
         const result = buildContext.toString();

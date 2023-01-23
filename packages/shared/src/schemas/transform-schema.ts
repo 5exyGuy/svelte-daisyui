@@ -1,6 +1,5 @@
 import { PropTypes } from '../enums';
 import type { ComponentSchema } from '../interfaces';
-import type { ResponsiveProperty } from '../types';
 import { convertToKeys } from '../utilities';
 
 export function transformSchema<Props>(componentSchema: ComponentSchema<Props>, value: any) {
@@ -10,16 +9,13 @@ export function transformSchema<Props>(componentSchema: ComponentSchema<Props>, 
         const propData = componentSchema.data[propName]!;
 
         const propValue = value[propName];
-        if (!propValue && propData.default) {
-            transformed[propName] = propData.default;
-            return transformed;
-        }
+        if (typeof propValue === 'undefined') return transformed;
 
         if (propData.responsive) {
             try {
                 const sanitizedPropValue = JSON.parse(
                     propValue.replace(/(['"])?([a-z0-9A-Z_]+)(['"])?:/g, '"$2":').replace(/'/g, '"'),
-                ) as ResponsiveProperty<Props[keyof Props]>;
+                ) as Props[keyof Props];
 
                 transformed[propName] = sanitizedPropValue;
             } catch (e) {

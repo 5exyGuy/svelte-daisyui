@@ -6,13 +6,14 @@ import {
 } from '@svelte-daisyui/shared';
 import { walk } from 'svelte/compiler';
 import type { Attribute, Element } from 'svelte/types/compiler/interfaces';
-import type { HtmlParseResult } from '../interfaces';
+import type { HtmlParseResult, PreprocessorOptions } from '../interfaces';
 import type { UniqueComponentProps } from '../types';
 
 export function parseComponents<Props, ResponsivePropNames extends keyof Props>(
     componentSchema: ComponentSchema<Props>,
     aliases: Set<string>,
     html: HtmlParseResult,
+    options: PreprocessorOptions,
 ) {
     const uniqueComponentProps = {} as UniqueComponentProps<Props, ResponsivePropNames>;
 
@@ -58,17 +59,17 @@ export function parseComponents<Props, ResponsivePropNames extends keyof Props>(
                     );
                     return;
                 }
-                convertToEntries<ResponsiveProperty<Props[keyof Props]>>(propValue as any).forEach(
-                    ([breakpointName, breakpointValue]) => {
-                        (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>) ??= {};
-                        (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>)[
-                            breakpointName
-                        ] ??= new Set();
-                        (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>)[
-                            breakpointName
-                        ]!.add(breakpointValue!);
-                    },
-                );
+                convertToEntries(options.breakpoints).forEach(([breakpointName]) => {
+                    const breakpointValue = propValue[breakpointName] as ResponsiveProperty<Props[keyof Props]>;
+                    if (!breakpointValue) return;
+
+                    (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>) ??= {};
+                    (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>)[breakpointName] ??=
+                        new Set();
+                    (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>)[
+                        breakpointName
+                    ]!.add(breakpointValue!);
+                });
             });
         },
     });
