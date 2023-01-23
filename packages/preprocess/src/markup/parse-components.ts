@@ -1,19 +1,15 @@
-import {
-    convertToEntries,
-    transformSchema,
-    type ComponentSchema,
-    type ResponsiveProperty,
-} from '@svelte-daisyui/shared';
+import { convertToEntries, type ComponentSchema, type ResponsiveProperty } from '@svelte-daisyui/shared';
 import { walk } from 'svelte/compiler';
 import type { Attribute, Element } from 'svelte/types/compiler/interfaces';
 import type { HtmlParseResult, PreprocessorOptions } from '../interfaces';
+import { transformSchema } from '../utilities';
 import type { UniqueComponentProps } from '../types';
 
 export function parseComponents<Props, ResponsivePropNames extends keyof Props>(
+    options: PreprocessorOptions,
     componentSchema: ComponentSchema<Props>,
     aliases: Set<string>,
     html: HtmlParseResult,
-    options: PreprocessorOptions,
 ) {
     const uniqueComponentProps = {} as UniqueComponentProps<Props, ResponsivePropNames>;
 
@@ -39,7 +35,7 @@ export function parseComponents<Props, ResponsivePropNames extends keyof Props>(
                 else throw new Error(`Invalid attribute value for ${name}`);
                 return props;
             }, {} as Record<keyof Props, string>);
-            const transformedComponentAttributes = transformSchema(componentSchema, componentAttributes);
+            const transformedComponentAttributes = transformSchema(options, componentSchema, componentAttributes);
 
             convertToEntries(transformedComponentAttributes).forEach(([propName, propValue]) => {
                 if (!componentSchema.data[propName]!.responsive) {
@@ -59,17 +55,17 @@ export function parseComponents<Props, ResponsivePropNames extends keyof Props>(
                     );
                     return;
                 }
-                convertToEntries(options.breakpoints).forEach(([breakpointName]) => {
-                    const breakpointValue = propValue[breakpointName] as ResponsiveProperty<Props[keyof Props]>;
-                    if (!breakpointValue) return;
-
-                    (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>) ??= {};
-                    (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>)[breakpointName] ??=
-                        new Set();
-                    (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>)[
-                        breakpointName
-                    ]!.add(breakpointValue!);
-                });
+                convertToEntries(propValue as unknown as ResponsiveProperty<Props[keyof Props]>).forEach(
+                    ([breakpointName, breakpointValue]) => {
+                        (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>) ??= {};
+                        (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>)[
+                            breakpointName
+                        ] ??= new Set();
+                        (uniqueComponentProps[propName] as ResponsiveProperty<Set<Props[keyof Props]>>)[
+                            breakpointName
+                        ]!.add(breakpointValue!);
+                    },
+                );
             });
         },
     });
