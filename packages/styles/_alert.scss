@@ -4,6 +4,10 @@
 @use 'sass:map';
 @use 'sass:string';
 
+// ---------------------------------------------------------------------------------
+//                                  Default
+// ---------------------------------------------------------------------------------
+
 @mixin default() {
     .alert {
         @include core.box-border-radius();
@@ -36,7 +40,11 @@
     }
 }
 
-$colors: base, primary, secondary, accent, info, success, warning, error;
+// ---------------------------------------------------------------------------------
+//                                  Colors
+// ---------------------------------------------------------------------------------
+
+$colors: 'base', 'primary', 'secondary', 'accent', 'info', 'success', 'warning', 'error';
 
 @mixin color($color) {
     @if not list.index($colors, $color) {
@@ -46,15 +54,6 @@ $colors: base, primary, secondary, accent, info, success, warning, error;
     .alert.alert-#{$color} {
         @include core.bg-color($color + if($color == 'base', '-200', ''));
         @include core.text-color($color + '-content');
-    }
-}
-
-@mixin colors() {
-    @each $color in $colors {
-        .alert.alert-#{$color} {
-            @include core.bg-color($color + if($color == 'base', '-200', ''));
-            @include core.text-color($color + '-content');
-        }
     }
 }
 

@@ -31,7 +31,10 @@ export function parseComponents<Props, ResponsivePropNames extends keyof Props>(
                     value.length === 1 &&
                     (value[0].type === 'Text' || value[0].type === 'MustacheTag')
                 )
-                    props[name as keyof Props] = html.content.substring(value[0].start + 1, value[0].end - 1);
+                    props[name as keyof Props] = html.content.substring(
+                        value[0].start + (value[0].type === 'Text' ? 0 : 1),
+                        value[0].end - (value[0].type === 'Text' ? 0 : 1),
+                    );
                 else throw new Error(`Invalid attribute value for ${name}`);
                 return props;
             }, {} as Record<keyof Props, string>);

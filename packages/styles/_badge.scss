@@ -1,7 +1,11 @@
 @use 'core';
-@use 'escape';
+@use 'escape' as *;
 @use 'sass:list';
 @use 'sass:map';
+
+// ---------------------------------------------------------------------------------
+//                                  Default
+// ---------------------------------------------------------------------------------
 
 @mixin default() {
     .badge {
@@ -19,7 +23,17 @@
     }
 }
 
+// ---------------------------------------------------------------------------------
+//                                  Colors
+// ---------------------------------------------------------------------------------
+
+$colors: 'primary', 'secondary', 'accent', 'info', 'success', 'warning', 'error', 'neutral', 'ghost';
+
 @mixin color($color) {
+    @if not list.index($colors, $color) {
+        @error 'Invalid color `#{$color}`. Expected one of `#{$colors}`.';
+    }
+
     .badge.badge-#{$color} {
         @include core.border-color($color);
         @include core.bg-color($color);
@@ -28,9 +42,28 @@
 }
 
 @mixin responsive-color($color, $prefix, $screen-size) {
+    @media (min-width: $screen-size) {
+        $prefix: escape($prefix + ':');
+
+        .badge.#{$prefix}badge-#{$color} {
+            @include core.border-color($color);
+            @include core.bg-color($color);
+            @include core.text-color($color + '-content');
+        }
+    }
 }
 
+// ---------------------------------------------------------------------------------
+//                                  Sizes
+// ---------------------------------------------------------------------------------
+
+$sizes: 'xs', 'sm', 'md', 'lg';
+
 @mixin size($size) {
+    @if not list.index($sizes, $size) {
+        @error 'Invalid size `#{$size}`. Expected one of `#{$sizes}`.';
+    }
+
     @if $size == 'xs' {
         .badge.badge-xs {
             height: 0.75rem;
@@ -67,9 +100,58 @@
 }
 
 @mixin responsive-size($size, $prefix, $screen-size) {
+    @if not list.index($sizes, $size) {
+        @error 'Invalid size `#{$size}`. Expected one of `#{$sizes}`.';
+    }
+
+    @media (min-width: $screen-size) {
+        $prefix: escape($prefix + ':');
+
+        @if $size == 'xs' {
+            .badge.#{$prefix}badge-xs {
+                height: 0.75rem;
+                font-size: 0.75rem;
+                line-height: 0.75rem;
+                padding-left: 0.313rem;
+                padding-right: 0.313rem;
+            }
+        } @else if $size == 'sm' {
+            .badge.#{$prefix}badge-sm {
+                height: 1rem;
+                font-size: 0.75rem;
+                line-height: 1rem;
+                padding-left: 0.438rem;
+                padding-right: 0.438rem;
+            }
+        } @else if $size == 'md' {
+            .badge.#{$prefix}badge-md {
+                height: 1.25rem;
+                font-size: 0.875rem;
+                line-height: 1.25rem;
+                padding-left: 0.563rem;
+                padding-right: 0.563rem;
+            }
+        } @else if $size == 'lg' {
+            .badge.#{$prefix}badge-lg {
+                height: 1.5rem;
+                font-size: 1rem;
+                line-height: 1.5rem;
+                padding-left: 0.688rem;
+                padding-right: 0.688rem;
+            }
+        }
+    }
 }
 
+// ---------------------------------------------------------------------------------
+//                                  Outline
+// ---------------------------------------------------------------------------------
+
 @mixin outline($color) {
+    @if not list.index($colors, $color) {
+        @error 'Invalid color `#{$color}`. Expected one of `#{$colors}`.';
+    }
+
     .badge.badge-outline {
         border-color: currentColor;
         color: currentColor;
@@ -77,6 +159,26 @@
 
         &.badge-#{$color} {
             @include core.text-color($color);
+        }
+    }
+}
+
+@mixin responsive-outline($color, $prefix, $screen-size) {
+    @if not list.index($colors, $color) {
+        @error 'Invalid color `#{$color}`. Expected one of `#{$colors}`.';
+    }
+
+    @media (min-width: $screen-size) {
+        $prefix: escape($prefix + ':');
+
+        .badge.#{$prefix}badge-outline {
+            border-color: currentColor;
+            color: currentColor;
+            background-color: transparent !important;
+
+            &.#{$prefix}badge-#{$color} {
+                @include core.text-color($color);
+            }
         }
     }
 }
