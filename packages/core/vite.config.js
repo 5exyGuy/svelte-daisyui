@@ -5,8 +5,8 @@ const config = {
     plugins: [sveltekit()],
     optimizeDeps: {
         include: [
-            // '@svelte-daisyui/shared',
-            // '@svelte-daisyui/preprocess',
+            '@svelte-daisyui/shared',
+            '@svelte-daisyui/preprocess',
             // '@svelte-daisyui/styles'
         ],
     },

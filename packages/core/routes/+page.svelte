@@ -6,7 +6,7 @@
 </script>
 
 <h1 class="test"><p>Page</p></h1>
-<Alert>Hello world</Alert>
+<Alert color='info'>Hello world</Alert>
 <Artboard demo class="test">Hello world</Artboard>
 <Avatar>Avatar</Avatar>
-<Badge color="info">Badge</Badge>
+<Badge>Badge</Badge>

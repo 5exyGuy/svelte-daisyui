@@ -1,6 +1,4 @@
-import { AlertStyleBuilder, ArtboardStyleBuilder } from './components';
-import { AvatarStyleBuilder } from './components/avatar-style-builder';
-import { BadgeStyleBuilder } from './components/badge-style-builder';
+import { AlertStyleBuilder, ArtboardStyleBuilder, AvatarStyleBuilder, BadgeStyleBuilder } from './components';
 
 export function resolveStyleBuilder(componentName: string) {
     switch (componentName) {

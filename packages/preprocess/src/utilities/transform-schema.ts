@@ -18,7 +18,11 @@ export function transformSchema<Props>(
         const propData = componentSchema.data[propName]!;
 
         const propValue = value[propName];
-        if (typeof propValue === 'undefined') return transformed;
+        // TODO: Fix this
+        if (typeof propValue === 'undefined' && propData.default) {
+            transformed[propName] = propData.default;
+            return transformed;
+        }
 
         if (propData.responsive) {
             try {

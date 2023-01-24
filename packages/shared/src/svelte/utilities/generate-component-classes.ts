@@ -18,15 +18,23 @@ export function generateComponentClasses<
         if (!propData) return;
 
         if (typeof propValue !== 'object') {
-            const propValueValid = propData.validate(propValue as Props[ClassPropNames]);
+            // TODO: Fix this
 
-            if (!propValueValid && propData.default)
+            if (propValue === undefined && propData.default !== undefined) propValue = propData.default;
+            else if (propValue === undefined) return;
+            if (!propData.validate(propValue as Props[ClassPropNames]))
                 throw new Error(
                     `Error occurred while generating classes for ${propName as string} property of ${
                         componentSchema.name
                     } component.`,
                 );
-            else if (propValueValid) {
+
+            if (propData.type === PropTypes.Boolean && propValue === false) return;
+            else if (
+                propData.type === PropTypes.String ||
+                propData.type === PropTypes.Number ||
+                propData.type === PropTypes.Object
+            ) {
                 propValue = propData.transform ? propData.transform(propValue as Props[ClassPropNames]) : propValue;
                 classList.push(`${componentSchema.name.toLowerCase()}-${propValue}`);
             }
