@@ -5,6 +5,7 @@ export const ArtboardSchema = {
     name: 'Artboard',
     data: {
         alignment: {
+            required: true,
             responsive: false,
             type: PropTypes.String,
             validate: (value) => Alignment[value!] !== undefined,
@@ -12,6 +13,7 @@ export const ArtboardSchema = {
             default: 'horizontal',
         },
         size: {
+            required: true,
             responsive: false,
             type: PropTypes.String,
             validate: (value) => ArtboardSize[value!] !== undefined,
@@ -19,6 +21,7 @@ export const ArtboardSchema = {
             default: '320x568',
         },
         demo: {
+            required: false,
             responsive: false,
             type: PropTypes.Boolean,
             validate: (value) => typeof value === 'boolean',

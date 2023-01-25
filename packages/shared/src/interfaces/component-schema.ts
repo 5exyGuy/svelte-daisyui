@@ -1,10 +1,11 @@
 import type { PropTypes } from '../enums';
 
 export interface ComponentPropData<Props, PropName extends keyof Props> {
+    readonly required: boolean;
     readonly responsive: boolean;
     readonly type: PropTypes;
     readonly validate: (value?: Props[PropName]) => boolean;
-    readonly transform?: <T>(value?: Props[PropName]) => T;
+    readonly transform: <T>(value?: Props[PropName]) => T;
     readonly default?: Props[PropName];
 }
 

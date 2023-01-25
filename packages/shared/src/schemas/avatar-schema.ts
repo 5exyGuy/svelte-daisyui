@@ -5,6 +5,7 @@ export const AvatarSchema = {
     name: 'Avatar',
     data: {
         placeholder: {
+            required: false,
             responsive: false,
             type: PropTypes.Boolean,
             validate: (value) => typeof value === 'boolean',
@@ -12,9 +13,11 @@ export const AvatarSchema = {
             default: false,
         },
         size: {
+            required: false,
             responsive: false,
             type: PropTypes.String,
             validate: (value) => typeof value === 'string',
+            transform: (value) => value,
             default: '6rem',
         },
         // ring: {
@@ -29,6 +32,7 @@ export const AvatarSchema = {
         //     },
         // },
         status: {
+            required: false,
             responsive: false,
             type: PropTypes.String,
             validate: (value) => AvatarStatus[value!] !== undefined,

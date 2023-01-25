@@ -17,9 +17,24 @@ export function generateComponentClasses<
         const propData = componentSchema.data[propName];
         if (!propData) return;
 
-        if (typeof propValue !== 'object') {
-            // TODO: Fix this
+        if (typeof propValue === 'object' && propData.type === PropTypes.Object)
+            throw new Error('Object type properties are not supported yet.');
 
+        if (typeof propValue === 'object' && propData.responsive) {
+            convertToEntries(propValue).forEach(([breakpointName, breakpointValue]) => {
+                if (!propData.validate(breakpointValue as Props[ClassPropNames]))
+                    throw new Error(`Invalid value for ${propName as string}`);
+                if (propData.type === PropTypes.Boolean && breakpointValue === false) return;
+                breakpointValue = propData.transform(breakpointValue as Props[ClassPropNames]);
+                classList.push(
+                    `${
+                        breakpointName !== 'default' ? (breakpointName as string) + ':' : ''
+                    }${componentSchema.name.toLowerCase()}-${breakpointValue}`,
+                );
+            });
+        }
+
+        if (typeof propValue !== 'object') {
             if (propValue === undefined && propData.default !== undefined) propValue = propData.default;
             else if (propValue === undefined) return;
             if (!propData.validate(propValue as Props[ClassPropNames]))
@@ -28,33 +43,17 @@ export function generateComponentClasses<
                         componentSchema.name
                     } component.`,
                 );
-
             if (propData.type === PropTypes.Boolean && propValue === false) return;
-            else if (
-                propData.type === PropTypes.String ||
-                propData.type === PropTypes.Number ||
-                propData.type === PropTypes.Object
-            ) {
-                propValue = propData.transform ? propData.transform(propValue as Props[ClassPropNames]) : propValue;
-                classList.push(`${componentSchema.name.toLowerCase()}-${propValue}`);
-            }
+
+            console.log(propName, propValue);
+
+            propValue = propData.transform(propValue as Props[ClassPropNames]);
+            classList.push(`${componentSchema.name.toLowerCase()}-${propValue}`);
             return;
         }
-
-        convertToEntries(propValue).forEach(([breakpointName, breakpointValue]) => {
-            if (!propData.validate(breakpointValue as Props[ClassPropNames]))
-                throw new Error(`Invalid value for ${propName as string}`);
-            if (propData.type === PropTypes.Boolean && breakpointValue === false) return;
-            breakpointValue = propData.transform
-                ? propData.transform(breakpointValue as Props[ClassPropNames])
-                : breakpointValue;
-            classList.push(
-                `${
-                    breakpointName !== 'default' ? (breakpointName as string) + ':' : ''
-                }${componentSchema.name.toLowerCase()}-${breakpointValue}`,
-            );
-        });
     });
+
+    console.log(classList);
 
     return classList.join(' ');
 }
