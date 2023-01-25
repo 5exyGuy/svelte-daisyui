@@ -45,15 +45,11 @@ export function generateComponentClasses<
                 );
             if (propData.type === PropTypes.Boolean && propValue === false) return;
 
-            console.log(propName, propValue);
-
             propValue = propData.transform(propValue as Props[ClassPropNames]);
             classList.push(`${componentSchema.name.toLowerCase()}-${propValue}`);
             return;
         }
     });
-
-    console.log(classList);
 
     return classList.join(' ');
 }

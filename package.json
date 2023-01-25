@@ -4,8 +4,8 @@
     "description": "Svelte UI Component Library based on daisyUI",
     "private": true,
     "scripts": {
-        "build": "turbo run build",
-        "dev": "turbo run dev --parallel"
+        "build": "turbo run build --no-daemon",
+        "dev": "turbo run dev --parallel --no-daemon"
     },
     "repository": {
         "type": "git",

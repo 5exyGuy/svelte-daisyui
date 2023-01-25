@@ -19,7 +19,23 @@ export const BadgeStyleBuilder = createStyleBuilder<BadgeProps, BadgeResponsiveP
         });
     });
     // Outline
-    context.uniqueProps.outline?.forEach((outline) => outline && context.includeMixin('badge', 'outline'));
+    context.uniqueProps.outline?.forEach(
+        (outline) =>
+            outline &&
+            convertToEntries(context.uniqueProps.color).forEach(([breakpointName, breakpointValues]) => {
+                breakpointValues!.forEach((color) => {
+                    breakpointName === 'default'
+                        ? context.includeMixin('badge', 'outline', color)
+                        : context.includeMixin(
+                              'badge',
+                              'responsive-outline',
+                              color,
+                              breakpointName,
+                              context.options.breakpoints[breakpointName] as string,
+                          );
+                });
+            }),
+    );
     // Size
     convertToEntries(context.uniqueProps.size).forEach(([breakpointName, breakpointValues]) => {
         breakpointValues!.forEach((size) => {
