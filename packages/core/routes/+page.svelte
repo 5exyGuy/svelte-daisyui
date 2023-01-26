@@ -9,4 +9,4 @@
 <Alert color="info">Hello world</Alert>
 <Artboard demo class="test">Hello world</Artboard>
 <Avatar>Avatar</Avatar>
-<Badge color="secondary" outline>Badge</Badge>
+<Badge color="info" size="lg">secondary</Badge>
